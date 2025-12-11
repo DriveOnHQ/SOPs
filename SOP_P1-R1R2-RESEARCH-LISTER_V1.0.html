@@ -1,0 +1,2826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1-R1R2-RESEARCH-LISTER SOP | DriveOn Commerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --champagne: #F4E8D0;
+            --gray-text: #555555;
+            --light-gray: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--light-gray);
+        }
+
+        /* Header */
+        header {
+            background: var(--carbon-black);
+            color: var(--white);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .role-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .role-badge {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .nav-toggle {
+            background: var(--drive-cyan);
+            border: none;
+            color: var(--carbon-black);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            display: none;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar-nav {
+            position: fixed;
+            left: 0;
+            top: 80px;
+            width: 280px;
+            height: calc(100vh - 80px);
+            background: var(--white);
+            border-right: 1px solid var(--border-gray);
+            overflow-y: auto;
+            padding: 2rem 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-nav.hidden {
+            transform: translateX(-100%);
+        }
+
+        .nav-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .nav-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gray-text);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--carbon-black);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .nav-link:hover {
+            background: var(--light-gray);
+            color: var(--drive-cyan);
+        }
+
+        .nav-link.active {
+            background: var(--champagne);
+            color: var(--carbon-black);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 280px;
+            padding: 2rem;
+            max-width: 1200px;
+            transition: margin-left 0.3s ease;
+        }
+
+        main.expanded {
+            margin-left: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--carbon-black) 0%, #2A2A2A 100%);
+            color: var(--white);
+            padding: 3rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--drive-cyan);
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gray-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-value {
+            font-weight: 600;
+            color: var(--drive-cyan);
+        }
+
+        .key-outcomes {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .outcome-chip {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Section Cards */
+        .section {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--drive-cyan);
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--carbon-black);
+        }
+
+        .section-intro {
+            color: var(--gray-text);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1rem 1.5rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-canon {
+            background: #FFF4E6;
+            border-color: var(--drive-cyan);
+        }
+
+        .callout-warning {
+            background: #FFF3CD;
+            border-color: #FF6B35;
+        }
+
+        .callout-tip {
+            background: #E8F5E9;
+            border-color: #4CAF50;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th {
+            background: var(--champagne);
+            color: var(--carbon-black);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        tr:hover {
+            background: var(--light-gray);
+        }
+
+        /* Workflow Cards */
+        .workflow-card {
+            background: var(--light-gray);
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .workflow-title {
+            font-size: 1.25rem;
+            color: var(--drive-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .workflow-step {
+            background: var(--white);
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--drive-cyan);
+        }
+
+        .workflow-step-number {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 0.75rem;
+        }
+
+        /* Handoff Cards */
+        .handoff-card {
+            background: var(--champagne);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .handoff-from, .handoff-to {
+            font-weight: 600;
+        }
+
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 1.5rem;
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--light-gray);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        pre {
+            background: var(--carbon-black);
+            color: var(--white);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            color: var(--white);
+        }
+
+        /* Checklist */
+        .checklist-item {
+            padding: 0.75rem;
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--drive-cyan);
+            border-radius: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--drive-cyan);
+            border-radius: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: calc(-2rem + 5px);
+            top: 12px;
+            width: 2px;
+            height: calc(100% - 12px);
+            background: var(--border-gray);
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--drive-cyan);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content {
+            color: var(--carbon-black);
+        }
+
+        /* Mermaid Diagram Container */
+        .diagram-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-gray);
+        }
+
+        .diagram-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--carbon-black);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar-nav {
+                transform: translateX(-100%);
+            }
+
+            .sidebar-nav.active {
+                transform: translateX(0);
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero-meta {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Collapsible Sections */
+        .collapsible-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light-gray);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        .collapsible-header:hover {
+            background: var(--champagne);
+        }
+
+        .collapsible-toggle {
+            color: var(--drive-cyan);
+            font-weight: 600;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.active {
+            max-height: 10000px;
+        }
+
+        /* KPI Badges */
+        .kpi-strip {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+
+        .kpi-badge {
+            background: var(--white);
+            border: 2px solid var(--drive-cyan);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--drive-cyan);
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            color: var(--gray-text);
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="role-title">
+                <span class="role-badge">P1 • Pod 1 – Product Intelligence</span>
+                <h1>Research & Lister (Dual Role)</h1>
+            </div>
+            <button class="nav-toggle" onclick="toggleNav()">☰ Contents</button>
+        </div>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar-nav" id="sidebar">
+        <div class="nav-section">
+            <div class="nav-section-title">Overview</div>
+            <a href="#hero" class="nav-link">Role Summary</a>
+            <a href="#purpose" class="nav-link">Purpose & Context</a>
+            <a href="#canon" class="nav-link">Canon Constraints</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Daily Work</div>
+            <a href="#day-in-life" class="nav-link">Day-in-the-Life</a>
+            <a href="#workflows" class="nav-link">Core Workflows</a>
+            <a href="#handoffs" class="nav-link">Handoff Specs</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Standards</div>
+            <a href="#kpis" class="nav-link">KPIs & Quality Bar</a>
+            <a href="#ai-usage" class="nav-link">AI Usage</a>
+            <a href="#tools" class="nav-link">Tools & Systems</a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Operations</div>
+            <a href="#escalation" class="nav-link">Escalation</a>
+            <a href="#onboarding" class="nav-link">Onboarding</a>
+            <a href="#changelog" class="nav-link">Change Log</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main">
+        <!-- Hero Section -->
+        <div class="hero" id="hero">
+            <h2 class="hero-title">P1-R1R2-RESEARCH-LISTER-XX</h2>
+            <p>Dual-role operator bridging research intelligence and store implementation – conducting R1/R2 product research while executing listing tasks to maintain velocity across the P1→P3 pipeline.</p>
+            
+            <div class="hero-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role Type</span>
+                    <span class="meta-value">RESEARCH_PLUS_LISTING</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Status</span>
+                    <span class="meta-value">DUAL_ONLY</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">CrossPod</span>
+                    <span class="meta-value">TRUE</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Default FTE</span>
+                    <span class="meta-value">1.0 (typically 0.6 research / 0.4 listing)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Owned Gates</span>
+                    <span class="meta-value">R1, R2 + Listing Support</span>
+                </div>
+            </div>
+
+            <div class="key-outcomes">
+                <span class="outcome-chip">3-4 R3-Ready Packets/Week</span>
+                <span class="outcome-chip">3-5 Live Listings/Week</span>
+                <span class="outcome-chip">Research + Listing Velocity</span>
+                <span class="outcome-chip">P1→P3 Pipeline Continuity</span>
+                <span class="outcome-chip">Quality Bar Enforcement</span>
+            </div>
+        </div>
+
+        <!-- Section 1: Meta Block -->
+        <section class="section" id="meta">
+            <div class="section-header">
+                <span class="section-icon">📋</span>
+                <h2 class="section-title">1. Meta Block</h2>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><strong>Role ID</strong></td>
+                    <td><code>P1-R1R2-RESEARCH-LISTER-XX</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Role Name</strong></td>
+                    <td>Product Researcher & Lister (Dual-Pod)</td>
+                </tr>
+                <tr>
+                    <td><strong>Pod</strong></td>
+                    <td>P1 – Product Intelligence (with P3 listing support)</td>
+                </tr>
+                <tr>
+                    <td><strong>Pipeline Stages</strong></td>
+                    <td>R1 (Plausibility), R2 (Deep Research), R3-prep + Listing Tasks</td>
+                </tr>
+                <tr>
+                    <td><strong>Upstream Roles</strong></td>
+                    <td>P1-R0-SCOUT-XX, P1-R1-SCOUT-SOURCING-XX</td>
+                </tr>
+                <tr>
+                    <td><strong>Downstream Roles</strong></td>
+                    <td>P1-R3-LEAD-STRATEGIST-XX (research handoff), P3-SB-LISTER-IMPL-XX (listing handoff)</td>
+                </tr>
+                <tr>
+                    <td><strong>CrossPod</strong></td>
+                    <td>true (bridges P1 research and P3 store implementation)</td>
+                </tr>
+                <tr>
+                    <td><strong>Default FTE</strong></td>
+                    <td>1.0 FTE (often split 0.6 research / 0.4 listing)</td>
+                </tr>
+                <tr>
+                    <td><strong>WIP Limits (1.0 FTE)</strong></td>
+                    <td>
+                        <ul>
+                            <li><strong>R1 Active:</strong> 6 packets</li>
+                            <li><strong>R2 Active:</strong> 3 packets</li>
+                            <li><strong>R3-Prep:</strong> 1 packet</li>
+                            <li><strong>Listing Tasks:</strong> 4-6 in progress</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Weekly Throughput</strong></td>
+                    <td>3-4 R3-ready packets/week + 15-20 researched listings/week (scaled by FTE split)</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary KPIs</strong></td>
+                    <td>
+                        <ul>
+                            <li>R3 Packet Completion Rate</li>
+                            <li>Listing Quality & Completeness</li>
+                            <li>Error Rate (listing accuracy)</li>
+                            <li>Research Cycle Time (R1→R3)</li>
+                            <li>Brief Completeness Score</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Tools</strong></td>
+                    <td>
+                        <ul>
+                            <li><strong>Research:</strong> Minea, PiPiAds, TikTok Creative Center, Meta Ad Library, Google</li>
+                            <li><strong>Listing:</strong> Shopify Admin, GemPages/PageFly, Shrine Theme</li>
+                            <li><strong>Data:</strong> Notion (Product OS, Packets OS), Google Sheets</li>
+                            <li><strong>Coordination:</strong> ClickUp, Discord, Google Drive</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Notion DBs</strong></td>
+                    <td>Product OS, Packets OS</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary ClickUp Spaces</strong></td>
+                    <td>P1 Product Intelligence, P3 Media & Store</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Discord Channels</strong></td>
+                    <td>#p1-r1-shortlist, #p1-r2-dossiers, #p3-stores-validation</td>
+                </tr>
+                <tr>
+                    <td><strong>Reports To</strong></td>
+                    <td>P1-R3-LEAD-STRATEGIST-XX (functional)</td>
+                </tr>
+                <tr>
+                    <td><strong>Version</strong></td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td><strong>Last Updated</strong></td>
+                    <td>December 10, 2025</td>
+                </tr>
+                <tr>
+                    <td><strong>Author</strong></td>
+                    <td>DriveOn SOP Factory (v4) / Claude Sonnet 4.5</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Section 2: Role Purpose & Context -->
+        <section class="section" id="purpose">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">2. Role Purpose & Context</h2>
+            </div>
+            <p class="section-intro">Why this dual role exists in the CaniCol model and how it supports the lean-volume testing engine.</p>
+
+            <h3>Core Purpose</h3>
+            <p>The <strong>P1-R1R2-RESEARCH-LISTER</strong> role represents an early-stage "T-shaped" pattern where one operator handles both:</p>
+            <ul>
+                <li><strong>Research Intelligence (R1/R2):</strong> Conducting initial plausibility checks and deep product research to advance packets through the pipeline</li>
+                <li><strong>Store Listing Implementation:</strong> Translating research-enriched product data into live Shopify product listings</li>
+            </ul>
+
+            <h3>Why This Role Exists</h3>
+            <p>This dual role serves critical economic and operational functions:</p>
+            <ul>
+                <li><strong>Pipeline Velocity:</strong> Maintains continuous flow from research to listing without handoff delays in lean team structures</li>
+                <li><strong>Context Preservation:</strong> The same person who researched the product creates the listing, reducing information loss</li>
+                <li><strong>Resource Efficiency:</strong> Maximizes utilization of research talent during listing bottlenecks</li>
+                <li><strong>Quality Control:</strong> Research insights directly inform listing quality (descriptions, features, positioning)</li>
+            </ul>
+
+            <h3>CaniCol Model Alignment</h3>
+            <p>This role directly supports the CaniCol v4.0 philosophy:</p>
+            <ul>
+                <li><strong>Lean-Volume Testing:</strong> Enables 45-60 products/month to flow through R1→R2→R3→Listing→P1 without bottlenecks</li>
+                <li><strong>Budget Discipline:</strong> Research enrichment improves listing quality without adding separate FTE costs</li>
+                <li><strong>Hit Rate Focus:</strong> Better listings (informed by research) improve P1 test validity and reduce false negatives</li>
+                <li><strong>Portfolio Thinking:</strong> High throughput across both research and listing maintains statistical power</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Long-Term Evolution Path</div>
+                <p>Per L2-03 canon: This dual-role pattern is explicitly <strong>early-stage</strong>. As the team scales, best practice is to <strong>decompose</strong> into separate specialized roles (pure researchers + pure listers) to maximize depth and efficiency.</p>
+            </div>
+
+            <h3>Connection to Holdings & Brand (L0/L1)</h3>
+            <p>This role upholds DriveOn's commitment to:</p>
+            <ul>
+                <li><strong>Systems-First Execution:</strong> Structured R1/R2 research prevents random product selection</li>
+                <li><strong>Anti-Hype Discipline:</strong> Research-backed listings avoid exaggerated claims</li>
+                <li><strong>Runnable Operations:</strong> Clear SOP enables junior execution without founder heroics</li>
+            </ul>
+        </section>
+
+        <!-- Section 3: Canon Constraints -->
+        <section class="section" id="canon">
+            <div class="section-header">
+                <span class="section-icon">⚖️</span>
+                <h2 class="section-title">3. Canon Constraints</h2>
+            </div>
+            <p class="section-intro">Non-negotiable rules from L0-L3 canon that govern this role's decisions and workflows.</p>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Canon Binding Rules</div>
+                <p>These constraints are <strong>read-only</strong>. Any deviation requires an explicit Canon Change Request (CCR) and cannot be modified at the L4 implementation level.</p>
+            </div>
+
+            <h3>Economics & Testing Volume (from L1-01, L2-05)</h3>
+            <ul>
+                <li><strong>Testing Volume:</strong> Support pipeline velocity of ~45-60 products/month reaching P1/P2</li>
+                <li><strong>P1 Budget:</strong> $40-$60 per product (research must optimize for testability within this constraint)</li>
+                <li><strong>P1+P2 Total:</strong> $70-$120 standard band (listings must support efficient testing)</li>
+                <li><strong>Test Bank:</strong> ≈$4,000-$5,500/month total P1+P2 spend (research throughput must align)</li>
+                <li><strong>Winner Expectations:</strong> 4-6% true winners (≈2-4 products/month) – most research leads to kills</li>
+            </ul>
+
+            <h3>WIP Limits & Throughput (from L2-03)</h3>
+            <p><strong>For 1.0 FTE allocation:</strong></p>
+            <ul>
+                <li><strong>R1 Active:</strong> ≤ 6 packets in progress</li>
+                <li><strong>R2 Active:</strong> ≤ 3 packets (deep work constraint)</li>
+                <li><strong>R3-Prep:</strong> ≤ 1 packet awaiting final handoff</li>
+                <li><strong>Listing Tasks:</strong> 4-6 in progress simultaneously</li>
+            </ul>
+
+            <p><strong>FTE Split Scaling:</strong></p>
+            <p>If operating at 0.6 research / 0.4 listing split:</p>
+            <ul>
+                <li>R1 Active: ceil(6 × 0.6) = 4 packets</li>
+                <li>R2 Active: ceil(3 × 0.6) = 2 packets</li>
+                <li>R3-Prep: 1 packet</li>
+                <li>Listing Tasks: ceil(5 × 0.4) = 2 tasks</li>
+            </ul>
+
+            <p><strong>Weekly Throughput Targets (1.0 FTE):</strong></p>
+            <ul>
+                <li>Research: 3-4 R3-ready packets/week</li>
+                <li>Listing: 15-20 researched listings/week (3-5 listings/day)</li>
+                <li>Monthly: 60-80 listings/month</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ WIP Violations Are Signals</div>
+                <p>Per L2-03: WIP breaches trigger <strong>process/capacity review</strong>, not automatic inflation. If you consistently hit WIP caps, escalate to Lead Strategist and Project Manager for workload rebalancing or capacity planning.</p>
+            </div>
+
+            <h3>Pass/Kill Criteria (from L2-05)</h3>
+            <p>While R1/R2 research doesn't make final pass/kill decisions, you must understand P1 thresholds to inform research quality:</p>
+            <ul>
+                <li><strong>P1 Pass Indicators:</strong> Strong CTR, reasonable CPC, depth events (ATC/IC/Purchase)</li>
+                <li><strong>P1 Kill Indicators:</strong> Weak hook (<1% CTR), high CPC (>$2), no depth events</li>
+                <li><strong>Research Responsibility:</strong> R2 dossiers must surface angle/hook quality to predict P1 viability</li>
+            </ul>
+
+            <h3>Tool Stack (from L2/L3)</h3>
+            <p><strong>Approved Tools Only:</strong></p>
+            <ul>
+                <li>✅ ClickUp, Notion, Google Drive, Discord/Slack, Shopify, GemPages/PageFly</li>
+                <li>❌ No Airtable, Asana, Trello, Monday.com, or non-canon tools</li>
+                <li>❌ No new core systems without L3 blueprint update</li>
+            </ul>
+
+            <h3>Handoff Rules (from L2-02, L2-03)</h3>
+            <ul>
+                <li><strong>R3 Handoff:</strong> Only R3-approved packets enter P1 testing – you cannot bypass R3 gate</li>
+                <li><strong>Listing Handoff:</strong> Listings must be complete and QA-checked before handoff to P3 store ops</li>
+                <li><strong>Minimum Quality Bar:</strong> Packets must include all required sections (see Workflows) before R3 submission</li>
+                <li><strong>No Freelance Decisions:</strong> You own R1/R2 execution but <strong>not</strong> R3 final approval (that's Lead Strategist)</li>
+            </ul>
+
+            <h3>Brand & Creative Guardrails (from L2-08)</h3>
+            <ul>
+                <li><strong>Anti-Hype Stance:</strong> Listings must avoid exaggerated claims, fake urgency, scarcity tactics</li>
+                <li><strong>Honest Positioning:</strong> Product descriptions reflect real value propositions, not invented benefits</li>
+                <li><strong>DriveOn Tone:</strong> Clarity over noise, systems over hacks, realistic over guru-style language</li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Day-in-the-Life Timeline -->
+        <section class="section" id="day-in-life">
+            <div class="section-header">
+                <span class="section-icon">⏰</span>
+                <h2 class="section-title">4. Day-in-the-Life Timeline</h2>
+            </div>
+            <p class="section-intro">Typical daily structure for a 1.0 FTE researcher-lister operating at 60% research / 40% listing split.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">08:00 - 08:30 | Morning Setup & Prioritization</div>
+                    <div class="timeline-content">
+                        <strong>Inputs:</strong> ClickUp task board, Discord handoff notifications, Notion queue<br>
+                        <strong>Actions:</strong>
+                        <ul>
+                            <li>Check #p1-r1-shortlist and #p1-r2-dossiers for new assignments</li>
+                            <li>Review ClickUp "P1 Product Pipeline" → Research folder for task priorities</li>
+                            <li>Identify: (1) R2 packets needing completion today, (2) R1 packets ready to advance, (3) Urgent listings</li>
+                            <li>Block time: 2-3 hours deep research, 1.5-2 hours listing implementation</li>
+                        </ul>
+                        <strong>Outputs:</strong> Prioritized daily task list<br>
+                        <strong>Tools:</strong> ClickUp (List view filtered by "Assigned to Me"), Notion Product OS, Discord
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">08:30 - 11:00 | Deep Research Block (R2 Primary Focus)</div>
+                    <div class="timeline-content">
+                        <strong>Inputs:</strong> R2 packets in progress (WIP ≤ 3), competitor data, spy tool insights<br>
+                        <strong>Actions:</strong>
+                        <ul>
+                            <li>Execute 2-3 R2 deep dives (see Core Workflows → R2 Research)</li>
+                            <li>For each product: competitor mapping, angle discovery, risk assessment, supplier validation</li>
+                            <li>Update Notion Product OS with findings (AOV estimates, positioning notes, hooks)</li>
+                            <li>Prepare R3-ready dossiers with all required sections</li>
+                        </ul>
+                        <strong>Quality Check:</strong> Each R2 packet must answer: "Why will this product work? What's the hook?"<br>
+                        <strong>Outputs:</strong> 1-2 completed R2 dossiers ready for R3 review<br>
+                        <strong>Tools:</strong> Minea, PiPiAds, TikTok Creative Center, Meta Ad Library, Notion, Google Sheets
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">11:00 - 11:15 | Mid-Morning Break & Status Update</div>
+                    <div class="timeline-content">
+                        <strong>Actions:</strong>
+                        <ul>
+                            <li>Quick Discord status update in #p1-r2-dossiers if completing major dossiers</li>
+                            <li>Check for urgent questions or blockers from Lead Strategist or P3 team</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">11:15 - 13:00 | Listing Implementation Block</div>
+                    <div class="timeline-content">
+                        <strong>Inputs:</strong> R3-approved packets, product data from Notion, creative assets from P2<br>
+                        <strong>Actions:</strong>
+                        <ul>
+                            <li>Execute 3-5 product listings (see Core Workflows → Listing Creation)</li>
+                            <li>For each listing: create PDP in Shopify, write descriptions (using research insights), configure variants, add images</li>
+                            <li>Implement page builder layouts (GemPages/PageFly/Shrine) if validation store</li>
+                            <li>QA check: pricing, shipping, collection assignment, SEO meta fields</li>
+                        </ul>
+                        <strong>Quality Check:</strong> Does listing reflect research quality? Is positioning clear?<br>
+                        <strong>Outputs:</strong> 3-5 live product listings with complete data<br>
+                        <strong>Tools:</strong> Shopify Admin, GemPages/PageFly, Notion Product OS, Drive (for assets)
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">13:00 - 13:30 | Lunch Break</div>
+                    <div class="timeline-content">
+                        <strong>Recommended:</strong> Step away from screen to maintain focus for afternoon work
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">13:30 - 15:00 | R1 Pipeline + Light Research Tasks</div>
+                    <div class="timeline-content">
+                        <strong>Inputs:</strong> R1 shortlist from scouts, R0 ideas needing plausibility check<br>
+                        <strong>Actions:</strong>
+                        <ul>
+                            <li>Process 4-6 R1 packets (see Core Workflows → R1 Plausibility Check)</li>
+                            <li>Quick filters: obvious red flags? clear demand signal? supplier viability?</li>
+                            <li>Update ClickUp status: R1_APPROVED → R2 queue, or R1_REJECTED with notes</li>
+                            <li>Log kill reasons in Notion for learning/pattern recognition</li>
+                        </ul>
+                        <strong>Quality Check:</strong> Are we sending only high-plausibility products to R2?<br>
+                        <strong>Outputs:</strong> 4-6 R1 decisions (approved/killed), updated pipeline<br>
+                        <strong>Tools:</strong> ClickUp, Notion, Quick supplier checks (AliExpress/CJ)
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">15:00 - 16:30 | Listing QA & Refinement OR Additional R2 Work</div>
+                    <div class="timeline-content">
+                        <strong>Flex Block – Choose based on daily priorities:</strong><br>
+                        <strong>Option A – Listing Focus:</strong>
+                        <ul>
+                            <li>QA check completed listings from morning session</li>
+                            <li>Fix errors, improve descriptions, optimize for SEO</li>
+                            <li>Coordinate with P3-SB-LISTER-IMPL if handoff needed</li>
+                        </ul>
+                        <strong>Option B – Research Focus:</strong>
+                        <ul>
+                            <li>Continue deep R2 work on high-priority products</li>
+                            <li>Build R3-prep packets for next-day handoff to Lead Strategist</li>
+                        </ul>
+                        <strong>Outputs:</strong> Variable based on daily mix
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">16:30 - 17:00 | End-of-Day Handoffs & Admin</div>
+                    <div class="timeline-content">
+                        <strong>Actions:</strong>
+                        <ul>
+                            <li>Post handoff messages in Discord (#p1-r3-approvals for completed R2 dossiers, #p3-stores-validation for completed listings)</li>
+                            <li>Update ClickUp task statuses (R2_REVIEW, LISTING_LIVE, etc.)</li>
+                            <li>Log time entries in time tracking system</li>
+                            <li>Note blockers or dependencies for tomorrow in ClickUp comments</li>
+                        </ul>
+                        <strong>Quality Check:</strong> Did I meet daily throughput targets? Any WIP violations?<br>
+                        <strong>Outputs:</strong> Handoff notifications, updated task board, logged time
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-strip">
+                <div class="kpi-badge">
+                    <div class="kpi-value">6-8</div>
+                    <div class="kpi-label">Tasks/Day</div>
+                </div>
+                <div class="kpi-badge">
+                    <div class="kpi-value">60/40</div>
+                    <div class="kpi-label">Research/Listing Split</div>
+                </div>
+                <div class="kpi-badge">
+                    <div class="kpi-value">≤10</div>
+                    <div class="kpi-label">Total Active WIP</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Core Workflows -->
+        <section class="section" id="workflows">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <h2 class="section-title">5. Core Workflows</h2>
+            </div>
+            <p class="section-intro">Step-by-step execution guides for all major tasks in this dual role.</p>
+
+            <!-- Workflow 1: R1 Plausibility Check -->
+            <div class="workflow-card">
+                <h3 class="workflow-title">Workflow 1: R1 Plausibility Check (Fast Filter)</h3>
+                <p><strong>Trigger:</strong> R0 scout or sourcing specialist assigns R1 candidate to you in ClickUp</p>
+                <p><strong>Time Budget:</strong> 15-20 minutes per product</p>
+                <p><strong>Goal:</strong> Quick go/no-go filter – eliminate obvious fails before deeper R2 investment</p>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">1</span>
+                    <strong>Load Product Context</strong>
+                    <ul>
+                        <li>Open ClickUp task in "P1 Product Pipeline → Research → R1 Shortlist"</li>
+                        <li>Open linked Notion Product OS page (ProductID: PRD-YYYYMMDD-XXX)</li>
+                        <li>Review: Product name, category, initial notes from scout</li>
+                    </ul>
+                    <strong>Tools:</strong> ClickUp, Notion
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">2</span>
+                    <strong>Demand Signal Check</strong>
+                    <ul>
+                        <li>Quick TikTok search: Is product trending? Any viral videos?</li>
+                        <li>Meta Ad Library: Active ads for this product or close variants?</li>
+                        <li>Google Trends: Is search volume present or growing?</li>
+                    </ul>
+                    <strong>Pass Criteria:</strong> Clear evidence of demand (videos, ads, search volume)<br>
+                    <strong>Kill Signal:</strong> Zero social proof, no ads, declining trends<br>
+                    <strong>Tools:</strong> TikTok, Meta Ad Library, Google Trends
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">3</span>
+                    <strong>Red Flag Scan</strong>
+                    <ul>
+                        <li>Policy risks: Adult content? Regulated category? Restricted on Meta/TikTok?</li>
+                        <li>Logistics risks: Fragile? Hazmat? Oversized shipping?</li>
+                        <li>Quality risks: Scammy reviews? Obvious knockoff? Safety complaints?</li>
+                    </ul>
+                    <strong>Kill Signal:</strong> Any hard-stop red flag (policy violation, unshippable, dangerous)<br>
+                    <strong>Tools:</strong> Amazon reviews, AliExpress product pages, common sense
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">4</span>
+                    <strong>Basic Supplier Viability</strong>
+                    <ul>
+                        <li>AliExpress/CJ quick search: Product available? Reasonable MOQ? Ship to target markets?</li>
+                        <li>Ballpark pricing: Can we hit 2-3x markup and stay competitive?</li>
+                    </ul>
+                    <strong>Pass Criteria:</strong> Supplier exists, pricing makes sense (landed cost allows margin)<br>
+                    <strong>Kill Signal:</strong> No suppliers, pricing impossible (too high landed cost for market)<br>
+                    <strong>Tools:</strong> AliExpress, CJ Dropshipping, quick calculator
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">5</span>
+                    <strong>Decision & Documentation</strong>
+                    <ul>
+                        <li>Update Notion Product OS: Add R1 notes (1-3 sentences on decision)</li>
+                        <li>Update ClickUp status:
+                            <ul>
+                                <li><strong>R1_APPROVED</strong> → Move to "R2 Deep Research" list</li>
+                                <li><strong>R1_REJECTED</strong> → Move to "Killed" list, add kill reason in comment</li>
+                            </ul>
+                        </li>
+                        <li>Log kill patterns in Notion for learning (e.g., "No supplier at margin")</li>
+                    </ul>
+                    <strong>Tools:</strong> Notion, ClickUp
+                </div>
+
+                <p><strong>Quality Bar:</strong> Are we only advancing products with plausible demand + no obvious showstoppers?</p>
+                <p><strong>Output Artifacts:</strong> R1 decision logged, ClickUp status updated, Notion notes recorded</p>
+            </div>
+
+            <!-- Workflow 2: R2 Deep Research & Dossier Creation -->
+            <div class="workflow-card">
+                <h3 class="workflow-title">Workflow 2: R2 Deep Research & Dossier Creation</h3>
+                <p><strong>Trigger:</strong> Product approved at R1, assigned to you for R2 deep dive</p>
+                <p><strong>Time Budget:</strong> 45-90 minutes per product (varies by complexity)</p>
+                <p><strong>Goal:</strong> Build comprehensive dossier answering: "Why will this work? What's the hook?"</p>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">1</span>
+                    <strong>Research Setup</strong>
+                    <ul>
+                        <li>Open ClickUp task in "P1 Product Pipeline → Research → R2 Deep Research"</li>
+                        <li>Open Notion Packet page (PacketID: PCT-PRD-YYYYMMDD-XXX-R2NN)</li>
+                        <li>Create Drive folder: <code>/02_P1_Product_Intel/Products/[ProductID]_[ShortName]/01_Research_Raw</code></li>
+                        <li>Open research tools: Minea, PiPiAds, TikTok Creative Center, Meta Ad Library</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">2</span>
+                    <strong>Competitor Mapping</strong>
+                    <ul>
+                        <li>Find 3-5 direct competitors selling same/similar product</li>
+                        <li>For each competitor, document:
+                            <ul>
+                                <li>Store URL</li>
+                                <li>Price point</li>
+                                <li>Positioning angle (e.g., "solves X pain point")</li>
+                                <li>Key product features emphasized</li>
+                            </ul>
+                        </li>
+                        <li>Take screenshots, save to Drive Research_Raw folder</li>
+                        <li>Identify price band: Low ($XX-$XX), Mid ($XX-$XX), High ($XX-$XX)</li>
+                    </ul>
+                    <strong>Tools:</strong> Google, Shopify stores, screenshots to Drive
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">3</span>
+                    <strong>Angle & Hook Discovery (CRITICAL)</strong>
+                    <ul>
+                        <li>Watch 10-15 winning ad creatives (Minea/PiPiAds/TikTok Creative Center)</li>
+                        <li>For each strong ad, extract:
+                            <ul>
+                                <li><strong>Hook:</strong> First 3-5 seconds of ad (what grabs attention?)</li>
+                                <li><strong>Angle:</strong> The "why you need this" story (pain point, benefit, transformation)</li>
+                                <li><strong>Format:</strong> UGC? B-roll? Before/after? Demo?</li>
+                            </ul>
+                        </li>
+                        <li>Identify 2-3 <strong>Primary Angles</strong> with strongest market proof (most views, engagement)</li>
+                        <li>Document in Notion Packet page under "Angles & Hooks" section</li>
+                    </ul>
+                    <strong>Quality Check:</strong> Can you clearly articulate "This product works because [angle] hooks [audience]"?<br>
+                    <strong>Tools:</strong> Minea, PiPiAds, TikTok Creative Center, Meta Ad Library
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">4</span>
+                    <strong>Risk Assessment</strong>
+                    <ul>
+                        <li>Review negative reviews (Amazon, AliExpress, Reddit)</li>
+                        <li>Identify common complaints: Quality issues? Fit problems? Delivery delays?</li>
+                        <li>Platform policy check: Any risk of ad rejection? (Health claims, before/after, etc.)</li>
+                        <li>Logistics risks: Breakage? Returns rate? Customs issues?</li>
+                        <li>Document top 2-3 risks in Notion with severity (Low/Med/High)</li>
+                    </ul>
+                    <strong>Decision Point:</strong> Are risks manageable or showstoppers?
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">5</span>
+                    <strong>Supplier Deep Dive</strong>
+                    <ul>
+                        <li>Find 2-3 supplier options (AliExpress, CJ, Alibaba)</li>
+                        <li>For each supplier, document:
+                            <ul>
+                                <li>Supplier name/URL</li>
+                                <li>Unit cost</li>
+                                <li>MOQ (Minimum Order Quantity)</li>
+                                <li>Shipping options & costs</li>
+                                <li>Lead time</li>
+                                <li>Quality indicators (reviews, photos, certifications)</li>
+                            </ul>
+                        </li>
+                        <li>Calculate landed cost (unit + shipping) and required retail price for 2.5-3x margin</li>
+                        <li>Update Notion "Supplier Options" section with shortlist</li>
+                    </ul>
+                    <strong>Tools:</strong> AliExpress, CJ Dropshipping, Google Sheets (cost calculator)
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">6</span>
+                    <strong>AOV & Economics Estimate</strong>
+                    <ul>
+                        <li>Estimate AOV (Average Order Value): Single product price or bundle potential?</li>
+                        <li>Estimate margin: (Retail Price - Landed Cost) / Retail Price</li>
+                        <li>Sanity check against P1 budget: Can we test at $40-60 and get meaningful data?</li>
+                        <li>Document in Notion "Economics" section</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">7</span>
+                    <strong>Dossier Assembly & R3 Prep</strong>
+                    <ul>
+                        <li>Ensure Notion Packet page includes ALL required sections:
+                            <ul>
+                                <li>✅ Product Overview (name, category, ProductID)</li>
+                                <li>✅ Competitor Mapping (3-5 competitors with URLs, pricing)</li>
+                                <li>✅ Angles & Hooks (2-3 primary angles with evidence)</li>
+                                <li>✅ Risk Assessment (top 2-3 risks with severity)</li>
+                                <li>✅ Supplier Options (2-3 suppliers with costs, MOQ, lead time)</li>
+                                <li>✅ Economics Estimate (AOV, margin, P1 budget fit)</li>
+                                <li>✅ References (links to winning ads, competitor stores, reviews)</li>
+                            </ul>
+                        </li>
+                        <li>Update ClickUp status: R2_IN_PROGRESS → <strong>R2_REVIEW</strong></li>
+                        <li>Notify Lead Strategist in Discord #p1-r2-dossiers (see Handoff section)</li>
+                    </ul>
+                </div>
+
+                <p><strong>Quality Bar:</strong></p>
+                <ul>
+                    <li>Can P2 Creative Director read this dossier and create briefs without questions?</li>
+                    <li>Does dossier clearly answer: "Why will this product sell?" and "What's the hook?"</li>
+                    <li>Are all risks surfaced (not hidden)?</li>
+                </ul>
+
+                <p><strong>Output Artifacts:</strong></p>
+                <ul>
+                    <li>Complete Notion R2 Packet page</li>
+                    <li>Drive folder with screenshots, research notes</li>
+                    <li>ClickUp task at R2_REVIEW status</li>
+                    <li>Discord handoff notification</li>
+                </ul>
+            </div>
+
+            <!-- Workflow 3: Listing Creation & Implementation -->
+            <div class="workflow-card">
+                <h3 class="workflow-title">Workflow 3: Product Listing Creation & Implementation</h3>
+                <p><strong>Trigger:</strong> R3-approved packet ready for listing, assigned to you in ClickUp P3 listing queue</p>
+                <p><strong>Time Budget:</strong> 30-45 minutes per listing (validation store) or 60-90 minutes (micro branded store)</p>
+                <p><strong>Goal:</strong> Create complete, research-enriched Shopify product listing ready for P1 testing</p>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">1</span>
+                    <strong>Listing Setup & Context Load</strong>
+                    <ul>
+                        <li>Open ClickUp task in "P3 Media & Store → Listings → To Do"</li>
+                        <li>Open linked Notion Product OS page (ProductID: PRD-YYYYMMDD-XXX)</li>
+                        <li>Review R3 packet: angles, positioning, product features, supplier info</li>
+                        <li>Confirm target store: Validation/micro store? Which Shopify store URL?</li>
+                        <li>Gather creative assets: Product images from P2 or Drive folder</li>
+                    </ul>
+                    <strong>Tools:</strong> ClickUp, Notion, Drive, Shopify Admin
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">2</span>
+                    <strong>Create Shopify Product Listing</strong>
+                    <ul>
+                        <li>Log into Shopify Admin → Products → Add Product</li>
+                        <li><strong>Product Title:</strong> Clear, benefit-focused (use primary angle from research)</li>
+                        <li><strong>Product Description:</strong>
+                            <ul>
+                                <li>Write 3-5 paragraphs (150-250 words) based on R2 angle discovery</li>
+                                <li>Structure: Hook (pain point) → Features → Benefits → Social proof → CTA</li>
+                                <li>Use research insights to avoid generic copy</li>
+                                <li>Follow L2-08 brand guardrails (no hype, no exaggerated claims)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Product Images:</strong>
+                            <ul>
+                                <li>Upload 4-8 high-quality images from P2 assets or supplier</li>
+                                <li>Order: Main product shot, lifestyle/in-use, detail shots, size/scale</li>
+                                <li>Ensure images load fast (compress if needed)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <strong>Tools:</strong> Shopify Admin, Google Docs (for description drafting)
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">3</span>
+                    <strong>Pricing & Variants Configuration</strong>
+                    <ul>
+                        <li><strong>Pricing:</strong>
+                            <ul>
+                                <li>Set price based on R2 economics estimate (ensure 2.5-3x margin)</li>
+                                <li>Compare-at price: If using, must be realistic (not fake inflated price)</li>
+                                <li>Cross-check with competitor pricing from R2 research</li>
+                            </ul>
+                        </li>
+                        <li><strong>Variants:</strong>
+                            <ul>
+                                <li>Add all size/color/style variants from supplier</li>
+                                <li>Ensure SKUs are unique and trackable</li>
+                                <li>Set inventory policy: "Continue selling when out of stock" (for dropship)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">4</span>
+                    <strong>Collections & Navigation</strong>
+                    <ul>
+                        <li>Assign product to appropriate collection(s):
+                            <ul>
+                                <li>Category collection (e.g., "Home & Garden", "Fitness")</li>
+                                <li>Testing collection (e.g., "P1 Active Tests" for validation stores)</li>
+                            </ul>
+                        </li>
+                        <li>Set product type and vendor tags for filtering</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">5</span>
+                    <strong>SEO & Meta Fields</strong>
+                    <ul>
+                        <li><strong>Meta Title:</strong> 50-60 characters, include primary keyword</li>
+                        <li><strong>Meta Description:</strong> 120-150 characters, benefit-focused</li>
+                        <li><strong>URL Handle:</strong> Clean, keyword-rich slug (auto-generated is usually fine)</li>
+                        <li>Note: For validation stores, SEO is secondary (P1 tests are paid traffic)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">6</span>
+                    <strong>Page Builder Implementation (If Applicable)</strong>
+                    <ul>
+                        <li>If using GemPages/PageFly/Shrine custom PDP:
+                            <ul>
+                                <li>Select appropriate template (validation vs branded)</li>
+                                <li>Add: Hero image, feature grid, trust badges, FAQ section, reviews placeholder</li>
+                                <li>Ensure mobile responsiveness (preview on mobile)</li>
+                                <li>CTA buttons: Clear, contrasting color, "Add to Cart" primary action</li>
+                            </ul>
+                        </li>
+                        <li>If using default Shopify theme: Ensure theme settings are optimized (images, fonts, layout)</li>
+                    </ul>
+                    <strong>Tools:</strong> GemPages, PageFly, or Shopify theme editor
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">7</span>
+                    <strong>QA & Pre-Launch Checklist</strong>
+                    <ul>
+                        <li>✅ Product title clear and benefit-focused?</li>
+                        <li>✅ Description reflects R2 research angles?</li>
+                        <li>✅ Pricing correct (margin check)?</li>
+                        <li>✅ All variants configured?</li>
+                        <li>✅ Images load correctly on desktop + mobile?</li>
+                        <li>✅ Collections assigned correctly?</li>
+                        <li>✅ Shipping settings correct (check Shopify Shipping profiles)?</li>
+                        <li>✅ No broken links or missing sections?</li>
+                    </ul>
+                    <strong>Action:</strong> Test "Add to Cart" flow from PDP → Cart → Checkout (at least on staging)
+                </div>
+
+                <div class="workflow-step">
+                    <span class="workflow-step-number">8</span>
+                    <strong>Go Live & Documentation</strong>
+                    <ul>
+                        <li>Set product status: <strong>Active</strong> (visible on store)</li>
+                        <li>Update Notion Product OS:
+                            <ul>
+                                <li>Add Shopify product URL</li>
+                                <li>Set status: "Listing Live"</li>
+                                <li>Note any deviations from R3 plan</li>
+                            </ul>
+                        </li>
+                        <li>Update ClickUp: Move task to "Listing Complete" and add product URL in comment</li>
+                        <li>Post handoff notification in Discord #p3-stores-validation (see Handoff section)</li>
+                    </ul>
+                </div>
+
+                <p><strong>Quality Bar:</strong></p>
+                <ul>
+                    <li>Does listing clearly communicate value proposition from R2 research?</li>
+                    <li>Is listing error-free (no typos, broken images, wrong pricing)?</li>
+                    <li>Can P3 Media Buyer launch P1 ads immediately without listing questions?</li>
+                </ul>
+
+                <p><strong>Output Artifacts:</strong></p>
+                <ul>
+                    <li>Live Shopify product listing (URL)</li>
+                    <li>Updated Notion Product OS page with listing URL</li>
+                    <li>ClickUp task marked complete</li>
+                    <li>Discord handoff notification</li>
+                </ul>
+            </div>
+
+            <!-- Mermaid Diagram: Pipeline Flow -->
+            <div class="diagram-container">
+                <div class="diagram-title">Research & Listing Pipeline Flow</div>
+                <div class="mermaid">
+                graph LR
+                    A[R0 Scout<br/>Assignment] --> B{R1 Plausibility<br/>Check}
+                    B -->|Pass| C[R2 Deep<br/>Research]
+                    B -->|Kill| Z1[Killed:<br/>No Demand/Supplier]
+                    C --> D{R2 Dossier<br/>Complete?}
+                    D -->|Yes| E[R3 Review<br/>by Lead Strategist]
+                    D -->|No| C
+                    E -->|R3 Approved| F[Listing<br/>Assignment]
+                    E -->|Kill| Z2[Killed:<br/>Low Viability]
+                    F --> G[Create Shopify<br/>Listing]
+                    G --> H[QA &<br/>Launch]
+                    H --> I[Live Listing<br/>Ready for P1]
+                    
+                    style B fill:#00C8C8,stroke:#1A1A1A,color:#1A1A1A
+                    style D fill:#00C8C8,stroke:#1A1A1A,color:#1A1A1A
+                    style E fill:#F4E8D0,stroke:#1A1A1A,color:#1A1A1A
+                    style I fill:#4CAF50,stroke:#1A1A1A,color:#fff
+                    style Z1 fill:#FF6B35,stroke:#1A1A1A,color:#fff
+                    style Z2 fill:#FF6B35,stroke:#1A1A1A,color:#fff
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Handoff & Interface Specs -->
+        <section class="section" id="handoffs">
+            <div class="section-header">
+                <span class="section-icon">🔄</span>
+                <h2 class="section-title">6. Handoff & Interface Specs</h2>
+            </div>
+            <p class="section-intro">How work moves between roles and pods – precise specifications for continuity.</p>
+
+            <h3>Critical Handoff Points</h3>
+
+            <!-- Handoff 1: R1 → R2 -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>From:</strong> P1-R0-SCOUT-XX / P1-R1-SCOUT-SOURCING-XX</div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-to"><strong>To:</strong> You (P1-R1R2-RESEARCH-LISTER-XX)</div>
+                </div>
+                <p><strong>Trigger:</strong> Scout completes R0 screening and assigns R1 candidate</p>
+                <p><strong>Required Inputs:</strong></p>
+                <ul>
+                    <li>ProductID assigned (PRD-YYYYMMDD-XXX)</li>
+                    <li>ClickUp task created in "P1 Product Pipeline → Research → R1 Shortlist"</li>
+                    <li>Notion Product OS page created with basic info (product name, category, initial notes)</li>
+                    <li>Initial supplier link or marketplace URL</li>
+                </ul>
+                <p><strong>Quality Bar:</strong> Product must have clear name + basic category – not just "random idea"</p>
+                <p><strong>Channel:</strong> ClickUp task assignment + optional Discord mention in #p1-r1-shortlist</p>
+            </div>
+
+            <!-- Handoff 2: R2 → R3 -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>From:</strong> You (P1-R1R2-RESEARCH-LISTER-XX)</div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-to"><strong>To:</strong> P1-R3-LEAD-STRATEGIST-XX</div>
+                </div>
+                <p><strong>Trigger:</strong> R2 dossier complete and ready for R3 approval decision</p>
+                <p><strong>Required Inputs:</strong></p>
+                <ul>
+                    <li>Complete Notion R2 Packet page with all 7 sections (Overview, Competitors, Angles, Risks, Suppliers, Economics, References)</li>
+                    <li>Drive folder with research artifacts (screenshots, notes)</li>
+                    <li>ClickUp status: <strong>R2_REVIEW</strong></li>
+                    <li>PacketID: PCT-PRD-YYYYMMDD-XXX-R2NN</li>
+                </ul>
+                <p><strong>Discord Template:</strong></p>
+                <pre><code>[R2 HANDOFF]
+Product ID: PRD-YYYYMMDD-XXX
+Packet ID: PCT-PRD-YYYYMMDD-XXX-R2NN
+Product: [Product Name]
+
+Primary Angle: [One sentence describing strongest hook]
+Key Risk: [Top risk flagged]
+
+Notion Packet: [Link]
+Drive Folder: [Link]
+ClickUp Task: [Link]
+
+Status: Ready for R3 Review
+@P1-R3-LEAD-STRATEGIST</code></pre>
+                <p><strong>Channel:</strong> Discord #p1-r2-dossiers</p>
+                <p><strong>Expected Response Time:</strong> R3 decision within 24-48 hours</p>
+            </div>
+
+            <!-- Handoff 3: R3 → Listing -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>From:</strong> P1-R3-LEAD-STRATEGIST-XX</div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-to"><strong>To:</strong> You (P1-R1R2-RESEARCH-LISTER-XX)</div>
+                </div>
+                <p><strong>Trigger:</strong> Lead Strategist approves packet at R3 gate → needs listing</p>
+                <p><strong>Required Inputs:</strong></p>
+                <ul>
+                    <li>R3-approved status in Notion Product OS</li>
+                    <li>ClickUp task created in "P3 Media & Store → Listings → To Do"</li>
+                    <li>Creative assets available (from P2) or supplier images confirmed</li>
+                    <li>Target store specified (validation store URL or micro store)</li>
+                </ul>
+                <p><strong>Quality Bar:</strong> R3 packet complete with angles/positioning – no ambiguity on "what to say"</p>
+                <p><strong>Channel:</strong> ClickUp assignment + Discord mention in #p3-stores-validation if urgent</p>
+            </div>
+
+            <!-- Handoff 4: Listing Complete → P3 -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>From:</strong> You (P1-R1R2-RESEARCH-LISTER-XX)</div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-to"><strong>To:</strong> P3-MB-BUYER-XX / P3-SB-LISTER-IMPL-XX</div>
+                </div>
+                <p><strong>Trigger:</strong> Shopify listing live and QA complete</p>
+                <p><strong>Required Outputs:</strong></p>
+                <ul>
+                    <li>Live Shopify product URL</li>
+                    <li>Notion Product OS updated with listing URL + "Listing Live" status</li>
+                    <li>ClickUp task moved to "Listing Complete"</li>
+                    <li>All variants/pricing/images confirmed correct</li>
+                </ul>
+                <p><strong>Discord Template:</strong></p>
+                <pre><code>[LISTING LIVE]
+Product ID: PRD-YYYYMMDD-XXX
+Product: [Product Name]
+
+Shopify URL: [Live product page URL]
+Store: [Store name/URL]
+Status: Ready for P1 Test Launch
+
+Key Details:
+- Price: $XX.XX
+- Variants: [X colors/sizes]
+- Collection: [Collection name]
+
+Notion Product Page: [Link]
+ClickUp Task: [Link]
+
+Ready for Media Buyer
+@P3-MB-BUYER</code></pre>
+                <p><strong>Channel:</strong> Discord #p3-stores-validation</p>
+                <p><strong>Expected Response Time:</strong> Media Buyer reviews within 1-2 hours for urgent P1 launches</p>
+            </div>
+
+            <h3>ClickUp Status Transitions</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>From Status</th>
+                        <th>Action Taken</th>
+                        <th>To Status</th>
+                        <th>Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R1_TO_DO</td>
+                        <td>Complete R1 plausibility check</td>
+                        <td>R1_APPROVED or R1_REJECTED</td>
+                        <td>You</td>
+                    </tr>
+                    <tr>
+                        <td>R1_APPROVED</td>
+                        <td>Begin R2 research</td>
+                        <td>R2_IN_PROGRESS</td>
+                        <td>You</td>
+                    </tr>
+                    <tr>
+                        <td>R2_IN_PROGRESS</td>
+                        <td>Complete dossier</td>
+                        <td>R2_REVIEW</td>
+                        <td>You</td>
+                    </tr>
+                    <tr>
+                        <td>R2_REVIEW</td>
+                        <td>Lead Strategist reviews</td>
+                        <td>R3_APPROVED or R2_REJECTED</td>
+                        <td>Lead Strategist</td>
+                    </tr>
+                    <tr>
+                        <td>LISTING_TO_DO</td>
+                        <td>Create Shopify listing</td>
+                        <td>LISTING_IN_PROGRESS</td>
+                        <td>You</td>
+                    </tr>
+                    <tr>
+                        <td>LISTING_IN_PROGRESS</td>
+                        <td>Complete QA & launch</td>
+                        <td>LISTING_COMPLETE</td>
+                        <td>You</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Notion Database Changes</h3>
+            <p><strong>Product OS Updates:</strong></p>
+            <ul>
+                <li><strong>R1 Phase:</strong> Update "Current Gate" → R1, add R1 notes field</li>
+                <li><strong>R2 Phase:</strong> Update "Current Gate" → R2, populate angles/risks/supplier sections</li>
+                <li><strong>R3 Handoff:</strong> Update "Status" → R3_REVIEW, "Current Gate" → R3</li>
+                <li><strong>Listing Live:</strong> Add Shopify URL field, update "Status" → Listing Live</li>
+            </ul>
+
+            <h3>Google Drive Updates</h3>
+            <p><strong>Folder Structure:</strong></p>
+            <ul>
+                <li>Create: <code>/02_P1_Product_Intel/Products/[ProductID]_[ShortName]/</code></li>
+                <li>Within product folder:
+                    <ul>
+                        <li><code>/01_Research_Raw/</code> – screenshots, notes, competitive analysis</li>
+                        <li><code>/02_Packets_and_Summaries/</code> – exported R2 dossiers (if PDF)</li>
+                        <li><code>/03_Supplier_Docs/</code> – supplier quotes, product specs (if applicable)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Handoff Best Practice</div>
+                <p>Always include <strong>all three links</strong> in handoff messages: (1) Notion page, (2) ClickUp task, (3) Drive folder (or Shopify URL for listings). This prevents "where is it?" back-and-forth and respects everyone's time.</p>
+            </div>
+        </section>
+
+        <!-- Section 7: KPIs & Quality Bar -->
+        <section class="section" id="kpis">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2 class="section-title">7. KPIs & Quality Bar</h2>
+            </div>
+            <p class="section-intro">Quantitative metrics and qualitative standards defining success in this role.</p>
+
+            <h3>Primary KPIs (from L2-07)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target (1.0 FTE)</th>
+                        <th>Measurement Method</th>
+                        <th>Source/Tool</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R3 Packet Completion Rate</strong></td>
+                        <td>3-4 R3-ready packets/week</td>
+                        <td>Count of packets reaching R2_REVIEW status per week</td>
+                        <td>ClickUp (task counts by status)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Listing Throughput</strong></td>
+                        <td>15-20 live listings/week<br/>60-80 listings/month</td>
+                        <td>Count of products moved to LISTING_COMPLETE status</td>
+                        <td>ClickUp + Shopify Admin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Research Cycle Time (R1→R3)</strong></td>
+                        <td>≤ 3 business days per product (target average)</td>
+                        <td>Time between R1_APPROVED and R2_REVIEW status</td>
+                        <td>ClickUp time tracking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Listing Quality Score</strong></td>
+                        <td>≥ 90% error-free on first QA</td>
+                        <td>Percent of listings passing QA without revisions</td>
+                        <td>Manual QA log (Notion or Sheets)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brief Completeness</strong></td>
+                        <td>100% of R2 dossiers include all 7 required sections</td>
+                        <td>Checklist audit of Notion packets</td>
+                        <td>Spot checks by Lead Strategist</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Error Rate (Listings)</strong></td>
+                        <td>≤ 5% of listings have pricing/variant/image errors</td>
+                        <td>Count of listings requiring post-launch fixes</td>
+                        <td>Incident log (Discord or ClickUp)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Qualitative Quality Standards</h3>
+
+            <h4>Research Quality (R2 Dossiers)</h4>
+            <p><strong>Good R2 Dossier Example:</strong></p>
+            <ul>
+                <li>✅ Clear hypothesis: "This product works because [pain point] + [angle] hooks [target audience]"</li>
+                <li>✅ 2-3 validated angles with concrete ad examples (URLs, screenshots)</li>
+                <li>✅ Competitor pricing mapped (3-5 stores with URLs)</li>
+                <li>✅ Top 2-3 risks identified with severity ratings</li>
+                <li>✅ Supplier options include unit cost + MOQ + shipping time</li>
+                <li>✅ AOV and margin estimates match P1 budget constraints</li>
+                <li>✅ References section has 10+ links to winning ads, stores, reviews</li>
+            </ul>
+
+            <p><strong>Bad R2 Dossier Example:</strong></p>
+            <ul>
+                <li>❌ Vague positioning: "This product is cool, people will like it"</li>
+                <li>❌ No specific angles – just "general interest"</li>
+                <li>❌ Competitor section has 1-2 stores with no pricing analysis</li>
+                <li>❌ Risks section empty or says "no major risks" without evidence</li>
+                <li>❌ Supplier data missing MOQ or shipping costs</li>
+                <li>❌ No margin calculation or budget sanity check</li>
+                <li>❌ References section has ≤3 links or generic Google searches</li>
+            </ul>
+
+            <h4>Listing Quality (Shopify PDPs)</h4>
+            <p><strong>Good Listing Example:</strong></p>
+            <ul>
+                <li>✅ Title clearly states benefit (not just product name)</li>
+                <li>✅ Description reflects primary angle from R2 research (150-250 words)</li>
+                <li>✅ Description structure: Hook → Features → Benefits → Social proof → CTA</li>
+                <li>✅ 4-8 high-quality images (main, lifestyle, details)</li>
+                <li>✅ Pricing aligns with R2 economics (2.5-3x margin)</li>
+                <li>✅ All variants configured correctly (SKUs unique)</li>
+                <li>✅ Mobile responsive (images/layout work on mobile)</li>
+                <li>✅ No typos, broken links, or missing sections</li>
+            </ul>
+
+            <p><strong>Bad Listing Example:</strong></p>
+            <ul>
+                <li>❌ Title is just product name: "Sleep Guard Pillow"</li>
+                <li>❌ Description is generic filler text or copied from supplier</li>
+                <li>❌ Description has no clear structure (wall of text)</li>
+                <li>❌ Only 1-2 low-quality images</li>
+                <li>❌ Pricing doesn't match R2 margin plan (too high/low)</li>
+                <li>❌ Variants missing or SKUs duplicated</li>
+                <li>❌ Images don't load on mobile or layout broken</li>
+                <li>❌ Multiple typos or placeholder text still visible</li>
+            </ul>
+
+            <h3>How KPIs Are Measured & Reported</h3>
+            <ul>
+                <li><strong>Weekly Review:</strong> Lead Strategist reviews ClickUp task counts and cycle times in Friday sync</li>
+                <li><strong>Monthly Dashboard:</strong> Ops Coordinator compiles KPI summary (Notion or Sheets) for pod review</li>
+                <li><strong>Spot Audits:</strong> Random packet/listing QA checks (10% sample) by Lead Strategist or PM</li>
+                <li><strong>Self-Monitoring:</strong> You track daily throughput in personal log (optional but recommended)</li>
+            </ul>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Canon Alignment Check</div>
+                <p>These KPIs directly support the CaniCol v4.0 testing volume of <strong>45-60 products/month</strong>. If you consistently miss targets, this signals a <strong>capacity or process issue</strong> – not a reason to lower standards. Escalate to Lead Strategist for workload rebalancing or process optimization.</p>
+            </div>
+        </section>
+
+        <!-- Section 8: AI Usage & Prompt Patterns -->
+        <section class="section" id="ai-usage">
+            <div class="section-header">
+                <span class="section-icon">🤖</span>
+                <h2 class="section-title">8. AI Usage & Prompt Patterns</h2>
+            </div>
+            <p class="section-intro">How and when to use AI tools (ChatGPT, Claude, Gemini) to accelerate research and listing workflows while maintaining quality.</p>
+
+            <h3>AI Integration Points</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>AI Use Case</th>
+                        <th>Human Checkpoint Required?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R1 Quick Filter</td>
+                        <td>None (too fast for AI overhead)</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>R2 Competitor Analysis</td>
+                        <td>Summarize competitor store copy patterns</td>
+                        <td>✅ Yes – verify AI didn't miss key differentiators</td>
+                    </tr>
+                    <tr>
+                        <td>R2 Angle Extraction</td>
+                        <td>Analyze 10-15 ad videos, extract common hooks</td>
+                        <td>✅ Yes – ensure angles are accurate, not hallucinated</td>
+                    </tr>
+                    <tr>
+                        <td>R2 Risk Assessment</td>
+                        <td>Summarize negative reviews for common complaints</td>
+                        <td>✅ Yes – cross-check against actual reviews</td>
+                    </tr>
+                    <tr>
+                        <td>Listing Copywriting</td>
+                        <td>Draft product description based on R2 angles</td>
+                        <td>✅ Yes – edit for brand voice, remove hype</td>
+                    </tr>
+                    <tr>
+                        <td>Listing SEO Meta</td>
+                        <td>Generate meta title/description variants</td>
+                        <td>✅ Yes – pick best option, ensure accuracy</td>
+                    </tr>
+                    <tr>
+                        <td>QA Checklist Review</td>
+                        <td>None (human judgment critical)</td>
+                        <td>N/A</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Ready-to-Copy AI Prompts</h3>
+            <p>Use these prompts with ChatGPT, Claude, or similar tools. Always <strong>edit outputs</strong> before using in production.</p>
+
+            <h4>Prompt 1: Competitor Copy Analysis</h4>
+            <pre><code>I'm researching [PRODUCT NAME/CATEGORY] for a dropshipping test.
+
+Here are 5 competitor store pages:
+1. [URL or paste copy]
+2. [URL or paste copy]
+3. [URL or paste copy]
+4. [URL or paste copy]
+5. [URL or paste copy]
+
+Task: Analyze these competitors and identify:
+1. Common positioning angles (what pain point / benefit do they emphasize?)
+2. Price range and pricing strategy
+3. Key features they all mention vs unique differentiators
+4. Copy tone (urgent/scarcity vs calm/informative)
+
+Format: Bullet list, keep it concise (≤ 200 words total).
+
+Important: I will verify your findings – do not make up patterns that aren't there.</code></pre>
+
+            <h4>Prompt 2: Angle Extraction from Ads</h4>
+            <pre><code>I watched 10 winning TikTok/Meta ads for [PRODUCT NAME].
+
+Here are the hooks I observed:
+1. "[First 5 seconds of ad 1]"
+2. "[First 5 seconds of ad 2]"
+3. "[First 5 seconds of ad 3]"
+... [continue for all ads]
+
+Task: Group these hooks into 2-3 primary angle categories.
+
+For each angle category, provide:
+- Angle name (e.g., "Pain Point → Solution", "Social Proof", "Transformation")
+- 1-2 sentence description of the angle
+- Which hooks fit this angle (list the hook numbers)
+
+Format: Numbered list, keep it under 150 words total.
+
+Constraints:
+- Do NOT invent angles that aren't clearly present in the hooks
+- Focus on what's working in the market, not what "should" work</code></pre>
+
+            <h4>Prompt 3: Negative Review Summary</h4>
+            <pre><code>I'm researching [PRODUCT NAME] and need to understand quality/risk issues.
+
+Here are 10-15 negative reviews (2-star or lower):
+[Paste review text or key complaints]
+
+Task: Summarize the top 3-5 complaint themes.
+
+For each theme, provide:
+- Brief description (1 sentence)
+- How many reviews mentioned this (rough count)
+- Severity rating: Low / Medium / High
+
+Format: Bullet list, under 150 words.
+
+Important: Only report what's actually in the reviews – don't speculate about complaints not mentioned.</code></pre>
+
+            <h4>Prompt 4: Product Description Drafting (Listing Copy)</h4>
+            <pre><code>I need a Shopify product description for [PRODUCT NAME].
+
+Context from research:
+- Primary Angle: [Paste angle from R2 dossier]
+- Key Features: [List 3-5 features]
+- Target Audience: [Brief description]
+- Price Point: $XX.XX
+
+Task: Write a product description (150-250 words) that:
+1. Opens with a hook addressing the pain point
+2. Lists 3-5 key features with benefits (not just specs)
+3. Includes light social proof language (e.g., "thousands of customers love...")
+4. Ends with clear CTA ("Add to Cart" or "Get Yours Today")
+
+Tone: Clear, benefit-focused, no hype or exaggerated claims.
+
+Constraints:
+- No fake urgency ("Only 3 left!")
+- No unverifiable claims ("Scientifically proven...")
+- No overpromising ("Change your life overnight")
+- Write in simple sentences (grade 8-10 reading level)
+
+Output format: Plain text, no Markdown formatting.</code></pre>
+
+            <h4>Prompt 5: SEO Meta Title/Description Variants</h4>
+            <pre><code>I need SEO meta fields for [PRODUCT NAME] Shopify listing.
+
+Product: [Brief description]
+Primary Keyword: [Keyword phrase]
+Price: $XX.XX
+
+Task: Generate 3 variants each for:
+1. Meta Title (50-60 characters, include keyword)
+2. Meta Description (120-150 characters, benefit-focused)
+
+Constraints:
+- Must include primary keyword naturally
+- No clickbait or hype language
+- Focus on clear value proposition
+
+Output: Numbered list, plain text.</code></pre>
+
+            <h3>Human Checkpoints (CRITICAL)</h3>
+            <p>Always verify AI outputs before using them:</p>
+            <ul>
+                <li>✅ <strong>Angle Accuracy:</strong> Do extracted angles match what you saw in ads? (AI sometimes invents patterns)</li>
+                <li>✅ <strong>Brand Voice:</strong> Does copy match DriveOn anti-hype tone? (Edit out exaggerations)</li>
+                <li>✅ <strong>Factual Accuracy:</strong> Are feature claims real? (AI may hallucinate product capabilities)</li>
+                <li>✅ <strong>Competitor Data:</strong> Did AI accurately summarize competitors? (Cross-check 1-2 stores)</li>
+                <li>✅ <strong>No Hype:</strong> Remove any fake urgency, exaggerated benefits, or unverifiable claims</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ AI Is a Draft Generator, Not a Decision Maker</div>
+                <p>AI accelerates drafting but <strong>cannot replace judgment</strong>. You are responsible for:</p>
+                <ul>
+                    <li>Verifying all facts and claims</li>
+                    <li>Ensuring brand voice compliance (L2-08 guardrails)</li>
+                    <li>Making final go/no-go research decisions</li>
+                    <li>QA-ing all listing content before launch</li>
+                </ul>
+                <p>If you use AI-generated content verbatim without review, you are violating this SOP.</p>
+            </div>
+
+            <h3>Tools & Platforms</h3>
+            <ul>
+                <li><strong>Recommended AI Tools:</strong> ChatGPT (GPT-4), Claude Sonnet, Gemini Pro</li>
+                <li><strong>Use Cases:</strong> Drafting, summarization, pattern extraction, copy variants</li>
+                <li><strong>Not Recommended:</strong> Using AI for final R3 approval decisions (that's Lead Strategist's role)</li>
+            </ul>
+        </section>
+
+        <!-- Section 9: Tools & Systems Reference -->
+        <section class="section" id="tools">
+            <div class="section-header">
+                <span class="section-icon">🛠️</span>
+                <h2 class="section-title">9. Tools & Systems Reference</h2>
+            </div>
+            <p class="section-intro">Comprehensive guide to all tools used in this role, with access levels and key views.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Primary Use Case</th>
+                        <th>Key Views / Lists / DBs</th>
+                        <th>Access Level</th>
+                        <th>Login / Setup</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task management, pipeline tracking</td>
+                        <td>
+                            <ul>
+                                <li>Space: "P1 Product Pipeline"</li>
+                                <li>Folder: "Research"</li>
+                                <li>Lists: R1 Shortlist, R2 Deep Research, R3 Approvals</li>
+                                <li>Space: "P3 Media & Store"</li>
+                                <li>Folder: "Listings"</li>
+                                <li>Lists: To Do, In Progress, Complete</li>
+                            </ul>
+                        </td>
+                        <td>Editor</td>
+                        <td>Login via workspace invite, enable notifications for assigned tasks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Knowledge base, product/packet data</td>
+                        <td>
+                            <ul>
+                                <li>DB: "Product OS" (all products)</li>
+                                <li>DB: "Packets OS" (R2/R3 packets)</li>
+                                <li>Views: "R1 Active", "R2 In Progress", "R3 Review", "Listing Queue"</li>
+                            </ul>
+                        </td>
+                        <td>Editor (P1 pages)</td>
+                        <td>Login via workspace invite, bookmark Product OS and Packets OS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>File storage (screenshots, docs)</td>
+                        <td>
+                            <ul>
+                                <li>Shared Drive: "DriveOn Commerce"</li>
+                                <li>Folder: "/02_P1_Product_Intel/Products/"</li>
+                                <li>Create subfolders per product: [ProductID]_[ShortName]</li>
+                            </ul>
+                        </td>
+                        <td>Editor</td>
+                        <td>Access via @driveon.com account, create folders as needed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Team communication, handoffs</td>
+                        <td>
+                            <ul>
+                                <li>Channels: #p1-r1-shortlist, #p1-r2-dossiers, #p1-r3-approvals</li>
+                                <li>Channels: #p3-stores-validation</li>
+                            </ul>
+                        </td>
+                        <td>Member (P1/P3 channels)</td>
+                        <td>Join workspace, enable notifications for assigned mentions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shopify Admin</strong></td>
+                        <td>Create product listings</td>
+                        <td>
+                            <ul>
+                                <li>Products section</li>
+                                <li>Collections management</li>
+                                <li>Settings → Shipping profiles</li>
+                            </ul>
+                        </td>
+                        <td>Staff (Product Editor role)</td>
+                        <td>Login to validation/micro stores as assigned, no access to production stores</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GemPages / PageFly</strong></td>
+                        <td>Page builder for custom PDPs</td>
+                        <td>
+                            <ul>
+                                <li>Template Library (select validation/branded templates)</li>
+                                <li>Mobile preview</li>
+                            </ul>
+                        </td>
+                        <td>Editor (via Shopify)</td>
+                        <td>Access through Shopify Apps section, use existing templates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Minea / PiPiAds</strong></td>
+                        <td>Ad spy, competitor research</td>
+                        <td>
+                            <ul>
+                                <li>Product search by keyword/niche</li>
+                                <li>Ad performance metrics (views, engagement)</li>
+                            </ul>
+                        </td>
+                        <td>Team account</td>
+                        <td>Login with shared credentials, bookmark frequently used searches</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TikTok Creative Center</strong></td>
+                        <td>Trend research, ad examples</td>
+                        <td>
+                            <ul>
+                                <li>Trending Products</li>
+                                <li>Top Ads</li>
+                                <li>Hashtag search</li>
+                            </ul>
+                        </td>
+                        <td>Free public access</td>
+                        <td>Visit ads.tiktok.com/business/creativecenter, no login required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Meta Ad Library</strong></td>
+                        <td>Facebook/Instagram ad research</td>
+                        <td>
+                            <ul>
+                                <li>Search by advertiser name or keyword</li>
+                                <li>Filter by platform (Facebook, Instagram)</li>
+                            </ul>
+                        </td>
+                        <td>Free public access</td>
+                        <td>Visit facebook.com/ads/library, no login required</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AliExpress / CJ Dropshipping</strong></td>
+                        <td>Supplier research, pricing</td>
+                        <td>
+                            <ul>
+                                <li>Product search</li>
+                                <li>Supplier ratings/reviews</li>
+                                <li>Shipping calculator</li>
+                            </ul>
+                        </td>
+                        <td>Free account (AliExpress)<br/>Team account (CJ)</td>
+                        <td>Create AliExpress account, use CJ shared login for deeper supplier data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Sheets</strong></td>
+                        <td>Quick calculations (pricing, margin)</td>
+                        <td>
+                            <ul>
+                                <li>Shared template: "Product Economics Calculator"</li>
+                            </ul>
+                        </td>
+                        <td>Editor</td>
+                        <td>Access via Drive, make copy of template for each product as needed</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tool Access Setup Checklist</h3>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>ClickUp access granted to P1 and P3 spaces, assigned to Research and Listing lists</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Notion access to Product OS and Packets OS databases</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Google Drive access to "DriveOn Commerce" shared drive</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Discord invite to P1 and P3 channels, notifications enabled</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Shopify staff account created for validation stores (not production)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Minea/PiPiAds team account login credentials received</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>AliExpress account created, CJ Dropshipping team login received</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Bookmarked: TikTok Creative Center, Meta Ad Library, Google Trends</span>
+            </div>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Tool Efficiency Tips</div>
+                <ul>
+                    <li><strong>ClickUp:</strong> Set up custom filters for "Assigned to Me" + "Status: In Progress" to see only your active work</li>
+                    <li><strong>Notion:</strong> Pin Product OS and Packets OS to sidebar for quick access</li>
+                    <li><strong>Drive:</strong> Use "Starred" folders for frequently accessed product folders</li>
+                    <li><strong>Minea/PiPiAds:</strong> Save common searches (e.g., "Home & Garden", "Fitness") for faster research</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 10: Escalation & Decision Rights -->
+        <section class="section" id="escalation">
+            <div class="section-header">
+                <span class="section-icon">🚨</span>
+                <h2 class="section-title">10. Escalation & Decision Rights</h2>
+            </div>
+            <p class="section-intro">What you can decide alone vs. when to escalate – clarity on decision boundaries.</p>
+
+            <h3>Decisions You CAN Make Alone</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Decision Type</th>
+                        <th>Your Authority</th>
+                        <th>No Approval Needed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R1 Pass/Kill</strong></td>
+                        <td>Final decision within guardrails (demand signal, red flags, supplier viability)</td>
+                        <td>✅ Move to R2 or kill without asking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R2 Research Approach</strong></td>
+                        <td>How you conduct research (which tools, how many competitors, etc.)</td>
+                        <td>✅ Execute as you see fit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Listing Copy Edits</strong></td>
+                        <td>Writing style, tone, formatting within brand guidelines</td>
+                        <td>✅ Write listings without approval (but QA before launch)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Image Selection</strong></td>
+                        <td>Which supplier/P2 images to use in listing</td>
+                        <td>✅ Choose images, no approval needed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Task Prioritization</strong></td>
+                        <td>Daily task order (which R2 packets or listings to tackle first)</td>
+                        <td>✅ Self-managed within WIP limits</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Decisions Requiring Lead Strategist Approval</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Decision Type</th>
+                        <th>Why Escalate</th>
+                        <th>Response Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R3 Final Approval</strong></td>
+                        <td>R3 is Lead Strategist's gate – you prepare packets, they decide go/no-go</td>
+                        <td>24-48 hours</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Budget Exceptions</strong></td>
+                        <td>If product requires >$120 P1+P2 budget (Tier S exception), escalate before R3</td>
+                        <td>Same day (urgent)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Policy Risk Products</strong></td>
+                        <td>If product has compliance risk (health claims, restricted category), flag at R2</td>
+                        <td>Same day</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Supplier Quality Issues</strong></td>
+                        <td>If supplier has <3-star rating or serious complaint patterns, escalate before R3</td>
+                        <td>24 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Decisions Requiring PM/Founder Approval</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Decision Type</th>
+                        <th>Why Escalate to PM/Founder</th>
+                        <th>Response Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Process Changes</strong></td>
+                        <td>If you want to change SOP workflow (e.g., skip a step, add new tool), propose via PM</td>
+                        <td>1 week (not urgent)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tool Access Issues</strong></td>
+                        <td>If tools are broken or access blocked, escalate to PM/Ops immediately</td>
+                        <td>Same day (blocker)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WIP Cap Changes</strong></td>
+                        <td>If WIP caps are consistently breached, escalate for capacity review (don't just ignore)</td>
+                        <td>1-2 weeks (process review)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Canon Questions</strong></td>
+                        <td>If canon docs conflict or are unclear, escalate to PM/Ops Integrator</td>
+                        <td>1 week</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Escalation Templates</h3>
+
+            <h4>Template: R2 Risk Escalation (to Lead Strategist)</h4>
+            <pre><code>[RISK ESCALATION]
+Product ID: PRD-YYYYMMDD-XXX
+Product: [Product Name]
+
+Issue: [Describe risk: supplier quality concern, policy risk, high returns rate, etc.]
+
+Evidence:
+- [Specific data points: review scores, complaint themes, policy violations]
+
+My Recommendation: [Kill / Proceed with caution / Need decision]
+
+Context:
+- Notion Packet: [Link]
+- ClickUp Task: [Link]
+
+Requesting decision before moving to R3.
+@P1-R3-LEAD-STRATEGIST</code></pre>
+
+            <h4>Template: Blocker Escalation (to PM)</h4>
+            <pre><code>[BLOCKER]
+Role: P1-R1R2-RESEARCH-LISTER
+
+Issue: [Describe blocker: tool down, access issue, unclear process, etc.]
+
+Impact:
+- [How this blocks work: "Can't complete R2 research", "Can't launch listings", etc.]
+- [How many tasks blocked: X tasks waiting]
+
+Tried:
+- [What you've tried to resolve: "Checked login", "Refreshed browser", "Asked in Discord"]
+
+Requesting: [What you need: "Restore tool access", "Clarify process", "Provide credentials"]
+
+Urgency: [High = blocking current work / Medium = blocking tomorrow / Low = will block next week]
+@P4-PM-MANAGER</code></pre>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ When in Doubt, Escalate</div>
+                <p>If you're unsure whether to escalate, <strong>err on the side of escalating</strong>. It's better to ask and get clarity than to guess and create downstream problems. Lead Strategist and PM would rather answer questions than fix mistakes.</p>
+            </div>
+
+            <h3>Expected Response Times Summary</h3>
+            <ul>
+                <li><strong>Same Day:</strong> Blockers, urgent decisions, policy risks</li>
+                <li><strong>24-48 Hours:</strong> R3 reviews, supplier quality escalations</li>
+                <li><strong>1 Week:</strong> Process questions, canon clarifications, non-urgent tool issues</li>
+                <li><strong>1-2 Weeks:</strong> Capacity reviews, WIP cap adjustments</li>
+            </ul>
+        </section>
+
+        <!-- Section 11: Onboarding Checklist -->
+        <section class="section" id="onboarding">
+            <div class="section-header">
+                <span class="section-icon">🎓</span>
+                <h2 class="section-title">11. Onboarding Checklist</h2>
+            </div>
+            <p class="section-intro">Step-by-step onboarding plan from Day 1 to independent execution (typically 2-4 weeks).</p>
+
+            <h3>Pre-Start Setup (Done by PM/Ops before Day 1)</h3>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>ClickUp account created, assigned to P1 and P3 spaces</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Notion access granted to Product OS and Packets OS</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Google Drive access to DriveOn Commerce shared drive</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Discord invite sent, role assigned (P1/P3 channels)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Shopify staff account created (validation stores only)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span>Minea/PiPiAds credentials shared, AliExpress/CJ login provided</span>
+            </div>
+
+            <h3>Week 1: Canon Reading & Tool Familiarization</h3>
+            <p><strong>Goal:</strong> Understand the CaniCol model, DriveOn brand, and tool ecosystem</p>
+
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Day 1 AM:</strong> Read this SOP (P1-R1R2-RESEARCH-LISTER) start to finish</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Day 1 PM:</strong> Read L1-01 CaniCol Model v4.0 (understand testing philosophy)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Day 2 AM:</strong> Read L2-03 Role Registry & WIP Limits (understand your WIP caps)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Day 2 PM:</strong> Read L2-08 Brand Platform & Creative Guardrails (understand anti-hype stance)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Day 3:</strong> Tool walkthroughs with PM or Lead Strategist:
+                    <ul>
+                        <li>ClickUp (lists, statuses, task views)</li>
+                        <li>Notion (Product OS structure, Packets OS)</li>
+                        <li>Shopify Admin (product creation, collections)</li>
+                    </ul>
+                </span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Day 4-5:</strong> Review 3-5 example R2 packets in Notion (good vs bad examples)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Day 5:</strong> Review 3-5 example Shopify listings (good vs bad)</span>
+            </div>
+
+            <h3>Week 2: Shadowing & Supervised Work</h3>
+            <p><strong>Goal:</strong> Execute first R1/R2/Listing tasks with supervision</p>
+
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Monday:</strong> Shadow senior researcher on 2-3 R1 decisions (observe, take notes)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Tuesday:</strong> Execute 2-3 supervised R1 decisions (reviewed by Lead Strategist)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Wednesday:</strong> Shadow on 1 R2 deep dive (full workflow, tools, dossier assembly)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Thursday-Friday:</strong> Execute 1 supervised R2 packet (Lead Strategist reviews for quality)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>End of Week:</strong> Review session with Lead Strategist (feedback on first R2 packet)</span>
+            </div>
+
+            <h3>Week 3: First Independent Tasks</h3>
+            <p><strong>Goal:</strong> Execute R1/R2 independently, start listing work</p>
+
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Monday-Tuesday:</strong> Execute 4-6 R1 decisions independently (Lead Strategist spot-checks 2-3)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Wednesday-Thursday:</strong> Complete 1-2 R2 packets independently (reviewed before R3 handoff)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Friday:</strong> Shadow on 2-3 listing creations (Shopify workflow, page builder usage)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>End of Week:</strong> Feedback session – identify gaps or questions before Week 4</span>
+            </div>
+
+            <h3>Week 4: Full Independent Execution</h3>
+            <p><strong>Goal:</strong> Operate at full velocity without supervision</p>
+
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Monday:</strong> Execute 2-3 R1 decisions + 1 R2 packet start independently</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Tuesday:</strong> Complete R2 packet + create 2-3 supervised listings (QA by P3 team)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Wednesday-Thursday:</strong> Full mixed workload (R1/R2 + listings) at 60/40 split</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Friday:</strong> End-of-week review with Lead Strategist:
+                    <ul>
+                        <li>Weekly throughput achieved? (target: 2-3 R3 packets + 10-15 listings)</li>
+                        <li>Quality bar met? (no critical errors)</li>
+                        <li>WIP limits respected?</li>
+                    </ul>
+                </span>
+            </div>
+
+            <h3>30-Day Review Criteria (Pass/Fail)</h3>
+            <p><strong>To pass 30-day onboarding, you must demonstrate:</strong></p>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Throughput:</strong> Consistently hitting 3-4 R3 packets/week + 15-20 listings/week (scaled by FTE)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Quality:</strong> ≥90% of work passes QA without major revisions</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Independence:</strong> Can execute R1/R2/Listings without asking basic questions</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Tool Proficiency:</strong> Comfortable with ClickUp, Notion, Shopify, research tools</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Canon Compliance:</strong> Work reflects L2-08 brand guardrails (no hype, accurate claims)</span>
+            </div>
+            <div class="checklist-item">
+                <div class="checkbox">☐</div>
+                <span><strong>Communication:</strong> Handoffs are clear, timely, and include all required links/info</span>
+            </div>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Onboarding Success Tips</div>
+                <ul>
+                    <li><strong>Ask Questions Early:</strong> Week 1-2 is the time to ask "dumb" questions – don't wait until Week 3</li>
+                    <li><strong>Review Past Work:</strong> Spend time in Notion reviewing example packets – learn from good patterns</li>
+                    <li><strong>Shadow Before Solo:</strong> Watch experienced team members first, then replicate</li>
+                    <li><strong>Document Your Questions:</strong> Keep a running doc of unclear things to review in feedback sessions</li>
+                    <li><strong>Start Slow, Build Speed:</strong> Week 1 is reading/learning, Week 4 is full speed – don't rush</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 12: Change Log -->
+        <section class="section" id="changelog">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <h2 class="section-title">12. Change Log</h2>
+            </div>
+            <p class="section-intro">Version history and updates to this SOP.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Change Summary</th>
+                        <th>Linked Canon Updates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1.0</strong></td>
+                        <td>December 10, 2025</td>
+                        <td>DriveOn SOP Factory (v4) / Claude Sonnet 4.5</td>
+                        <td>
+                            <ul>
+                                <li>Initial SOP creation for P1-R1R2-RESEARCH-LISTER-XX</li>
+                                <li>Based on L2-03 role registry specifications</li>
+                                <li>Includes all 12 sections per Global SOP Schema</li>
+                                <li>Workflow bindings to ClickUp, Notion, Drive, Discord, Shopify</li>
+                                <li>AI usage patterns and ready-to-copy prompts included</li>
+                                <li>Mermaid diagram for pipeline flow visualization</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>L1-01 CaniCol Model v4.0</li>
+                                <li>L2-03 Role Registry & WIP Limits v1</li>
+                                <li>L2-05 Testing Canon v4.0</li>
+                                <li>L2-07 Pod KPIs & TestBank v4.0</li>
+                                <li>L2-08 Brand Platform v2.0</li>
+                                <li>L3-01 Discord Infra v1</li>
+                                <li>L3-02 ClickUp Infra v1</li>
+                                <li>L3-03 Notion Infra v1</li>
+                                <li>L3-04 Drive Infra v1</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #777; font-style: italic;">Future updates will be logged here with version increments (v1.1, v1.2, etc.)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Canon Drift Monitoring</h3>
+            <p>This SOP is <strong>L4 implementation</strong> of L0-L3 canon. If any of the following canon docs are updated, this SOP must be reviewed and potentially updated:</p>
+            <ul>
+                <li><strong>L1-01 CaniCol Model:</strong> If testing volumes, budgets, or philosophy change</li>
+                <li><strong>L2-03 Role Registry:</strong> If WIP limits, throughput targets, or role definitions change</li>
+                <li><strong>L2-05 Testing Canon:</strong> If P1/P2 pass/kill criteria change</li>
+                <li><strong>L2-07 Pod KPIs:</strong> If KPI definitions or targets change</li>
+                <li><strong>L2-08 Brand Platform:</strong> If brand guardrails or creative rules change</li>
+                <li><strong>L3-XX Infra Blueprints:</strong> If tool stack, folder structures, or channel names change</li>
+            </ul>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Canon Change Notification</div>
+                <p>If you notice a conflict between this SOP and any L0-L3 canon document, <strong>canon wins</strong>. Report the discrepancy to P4-OP-INTEGRATOR-XX for SOP update. Do not modify your behavior based on this SOP if it contradicts canon.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Hidden JSON Structure (for source-of-truth and future text generation) -->
+    <script type="application/json" id="sop-structure">
+    {
+      "role_id": "P1-R1R2-RESEARCH-LISTER-XX",
+      "role_name": "Product Researcher & Lister (Dual-Pod)",
+      "role_type": "RESEARCH_PLUS_LISTING",
+      "pod": "P1 – Product Intelligence (with P3 listing support)",
+      "status": "DUAL_ONLY",
+      "cross_pod": true,
+      "default_fte": 1.0,
+      "typical_fte_split": "0.6 research / 0.4 listing",
+      "owned_gates": ["R1", "R2", "Listing Support"],
+      "wip_limits": {
+        "r1_active": 6,
+        "r2_active": 3,
+        "r3_prep": 1,
+        "listing_tasks": "4-6"
+      },
+      "throughput_weekly": {
+        "r3_packets": "3-4",
+        "listings": "15-20"
+      },
+      "throughput_monthly": {
+        "listings": "60-80"
+      },
+      "primary_kpis": [
+        "R3 Packet Completion Rate",
+        "Listing Quality & Completeness",
+        "Error Rate (listing accuracy)",
+        "Research Cycle Time (R1→R3)",
+        "Brief Completeness Score"
+      ],
+      "day_in_life": [
+        {
+          "time_range": "08:00-08:30",
+          "focus": "Morning Setup & Prioritization",
+          "primary_workflows": ["Queue Review", "Daily Planning"]
+        },
+        {
+          "time_range": "08:30-11:00",
+          "focus": "Deep Research Block (R2 Primary)",
+          "primary_workflows": ["R2 Deep Research", "Dossier Creation"]
+        },
+        {
+          "time_range": "11:15-13:00",
+          "focus": "Listing Implementation",
+          "primary_workflows": ["Listing Creation", "Shopify PDP Setup"]
+        },
+        {
+          "time_range": "13:30-15:00",
+          "focus": "R1 Pipeline + Light Research",
+          "primary_workflows": ["R1 Plausibility Check", "Kill Decisions"]
+        },
+        {
+          "time_range": "15:00-16:30",
+          "focus": "Listing QA OR Additional R2",
+          "primary_workflows": ["QA & Refinement", "R2 Continuation"]
+        },
+        {
+          "time_range": "16:30-17:00",
+          "focus": "Handoffs & Admin",
+          "primary_workflows": ["Discord Notifications", "ClickUp Updates", "Time Logging"]
+        }
+      ],
+      "workflows": [
+        {
+          "name": "R1 Plausibility Check",
+          "trigger": "R0 scout assigns R1 candidate in ClickUp",
+          "time_budget": "15-20 minutes",
+          "inputs": ["ProductID", "ClickUp task", "Notion Product OS page", "Scout notes"],
+          "steps": [
+            "Load product context from ClickUp and Notion",
+            "Check demand signals (TikTok, Meta, Google Trends)",
+            "Scan for red flags (policy, logistics, quality risks)",
+            "Verify basic supplier viability (AliExpress/CJ)",
+            "Update Notion + ClickUp status (R1_APPROVED or R1_REJECTED)"
+          ],
+          "outputs": ["R1 decision logged", "ClickUp status updated", "Notion notes"],
+          "handoffs": ["P1-R3-LEAD-STRATEGIST-XX (if rejected with pattern learning)"],
+          "tools": ["ClickUp", "Notion", "TikTok", "Meta Ad Library", "Google Trends", "AliExpress"]
+        },
+        {
+          "name": "R2 Deep Research & Dossier",
+          "trigger": "Product approved at R1, assigned for R2",
+          "time_budget": "45-90 minutes",
+          "inputs": ["R1-approved product", "ClickUp R2 task", "Notion Packet page"],
+          "steps": [
+            "Research setup (open tools, create Drive folder)",
+            "Competitor mapping (3-5 competitors, pricing, positioning)",
+            "Angle & hook discovery (10-15 winning ads, extract angles)",
+            "Risk assessment (negative reviews, policy checks)",
+            "Supplier deep dive (2-3 suppliers with costs, MOQ, lead time)",
+            "AOV & economics estimate (margin check, P1 budget fit)",
+            "Assemble dossier (7 required sections in Notion)",
+            "Update ClickUp to R2_REVIEW, notify Lead Strategist"
+          ],
+          "outputs": ["Complete R2 Packet", "Drive research artifacts", "Discord handoff"],
+          "handoffs": ["P1-R3-LEAD-STRATEGIST-XX"],
+          "tools": ["Minea", "PiPiAds", "TikTok Creative Center", "Meta Ad Library", "Notion", "Drive", "AliExpress", "CJ"]
+        },
+        {
+          "name": "Listing Creation & Implementation",
+          "trigger": "R3-approved packet assigned for listing",
+          "time_budget": "30-90 minutes",
+          "inputs": ["R3 packet", "ProductID", "Creative assets", "Target store URL"],
+          "steps": [
+            "Load context (Notion packet, ClickUp task, assets)",
+            "Create Shopify product listing (title, description, images)",
+            "Configure pricing & variants (check margin, SKUs)",
+            "Assign collections & navigation",
+            "Set SEO meta fields",
+            "Implement page builder layout (if applicable)",
+            "QA checklist (pricing, images, mobile, shipping)",
+            "Go live, update Notion/ClickUp, notify P3 team"
+          ],
+          "outputs": ["Live Shopify listing", "Notion update", "Discord handoff"],
+          "handoffs": ["P3-MB-BUYER-XX", "P3-SB-LISTER-IMPL-XX"],
+          "tools": ["Shopify Admin", "GemPages/PageFly", "Notion", "Drive", "Discord"]
+        }
+      ],
+      "handoffs": [
+        {
+          "from_role": "P1-R0-SCOUT-XX",
+          "to_role": "P1-R1R2-RESEARCH-LISTER-XX",
+          "trigger": "R0 screening complete, R1 candidate assigned",
+          "channel": "ClickUp assignment + Discord #p1-r1-shortlist"
+        },
+        {
+          "from_role": "P1-R1R2-RESEARCH-LISTER-XX",
+          "to_role": "P1-R3-LEAD-STRATEGIST-XX",
+          "trigger": "R2 dossier complete",
+          "channel": "Discord #p1-r2-dossiers"
+        },
+        {
+          "from_role": "P1-R3-LEAD-STRATEGIST-XX",
+          "to_role": "P1-R1R2-RESEARCH-LISTER-XX",
+          "trigger": "R3 approval for listing",
+          "channel": "ClickUp assignment + Discord #p3-stores-validation"
+        },
+        {
+          "from_role": "P1-R1R2-RESEARCH-LISTER-XX",
+          "to_role": "P3-MB-BUYER-XX",
+          "trigger": "Listing live and QA complete",
+          "channel": "Discord #p3-stores-validation"
+        }
+      ],
+      "canon_sources": [
+        "L1-01_CaniCol_Model_v4.0",
+        "L2-03_Role_Registry_and_WIP_Limits_v1",
+        "L2-05_Testing_Canon_v4.0",
+        "L2-07_Pod_KPIs_and_TestBank_v4.0",
+        "L2-08_DriveOn_Master_Brand_Platform_v2.0",
+        "L3-01_Discord_Infra_v1",
+        "L3-02_ClickUp_Infra_v1",
+        "L3-03_Notion_Infra_v1",
+        "L3-04_Drive_Infra_v1"
+      ],
+      "version": "1.0",
+      "last_updated": "2025-12-10",
+      "author": "DriveOn SOP Factory (v4) / Claude Sonnet 4.5"
+    }
+    </script>
+
+    <!-- JavaScript for Navigation & Interactivity -->
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#1A1A1A',
+                lineColor: '#1A1A1A',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Toggle navigation on mobile
+        function toggleNav() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            sidebar.classList.toggle('hidden');
+            main.classList.toggle('expanded');
+        }
+
+        // Smooth scroll with offset for sticky header
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Update active link
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Auto-hide/show nav on scroll (desktop only)
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', function() {
+            if (window.innerWidth > 768) {
+                const sidebar = document.getElementById('sidebar');
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Only hide if scrolling down past header
+                if (scrollTop > 100 && scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    sidebar.style.transform = 'translateX(-100%)';
+                } else {
+                    // Scrolling up
+                    sidebar.style.transform = 'translateX(0)';
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }
+        });
+
+        // Intersection Observer for active nav links
+        const sections = document.querySelectorAll('section[id], .hero[id]');
+        const observerOptions = {
+            rootMargin: '-100px 0px -80% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // Collapsible sections functionality (if needed for future sections)
+        document.querySelectorAll('.collapsible-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const toggle = this.querySelector('.collapsible-toggle');
+                
+                content.classList.toggle('active');
+                toggle.textContent = content.classList.contains('active') ? '−' : '+';
+            });
+        });
+
+        // Console log for debugging
+        console.log('DriveOn P1-R1R2-RESEARCH-LISTER SOP v1.0 loaded successfully');
+        console.log('Canon compliance: L0-L3 binding enforced');
+        console.log('Interactive features: Navigation, smooth scroll, active link tracking');
+    </script>
+</body>
+</html>
