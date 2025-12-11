@@ -1,0 +1,2745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP: P4-HR-TALENT | Talent & Recruiting Specialist | DriveOn Commerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface-white: #FFFFFF;
+            --surface-light: #F8F8F8;
+            --border-color: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success-green: #28A745;
+            --warning-yellow: #FFC107;
+            --danger-red: #DC3545;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-light);
+        }
+        
+        /* Header */
+        header {
+            background: var(--carbon-black);
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .role-badge {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .status-chip {
+            background: var(--champagne);
+            color: var(--carbon-black);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .nav-toggle {
+            background: var(--drive-cyan);
+            border: none;
+            color: var(--carbon-black);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            display: none;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            left: 0;
+            top: 80px;
+            width: 280px;
+            height: calc(100vh - 80px);
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            padding: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav a {
+            display: block;
+            padding: 0.75rem 2rem;
+            color: var(--carbon-black);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        nav a:hover {
+            background: var(--surface-light);
+            border-left-color: var(--drive-cyan);
+        }
+        
+        nav a.active {
+            background: var(--surface-light);
+            border-left-color: var(--drive-cyan);
+            color: var(--drive-cyan);
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        main {
+            margin-left: 280px;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+        
+        /* Hero Summary */
+        .hero-summary {
+            background: linear-gradient(135deg, var(--carbon-black) 0%, #2A2A2A 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--drive-cyan);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+        
+        .key-outcomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .outcome-chip {
+            background: rgba(0, 200, 200, 0.2);
+            border-left: 4px solid var(--drive-cyan);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+        
+        .outcome-chip-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--drive-cyan);
+        }
+        
+        .you-own {
+            margin-top: 2rem;
+        }
+        
+        .you-own h3 {
+            color: var(--champagne);
+            margin-bottom: 1rem;
+        }
+        
+        .you-own ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .you-own li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .you-own li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--drive-cyan);
+            font-weight: bold;
+        }
+        
+        /* Section Card */
+        .section-card {
+            background: var(--surface-white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--drive-cyan);
+        }
+        
+        .section-icon {
+            font-size: 1.8rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--carbon-black);
+        }
+        
+        .section-intro {
+            background: var(--surface-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--drive-cyan);
+        }
+        
+        /* Callouts */
+        .callout {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        
+        .callout-canon {
+            background: rgba(244, 232, 208, 0.2);
+            border-color: var(--champagne);
+        }
+        
+        .callout-warning {
+            background: rgba(255, 193, 7, 0.1);
+            border-color: var(--warning-yellow);
+        }
+        
+        .callout-tip {
+            background: rgba(0, 200, 200, 0.1);
+            border-color: var(--drive-cyan);
+        }
+        
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--drive-cyan);
+        }
+        
+        .timeline-block {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-marker {
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--drive-cyan);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        
+        .timeline-time {
+            font-weight: 600;
+            color: var(--drive-cyan);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            background: var(--surface-light);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+        
+        /* Handoff Card */
+        .handoff-card {
+            background: var(--surface-light);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .handoff-flow {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 1.5rem;
+        }
+        
+        /* Code Block */
+        pre {
+            background: var(--carbon-black);
+            color: var(--drive-cyan);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th {
+            background: var(--carbon-black);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        tr:hover {
+            background: var(--surface-light);
+        }
+        
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            background: var(--surface-light);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .checklist li::before {
+            content: "☐";
+            font-size: 1.5rem;
+            color: var(--drive-cyan);
+        }
+        
+        /* Collapsible */
+        .collapsible {
+            margin: 1.5rem 0;
+        }
+        
+        .collapsible-header {
+            background: var(--surface-light);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: background 0.2s ease;
+        }
+        
+        .collapsible-header:hover {
+            background: var(--border-color);
+        }
+        
+        .collapsible-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .collapsible-content.active {
+            max-height: 5000px;
+        }
+        
+        .collapsible-inner {
+            padding: 1.5rem;
+        }
+        
+        /* KPI Strip */
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .kpi-card {
+            background: var(--surface-white);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .kpi-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav {
+                transform: translateX(-100%);
+            }
+            
+            nav.active {
+                transform: translateX(0);
+            }
+            
+            main {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .key-outcomes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <span class="role-badge">P4-HR-TALENT-XX</span>
+                <div>
+                    <h1 style="font-size: 1.5rem; margin-bottom: 0.25rem;">Talent & Recruiting Specialist</h1>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Pod 4: Operations & Integration | CaniCol v4.0</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <span class="status-chip">OPTIONAL</span>
+                <button class="nav-toggle" onclick="toggleNav()">☰ Contents</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav id="main-nav">
+        <ul>
+            <li><a href="#hero" class="active">Overview</a></li>
+            <li><a href="#meta">1. Role Meta</a></li>
+            <li><a href="#purpose">2. Role Purpose</a></li>
+            <li><a href="#canon">3. Canon Constraints</a></li>
+            <li><a href="#day-in-life">4. Day-in-the-Life</a></li>
+            <li><a href="#workflows">5. Core Workflows</a></li>
+            <li><a href="#handoffs">6. Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">7. KPIs & Quality Bar</a></li>
+            <li><a href="#ai-usage">8. AI Usage & Prompts</a></li>
+            <li><a href="#tools">9. Tools & Systems</a></li>
+            <li><a href="#escalation">10. Escalation & Decision Rights</a></li>
+            <li><a href="#onboarding">11. Onboarding Checklist</a></li>
+            <li><a href="#changelog">12. Change Log</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Summary -->
+        <section id="hero" class="hero-summary">
+            <h1 class="hero-title">Talent & Recruiting Specialist</h1>
+            <p class="hero-subtitle">Building the team that powers the CaniCol testing engine</p>
+            
+            <div class="key-outcomes">
+                <div class="outcome-chip">
+                    <div class="outcome-chip-title">Pipeline Velocity</div>
+                    <div>10-20 candidates/week across all open roles</div>
+                </div>
+                <div class="outcome-chip">
+                    <div class="outcome-chip-title">Time-to-Fill</div>
+                    <div>14-21 days for core roles, 7-14 days for support roles</div>
+                </div>
+                <div class="outcome-chip">
+                    <div class="outcome-chip-title">Quality-of-Hire</div>
+                    <div>≥80% 30-day retention, ≥90% SOP competency at 30 days</div>
+                </div>
+                <div class="outcome-chip">
+                    <div class="outcome-chip-title">Candidate Experience</div>
+                    <div>≥4.0/5.0 rating, ≤48hr response time at all stages</div>
+                </div>
+            </div>
+            
+            <div class="you-own">
+                <h3>You Own:</h3>
+                <ul>
+                    <li>Full recruiting pipeline from job posting to offer acceptance</li>
+                    <li>Candidate experience and communication throughout the hiring journey</li>
+                    <li>ATS hygiene and pipeline data integrity</li>
+                    <li>Onboarding coordination and Day 1 readiness</li>
+                    <li>Employer brand consistency across all candidate touchpoints</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 1: Role Meta -->
+        <section id="meta" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📋</span>
+                <h2 class="section-title">1. Role Meta & Specifications</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> This is your role's "data sheet" – the canonical definition that connects you to the broader DriveOn system. Everything here is read-only from canon; you implement it, you don't change it.
+            </div>
+
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><strong>Role ID</strong></td>
+                    <td>P4-HR-TALENT-XX</td>
+                </tr>
+                <tr>
+                    <td><strong>Role Type</strong></td>
+                    <td>TALENT_RECRUITING</td>
+                </tr>
+                <tr>
+                    <td><strong>Pod</strong></td>
+                    <td>P4 – Operations & Integration</td>
+                </tr>
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td>OPTIONAL (becomes CORE when team >30)</td>
+                </tr>
+                <tr>
+                    <td><strong>Cross-Pod</strong></td>
+                    <td>true (interfaces with all pods)</td>
+                </tr>
+                <tr>
+                    <td><strong>Default FTE</strong></td>
+                    <td>0.5–1.0</td>
+                </tr>
+                <tr>
+                    <td><strong>Owned Gates</strong></td>
+                    <td>Recruiting Pipeline (Sourcing → Screening → Interview → Offer → Onboarding)</td>
+                </tr>
+                <tr>
+                    <td><strong>Upstream Roles</strong></td>
+                    <td>P4-PM-MANAGER (hiring needs), P4-OP-INTEGRATOR (role definitions), Founder (approval)</td>
+                </tr>
+                <tr>
+                    <td><strong>Downstream Roles</strong></td>
+                    <td>All pods (new hires), P4-PM-MANAGER (onboarding coordination)</td>
+                </tr>
+                <tr>
+                    <td><strong>Reports To</strong></td>
+                    <td>Founder / P4-OP-INTEGRATOR</td>
+                </tr>
+            </table>
+
+            <div class="kpi-strip" style="margin-top: 2rem;">
+                <div class="kpi-card">
+                    <div class="kpi-label">WIP Limit</div>
+                    <div class="kpi-value">5-10</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.5rem;">open roles/candidates</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Daily Throughput</div>
+                    <div class="kpi-value">3-5</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.5rem;">candidate touches</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Weekly Throughput</div>
+                    <div class="kpi-value">10-20</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.5rem;">candidates progressed</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Monthly Throughput</div>
+                    <div class="kpi-value">40-80</div>
+                    <div style="font-size: 0.85rem; margin-top: 0.5rem;">total candidate interactions</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1rem;">Primary Workspaces</h3>
+                <table>
+                    <tr>
+                        <th>System</th>
+                        <th>Primary Location</th>
+                    </tr>
+                    <tr>
+                        <td>ClickUp</td>
+                        <td>P4 – Ops & PM → Recruiting & HR → Role Hiring</td>
+                    </tr>
+                    <tr>
+                        <td>Notion</td>
+                        <td>People & Roles DB, Candidate Pipeline DB, Onboarding Checklist Templates</td>
+                    </tr>
+                    <tr>
+                        <td>ATS</td>
+                        <td>Upwork/OnlineJobs.ph (primary), supplemental ATS if configured</td>
+                    </tr>
+                    <tr>
+                        <td>Discord</td>
+                        <td>#p4-hiring (primary), pod channels for role-specific discussions</td>
+                    </tr>
+                    <tr>
+                        <td>Google Drive</td>
+                        <td>/DriveOn Commerce/P4 Operations/Recruiting & HR/</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 2: Role Purpose -->
+        <section id="purpose" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h2 class="section-title">2. Role Purpose & Context</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> Understanding why this role exists in the CaniCol model helps you make better decisions about trade-offs, prioritization, and when to escalate versus when to execute independently.
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Why This Role Exists</h3>
+            
+            <p>The CaniCol v4.0 model tests <strong>45–60 products/month</strong> with a <strong>4–6% winner rate</strong>. This engine requires:</p>
+            
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li>Pod 1 researchers feeding packets</li>
+                <li>Pod 2 creatives producing assets</li>
+                <li>Pod 3 buyers launching tests</li>
+                <li>Pod 4 orchestrating the system</li>
+            </ul>
+
+            <p>As the team scales beyond <strong>15–20 people</strong>, ad-hoc hiring breaks down. Founders can't screen 40+ candidates/month while also running the business. Pod leads can't maintain hiring velocity while executing their core roles.</p>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Canon Alignment</div>
+                <p>This role exists to <strong>protect founder time and maintain hiring velocity</strong> without compromising on quality-of-hire. You are the <strong>talent engine that feeds the testing engine</strong>.</p>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">How This Role Supports CaniCol Economics</h3>
+            
+            <p>Every role in DriveOn exists to support or protect the testing model's economics. Your contribution:</p>
+
+            <div class="outcome-chip" style="margin: 1rem 0;">
+                <div class="outcome-chip-title">Speed Without Sacrifice</div>
+                <div>Fill roles fast enough to maintain testing volume (45–60 tests/month) without hiring mis-fits who burn time and money.</div>
+            </div>
+
+            <div class="outcome-chip" style="margin: 1rem 0;">
+                <div class="outcome-chip-title">First-Time-Right Hires</div>
+                <div>≥80% 30-day retention means less re-hiring churn, which directly protects the Test Bank budget and pod throughput.</div>
+            </div>
+
+            <div class="outcome-chip" style="margin: 1rem 0;">
+                <div class="outcome-chip-title">Culture & Canon Fit</div>
+                <div>Every hire must be able to execute SOPs from day one. You screen for canon-fit, not just skills.</div>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Connection to Holdings & Brand Architecture</h3>
+            
+            <p>From <strong>L0-01 (DriveOn Holdings Charter)</strong>:</p>
+            <ul style="margin: 1rem 0; padding-left: 2rem;">
+                <li>DriveOn Commerce is the <strong>dropshipping engine</strong> within DriveOn Holdings</li>
+                <li>It must operate <strong>lean and disciplined</strong> – no bloat, no vanity hires</li>
+                <li>Every role must have <strong>clear WIP limits, throughput targets, and KPIs</strong></li>
+            </ul>
+
+            <p>Your job is to <strong>enforce these standards at the hiring gate</strong>, not after someone is already onboarded and struggling.</p>
+        </section>
+
+        <!-- Section 3: Canon Constraints -->
+        <section id="canon" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">⚖️</span>
+                <h2 class="section-title">3. Canon Constraints</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> These are non-negotiable. If a candidate, hiring manager, or external platform asks you to break these rules, the answer is "no" – and you escalate if needed.
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Constraint 1: Role Definitions Are Canon-Only</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Source:</strong> L2-03 Role Registry & WIP Limits v1</p>
+                        
+                        <div class="callout callout-warning">
+                            <div class="callout-title">⚠️ Hard Rule</div>
+                            <p>You may <strong>only hire for roles defined in L2-03</strong>. You cannot invent new roles, merge roles, or modify WIP limits without explicit canon updates.</p>
+                        </div>
+
+                        <p><strong>Why this matters:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Every role has specific WIP limits and throughput targets that tie to the 45–60 tests/month model</li>
+                            <li>Adding undefined roles breaks the economic model</li>
+                            <li>Job descriptions must match canon role specs exactly</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>If a hiring manager says:</strong> "We need a hybrid researcher + editor role"</p>
+                        <p><strong>Your response:</strong> "That's not a canonical role. Let's either hire two separate roles (P1-R1R2-RESEARCH + P2-CR-VOLUME) or propose a Canon Change Request to define the hybrid."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Constraint 2: All Candidates Must Be Canon-Executable</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Source:</strong> L2-01 Standard Ops Binding + All Role SOPs</p>
+                        
+                        <p>Every new hire must be able to:</p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Read and follow their role's L4 SOP from day one</li>
+                            <li>Use the approved tool stack (Discord/ClickUp/Notion/Drive) without training</li>
+                            <li>Operate within WIP limits and meet throughput targets within 30 days</li>
+                        </ul>
+
+                        <div class="callout callout-tip">
+                            <div class="callout-title">💡 Screening Litmus Test</div>
+                            <p>Ask: "If I give this candidate the role SOP and 2 hours of tool access, can they complete their first task without hand-holding?"</p>
+                            <p>If the answer is "no," they're not canon-executable.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Constraint 3: No Tool Sprawl</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Source:</strong> L2-01 Standard Ops Binding, L3-01–L3-04 Infra Blueprints</p>
+                        
+                        <p>The approved tool stack is:</p>
+                        <ul style="padding-left: 2rem;">
+                            <li><strong>Discord</strong> – internal comms</li>
+                            <li><strong>Slack</strong> – recruiting & external only</li>
+                            <li><strong>ClickUp</strong> – tasks, gates, WIP, time tracking</li>
+                            <li><strong>Notion</strong> – knowledge, canon, people registry</li>
+                            <li><strong>Google Drive</strong> – files and media</li>
+                            <li><strong>ATS</strong> – Upwork/OnlineJobs.ph (primary)</li>
+                        </ul>
+
+                        <div class="callout callout-warning">
+                            <div class="callout-title">⚠️ Forbidden</div>
+                            <p>Do NOT recruit via:</p>
+                            <ul style="padding-left: 2rem;">
+                                <li>Airtable, Asana, Monday.com, Trello (not in canon)</li>
+                                <li>Personal email threads (all hiring must be in ATS + ClickUp)</li>
+                                <li>Random freelance platforms not approved in L3</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Constraint 4: Compensation Must Align With L3-05 Schema</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Source:</strong> L3-05 Time & Payroll Schema v1</p>
+                        
+                        <p>All offers must follow the canonical comp models:</p>
+                        <ul style="padding-left: 2rem;">
+                            <li><strong>Hourly</strong> – for roles with variable hours (most VAs, support roles)</li>
+                            <li><strong>Per-Deliverable</strong> – for output-based roles (e.g., approved R3 packets, hero edits)</li>
+                            <li><strong>Retainer</strong> – for leadership/senior roles with fixed monthly commitment</li>
+                            <li><strong>Winner Bonus</strong> – for roles that directly contribute to P2_PASS/P3_WINNER outcomes</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>You may NOT:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Offer salary bands outside the ranges approved for each role in L2-03 notes</li>
+                            <li>Promise equity, rev-share, or profit-share (not in canon)</li>
+                            <li>Create custom comp structures without explicit founder approval</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Constraint 5: Security & Access Policy</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Source:</strong> L2-10 Security & Access Policy v1</p>
+                        
+                        <p>All new hires must:</p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Sign NDA before receiving any sensitive company info</li>
+                            <li>Use approved access controls (no shared logins)</li>
+                            <li>Complete security onboarding checklist</li>
+                            <li>Understand data handling policies for customer/financial data</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>You coordinate with P4-OP-INTEGRATOR to:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Provision correct access levels per role (viewer/editor/admin)</li>
+                            <li>Ensure contractors cannot access financial or customer PII unless role requires it</li>
+                            <li>Revoke access immediately upon termination</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Day-in-the-Life -->
+        <section id="day-in-life" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📅</span>
+                <h2 class="section-title">4. Day-in-the-Life Timeline</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> This is your daily rhythm. It's designed to balance proactive sourcing, reactive candidate management, and administrative hygiene without burning you out or letting candidates go cold.
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-block">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-time">Morning Block (9:00–11:00 AM)</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Pipeline Review & Candidate Outreach
+                        <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                            <li><strong>Check ATS</strong> – Review new applications from last 24hrs</li>
+                            <li><strong>Screen Resumes</strong> – Run initial filters (location, experience, skills) using ATS automation</li>
+                            <li><strong>Send Outreach</strong> – 5–10 cold outreach messages to passive candidates on Upwork/OnlineJobs</li>
+                            <li><strong>Schedule Interviews</strong> – Confirm 2–3 upcoming interview slots using self-scheduling links</li>
+                        </ul>
+                        <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(0,200,200,0.1); border-radius: 4px;">
+                            <strong>Output:</strong> 5–10 candidates screened, 3–5 outreach sent, 2–3 interviews scheduled
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-time">Midday Block (11:00 AM–1:00 PM)</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Interviews & Assessments
+                        <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                            <li><strong>Conduct Screening Interviews</strong> – 2–3 × 15–20min video calls</li>
+                            <li><strong>Administer Skills Tests</strong> – Send take-home assignments or live skill assessments</li>
+                            <li><strong>Document Feedback</strong> – Update ATS with interview notes and scorecards immediately after each call</li>
+                        </ul>
+                        <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(0,200,200,0.1); border-radius: 4px;">
+                            <strong>Output:</strong> 2–3 interviews completed, feedback logged in ATS
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-time">Afternoon Block (1:00–3:00 PM)</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Candidate Communication & Pipeline Hygiene
+                        <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                            <li><strong>Send Status Updates</strong> – Email/message all candidates who are awaiting next steps (≤48hr response SLA)</li>
+                            <li><strong>Coordinate Technical Interviews</strong> – Connect advanced candidates with pod leads for deeper skill assessment</li>
+                            <li><strong>Update ClickUp</strong> – Move hiring tasks through pipeline (Sourcing → Screening → Interview → Offer)</li>
+                            <li><strong>Update Notion</strong> – Log candidate profiles in Candidate Pipeline DB</li>
+                        </ul>
+                        <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(0,200,200,0.1); border-radius: 4px;">
+                            <strong>Output:</strong> All candidates have status updates, no one waiting >48hrs
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-time">Late Afternoon Block (3:00–5:00 PM)</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Offers, Onboarding Prep & Reporting
+                        <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                            <li><strong>Draft Offers</strong> – Prepare offer letters for approved candidates (use templates from Drive)</li>
+                            <li><strong>Coordinate Onboarding</strong> – Work with P4-PM-MANAGER to schedule Day 1 for incoming hires</li>
+                            <li><strong>Post New Job Ads</strong> – Refresh or create listings for open roles</li>
+                            <li><strong>Weekly Reporting</strong> – (Fridays) Update hiring dashboard with time-to-fill, pipeline health, offer acceptance rate</li>
+                        </ul>
+                        <div style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(0,200,200,0.1); border-radius: 4px;">
+                            <strong>Output:</strong> 1–2 offers sent, onboarding queued, pipeline report ready
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-time">End-of-Day (5:00–5:30 PM)</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Standup & Tomorrow Prep
+                        <ul style="margin-top: 0.5rem; padding-left: 2rem;">
+                            <li><strong>Post Daily Standup</strong> – #p4-pm-daily-standup in Discord</li>
+                            <li><strong>Review Tomorrow's Calendar</strong> – Confirm interviews, candidate calls, offer discussions</li>
+                            <li><strong>Flag Blockers</strong> – Any hiring delays, difficult-to-fill roles, or candidate ghosting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout callout-tip" style="margin-top: 2rem;">
+                <div class="callout-title">💡 Time Management Tip</div>
+                <p>Use <strong>time-blocking</strong> to protect deep work. Disable Slack/Discord notifications during interview blocks. Batch candidate emails into 2–3 focused sessions rather than responding reactively all day.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: Core Workflows -->
+        <section id="workflows" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <h2 class="section-title">5. Core Workflows</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> These are your repeatable processes. Follow them exactly as written until you've run 50+ candidates through – only then propose improvements via Canon Change Request.
+            </div>
+
+            <!-- Mermaid Diagram: Full Recruiting Pipeline -->
+            <div style="margin: 2rem 0; background: white; padding: 2rem; border-radius: 8px;">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Full Recruiting Pipeline Flow</h3>
+                <div class="mermaid">
+                flowchart TD
+                    A[Hiring Need Identified] --> B[Create Job Posting]
+                    B --> C{Source Candidates}
+                    C -->|Active Sourcing| D[Upwork/OnlineJobs.ph]
+                    C -->|Passive Sourcing| E[Referrals/LinkedIn]
+                    C -->|Job Boards| F[Indeed/Remote.co]
+                    D --> G[Applications in ATS]
+                    E --> G
+                    F --> G
+                    G --> H[Resume Screening]
+                    H -->|Fail| I[Reject - Send Template Email]
+                    H -->|Pass| J[Phone/Video Screen 15-20min]
+                    J -->|Fail| I
+                    J -->|Pass| K[Skills Assessment]
+                    K -->|Fail| I
+                    K -->|Pass| L[Technical Interview with Pod Lead]
+                    L -->|Fail| I
+                    L -->|Pass| M[Reference Check]
+                    M --> N[Offer Preparation]
+                    N --> O{Offer Sent}
+                    O -->|Rejected| P[Back to Pipeline]
+                    O -->|Accepted| Q[Onboarding Coordination]
+                    Q --> R[Day 1 Ready]
+                    
+                    style A fill:#00C8C8,color:#1A1A1A
+                    style R fill:#28A745,color:#fff
+                    style I fill:#DC3545,color:#fff
+                    style O fill:#FFC107,color:#1A1A1A
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Workflow 1: Create Job Posting from Canon Role</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Trigger:</strong> Hiring manager creates task in ClickUp (P4 – Recruiting & HR → Role Hiring) OR founder sends request in #p4-hiring</p>
+                        
+                        <p><strong>Inputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Role ID from L2-03 (e.g., P1-R1R2-RESEARCH-01)</li>
+                            <li>Target start date</li>
+                            <li>FTE allocation (0.5 or 1.0)</li>
+                            <li>Any special constraints (timezone, language, etc.)</li>
+                        </ul>
+
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 2rem;">
+                            <li><strong>Pull Role SOP</strong> – Open the canonical L4 SOP for that role in Notion</li>
+                            <li><strong>Extract Key Info</strong> – Copy:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Role name and pod</li>
+                                    <li>WIP limits and throughput targets</li>
+                                    <li>Primary tools and workspaces</li>
+                                    <li>Core workflows (2–3 sentence summary each)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Use Job Posting Template</strong> – Fetch from /DriveOn Commerce/P4 Operations/Recruiting & HR/Templates/Job_Posting_Template.docx</li>
+                            <li><strong>Customize Template</strong> – Fill in:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Role title and ID</li>
+                                    <li>Pod context</li>
+                                    <li>Day-in-the-life summary</li>
+                                    <li>Must-have skills vs nice-to-have</li>
+                                    <li>Comp range (from L2-03 notes or approved band)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Add Canon Fit Questions</strong> – Include 3–5 screening questions:
+                                <ul style="padding-left: 2rem;">
+                                    <li>"Can you follow detailed SOPs independently?"</li>
+                                    <li>"Are you comfortable with WIP limits and throughput targets?"</li>
+                                    <li>"Do you have experience with [tool stack]?"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Review with PM/Integrator</strong> – Share draft in #p4-hiring for quick review (≤24hrs)</li>
+                            <li><strong>Post to Platforms</strong> – Publish on:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Upwork (primary)</li>
+                                    <li>OnlineJobs.ph (for PH-based roles)</li>
+                                    <li>LinkedIn (optional, for senior roles)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Log in ClickUp</strong> – Update task status to "Active - Sourcing"</li>
+                        </ol>
+
+                        <p><strong>Outputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Live job posting on 2–3 platforms</li>
+                            <li>ClickUp task updated with posting URLs</li>
+                            <li>ATS candidate pipeline initialized</li>
+                        </ul>
+
+                        <p><strong>Quality Checks:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Job description matches L2-03 role spec exactly</li>
+                            <li>Comp range is within approved band</li>
+                            <li>No tools/processes mentioned that aren't in canon</li>
+                        </ul>
+
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--surface-light); border-radius: 6px;">
+                            <strong>🤖 AI Prompt for This Workflow:</strong>
+                            <pre style="margin-top: 0.5rem; white-space: pre-wrap;">You are helping me create a job posting for DriveOn Commerce. Here's the canonical role definition:
+
+[Paste role section from L2-03]
+
+And here's the role SOP:
+
+[Paste key sections from L4 SOP]
+
+Please draft a job posting that:
+1. Matches the canon role spec exactly
+2. Is ~300-400 words
+3. Emphasizes SOP-executable, system-first mindset
+4. Includes 3-5 canon-fit screening questions
+5. Uses this comp range: [insert range]
+
+Do NOT invent new tools, WIP limits, or responsibilities. Stick to canon.</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Workflow 2: Screen Candidates (Resume → Phone Screen)</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Trigger:</strong> New application appears in ATS</p>
+                        
+                        <p><strong>Inputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Resume/CV</li>
+                            <li>Application answers to screening questions</li>
+                            <li>Cover letter (if provided)</li>
+                        </ul>
+
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 2rem;">
+                            <li><strong>Run ATS Auto-Screen</strong> – Use ATS keyword filters:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Years of experience (if relevant)</li>
+                                    <li>Tool proficiency (ClickUp, Notion, etc.)</li>
+                                    <li>Language requirements</li>
+                                    <li>Location/timezone (if role-specific)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Manual Resume Review</strong> (2–3min per resume):
+                                <ul style="padding-left: 2rem;">
+                                    <li>Can they articulate past work in SOP/process language?</li>
+                                    <li>Do they show self-direction vs needing hand-holding?</li>
+                                    <li>Are there red flags (job-hopping, vague descriptions, skill inflation)?</li>
+                                </ul>
+                            </li>
+                            <li><strong>Review Screening Answers</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>"Can you follow SOPs independently?" – looking for "yes" with examples</li>
+                                    <li>"Comfortable with WIP limits?" – must understand the concept</li>
+                                    <li>Tool stack familiarity – must have used 3+ of our core tools</li>
+                                </ul>
+                            </li>
+                            <li><strong>Score in ATS</strong> – Use simple 1–5 scale:
+                                <ul style="padding-left: 2rem;">
+                                    <li>5 = Immediate phone screen</li>
+                                    <li>4 = Strong maybe, schedule if time permits</li>
+                                    <li>3 = Borderline, hold for now</li>
+                                    <li>1–2 = Reject</li>
+                                </ul>
+                            </li>
+                            <li><strong>Send Response ≤48hrs</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li><strong>If 4–5:</strong> Send phone screen invite with self-scheduling link (Calendly/ClickUp integration)</li>
+                                    <li><strong>If 1–2:</strong> Send polite rejection using ATS template</li>
+                                    <li><strong>If 3:</strong> Send "hold" email – "We're reviewing and will update you within 5 business days"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Log in ATS + ClickUp</strong> – Update candidate status, attach scorecard notes</li>
+                        </ol>
+
+                        <p><strong>Outputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>All candidates scored and responded to ≤48hrs</li>
+                            <li>Phone screens scheduled for top 20–30% of applicants</li>
+                            <li>Rejection emails sent (with kind, brief feedback if requested)</li>
+                        </ul>
+
+                        <p><strong>Quality Checks:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>No qualified candidates fall through cracks (check ATS daily)</li>
+                            <li>Response time ≤48hrs for all candidates</li>
+                            <li>Scoring is consistent (not mood-dependent)</li>
+                        </ul>
+
+                        <div class="callout callout-tip" style="margin-top: 1rem;">
+                            <div class="callout-title">💡 2025 Best Practice: AI-Assisted Screening</div>
+                            <p>Modern ATS platforms (2025) support AI-powered resume ranking. Use it to surface top 10–15% automatically, but <strong>always human-review</strong> before rejecting. AI can miss culture fit and canon alignment signals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Workflow 3: Conduct Phone/Video Screen (15–20min)</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Trigger:</strong> Candidate confirms phone screen via self-scheduling link</p>
+                        
+                        <p><strong>Inputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Candidate's resume and application</li>
+                            <li>Screening scorecard (from ATS)</li>
+                            <li>Role SOP (skim key sections before call)</li>
+                        </ul>
+
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 2rem;">
+                            <li><strong>Pre-Call Prep (5min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Review candidate's resume highlights</li>
+                                    <li>Note 2–3 questions based on gaps or strengths</li>
+                                    <li>Have role SOP open in another tab</li>
+                                </ul>
+                            </li>
+                            <li><strong>Opening (2min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Introduce yourself and DriveOn</li>
+                                    <li>"We're a lean dropshipping operation that tests 45–60 products/month with strict economics. We follow SOPs religiously and prioritize systems over heroics."</li>
+                                    <li>"This call is 15–20min. I'll ask about your experience, walk through the role, and answer your questions."</li>
+                                </ul>
+                            </li>
+                            <li><strong>Experience Questions (5min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>"Walk me through your most recent role. What did a typical day look like?"</li>
+                                    <li>"Tell me about a time you had to follow detailed processes or SOPs. How did you handle it?"</li>
+                                    <li>"Have you worked in a high-throughput, high-accountability environment before? Give an example."</li>
+                                </ul>
+                            </li>
+                            <li><strong>Role Walkthrough (3min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Summarize the role's day-in-the-life (use timeline from this SOP)</li>
+                                    <li>Explain WIP limits and throughput targets: "You'll manage 5–10 open roles at a time, with 10–20 candidates/week moving through."</li>
+                                    <li>Emphasize tools: "You'll live in our ATS, ClickUp, Notion, and Discord. Comfort with tech is non-negotiable."</li>
+                                </ul>
+                            </li>
+                            <li><strong>Culture Fit Questions (3min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>"How do you feel about strict WIP limits and throughput metrics?"</li>
+                                    <li>"Give me an example of when you had to prioritize speed without sacrificing quality."</li>
+                                    <li>"We're remote-first. How do you stay accountable when no one's watching?"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Candidate Questions (2–3min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>"What questions do you have for me?"</li>
+                                    <li>Be honest about workload, pace, and expectations</li>
+                                </ul>
+                            </li>
+                            <li><strong>Closing (1min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>"Thanks for your time. We'll review and get back to you within 2 business days with next steps or a decision."</li>
+                                </ul>
+                            </li>
+                            <li><strong>Post-Call (5min)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Immediately log notes in ATS</li>
+                                    <li>Score: Pass / Maybe / Fail</li>
+                                    <li>Flag any red flags or standout strengths</li>
+                                    <li>Update ClickUp task with next action</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <p><strong>Outputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Candidate scored (Pass/Maybe/Fail)</li>
+                            <li>Notes logged in ATS within 5min of call end</li>
+                            <li>Next step determined (Skills Test / Technical Interview / Reject)</li>
+                        </ul>
+
+                        <p><strong>Quality Checks:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Did you stay on time (15–20min)?</li>
+                            <li>Did you assess both skills AND canon-fit?</li>
+                            <li>Did you give candidate a clear picture of the role's intensity?</li>
+                        </ul>
+
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--surface-light); border-radius: 6px;">
+                            <strong>🤖 AI Prompt for Interview Prep:</strong>
+                            <pre style="margin-top: 0.5rem; white-space: pre-wrap;">I'm about to interview a candidate for [Role ID]. Here's their resume:
+
+[Paste resume]
+
+And here's our role SOP:
+
+[Paste key sections]
+
+Generate 5–7 interview questions that test:
+1. Ability to follow SOPs independently
+2. Comfort with high-throughput, metric-driven work
+3. Tool proficiency (ClickUp, Notion, ATS, Discord)
+4. Remote accountability and self-management
+5. Culture fit for lean, no-heroics operations</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Workflow 4: Skills Assessment & Technical Interview</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Trigger:</strong> Candidate passes phone screen</p>
+                        
+                        <p><strong>Inputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Phone screen notes and score</li>
+                            <li>Role-specific skill requirements from L2-03</li>
+                            <li>Skills test templates (in Drive)</li>
+                        </ul>
+
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 2rem;">
+                            <li><strong>Select Assessment Type</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li><strong>Take-home</strong> – for roles requiring output (research, creative, store building)</li>
+                                    <li><strong>Live test</strong> – for real-time problem-solving (media buying, technical troubleshooting)</li>
+                                    <li><strong>Portfolio review</strong> – for roles with strong body-of-work (senior creative, SEO)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Send Assessment</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Fetch template from /DriveOn Commerce/P4 Operations/Recruiting & HR/Skills_Tests/[Role]/</li>
+                                    <li>Customize with specific deliverable (e.g., "Find 3 product ideas using our R1 criteria")</li>
+                                    <li>Set deadline (24–72hrs typical)</li>
+                                    <li>Include submission instructions (email, ATS upload, Drive link)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Review Submission</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Use role-specific rubric (in Drive)</li>
+                                    <li>Score: 1–5 scale on quality, completeness, canon-alignment</li>
+                                    <li>Flag for pod lead if borderline</li>
+                                </ul>
+                            </li>
+                            <li><strong>If Pass: Coordinate Technical Interview</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Send Calendly link for 30–45min interview with pod lead</li>
+                                    <li>Brief pod lead with candidate summary + skills test score</li>
+                                    <li>Attend interview (optional) to observe and take notes</li>
+                                </ul>
+                            </li>
+                            <li><strong>Post-Interview Sync</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Collect pod lead feedback immediately after call</li>
+                                    <li>Final decision: Hire / Hold / Reject</li>
+                                    <li>Update ATS and ClickUp with decision and rationale</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <p><strong>Outputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Skills test completed and scored</li>
+                            <li>Technical interview conducted (if pass)</li>
+                            <li>Hiring decision made with pod lead sign-off</li>
+                        </ul>
+
+                        <p><strong>Quality Checks:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Assessment matches actual job tasks (not generic tests)</li>
+                            <li>Scoring is objective (rubric-based)</li>
+                            <li>Pod lead has full context before technical interview</li>
+                        </ul>
+
+                        <div class="callout callout-warning" style="margin-top: 1rem;">
+                            <div class="callout-title">⚠️ Common Pitfall</div>
+                            <p>Don't skip the skills test just because a candidate "seems great." 30% of polished interviewees can't execute in practice. The skills test is your protection against mis-hires.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Workflow 5: Extend Offer & Close Candidate</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Trigger:</strong> Candidate passes technical interview + pod lead approves hire</p>
+                        
+                        <p><strong>Inputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Approved comp range for role (from L2-03 or founder)</li>
+                            <li>Start date and FTE allocation</li>
+                            <li>NDA and contractor agreement templates (in Drive)</li>
+                        </ul>
+
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 2rem;">
+                            <li><strong>Reference Check (optional but recommended)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Request 1–2 professional references</li>
+                                    <li>Call or email with 3–5 quick questions</li>
+                                    <li>Focus: reliability, communication, ability to follow systems</li>
+                                    <li>Timeline: Complete within 24–48hrs</li>
+                                </ul>
+                            </li>
+                            <li><strong>Prepare Offer Letter</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Use template: /DriveOn Commerce/P4 Operations/Recruiting & HR/Templates/Offer_Letter_Template.docx</li>
+                                    <li>Fill in: Role ID, Role Name, Pod, FTE, Comp structure, Start Date</li>
+                                    <li>Attach: NDA, Contractor Agreement, Security & Access Policy summary</li>
+                                </ul>
+                            </li>
+                            <li><strong>Get Founder/PM Approval</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Share offer draft in #p4-hiring</li>
+                                    <li>Wait for explicit "approved" before sending (≤24hrs typical)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Send Offer</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Email candidate with offer letter + attachments</li>
+                                    <li>Include: "Please review and let us know if you accept within 48hrs. Feel free to ask questions!"</li>
+                                    <li>Set follow-up reminder for 36hrs (if no response)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Handle Response</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li><strong>If Accept:</strong> Send welcome email + onboarding next steps</li>
+                                    <li><strong>If Negotiate:</strong> Escalate to founder/PM (you cannot adjust comp without approval)</li>
+                                    <li><strong>If Reject:</strong> Ask for feedback, mark candidate as "Offer Declined" in ATS, restart search</li>
+                                </ul>
+                            </li>
+                            <li><strong>Update Systems</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>ATS: Mark as "Offer Accepted"</li>
+                                    <li>ClickUp: Close "Role Hiring" task, create "Onboarding" task</li>
+                                    <li>Notion: Add to People & Roles DB with start date and role ID</li>
+                                    <li>Discord: Post announcement in #p4-hiring: "New hire: [Name], [Role ID], starts [Date]"</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <p><strong>Outputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Offer sent and accepted</li>
+                            <li>All systems updated</li>
+                            <li>Onboarding queued with P4-PM-MANAGER</li>
+                        </ul>
+
+                        <p><strong>Quality Checks:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Offer matches approved comp range exactly</li>
+                            <li>All legal docs attached (NDA, contract)</li>
+                            <li>Candidate has clear next steps and start date</li>
+                        </ul>
+
+                        <div style="margin-top: 1rem; padding: 1rem; background: var(--surface-light); border-radius: 6px;">
+                            <strong>Ready-to-Copy Offer Email Template:</strong>
+                            <pre style="margin-top: 0.5rem; white-space: pre-wrap;">Subject: Offer for [Role Name] at DriveOn Commerce
+
+Hi [Candidate Name],
+
+We're excited to offer you the [Role Name] position at DriveOn Commerce!
+
+Please find attached:
+- Offer letter with comp details and start date
+- NDA and Contractor Agreement
+- Security & Access Policy summary
+
+Please review and let us know if you accept within 48 hours. If you have any questions, I'm happy to jump on a quick call.
+
+Looking forward to working with you!
+
+Best,
+[Your Name]
+Talent & Recruiting Specialist
+DriveOn Commerce</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Workflow 6: Onboarding Coordination (Pre-Day 1)</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <p><strong>Trigger:</strong> Candidate accepts offer</p>
+                        
+                        <p><strong>Inputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>Accepted offer with start date</li>
+                            <li>New hire's contact info and timezone</li>
+                            <li>Role-specific onboarding checklist (from role SOP)</li>
+                        </ul>
+
+                        <p><strong>Steps:</strong></p>
+                        <ol style="padding-left: 2rem;">
+                            <li><strong>Create Onboarding Task in ClickUp</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Space: P4 – Ops & PM</li>
+                                    <li>Folder: Recruiting & HR</li>
+                                    <li>List: Onboarding</li>
+                                    <li>Task Name: "[Role ID] – [Name] – Onboarding"</li>
+                                    <li>Due Date: Start Date - 3 days (to ensure Day 1 readiness)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Coordinate with P4-PM-MANAGER</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Send handoff message in #p4-hiring with: Name, Role ID, Start Date, Timezone</li>
+                                    <li>PM will handle access provisioning (Discord, ClickUp, Notion, Drive)</li>
+                                    <li>You handle: Welcome email, pre-reading, Day 1 agenda</li>
+                                </ul>
+                            </li>
+                            <li><strong>Send Pre-Onboarding Email (1 week before start)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Subject: "Welcome to DriveOn Commerce – Your First Week"</li>
+                                    <li>Include:
+                                        <ul style="padding-left: 2rem;">
+                                            <li>Link to L0-01 (Holdings Charter)</li>
+                                            <li>Link to L1-01 (CaniCol Model)</li>
+                                            <li>Link to DriveOn_Commerce_Overview_and_Onboarding doc</li>
+                                            <li>Link to their role SOP</li>
+                                            <li>Day 1 agenda and meeting link</li>
+                                        </ul>
+                                    </li>
+                                    <li>"Read these docs before Day 1. No need to memorize – just get familiar."</li>
+                                </ul>
+                            </li>
+                            <li><strong>Confirm Access Setup (2–3 days before start)</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Check with PM: Are Discord, ClickUp, Notion, Drive accounts ready?</li>
+                                    <li>Test: Send candidate test invite to Discord/ClickUp to confirm access</li>
+                                </ul>
+                            </li>
+                            <li><strong>Day 1 Check-In</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Send morning-of message: "Welcome! Here's your Day 1 agenda: [link]"</li>
+                                    <li>Attend their first standup or kickoff meeting (if scheduled)</li>
+                                    <li>Check in EOD: "How was Day 1? Any blockers or questions?"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Week 1 Follow-Up</strong>:
+                                <ul style="padding-left: 2rem;">
+                                    <li>Send candidate a quick survey: "How's onboarding going? 1–5 scale + any feedback"</li>
+                                    <li>Loop feedback to PM/pod lead if anything needs adjustment</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <p><strong>Outputs:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>New hire has all access and pre-reading before Day 1</li>
+                            <li>Onboarding task tracked in ClickUp</li>
+                            <li>Day 1 check-in completed</li>
+                        </ul>
+
+                        <p><strong>Quality Checks:</strong></p>
+                        <ul style="padding-left: 2rem;">
+                            <li>No access blockers on Day 1 (test logins 2–3 days early)</li>
+                            <li>New hire knows what to expect Week 1</li>
+                            <li>PM has new hire on their radar for WIP tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Handoffs -->
+        <section id="handoffs" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🔄</span>
+                <h2 class="section-title">6. Handoffs & Interface Specs</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> Recruiting is inherently cross-pod. You're the interface between external candidates and internal teams. These handoffs must be crisp, documented, and never dropped.
+            </div>
+
+            <!-- Mermaid: Handoff Swimlane -->
+            <div style="margin: 2rem 0; background: white; padding: 2rem; border-radius: 8px;">
+                <h3 style="text-align: center; margin-bottom: 1rem;">Cross-Pod Handoff Flow</h3>
+                <div class="mermaid">
+                flowchart TB
+                    subgraph PM["P4-PM-MANAGER"]
+                        A[Identifies Hiring Need]
+                        G[Provisions Access]
+                        H[Manages Onboarding]
+                    end
+                    
+                    subgraph HR["P4-HR-TALENT (YOU)"]
+                        B[Creates Job Posting]
+                        C[Sources & Screens]
+                        D[Coordinates Interviews]
+                        E[Extends Offer]
+                        F[Pre-Onboarding Prep]
+                    end
+                    
+                    subgraph POD["Pod Leads"]
+                        I[Technical Interview]
+                        J[Approve/Reject Candidate]
+                        K[Day 1 Orientation]
+                    end
+                    
+                    A -->|Hiring Request| B
+                    C -->|Top Candidates| I
+                    I -->|Feedback| J
+                    J -->|Approved| E
+                    E -->|Accepted Offer| F
+                    F -->|New Hire Info| G
+                    G -->|Access Ready| H
+                    H -->|Day 1 Ready| K
+                    
+                    style HR fill:#00C8C8,color:#1A1A1A
+                    style PM fill:#F4E8D0,color:#1A1A1A
+                    style POD fill:#E0E0E0,color:#1A1A1A
+                </div>
+            </div>
+
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-flow">
+                        <span>P4-PM-MANAGER</span>
+                        <span class="handoff-arrow">→</span>
+                        <span>P4-HR-TALENT</span>
+                    </div>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);">Hiring Request</span>
+                </div>
+                
+                <p><strong>Trigger:</strong> PM creates ClickUp task in "P4 – Recruiting & HR → Role Hiring" OR posts in #p4-hiring</p>
+                
+                <p style="margin-top: 1rem;"><strong>Required Inputs:</strong></p>
+                <ul style="padding-left: 2rem;">
+                    <li>Role ID (from L2-03)</li>
+                    <li>Target start date</li>
+                    <li>FTE allocation (0.5 or 1.0)</li>
+                    <li>Any special requirements (timezone, language, etc.)</li>
+                    <li>Approver (usually Founder or P4-OP-INTEGRATOR)</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Your Response:</strong></p>
+                <ul style="padding-left: 2rem;">
+                    <li>Acknowledge within 4 business hours</li>
+                    <li>Confirm role is in L2-03 canon (if not, escalate to PM/Founder)</li>
+                    <li>Draft job posting within 24hrs and share for review</li>
+                    <li>Post live within 48hrs of approval</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Channel:</strong> #p4-hiring (Discord) + ClickUp task comments</p>
+            </div>
+
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-flow">
+                        <span>P4-HR-TALENT</span>
+                        <span class="handoff-arrow">→</span>
+                        <span>Pod Leads</span>
+                    </div>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);">Technical Interview Request</span>
+                </div>
+                
+                <p><strong>Trigger:</strong> Candidate passes phone screen + skills assessment</p>
+                
+                <p style="margin-top: 1rem;"><strong>Required Inputs You Provide:</strong></p>
+                <ul style="padding-left: 2rem;">
+                    <li>Candidate name and profile link (ATS or resume)</li>
+                    <li>Phone screen summary (2–3 sentences)</li>
+                    <li>Skills test score and key takeaways</li>
+                    <li>Suggested interview questions (3–5)</li>
+                    <li>Calendly link or meeting request</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Pod Lead Response:</strong></p>
+                <ul style="padding-left: 2rem;">
+                    <li>Schedule technical interview within 3–5 business days</li>
+                    <li>Conduct 30–45min interview</li>
+                    <li>Provide immediate verbal feedback after call</li>
+                    <li>Formal decision (Hire/Hold/Reject) within 24hrs</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Channel:</strong> DM pod lead in Discord + cc in ClickUp task</p>
+
+                <div style="margin-top: 1rem; padding: 1rem; background: var(--surface-light); border-radius: 6px;">
+                    <strong>Ready-to-Copy Technical Interview Handoff Message:</strong>
+                    <pre style="margin-top: 0.5rem; white-space: pre-wrap;">@[Pod Lead Name] – Technical Interview Request
+
+Candidate: [Name]
+Role: [Role ID]
+Resume: [ATS link]
+
+Phone Screen Summary:
+[2–3 sentences on strengths, communication, culture fit]
+
+Skills Test:
+Score: [X/5]
+Key Takeaway: [1 sentence on technical ability]
+
+Suggested Questions:
+1. [Question focused on role-specific skill]
+2. [Question on system/SOP comfort]
+3. [Question on collaboration/autonomy balance]
+
+Calendly Link: [link]
+
+Let me know your availability and I'll coordinate!</pre>
+                </div>
+            </div>
+
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-flow">
+                        <span>P4-HR-TALENT</span>
+                        <span class="handoff-arrow">→</span>
+                        <span>P4-PM-MANAGER</span>
+                    </div>
+                    <span style="font-size: 0.9rem; color: var(--text-secondary);">Onboarding Handoff</span>
+                </div>
+                
+                <p><strong>Trigger:</strong> Candidate accepts offer</p>
+                
+                <p style="margin-top: 1rem;"><strong>Required Inputs You Provide:</strong></p>
+                <ul style="padding-left: 2rem;">
+                    <li>New hire name, email, timezone</li>
+                    <li>Role ID and pod assignment</li>
+                    <li>Start date</li>
+                    <li>FTE allocation</li>
+                    <li>Link to accepted offer and signed NDA</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>PM Response:</strong></p>
+                <ul style="padding-left: 2rem;">
+                    <li>Provision access (Discord, ClickUp, Notion, Drive) 2–3 days before start</li>
+                    <li>Add to People & Roles DB in Notion</li>
+                    <li>Coordinate Day 1 orientation with pod lead</li>
+                    <li>Confirm all access is working before Day 1</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Channel:</strong> #p4-hiring (Discord) + ClickUp "Onboarding" task</p>
+
+                <p style="margin-top: 1rem;"><strong>Quality Bar:</strong> No new hire should have access blockers on Day 1. You test logins 2–3 days early.</p>
+            </div>
+
+            <div class="callout callout-warning" style="margin-top: 2rem;">
+                <div class="callout-title">⚠️ Common Handoff Failure Modes</div>
+                <ul style="padding-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>Ghosting:</strong> Candidate waits >48hrs for next steps → candidate drops out</li>
+                    <li><strong>Incomplete Context:</strong> Pod lead gets candidate with no prep → poor interview, bad signal</li>
+                    <li><strong>Access Delays:</strong> New hire can't log in Day 1 → bad first impression, lost productivity</li>
+                    <li><strong>No Follow-Up:</strong> You hand off to PM and never check if onboarding actually happened</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 7: KPIs -->
+        <section id="kpis" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h2 class="section-title">7. KPIs & Quality Bar</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> You're measured on speed, quality, and candidate experience. These KPIs tie directly to the team's ability to maintain 45–60 tests/month.
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Quantitative KPIs</h3>
+            
+            <table>
+                <tr>
+                    <th>KPI</th>
+                    <th>Target</th>
+                    <th>Measurement</th>
+                    <th>Source Doc</th>
+                </tr>
+                <tr>
+                    <td><strong>Time-to-Fill</strong></td>
+                    <td>14–21 days (core roles)<br>7–14 days (support roles)</td>
+                    <td>From job posting to offer acceptance</td>
+                    <td>L2-07, 01_Role_Pod_Registry_v2</td>
+                </tr>
+                <tr>
+                    <td><strong>Candidate Pipeline Velocity</strong></td>
+                    <td>10–20 candidates/week</td>
+                    <td>Candidates advancing through stages (Screen → Interview → Offer)</td>
+                    <td>L2-03</td>
+                </tr>
+                <tr>
+                    <td><strong>Offer Acceptance Rate</strong></td>
+                    <td>≥70%</td>
+                    <td>Offers accepted ÷ offers sent</td>
+                    <td>Industry benchmark + L2-07</td>
+                </tr>
+                <tr>
+                    <td><strong>Quality-of-Hire (30-day retention)</strong></td>
+                    <td>≥80%</td>
+                    <td>New hires still active at Day 30 ÷ total hires</td>
+                    <td>L2-07</td>
+                </tr>
+                <tr>
+                    <td><strong>SOP Competency at 30 Days</strong></td>
+                    <td>≥90%</td>
+                    <td>New hires meeting throughput targets and WIP discipline by Day 30</td>
+                    <td>L2-03 + Role SOPs</td>
+                </tr>
+                <tr>
+                    <td><strong>Candidate Response Time</strong></td>
+                    <td>≤48hrs at all stages</td>
+                    <td>Time from candidate action (apply, interview) to your response</td>
+                    <td>2025 industry best practice</td>
+                </tr>
+                <tr>
+                    <td><strong>Candidate Experience Score</strong></td>
+                    <td>≥4.0/5.0</td>
+                    <td>Post-hire survey or ATS feedback rating</td>
+                    <td>2025 industry best practice</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Qualitative Quality Bar</h3>
+            
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Good vs Bad: Canon Fit Screening</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <h4 style="color: var(--success-green); margin-bottom: 0.5rem;">✅ Good Example</h4>
+                                <p style="background: rgba(40, 167, 69, 0.1); padding: 1rem; border-radius: 6px;">
+                                    Candidate says: "I've worked in process-driven environments before. I prefer clear SOPs because it means I can deliver consistently without second-guessing. I'm comfortable with throughput metrics – my last role tracked 15–20 deliverables/week and I hit that 95% of the time."
+                                </p>
+                                <p style="margin-top: 0.5rem;"><strong>Why this is good:</strong> Shows canon-fit (SOP comfort, metrics, throughput discipline).</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--danger-red); margin-bottom: 0.5rem;">❌ Bad Example</h4>
+                                <p style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 6px;">
+                                    Candidate says: "I like to be creative and think outside the box. I don't really like following strict processes – I prefer to find my own way of doing things. Metrics feel micromanage-y to me."
+                                </p>
+                                <p style="margin-top: 0.5rem;"><strong>Why this is bad:</strong> Red flag for canon resistance. Will likely chafe at WIP limits and SOPs.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Good vs Bad: Candidate Communication</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div>
+                                <h4 style="color: var(--success-green); margin-bottom: 0.5rem;">✅ Good Example</h4>
+                                <p style="background: rgba(40, 167, 69, 0.1); padding: 1rem; border-radius: 6px;">
+                                    "Hi [Candidate], thanks for applying! We're reviewing applications and you're in the top group. I'll be reaching out within 2 business days to schedule a phone screen if you advance. Feel free to email if you have questions in the meantime."
+                                </p>
+                                <p style="margin-top: 0.5rem;"><strong>Why this is good:</strong> Clear timeline, encourages questions, professional tone.</p>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--danger-red); margin-bottom: 0.5rem;">❌ Bad Example</h4>
+                                <p style="background: rgba(220, 53, 69, 0.1); padding: 1rem; border-radius: 6px;">
+                                    (5 days later, candidate emails asking for update, no response)
+                                </p>
+                                <p style="margin-top: 0.5rem;"><strong>Why this is bad:</strong> Ghosting kills candidate experience. Even a "we're still reviewing" is better than silence.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">How KPIs Are Measured & Reported</h3>
+            
+            <p>You own a <strong>weekly hiring dashboard</strong> (Google Sheets or Notion dashboard) with:</p>
+            <ul style="padding-left: 2rem; margin: 1rem 0;">
+                <li><strong>Open Roles:</strong> Count by pod and status (Sourcing / Screening / Interviewing / Offer Pending)</li>
+                <li><strong>Pipeline Velocity:</strong> Candidates advanced per stage this week</li>
+                <li><strong>Time-to-Fill:</strong> Average days from posting to offer acceptance (rolling 30-day window)</li>
+                <li><strong>Offer Acceptance Rate:</strong> Offers accepted ÷ total offers sent (rolling 60-day window)</li>
+                <li><strong>30-Day Retention:</strong> New hires still active ÷ total hires (trailing 30 days)</li>
+            </ul>
+
+            <p><strong>Reporting cadence:</strong></p>
+            <ul style="padding-left: 2rem;">
+                <li><strong>Weekly:</strong> Post dashboard link in #p4-hiring (Fridays EOD)</li>
+                <li><strong>Monthly:</strong> Detailed report to Founder/P4-OP-INTEGRATOR with trends, bottlenecks, hiring forecast</li>
+            </ul>
+
+            <div class="callout callout-tip" style="margin-top: 2rem;">
+                <div class="callout-title">💡 KPI Tip: Lead Indicators vs Lag Indicators</div>
+                <p><strong>Lead indicators</strong> (pipeline velocity, response time) tell you if you're on track <em>before</em> the final outcome.</p>
+                <p><strong>Lag indicators</strong> (time-to-fill, retention) tell you what already happened.</p>
+                <p>Track both, but <strong>act on lead indicators</strong> to prevent lag indicator problems.</p>
+            </div>
+        </section>
+
+        <!-- Section 8: AI Usage -->
+        <section id="ai-usage" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🤖</span>
+                <h2 class="section-title">8. AI Usage & Prompt Patterns</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> AI can 10x your productivity in recruiting – but only if you use it correctly. These prompts are battle-tested for DriveOn's canon-first approach.
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Where AI Helps in This Role</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1.5rem 0;">
+                <div style="background: var(--surface-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--drive-cyan);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">Job Description Generation</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Turn canon role specs into compelling, accurate job postings</div>
+                </div>
+                <div style="background: var(--surface-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--drive-cyan);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">Resume Screening Assist</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Summarize candidate fit vs role requirements quickly</div>
+                </div>
+                <div style="background: var(--surface-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--drive-cyan);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">Interview Question Generation</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Create role-specific, canon-aligned interview questions</div>
+                </div>
+                <div style="background: var(--surface-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--drive-cyan);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">Candidate Email Templates</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Draft professional, consistent candidate communications</div>
+                </div>
+                <div style="background: var(--surface-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--drive-cyan);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">Skills Test Design</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Create realistic, role-relevant assessments</div>
+                </div>
+                <div style="background: var(--surface-light); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--drive-cyan);">
+                    <div style="font-weight: 600; margin-bottom: 0.5rem;">Candidate Outreach Messages</div>
+                    <div style="font-size: 0.9rem; color: var(--text-secondary);">Personalized cold outreach for passive candidates</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Ready-to-Copy AI Prompts</h3>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Prompt 1: Generate Job Posting from Canon Role</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <pre style="white-space: pre-wrap;">You are helping me create a job posting for a DriveOn Commerce role.
+
+DriveOn is a lean dropshipping operation that tests 45–60 products/month using the CaniCol v4.0 model. We follow strict SOPs, WIP limits, and throughput targets. We hire for execution, not heroics.
+
+Here's the canonical role definition from L2-03:
+
+[Paste role section]
+
+Here's the role SOP summary:
+
+[Paste key sections from L4 SOP]
+
+Please draft a job posting that:
+1. Is 300–400 words
+2. Matches the canon role spec exactly (no invented responsibilities)
+3. Emphasizes SOP-executable, system-first mindset
+4. Includes 3–5 canon-fit screening questions
+5. Uses this comp range: [insert approved range]
+6. Has a "Why DriveOn?" section that explains our lean, disciplined approach
+7. Is honest about pace and intensity (we don't sugarcoat)
+
+Do NOT:
+- Invent new tools, WIP limits, or responsibilities
+- Use generic "fast-paced startup" language
+- Promise things not in canon (equity, rev-share, etc.)
+
+Output format: Job posting text + screening questions as bullets</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Prompt 2: Screen Resume Against Canon Role</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <pre style="white-space: pre-wrap;">You are helping me screen a candidate for a DriveOn Commerce role.
+
+Here's the role we're hiring for:
+
+[Paste role ID and key requirements from L2-03]
+
+Here's the candidate's resume:
+
+[Paste resume text]
+
+Please evaluate this candidate on:
+
+1. **Canon Fit** (1–5): Do they show comfort with SOPs, systems, metrics, and accountability?
+2. **Tool Proficiency** (1–5): Experience with ClickUp, Notion, ATS, Discord, or similar?
+3. **Throughput Discipline** (1–5): Evidence of high-volume, high-accountability work?
+4. **Remote Self-Management** (1–5): Can they work independently without hand-holding?
+5. **Communication** (1–5): Is their resume clear, concise, professional?
+
+Overall Score: [Average of above]
+Recommendation: [Pass to Phone Screen / Maybe / Reject]
+
+Key Strengths: [2–3 bullets]
+Red Flags: [2–3 bullets if any]
+
+Be honest and critical. We're hiring for execution, not potential.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Prompt 3: Generate Interview Questions</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <pre style="white-space: pre-wrap;">I'm interviewing a candidate for [Role ID] at DriveOn Commerce.
+
+Role context:
+- We test 45–60 products/month with strict budgets and kill discipline
+- This role must follow SOPs, respect WIP limits, and hit throughput targets
+- We use ClickUp, Notion, Discord, ATS, Google Drive
+- Remote-first, high-autonomy, high-accountability
+
+Candidate's background:
+[Paste 2–3 sentence summary from resume]
+
+Generate 7–10 interview questions that test:
+1. Ability to follow SOPs independently (not just "can you follow instructions")
+2. Comfort with high-throughput, metric-driven work (give me examples where they've done this)
+3. Tool proficiency and tech comfort (how they use tools, not just "have you used X")
+4. Remote self-management and accountability (how do they stay on track without oversight)
+5. Canon-fit for lean, no-heroics operations (do they expect to be a "rockstar" or execute a system?)
+
+Format as:
+- Question
+- What I'm listening for
+- Follow-up probe if needed
+
+Be direct and specific. Avoid generic HR questions.</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                    <span>Prompt 4: Draft Candidate Email (Status Update)</span>
+                    <span class="collapsible-icon">▼</span>
+                </div>
+                <div class="collapsible-content">
+                    <div class="collapsible-inner">
+                        <pre style="white-space: pre-wrap;">Draft a professional email to a candidate with the following context:
+
+Situation: [Applied 3 days ago / Just finished phone screen / Offer extended / etc.]
+Next Step: [Phone screen invitation / Waiting on technical interview / Rejection / etc.]
+Tone: Professional, direct, respectful (no corporate jargon)
+
+Additional context:
+- Candidate name: [Name]
+- Role: [Role ID]
+- Any special notes: [Timeline constraints, feedback to share, etc.]
+
+Requirements:
+- Keep it under 150 words
+- Set clear expectations (what happens next, when they'll hear back)
+- Be honest and direct (we don't sugarcoat or overpromise)
+- Include a call-to-action if needed (reply, schedule, etc.)
+
+Output: Email subject line + body</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout callout-warning" style="margin-top: 2rem;">
+                <div class="callout-title">⚠️ Human Checkpoints for AI Outputs</div>
+                <p>AI is a force multiplier, but you must <strong>always human-review</strong> before sending/posting:</p>
+                <ul style="padding-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>Job postings:</strong> Verify no hallucinated tools or comp ranges</li>
+                    <li><strong>Resume screens:</strong> Double-check AI didn't miss obvious red flags or overvalue buzzwords</li>
+                    <li><strong>Interview questions:</strong> Ensure questions are legally compliant (no age, religion, etc.)</li>
+                    <li><strong>Candidate emails:</strong> Check tone isn't too robotic or accidentally harsh</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 9: Tools & Systems -->
+        <section id="tools" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🛠️</span>
+                <h2 class="section-title">9. Tools & Systems Reference</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> You live in these tools. Knowing where everything lives and how to access it quickly is the difference between 10–20 candidates/week and falling behind.
+            </div>
+
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>Primary Use</th>
+                    <th>Key Locations</th>
+                    <th>Access Level</th>
+                </tr>
+                <tr>
+                    <td><strong>Upwork</strong></td>
+                    <td>Primary sourcing platform for remote contractors</td>
+                    <td>DriveOn Commerce account → Job Postings<br>Talent search + cold outreach</td>
+                    <td>Editor (can post jobs, message candidates)</td>
+                </tr>
+                <tr>
+                    <td><strong>OnlineJobs.ph</strong></td>
+                    <td>Sourcing PH-based VAs and support roles</td>
+                    <td>DriveOn Commerce account → Job Postings<br>Candidate database search</td>
+                    <td>Editor</td>
+                </tr>
+                <tr>
+                    <td><strong>ClickUp</strong></td>
+                    <td>Task tracking for hiring pipeline</td>
+                    <td><strong>Space:</strong> P4 – Ops & PM<br><strong>Folder:</strong> Recruiting & HR<br><strong>Lists:</strong> Role Hiring, Onboarding</td>
+                    <td>Editor (can create/edit tasks in P4)</td>
+                </tr>
+                <tr>
+                    <td><strong>Notion</strong></td>
+                    <td>Knowledge base, role SOPs, candidate tracking</td>
+                    <td><strong>DBs:</strong><br>- People & Roles DB<br>- Candidate Pipeline DB<br>- Canon Registry (read-only)<br><strong>Pages:</strong> Role SOPs (L4)</td>
+                    <td>Editor in People & Roles DB<br>Viewer for Canon docs</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Drive</strong></td>
+                    <td>File storage for templates, NDAs, offer letters</td>
+                    <td>/DriveOn Commerce/P4 Operations/Recruiting & HR/<br>- Templates/<br>- Job Postings/<br>- Offer Letters/<br>- Skills Tests/</td>
+                    <td>Editor in P4 Operations folder</td>
+                </tr>
+                <tr>
+                    <td><strong>Discord</strong></td>
+                    <td>Team communication and hiring updates</td>
+                    <td><strong>Primary:</strong> #p4-hiring<br><strong>Secondary:</strong> Pod channels (for role-specific discussions)</td>
+                    <td>Member (can post in all channels)</td>
+                </tr>
+                <tr>
+                    <td><strong>Slack</strong></td>
+                    <td>External candidate communication (pre-onboarding)</td>
+                    <td>DriveOn Recruiting workspace → Candidate DMs</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td><strong>Calendly / ClickUp Scheduling</strong></td>
+                    <td>Self-scheduling for phone screens and interviews</td>
+                    <td>Your personal Calendly account → Interview templates</td>
+                    <td>Owner</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Tool SOP Quick Links</h3>
+            
+            <p>For detailed tool usage, see:</p>
+            <ul style="padding-left: 2rem;">
+                <li><strong>L3-01</strong> – Discord Infra Blueprint (channel structure, message templates)</li>
+                <li><strong>L3-02</strong> – ClickUp Infra Blueprint (spaces, lists, views, custom fields)</li>
+                <li><strong>L3-03</strong> – Notion Infra Blueprint (DB structure, templates)</li>
+                <li><strong>L3-04</strong> – Google Drive Infra Blueprint (folder structure, access controls)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Quick Access Checklist (Day 1)</h3>
+            
+            <ul class="checklist">
+                <li>Upwork account access confirmed</li>
+                <li>OnlineJobs.ph account access confirmed</li>
+                <li>ClickUp: Can see P4 space, create tasks in "Role Hiring"</li>
+                <li>Notion: Can edit People & Roles DB, view Role SOPs</li>
+                <li>Google Drive: Can access P4 Operations/Recruiting & HR folder</li>
+                <li>Discord: Joined #p4-hiring and pod channels</li>
+                <li>Calendly: Set up interview scheduling templates</li>
+            </ul>
+        </section>
+
+        <!-- Section 10: Escalation -->
+        <section id="escalation" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🚨</span>
+                <h2 class="section-title">10. Escalation & Decision Rights</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> Knowing when to decide vs when to escalate protects both you and the business. Never guess on big decisions; always escalate when in doubt.
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Decisions You Own (No Escalation Needed)</h3>
+            
+            <div style="background: rgba(40, 167, 69, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--success-green); margin: 1rem 0;">
+                <ul style="padding-left: 2rem;">
+                    <li>Which candidates advance from resume screen to phone screen</li>
+                    <li>Which candidates advance from phone screen to skills test</li>
+                    <li>Scheduling interviews and coordinating with pod leads</li>
+                    <li>Sending standard candidate communications (status updates, rejections, interview invites)</li>
+                    <li>Updating ATS, ClickUp, and Notion with candidate progress</li>
+                    <li>Posting job ads on approved platforms (Upwork, OnlineJobs, LinkedIn)</li>
+                    <li>Using AI to draft content (as long as you human-review before sending)</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Decisions Requiring PM/Integrator Approval</h3>
+            
+            <div style="background: rgba(255, 193, 7, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--warning-yellow); margin: 1rem 0;">
+                <ul style="padding-left: 2rem;">
+                    <li>Hiring for a role NOT in L2-03 canon</li>
+                    <li>Modifying comp ranges beyond approved bands</li>
+                    <li>Creating custom comp structures (e.g., rev-share, equity)</li>
+                    <li>Posting on new platforms not in L3 (e.g., Fiverr, Freelancer.com)</li>
+                    <li>Extending deadlines or timelines beyond typical bands (e.g., >30 day time-to-fill)</li>
+                    <li>Making offers without pod lead technical interview</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Decisions Requiring Founder Approval</h3>
+            
+            <div style="background: rgba(220, 53, 69, 0.1); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--danger-red); margin: 1rem 0;">
+                <ul style="padding-left: 2rem;">
+                    <li>Creating new roles or role hybrids</li>
+                    <li>Comp bands outside L2-03 approved ranges</li>
+                    <li>Hiring for leadership/senior roles (P4-OP-INTEGRATOR, pod leads, etc.)</li>
+                    <li>Making exceptions to NDA/security policy</li>
+                    <li>Changing core hiring criteria or canon-fit standards</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">When to Escalate (Even If Not Explicitly Listed)</h3>
+            
+            <p>Escalate immediately if:</p>
+            <ul style="padding-left: 2rem; margin: 1rem 0;">
+                <li>A candidate is asking for terms you're not sure are allowed</li>
+                <li>You're stuck on a decision for >2 hours</li>
+                <li>A hiring manager is pushing you to break canon constraints</li>
+                <li>A candidate is threatening legal action or making discrimination claims</li>
+                <li>You're unsure if a decision will set a bad precedent</li>
+            </ul>
+
+            <div class="callout callout-tip" style="margin-top: 2rem;">
+                <div class="callout-title">💡 Escalation Template</div>
+                <p>When escalating, use this format in #p4-hiring or DM:</p>
+                <pre style="margin-top: 0.5rem; white-space: pre-wrap;">**ESCALATION REQUEST**
+
+Situation: [2–3 sentence summary]
+Question: [Specific decision or approval needed]
+Impact: [What happens if we wait / if we do X vs Y]
+Urgency: [Immediate / 24hrs / 48hrs]
+
+My recommendation: [Your take, if you have one]
+
+cc: @PM / @Founder / @Integrator</pre>
+            </div>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Expected Response Times</h3>
+            
+            <table>
+                <tr>
+                    <th>Escalation Type</th>
+                    <th>To Whom</th>
+                    <th>Expected Response Time</th>
+                </tr>
+                <tr>
+                    <td>Role not in canon</td>
+                    <td>P4-PM-MANAGER or P4-OP-INTEGRATOR</td>
+                    <td>4 business hours</td>
+                </tr>
+                <tr>
+                    <td>Comp band question</td>
+                    <td>P4-PM-MANAGER or Founder</td>
+                    <td>24 hours</td>
+                </tr>
+                <tr>
+                    <td>Canon change request</td>
+                    <td>Founder</td>
+                    <td>48–72 hours</td>
+                </tr>
+                <tr>
+                    <td>Urgent candidate issue</td>
+                    <td>P4-PM-MANAGER (first), Founder (if critical)</td>
+                    <td>2–4 hours</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Section 11: Onboarding -->
+        <section id="onboarding" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🎓</span>
+                <h2 class="section-title">11. Onboarding Checklist (Your First 30 Days)</h2>
+            </div>
+            
+            <div class="section-intro">
+                <strong>Why this section matters:</strong> This is your ramp plan. Follow it sequentially. Don't skip steps or you'll miss critical context.
+            </div>
+
+            <h3 style="margin-bottom: 1rem;">Week 1: Foundation & Access</h3>
+            
+            <ul class="checklist">
+                <li><strong>Day 1:</strong> Complete security onboarding (NDA, access policy review)</li>
+                <li><strong>Day 1:</strong> Get access to all core tools (Upwork, OnlineJobs, ClickUp, Notion, Drive, Discord)</li>
+                <li><strong>Day 1:</strong> Read L0-01 (Holdings Charter) and L1-01 (CaniCol Model)</li>
+                <li><strong>Day 2:</strong> Read DriveOn_Commerce_Overview_and_Onboarding doc</li>
+                <li><strong>Day 2:</strong> Read L2-03 (Role Registry) – memorize at least 10 core role IDs</li>
+                <li><strong>Day 3:</strong> Shadow PM on one hiring request → job posting creation</li>
+                <li><strong>Day 4:</strong> Draft your first job posting (with PM review) for an open role</li>
+                <li><strong>Day 5:</strong> Post your first job ad live (with approval)</li>
+                <li><strong>Day 5:</strong> Review 10–15 sample resumes with PM and practice ATS scoring</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Week 2: Screening & Interviewing</h3>
+            
+            <ul class="checklist">
+                <li><strong>Day 6:</strong> Conduct first phone screen (shadow with PM or pod lead)</li>
+                <li><strong>Day 7:</strong> Conduct 2–3 solo phone screens (with post-call review from PM)</li>
+                <li><strong>Day 8:</strong> Learn ATS advanced features (filters, templates, automation)</li>
+                <li><strong>Day 9:</strong> Draft and send first skills test (with PM review)</li>
+                <li><strong>Day 10:</strong> Score skills test submission, coordinate technical interview</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Week 3: Offers & Onboarding</h3>
+            
+            <ul class="checklist">
+                <li><strong>Day 11–15:</strong> Draft first offer letter (with Founder/PM approval)</li>
+                <li><strong>Day 11–15:</strong> Send offer, handle acceptance, coordinate onboarding handoff</li>
+                <li><strong>Day 11–15:</strong> Build your weekly hiring dashboard (Google Sheets or Notion)</li>
+                <li><strong>Day 11–15:</strong> Run first full pipeline cycle independently (sourcing → offer → onboarding)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Week 4: Independent Operations & Optimization</h3>
+            
+            <ul class="checklist">
+                <li><strong>Day 16–21:</strong> Manage 5–10 open roles independently</li>
+                <li><strong>Day 16–21:</strong> Hit 10–20 candidates/week pipeline velocity</li>
+                <li><strong>Day 16–21:</strong> Maintain ≤48hr response time for all candidates</li>
+                <li><strong>Day 16–21:</strong> Post first weekly dashboard update in #p4-hiring</li>
+                <li><strong>Day 22–30:</strong> Identify one process improvement and propose to PM</li>
+                <li><strong>Day 30:</strong> 30-day review with PM/Integrator: KPIs, feedback, next 30-day goals</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">30-Day Competency Checklist</h3>
+            
+            <p>By Day 30, you should be able to:</p>
+            <ul class="checklist">
+                <li>Create canon-compliant job postings without PM review</li>
+                <li>Screen 10–15 resumes/day using ATS and score consistently</li>
+                <li>Conduct 3–5 phone screens/week independently</li>
+                <li>Coordinate technical interviews with pod leads smoothly</li>
+                <li>Draft and send offers (with approval) without errors</li>
+                <li>Manage onboarding handoff to PM without dropped balls</li>
+                <li>Maintain ≤48hr candidate response time at all stages</li>
+                <li>Update hiring dashboard weekly without reminders</li>
+            </ul>
+
+            <div class="callout callout-canon" style="margin-top: 2rem;">
+                <div class="callout-title">⚖️ Canon Reminder</div>
+                <p>If you're not hitting these competency marks by Day 30, that's a signal – not a failure. Escalate to PM/Integrator and we'll figure out if it's a training gap, role-fit issue, or WIP overload.</p>
+            </div>
+        </section>
+
+        <!-- Section 12: Change Log -->
+        <section id="changelog" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <h2 class="section-title">12. Change Log</h2>
+            </div>
+            
+            <table>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                    <th>Canon Trigger</th>
+                </tr>
+                <tr>
+                    <td><strong>v1.0</strong></td>
+                    <td>2025-12-11</td>
+                    <td>DriveOn SOP Factory (Claude)</td>
+                    <td>Initial SOP creation<br>- Full Global SOP Schema implemented<br>- 2025 recruiting best practices integrated<br>- 6 core workflows documented<br>- KPIs and quality bars defined<br>- Mermaid diagrams for pipeline and handoffs<br>- AI prompt library included</td>
+                    <td>L2-03 v1 (Role Registry)<br>L2-07 v4.0 (KPIs)<br>01_Role_Pod_Registry_v2</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Future Update Triggers</h3>
+            
+            <p>This SOP must be updated when:</p>
+            <ul style="padding-left: 2rem;">
+                <li>L2-03 (Role Registry) changes role ID, WIP, or throughput</li>
+                <li>L2-07 (KPIs) changes hiring KPI targets</li>
+                <li>L3-02 (ClickUp) changes P4 folder/list structure</li>
+                <li>L3-03 (Notion) changes People & Roles DB or Candidate Pipeline DB</li>
+                <li>ATS platform changes (e.g., switching from Upwork to different primary platform)</li>
+                <li>Comp structure changes in L3-05 (Time & Payroll Schema)</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Hidden JSON Structure -->
+    <script type="application/json" id="sop-structure">
+    {
+      "role_id": "P4-HR-TALENT-XX",
+      "role_name": "Talent & Recruiting Specialist",
+      "pod": "P4",
+      "role_type": "TALENT_RECRUITING",
+      "status": "OPTIONAL",
+      "cross_pod": true,
+      "default_fte": "0.5-1.0",
+      "owned_gates": ["Recruiting Pipeline"],
+      "wip_limits": {
+        "open_roles_candidates": "5-10"
+      },
+      "throughput_targets": {
+        "daily": "3-5 candidate touches",
+        "weekly": "10-20 candidates progressed",
+        "monthly": "40-80 total interactions"
+      },
+      "kpis": [
+        {
+          "name": "Time-to-Fill",
+          "target": "14-21 days (core), 7-14 days (support)",
+          "source": "L2-07, 01_Role_Pod_Registry_v2"
+        },
+        {
+          "name": "Pipeline Velocity",
+          "target": "10-20 candidates/week",
+          "source": "L2-03"
+        },
+        {
+          "name": "Offer Acceptance Rate",
+          "target": "≥70%",
+          "source": "Industry benchmark"
+        },
+        {
+          "name": "30-Day Retention",
+          "target": "≥80%",
+          "source": "L2-07"
+        },
+        {
+          "name": "SOP Competency at 30 Days",
+          "target": "≥90%",
+          "source": "L2-03 + Role SOPs"
+        },
+        {
+          "name": "Response Time",
+          "target": "≤48hrs",
+          "source": "2025 best practice"
+        },
+        {
+          "name": "Candidate Experience Score",
+          "target": "≥4.0/5.0",
+          "source": "2025 best practice"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "Create Job Posting from Canon Role",
+          "trigger": "Hiring manager creates ClickUp task OR founder request in #p4-hiring",
+          "inputs": ["Role ID from L2-03", "Target start date", "FTE allocation"],
+          "steps": [
+            "Pull Role SOP from Notion",
+            "Extract key info from SOP",
+            "Use job posting template from Drive",
+            "Customize template with role details",
+            "Add canon-fit screening questions",
+            "Review with PM/Integrator",
+            "Post to platforms (Upwork, OnlineJobs, LinkedIn)",
+            "Log in ClickUp"
+          ],
+          "outputs": ["Live job posting on 2-3 platforms", "ClickUp task updated", "ATS pipeline initialized"],
+          "tools": ["Notion", "Google Drive", "Upwork", "OnlineJobs", "ClickUp", "Discord"]
+        },
+        {
+          "name": "Screen Candidates (Resume → Phone Screen)",
+          "trigger": "New application in ATS",
+          "inputs": ["Resume/CV", "Application answers", "Cover letter"],
+          "steps": [
+            "Run ATS auto-screen filters",
+            "Manual resume review (2-3min)",
+            "Review screening answers",
+            "Score in ATS (1-5 scale)",
+            "Send response ≤48hrs (invite, hold, reject)",
+            "Log in ATS + ClickUp"
+          ],
+          "outputs": ["All candidates scored", "Phone screens scheduled for top 20-30%", "Responses sent ≤48hrs"],
+          "tools": ["ATS (Upwork/OnlineJobs)", "ClickUp"]
+        },
+        {
+          "name": "Conduct Phone/Video Screen",
+          "trigger": "Candidate confirms phone screen",
+          "inputs": ["Resume", "Screening scorecard", "Role SOP"],
+          "steps": [
+            "Pre-call prep (5min)",
+            "Opening intro (2min)",
+            "Experience questions (5min)",
+            "Role walkthrough (3min)",
+            "Culture fit questions (3min)",
+            "Candidate questions (2-3min)",
+            "Closing (1min)",
+            "Post-call logging (5min)"
+          ],
+          "outputs": ["Candidate scored (Pass/Maybe/Fail)", "Notes logged in ATS", "Next step determined"],
+          "tools": ["Video call platform", "ATS", "ClickUp", "Notion (Role SOP)"]
+        },
+        {
+          "name": "Skills Assessment & Technical Interview",
+          "trigger": "Candidate passes phone screen",
+          "inputs": ["Phone screen notes", "Role skill requirements", "Skills test templates"],
+          "steps": [
+            "Select assessment type",
+            "Send assessment to candidate",
+            "Review submission using rubric",
+            "Coordinate technical interview with pod lead if pass",
+            "Post-interview sync with pod lead"
+          ],
+          "outputs": ["Skills test scored", "Technical interview conducted", "Hiring decision with pod lead sign-off"],
+          "tools": ["Google Drive (skills tests)", "Video call", "ATS", "ClickUp", "Discord"]
+        },
+        {
+          "name": "Extend Offer & Close Candidate",
+          "trigger": "Candidate passes technical interview + pod lead approval",
+          "inputs": ["Approved comp range", "Start date", "NDA and contract templates"],
+          "steps": [
+            "Reference check (optional)",
+            "Prepare offer letter from template",
+            "Get Founder/PM approval",
+            "Send offer to candidate",
+            "Handle response (accept/negotiate/reject)",
+            "Update all systems"
+          ],
+          "outputs": ["Offer sent and accepted", "Systems updated", "Onboarding queued"],
+          "tools": ["Google Drive", "Discord (#p4-hiring)", "ClickUp", "Notion", "ATS"]
+        },
+        {
+          "name": "Onboarding Coordination",
+          "trigger": "Candidate accepts offer",
+          "inputs": ["Accepted offer", "Contact info", "Role-specific onboarding checklist"],
+          "steps": [
+            "Create onboarding task in ClickUp",
+            "Coordinate with P4-PM-MANAGER",
+            "Send pre-onboarding email (1 week before)",
+            "Confirm access setup (2-3 days before)",
+            "Day 1 check-in",
+            "Week 1 follow-up"
+          ],
+          "outputs": ["New hire has access + pre-reading", "Onboarding tracked in ClickUp", "Day 1 check-in completed"],
+          "tools": ["ClickUp", "Discord", "Email", "Notion", "Google Drive"]
+        }
+      ],
+      "day_in_life": [
+        {
+          "time_range": "9:00-11:00 AM",
+          "focus": "Pipeline Review & Candidate Outreach",
+          "primary_workflows": ["Resume screening", "Candidate outreach", "Interview scheduling"]
+        },
+        {
+          "time_range": "11:00 AM-1:00 PM",
+          "focus": "Interviews & Assessments",
+          "primary_workflows": ["Phone/video screens", "Skills assessments", "Feedback documentation"]
+        },
+        {
+          "time_range": "1:00-3:00 PM",
+          "focus": "Communication & Hygiene",
+          "primary_workflows": ["Status updates", "Technical interview coordination", "System updates"]
+        },
+        {
+          "time_range": "3:00-5:00 PM",
+          "focus": "Offers & Reporting",
+          "primary_workflows": ["Offer preparation", "Onboarding prep", "Job posting", "Weekly reporting"]
+        }
+      ],
+      "tools": [
+        {
+          "name": "Upwork",
+          "use_case": "Primary sourcing platform",
+          "access_level": "Editor"
+        },
+        {
+          "name": "OnlineJobs.ph",
+          "use_case": "PH-based talent sourcing",
+          "access_level": "Editor"
+        },
+        {
+          "name": "ClickUp",
+          "use_case": "Task tracking",
+          "key_location": "P4 – Ops & PM → Recruiting & HR",
+          "access_level": "Editor"
+        },
+        {
+          "name": "Notion",
+          "use_case": "Knowledge base, SOPs, candidate tracking",
+          "key_location": "People & Roles DB, Candidate Pipeline DB, Role SOPs",
+          "access_level": "Editor (DBs), Viewer (Canon)"
+        },
+        {
+          "name": "Google Drive",
+          "use_case": "Templates and files",
+          "key_location": "/DriveOn Commerce/P4 Operations/Recruiting & HR/",
+          "access_level": "Editor"
+        },
+        {
+          "name": "Discord",
+          "use_case": "Team communication",
+          "key_location": "#p4-hiring",
+          "access_level": "Member"
+        }
+      ],
+      "handoffs": [
+        {
+          "from": "P4-PM-MANAGER",
+          "to": "P4-HR-TALENT",
+          "trigger": "Hiring request",
+          "required_inputs": ["Role ID", "Target start date", "FTE", "Special requirements"],
+          "channel": "#p4-hiring + ClickUp"
+        },
+        {
+          "from": "P4-HR-TALENT",
+          "to": "Pod Leads",
+          "trigger": "Technical interview request",
+          "required_inputs": ["Candidate profile", "Phone screen summary", "Skills test score"],
+          "channel": "Discord DM + ClickUp"
+        },
+        {
+          "from": "P4-HR-TALENT",
+          "to": "P4-PM-MANAGER",
+          "trigger": "Offer accepted",
+          "required_inputs": ["New hire info", "Start date", "Role ID", "Signed docs"],
+          "channel": "#p4-hiring + ClickUp"
+        }
+      ],
+      "version": "1.0",
+      "last_updated": "2025-12-11",
+      "author": "DriveOn SOP Factory (Claude)"
+    }
+    </script>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00C8C8',
+                lineColor: '#666666',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Navigation active state
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            function updateActiveNav() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveNav);
+            updateActiveNav();
+
+            // Smooth scroll
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Toggle navigation on mobile
+        function toggleNav() {
+            const nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        }
+
+        // Toggle collapsible sections
+        function toggleCollapsible(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.collapsible-icon');
+            
+            content.classList.toggle('active');
+            icon.textContent = content.classList.contains('active') ? '▲' : '▼';
+        }
+    </script>
+</body>
+</html>

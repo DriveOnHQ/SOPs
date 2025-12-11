@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2-CR-VOLEDIT – Volume/UGC Editor SOP</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #f5f7fa;
+      color: #1A1A1A;
+      line-height: 1.6;
+    }
+    
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 16px 64px;
+    }
+    
+    .header-banner {
+      background: linear-gradient(135deg, #00C8C8 0%, #009999 100%);
+      color: white;
+      padding: 32px 24px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 6px 20px rgba(0, 200, 200, 0.2);
+    }
+    
+    .header-banner h1 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .header-banner .subtitle {
+      font-size: 16px;
+      opacity: 0.95;
+      font-weight: 400;
+    }
+    
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e0e4ea;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+    }
+    
+    .card-header {
+      border-left: 4px solid #00C8C8;
+      padding-left: 14px;
+      margin-bottom: 18px;
+    }
+    
+    .section-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin-bottom: 6px;
+    }
+    
+    .section-subtitle {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 0;
+    }
+    
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin: 20px 0 12px;
+    }
+    
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin: 16px 0 10px;
+    }
+    
+    h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #333;
+      margin: 12px 0 8px;
+    }
+    
+    p {
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #333;
+    }
+    
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: #e0faf8;
+      color: #007d7d;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 6px;
+      margin-bottom: 4px;
+    }
+    
+    .tag.pod {
+      background: #f0e5ff;
+      color: #6b3fa0;
+    }
+    
+    .tag.role {
+      background: #fff4e6;
+      color: #c77700;
+    }
+    
+    .tag.status {
+      background: #d4f4dd;
+      color: #1a7f37;
+    }
+    
+    .meta-table, .kpi-table, .handoff-table, .tools-table, .changelog-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 13px;
+    }
+    
+    .meta-table th, .kpi-table th, .handoff-table th, .tools-table th, .changelog-table th {
+      background: #f8f9fb;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 12px;
+      border: 1px solid #e0e4ea;
+      color: #1A1A1A;
+    }
+    
+    .meta-table td, .kpi-table td, .handoff-table td, .tools-table td, .changelog-table td {
+      padding: 10px 12px;
+      border: 1px solid #e0e4ea;
+      color: #333;
+    }
+    
+    ul, ol {
+      margin: 10px 0 14px 24px;
+      font-size: 14px;
+    }
+    
+    li {
+      margin-bottom: 6px;
+      color: #333;
+    }
+    
+    .time-block {
+      background: #f8f9fb;
+      border-left: 3px solid #00C8C8;
+      padding: 12px 14px;
+      margin: 10px 0;
+      border-radius: 4px;
+    }
+    
+    .time-block .time {
+      font-size: 13px;
+      font-weight: 700;
+      color: #00C8C8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    
+    .time-block .duration {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 6px;
+    }
+    
+    .time-block .activity {
+      font-size: 14px;
+      color: #1A1A1A;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    .time-block .details {
+      font-size: 13px;
+      color: #555;
+      margin-top: 4px;
+    }
+    
+    .callout {
+      background: #f0fbff;
+      border-left: 4px solid #00C8C8;
+      padding: 14px 16px;
+      border-radius: 6px;
+      margin: 16px 0;
+      font-size: 14px;
+    }
+    
+    .callout.warning {
+      background: #fff8ed;
+      border-left-color: #f59e0b;
+    }
+    
+    .callout.critical {
+      background: #fef2f2;
+      border-left-color: #ef4444;
+    }
+    
+    .callout strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+    
+    .workflow {
+      background: #fafbfc;
+      border: 1px solid #e0e4ea;
+      border-radius: 8px;
+      padding: 18px;
+      margin: 16px 0;
+    }
+    
+    .workflow-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1A1A1A;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #00C8C8;
+    }
+    
+    .workflow-section {
+      margin: 12px 0;
+    }
+    
+    .workflow-section h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #00C8C8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    
+    .workflow-steps {
+      counter-reset: step-counter;
+      list-style: none;
+      margin-left: 0;
+    }
+    
+    .workflow-steps li {
+      counter-increment: step-counter;
+      position: relative;
+      padding-left: 32px;
+      margin-bottom: 10px;
+    }
+    
+    .workflow-steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: #00C8C8;
+      color: white;
+      font-weight: 700;
+      font-size: 11px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .checklist {
+      list-style: none;
+      margin-left: 0;
+    }
+    
+    .checklist li {
+      padding-left: 28px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    
+    .checklist li::before {
+      content: "☐";
+      position: absolute;
+      left: 0;
+      font-size: 18px;
+      color: #00C8C8;
+    }
+    
+    code {
+      background: #f3f4f6;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+      font-size: 12px;
+      color: #1f2937;
+    }
+    
+    .prompt-box {
+      background: #1f2937;
+      color: #f3f4f6;
+      padding: 16px;
+      border-radius: 6px;
+      font-family: "SF Mono", Monaco, "Cascadia Code", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 12px 0;
+      overflow-x: auto;
+    }
+    
+    .footer {
+      text-align: center;
+      padding: 32px 16px;
+      color: #666;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    
+    <!-- HEADER BANNER -->
+    <div class="header-banner">
+      <h1>Volume / UGC Editor</h1>
+      <div class="subtitle">Role SOP – DriveOn Commerce Creative Factory</div>
+    </div>
+    
+    <!-- 1. META BLOCK -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">1. Meta Block</div>
+        <div class="section-subtitle">Role identification, scope, and quick reference</div>
+      </div>
+      
+      <div>
+        <span class="tag role">P2-CR-VOLEDIT-01</span>
+        <span class="tag pod">Pod 2 – Creative Factory</span>
+        <span class="tag status">Active</span>
+      </div>
+      
+      <table class="meta-table">
+        <tr>
+          <th style="width: 28%;">Attribute</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td><strong>Role ID</strong></td>
+          <td>P2-CR-VOLEDIT-01</td>
+        </tr>
+        <tr>
+          <td><strong>Role Name</strong></td>
+          <td>Volume / UGC Editor</td>
+        </tr>
+        <tr>
+          <td><strong>Pod</strong></td>
+          <td>P2 – Creative Factory</td>
+        </tr>
+        <tr>
+          <td><strong>Pipeline Stages Served</strong></td>
+          <td>P1 (Initial Test), P2 (Validation), P3 (Scale)</td>
+        </tr>
+        <tr>
+          <td><strong>Upstream Roles</strong></td>
+          <td>P2-CR-STRAT (Creative Strategist), P1-R3 (Product Researcher)</td>
+        </tr>
+        <tr>
+          <td><strong>Downstream Roles</strong></td>
+          <td>P2-CR-QA (Creative QA), P3-MB (Media Buyer), P3-SB (Store Builder)</td>
+        </tr>
+        <tr>
+          <td><strong>Cross-Pod Dependencies</strong></td>
+          <td>Yes – Receives product packets from P1, delivers assets to P3</td>
+        </tr>
+        <tr>
+          <td><strong>Default FTE</strong></td>
+          <td>1.0 FTE (can scale to 2.0+ at higher volumes)</td>
+        </tr>
+        <tr>
+          <td><strong>WIP Limits (per 1.0 FTE)</strong></td>
+          <td>
+            • Active editing queue: ≤8 products<br>
+            • Awaiting QA: ≤12 asset batches<br>
+            • Revision queue: ≤6 asset batches
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Weekly Throughput Target</strong></td>
+          <td>25–35 edited video assets (P1/P2 combined), supporting ~12–15 products/week</td>
+        </tr>
+        <tr>
+          <td><strong>Primary KPIs</strong></td>
+          <td>
+            • Assets delivered per week<br>
+            • QA first-pass rate (target: ≥80%)<br>
+            • Average turnaround time (target: &lt;24h standard edits)<br>
+            • Revision rate (target: &lt;20%)
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Primary Tools</strong></td>
+          <td>CapCut, Premiere Pro (optional), ClickUp, Notion, Google Drive, Discord</td>
+        </tr>
+        <tr>
+          <td><strong>Primary Notion DBs</strong></td>
+          <td>
+            • "Creative Assets" (asset tracking)<br>
+            • "Product Packets" (product context)
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Primary ClickUp Spaces</strong></td>
+          <td>
+            • Space: "Creative Production"<br>
+            • Folder: "UGC Editing"<br>
+            • Lists: "Editing Queue", "In Progress", "QA Review"
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Primary Discord Channels</strong></td>
+          <td>
+            • #p2-creative-queue (intake)<br>
+            • #p2-asset-delivery (handoffs)<br>
+            • #p2-revisions (feedback loop)
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Version</strong></td>
+          <td>1.0</td>
+        </tr>
+        <tr>
+          <td><strong>Last Updated</strong></td>
+          <td>December 8, 2025</td>
+        </tr>
+        <tr>
+          <td><strong>Document Owner</strong></td>
+          <td>DriveOn Commerce – Pod 2 Lead</td>
+        </tr>
+      </table>
+    </div>
+    
+    <!-- 2. ROLE PURPOSE & CONTEXT -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">2. Role Purpose & Context</div>
+        <div class="section-subtitle">Why this role exists and how it fits into CaniCol v4.0</div>
+      </div>
+      
+      <h3>Strategic Purpose</h3>
+      <p>The Volume / UGC Editor is the execution engine of the Creative Factory (Pod 2). This role exists to generate <strong>high-volume, UGC-style creative assets</strong> that support DriveOn Commerce's lean-testing philosophy under the CaniCol v4.0 model.</p>
+      
+      <p>With ~45–60 products entering P1/P2 testing each month and tight budget constraints ($40–$60 per product for P1, $70–$120 total for P1+P2), the Volume Editor must produce <strong>fast, cost-effective, scroll-stopping video ads</strong> that look authentic and native to social feeds.</p>
+      
+      <h3>Economic Context</h3>
+      <p>This role directly impacts the economic viability of the testing pipeline:</p>
+      <ul>
+        <li><strong>Test Bank Discipline:</strong> With a monthly test bank of $4,000–$5,500 for P1+P2 combined, creative costs must stay lean. High-volume editing enables multiple creative variants per product without breaking budget.</li>
+        <li><strong>Hit Rate Support:</strong> Only 4–6% of products (~2–4/month) become true winners. Fast creative iteration increases the odds of finding winning angles early.</li>
+        <li><strong>Portfolio Thinking:</strong> Most products fail. The Volume Editor's speed and efficiency ensure that failures are learned from quickly and cheaply, while winners get rapid creative reinforcement.</li>
+      </ul>
+      
+      <h3>Pod 2 (Creative Factory) Context</h3>
+      <p>The Volume Editor sits within Pod 2, which transforms product research packets into testable creative assets. The pod operates as a factory:</p>
+      <ul>
+        <li><strong>Upstream:</strong> Receives product packets and creative briefs from P1 (Product Intelligence) and P2-CR-STRAT (Creative Strategist).</li>
+        <li><strong>Internal:</strong> Works alongside Creative Strategists, Script Writers, and Creative QA.</li>
+        <li><strong>Downstream:</strong> Delivers finished assets to P3 (Media & Store) for campaign setup and testing.</li>
+      </ul>
+      
+      <h3>Why "Volume" and Why "UGC"</h3>
+      <p><strong>Volume:</strong> This role is optimized for throughput, not artistry. You are not creating Super Bowl ads. You are creating <strong>testable hypotheses in video form</strong> at scale.</p>
+      
+      <p><strong>UGC (User-Generated Content) Style:</strong> UGC-style ads perform disproportionately well in dropshipping because they feel authentic, not salesy. They blend into social feeds, reduce ad fatigue, and lower CPMs. This role masters the UGC aesthetic: raw, relatable, mobile-first, scroll-stopping.</p>
+      
+      <div class="callout">
+        <strong>Core Philosophy:</strong> Speed and volume beat perfection. Your job is to produce <strong>good-enough-to-test</strong> assets quickly, learn from data, and iterate. Perfectionism is the enemy of throughput in this role.
+      </div>
+    </div>
+    
+    <!-- 3. CANON CONSTRAINTS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">3. Canon Constraints</div>
+        <div class="section-subtitle">Non-negotiable rules and boundaries from L0–L3 canon</div>
+      </div>
+      
+      <h3>Economic Constraints (from L1-01 CaniCol Model + L2-05 Testing Canon)</h3>
+      <div class="callout warning">
+        <strong>⚠️ CRITICAL:</strong> These constraints are locked by L0/L1 canon and cannot be changed at the L4 level.
+      </div>
+      
+      <ul>
+        <li><strong>Testing Volume:</strong> ~45–60 products/month reach P1/P2 testing. Your output must support this volume.</li>
+        <li><strong>P1 Budget:</strong> $40–$60 per product. Creative costs for P1 must stay lean (typically 2–4 variants).</li>
+        <li><strong>P1+P2 Total Budget:</strong> $70–$120 per product (standard band $80–$100). P2 may add more creative variants if P1 shows promise.</li>
+        <li><strong>Test Bank:</strong> ~$4,000–$5,500/month total P1+P2 spend. Creative production is a cost center within this budget.</li>
+        <li><strong>Winner Rate:</strong> Only 4–6% of products (~2–4/month) become winners. Do not over-invest in creative for unproven products.</li>
+      </ul>
+      
+      <h3>WIP & Throughput Constraints (from L2-03 Role Registry)</h3>
+      <ul>
+        <li><strong>Active editing queue:</strong> ≤8 products in progress at once (per 1.0 FTE).</li>
+        <li><strong>Awaiting QA:</strong> ≤12 asset batches awaiting review.</li>
+        <li><strong>Revision queue:</strong> ≤6 asset batches in revision.</li>
+        <li><strong>Weekly output target:</strong> 25–35 edited video assets delivered per week.</li>
+      </ul>
+      
+      <h3>Tool Constraints (from L2/L3 Infra Blueprints)</h3>
+      <p><strong>Approved tools only:</strong> ClickUp, Notion, Google Drive, Discord, CapCut, Premiere Pro (optional advanced tool). Do not introduce unapproved tools (e.g., Airtable, Asana, Trello, Frame.io) without canon update.</p>
+      
+      <h3>Brand & Creative Constraints (from L2-08 Master Brand Platform)</h3>
+      <ul>
+        <li><strong>No hype language:</strong> No "get rich quick", "life-changing", "limited time only" style copy.</li>
+        <li><strong>No false urgency:</strong> No countdown timers, fake scarcity tactics, or pressure-based CTAs.</li>
+        <li><strong>Authentic UGC aesthetic:</strong> Ads must feel like real people sharing real experiences, not polished brand content.</li>
+        <li><strong>Mobile-first:</strong> All edits optimized for vertical (9:16) mobile viewing.</li>
+      </ul>
+      
+      <h3>Handoff Constraints (from L2-02 Pod Overview)</h3>
+      <ul>
+        <li><strong>No skipping QA:</strong> All assets must pass through P2-CR-QA before delivery to P3.</li>
+        <li><strong>No direct-to-launch:</strong> Media buyers and store builders are downstream. You deliver assets; you do not launch campaigns.</li>
+        <li><strong>Clear handoff protocols:</strong> Assets must be organized, named per convention, and delivered with metadata (product ID, test ID, variant ID).</li>
+      </ul>
+      
+      <div class="callout critical">
+        <strong>🚨 IMMUTABLE RULE:</strong> You cannot change testing budgets, gate definitions, or WIP caps. If you believe constraints are blocking performance, escalate to Pod 2 Lead. Do not silently work around constraints.
+      </div>
+    </div>
+    
+    <!-- 4. DAY-IN-THE-LIFE TIMELINE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">4. Day-in-the-Life Timeline</div>
+        <div class="section-subtitle">Time-blocked daily schedule for a Volume / UGC Editor</div>
+      </div>
+      
+      <p>This timeline represents a typical 8-hour workday for a 1.0 FTE Volume Editor. Actual flow may vary based on queue depth and priority shifts, but the <strong>time allocation philosophy</strong> should remain consistent: maximize deep editing blocks, batch admin tasks, maintain handoff discipline.</p>
+      
+      <div class="time-block">
+        <div class="time">9:00 AM – 9:30 AM</div>
+        <div class="duration">⏱ 30 minutes</div>
+        <div class="activity">Morning Queue Review & Prioritization</div>
+        <div class="details">
+          <strong>Actions:</strong>
+          <ul>
+            <li>Check ClickUp "Editing Queue" list for new assignments</li>
+            <li>Review Discord #p2-creative-queue for urgent requests or briefs</li>
+            <li>Pull today's priorities based on: (1) P1 test launch dates, (2) revision urgency, (3) QA feedback</li>
+            <li>Update ClickUp statuses: move queued items to "In Progress"</li>
+            <li>Download raw assets from Google Drive to local editing workspace</li>
+          </ul>
+          <strong>Outputs:</strong> Prioritized editing list for the day (6–10 tasks), raw assets staged locally.
+        </div>
+      </div>
+      
+      <div class="time-block">
+        <div class="time">9:30 AM – 11:00 AM</div>
+        <div class="duration">⏱ 90 minutes – DEEP WORK BLOCK 1</div>
+        <div class="activity">High-Priority Editing Session</div>
+        <div class="details">
+          <strong>Focus:</strong> Batch editing for 2–3 products (6–9 variants total).
+          <ul>
+            <li>Work in CapCut or Premiere Pro (based on complexity)</li>
+            <li>Follow creative brief specifications (hook, CTA, pacing, music)</li>
+            <li>Apply UGC editing techniques: jump cuts, on-screen text overlays, casual pacing</li>
+            <li>Export in 9:16 vertical format, 1080x1920px, MP4, <30MB per file</li>
+            <li><strong>No interruptions:</strong> Discord notifications muted, focus mode enabled</li>
+          </ul>
+          <strong>Target Output:</strong> 6–9 finished video variants (2–3 variants per product).
+        </div>
+      </div>
+      
+      <div class="time-block">
+        <div class="time">11:00 AM – 11:45 AM</div>
+        <div class="duration">⏱ 45 minutes</div>
+        <div class="activity">QA Review & Revision Processing</div>
+        <div class="details">
+          <strong>Actions:</strong>
+          <ul>
+            <li>Check Discord #p2-revisions for QA feedback from previous day's deliveries</li>
+            <li>Review ClickUp "Revision Queue" for flagged assets</li>
+            <li>Prioritize revisions: critical issues first (brand violations, technical errors), minor tweaks second</li>
+            <li>Make revisions in batch (group similar fixes across multiple assets)</li>
+            <li>Re-export and re-upload revised assets to Drive</li>
+            <li>Update ClickUp: move revised assets back to "QA Review" status</li>
+          </ul>
+          <strong>Target Output:</strong> 3–6 revised assets ready for re-review.
+        </div>
+      </div>
+      
+      <div class="time-block">
+        <div class="time">11:45 AM – 12:30 PM</div>
+        <div class="duration">⏱ 45 minutes</div>
+        <div class="activity">Lunch & Admin Break</div>
+        <div class="details">
+          Light admin during lunch: respond to non-urgent Discord messages, scan Notion for product updates, review upcoming brief pipeline for next day.
+        </div>
+      </div>
+      
+      <div class="time-block">
+        <div class="time">12:30 PM – 2:00 PM</div>
+        <div class="duration">⏱ 90 minutes – DEEP WORK BLOCK 2</div>
+        <div class="activity">Standard Queue Editing Session</div>
+        <div class="details">
+          <strong>Focus:</strong> Mid-priority products and P2 creative variants (products that passed P1).
+          <ul>
+            <li>Continue batch editing workflow</li>
+            <li>Focus on 2–3 products, producing 2–4 variants per product</li>
+            <li>For P2 products (proven winners from P1), apply more polish: tighter cuts, better music sync, refined CTAs</li>
+            <li>Self-QA before handoff: check for typos, audio sync issues, export quality</li>
+          </ul>
+          <strong>Target Output:</strong> 6–12 additional edited variants.
+        </div>
+      </div>
+      
+      <div class="time-block">
+        <div class="time">2:00 PM – 2:45 PM</div>
+        <div class="duration">⏱ 45 minutes</div>
+        <div class="activity">Upload, Organize & Handoff Prep</div>
+        <div class="details">
+          <strong>Actions:</strong>
+          <ul>
+            <li>Upload all finished assets to Google Drive: <code>/Creative_Assets/[Product_ID]/</code></li>
+            <li>Follow file naming convention: <code>CRT-[Test_ID]-[Variant]-[HookType].mp4</code></li>
+            <li>Update Notion "Creative Assets" DB with metadata: Product_ID, Test_ID, Variant_ID, Duration, File_Size, Drive_Link</li>
+            <li>Update ClickUp: move assets from "In Progress" to "QA Review"</li>
+            <li>Post handoff notification in Discord #p2-asset-delivery: "@QA – 12 new assets ready for review, Product IDs: [list]"</li>
+          </ul>
+          <strong>Outputs:</strong> 12–20 assets delivered to QA pipeline, organized and documented.
+        </div>
+      </div>
+      
+      <div class="time-block">
+        <div class="time">2:45 PM – 4:00 PM</div>
+        <div class="duration">⏱ 75 minutes – DEEP WORK BLOCK 3 (Optional/Flex)</div>
+        <div class="activity">Overflow Editing or Creative Experimentation</div>
+        <div class="details">
+          <strong>Flex Time Use Cases:</strong>
+          <ul>
+            <li><strong>If queue is deep:</strong> Continue editing to stay ahead of deadlines.</li>
+            <li><strong>If queue is light:</strong> Experiment with new UGC techniques, test AI-assisted editing workflows, build reusable templates.</li>
+            <li><strong>If urgent P1 launch:</strong> Priority-override to deliver critical last-minute assets.</li>
+          </ul>
+          <strong>Philosophy:</strong> Use this block to either clear backlog or invest in skill development. Never sit idle.
+        </div>
+      </div>
+      
+      <div class="time-block">
+        <div class="time">4:00 PM – 4:30 PM</div>
+        <div class="duration">⏱ 30 minutes</div>
+        <div class="activity">End-of-Day Wrap-Up & Planning</div>
+        <div class="details">
+          <strong>Actions:</strong>
+          <ul>
+            <li>Final ClickUp status updates: ensure all tasks reflect accurate progress</li>
+            <li>Review tomorrow's queue: identify high-priority products launching in 24–48 hours</li>
+            <li>Check Discord for any late-breaking briefs or escalations</li>
+            <li>Log time in ClickUp or time tracking system (if required)</li>
+            <li>Post brief daily summary in #p2-creative-queue: "EOD Summary: [X] assets delivered, [Y] in revision, [Z] queued for tomorrow"</li>
+          </ul>
+          <strong>Outputs:</strong> Clean handoff state, clear priorities for next day, accurate task tracking.
+        </div>
+      </div>
+      
+      <div class="callout">
+        <strong>Time Block Philosophy:</strong> Protect deep work blocks (90+ min) ruthlessly. Editing requires flow state. Batch interruptions into admin windows. If urgent requests break into deep work, note the disruption and escalate pattern if it becomes chronic.
+      </div>
+    </div>
+    
+    <!-- 5. CORE WORKFLOWS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">5. Core Workflows</div>
+        <div class="section-subtitle">Step-by-step execution protocols for key tasks</div>
+      </div>
+      
+      <p>Each workflow below is a repeatable, documented process. Follow these workflows exactly until you identify improvement opportunities, then propose updates to this SOP via Pod 2 Lead.</p>
+      
+      <!-- WORKFLOW 1 -->
+      <div class="workflow">
+        <div class="workflow-title">Workflow 1: Daily Asset Queue Processing</div>
+        
+        <div class="workflow-section">
+          <h4>Trigger</h4>
+          <p>Start of each workday (9:00 AM) or when new high-priority brief arrives in #p2-creative-queue.</p>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Inputs</h4>
+          <ul>
+            <li>ClickUp "Editing Queue" list (tasks assigned to you)</li>
+            <li>Discord #p2-creative-queue (new briefs and urgent requests)</li>
+            <li>Notion "Product Packets" DB (product context)</li>
+            <li>Google Drive <code>/Creative_Briefs/</code> folder (detailed creative specs)</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Steps</h4>
+          <ol class="workflow-steps">
+            <li>Open ClickUp "Editing Queue" list. Filter by Assignee = You, Status = "Queued".</li>
+            <li>Sort tasks by Priority (High → Low) and Due Date (Soonest first).</li>
+            <li>For each task, check linked Product_ID in Notion "Product Packets" to understand product context.</li>
+            <li>Scan Discord #p2-creative-queue for overnight messages. Flag any urgent requests (e.g., "P1 launching in 12 hours, need 3 variants ASAP").</li>
+            <li>Build today's priority list: (1) Urgent/deadline-driven tasks first, (2) High-priority P1 launches, (3) P2 creative scale-ups, (4) Standard queue items.</li>
+            <li>Update ClickUp: Move top 6–10 tasks from "Queued" to "In Progress". Add comment: "Starting today [Date], ETA delivery by EOD."</li>
+            <li>Download raw assets from Google Drive for priority tasks: go to <code>/Raw_Assets/[Product_ID]/</code>, download video clips, images, scripts.</li>
+            <li>Stage raw assets locally in organized folders: <code>/Local_Workspace/[Product_ID]/</code>.</li>
+            <li>Post brief standup in #p2-creative-queue: "Morning queue loaded. Priority today: [Product IDs]. ETA: [X] assets by EOD."</li>
+          </ol>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Outputs</h4>
+          <ul>
+            <li>Prioritized task list (6–10 tasks for the day)</li>
+            <li>ClickUp statuses updated ("In Progress")</li>
+            <li>Raw assets staged locally and ready to edit</li>
+            <li>Standup message posted in Discord</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Quality Checks</h4>
+          <ul>
+            <li>✓ No P1 launch-critical tasks missed in priority ranking</li>
+            <li>✓ All raw asset files downloaded and accessible</li>
+            <li>✓ ClickUp comments added to confirm task ownership</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Handoff</h4>
+          <p><strong>None – Internal workflow.</strong> This sets up your editing pipeline for the day.</p>
+        </div>
+      </div>
+      
+      <!-- WORKFLOW 2 -->
+      <div class="workflow">
+        <div class="workflow-title">Workflow 2: UGC-Style Video Editing (Brief to Delivery)</div>
+        
+        <div class="workflow-section">
+          <h4>Trigger</h4>
+          <p>Creative Strategist delivers brief + raw assets. Task appears in ClickUp "Editing Queue" with status "Queued".</p>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Inputs</h4>
+          <ul>
+            <li>Creative Brief (Google Doc or ClickUp description): hook, CTA, product angles, target duration, style notes</li>
+            <li>Raw assets in Google Drive: <code>/Raw_Assets/[Product_ID]/</code> (video clips, B-roll, product images, voiceover scripts)</li>
+            <li>Product context from Notion "Product Packets" DB (AOV, niche, unique value prop)</li>
+            <li>Brand guidelines from L2-08 Master Brand Platform (tone, visual style, forbidden patterns)</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Steps</h4>
+          <ol class="workflow-steps">
+            <li>Read creative brief fully. Note key requirements: hook style (problem-agitate, curiosity gap, direct CTA), video length (15–30 sec), music mood, on-screen text requirements.</li>
+            <li>Open editing software (CapCut for fast edits, Premiere Pro for complex projects). Create new project: <code>[Product_ID]_Variant_[A/B/C]</code>.</li>
+            <li>Import raw assets into project. Organize timeline: Intro (hook, 2–4 sec) → Body (product demo, 8–15 sec) → Close (CTA, 3–5 sec).</li>
+            <li><strong>Edit for UGC aesthetic:</strong> Use jump cuts, slight camera shake (if authentic), casual pacing. Avoid over-polishing. Think "real person sharing a find," not "brand commercial."</li>
+            <li>Add on-screen text overlays for key points: Use bold, high-contrast fonts (white text with black stroke or vice versa). Keep text concise (3–5 words per frame).</li>
+            <li>Sync background music: Use royalty-free tracks from approved library. Music should enhance, not overpower. Fade in/out smoothly.</li>
+            <li>Add CTA at end: "Link in bio" / "Tap to shop" / "Check comments for link" (avoid salesy language).</li>
+            <li>Self-QA before export: Watch full edit 2–3 times. Check for: typos in text overlays, audio sync issues, abrupt cuts, file name accuracy.</li>
+            <li>Export settings: Format: MP4 (H.264), Resolution: 1080x1920 (9:16 vertical), Frame rate: 30fps, Bitrate: Medium-High (~5–8 Mbps), File size target: <30MB.</li>
+            <li>Save exported file locally with naming convention: <code>CRT-[Test_ID]-[Variant_ID]-[HookType].mp4</code>. Example: <code>CRT-TST-PRD-20251208-042-P101-A-ProblemAgitate.mp4</code>.</li>
+          </ol>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Outputs</h4>
+          <ul>
+            <li>1 finished video asset per variant (typically 2–4 variants per product)</li>
+            <li>File saved locally with correct naming convention</li>
+            <li>Project file saved for future revisions</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Quality Checks</h4>
+          <ul>
+            <li>✓ Video matches brief specifications (hook, CTA, duration)</li>
+            <li>✓ UGC aesthetic achieved (authentic, mobile-native, not overly polished)</li>
+            <li>✓ No typos in on-screen text</li>
+            <li>✓ Audio levels balanced (music not overpowering voiceover/dialogue)</li>
+            <li>✓ Export specs correct (9:16, <30MB, 30fps)</li>
+            <li>✓ File naming convention followed exactly</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Handoff</h4>
+          <p><strong>FROM:</strong> Volume Editor (you)<br>
+          <strong>TO:</strong> Self (upload & organize phase, see Workflow 3) → then to P2-CR-QA (Creative QA)<br>
+          <strong>Tool:</strong> Local filesystem → Google Drive → ClickUp status update<br>
+          <strong>Next Step:</strong> Proceed to Workflow 3 (Upload & Handoff Prep) once 6–12 assets are completed in batch.</p>
+        </div>
+      </div>
+      
+      <!-- WORKFLOW 3 -->
+      <div class="workflow">
+        <div class="workflow-title">Workflow 3: Asset Upload, Organization & QA Handoff</div>
+        
+        <div class="workflow-section">
+          <h4>Trigger</h4>
+          <p>Batch of 6–12 finished video assets ready for delivery (typically 2–3 times per day: late morning, mid-afternoon, EOD).</p>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Inputs</h4>
+          <ul>
+            <li>Finished video assets (exported, named correctly, <30MB each)</li>
+            <li>Google Drive folder structure: <code>/Creative_Assets/[Product_ID]/</code></li>
+            <li>Notion "Creative Assets" DB (for metadata logging)</li>
+            <li>ClickUp "In Progress" list (tasks to move to "QA Review")</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Steps</h4>
+          <ol class="workflow-steps">
+            <li>Navigate to Google Drive: <code>/Creative_Assets/[Product_ID]/</code>. If folder doesn't exist, create it.</li>
+            <li>Upload all finished assets for that product. Verify file names match convention.</li>
+            <li>Open Notion "Creative Assets" DB. For each uploaded asset, create new entry or update existing entry with:
+              <ul>
+                <li>Product_ID (relation to "Product Packets" DB)</li>
+                <li>Test_ID (if assigned)</li>
+                <li>Variant_ID (A, B, C, etc.)</li>
+                <li>File_Name (exact filename in Drive)</li>
+                <li>Drive_Link (shareable link to file)</li>
+                <li>Duration (seconds)</li>
+                <li>File_Size (MB)</li>
+                <li>Created_Date (today)</li>
+                <li>Status: "Pending QA"</li>
+              </ul>
+            </li>
+            <li>Open ClickUp. For each product's editing task, move from "In Progress" to "QA Review". Add comment: "Assets uploaded to Drive, logged in Notion. Ready for QA. [Link to Drive folder]".</li>
+            <li>Post handoff notification in Discord #p2-asset-delivery:
+              <div class="prompt-box">@P2-CR-QA – Batch ready for review
+Product IDs: [PRD-001, PRD-002, PRD-003]
+Total Assets: 12 videos
+Drive Location: /Creative_Assets/
+Notion: All entries updated, Status = "Pending QA"
+Priority: [Standard / Urgent]</div>
+            </li>
+          </ol>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Outputs</h4>
+          <ul>
+            <li>All finished assets uploaded to Google Drive in correct folders</li>
+            <li>Notion "Creative Assets" DB updated with full metadata</li>
+            <li>ClickUp tasks moved to "QA Review" status</li>
+            <li>Discord handoff notification posted</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Quality Checks</h4>
+          <ul>
+            <li>✓ All files uploaded (no missing assets)</li>
+            <li>✓ File names match convention exactly</li>
+            <li>✓ Drive links in Notion are accessible (test 1–2 links)</li>
+            <li>✓ ClickUp comments include Drive folder link</li>
+            <li>✓ Discord notification includes all required info (Product IDs, asset count, location)</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Handoff</h4>
+          <p><strong>FROM:</strong> P2-CR-VOLEDIT-01 (Volume Editor, you)<br>
+          <strong>TO:</strong> P2-CR-QA (Creative QA)<br>
+          <strong>Tool:</strong> ClickUp (status transition), Notion (DB update), Discord (notification)<br>
+          <strong>Location:</strong> ClickUp → "Creative Production" / "UGC Editing" / "QA Review"<br>
+          <strong>Trigger for QA:</strong> Discord ping in #p2-asset-delivery + ClickUp status = "QA Review"<br>
+          <strong>Expected Output from QA:</strong> QA either approves (moves to "Approved") or rejects with revision notes (moves to "Revision Needed").</p>
+        </div>
+      </div>
+      
+      <!-- WORKFLOW 4 -->
+      <div class="workflow">
+        <div class="workflow-title">Workflow 4: Revision Processing & Re-Delivery</div>
+        
+        <div class="workflow-section">
+          <h4>Trigger</h4>
+          <p>QA flags asset(s) with issues. ClickUp task moves to "Revision Needed" status. Discord notification appears in #p2-revisions.</p>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Inputs</h4>
+          <ul>
+            <li>QA feedback: ClickUp comment or Discord message detailing issues (typo, audio sync, brand violation, etc.)</li>
+            <li>Original project file (saved during initial edit)</li>
+            <li>Original exported asset (for reference)</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Steps</h4>
+          <ol class="workflow-steps">
+            <li>Check Discord #p2-revisions and ClickUp "Revision Needed" list. Identify flagged assets.</li>
+            <li>Read QA feedback carefully. Categorize issues: (1) Critical (brand violation, major error), (2) Standard (typo, minor audio issue), (3) Minor polish (optional improvement suggestion).</li>
+            <li>Prioritize critical issues first. If multiple assets need revision, batch similar fixes (e.g., fix all typos in one session, all audio sync issues in another).</li>
+            <li>Open original project file in editing software. Make required changes. Do NOT over-revise; stick to QA's specific notes.</li>
+            <li>Re-export with same settings as original. Save with same file name (overwrite old file in local workspace).</li>
+            <li>Upload revised file to Google Drive, overwriting previous version. Update "Date Modified" in Notion "Creative Assets" DB.</li>
+            <li>Update ClickUp: Move task from "Revision Needed" to "QA Review" (re-submission). Add comment: "Revision complete. Changes: [list fixes]. Re-uploaded to Drive."</li>
+            <li>Post update in Discord #p2-revisions: "Revisions complete for [Product IDs]. Re-submitted to QA."</li>
+          </ol>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Outputs</h4>
+          <ul>
+            <li>Revised video asset (same file name, updated content)</li>
+            <li>Updated file in Google Drive</li>
+            <li>Notion DB updated (Date Modified)</li>
+            <li>ClickUp task re-submitted to QA Review</li>
+            <li>Discord update posted</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Quality Checks</h4>
+          <ul>
+            <li>✓ All QA-requested changes implemented</li>
+            <li>✓ No new issues introduced during revision</li>
+            <li>✓ File name unchanged (to maintain linking)</li>
+            <li>✓ Drive file updated (not duplicated)</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Handoff</h4>
+          <p><strong>FROM:</strong> P2-CR-VOLEDIT-01 (Volume Editor, you)<br>
+          <strong>TO:</strong> P2-CR-QA (Creative QA, re-review)<br>
+          <strong>Tool:</strong> ClickUp, Google Drive, Discord<br>
+          <strong>Location:</strong> Same as Workflow 3 handoff<br>
+          <strong>Expected Outcome:</strong> QA approves on second review, or escalates if issue persists.</p>
+        </div>
+      </div>
+      
+      <!-- WORKFLOW 5 -->
+      <div class="workflow">
+        <div class="workflow-title">Workflow 5: Batch Multi-Variant Test Setup</div>
+        
+        <div class="workflow-section">
+          <h4>Trigger</h4>
+          <p>Creative Strategist requests multiple variants for A/B testing (common for P2 scale-ups or high-priority P1 launches).</p>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Inputs</h4>
+          <ul>
+            <li>Creative brief specifying variant count (typically 3–5 variants) and variant types (different hooks, CTAs, or visual styles)</li>
+            <li>Single set of raw assets (video clips, images, voiceover)</li>
+            <li>Variant matrix from Creative Strategist: Hook A / Hook B / Hook C × CTA 1 / CTA 2</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Steps</h4>
+          <ol class="workflow-steps">
+            <li>Review variant matrix. Understand differences between each variant (e.g., Variant A = Problem-Agitate hook, Variant B = Curiosity Gap hook, Variant C = Direct CTA hook).</li>
+            <li>Create master project file with base edit (shared body section). Duplicate project file for each variant.</li>
+            <li>For each variant, edit only the differing sections: swap hook intro, change CTA ending, or adjust on-screen text to match variant theme.</li>
+            <li>Keep body/demo section identical across variants (unless brief specifies otherwise). This ensures clean A/B test data.</li>
+            <li>Export all variants in batch. Use naming convention: <code>CRT-[Test_ID]-[Variant_Letter]-[HookType].mp4</code>. Example:
+              <ul>
+                <li>CRT-TST-001-P101-A-ProblemAgitate.mp4</li>
+                <li>CRT-TST-001-P101-B-CuriosityGap.mp4</li>
+                <li>CRT-TST-001-P101-C-DirectCTA.mp4</li>
+              </ul>
+            </li>
+            <li>Self-QA all variants: Watch each variant once, confirm only intended sections differ. Check for typos in variant-specific text.</li>
+            <li>Upload all variants to Google Drive: <code>/Creative_Assets/[Product_ID]/Variants/</code></li>
+            <li>Log all variants in Notion "Creative Assets" DB (one entry per variant). Include Variant_Letter and Variant_Type fields.</li>
+            <li>Update ClickUp: Move task to "QA Review". Add comment: "Multi-variant batch complete. [X] variants uploaded. Drive: [link]."</li>
+            <li>Post handoff in Discord #p2-asset-delivery: "Multi-variant batch ready – Product: [ID], Variants: [A, B, C], Total: [X] assets."</li>
+          </ol>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Outputs</h4>
+          <ul>
+            <li>3–5 video variants (per brief specs)</li>
+            <li>All variants uploaded to Drive</li>
+            <li>All variants logged in Notion</li>
+            <li>ClickUp task moved to QA Review</li>
+            <li>Discord handoff notification posted</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Quality Checks</h4>
+          <ul>
+            <li>✓ All variants exported and uploaded (no missing variants)</li>
+            <li>✓ Variant differences are clear and intentional (not accidental)</li>
+            <li>✓ Shared sections (body) are identical across variants</li>
+            <li>✓ File naming reflects variant letter and type</li>
+            <li>✓ Notion entries distinguish variants clearly</li>
+          </ul>
+        </div>
+        
+        <div class="workflow-section">
+          <h4>Handoff</h4>
+          <p><strong>FROM:</strong> P2-CR-VOLEDIT-01 (Volume Editor, you)<br>
+          <strong>TO:</strong> P2-CR-QA → then to P3-MB (Media Buyer for testing setup)<br>
+          <strong>Tool:</strong> ClickUp, Notion, Google Drive, Discord<br>
+          <strong>Purpose:</strong> Media Buyer uses variants to set up A/B test campaigns in Meta/TikTok/Google Ads. Clean variant structure = clean test data.</p>
+        </div>
+      </div>
+      
+      <div class="callout">
+        <strong>Workflow Iteration:</strong> These workflows are v1.0. As you identify bottlenecks or improvements, document them and propose updates to Pod 2 Lead. Good operators improve systems, not just execute them.
+      </div>
+    </div>
+    
+    <!-- 6. HANDOFF & INTERFACE SPECS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">6. Handoff & Interface Specs</div>
+        <div class="section-subtitle">Cross-role and cross-pod delivery protocols</div>
+      </div>
+      
+      <p>Handoffs are the connective tissue of the CaniCol pipeline. Poor handoffs = dropped work, missed deadlines, and broken trust. This section defines <strong>exactly</strong> how work moves between roles.</p>
+      
+      <h3>Handoff Matrix</h3>
+      <table class="handoff-table">
+        <thead>
+          <tr>
+            <th style="width: 15%;">From Role</th>
+            <th style="width: 15%;">To Role</th>
+            <th style="width: 12%;">Tool</th>
+            <th style="width: 20%;">Location</th>
+            <th style="width: 18%;">Trigger</th>
+            <th style="width: 20%;">Output</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>P2-CR-STRAT<br><small>(Creative Strategist)</small></td>
+            <td>P2-CR-VOLEDIT<br><small>(Volume Editor, YOU)</small></td>
+            <td>ClickUp + Drive + Discord</td>
+            <td>ClickUp: "Creative Production" / "UGC Editing" / "Editing Queue"<br>Drive: /Creative_Briefs/ + /Raw_Assets/<br>Discord: #p2-creative-queue</td>
+            <td>Creative brief finalized, raw assets uploaded</td>
+            <td>Brief document (Google Doc or ClickUp description), raw assets in Drive, ClickUp task assigned to you with status "Queued"</td>
+          </tr>
+          <tr>
+            <td>P2-CR-VOLEDIT<br><small>(Volume Editor, YOU)</small></td>
+            <td>P2-CR-QA<br><small>(Creative QA)</small></td>
+            <td>ClickUp + Notion + Drive + Discord</td>
+            <td>ClickUp: "Creative Production" / "UGC Editing" / "QA Review"<br>Notion: "Creative Assets" DB (Status = "Pending QA")<br>Drive: /Creative_Assets/[Product_ID]/<br>Discord: #p2-asset-delivery</td>
+            <td>Batch of 6–12 assets completed and uploaded</td>
+            <td>Finished video assets in Drive (named per convention), Notion DB entries updated with metadata, ClickUp status = "QA Review", Discord notification with Product IDs and asset count</td>
+          </tr>
+          <tr>
+            <td>P2-CR-QA<br><small>(Creative QA)</small></td>
+            <td>P2-CR-VOLEDIT<br><small>(Volume Editor, YOU)</small></td>
+            <td>ClickUp + Discord</td>
+            <td>ClickUp: "Creative Production" / "UGC Editing" / "Revision Needed"<br>Discord: #p2-revisions</td>
+            <td>QA identifies issues during review</td>
+            <td>ClickUp task moved to "Revision Needed" with comment detailing issues, Discord message in #p2-revisions tagging you with specific asset IDs and required fixes</td>
+          </tr>
+          <tr>
+            <td>P2-CR-QA<br><small>(Creative QA)</small></td>
+            <td>P3-MB<br><small>(Media Buyer)</small></td>
+            <td>ClickUp + Notion + Discord</td>
+            <td>ClickUp: "Media Campaigns" / "Asset Library"<br>Notion: "Creative Assets" DB (Status = "Approved")<br>Discord: #p3-media-intake</td>
+            <td>QA approves assets, marks as ready for campaign setup</td>
+            <td>Approved assets in Drive, Notion DB Status = "Approved", ClickUp handoff notification to Media Buyer, Discord ping in #p3-media-intake</td>
+          </tr>
+          <tr>
+            <td>P3-MB<br><small>(Media Buyer)</small></td>
+            <td>P2-CR-VOLEDIT<br><small>(Volume Editor, YOU)</small></td>
+            <td>ClickUp + Discord</td>
+            <td>ClickUp: "Creative Production" / "UGC Editing" / "Revision Needed"<br>Discord: #p2-revisions</td>
+            <td>Media Buyer identifies performance issues with live assets (e.g., low CTR, high CPM) and requests creative iteration</td>
+            <td>ClickUp task with performance data and revision request, Discord message with specific feedback (e.g., "Hook not stopping scroll, try curiosity gap instead")</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h3>Handoff Quality Bar</h3>
+      <p>For assets to pass handoff successfully, they must meet these minimum standards:</p>
+      
+      <div class="callout">
+        <strong>Non-Negotiable Handoff Requirements:</strong>
+        <ul>
+          <li>✓ File naming convention followed exactly (no exceptions)</li>
+          <li>✓ All files <30MB (technical requirement for platform upload)</li>
+          <li>✓ 9:16 aspect ratio (vertical mobile)</li>
+          <li>✓ No typos in on-screen text (QA auto-rejects typos)</li>
+          <li>✓ Audio levels balanced (no clipping, no silence)</li>
+          <li>✓ Notion metadata complete (Product_ID, Variant_ID, Drive_Link, Duration, File_Size)</li>
+          <li>✓ ClickUp status transitions logged with comments</li>
+          <li>✓ Discord handoff notifications posted in correct channels</li>
+        </ul>
+      </div>
+      
+      <h3>Handoff Rejection Protocol</h3>
+      <p>If QA or Media Buyer rejects your handoff:</p>
+      <ol>
+        <li><strong>Acknowledge immediately:</strong> React to Discord message with 👀 emoji to confirm you've seen the rejection.</li>
+        <li><strong>Clarify if needed:</strong> If rejection reason is unclear, ask in thread or DM. Do not guess.</li>
+        <li><strong>Prioritize fix:</strong> Rejected assets move to front of revision queue (unless lower-priority product).</li>
+        <li><strong>Re-submit within 24 hours:</strong> Standard SLA for revisions is <24 hours. Urgent revisions: <4 hours.</li>
+        <li><strong>Learn patterns:</strong> If same issue repeats (e.g., typos, audio sync), document and adjust your self-QA checklist.</li>
+      </ol>
+      
+      <h3>Cross-Pod Communication Etiquette</h3>
+      <p>When handing off to P3 (Media & Store):</p>
+      <ul>
+        <li><strong>Respect their timeline:</strong> Media Buyers need assets 24–48 hours before campaign launch. Late delivery = missed launch window = wasted research.</li>
+        <li><strong>No surprise revisions:</strong> If you discover an issue post-handoff, notify immediately in #p2-revisions. Do not silently re-upload.</li>
+        <li><strong>Context matters:</strong> If an asset required unusual creative choices (e.g., non-standard pacing), add a note in ClickUp comment so Media Buyer understands intent.</li>
+      </ul>
+    </div>
+    
+    <!-- 7. KPIs & QUALITY BAR -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">7. KPIs & Quality Bar</div>
+        <div class="section-subtitle">How success is measured for this role</div>
+      </div>
+      
+      <h3>Primary KPIs</h3>
+      <table class="kpi-table">
+        <thead>
+          <tr>
+            <th style="width: 30%;">KPI</th>
+            <th style="width: 20%;">Target</th>
+            <th style="width: 20%;">Measurement Frequency</th>
+            <th style="width: 30%;">Data Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Assets Delivered Per Week</strong></td>
+            <td>25–35 edited video assets</td>
+            <td>Weekly</td>
+            <td>Notion "Creative Assets" DB (filter by Created_Date, Status = "Approved")</td>
+          </tr>
+          <tr>
+            <td><strong>QA First-Pass Rate</strong></td>
+            <td>≥80%</td>
+            <td>Weekly</td>
+            <td>ClickUp (count tasks: "QA Review" → "Approved" vs "QA Review" → "Revision Needed")</td>
+          </tr>
+          <tr>
+            <td><strong>Average Turnaround Time</strong></td>
+            <td><24 hours (standard edits)<br><4 hours (urgent edits)</td>
+            <td>Weekly</td>
+            <td>ClickUp (time from "Queued" to "QA Review" status change)</td>
+          </tr>
+          <tr>
+            <td><strong>Revision Rate</strong></td>
+            <td><20% of delivered assets</td>
+            <td>Weekly</td>
+            <td>Notion "Creative Assets" DB (filter by Status = "Revision Needed" within past 7 days)</td>
+          </tr>
+          <tr>
+            <td><strong>WIP Compliance</strong></td>
+            <td>100% adherence to caps</td>
+            <td>Daily</td>
+            <td>ClickUp (manual check: "In Progress" ≤8, "Awaiting QA" ≤12, "Revision Needed" ≤6)</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h3>Secondary KPIs (Tracked, Not Strictly Enforced)</h3>
+      <ul>
+        <li><strong>Assets per product:</strong> Average 2.5–3.5 variants per product (indicates healthy creative diversity)</li>
+        <li><strong>Editing speed:</strong> ~15–25 minutes per asset (for standard UGC edits; complex edits may take longer)</li>
+        <li><strong>File compliance:</strong> 100% of assets meet technical specs (9:16, <30MB, 30fps, MP4)</li>
+      </ul>
+      
+      <h3>Quality Bar: Good vs Bad Assets</h3>
+      <p>Use these examples to calibrate your internal quality standards.</p>
+      
+      <h4>✅ Good Volume Edit (Meets Bar)</h4>
+      <ul>
+        <li>Hook stops scroll in first 2–3 seconds (curiosity, problem-agitate, or bold visual)</li>
+        <li>UGC aesthetic: feels authentic, not overly polished or "corporate"</li>
+        <li>On-screen text is legible, concise, and enhances (not clutters) the visual</li>
+        <li>CTA is clear and non-salesy ("Link in bio" / "Tap to learn more")</li>
+        <li>Audio levels balanced, music enhances mood without overpowering</li>
+        <li>Pacing: quick cuts, maintains energy, no dead air</li>
+        <li>Mobile-first: vertical framing, key elements in center "safe zone"</li>
+        <li>Duration: 15–30 seconds (optimal for platform algorithms)</li>
+        <li>File specs: 9:16, <30MB, clean export (no artifacts or compression issues)</li>
+      </ul>
+      
+      <h4>❌ Bad Volume Edit (Below Bar)</h4>
+      <ul>
+        <li>Hook is generic or slow (first 3 seconds don't grab attention)</li>
+        <li>Overly polished: looks like a brand ad, not a real person sharing</li>
+        <li>On-screen text is too small, too dense, or has typos</li>
+        <li>CTA is salesy or aggressive ("BUY NOW!" / "LIMITED TIME ONLY!")</li>
+        <li>Audio issues: music too loud, voiceover cuts off, echo/distortion</li>
+        <li>Pacing: drags, too many slow moments, loses viewer attention</li>
+        <li>Desktop-framed: horizontal crop or key elements cut off in mobile view</li>
+        <li>Duration: too long (>45 sec) or awkwardly short (<10 sec)</li>
+        <li>File issues: wrong aspect ratio, file size >30MB, compression artifacts visible</li>
+      </ul>
+      
+      <h3>Performance Review Cadence</h3>
+      <ul>
+        <li><strong>Daily self-check:</strong> Review WIP limits, ensure no queue overload.</li>
+        <li><strong>Weekly KPI review:</strong> Pod 2 Lead reviews your ClickUp/Notion data, discusses performance in standup.</li>
+        <li><strong>Monthly deep dive:</strong> 1:1 with Pod 2 Lead: review trends, identify skill gaps, set improvement goals.</li>
+        <li><strong>Quarterly formal review:</strong> Tied to compensation cycles (if applicable). Comprehensive performance assessment.</li>
+      </ul>
+      
+      <div class="callout">
+        <strong>KPI Philosophy:</strong> These metrics exist to support you, not punish you. If you're consistently missing targets, that's a signal to adjust workflow, seek help, or flag systemic issues (e.g., unclear briefs, insufficient raw assets). Speak up early.
+      </div>
+    </div>
+    
+    <!-- 8. AI USAGE & PROMPT PATTERNS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">8. AI Usage & Prompt Patterns</div>
+        <div class="section-subtitle">How to leverage AI tools while maintaining human quality control</div>
+      </div>
+      
+      <h3>Philosophy: AI as Copilot, Not Autopilot</h3>
+      <p>AI tools can accelerate certain editing tasks, but <strong>you remain responsible</strong> for final quality, brand compliance, and creative judgment. AI outputs must always pass through human review.</p>
+      
+      <h3>Approved AI Use Cases</h3>
+      <p>You may use AI for the following tasks within this role:</p>
+      
+      <h4>1. Script Generation & Refinement</h4>
+      <p><strong>Use Case:</strong> When Creative Strategist provides only bullet points, use AI to draft full UGC-style scripts.</p>
+      <p><strong>Tool:</strong> ChatGPT, Claude, or similar LLM.</p>
+      <p><strong>Prompt Pattern:</strong></p>
+      <div class="prompt-box">You are a UGC content creator making authentic, scroll-stopping ads for [Product Name].
+
+Product Context:
+- Niche: [e.g., pet accessories]
+- Unique Value Prop: [e.g., solves shedding problem]
+- AOV: [e.g., $35]
+
+Brief:
+- Hook: [e.g., problem-agitate style]
+- Key Points: [list 3–5 bullet points from strategist]
+- CTA: [e.g., "Link in bio"]
+- Tone: Casual, authentic, no hype
+
+Generate a 20-second UGC script (50–70 words) optimized for TikTok/Reels. Use first-person perspective ("I found this thing..."). Keep it conversational and relatable.</div>
+      <p><strong>Human Checkpoint:</strong> Review AI script for brand violations (hype language, false claims). Edit for authenticity. Never use AI script verbatim without review.</p>
+      
+      <h4>2. On-Screen Text Suggestions</h4>
+      <p><strong>Use Case:</strong> Need punchy, concise text overlays for key moments.</p>
+      <p><strong>Prompt Pattern:</strong></p>
+      <div class="prompt-box">Generate 5 variations of on-screen text (3–5 words each) for this moment in a UGC ad:
+
+Context: Showing product solving a problem
+Mood: Surprise/relief
+Avoid: Hype language, ALL CAPS, excessive punctuation
+
+Example Good Text: "Wait, it actually works?"
+Example Bad Text: "GAME CHANGER!!!"
+
+Generate 5 options:</div>
+      <p><strong>Human Checkpoint:</strong> Pick the best option or blend elements. Check for typos and brand alignment.</p>
+      
+      <h4>3. Music Cue & Pacing Suggestions</h4>
+      <p><strong>Use Case:</strong> Stuck on music selection or edit pacing.</p>
+      <p><strong>Prompt Pattern:</strong></p>
+      <div class="prompt-box">I'm editing a 25-second UGC ad for [Product Type]. 
+
+Mood: [e.g., upbeat, problem-solving, aspirational]
+Key Moments:
+- 0–3 sec: Hook (problem intro)
+- 3–15 sec: Product demo
+- 15–20 sec: Result/benefit
+- 20–25 sec: CTA
+
+Suggest:
+1. Music genre/style (royalty-free, trending on TikTok/Reels)
+2. Pacing notes (fast cuts vs slower moments)
+3. Music sync points (where to hit key beats)</div>
+      <p><strong>Human Checkpoint:</strong> Use suggestions as inspiration. Test music against actual edit. Trust your ears over AI's text-based suggestion.</p>
+      
+      <h4>4. Thumbnail Frame Selection</h4>
+      <p><strong>Use Case:</strong> Picking the best video frame for thumbnail.</p>
+      <p><strong>Tool:</strong> AI-assisted tools like Runway ML or manual frame scan with Claude/ChatGPT analysis.</p>
+      <p><strong>Prompt Pattern:</strong></p>
+      <div class="prompt-box">I have 3 candidate thumbnail frames for a UGC ad about [Product]. Describe what makes a strong UGC thumbnail for social media (TikTok/Reels/Facebook):
+
+Criteria:
+- Facial expression (if applicable): curiosity, surprise, relatability
+- Visual clarity: product visible, text legible
+- Scroll-stopping factor: bold colors, clear focal point
+- Authenticity: doesn't look like a stock photo
+
+[Upload frames or describe them, then ask AI to rank]</div>
+      <p><strong>Human Checkpoint:</strong> Final decision is yours. AI can analyze, but you know the brand and audience best.</p>
+      
+      <h3>Forbidden AI Use Cases</h3>
+      <div class="callout critical">
+        <strong>🚨 DO NOT USE AI FOR:</strong>
+        <ul>
+          <li><strong>Final editing decisions:</strong> AI cannot replace your creative judgment on cuts, pacing, or UGC authenticity.</li>
+          <li><strong>Automated asset generation without review:</strong> Never export AI-generated content directly to Drive without human QA.</li>
+          <li><strong>Brand compliance checks:</strong> AI may miss subtle brand violations. You are the final compliance gatekeeper.</li>
+          <li><strong>Voiceover recording:</strong> UGC ads require real human voices. Do not use AI voiceovers (e.g., ElevenLabs) unless explicitly approved by Creative Strategist for specific use cases.</li>
+        </ul>
+      </div>
+      
+      <h3>AI Tool Stack (Approved for Experimentation)</h3>
+      <ul>
+        <li><strong>Script assistance:</strong> ChatGPT, Claude, Jasper (text generation only)</li>
+        <li><strong>Editing aids:</strong> Adobe Sensei (within Premiere Pro), CapCut AI features (auto-captions, auto-cut)</li>
+        <li><strong>Asset generation (visual):</strong> Midjourney, DALL-E (for concept thumbnails only, not final assets)</li>
+        <li><strong>Music selection:</strong> Epidemic Sound AI search, Artlist AI mood matching</li>
+      </ul>
+      
+      <div class="callout">
+        <strong>Golden Rule:</strong> AI accelerates, human validates. Every AI output must pass through your review before it touches a deliverable. If in doubt, ask Pod 2 Lead.
+      </div>
+    </div>
+    
+    <!-- 9. TOOLS & SYSTEMS REFERENCE -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">9. Tools & Systems Reference</div>
+        <div class="section-subtitle">Quick reference for core tools and access requirements</div>
+      </div>
+      
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Tool</th>
+            <th style="width: 30%;">Primary Use Case</th>
+            <th style="width: 30%;">Key Views / Features</th>
+            <th style="width: 20%;">Access Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CapCut</strong></td>
+            <td>Primary editing software for fast UGC-style edits</td>
+            <td>
+              • Timeline editing<br>
+              • Text overlays<br>
+              • Auto-captions<br>
+              • Music library<br>
+              • Export presets (9:16, 30fps)
+            </td>
+            <td>Full access (desktop app or web)</td>
+          </tr>
+          <tr>
+            <td><strong>Adobe Premiere Pro</strong><br><small>(Optional)</small></td>
+            <td>Advanced editing for complex projects</td>
+            <td>
+              • Multi-track timeline<br>
+              • Advanced color grading<br>
+              • Audio mixing<br>
+              • Lumetri Color panel
+            </td>
+            <td>Full access (if licensed)</td>
+          </tr>
+          <tr>
+            <td><strong>ClickUp</strong></td>
+            <td>Task tracking, status transitions, queue management</td>
+            <td>
+              <strong>Space:</strong> "Creative Production"<br>
+              <strong>Folder:</strong> "UGC Editing"<br>
+              <strong>Lists:</strong> "Editing Queue", "In Progress", "QA Review", "Revision Needed"<br>
+              <strong>Views:</strong> List view (default), Board view (Kanban), Gantt (deadlines)
+            </td>
+            <td>Editor (can edit tasks assigned to you)</td>
+          </tr>
+          <tr>
+            <td><strong>Notion</strong></td>
+            <td>Asset metadata tracking, product context lookup</td>
+            <td>
+              <strong>DBs:</strong><br>
+              • "Creative Assets" (asset inventory)<br>
+              • "Product Packets" (product details)<br>
+              <strong>Views:</strong><br>
+              • "Pending QA" (Status = Pending QA)<br>
+              • "Approved" (Status = Approved)<br>
+              • "My Assets" (Filter: Created_By = You)
+            </td>
+            <td>Editor (can create/edit entries in designated DBs)</td>
+          </tr>
+          <tr>
+            <td><strong>Google Drive</strong></td>
+            <td>File storage (raw assets, finished assets, briefs)</td>
+            <td>
+              <strong>Key Folders:</strong><br>
+              • /Raw_Assets/[Product_ID]/<br>
+              • /Creative_Assets/[Product_ID]/<br>
+              • /Creative_Briefs/<br>
+              <strong>File Types:</strong> MP4 (video), PNG/JPG (images), PDF (briefs)
+            </td>
+            <td>Editor (can upload/download in designated folders)</td>
+          </tr>
+          <tr>
+            <td><strong>Discord</strong></td>
+            <td>Communication, handoffs, notifications</td>
+            <td>
+              <strong>Channels:</strong><br>
+              • #p2-creative-queue (intake)<br>
+              • #p2-asset-delivery (handoffs to QA)<br>
+              • #p2-revisions (QA feedback loop)<br>
+              • #p2-general (team updates)<br>
+              <strong>Best Practices:</strong> Use threads for long discussions, react with emojis to acknowledge, tag roles (@P2-CR-QA) not individuals
+            </td>
+            <td>Member (can read/post in P2 channels)</td>
+          </tr>
+          <tr>
+            <td><strong>Music Libraries</strong><br><small>(Epidemic Sound, Artlist, etc.)</small></td>
+            <td>Royalty-free music for video backgrounds</td>
+            <td>
+              • Search by mood/genre<br>
+              • Download tracks (MP3/WAV)<br>
+              • Sync to video timeline<br>
+              <strong>License:</strong> Ensure DriveOn Commerce account is active
+            </td>
+            <td>User (can download and use tracks)</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h3>Tool Access Setup (Onboarding)</h3>
+      <p>On your first day, you should receive access invitations to:</p>
+      <ul>
+        <li>ClickUp: Invitation to "DriveOn Commerce" workspace, assigned to "Creative Production" space</li>
+        <li>Notion: Invitation to DriveOn Notion workspace, granted Editor access to "Creative Assets" and "Product Packets" DBs</li>
+        <li>Google Drive: Shared drive access to /Raw_Assets/, /Creative_Assets/, /Creative_Briefs/</li>
+        <li>Discord: Invite link to DriveOn server, assigned "P2 Creative" role (grants access to P2 channels)</li>
+        <li>CapCut: Create account using company email, license key provided (if applicable)</li>
+        <li>Music Library: Login credentials provided by Pod 2 Lead or Ops</li>
+      </ul>
+      
+      <p><strong>If any access is missing:</strong> Ping Pod 2 Lead in #p2-general immediately. Do not wait. Access issues block onboarding.</p>
+      
+      <h3>Tool-Specific Training Resources</h3>
+      <ul>
+        <li><strong>CapCut:</strong> Internal video tutorial library in Notion (link: [to be added by Pod 2 Lead])</li>
+        <li><strong>ClickUp:</strong> DriveOn-specific workflow guide in Notion → "Ops Docs" → "ClickUp SOP"</li>
+        <li><strong>Notion:</strong> DB schema docs in Notion → "Ops Docs" → "Notion Blueprint"</li>
+        <li><strong>UGC Editing Best Practices:</strong> Internal "Creative Playbook" in Notion (curated examples, dos/don'ts)</li>
+      </ul>
+    </div>
+    
+    <!-- 10. ESCALATION & DECISION RIGHTS -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">10. Escalation & Decision Rights</div>
+        <div class="section-subtitle">What you can decide alone, and when to escalate</div>
+      </div>
+      
+      <h3>Decisions You Can Make Independently</h3>
+      <p>You have <strong>full authority</strong> to make these decisions without approval:</p>
+      <ul>
+        <li><strong>Editing techniques:</strong> Cut styles, pacing choices, transition effects (as long as UGC aesthetic is maintained)</li>
+        <li><strong>On-screen text placement:</strong> Where and how to position text overlays (as long as legible and brand-compliant)</li>
+        <li><strong>Music selection:</strong> Choose tracks from approved library based on brief mood requirements</li>
+        <li><strong>Creative interpretation:</strong> How to execute brief details (e.g., if brief says "energetic hook," you decide the specific execution)</li>
+        <li><strong>Variant sequencing:</strong> Order in which you tackle editing queue (within priority constraints)</li>
+        <li><strong>Self-QA standards:</strong> Your personal quality checklist can be stricter than the baseline (but not looser)</li>
+        <li><strong>Minor revisions:</strong> Typo fixes, small audio adjustments, re-exports due to technical issues</li>
+      </ul>
+      
+      <h3>Decisions Requiring Pod 2 Lead Approval</h3>
+      <p>You must <strong>escalate and get approval</strong> for:</p>
+      <ul>
+        <li><strong>Deviating from brief:</strong> If you believe the brief's creative direction won't work, escalate before making major changes</li>
+        <li><strong>Brand guideline edge cases:</strong> If unsure whether something violates L2-08 Master Brand Platform, ask before proceeding</li>
+        <li><strong>Missed deadlines:</strong> If you cannot meet a P1 launch deadline, escalate immediately (as soon as you know, not when it's too late)</li>
+        <li><strong>WIP cap overrun:</strong> If queue depth forces you over WIP limits, escalate to discuss prioritization or resource allocation</li>
+        <li><strong>Tool/workflow changes:</strong> If you want to adopt a new tool or significantly change workflow, propose via Pod 2 Lead (not unilaterally)</li>
+        <li><strong>Quality vs speed tradeoffs:</strong> If hitting throughput targets requires compromising quality, escalate to discuss acceptable tradeoffs</li>
+      </ul>
+      
+      <h3>Decisions Requiring Founder / Canon Owner Approval</h3>
+      <p>The following are <strong>never</strong> decided at your level or even Pod Lead level—these require L0/L1 canon changes:</p>
+      <ul>
+        <li>Changing testing budgets or gate definitions</li>
+        <li>Altering WIP caps or throughput targets</li>
+        <li>Introducing new core tools (e.g., replacing ClickUp with Asana)</li>
+        <li>Modifying brand positioning or creative guardrails</li>
+      </ul>
+      <p>If you believe such changes are needed, you can propose them, but they go through the Canon Change Request (CCR) process, not operational decision flow.</p>
+      
+      <h3>Escalation SLAs (Expected Response Times)</h3>
+      <table class="meta-table">
+        <tr>
+          <th style="width: 30%;">Issue Type</th>
+          <th style="width: 25%;">Escalation Channel</th>
+          <th style="width: 25%;">Expected Response Time</th>
+          <th style="width: 20%;">Fallback if No Response</th>
+        </tr>
+        <tr>
+          <td><strong>Urgent (P1 launch blocked)</strong></td>
+          <td>Discord DM to Pod 2 Lead + ping in #p2-general</td>
+          <td><2 hours</td>
+          <td>Ping founder in #leadership if >2 hours no response</td>
+        </tr>
+        <tr>
+          <td><strong>High Priority (QA dispute)</strong></td>
+          <td>Discord thread in #p2-revisions, tag Pod 2 Lead</td>
+          <td><4 hours</td>
+          <td>DM Pod 2 Lead directly if no thread response</td>
+        </tr>
+        <tr>
+          <td><strong>Standard (workflow question)</strong></td>
+          <td>Discord #p2-general or DM to Pod 2 Lead</td>
+          <td><24 hours</td>
+          <td>Post again next day if no response</td>
+        </tr>
+        <tr>
+          <td><strong>Non-Urgent (improvement idea)</strong></td>
+          <td>Weekly team meeting or Notion "Ideas" DB</td>
+          <td><1 week</td>
+          <td>Bring up in next 1:1 with Pod 2 Lead</td>
+        </tr>
+      </table>
+      
+      <h3>Escalation Communication Template</h3>
+      <p>When escalating, use this structure:</p>
+      <div class="prompt-box">🚨 ESCALATION – [Issue Type]
+
+Context:
+[1–2 sentences: what you were working on]
+
+Problem:
+[1–2 sentences: what's blocking you or what decision you need]
+
+Impact:
+[1 sentence: what happens if not resolved]
+
+What I've Tried:
+[Bullet list: steps you took to resolve before escalating]
+
+Request:
+[Specific ask: approval, guidance, resources, etc.]
+
+Urgency:
+[Urgent / High / Standard]</div>
+      
+      <div class="callout">
+        <strong>Escalation is not failure.</strong> Recognizing when you need help or approval is a core competency. Escalate early, escalate clearly, and never let pride block you from asking.
+      </div>
+    </div>
+    
+    <!-- 11. ONBOARDING CHECKLIST -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">11. Onboarding Checklist</div>
+        <div class="section-subtitle">First 30 days: from zero to independent execution</div>
+      </div>
+      
+      <h3>Week 1: Orientation & Tool Access</h3>
+      <h4>Days 1–2: Context & Canon</h4>
+      <ul class="checklist">
+        <li>Read L0-01 (DriveOn Holdings Charter) for company context</li>
+        <li>Read L0-02 (Product & Brand Architecture) for brand hierarchy</li>
+        <li>Read L1-01 (CaniCol Model v4.0) for economic model and testing philosophy</li>
+        <li>Read L2-08 (Master Brand Platform & Creative Guardrails) for creative dos/don'ts</li>
+        <li>Watch "DriveOn 101" video (internal onboarding, link in Notion)</li>
+        <li>Shadow Pod 2 Lead for 2 hours: observe creative review meeting, ask questions</li>
+      </ul>
+      
+      <h4>Days 3–5: Tool Setup & Training</h4>
+      <ul class="checklist">
+        <li>Receive access to ClickUp, Notion, Google Drive, Discord (confirm in #p2-general)</li>
+        <li>Install CapCut (desktop app preferred for speed)</li>
+        <li>Complete CapCut tutorial: "UGC Editing Fundamentals" (internal doc in Notion)</li>
+        <li>Watch 5 example UGC ads from "Creative Playbook" in Notion, note what makes them effective</li>
+        <li>Practice edit: Take provided raw assets, follow sample brief, produce 1 test asset (not for delivery, just skill check)</li>
+        <li>Submit practice asset to Pod 2 Lead for feedback (no pressure, just learning)</li>
+      </ul>
+      
+      <h3>Week 2: Supervised Execution</h3>
+      <h4>Days 6–10: First Real Edits (Supervised)</h4>
+      <ul class="checklist">
+        <li>Assigned 2–3 real products (low-priority P1 tests, not launch-critical)</li>
+        <li>Edit 6–9 assets (2–3 variants per product) with Pod 2 Lead or senior editor available for questions</li>
+        <li>Submit assets to QA (normal handoff process)</li>
+        <li>Receive QA feedback, make revisions (Pod 2 Lead reviews your revision approach)</li>
+        <li>Debrief with Pod 2 Lead: what went well, what to improve</li>
+        <li>Goal: Complete full workflow end-to-end with safety net</li>
+      </ul>
+      
+      <h3>Week 3: Semi-Independent Execution</h3>
+      <h4>Days 11–15: Increased Volume, Less Oversight</h4>
+      <ul class="checklist">
+        <li>Assigned 4–5 products (mix of P1 and P2)</li>
+        <li>Edit 12–15 assets with minimal supervision (Pod 2 Lead available for questions, but not actively shadowing)</li>
+        <li>Begin building personal editing speed: aim for <20 min per standard UGC edit</li>
+        <li>Self-track KPIs: count assets delivered, note QA pass/fail rate</li>
+        <li>Mid-week check-in with Pod 2 Lead: review first-pass rate, discuss bottlenecks</li>
+      </ul>
+      
+      <h3>Week 4: Full Independence & First KPI Review</h3>
+      <h4>Days 16–20: Operating Independently</h4>
+      <ul class="checklist">
+        <li>Assigned normal weekly volume: 6–8 products, target 20–25 assets</li>
+        <li>Manage your own queue prioritization (Pod 2 Lead spot-checks, doesn't micromanage)</li>
+        <li>Handle revisions independently (escalate only if QA feedback is unclear or you disagree)</li>
+        <li>Post daily standups in #p2-creative-queue without being prompted</li>
+        <li>Track your own WIP limits: ensure you're not overloading "In Progress"</li>
+      </ul>
+      
+      <h4>Day 21–22: 30-Day Review</h4>
+      <ul class="checklist">
+        <li>1:1 with Pod 2 Lead: formal review of first month performance</li>
+        <li>Review KPIs: Assets delivered, QA first-pass rate, turnaround time, revision rate</li>
+        <li>Discuss strengths and improvement areas</li>
+        <li>Set goals for Month 2: skill development targets (e.g., improve editing speed, reduce revision rate)</li>
+        <li>Clarify any lingering questions about workflows, tools, or expectations</li>
+      </ul>
+      
+      <h3>Onboarding Success Criteria</h3>
+      <p>By end of Week 4, you should be able to:</p>
+      <div class="callout">
+        <strong>✓ Competency Checklist:</strong>
+        <ul>
+          <li>Independently process daily asset queue (prioritize, download, stage)</li>
+          <li>Edit 3–5 UGC-style video assets per day without supervision</li>
+          <li>Follow file naming conventions and workspace bindings without errors</li>
+          <li>Hand off assets to QA with complete metadata and correct status transitions</li>
+          <li>Respond to QA revisions within 24 hours</li>
+          <li>Maintain WIP limits without being reminded</li>
+          <li>Communicate proactively in Discord (standups, escalations)</li>
+          <li>Understand when to escalate vs decide independently</li>
+          <li>Deliver 20–25 assets in Week 4 (approaching full throughput target)</li>
+        </ul>
+      </div>
+      
+      <p><strong>If you're struggling with any of the above by end of Week 4:</strong> That's okay. Escalate to Pod 2 Lead. Onboarding can be extended, or additional training can be provided. The goal is competency, not speed.</p>
+    </div>
+    
+    <!-- 12. CHANGE LOG -->
+    <div class="card">
+      <div class="card-header">
+        <div class="section-title">12. Change Log</div>
+        <div class="section-subtitle">Version history and SOP updates</div>
+      </div>
+      
+      <table class="changelog-table">
+        <thead>
+          <tr>
+            <th style="width: 12%;">Version</th>
+            <th style="width: 15%;">Date</th>
+            <th style="width: 20%;">Author</th>
+            <th style="width: 53%;">Changes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1.0</strong></td>
+            <td>December 8, 2025</td>
+            <td>DriveOn SOP Factory (Claude v4)</td>
+            <td>
+              <strong>Initial Release</strong><br>
+              • Created comprehensive SOP for P2-CR-VOLEDIT role<br>
+              • Defined 5 core workflows with explicit handoffs<br>
+              • Established KPIs and quality bar aligned with CaniCol v4.0 economics<br>
+              • Documented AI usage patterns and tool stack<br>
+              • Built 30-day onboarding checklist<br>
+              • Integrated with L0–L3 canon (Holdings, CaniCol, Testing Canon, Master Brand Platform, OS Data Model)<br>
+              • Bound workflows to ClickUp, Notion, Drive, and Discord infra
+            </td>
+          </tr>
+          <tr>
+            <td colspan="4" style="text-align: center; color: #999; font-style: italic; padding: 20px;">Future versions will be logged here as canon updates or workflow improvements are made.</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <h3>How to Propose SOP Updates</h3>
+      <p>If you identify improvements to this SOP (workflow optimizations, missing details, outdated info):</p>
+      <ol>
+        <li><strong>Document the issue:</strong> What's unclear, inefficient, or incorrect?</li>
+        <li><strong>Propose solution:</strong> What specific change would improve the SOP?</li>
+        <li><strong>Assess impact:</strong> Does this change affect other roles, pods, or canon docs?</li>
+        <li><strong>Submit to Pod 2 Lead:</strong> Post in #p2-general or bring up in weekly team meeting.</li>
+        <li><strong>Review & approval:</strong> Pod 2 Lead reviews, may escalate to Canon Owner if it impacts L0–L3.</li>
+        <li><strong>Update SOP:</strong> If approved, Pod 2 Lead or SOP Factory updates this doc, increments version, logs change.</li>
+      </ol>
+      
+      <div class="callout">
+        <strong>Living Document Philosophy:</strong> This SOP is v1.0, not v1.0 Forever. As DriveOn scales, tools evolve, and creative best practices shift, this document should be updated. Your field experience is valuable—speak up when you see gaps.
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="footer">
+    <p><strong>P2-CR-VOLEDIT-01 – Volume / UGC Editor SOP v1.0</strong></p>
+    <p>DriveOn Commerce | Pod 2 – Creative Factory | December 8, 2025</p>
+    <p style="margin-top: 12px; font-size: 12px; color: #999;">
+      This document is L4 implementation canon, governed by L0–L3 precedence.<br>
+      Unauthorized modifications prohibited. Propose changes via Pod 2 Lead.
+    </p>
+  </div>
+  
+</body>
+</html>

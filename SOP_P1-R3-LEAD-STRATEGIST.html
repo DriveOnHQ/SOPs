@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1-R3-LEAD-STRATEGIST | DriveOn Commerce SOP</title>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface: #FFFFFF;
+            --surface-alt: #F8F8F8;
+            --border: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-alt);
+        }
+        
+        header {
+            background: var(--carbon-black);
+            color: var(--surface);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .status-chip {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-active {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+        }
+        
+        nav {
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            position: fixed;
+            left: 0;
+            top: 120px;
+            width: 250px;
+            height: calc(100vh - 120px);
+            overflow-y: auto;
+            display: none;
+        }
+        
+        @media (min-width: 1024px) {
+            nav {
+                display: block;
+            }
+        }
+        
+        nav a {
+            display: block;
+            padding: 0.5rem 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        nav a:hover {
+            background: var(--surface-alt);
+            color: var(--drive-cyan);
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        @media (min-width: 1024px) {
+            main {
+                margin-left: 250px;
+            }
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--carbon-black) 0%, #2A2A2A 100%);
+            color: var(--surface);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .hero h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            color: var(--drive-cyan);
+        }
+        
+        .outcomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .outcome-chip {
+            background: rgba(0, 200, 200, 0.1);
+            border: 1px solid var(--drive-cyan);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .ownership {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(244, 232, 208, 0.1);
+            border-left: 4px solid var(--champagne);
+            border-radius: 4px;
+        }
+        
+        .ownership h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--champagne);
+        }
+        
+        .ownership ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .ownership li:before {
+            content: "→ ";
+            color: var(--champagne);
+            font-weight: bold;
+        }
+        
+        section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--carbon-black);
+            border-bottom: 2px solid var(--drive-cyan);
+            padding-bottom: 0.5rem;
+        }
+        
+        section h3 {
+            font-size: 1.25rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--carbon-black);
+        }
+        
+        .why-matters {
+            background: var(--surface-alt);
+            padding: 1rem;
+            border-left: 4px solid var(--drive-cyan);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .callout {
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+        
+        .callout-constraint {
+            background: rgba(239, 68, 68, 0.05);
+            border-color: var(--danger);
+        }
+        
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.05);
+            border-color: var(--warning);
+        }
+        
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.05);
+            border-color: var(--success);
+        }
+        
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        th {
+            background: var(--surface-alt);
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+        
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .timeline-block {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 1.5rem;
+            padding: 1rem;
+            background: var(--surface-alt);
+            border-radius: 8px;
+        }
+        
+        .timeline-time {
+            font-weight: 700;
+            color: var(--drive-cyan);
+            font-size: 0.9rem;
+        }
+        
+        .timeline-content h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .wip-strip {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        
+        .wip-badge {
+            padding: 0.5rem 1rem;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .handoff-card {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .handoff-flow {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .handoff-role {
+            padding: 0.5rem 1rem;
+            background: var(--carbon-black);
+            color: var(--surface);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 1.5rem;
+        }
+        
+        code {
+            background: var(--surface-alt);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: "Courier New", monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: var(--carbon-black);
+            color: var(--surface);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--drive-cyan);
+        }
+        
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
+            color: var(--drive-cyan);
+        }
+        
+        details {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        summary {
+            padding: 1rem;
+            background: var(--surface-alt);
+            cursor: pointer;
+            font-weight: 600;
+            user-select: none;
+        }
+        
+        summary:hover {
+            background: var(--border);
+        }
+        
+        details[open] summary {
+            border-bottom: 1px solid var(--border);
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+        }
+        
+        details .details-content {
+            padding: 1rem;
+        }
+        
+        .mermaid {
+            background: var(--surface);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>P1-R3-LEAD-STRATEGIST</h1>
+        <div class="header-meta">
+            <span><strong>Role:</strong> Lead Product Strategist & Early Trend Specialist</span>
+            <span><strong>Pod:</strong> P1 — Product Intelligence</span>
+            <span><strong>Status:</strong> <span class="status-chip status-active">Active</span></span>
+            <span><strong>Version:</strong> 1.0</span>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="#hero">Role Overview</a>
+        <a href="#context">Purpose & Context</a>
+        <a href="#constraints">Canon Constraints</a>
+        <a href="#day-in-life">Day-in-the-Life</a>
+        <a href="#workflows">Core Workflows</a>
+        <a href="#handoffs">Handoffs & Interfaces</a>
+        <a href="#kpis">KPIs & Quality Bar</a>
+        <a href="#ai-usage">AI Usage</a>
+        <a href="#tools">Tools & Systems</a>
+        <a href="#escalation">Escalation</a>
+        <a href="#onboarding">Onboarding</a>
+        <a href="#changelog">Change Log</a>
+    </nav>
+    
+    <main>
+        <div class="hero" id="hero">
+            <h2>Lead Product Strategist & Early Trend Specialist</h2>
+            <p><strong>Role ID:</strong> P1-R3-LEAD-STRATEGIST | <strong>FTE:</strong> 1.0 | <strong>Cross-Pod:</strong> Yes</p>
+            <p style="margin-top: 1rem;">You are the final decision-maker at R3, the gateway to P1 testing. You own the macro product mix, balancing workhorse candidates with early trend bets to maximize the 4-6% hit rate while protecting the $4,000-$5,500/month test bank.</p>
+            
+            <div class="outcomes">
+                <div class="outcome-chip">40-60 R3 Approvals/Month</div>
+                <div class="outcome-chip">3-5 Early Trend Bets/Week</div>
+                <div class="outcome-chip">Portfolio Diversity Guardian</div>
+                <div class="outcome-chip">P1_PASS Rate Optimizer</div>
+            </div>
+            
+            <div class="ownership">
+                <h3>You Own</h3>
+                <ul>
+                    <li>Final Go/No-Go on all products entering P1 testing</li>
+                    <li>Strategic product mix across risk profiles (safe/trend/experimental)</li>
+                    <li>R3 gate quality and prioritization</li>
+                    <li>Pod 1 throughput discipline (10-15 R3 decisions/week)</li>
+                </ul>
+            </div>
+        </div>
+        
+        <section id="context">
+            <h2>1. Role Purpose & Context</h2>
+            <div class="why-matters">
+                <strong>Why This Role Exists:</strong> DriveOn's CaniCol v4.0 model runs 45-60 products/month through P1/P2 at $80-100 per product to find 2-4 winners monthly (4-6% hit rate). The R3 gate is the last research checkpoint before paid spend begins. Your strategic curation prevents false positives (weak products burning test budget) and optimizes for the right portfolio mix.
+            </div>
+            
+            <h3>Mission Statement</h3>
+            <p>Generate a predictable flow of <strong>10-15 R3-approved packets per week</strong> (40-60/month) that:</p>
+            <ul>
+                <li>Meet minimum P1 viability standards</li>
+                <li>Balance proven workhorse patterns with early trend opportunities</li>
+                <li>Maximize downstream P1_PASS rate through strategic selection</li>
+                <li>Feed Pod 2 (Creative) and Pod 3 (Media) with clear, actionable packets</li>
+            </ul>
+            
+            <h3>Strategic Context</h3>
+            <p><strong>L0 Holdings:</strong> DriveOn Commerce operates as the lean-volume dropshipping engine within DriveOn Holdings, using systematic testing to validate products before brand investment.</p>
+            <p><strong>L1 Model:</strong> CaniCol v4.0 emphasizes capital efficiency, kill discipline (70-80% die at P1), and portfolio thinking over individual product heroics.</p>
+            <p><strong>L2 Pods:</strong> You bridge Pod 1 (research) with Pod 2 (creative) and Pod 3 (testing), ensuring only qualified products consume creative capacity and test budget.</p>
+        </section>
+        
+        <section id="constraints">
+            <h2>2. Canon Constraints</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> These constraints protect the economic model. Violating them creates downstream chaos (creative bottlenecks, budget overruns, missed KPIs).
+            </div>
+            
+            <div class="callout callout-constraint">
+                <div class="callout-title">⚖️ Economic Invariants (L1-01, L2-05)</div>
+                <ul>
+                    <li><strong>Testing Volume:</strong> 45-60 products/month reach P1/P2 (10-15/week target)</li>
+                    <li><strong>P1 Budget:</strong> $40-60 per product</li>
+                    <li><strong>P1+P2 Total:</strong> $70-120 per product (standard: $80-100)</li>
+                    <li><strong>Test Bank:</strong> $4,000-5,500/month total P1+P2 spend</li>
+                    <li><strong>Hit Rate:</strong> 4-6% winners (~2-4 products/month pass P2)</li>
+                    <li><strong>Kill Rate:</strong> 70-80% die at P1 within 24-48 hours</li>
+                </ul>
+            </div>
+            
+            <div class="callout callout-constraint">
+                <div class="callout-title">⚖️ WIP & Throughput (L2-03)</div>
+                <div class="wip-strip">
+                    <div class="wip-badge">R3 Review WIP: ≤10-15 packets</div>
+                    <div class="wip-badge">Weekly Output: 10-15 R3 approvals</div>
+                    <div class="wip-badge">Early Trends: 3-5/week minimum</div>
+                </div>
+                <p style="margin-top: 1rem;"><strong>No exceptions.</strong> If R3 queue exceeds 15, you must expedite kill decisions or escalate capacity issues to Integrator.</p>
+            </div>
+            
+            <div class="callout callout-constraint">
+                <div class="callout-title">⚖️ R3 Pass Criteria (Minimum Bar)</div>
+                <p>A product must meet ALL of these to pass R3:</p>
+                <ul>
+                    <li><strong>Market Viability:</strong> Clear demand signals (ads performing, social proof exists)</li>
+                    <li><strong>Unit Economics:</strong> AOV projection ≥$35, estimated CAC ≤0.5×AOV possible</li>
+                    <li><strong>Supplier Ready:</strong> 2+ viable suppliers, lead time ≤7 days, pricing supports margins</li>
+                    <li><strong>Angle Clarity:</strong> 2-3 distinct hooks/angles documented for Pod 2</li>
+                    <li><strong>Risk Assessment:</strong> No red flags (compliance, IP, logistics disasters)</li>
+                    <li><strong>Packet Complete:</strong> All R3 packet sections filled per template</li>
+                </ul>
+            </div>
+            
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Common Failure Modes</div>
+                <ul>
+                    <li><strong>Over-optimization paralysis:</strong> Waiting for "perfect" packets kills throughput</li>
+                    <li><strong>Trend-chasing without discipline:</strong> Approving hype products without viability checks</li>
+                    <li><strong>Monotonous portfolio:</strong> All "safe" products = missed upside from trends</li>
+                    <li><strong>Gut-feel overrides:</strong> Ignoring data because product "feels" good</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="day-in-life">
+            <h2>3. Day-in-the-Life Timeline</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> Your day is structured around decision velocity. R3 is a bottleneck if decisions drag; speed with quality is the skill.
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-block">
+                    <div class="timeline-time">08:00 - 09:00<br>Morning Setup</div>
+                    <div class="timeline-content">
+                        <h4>Pipeline Review & Prioritization</h4>
+                        <ul>
+                            <li>Review overnight updates in ClickUp R3 Approved Packets list</li>
+                            <li>Check Notion Product Packets DB for new R2→R3 submissions</li>
+                            <li>Scan Discord #p1-research-updates for flags or questions</li>
+                            <li>Pull weekly throughput dashboard: are we on pace for 10-15 approvals this week?</li>
+                            <li>Identify today's 3-5 packets to review (mix of ready + high-priority)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-block">
+                    <div class="timeline-time">09:00 - 11:30<br>Core Review</div>
+                    <div class="timeline-content">
+                        <h4>R3 Packet Evaluation (Deep Work)</h4>
+                        <ul>
+                            <li>Review 3-5 packets using R3 Decision Framework (see Workflows)</li>
+                            <li>Each packet takes 20-40 minutes depending on complexity</li>
+                            <li>Make Go/No-Go/Revise decision and log rationale in Notion</li>
+                            <li>For Go: update status to R3_APPROVED, assign to Pod 2 Creative Director</li>
+                            <li>For No-Go: document kill reason, update to R3_REJECTED</li>
+                            <li>For Revise: tag researcher, specify what's missing, set to R2_REVISION</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-block">
+                    <div class="timeline-time">11:30 - 12:00<br>Trend Hunting</div>
+                    <div class="timeline-content">
+                        <h4>Early Signal Scanning</h4>
+                        <ul>
+                            <li>TikTok Creative Center: scan top ads in target niches</li>
+                            <li>Minea: check newly trending products (7-day velocity)</li>
+                            <li>Creative Intel feed from P1-R0-CREATIVE-INTEL</li>
+                            <li>Identify 1-2 early trend candidates for fast-track R1→R2→R3</li>
+                            <li>Brief researchers on priority trend products</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-block">
+                    <div class="timeline-time">12:00 - 13:00<br>Lunch / Async</div>
+                    <div class="timeline-content">
+                        <h4>Break & Catch-Up</h4>
+                        <p>Respond to Slack/Discord questions, review lightweight docs, handle admin.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-block">
+                    <div class="timeline-time">13:00 - 15:00<br>Portfolio Work</div>
+                    <div class="timeline-content">
+                        <h4>Strategic Portfolio Management</h4>
+                        <ul>
+                            <li>Review this week's approved product mix: risk profile distribution check</li>
+                            <li>Target mix: 60% proven patterns, 30% trend bets, 10% experimental</li>
+                            <li>Adjust next-week prioritization to balance portfolio</li>
+                            <li>Weekly sync with Pod 3 Media Buyers: what's passing P1? Feedback loop</li>
+                            <li>Update R3 prioritization list for researchers (which niches to focus)</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-block">
+                    <div class="timeline-time">15:00 - 16:30<br>Cross-Pod Coordination</div>
+                    <div class="timeline-content">
+                        <h4>Handoffs & Communication</h4>
+                        <ul>
+                            <li>Pod 2 Creative Director: discuss upcoming R3 packets, creative capacity check</li>
+                            <li>Pod 1 Researchers: feedback on recent packets, pattern sharing</li>
+                            <li>Handle escalations: borderline products, trend urgency decisions</li>
+                            <li>Discord notifications: announce new R3 approvals to #p2-creative-briefs</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-block">
+                    <div class="timeline-time">16:30 - 17:00<br>EOD Admin</div>
+                    <div class="timeline-content">
+                        <h4>Close & Plan Tomorrow</h4>
+                        <ul>
+                            <li>Update ClickUp: all reviewed packets have final status</li>
+                            <li>Log decisions in Notion change log</li>
+                            <li>Queue tomorrow's review list (3-5 packets)</li>
+                            <li>Quick weekly throughput check: still on pace for 10-15 approvals?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="workflows">
+            <h2>4. Core Workflows</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> These workflows are your decision engines. Follow them to maintain consistency and speed.
+            </div>
+            
+            <details>
+                <summary>Workflow 1: R3 Packet Evaluation (Go/No-Go Decision)</summary>
+                <div class="details-content">
+                    <h4>Trigger</h4>
+                    <p>Researcher moves packet from R2_COMPLETE to R3_REVIEW in ClickUp and Notion</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li><strong>Notion:</strong> Product Packets DB, packet ID PRD-YYYYMMDD-XXX, status = R3_REVIEW</li>
+                        <li><strong>ClickUp:</strong> Task in P1 → Research Pipeline → R3 Approved Packets list</li>
+                        <li><strong>Drive:</strong> Supplier docs, competitor screenshots in /Product Research/R2_Deep_Research/PRD-XXX/</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Open packet in Notion Product Packets DB</strong>
+                            <ul>
+                                <li>Scan sections: Offer Summary, Angles/Hooks, Supplier Options, Risk Assessment, Creative Notes</li>
+                                <li>Check for completeness: all sections filled, no placeholders</li>
+                            </ul>
+                        </li>
+                        <li><strong>Evaluate Market Viability (5-10 min)</strong>
+                            <ul>
+                                <li>Review demand signals: are there active ads? TikTok videos? Social proof?</li>
+                                <li>Check competitor performance data: CTR estimates, engagement</li>
+                                <li>Ask: "Is there evidence people want this right now?"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Evaluate Unit Economics (5-10 min)</strong>
+                            <ul>
+                                <li>AOV projection: is it ≥$35? (Below $35 rarely passes P1 economically)</li>
+                                <li>Estimated CAC: based on niche CPCs, can we hit CAC ≤0.5×AOV?</li>
+                                <li>Margin check: supplier cost + shipping ≤ 30% of AOV?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Evaluate Supplier Readiness (3-5 min)</strong>
+                            <ul>
+                                <li>2+ suppliers listed with pricing and lead times?</li>
+                                <li>Lead time ≤7 days? (Longer = P1 fulfillment risk)</li>
+                                <li>Any supplier red flags? (bad reviews, MOQ issues)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Evaluate Angle Clarity (5-10 min)</strong>
+                            <ul>
+                                <li>Are 2-3 distinct hooks/angles documented?</li>
+                                <li>Are they specific enough for Pod 2 to create 4-6 creatives?</li>
+                                <li>Do angles align with Creative Intel patterns?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Risk Assessment (3-5 min)</strong>
+                            <ul>
+                                <li>Check for red flags: IP issues, compliance (FDA, FTC), logistics nightmares</li>
+                                <li>If ANY red flag = auto-reject unless Tier S candidate</li>
+                            </ul>
+                        </li>
+                        <li><strong>Make Decision</strong>
+                            <ul>
+                                <li><strong>GO (R3_APPROVED):</strong> Meets all criteria → proceed to step 8</li>
+                                <li><strong>NO-GO (R3_REJECTED):</strong> Fails critical criteria → proceed to step 9</li>
+                                <li><strong>REVISE (R2_REVISION):</strong> Fixable gaps → proceed to step 10</li>
+                            </ul>
+                        </li>
+                        <li><strong>If GO → Approve & Hand Off</strong>
+                            <ul>
+                                <li>Update Notion: Status = R3_APPROVED, Approved_By = Your Name, Approved_Date = Today</li>
+                                <li>Update ClickUp: Move task to P2 → Creative Pipeline → Briefs list</li>
+                                <li>Assign to P2-CR-DIRECTOR in ClickUp</li>
+                                <li>Discord notification: Post in #p2-creative-briefs with packet ID and link</li>
+                                <li>Add to your weekly R3 approval count tracker</li>
+                            </ul>
+                        </li>
+                        <li><strong>If NO-GO → Document & Kill</strong>
+                            <ul>
+                                <li>Update Notion: Status = R3_REJECTED, Rejection_Reason = [specific reason]</li>
+                                <li>Update ClickUp: Move to Closed/Killed status</li>
+                                <li>Tag researcher in ClickUp comment: "@Researcher - Killed at R3. Reason: [X]. Focus on [Y] instead."</li>
+                                <li>Log pattern in kill-reason tracker (for future research guidance)</li>
+                            </ul>
+                        </li>
+                        <li><strong>If REVISE → Return to R2</strong>
+                            <ul>
+                                <li>Update Notion: Status = R2_REVISION, Revision_Notes = [specific gaps]</li>
+                                <li>Update ClickUp: Move back to R2 Dossiers list</li>
+                                <li>Tag researcher: "@Researcher - R3 revise. Missing: [X, Y]. Expected back in 24-48h."</li>
+                                <li>Set reminder to follow up if not re-submitted in 48h</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul>
+                        <li>Every decision has documented rationale (no silent approvals/kills)</li>
+                        <li>Researcher gets actionable feedback within 24 hours</li>
+                        <li>R3 approval rate stays 40-60% (too high = low bar, too low = researcher churn)</li>
+                    </ul>
+                    
+                    <h4>Typical Cycle Time</h4>
+                    <p>20-40 minutes per packet (experienced strategist). Aim for 3-5 packets per day = 15-25 per week.</p>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Workflow 2: Early Trend Fast-Track</summary>
+                <div class="details-content">
+                    <h4>Trigger</h4>
+                    <p>You identify an emerging trend in TikTok/Minea/Creative Intel that needs fast R3 approval</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Trend signal source (TikTok Creative Center, Minea 7-day velocity, Creative Intel report)</li>
+                        <li>Product idea with minimal R1 validation</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Validate Trend Signal (10 min)</strong>
+                            <ul>
+                                <li>Is this product showing 5-10x growth in last 7 days?</li>
+                                <li>Are there 3+ successful ads in different accounts?</li>
+                                <li>Does it align with DriveOn's brand positioning?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Brief Researcher for Express R1→R2 (same day)</strong>
+                            <ul>
+                                <li>Slack/Discord: "@Researcher - URGENT TREND: [Product]. Need R2 packet by EOD. Focus: supplier + 2 angles."</li>
+                                <li>Set expectation: lightweight R2, just enough to pass R3 minimum bar</li>
+                            </ul>
+                        </li>
+                        <li><strong>Review Express Packet (end of day)</strong>
+                            <ul>
+                                <li>Apply R3 criteria but accept "good enough" on depth</li>
+                                <li>Priority: speed to P1 test before trend cools</li>
+                            </ul>
+                        </li>
+                        <li><strong>If Approved → Flag as EARLY_TREND</strong>
+                            <ul>
+                                <li>Add "EARLY_TREND" tag in ClickUp and Notion</li>
+                                <li>Hand off to Pod 2 with note: "Trend product - prioritize creative by [date]"</li>
+                                <li>Track separately: early trend bets should be 3-5/week minimum</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul>
+                        <li>Early trend bets are 3-5 per week (not 0, not 10)</li>
+                        <li>They still meet R3 minimum bar (not random hype products)</li>
+                        <li>Track their P1_PASS rate separately to validate strategy</li>
+                    </ul>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Workflow 3: Weekly Portfolio Mix Review</summary>
+                <div class="details-content">
+                    <h4>Trigger</h4>
+                    <p>Every Friday afternoon, review this week's R3 approvals for portfolio balance</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Notion Product Packets DB filtered by R3_APPROVED, This Week</li>
+                        <li>ClickUp R3 Approved Packets list</li>
+                        <li>Weekly throughput dashboard</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Count This Week's R3 Approvals</strong>
+                            <ul>
+                                <li>Target: 10-15 approvals</li>
+                                <li>If below 10 → identify bottleneck (researcher capacity? quality issues?)</li>
+                                <li>If above 15 → check if quality bar slipped (too easy to pass?)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Categorize by Risk Profile</strong>
+                            <ul>
+                                <li><strong>Proven Patterns:</strong> Products similar to past P1_PASS winners</li>
+                                <li><strong>Trend Bets:</strong> Early trend products</li>
+                                <li><strong>Experimental:</strong> New angles, untested niches</li>
+                                <li>Target mix: 60% proven, 30% trend, 10% experimental</li>
+                            </ul>
+                        </li>
+                        <li><strong>Check Niche Diversity</strong>
+                            <ul>
+                                <li>Are we over-indexed on one niche? (e.g., all beauty, no home goods)</li>
+                                <li>Flag for next week: "Need more [niche] candidates"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Review P1 Feedback Loop</strong>
+                            <ul>
+                                <li>Check last 2 weeks' P1 results: which R3 packets are passing P1?</li>
+                                <li>Identify patterns: what's working? What's dying at P1?</li>
+                                <li>Adjust next week's R3 selection criteria based on P1 data</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Researchers on Priorities</strong>
+                            <ul>
+                                <li>Slack #p1-research-updates: "Next week focus: [niche/pattern], reduce [overindexed area]"</li>
+                                <li>Share P1 learnings: "Last week's wins were [X pattern], let's find more"</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul>
+                        <li>Weekly R3 approval count is 10-15 (feeds 40-60/month target)</li>
+                        <li>Portfolio mix is balanced (not all safe, not all risky)</li>
+                        <li>P1_PASS rate is tracked and improving (target: 20-30% of R3 approvals pass P1)</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+        
+        <section id="handoffs">
+            <h2>5. Handoffs & Interface Specs</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> You sit at the crossroads of Pod 1, Pod 2, and Pod 3. Clean handoffs prevent bottlenecks and miscommunication.
+            </div>
+            
+            <h3>Upstream: Receiving from Researchers</h3>
+            <div class="handoff-card">
+                <div class="handoff-flow">
+                    <div class="handoff-role">P1-R2-CORE-RESEARCHER</div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-role">P1-R3-LEAD-STRATEGIST</div>
+                </div>
+                <h4>What You Receive</h4>
+                <ul>
+                    <li><strong>Artifact:</strong> R2-complete packet in Notion Product Packets DB</li>
+                    <li><strong>Status Transition:</strong> R2_COMPLETE → R3_REVIEW</li>
+                    <li><strong>ClickUp:</strong> Task in P1 → Research Pipeline → R3 Approved Packets (status: R3_REVIEW)</li>
+                    <li><strong>Notification:</strong> Discord #p1-research-updates: "New R3 packet ready: PRD-YYYYMMDD-XXX"</li>
+                </ul>
+                <h4>Minimum Quality Bar for Acceptance</h4>
+                <ul>
+                    <li>All Notion packet sections filled (no "TBD" or empty sections)</li>
+                    <li>2+ supplier options documented</li>
+                    <li>At least 2 creative angles proposed</li>
+                    <li>Drive folder has competitor screenshots</li>
+                </ul>
+                <h4>If Incomplete</h4>
+                <p>Immediately return to R2_REVISION with specific gaps documented. Do not accept incomplete packets "to be nice."</p>
+            </div>
+            
+            <h3>Downstream: Sending to Creative</h3>
+            <div class="handoff-card">
+                <div class="handoff-flow">
+                    <div class="handoff-role">P1-R3-LEAD-STRATEGIST</div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-role">P2-CR-DIRECTOR</div>
+                </div>
+                <h4>What You Send</h4>
+                <ul>
+                    <li><strong>Artifact:</strong> R3-approved packet in Notion Product Packets DB</li>
+                    <li><strong>Status Transition:</strong> R3_APPROVED</li>
+                    <li><strong>ClickUp:</strong> Task moved to P2 → Creative Pipeline → Briefs (assigned to P2-CR-DIRECTOR)</li>
+                    <li><strong>Notification:</strong> Discord #p2-creative-briefs with template below</li>
+                </ul>
+                <h4>Discord Notification Template</h4>
+                <pre><code>📦 New R3 Packet Approved
+Packet ID: PRD-20251210-042
+Product: [Product Name]
+Angles: [2-3 key hooks in 1 sentence each]
+Priority: [STANDARD / EARLY_TREND / URGENT]
+Creative Brief Target: [Date - typically 48h from approval]
+Notion: [Link to packet]
+ClickUp: [Link to task]
+
+@P2-CR-DIRECTOR ready for creative brief</code></pre>
+            </div>
+            
+            <h3>Cross-Pod: Feedback Loop with Media Buyers</h3>
+            <div class="handoff-card">
+                <div class="handoff-flow">
+                    <div class="handoff-role">P1-R3-LEAD-STRATEGIST</div>
+                    <div class="handoff-arrow">↔</div>
+                    <div class="handoff-role">P3-MB-BUYER</div>
+                </div>
+                <h4>Weekly P1 Results Review</h4>
+                <ul>
+                    <li><strong>Frequency:</strong> Every Monday morning, 30-minute sync</li>
+                    <li><strong>Agenda:</strong> Review last week's P1 results for products you approved 2-3 weeks ago</li>
+                    <li><strong>Data Shared:</strong> Which packets passed P1? Which died? Why?</li>
+                    <li><strong>Action:</strong> Adjust R3 selection criteria based on P1 patterns</li>
+                </ul>
+                <h4>Ad-Hoc Questions</h4>
+                <p>Media buyers may ask: "Why did we test this product?" or "Can you provide more context on angle X?"</p>
+                <p>Response SLA: Within 2 hours during work hours. Use Discord DM or #p3-media-questions channel.</p>
+            </div>
+        </section>
+        
+        <section id="kpis">
+            <h2>6. KPIs & Quality Bar</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> Your performance directly impacts the 4-6% winner rate. These KPIs track your strategic curation effectiveness.
+            </div>
+            
+            <h3>Primary KPIs (from L2-07)</h3>
+            <table>
+                <tr>
+                    <th>KPI</th>
+                    <th>Target</th>
+                    <th>Measurement Source</th>
+                    <th>Review Frequency</th>
+                </tr>
+                <tr>
+                    <td><strong>R3 Approvals/Month</strong></td>
+                    <td>40-60</td>
+                    <td>Notion Product Packets DB (Status = R3_APPROVED, This Month)</td>
+                    <td>Weekly</td>
+                </tr>
+                <tr>
+                    <td><strong>R3 Approvals/Week</strong></td>
+                    <td>10-15</td>
+                    <td>Notion Product Packets DB (Status = R3_APPROVED, This Week)</td>
+                    <td>Weekly</td>
+                </tr>
+                <tr>
+                    <td><strong>Early Trend Bets/Week</strong></td>
+                    <td>3-5</td>
+                    <td>ClickUp (Tasks tagged EARLY_TREND, This Week)</td>
+                    <td>Weekly</td>
+                </tr>
+                <tr>
+                    <td><strong>P1_PASS Rate (Downstream)</strong></td>
+                    <td>20-30%</td>
+                    <td>P1 test results for products you approved 2-3 weeks ago</td>
+                    <td>Monthly</td>
+                </tr>
+                <tr>
+                    <td><strong>Portfolio Diversity (Risk Mix)</strong></td>
+                    <td>60% proven, 30% trend, 10% experimental</td>
+                    <td>Manual categorization in weekly review</td>
+                    <td>Weekly</td>
+                </tr>
+                <tr>
+                    <td><strong>R3 Cycle Time</strong></td>
+                    <td>≤48 hours from R2_COMPLETE to R3 decision</td>
+                    <td>ClickUp task timestamps</td>
+                    <td>Weekly</td>
+                </tr>
+            </table>
+            
+            <h3>Qualitative Standards</h3>
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Good vs Bad R3 Decisions</div>
+                <h4>Good Decision Signs</h4>
+                <ul>
+                    <li>Clear documented rationale for every Go/No-Go</li>
+                    <li>Researchers get actionable feedback within 24h</li>
+                    <li>P1 results validate your risk assessments over time</li>
+                    <li>Creative Director rarely pushes back on packet clarity</li>
+                </ul>
+                <h4>Bad Decision Signs</h4>
+                <ul>
+                    <li>"I'll approve this even though supplier data is weak" → leads to P1 failures</li>
+                    <li>Approving trend products without minimum viability checks</li>
+                    <li>Letting packets sit in R3_REVIEW for 5+ days (throughput killer)</li>
+                    <li>All approvals look the same (no portfolio diversity)</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="ai-usage">
+            <h2>7. AI Usage & Prompt Patterns</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> AI accelerates research synthesis and decision documentation but cannot replace strategic judgment. Use it to augment, not replace, your expertise.
+            </div>
+            
+            <h3>Where AI Helps</h3>
+            <ul>
+                <li><strong>Packet Summary Review:</strong> Quickly extract key points from long R2 dossiers</li>
+                <li><strong>Angle Brainstorming:</strong> Generate additional hook ideas based on researcher's base angles</li>
+                <li><strong>Risk Assessment:</strong> Cross-check compliance or IP red flags</li>
+                <li><strong>Decision Documentation:</strong> Draft rejection reasons or revision notes</li>
+            </ul>
+            
+            <h3>Ready-to-Copy AI Prompts</h3>
+            
+            <details>
+                <summary>Prompt 1: R3 Packet Quick Summary</summary>
+                <div class="details-content">
+                    <pre><code>You are an expert dropshipping product strategist reviewing an R3 product packet for DriveOn Commerce.
+
+Extract the following from this packet:
+1. Product: [1 sentence description]
+2. Primary angle/hook: [1 sentence]
+3. Estimated AOV: $XX
+4. Top 2 suppliers: [Name, price, lead time]
+5. Key risk flags: [Any compliance, IP, logistics concerns]
+6. R3 readiness score: [1-10 with brief why]
+
+Packet content:
+[Paste Notion packet text here]
+
+Format as bullet points, maximum 200 words total.</code></pre>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Prompt 2: Generate Additional Angles</summary>
+                <div class="details-content">
+                    <pre><code>You are a creative strategist for DriveOn Commerce dropshipping.
+
+Product: [Product name/description]
+Existing angles from researcher:
+1. [Angle 1]
+2. [Angle 2]
+
+Generate 3 additional distinct angles/hooks for this product that:
+- Target different pain points or desires
+- Are specific enough for video ad scripts
+- Avoid clichés or overused patterns
+- Align with 2024-2025 TikTok/Meta ad trends
+
+Output format:
+- Angle 3: [Hook in 1 sentence]
+- Angle 4: [Hook in 1 sentence]  
+- Angle 5: [Hook in 1 sentence]</code></pre>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Prompt 3: Compliance/IP Risk Check</summary>
+                <div class="details-content">
+                    <pre><code>You are a compliance advisor for e-commerce dropshipping.
+
+Product: [Product name/description]
+Category: [e.g., beauty, health, electronics]
+
+Identify potential red flags in these areas:
+1. FDA/FTC regulations (health claims, testimonials)
+2. Intellectual property (brand names, patents, copyrights)
+3. Platform ad policy violations (restricted categories, misleading claims)
+4. Shipping/import restrictions (batteries, liquids, customs issues)
+
+For each area, respond:
+- Status: ✅ Clear / ⚠️ Caution / 🚫 High Risk
+- If caution/risk: specific concern in 1 sentence
+
+Maximum 150 words total.</code></pre>
+                </div>
+            </details>
+            
+            <h3>Human Checkpoints (Where AI Must Not Decide)</h3>
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Always Human Decision</div>
+                <ul>
+                    <li><strong>Final R3 Go/No-Go:</strong> AI can summarize, but YOU make the call</li>
+                    <li><strong>Portfolio Mix Strategy:</strong> AI doesn't understand macro context</li>
+                    <li><strong>Trend vs Fad Judgment:</strong> Requires market intuition AI lacks</li>
+                    <li><strong>Researcher Feedback:</strong> AI-generated criticism needs human tone-check</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="tools">
+            <h2>8. Tools & Systems Reference</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> You touch 5+ tools daily. Know exactly where data lives and which views to use.
+            </div>
+            
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>Use Case</th>
+                    <th>Key Views/Lists/Channels</th>
+                    <th>Access Level</th>
+                </tr>
+                <tr>
+                    <td><strong>Notion</strong></td>
+                    <td>R3 packet review, decision logging, packet editing</td>
+                    <td>
+                        • Product Packets DB (filter: R3_REVIEW)<br>
+                        • Canon & SOPs workspace (read-only)
+                    </td>
+                    <td>Editor on Product Packets DB</td>
+                </tr>
+                <tr>
+                    <td><strong>ClickUp</strong></td>
+                    <td>Task management, status transitions, assignments</td>
+                    <td>
+                        • P1 → Research Pipeline → R3 Approved Packets<br>
+                        • P2 → Creative Pipeline → Briefs (for handoffs)
+                    </td>
+                    <td>Admin on P1 space</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Drive</strong></td>
+                    <td>Supplier docs, competitor screenshots, reference materials</td>
+                    <td>
+                        • /DriveOn Commerce/Product Research/R2_Deep_Research/
+                    </td>
+                    <td>Editor</td>
+                </tr>
+                <tr>
+                    <td><strong>Discord</strong></td>
+                    <td>Cross-pod communication, R3 announcements</td>
+                    <td>
+                        • #p1-research-updates (upstream)<br>
+                        • #p2-creative-briefs (downstream)<br>
+                        • #p3-media-questions (feedback loop)
+                    </td>
+                    <td>Member</td>
+                </tr>
+                <tr>
+                    <td><strong>TikTok Creative Center</strong></td>
+                    <td>Trend hunting, ad performance benchmarks</td>
+                    <td>
+                        • Top Ads by niche<br>
+                        • 7-day trending products
+                    </td>
+                    <td>Self-serve (public)</td>
+                </tr>
+                <tr>
+                    <td><strong>Minea</strong></td>
+                    <td>Product discovery, competitor tracking</td>
+                    <td>
+                        • 7-day velocity filter<br>
+                        • Winning products by niche
+                    </td>
+                    <td>Team account</td>
+                </tr>
+            </table>
+        </section>
+        
+        <section id="escalation">
+            <h2>9. Escalation & Decision Rights</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> Know when to decide autonomously vs when to escalate. Speed requires clarity.
+            </div>
+            
+            <h3>You Decide Alone</h3>
+            <ul>
+                <li>Standard R3 Go/No-Go decisions within canon criteria</li>
+                <li>Which packets to prioritize this week</li>
+                <li>Feedback to researchers on packet quality</li>
+                <li>Minor adjustments to portfolio mix (e.g., "need more home goods")</li>
+                <li>Fast-tracking early trend products (within 3-5/week guideline)</li>
+            </ul>
+            
+            <h3>Escalate to Founder/Integrator</h3>
+            <ul>
+                <li>Proposed changes to R3 pass criteria or economic thresholds</li>
+                <li>Tier S candidates (rare, high-budget exceptions)</li>
+                <li>Major portfolio strategy shifts (e.g., "pause all beauty for 2 weeks")</li>
+                <li>WIP cap breaches that threaten throughput (R3 queue >15 for >3 days)</li>
+                <li>Researcher performance issues affecting R3 quality</li>
+            </ul>
+            
+            <h3>Collaborate with Pod Leads</h3>
+            <ul>
+                <li><strong>P2 Creative Director:</strong> When packet angles are unclear or creative capacity is constrained</li>
+                <li><strong>P3 Media Buyer Lead:</strong> When P1 results suggest R3 criteria need adjustment</li>
+                <li><strong>Pod 1 Researchers:</strong> When research patterns need strategic guidance</li>
+            </ul>
+            
+            <h3>Response Time Expectations</h3>
+            <table>
+                <tr>
+                    <th>Request Type</th>
+                    <th>Response SLA</th>
+                </tr>
+                <tr>
+                    <td>R3 packet review</td>
+                    <td>≤48 hours</td>
+                </tr>
+                <tr>
+                    <td>Researcher questions (Discord/Slack)</td>
+                    <td>≤4 hours during work hours</td>
+                </tr>
+                <tr>
+                    <td>Creative Director clarifications</td>
+                    <td>≤2 hours during work hours</td>
+                </tr>
+                <tr>
+                    <td>Urgent trend fast-track requests</td>
+                    <td>Same day</td>
+                </tr>
+            </table>
+        </section>
+        
+        <section id="onboarding">
+            <h2>10. Onboarding Checklist</h2>
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> This role requires strategic judgment built through pattern recognition. Onboarding focuses on building that judgment systematically.
+            </div>
+            
+            <h3>Week 1: Canon & Context</h3>
+            <ul class="checklist">
+                <li>Read L1-01 CaniCol Model v4.0 (economic model & philosophy)</li>
+                <li>Read L2-03 Role Registry & WIP Limits (your WIP caps, throughput targets)</li>
+                <li>Read L2-05 Testing Canon v4.0 (P1/P2/P3 pass/kill criteria)</li>
+                <li>Read L2-06 Scaling Tiers & P3 Strategy (what happens after P1_PASS)</li>
+                <li>Shadow current R3 Strategist: observe 5-10 R3 decisions with commentary</li>
+                <li>Review last month's R3 approvals in Notion: spot patterns in what passed</li>
+                <li>Set up access: Notion (Editor), ClickUp (Admin), Drive (Editor), Discord</li>
+            </ul>
+            
+            <h3>Week 2: Supervised Practice</h3>
+            <ul class="checklist">
+                <li>Review 5 R3 packets independently, write your decision + rationale</li>
+                <li>Compare your decisions to actual R3 Strategist decisions: discuss gaps</li>
+                <li>Attend weekly P1 results review with Media Buyers (observer mode)</li>
+                <li>Practice using R3 Decision Framework on 3 borderline packets</li>
+                <li>Draft your first Discord handoff notifications (reviewed before posting)</li>
+                <li>Learn TikTok Creative Center & Minea: run 3 trend-hunting sessions</li>
+            </ul>
+            
+            <h3>Week 3: First Independent Decisions</h3>
+            <ul class="checklist">
+                <li>Make your first 3 R3 Go/No-Go decisions independently (with spot-check)</li>
+                <li>Run your first weekly portfolio mix review (with coaching)</li>
+                <li>Identify and brief researchers on 1 early trend candidate</li>
+                <li>Give feedback to 2 researchers on packet quality</li>
+                <li>Post 3 Discord handoff notifications independently</li>
+                <li>Track your first week's throughput: did you hit 8-12 decisions?</li>
+            </ul>
+            
+            <h3>Week 4: Full Autonomy</h3>
+            <ul class="checklist">
+                <li>Own the entire R3 flow for the week (10-15 decisions target)</li>
+                <li>Run your first unsupervised weekly portfolio mix review</li>
+                <li>Fast-track 1 early trend product end-to-end</li>
+                <li>Handle your first cross-pod escalation or clarification request</li>
+                <li>Review your month's P1_PASS rate: on track for 20-30%?</li>
+                <li>30-day review meeting with Integrator: competency assessment</li>
+            </ul>
+            
+            <h3>Competency Milestones (30-Day Review)</h3>
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 You're Ready When...</div>
+                <ul>
+                    <li>You consistently hit 10-15 R3 decisions per week</li>
+                    <li>Your R3 approval rate is 40-60% (not too loose, not too tight)</li>
+                    <li>Researchers get actionable feedback within 24h</li>
+                    <li>Creative Director rarely needs clarification on your approved packets</li>
+                    <li>You can articulate portfolio mix rationale without prompting</li>
+                    <li>You identify 3-5 early trend candidates per week</li>
+                </ul>
+            </div>
+        </section>
+        
+        <section id="changelog">
+            <h2>11. Change Log</h2>
+            <table>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                    <th>Canon Trigger</th>
+                </tr>
+                <tr>
+                    <td>1.0</td>
+                    <td>2025-12-10</td>
+                    <td>DriveOn SOP Factory (Claude)</td>
+                    <td>Initial release based on v4.0 canon (L0-L3)</td>
+                    <td>
+                        • L1-01 CaniCol Model v4.0<br>
+                        • L2-03 Role Registry & WIP Limits v1<br>
+                        • L2-05 Testing Canon v4<br>
+                        • L2-06 Scaling Tiers v4.0
+                    </td>
+                </tr>
+            </table>
+        </section>
+        
+        <section>
+            <h2>Appendix: Visual Workflows</h2>
+            
+            <h3>R3 Pipeline Flow</h3>
+            <div class="mermaid">
+                <pre>
+graph TD
+    A[R2_COMPLETE Packet] --> B{R3 Strategist Review}
+    B -->|Meets Criteria| C[R3_APPROVED]
+    B -->|Critical Gaps| D[R3_REJECTED]
+    B -->|Fixable Issues| E[R2_REVISION]
+    
+    C --> F[Update Notion: R3_APPROVED]
+    C --> G[Move to P2 Creative Briefs]
+    C --> H[Discord Notification]
+    
+    D --> I[Document Kill Reason]
+    D --> J[Update ClickUp: Closed]
+    
+    E --> K[Tag Researcher with Gaps]
+    E --> L[Set 48h Follow-up]
+    
+    style C fill:#10B981
+    style D fill:#EF4444
+    style E fill:#F59E0B
+                </pre>
+            </div>
+            
+            <h3>Cross-Pod Handoff Swimlanes</h3>
+            <div class="mermaid">
+                <pre>
+graph TB
+    subgraph Pod1[Pod 1 - Research]
+        R1[R0-R1-R2 Researchers]
+        R2[R3 Lead Strategist]
+    end
+    
+    subgraph Pod2[Pod 2 - Creative]
+        C1[Creative Director]
+        C2[Video Editors]
+    end
+    
+    subgraph Pod3[Pod 3 - Media]
+        M1[Media Buyers]
+    end
+    
+    R1 -->|R2 Packet| R2
+    R2 -->|R3 Approved Packet| C1
+    C1 -->|4-6 Creatives| M1
+    M1 -->|P1 Results Feedback| R2
+    
+    style R2 fill:#00C8C8
+                </pre>
+            </div>
+            
+            <h3>Decision Tree: Go/No-Go at R3</h3>
+            <div class="mermaid">
+                <pre>
+graph TD
+    Start[R3 Packet Submitted] --> Q1{All Sections Complete?}
+    Q1 -->|No| Reject1[RETURN: R2_REVISION]
+    Q1 -->|Yes| Q2{Market Viability OK?}
+    
+    Q2 -->|No demand signals| Reject2[KILL: R3_REJECTED]
+    Q2 -->|Yes| Q3{Unit Economics Viable?}
+    
+    Q3 -->|AOV <$35 or CAC risk high| Reject3[KILL: R3_REJECTED]
+    Q3 -->|Yes| Q4{Supplier Ready?}
+    
+    Q4 -->|No viable suppliers| Reject4[RETURN: R2_REVISION]
+    Q4 -->|Yes| Q5{Angle Clarity?}
+    
+    Q5 -->|Weak/generic angles| Reject5[RETURN: R2_REVISION]
+    Q5 -->|Yes| Q6{Red Flags?}
+    
+    Q6 -->|Compliance/IP/Logistics disaster| Reject6[KILL: R3_REJECTED]
+    Q6 -->|Clean| Approve[APPROVE: R3_APPROVED]
+    
+    Approve --> Handoff[Hand off to Pod 2]
+    
+    style Approve fill:#10B981
+    style Reject2 fill:#EF4444
+    style Reject3 fill:#EF4444
+    style Reject6 fill:#EF4444
+    style Reject1 fill:#F59E0B
+    style Reject4 fill:#F59E0B
+    style Reject5 fill:#F59E0B
+                </pre>
+            </div>
+        </section>
+    </main>
+    
+    <script type="application/json" id="sop-structure">
+    {
+        "role_id": "P1-R3-LEAD-STRATEGIST",
+        "role_name": "Lead Product Strategist & Early Trend Specialist",
+        "pod": "P1",
+        "pipeline_stages": ["R3"],
+        "cross_pod": true,
+        "fte": 1.0,
+        "upstream_roles": ["P1-R2-CORE-RESEARCHER", "P1-R1R2-RESEARCH", "P1-R0-CREATIVE-INTEL"],
+        "downstream_roles": ["P2-CR-DIRECTOR", "P3-MB-BUYER", "P4-OP-INTEGRATOR"],
+        "wip_limits": {
+            "R3_REVIEW": 10,
+            "R3_APPROVED_WEEKLY": 15
+        },
+        "throughput": {
+            "weekly": "10-15 R3 approvals",
+            "monthly": "40-60 R3 approvals",
+            "early_trends_weekly": "3-5"
+        },
+        "kpis": [
+            {
+                "name": "R3 Approvals/Month",
+                "target": "40-60",
+                "source": "Notion Product Packets DB"
+            },
+            {
+                "name": "P1_PASS Rate",
+                "target": "20-30%",
+                "source": "P1 test results 2-3 weeks post-approval"
+            },
+            {
+                "name": "Portfolio Diversity",
+                "target": "60% proven, 30% trend, 10% experimental",
+                "source": "Manual weekly categorization"
+            },
+            {
+                "name": "R3 Cycle Time",
+                "target": "≤48 hours",
+                "source": "ClickUp timestamps"
+            }
+        ],
+        "workflows": [
+            {
+                "name": "R3 Packet Evaluation",
+                "trigger": "Packet moved to R3_REVIEW status",
+                "inputs": ["Notion Product Packets DB", "ClickUp R3 task", "Drive supplier docs"],
+                "steps": [
+                    "Open packet in Notion",
+                    "Evaluate market viability (5-10 min)",
+                    "Evaluate unit economics (5-10 min)",
+                    "Evaluate supplier readiness (3-5 min)",
+                    "Evaluate angle clarity (5-10 min)",
+                    "Risk assessment (3-5 min)",
+                    "Make Go/No-Go/Revise decision",
+                    "Execute decision workflow",
+                    "Update all systems",
+                    "Notify downstream"
+                ],
+                "outputs": ["R3_APPROVED or R3_REJECTED or R2_REVISION status", "Discord notification", "ClickUp assignment"],
+                "cycle_time": "20-40 minutes per packet"
+            },
+            {
+                "name": "Early Trend Fast-Track",
+                "trigger": "Trend signal identified in TikTok/Minea",
+                "inputs": ["Trend data", "Product idea"],
+                "steps": [
+                    "Validate trend signal",
+                    "Brief researcher for express R1→R2",
+                    "Review express packet EOD",
+                    "If approved, flag as EARLY_TREND",
+                    "Prioritize in Pod 2 handoff"
+                ],
+                "outputs": ["Fast-tracked R3 approval with EARLY_TREND tag"],
+                "cycle_time": "Same day"
+            },
+            {
+                "name": "Weekly Portfolio Mix Review",
+                "trigger": "Every Friday afternoon",
+                "inputs": ["This week's R3 approvals", "P1 feedback data"],
+                "steps": [
+                    "Count weekly R3 approvals (target: 10-15)",
+                    "Categorize by risk profile",
+                    "Check niche diversity",
+                    "Review P1 feedback loop",
+                    "Update researchers on next week priorities"
+                ],
+                "outputs": ["Portfolio balance assessment", "Research priorities for next week"],
+                "cycle_time": "60-90 minutes"
+            }
+        ],
+        "tools": [
+            {
+                "name": "Notion",
+                "use_case": "R3 packet review and decision logging",
+                "key_views": ["Product Packets DB (R3_REVIEW filter)"],
+                "access": "Editor"
+            },
+            {
+                "name": "ClickUp",
+                "use_case": "Task management and status transitions",
+                "key_views": ["P1 → Research Pipeline → R3 Approved Packets", "P2 → Creative Pipeline → Briefs"],
+                "access": "Admin"
+            },
+            {
+                "name": "Google Drive",
+                "use_case": "Reference materials and supplier docs",
+                "key_views": ["/DriveOn Commerce/Product Research/R2_Deep_Research/"],
+                "access": "Editor"
+            },
+            {
+                "name": "Discord",
+                "use_case": "Cross-pod communication",
+                "key_channels": ["#p1-research-updates", "#p2-creative-briefs", "#p3-media-questions"],
+                "access": "Member"
+            },
+            {
+                "name": "TikTok Creative Center",
+                "use_case": "Trend hunting and ad benchmarks",
+                "access": "Public"
+            },
+            {
+                "name": "Minea",
+                "use_case": "Product discovery and competitor tracking",
+                "access": "Team account"
+            }
+        ],
+        "canon_constraints": {
+            "P1_budget": "$40-60",
+            "P1_P2_total": "$70-120 (standard $80-100)",
+            "test_bank_monthly": "$4,000-5,500",
+            "hit_rate": "4-6% (2-4 products/month)",
+            "kill_rate_P1": "70-80%",
+            "R3_min_criteria": ["Market viability", "Unit economics (AOV ≥$35, CAC ≤0.5×AOV)", "Supplier ready (2+ options, ≤7 days)", "Angle clarity (2-3 hooks)", "No red flags"]
+        }
+    }
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00C8C8',
+                lineColor: '#666666',
+                secondaryColor: '#F8F8F8',
+                tertiaryColor: '#F4E8D0'
+            }
+        });
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = 120;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

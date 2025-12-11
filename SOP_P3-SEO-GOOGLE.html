@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P3-SEO-GOOGLE-01 · SEO & Google Store Specialist | DriveOn Commerce SOP</title>
+    <style>
+        /* === RESET & BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #555555;
+            --text-tertiary: #777777;
+            --surface-white: #FFFFFF;
+            --surface-light: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --accent-champagne: #F4E8D0;
+            --success-green: #10B981;
+            --warning-orange: #F59E0B;
+            --error-red: #EF4444;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-light);
+        }
+        
+        /* === LAYOUT === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* === HEADER === */
+        header {
+            background: var(--surface-white);
+            border-bottom: 3px solid var(--drive-cyan);
+            padding: 24px 0;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .header-title {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--carbon-black);
+            margin-bottom: 8px;
+        }
+        
+        .role-meta {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .badge-pod { background: var(--drive-cyan); color: white; }
+        .badge-status { background: var(--success-green); color: white; }
+        .badge-gate { background: var(--accent-champagne); color: var(--carbon-black); }
+        
+        /* === NAVIGATION === */
+        nav {
+            background: var(--surface-white);
+            border-right: 2px solid var(--border-gray);
+            position: sticky;
+            top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+        }
+        
+        .nav-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin-bottom: 8px;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: block;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        
+        nav a:hover {
+            background: var(--surface-light);
+            color: var(--drive-cyan);
+            padding-left: 16px;
+        }
+        
+        /* === MAIN GRID === */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+        
+        @media (max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            nav {
+                position: static;
+                max-height: none;
+            }
+        }
+        
+        /* === HERO SUMMARY === */
+        .hero-summary {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A0A0 100%);
+            color: white;
+            padding: 32px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            box-shadow: 0 4px 12px rgba(0, 200, 200, 0.2);
+        }
+        
+        .hero-summary h2 {
+            font-size: 22px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        
+        .key-outcomes {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .outcome-chip {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+        
+        .you-own {
+            background: rgba(255,255,255,0.15);
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid white;
+        }
+        
+        .you-own ul {
+            list-style: none;
+            margin-top: 8px;
+        }
+        
+        .you-own li {
+            padding: 4px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .you-own li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* === SECTIONS === */
+        section {
+            background: var(--surface-white);
+            padding: 32px;
+            margin-bottom: 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-gray);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        
+        section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--carbon-black);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--drive-cyan);
+        }
+        
+        section h3 {
+            font-size: 18px;
+            margin: 24px 0 12px 0;
+            color: var(--carbon-black);
+            font-weight: 600;
+        }
+        
+        section h4 {
+            font-size: 16px;
+            margin: 16px 0 8px 0;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        
+        .section-intro {
+            background: var(--surface-light);
+            padding: 16px;
+            border-left: 4px solid var(--drive-cyan);
+            margin-bottom: 24px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+        
+        /* === COLLAPSIBLE === */
+        details {
+            margin: 16px 0;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        summary {
+            background: var(--surface-light);
+            padding: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        summary:hover {
+            background: var(--accent-champagne);
+        }
+        
+        summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        summary::before {
+            content: "▶";
+            display: inline-block;
+            transition: transform 0.2s;
+            color: var(--drive-cyan);
+            font-size: 12px;
+        }
+        
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        details > div {
+            padding: 20px;
+        }
+        
+        /* === LISTS === */
+        ul, ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        /* === TABLES === */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 14px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        th {
+            background: var(--surface-light);
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+        
+        tr:hover {
+            background: var(--surface-light);
+        }
+        
+        /* === CALLOUTS === */
+        .callout {
+            padding: 16px 16px 16px 48px;
+            border-radius: 8px;
+            margin: 16px 0;
+            position: relative;
+        }
+        
+        .callout:before {
+            position: absolute;
+            left: 16px;
+            font-size: 20px;
+        }
+        
+        .callout-canon {
+            background: #EFF6FF;
+            border-left: 4px solid #3B82F6;
+        }
+        
+        .callout-canon:before {
+            content: "⚖️";
+        }
+        
+        .callout-warning {
+            background: #FEF3C7;
+            border-left: 4px solid var(--warning-orange);
+        }
+        
+        .callout-warning:before {
+            content: "⚠️";
+        }
+        
+        .callout-tip {
+            background: #F0FDF4;
+            border-left: 4px solid var(--success-green);
+        }
+        
+        .callout-tip:before {
+            content: "💡";
+        }
+        
+        /* === CODE BLOCKS === */
+        pre, code {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        code {
+            background: var(--surface-light);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #E11D48;
+        }
+        
+        pre {
+            background: var(--carbon-black);
+            color: #F8F8F8;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        
+        /* === CARDS === */
+        .card {
+            background: var(--surface-white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--carbon-black);
+        }
+        
+        /* === HANDOFF CARDS === */
+        .handoff-card {
+            background: var(--surface-light);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 16px 0;
+        }
+        
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .handoff-flow {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 20px;
+        }
+        
+        /* === KPI STRIP === */
+        .kpi-strip {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .kpi-item {
+            background: var(--surface-light);
+            padding: 12px 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--drive-cyan);
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .kpi-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .kpi-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--carbon-black);
+            margin-top: 4px;
+        }
+        
+        /* === MERMAID === */
+        .mermaid {
+            background: var(--surface-white);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 1px solid var(--border-gray);
+        }
+        
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text-tertiary);
+            font-size: 14px;
+            border-top: 1px solid var(--border-gray);
+            margin-top: 48px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>P3-SEO-GOOGLE-01 · SEO & Google Store Specialist</h1>
+                    <div class="role-meta">
+                        <span class="badge badge-pod">Pod 3 · Media & Store</span>
+                        <span class="badge badge-status">CORE</span>
+                        <span class="badge badge-gate">General Store SEO + Shopping/PMax</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-grid">
+            <nav>
+                <div class="nav-title">Contents</div>
+                <ul>
+                    <li><a href="#hero">Role Summary</a></li>
+                    <li><a href="#meta">1. Meta & Role Snapshot</a></li>
+                    <li><a href="#purpose">2. Role Purpose & Context</a></li>
+                    <li><a href="#canon">3. Canon Constraints</a></li>
+                    <li><a href="#day">4. Day-in-the-Life</a></li>
+                    <li><a href="#workflows">5. Core Workflows</a></li>
+                    <li><a href="#handoffs">6. Handoff & Interface Specs</a></li>
+                    <li><a href="#kpis">7. KPIs & Quality Bar</a></li>
+                    <li><a href="#ai">8. AI Usage & Prompts</a></li>
+                    <li><a href="#tools">9. Tools & Systems</a></li>
+                    <li><a href="#escalation">10. Escalation & Decision Rights</a></li>
+                    <li><a href="#onboarding">11. Onboarding Checklist</a></li>
+                    <li><a href="#changelog">12. Change Log</a></li>
+                </ul>
+            </nav>
+
+            <main>
+                <div class="hero-summary" id="hero">
+                    <h2>You Own Long-Term Compounding Traffic</h2>
+                    
+                    <div class="key-outcomes">
+                        <span class="outcome-chip">🔍 Organic Search Growth</span>
+                        <span class="outcome-chip">🛍️ Shopping Feed Health</span>
+                        <span class="outcome-chip">⚡ Core Web Vitals</span>
+                        <span class="outcome-chip">🔗 Internal Link Architecture</span>
+                        <span class="outcome-chip">📊 Schema & Rich Results</span>
+                    </div>
+                    
+                    <div class="you-own">
+                        <strong>You Own:</strong>
+                        <ul>
+                            <li>General/SEO catalog store organic visibility</li>
+                            <li>Google Shopping feed optimization and PMax campaigns</li>
+                            <li>Structural SEO improvements (collections, schema, internal linking)</li>
+                            <li>Core Web Vitals and technical SEO health</li>
+                            <li>Long-term compounding traffic vs. paid-only dependency</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <section id="meta">
+                    <h2>📋 1. Meta & Role Snapshot</h2>
+                    
+                    <div class="section-intro">
+                        Core reference data for this role within DriveOn Commerce's CaniCol v4.0 system.
+                    </div>
+                    
+                    <table>
+                        <tr>
+                            <th>Field</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Role_ID</strong></td>
+                            <td><code>P3-SEO-GOOGLE-01</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Role_Name</strong></td>
+                            <td>SEO & Google Store Specialist</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pod</strong></td>
+                            <td>P3 – Media & Store</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Role_Type</strong></td>
+                            <td>SEO_GOOGLE_SPECIALIST</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status</strong></td>
+                            <td>CORE (distinct from media buyer)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CrossPod</strong></td>
+                            <td>true (coordinates with P1 research, P2 creative, P3 store builders)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Default_FTE</strong></td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pipeline_Stages</strong></td>
+                            <td>Winners entering General Store lane (P2_PASS+)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Owned_Gates</strong></td>
+                            <td>Organic search + Shopping/PMax for general catalog store</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Upstream_Roles</strong></td>
+                            <td>P3-MB-BUYER (winner validation), P3-SB-GENERAL (store structure), P1 Research (product data)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Downstream_Roles</strong></td>
+                            <td>P4-PM (reporting), Media Buyer (performance synergy), Founders (strategy)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WIP_Limits</strong></td>
+                            <td>3-4 SEO projects; 3-4 feed/Shopping initiatives</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Weekly_Throughput</strong></td>
+                            <td>2-4 structural SEO improvements/week (collections, schema, internal links, CWV fixes, feed optimizations)</td>
+                        </tr>
+                    </table>
+
+                    <h3>Primary KPIs</h3>
+                    <div class="kpi-strip">
+                        <div class="kpi-item">
+                            <div class="kpi-label">Organic Sessions</div>
+                            <div class="kpi-value">Growth MoM</div>
+                        </div>
+                        <div class="kpi-item">
+                            <div class="kpi-label">Shopping Revenue</div>
+                            <div class="kpi-value">% of Total</div>
+                        </div>
+                        <div class="kpi-item">
+                            <div class="kpi-label">Indexed Pages</div>
+                            <div class="kpi-value">Coverage %</div>
+                        </div>
+                        <div class="kpi-item">
+                            <div class="kpi-label">CWV Score</div>
+                            <div class="kpi-value">Good URLs %</div>
+                        </div>
+                    </div>
+
+                    <h3>Primary Tools & Workspaces</h3>
+                    
+                    <h4>ClickUp</h4>
+                    <ul>
+                        <li><strong>Space:</strong> P3 – Media & Store</li>
+                        <li><strong>Folder:</strong> Stores</li>
+                        <li><strong>List:</strong> General/SEO Store</li>
+                        <li><strong>Statuses:</strong> SEO_BACKLOG → SEO_IN_PROGRESS → SEO_REVIEW → SEO_DEPLOYED</li>
+                    </ul>
+
+                    <h4>Notion</h4>
+                    <ul>
+                        <li><strong>Database:</strong> SEO Projects</li>
+                        <li><strong>Properties:</strong> Project_ID, Type (Technical/Content/Shopping), Status, Priority, Products_Affected</li>
+                    </ul>
+
+                    <h4>Google Drive</h4>
+                    <ul>
+                        <li><strong>Path:</strong> /04_P3_Media_and_Stores/Stores/03_General_SEO_Store/04_Tracking_and_Feeds/</li>
+                        <li><strong>Files:</strong> Feed exports, schema docs, GSC reports, CWV audits</li>
+                    </ul>
+
+                    <h4>Discord/Slack</h4>
+                    <ul>
+                        <li><strong>Channel:</strong> #p3-general-seo</li>
+                        <li><strong>Purpose:</strong> General/SEO store work, Shopping feeds, SEO changes</li>
+                    </ul>
+
+                    <h3>Document Metadata</h3>
+                    <table>
+                        <tr>
+                            <td><strong>Version</strong></td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Last Updated</strong></td>
+                            <td>December 9, 2025</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Author</strong></td>
+                            <td>DriveOn SOP Factory v4</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Canon Dependencies</strong></td>
+                            <td>L1-01, L2-02, L2-03, L2-05, L2-07, L3-01, L3-02, L3-03, L3-04</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section id="purpose">
+                    <h2>🎯 2. Role Purpose & Context</h2>
+                    
+                    <div class="section-intro">
+                        This role builds long-term compounding organic traffic for the General/SEO catalog store, reducing paid-only dependency and creating sustainable revenue channels.
+                    </div>
+
+                    <h3>Why This Role Exists</h3>
+                    <p>In the CaniCol v4.0 model, DriveOn tests 45-60 products monthly at lean budgets ($40-$60 P1, total $80-$100 P1+P2). Winners achieving P2_PASS (4-6% hit rate) are routed into one of three lanes:</p>
+                    <ul>
+                        <li><strong>Validation Lane:</strong> Fast MVS/1-page stores for quick P1/P2 tests</li>
+                        <li><strong>Brand Lane:</strong> Dedicated brand/niche stores for premium winners</li>
+                        <li><strong>General/SEO Lane:</strong> Multi-product catalog store optimized for organic search and Google Shopping</li>
+                    </ul>
+
+                    <p>The <strong>P3-SEO-GOOGLE</strong> role owns the General/SEO lane, ensuring that validated winners aren't solely dependent on paid ads but also build organic momentum through:</p>
+                    <ul>
+                        <li>Search-optimized collections and product pages</li>
+                        <li>Google Shopping feed health and PMax campaign optimization</li>
+                        <li>Technical SEO foundations (CWV, schema, internal linking)</li>
+                        <li>Long-tail keyword coverage across product catalog</li>
+                    </ul>
+
+                    <h3>How This Supports CaniCol Economics</h3>
+                    <p>CaniCol's lean-volume testing philosophy means most products fail quickly. The General Store serves as a <strong>portfolio aggregator</strong> where multiple P2_PASS winners co-exist, each contributing organic traffic that compounds over time:</p>
+                    <ul>
+                        <li><strong>Cost Efficiency:</strong> Organic traffic has no per-click cost, improving unit economics for proven winners</li>
+                        <li><strong>Reduced CAC:</strong> Shopping and organic reduce dependency on paid social CPC inflation</li>
+                        <li><strong>Portfolio Effect:</strong> Even if individual products have modest organic potential, the aggregate store builds domain authority and captures broad search intent</li>
+                        <li><strong>Winner Longevity:</strong> Products that might exhaust paid audiences can continue generating revenue through search</li>
+                    </ul>
+
+                    <div class="callout callout-canon">
+                        <strong>Canon Alignment:</strong> This role follows standard ecommerce practice where SEO is a distinct specialist function, separate from paid media buying. Per L2-03, this ensures focused expertise on organic growth vs. paid campaign execution.
+                    </div>
+
+                    <h3>Relationship to Holdings & Brand Architecture</h3>
+                    <p>Per L0-02 (Product & Brand Architecture):</p>
+                    <ul>
+                        <li><strong>DriveOn Commerce</strong> operates the General/SEO store as a "Dropshipping Engine" – a lean catalog model</li>
+                        <li>This role doesn't own branded niche stores (that's P3-SB-BRAND's domain)</li>
+                        <li>Focus is on <strong>functional SEO</strong> for a multi-product catalog, not brand storytelling</li>
+                        <li>Optimizations serve the portfolio strategy, not individual product obsession</li>
+                    </ul>
+                </section>
+
+                <section id="canon">
+                    <h2>⚖️ 3. Canon Constraints</h2>
+                    
+                    <div class="section-intro">
+                        Non-negotiable rules from L0-L3 canon that govern this role's operations.
+                    </div>
+
+                    <div class="callout callout-canon">
+                        <strong>L1-01 Economics (CaniCol Model):</strong>
+                        <ul>
+                            <li>Testing volume: ~45-60 products/month reach P1/P2</li>
+                            <li>Winner rate: ~4-6% achieve P2_PASS (≈2-4 products/month)</li>
+                            <li>Only P2_PASS+ winners enter General Store for SEO investment</li>
+                            <li>Portfolio approach: not every product needs strong organic – aggregate effect matters</li>
+                        </ul>
+                    </div>
+
+                    <div class="callout callout-canon">
+                        <strong>L2-03 WIP & Throughput Limits:</strong>
+                        <ul>
+                            <li><strong>WIP Cap:</strong> 3-4 SEO projects + 3-4 feed/Shopping initiatives simultaneously</li>
+                            <li><strong>Weekly Throughput:</strong> 2-4 structural improvements (not 10+; quality over quantity)</li>
+                            <li>WIP violations signal process issues, not a reason to inflate limits</li>
+                            <li>Must coordinate with P3-SB-GENERAL who owns store structure/nav</li>
+                        </ul>
+                    </div>
+
+                    <div class="callout callout-canon">
+                        <strong>L2-05 Testing Canon – Pass/Kill Gates:</strong>
+                        <ul>
+                            <li>Products must pass P2 gates before SEO investment</li>
+                            <li>P1_FAIL/P2_FAIL products get killed (24-48hr discipline) – don't waste SEO effort on losers</li>
+                            <li>Focus SEO on proven demand signals, not speculative optimization</li>
+                        </ul>
+                    </div>
+
+                    <div class="callout callout-canon">
+                        <strong>L2-07 Pod KPIs:</strong>
+                        <ul>
+                            <li>Organic traffic growth (sessions, conversions) MoM</li>
+                            <li>Shopping revenue as % of total General Store revenue</li>
+                            <li>Indexed page coverage % (GSC)</li>
+                            <li>Core Web Vitals "Good URLs" percentage</li>
+                        </ul>
+                    </div>
+
+                    <h3>Workspace & Tool Constraints</h3>
+                    <ul>
+                        <li><strong>Approved Tools (L3):</strong> GSC, GA4, Shopify, PageSpeed Insights, Screaming Frog, Merchant Center</li>
+                        <li><strong>Not Approved:</strong> Unauthorized SEO SaaS tools without Ops approval</li>
+                        <li><strong>ClickUp/Notion/Drive:</strong> All SEO tasks, docs, and feed files must use canonical paths from L3 blueprints</li>
+                        <li><strong>No Drift:</strong> Do not create new lists, channels, or DBs outside L3 structure</li>
+                    </ul>
+
+                    <div class="callout callout-warning">
+                        <strong>Common Failure Modes:</strong>
+                        <ul>
+                            <li>Optimizing pre-validation products (wastes effort on likely losers)</li>
+                            <li>Over-indexing on single-product SEO vs. portfolio strategy</li>
+                            <li>Ignoring CWV/tech SEO in favor of content-only fixes</li>
+                            <li>Shopping feed drift (missing required fields, stale pricing)</li>
+                            <li>Failing to coordinate with P3-SB-GENERAL on nav/collection structure</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="day">
+                    <h2>⏰ 4. Day-in-the-Life Timeline</h2>
+                    
+                    <div class="section-intro">
+                        A typical day for P3-SEO-GOOGLE during active operations. Adjust based on project phases but maintain core rhythms.
+                    </div>
+
+                    <div class="mermaid">
+gantt
+    title Daily Rhythm – P3-SEO-GOOGLE
+    dateFormat HH:mm
+    axisFormat %H:%M
+    
+    section Morning
+    Morning Review & Planning           :09:00, 30m
+    GSC/GA4 Data Review                 :09:30, 45m
+    Priority SEO Task Block 1           :10:15, 90m
+    
+    section Midday
+    Feed/Shopping Check                 :12:00, 30m
+    Priority SEO Task Block 2           :12:30, 90m
+    Cross-Team Syncs                    :14:00, 30m
+    
+    section Afternoon
+    Technical SEO/CWV Work              :14:30, 90m
+    Documentation & Reporting           :16:00, 45m
+    End-of-Day Handoffs                 :16:45, 15m
+                    </div>
+
+                    <h3>Morning Block (9:00-12:00)</h3>
+                    <details>
+                        <summary>Morning Review & Planning (9:00-9:30)</summary>
+                        <div>
+                            <ul>
+                                <li>Check Discord #p3-general-seo for overnight alerts or handoffs</li>
+                                <li>Review ClickUp "SEO_IN_PROGRESS" tasks for blockers</li>
+                                <li>Check GSC for new coverage issues or manual actions</li>
+                                <li>Prioritize 1-2 deep-work items for the day (align with WIP cap)</li>
+                            </ul>
+                            <p><strong>Output:</strong> Daily priority list in Notion; Discord standup in #p4-pm-daily-standup</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>GSC/GA4 Data Review (9:30-10:15)</summary>
+                        <div>
+                            <ul>
+                                <li>GSC: Query performance, index coverage, CWV trends</li>
+                                <li>GA4: Organic sessions, conversion paths, product performance</li>
+                                <li>Merchant Center: Shopping feed status, disapprovals</li>
+                                <li>Flag anomalies (sudden traffic drops, indexing errors)</li>
+                            </ul>
+                            <p><strong>Output:</strong> Data screenshots saved to Drive; flagged issues posted to #p3-general-seo</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Priority SEO Task Block 1 (10:15-11:45)</summary>
+                        <div>
+                            <p>Deep work on 1 primary task from WIP:</p>
+                            <ul>
+                                <li><strong>If Collection Optimization:</strong> Keyword research, meta updates, internal linking</li>
+                                <li><strong>If Schema Implementation:</strong> Product/Collection schema markup, testing</li>
+                                <li><strong>If CWV Fix:</strong> Image optimization, code splitting, caching review</li>
+                                <li><strong>If Feed Fix:</strong> Resolve disapprovals, update variant mapping</li>
+                            </ul>
+                            <p><strong>Output:</strong> Task moved to SEO_REVIEW in ClickUp; draft docs/screenshots in Drive</p>
+                        </div>
+                    </details>
+
+                    <h3>Midday Block (12:00-14:30)</h3>
+                    <details>
+                        <summary>Feed/Shopping Health Check (12:00-12:30)</summary>
+                        <div>
+                            <ul>
+                                <li>Merchant Center: Verify feed status, check for new disapprovals</li>
+                                <li>PMax campaign: Quick performance check (ROAS, impressions)</li>
+                                <li>If critical issues, escalate immediately; otherwise queue for afternoon</li>
+                            </ul>
+                            <p><strong>Output:</strong> Feed status note in Notion; escalation to Media Buyer if needed</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Priority SEO Task Block 2 (12:30-14:00)</summary>
+                        <div>
+                            <p>Second deep-work item from WIP or continuation of morning task:</p>
+                            <ul>
+                                <li>Internal linking updates across new collections</li>
+                                <li>Meta description/title tag optimization batch</li>
+                                <li>Product page template improvements (schema, structured data)</li>
+                            </ul>
+                            <p><strong>Output:</strong> Task progress documented; ready for review or deployment</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Cross-Team Syncs (14:00-14:30)</summary>
+                        <div>
+                            <ul>
+                                <li>Sync with P3-SB-GENERAL on nav/collection structure changes</li>
+                                <li>Sync with P3-MB-BUYER on new P2_PASS winners entering General Store</li>
+                                <li>Sync with P1 Research on product data quality for feed</li>
+                            </ul>
+                            <p><strong>Output:</strong> Action items logged in ClickUp; coordination notes in Discord</p>
+                        </div>
+                    </details>
+
+                    <h3>Afternoon Block (14:30-17:00)</h3>
+                    <details>
+                        <summary>Technical SEO/CWV Work (14:30-16:00)</summary>
+                        <div>
+                            <ul>
+                                <li>PageSpeed audits for new product pages</li>
+                                <li>Image optimization (compression, lazy loading, WebP conversion)</li>
+                                <li>Mobile usability checks</li>
+                                <li>Crawl budget optimization (robots.txt, sitemap updates)</li>
+                            </ul>
+                            <p><strong>Output:</strong> CWV improvement tasks in ClickUp; implementation notes in Drive</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Documentation & Reporting (16:00-16:45)</summary>
+                        <div>
+                            <ul>
+                                <li>Update Notion SEO Projects DB with progress notes</li>
+                                <li>Export weekly/monthly metrics to Drive for PM reporting</li>
+                                <li>Document learnings (what worked/didn't for future projects)</li>
+                                <li>Update ClickUp task statuses</li>
+                            </ul>
+                            <p><strong>Output:</strong> Current state documented; metrics dashboard updated</p>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>End-of-Day Handoffs (16:45-17:00)</summary>
+                        <div>
+                            <ul>
+                                <li>Post handoff to #p3-general-seo for urgent items</li>
+                                <li>Flag any blockers for P3-SB-GENERAL or Media Buyer</li>
+                                <li>Update WIP status (confirm within 3-4 SEO + 3-4 Shopping limits)</li>
+                            </ul>
+                            <p><strong>Output:</strong> Clean handoff state; no orphaned tasks</p>
+                        </div>
+                    </details>
+
+                    <div class="callout callout-tip">
+                        <strong>Pro Tip:</strong> Protect deep-work blocks (10:15-11:45, 12:30-14:00) by batching communications. Avoid context-switching between SEO, Shopping, and CWV tasks within a single block.
+                    </div>
+                </section>
+
+                <section id="workflows">
+                    <h2>🔄 5. Core Workflows</h2>
+                    
+                    <div class="section-intro">
+                        Step-by-step workflows for the primary responsibilities of P3-SEO-GOOGLE. Each workflow includes triggers, inputs, actions, outputs, and quality checks.
+                    </div>
+
+                    <div class="mermaid">
+flowchart TD
+    A[New P2_PASS Winner] --> B{Lane Decision}
+    B -->|General/SEO| C[SEO Onboarding Workflow]
+    C --> D[Collection Optimization]
+    C --> E[Product Page SEO]
+    C --> F[Shopping Feed Integration]
+    D --> G[Monitor & Iterate]
+    E --> G
+    F --> G
+    G --> H{Performance?}
+    H -->|Good| I[Scale: More Collections]
+    H -->|Poor| J[Diagnose: CWV/Content/Links]
+    J --> G
+                    </div>
+
+                    <details open>
+                        <summary>Workflow 1: New Winner SEO Onboarding</summary>
+                        <div>
+                            <h4>Trigger</h4>
+                            <p>Media Buyer confirms P2_PASS winner routed to General Store lane</p>
+
+                            <h4>Inputs</h4>
+                            <ul>
+                                <li>Product_ID, Test_ID from P3-MB-BUYER</li>
+                                <li>Product packet from P1 (AOV, niche, angles)</li>
+                                <li>Winning creative from P2 (for content inspiration)</li>
+                                <li>Store structure from P3-SB-GENERAL (collection placement)</li>
+                            </ul>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Initial Audit (15-30 min)</strong>
+                                    <ul>
+                                        <li>Check if product already in General Store catalog</li>
+                                        <li>Review P3-SB-GENERAL's collection placement</li>
+                                        <li>Identify primary + secondary keyword targets using GSC, Ahrefs/Semrush</li>
+                                        <li>Check competitor PDPs for content gaps</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Product Page SEO Setup (30-45 min)</strong>
+                                    <ul>
+                                        <li>Optimize title tag: [Primary Keyword] | [Benefit] | DriveOn</li>
+                                        <li>Write meta description (155 chars, include CTA + benefit)</li>
+                                        <li>Add product schema markup (Product, AggregateRating, Offer)</li>
+                                        <li>Optimize product description (300-500 words, keyword-natural, benefit-focused)</li>
+                                        <li>Add alt text to all product images (descriptive + keyword-natural)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Internal Linking (15-20 min)</strong>
+                                    <ul>
+                                        <li>Add 3-5 contextual internal links from related products</li>
+                                        <li>Add links from relevant collection pages</li>
+                                        <li>Update breadcrumbs if needed</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Shopping Feed Integration (20-30 min)</strong>
+                                    <ul>
+                                        <li>Verify product appears in Merchant Center feed</li>
+                                        <li>Check all required attributes (title, description, price, image, GTIN/MPN)</li>
+                                        <li>Validate no disapprovals or warnings</li>
+                                        <li>If multi-variant, ensure proper variant mapping</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Quality Check (10 min)</strong>
+                                    <ul>
+                                        <li>Mobile preview: CWV, layout, CTA clarity</li>
+                                        <li>Desktop preview: full content, images, schema</li>
+                                        <li>Test URL in GSC: request indexing</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>Product page live with SEO optimizations</li>
+                                <li>Product in Shopping feed (verified in Merchant Center)</li>
+                                <li>Internal links established</li>
+                                <li>ClickUp task: <code>SEO-[Product_ID]-ONBOARD</code> moved to SEO_DEPLOYED</li>
+                                <li>Notion SEO Projects DB updated with baseline metrics</li>
+                            </ul>
+
+                            <h4>Handoff</h4>
+                            <p>Post to #p3-general-seo:</p>
+                            <pre><code>✅ SEO Onboarding Complete
+Product_ID: PRD-YYYYMMDD-XXX
+Primary KW: [keyword]
+Collection: [collection name]
+GSC Indexing: Requested
+Shopping Feed: Active
+Next: Monitor 7-14 days for initial rankings</code></pre>
+
+                            <h4>Quality Bar</h4>
+                            <ul>
+                                <li>All required schema fields present (validate with schema tester)</li>
+                                <li>Meta description under 160 chars, includes benefit + CTA</li>
+                                <li>Product description 300+ words, keyword-natural (no stuffing)</li>
+                                <li>Images optimized (WebP, lazy load, alt text)</li>
+                                <li>No broken internal links</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Workflow 2: Collection Optimization for Organic Growth</summary>
+                        <div>
+                            <h4>Trigger</h4>
+                            <p>New collection created by P3-SB-GENERAL, or existing collection identified for SEO uplift</p>
+
+                            <h4>Inputs</h4>
+                            <ul>
+                                <li>Collection URL and product count</li>
+                                <li>Keyword research data (GSC, competitor analysis)</li>
+                                <li>Current organic performance (sessions, conversions)</li>
+                            </ul>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Keyword & Intent Research (30-45 min)</strong>
+                                    <ul>
+                                        <li>Identify primary collection keyword (e.g., "best kitchen gadgets")</li>
+                                        <li>Find 3-5 long-tail variants (e.g., "innovative kitchen tools 2025")</li>
+                                        <li>Analyze SERP: featured snippets, PAA, image packs, shopping results</li>
+                                    </ul>
+                                </li>
+                                <li><strong>On-Page Optimization (45-60 min)</strong>
+                                    <ul>
+                                        <li>Title tag: [Primary Keyword] | Shop [Category] | DriveOn</li>
+                                        <li>Meta description: 155 chars, benefit-focused, CTA</li>
+                                        <li>H1: Primary keyword, natural phrasing</li>
+                                        <li>Collection description: 400-600 words
+                                            <ul>
+                                                <li>Intro paragraph with primary keyword</li>
+                                                <li>2-3 benefit sections with subheadings (H2)</li>
+                                                <li>Natural keyword integration (no stuffing)</li>
+                                                <li>Internal links to top products</li>
+                                            </ul>
+                                        </li>
+                                        <li>Add collection schema (CollectionPage or ItemList)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Internal Linking Strategy (20-30 min)</strong>
+                                    <ul>
+                                        <li>Add links from homepage/nav (if tier-1 collection)</li>
+                                        <li>Cross-link from related collections</li>
+                                        <li>Add links from 5-10 relevant product pages</li>
+                                        <li>Update sitemap priority if needed</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Image & Media Optimization (15-20 min)</strong>
+                                    <ul>
+                                        <li>Hero image: optimized, descriptive file name, alt text</li>
+                                        <li>Product thumbnails: consistent sizing, lazy load</li>
+                                        <li>If using banners, ensure mobile responsive</li>
+                                    </ul>
+                                </li>
+                                <li><strong>CWV Check (10-15 min)</strong>
+                                    <ul>
+                                        <li>PageSpeed Insights audit (mobile + desktop)</li>
+                                        <li>Verify LCP < 2.5s, FID < 100ms, CLS < 0.1</li>
+                                        <li>Fix critical issues before deployment</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>Optimized collection page live</li>
+                                <li>Schema implemented and tested</li>
+                                <li>Internal linking network established</li>
+                                <li>GSC indexing requested</li>
+                                <li>ClickUp task: <code>SEO-COL-[CollectionName]</code> moved to SEO_DEPLOYED</li>
+                            </ul>
+
+                            <h4>Quality Bar</h4>
+                            <ul>
+                                <li>Collection description 400+ words, benefit-focused, keyword-natural</li>
+                                <li>Schema validates without errors (Google Rich Results Test)</li>
+                                <li>CWV all "Good" on mobile (or documented plan to fix)</li>
+                                <li>At least 5 internal links established</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Workflow 3: Google Shopping Feed Maintenance & Optimization</summary>
+                        <div>
+                            <h4>Trigger</h4>
+                            <p>Weekly scheduled review, or alert from Merchant Center (disapprovals, feed errors)</p>
+
+                            <h4>Inputs</h4>
+                            <ul>
+                                <li>Current feed export from Shopify</li>
+                                <li>Merchant Center diagnostics report</li>
+                                <li>Recent product additions/changes from P3-SB-GENERAL</li>
+                            </ul>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Feed Health Audit (15-20 min)</strong>
+                                    <ul>
+                                        <li>Check Merchant Center for disapprovals, warnings, pending items</li>
+                                        <li>Review feed diagnostics: missing attributes, pricing errors, image issues</li>
+                                        <li>Identify products with low impressions or zero clicks</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Critical Issue Resolution (30-45 min)</strong>
+                                    <ul>
+                                        <li><strong>If disapprovals:</strong> Fix missing GTINs, incorrect pricing, policy violations</li>
+                                        <li><strong>If image issues:</strong> Replace low-res images, fix broken URLs</li>
+                                        <li><strong>If description issues:</strong> Remove promotional text, ensure compliance</li>
+                                        <li>Coordinate with P3-SB-GENERAL for Shopify-side fixes</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Feed Optimization (30-45 min)</strong>
+                                    <ul>
+                                        <li>Enhance product titles: [Brand] + [Product Type] + [Key Attribute]</li>
+                                        <li>Add product_type taxonomy (Google Product Categories)</li>
+                                        <li>Optimize custom labels for campaign segmentation</li>
+                                        <li>Ensure all variants mapped correctly (size, color)</li>
+                                        <li>Add promotional overlays if running sale (sale_price field)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>PMax Campaign Coordination (15-20 min)</strong>
+                                    <ul>
+                                        <li>Review PMax performance with P3-MB-BUYER</li>
+                                        <li>Identify top-performing product groups</li>
+                                        <li>Flag feed improvements that may help campaigns (e.g., better titles)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Documentation (10 min)</strong>
+                                    <ul>
+                                        <li>Export feed diagnostics to Drive (/04_Tracking_and_Feeds/)</li>
+                                        <li>Log changes in Notion SEO Projects DB</li>
+                                        <li>Update ClickUp task status</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>Feed errors resolved (or escalated)</li>
+                                <li>Optimized feed re-uploaded to Merchant Center</li>
+                                <li>Documentation in Drive and Notion</li>
+                                <li>Coordination notes shared with Media Buyer</li>
+                            </ul>
+
+                            <h4>Quality Bar</h4>
+                            <ul>
+                                <li>Zero critical disapprovals within 48 hours</li>
+                                <li>All active products have: title, description, price, image, GTIN/MPN (or exemption)</li>
+                                <li>Feed validation passes with no errors in Merchant Center</li>
+                                <li>Custom labels used for segmentation (margin tier, seasonality, etc.)</li>
+                            </ul>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Workflow 4: Core Web Vitals (CWV) Improvement Sprint</summary>
+                        <div>
+                            <h4>Trigger</h4>
+                            <p>GSC CWV report shows declining "Good URLs" percentage, or new template/products deployed</p>
+
+                            <h4>Inputs</h4>
+                            <ul>
+                                <li>GSC Core Web Vitals report (mobile + desktop)</li>
+                                <li>PageSpeed Insights audits for key URLs</li>
+                                <li>Lighthouse CI data (if available)</li>
+                            </ul>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Prioritization (20-30 min)</strong>
+                                    <ul>
+                                        <li>Identify URLs with "Poor" or "Needs Improvement" ratings</li>
+                                        <li>Prioritize by traffic/revenue impact (focus on top collections, best-sellers)</li>
+                                        <li>Group by issue type: LCP, FID, CLS</li>
+                                    </ul>
+                                </li>
+                                <li><strong>LCP Optimization (1-2 hours)</strong>
+                                    <ul>
+                                        <li>Optimize hero images: WebP format, responsive sizes, preload critical images</li>
+                                        <li>Remove render-blocking resources (defer JS, inline critical CSS)</li>
+                                        <li>Enable CDN caching for images/assets</li>
+                                        <li>Minimize server response time (TTFB)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>FID/INP Optimization (1-2 hours)</strong>
+                                    <ul>
+                                        <li>Defer non-critical JS (analytics, chat widgets)</li>
+                                        <li>Code-split large JS bundles</li>
+                                        <li>Remove unused third-party scripts</li>
+                                        <li>Optimize event handlers (debounce/throttle)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>CLS Optimization (30-60 min)</strong>
+                                    <ul>
+                                        <li>Set explicit width/height on images and embeds</li>
+                                        <li>Reserve space for dynamic content (ads, banners)</li>
+                                        <li>Avoid inserting content above existing content</li>
+                                        <li>Use CSS aspect-ratio for responsive elements</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Testing & Validation (30-45 min)</strong>
+                                    <ul>
+                                        <li>Re-run PageSpeed Insights on fixed URLs</li>
+                                        <li>Test on real mobile device (throttled 3G)</li>
+                                        <li>Monitor GSC for CWV improvements (takes 28 days to fully reflect)</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>CWV improvements deployed</li>
+                                <li>Before/after PageSpeed scores documented in Drive</li>
+                                <li>ClickUp task: <code>SEO-CWV-[Issue]</code> moved to SEO_DEPLOYED</li>
+                                <li>Monitoring dashboard updated with new baseline</li>
+                            </ul>
+
+                            <h4>Quality Bar</h4>
+                            <ul>
+                                <li>Target: 75%+ URLs in "Good" category (GSC report)</li>
+                                <li>Mobile PageSpeed score > 80 for key pages</li>
+                                <li>LCP < 2.5s, FID < 100ms, CLS < 0.1 (75th percentile)</li>
+                                <li>No regressions on other metrics (accessibility, best practices)</li>
+                            </ul>
+                        </div>
+                    </details>
+                </section>
+
+                <section id="handoffs">
+                    <h2>🤝 6. Handoff & Interface Specs</h2>
+                    
+                    <div class="section-intro">
+                        Clear handoff protocols for work moving between P3-SEO-GOOGLE and other roles/pods.
+                    </div>
+
+                    <div class="mermaid">
+graph LR
+    A[P3-MB-BUYER] -->|P2_PASS Winner| B[P3-SEO-GOOGLE]
+    C[P3-SB-GENERAL] -->|Store Structure| B
+    D[P1-Research] -->|Product Data| B
+    B -->|SEO Insights| A
+    B -->|Nav/Collection Requests| C
+    B -->|Performance Reports| E[P4-PM]
+                    </div>
+
+                    <h3>Inbound Handoffs</h3>
+
+                    <div class="handoff-card">
+                        <div class="handoff-header">
+                            <div class="handoff-flow">
+                                <span>P3-MB-BUYER</span>
+                                <span class="handoff-arrow">→</span>
+                                <span>P3-SEO-GOOGLE</span>
+                            </div>
+                            <span class="badge badge-gate">New P2_PASS Winner</span>
+                        </div>
+                        
+                        <h4>Trigger</h4>
+                        <p>Media Buyer confirms P2_PASS winner routed to General Store lane</p>
+
+                        <h4>Required Inputs</h4>
+                        <ul>
+                            <li><code>Product_ID</code></li>
+                            <li><code>Test_ID</code> (P2 test reference)</li>
+                            <li>Lane assignment: <code>GENERAL</code></li>
+                            <li>Notion Product Page link</li>
+                            <li>ClickUp task link</li>
+                        </ul>
+
+                        <h4>Channel</h4>
+                        <p>Discord: #p3-general-seo</p>
+
+                        <h4>Template</h4>
+                        <pre><code>[HANDOFF]
+From: Media Buyer (@User)
+To: SEO Specialist (@User)
+
+Product_ID: PRD-YYYYMMDD-XXX
+Test_ID: TST-PRD-YYYYMMDD-XXX-P2NN
+Lane: GENERAL
+Status: P2_PASS
+
+Summary:
+- [2-3 sentence winner summary]
+- AOV: $XX | P2 ROAS: X.XX
+- Primary angle: [angle]
+
+Links:
+- Notion: [link]
+- ClickUp: [link]
+- Winning Creative: [link]
+
+Action: Begin SEO onboarding workflow
+Due By: [YYYY-MM-DD, typically 3-5 days]</code></pre>
+
+                        <h4>Quality Bar for Acceptance</h4>
+                        <ul>
+                            <li>Product has passed P2 gates per L2-05</li>
+                            <li>All required links present</li>
+                            <li>Product data complete in Notion (AOV, niche, supplier)</li>
+                        </ul>
+                    </div>
+
+                    <div class="handoff-card">
+                        <div class="handoff-header">
+                            <div class="handoff-flow">
+                                <span>P3-SB-GENERAL</span>
+                                <span class="handoff-arrow">→</span>
+                                <span>P3-SEO-GOOGLE</span>
+                            </div>
+                            <span class="badge badge-gate">New Collection/Nav Change</span>
+                        </div>
+                        
+                        <h4>Trigger</h4>
+                        <p>General Store Builder creates or modifies collection structure</p>
+
+                        <h4>Required Inputs</h4>
+                        <ul>
+                            <li>Collection name and URL</li>
+                            <li>Product count</li>
+                            <li>Nav placement (tier 1, tier 2, sub-collection)</li>
+                            <li>Initial meta/description (if any)</li>
+                        </ul>
+
+                        <h4>Channel</h4>
+                        <p>Discord: #p3-general-seo</p>
+
+                        <h4>Template</h4>
+                        <pre><code>[NEW COLLECTION]
+From: Store Builder (@User)
+To: SEO Specialist (@User)
+
+Collection: [Name]
+URL: [shopify.com/collections/slug]
+Products: XX items
+Nav: Tier [1/2]
+
+Context:
+- [Why this collection exists]
+- [Target customer intent]
+
+SEO Priority: [High/Medium/Low]
+
+Action: Review and optimize for organic search
+Due By: [YYYY-MM-DD]</code></pre>
+                    </div>
+
+                    <h3>Outbound Handoffs</h3>
+
+                    <div class="handoff-card">
+                        <div class="handoff-header">
+                            <div class="handoff-flow">
+                                <span>P3-SEO-GOOGLE</span>
+                                <span class="handoff-arrow">→</span>
+                                <span>P3-MB-BUYER</span>
+                            </div>
+                            <span class="badge badge-gate">Shopping Performance Insights</span>
+                        </div>
+                        
+                        <h4>Trigger</h4>
+                        <p>Significant Shopping/PMax performance change detected, or weekly coordination sync</p>
+
+                        <h4>Outputs</h4>
+                        <ul>
+                            <li>Shopping performance summary (impressions, clicks, conversions)</li>
+                            <li>Feed health status</li>
+                            <li>Product-level insights (top performers, zero-impression products)</li>
+                            <li>Recommended campaign adjustments</li>
+                        </ul>
+
+                        <h4>Channel</h4>
+                        <p>Discord: #p3-general-seo or direct DM for urgent issues</p>
+
+                        <h4>Template</h4>
+                        <pre><code>[SHOPPING UPDATE]
+From: SEO Specialist (@User)
+To: Media Buyer (@User)
+
+Period: [Date range]
+
+Feed Health: ✅ All products active | ⚠️ XX disapprovals
+Shopping Performance:
+- Impressions: XXK (↑/↓ X% vs prior period)
+- Clicks: XXX (↑/↓ X%)
+- ROAS: X.XX
+
+Top Performers:
+1. [Product_ID] - $XXX revenue
+2. [Product_ID] - $XXX revenue
+3. [Product_ID] - $XXX revenue
+
+Issues:
+- [List any critical feed/product issues]
+
+Recommendations:
+- [1-3 actionable suggestions]
+
+Files: [Link to Drive export]</code></pre>
+                    </div>
+
+                    <div class="handoff-card">
+                        <div class="handoff-header">
+                            <div class="handoff-flow">
+                                <span>P3-SEO-GOOGLE</span>
+                                <span class="handoff-arrow">→</span>
+                                <span>P4-PM</span>
+                            </div>
+                            <span class="badge badge-gate">Weekly/Monthly SEO Report</span>
+                        </div>
+                        
+                        <h4>Trigger</h4>
+                        <p>Weekly (Friday) or Monthly (1st of month) reporting cadence</p>
+
+                        <h4>Outputs</h4>
+                        <ul>
+                            <li>Organic traffic metrics (sessions, conversions, revenue)</li>
+                            <li>Shopping metrics (impressions, clicks, ROAS)</li>
+                            <li>Index coverage status</li>
+                            <li>CWV status</li>
+                            <li>Key wins and blockers</li>
+                        </ul>
+
+                        <h4>Destination</h4>
+                        <ul>
+                            <li>Notion: SEO Projects DB (updated metrics)</li>
+                            <li>Drive: /04_P3_Media_and_Stores/Stores/03_General_SEO_Store/04_Tracking_and_Feeds/Reports/</li>
+                            <li>Discord: #p3-general-seo (summary post)</li>
+                        </ul>
+                    </div>
+
+                    <div class="callout callout-tip">
+                        <strong>Handoff Best Practices:</strong>
+                        <ul>
+                            <li>Always include Product_ID or Collection URL for traceability</li>
+                            <li>Use ClickUp linking to connect handoff to task workflows</li>
+                            <li>Post handoffs in Discord during working hours (avoid weekend/late-night drops)</li>
+                            <li>If urgent, @mention specific person + post in relevant channel</li>
+                            <li>Document blocking issues immediately – don't wait for sync meetings</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="kpis">
+                    <h2>📊 7. KPIs & Quality Bar</h2>
+                    
+                    <div class="section-intro">
+                        Quantitative metrics and qualitative standards that define success for P3-SEO-GOOGLE.
+                    </div>
+
+                    <h3>Quantitative KPIs</h3>
+                    <p>From L2-07 (Pod KPIs) adapted for SEO specialist:</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>KPI</th>
+                                <th>Target</th>
+                                <th>Measurement</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Organic Sessions (MoM Growth)</strong></td>
+                                <td>+10-20% MoM during growth phase</td>
+                                <td>GA4 Acquisition report (Organic Search channel)</td>
+                                <td>GA4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Organic Conversions</strong></td>
+                                <td>2-5% of organic sessions convert</td>
+                                <td>GA4 Conversions by channel</td>
+                                <td>GA4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shopping Revenue %</strong></td>
+                                <td>15-30% of total General Store revenue</td>
+                                <td>Shopify Sales by Referrer + Merchant Center</td>
+                                <td>Shopify + MC</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Indexed Pages</strong></td>
+                                <td>≥90% of submitted URLs indexed</td>
+                                <td>GSC Index Coverage report</td>
+                                <td>GSC</td>
+                            </tr>
+                            <tr>
+                                <td><strong>CWV "Good URLs" %</strong></td>
+                                <td>≥75% URLs in "Good" category</td>
+                                <td>GSC Core Web Vitals report (mobile)</td>
+                                <td>GSC</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shopping Feed Health</strong></td>
+                                <td>Zero critical disapprovals</td>
+                                <td>Merchant Center Diagnostics</td>
+                                <td>Merchant Center</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Average Position (Top Collections)</strong></td>
+                                <td>Top 3 pages rank in top 20 for primary keywords</td>
+                                <td>GSC Performance report (Position column)</td>
+                                <td>GSC</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Structural Improvements/Week</strong></td>
+                                <td>2-4 improvements deployed</td>
+                                <td>ClickUp tasks moved to SEO_DEPLOYED</td>
+                                <td>ClickUp</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="callout callout-canon">
+                        <strong>Canon Note:</strong> These KPIs support the CaniCol model's portfolio strategy. Not every product needs strong organic – the aggregate General Store effect matters. Focus on compounding returns over time.
+                    </div>
+
+                    <h3>Qualitative Standards</h3>
+
+                    <h4>Good vs. Bad: Product Page SEO</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="card">
+                            <div class="card-title" style="color: var(--success-green);">✅ Good Example</div>
+                            <ul>
+                                <li>Title: "Portable Blender for Smoothies | USB Rechargeable | DriveOn"</li>
+                                <li>Meta: "Blend anywhere with our portable USB blender. Perfect for smoothies on-the-go. Free shipping. Shop now!"</li>
+                                <li>Description: 400 words, benefit-focused, keyword-natural</li>
+                                <li>Schema: Product, AggregateRating, Offer all present</li>
+                                <li>Images: WebP, alt text, lazy load</li>
+                                <li>Mobile CWV: All "Good"</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title" style="color: var(--error-red);">❌ Bad Example</div>
+                            <ul>
+                                <li>Title: "Blender | DriveOn" (too generic)</li>
+                                <li>Meta: Missing or auto-generated</li>
+                                <li>Description: 50 words, feature list only</li>
+                                <li>Schema: Missing or incomplete</li>
+                                <li>Images: JPEG, no alt text, 5MB file size</li>
+                                <li>Mobile CWV: LCP 4.5s, CLS 0.3</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Good vs. Bad: Collection Optimization</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="card">
+                            <div class="card-title" style="color: var(--success-green);">✅ Good Example</div>
+                            <ul>
+                                <li>Title: "Best Kitchen Gadgets 2025 | Innovative Cooking Tools | DriveOn"</li>
+                                <li>H1: "Best Kitchen Gadgets for Home Chefs"</li>
+                                <li>Description: 500 words, 3 H2 sections (benefits, buying guide, FAQ)</li>
+                                <li>Internal links: 8 contextual links to products + related collections</li>
+                                <li>Schema: CollectionPage markup</li>
+                                <li>CWV: All "Good"</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title" style="color: var(--error-red);">❌ Bad Example</div>
+                            <ul>
+                                <li>Title: "Kitchen" (too vague)</li>
+                                <li>H1: Missing or same as title</li>
+                                <li>Description: 100 words, keyword stuffing</li>
+                                <li>Internal links: None or only navigation</li>
+                                <li>Schema: Missing</li>
+                                <li>CWV: Not tested or "Poor"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h4>Good vs. Bad: Shopping Feed</h4>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="card">
+                            <div class="card-title" style="color: var(--success-green);">✅ Good Example</div>
+                            <ul>
+                                <li>Title: "Portable Blender | USB Rechargeable | 400ml | Black"</li>
+                                <li>Description: Benefit-focused, 500-1000 chars, compliant</li>
+                                <li>GTIN/MPN: Present or exemption documented</li>
+                                <li>Image: 800x800px minimum, white background</li>
+                                <li>Custom labels: Margin tier, seasonality, best-seller flag</li>
+                                <li>Variants: All mapped correctly (color, size)</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <div class="card-title" style="color: var(--error-red);">❌ Bad Example</div>
+                            <ul>
+                                <li>Title: "Blender" (too generic)</li>
+                                <li>Description: Copy-paste from supplier, promotional text</li>
+                                <li>GTIN/MPN: Missing, no exemption</li>
+                                <li>Image: 200x200px, watermark, dark background</li>
+                                <li>Custom labels: Not used</li>
+                                <li>Variants: Missing or incorrect mapping</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="callout callout-warning">
+                        <strong>Common Quality Issues:</strong>
+                        <ul>
+                            <li>Keyword stuffing (ruins readability and violates Google guidelines)</li>
+                            <li>Thin content (< 300 words on collection pages)</li>
+                            <li>Broken internal links (check quarterly with Screaming Frog)</li>
+                            <li>Duplicate meta descriptions across multiple pages</li>
+                            <li>Missing or incorrect schema (always validate with Rich Results Test)</li>
+                            <li>Shopping feed disapprovals ignored for > 48 hours</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="ai">
+                    <h2>🤖 8. AI Usage & Prompt Patterns</h2>
+                    
+                    <div class="section-intro">
+                        Leverage AI tools to accelerate SEO work while maintaining quality and canon compliance. Always review AI outputs before deployment.
+                    </div>
+
+                    <h3>Where AI Helps This Role</h3>
+                    <ul>
+                        <li><strong>Keyword Research:</strong> Generate long-tail keyword ideas from seed terms</li>
+                        <li><strong>Meta Tags:</strong> Draft title tags and meta descriptions (always review for accuracy)</li>
+                        <li><strong>Product Descriptions:</strong> Expand bullet points into benefit-focused copy</li>
+                        <li><strong>Schema Markup:</strong> Generate JSON-LD schema templates</li>
+                        <li><strong>Content Gaps:</strong> Analyze competitor content and suggest improvements</li>
+                        <li><strong>Feed Optimization:</strong> Suggest product title improvements for Shopping</li>
+                    </ul>
+
+                    <h3>Human Checkpoints (Do Not Skip)</h3>
+                    <ul>
+                        <li>✅ <strong>Always verify factual accuracy</strong> (AI may hallucinate product specs)</li>
+                        <li>✅ <strong>Check keyword density</strong> (avoid AI keyword stuffing)</li>
+                        <li>✅ <strong>Validate schema</strong> (use Google Rich Results Test, not blind trust)</li>
+                        <li>✅ <strong>Review Shopping feed changes</strong> (AI may introduce policy violations)</li>
+                        <li>✅ <strong>Test CWV after AI-suggested code changes</strong> (ensure no regressions)</li>
+                    </ul>
+
+                    <h3>Ready-to-Copy AI Prompts</h3>
+
+                    <details>
+                        <summary>Prompt 1: Generate Product Page SEO Copy</summary>
+                        <div>
+                            <pre><code>I need SEO-optimized product copy for an ecommerce product page.
+
+Product: [Product Name]
+Primary Keyword: [keyword]
+AOV: $XX
+Target Customer: [brief description]
+
+Bullet Features:
+- [Feature 1]
+- [Feature 2]
+- [Feature 3]
+
+Please generate:
+1. Page Title (60 chars max): [Primary Keyword] | [Benefit] | DriveOn
+2. Meta Description (155 chars max): Include benefit, CTA, and keyword naturally
+3. Product Description (400-500 words):
+   - Opening paragraph with primary keyword
+   - 2-3 benefit-focused sections with H3 subheadings
+   - Natural keyword integration (no stuffing)
+   - Include trust signals (free shipping, warranty if applicable)
+   - Conversational tone, benefit > features
+
+Requirements:
+- Keyword density: ~1-2% for primary keyword
+- Focus on benefits, not just features
+- Include emotional trigger (convenience, status, safety)
+- End with soft CTA
+
+Please format with clear headings and keep it scannable.</code></pre>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Prompt 2: Generate Collection SEO Content</summary>
+                        <div>
+                            <pre><code>I need SEO-optimized collection page content for an ecommerce category.
+
+Collection: [Collection Name]
+Primary Keyword: [keyword]
+Long-Tail Variants: [keyword 2], [keyword 3]
+Target Audience: [brief description]
+Product Count: ~XX products
+
+Please generate:
+1. Page Title (60 chars): [Primary Keyword] | Shop [Category] | DriveOn
+2. Meta Description (155 chars): Benefit-focused, includes CTA
+3. H1 Heading: Natural phrasing with primary keyword
+4. Collection Description (500-600 words):
+   - Intro paragraph: What this collection is, who it's for, primary keyword
+   - Section 1 (H2): Top Benefits – why customers love these products
+   - Section 2 (H2): Buying Guide – how to choose the right product
+   - Section 3 (H2): FAQ – answer 3-5 common questions
+   - Naturally include long-tail keywords
+   - Add 5-8 contextual internal link suggestions (to products/related collections)
+
+Tone: Helpful, informative, not salesy
+Format: Scannable with headings, short paragraphs (3-4 lines max)
+
+Please avoid keyword stuffing and ensure content provides genuine value.</code></pre>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Prompt 3: Optimize Google Shopping Product Titles</summary>
+                        <div>
+                            <pre><code>I need to optimize product titles for Google Shopping feed compliance and performance.
+
+Current Title: [current title]
+Product Type: [type]
+Key Attributes: [e.g., size, color, material, key feature]
+Brand: [if applicable, or "Generic"]
+
+Google Shopping Best Practices:
+- Format: [Brand] + [Product Type] + [Key Attributes] (up to 150 chars)
+- Include: Most important attributes that customers search for
+- Avoid: Promotional text, ALL CAPS, gimmicky words
+
+Please generate 3 title options that:
+1. Follow Google Shopping guidelines
+2. Are specific and descriptive
+3. Include relevant search terms
+4. Differentiate from competitors
+
+Also suggest custom_label_0 value for campaign segmentation (options: best-seller, seasonal, high-margin, new-arrival).</code></pre>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Prompt 4: Generate Product Schema JSON-LD</summary>
+                        <div>
+                            <pre><code>Generate JSON-LD schema markup for a product page.
+
+Product Details:
+- Name: [Product Name]
+- Description: [Short description]
+- Brand: [Brand or "Generic"]
+- SKU: [SKU]
+- Price: $XX.XX
+- Currency: USD
+- Availability: [InStock / OutOfStock / PreOrder]
+- Condition: NewCondition
+- Image URL: [URL]
+- Rating: [X.X out of 5] (X reviews) – if available, otherwise omit
+- GTIN: [if available, otherwise omit]
+
+Please generate valid JSON-LD for:
+- Product schema (schema.org/Product)
+- AggregateRating (if rating data available)
+- Offer schema
+
+Format: Valid JSON-LD ready to paste into <script type="application/ld+json">
+Validate: Ensure all required properties are present per Google guidelines</code></pre>
+                        </div>
+                    </details>
+
+                    <details>
+                        <summary>Prompt 5: Analyze Competitor Content Gaps</summary>
+                        <div>
+                            <pre><code>Analyze competitor content and suggest improvements for my collection page.
+
+My Collection: [URL]
+My Current Word Count: ~XXX words
+My Current Headings: [H1], [H2s if any]
+
+Top 3 Competitors:
+1. [URL]
+2. [URL]
+3. [URL]
+
+Please analyze and provide:
+1. Content Gap Analysis:
+   - What topics do competitors cover that I don't?
+   - What keywords appear in their content but not mine?
+   - What questions do they answer that I should address?
+
+2. Structural Recommendations:
+   - Suggested H2/H3 outline to match or beat competitors
+   - Optimal word count target
+
+3. Differentiation Opportunities:
+   - How can I provide unique value vs. competitors?
+   - What angles or benefits can I emphasize that they miss?
+
+4. Internal Linking Suggestions:
+   - Based on competitor link structures, what internal links should I add?
+
+Format: Actionable recommendations, not just observations.</code></pre>
+                        </div>
+                    </details>
+
+                    <div class="callout callout-tip">
+                        <strong>AI Workflow Best Practices:</strong>
+                        <ul>
+                            <li>Start with AI draft → Human edit → Validate → Deploy</li>
+                            <li>Use AI for volume work (meta tags, alt text) but always spot-check</li>
+                            <li>For critical pages (top collections, best-sellers), always human-write or heavily edit AI output</li>
+                            <li>Keep AI prompts in Notion for team reuse and iteration</li>
+                            <li>Document what works/doesn't in prompt library</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="tools">
+                    <h2>🛠️ 9. Tools & Systems Reference</h2>
+                    
+                    <div class="section-intro">
+                        Comprehensive reference for all tools and platforms used by P3-SEO-GOOGLE. All tools are approved per L3 canon.
+                    </div>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Use Case</th>
+                                <th>Key Features</th>
+                                <th>Access Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Google Search Console</strong></td>
+                                <td>Index coverage, performance, CWV</td>
+                                <td>Performance report, Index Coverage, CWV, Sitemaps, Manual Actions</td>
+                                <td>Full Access (Owner or Full User)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google Analytics 4</strong></td>
+                                <td>Traffic, conversions, behavior</td>
+                                <td>Acquisition reports, Conversions, Funnels, User Explorer</td>
+                                <td>Editor or Admin</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google Merchant Center</strong></td>
+                                <td>Shopping feed, PMax coordination</td>
+                                <td>Feed Diagnostics, Performance, Promotions, Product Issues</td>
+                                <td>Admin</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Shopify Admin</strong></td>
+                                <td>Product edits, meta fields, apps</td>
+                                <td>Products, Collections, Navigation, Online Store (meta tags, theme edits)</td>
+                                <td>Staff or Admin</td>
+                            </tr>
+                            <tr>
+                                <td><strong>PageSpeed Insights</strong></td>
+                                <td>CWV testing, performance audits</td>
+                                <td>LCP/FID/CLS scores, Opportunities, Diagnostics (mobile + desktop)</td>
+                                <td>Public tool (no login)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Screaming Frog SEO Spider</strong></td>
+                                <td>Site crawls, broken links, audits</td>
+                                <td>Crawl entire site, find broken links, duplicate content, schema validation</td>
+                                <td>Local install (license)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ahrefs / Semrush</strong></td>
+                                <td>Keyword research, backlinks</td>
+                                <td>Keyword Explorer, Site Audit, Competitor Analysis, Rank Tracking</td>
+                                <td>Shared team account</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ClickUp</strong></td>
+                                <td>Task management, workflows</td>
+                                <td>P3 Media & Store space, SEO task lists, statuses, custom fields</td>
+                                <td>Member (view/edit own tasks)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Notion</strong></td>
+                                <td>SEO projects DB, docs</td>
+                                <td>SEO Projects database, metric tracking, SOPs, knowledge base</td>
+                                <td>Full Member</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google Drive</strong></td>
+                                <td>File storage, exports</td>
+                                <td>/04_P3_Media_and_Stores/Stores/03_General_SEO_Store/ (configs, feeds, reports)</td>
+                                <td>Editor on P3 folders</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discord/Slack</strong></td>
+                                <td>Team communication</td>
+                                <td>#p3-general-seo, #p4-pm-daily-standup channels</td>
+                                <td>Standard member</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Tool-Specific Workflows</h3>
+
+                    <h4>Google Search Console - Weekly Review Checklist</h4>
+                    <ul>
+                        <li>Performance Report: Check impressions, clicks, CTR, position trends (7-day view)</li>
+                        <li>Index Coverage: Review "Error" and "Valid with warnings" tabs</li>
+                        <li>Core Web Vitals: Check % of URLs in "Good" category (mobile priority)</li>
+                        <li>Manual Actions: Verify zero active penalties</li>
+                        <li>Sitemaps: Confirm submitted URLs match discovered/indexed URLs</li>
+                    </ul>
+
+                    <h4>Merchant Center - Daily Health Check</h4>
+                    <ul>
+                        <li>Feed Status: Green = good, Yellow/Red = investigate immediately</li>
+                        <li>Diagnostics: Check "Item issues" tab for disapprovals</li>
+                        <li>Performance: Quick glance at impressions/clicks trend</li>
+                        <li>Promotions: Verify active promotions match Shopify discounts</li>
+                    </ul>
+
+                    <h4>ClickUp - Status Workflow</h4>
+                    <ul>
+                        <li><strong>SEO_BACKLOG:</strong> Ideas, low-priority tasks</li>
+                        <li><strong>SEO_IN_PROGRESS:</strong> Active work (respect WIP limit: 3-4 projects)</li>
+                        <li><strong>SEO_REVIEW:</strong> Ready for QA/validation before deployment</li>
+                        <li><strong>SEO_DEPLOYED:</strong> Live and being monitored</li>
+                    </ul>
+
+                    <h4>Notion - SEO Projects Database Schema</h4>
+                    <ul>
+                        <li><strong>Project_ID:</strong> SEO-YYYYMMDD-XXX</li>
+                        <li><strong>Type:</strong> Select (Technical, Content, Shopping, CWV)</li>
+                        <li><strong>Status:</strong> Select (Backlog, In Progress, Review, Deployed, Monitoring)</li>
+                        <li><strong>Priority:</strong> Select (High, Medium, Low)</li>
+                        <li><strong>Products_Affected:</strong> Relation to Products DB</li>
+                        <li><strong>Estimated_Impact:</strong> Text (Low/Medium/High traffic potential)</li>
+                        <li><strong>Deploy_Date:</strong> Date</li>
+                        <li><strong>Metrics_Before:</strong> Text (baseline sessions, conversions)</li>
+                        <li><strong>Metrics_After:</strong> Text (30-day post-deploy)</li>
+                        <li><strong>Notes:</strong> Text (learnings, issues, next steps)</li>
+                    </ul>
+
+                    <div class="callout callout-warning">
+                        <strong>Tool Constraints:</strong>
+                        <ul>
+                            <li>Do not use unauthorized SEO SaaS tools without Ops approval (security/budget)</li>
+                            <li>Do not create new ClickUp lists or Notion DBs outside L3 structure</li>
+                            <li>All exports must be saved to canonical Drive paths per L3-04</li>
+                            <li>For new tool requests, submit to P4-OP-INTEGRATOR via #p4-systems-ops</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="escalation">
+                    <h2>🚨 10. Escalation & Decision Rights</h2>
+                    
+                    <div class="section-intro">
+                        Clear decision-making authority and escalation paths for P3-SEO-GOOGLE.
+                    </div>
+
+                    <h3>Decisions You Can Make Independently</h3>
+                    <ul>
+                        <li>✅ Product page meta tag optimization (title, description)</li>
+                        <li>✅ Collection page content optimization (within existing structure)</li>
+                        <li>✅ Internal linking additions/updates</li>
+                        <li>✅ Schema markup implementation</li>
+                        <li>✅ Image optimization (compression, alt text, lazy load)</li>
+                        <li>✅ Shopping feed attribute optimization (titles, descriptions, labels)</li>
+                        <li>✅ GSC indexing requests</li>
+                        <li>✅ CWV fixes (image optimization, code improvements within safe bounds)</li>
+                        <li>✅ Routine feed diagnostics resolution (missing GTINs, pricing errors)</li>
+                    </ul>
+
+                    <h3>Decisions Requiring Coordination</h3>
+                    <ul>
+                        <li>🤝 <strong>With P3-SB-GENERAL:</strong

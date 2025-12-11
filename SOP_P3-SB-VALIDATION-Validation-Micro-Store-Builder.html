@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P3-SB-VALIDATION – Validation / Micro Store Builder SOP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f5f7fa;
+            color: #1A1A1A;
+            line-height: 1.6;
+        }
+        .page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 32px 16px 64px;
+        }
+        .header-block {
+            background: linear-gradient(135deg, #00C8C8 0%, #007d7d 100%);
+            color: white;
+            padding: 40px 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(0, 200, 200, 0.2);
+        }
+        .header-block h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .header-block .subtitle {
+            font-size: 16px;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #e0e4ea;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .card-header {
+            border-left: 4px solid #00C8C8;
+            padding-left: 16px;
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 6px;
+        }
+        .section-subtitle {
+            font-size: 14px;
+            color: #666;
+            font-weight: 400;
+        }
+        .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: #e0faf8;
+            color: #007d7d;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .tag.pod { background: #fff4e6; color: #d97706; }
+        .tag.version { background: #ede9fe; color: #7c3aed; }
+        .meta-table, .kpi-table, .handoff-table, .tools-table, .changelog-table, .onboarding-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        .meta-table th, .kpi-table th, .handoff-table th, .tools-table th, .changelog-table th, .onboarding-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            text-align: left;
+            padding: 10px 12px;
+            border: 1px solid #e0e4ea;
+            color: #444;
+        }
+        .meta-table td, .kpi-table td, .handoff-table td, .tools-table td, .changelog-table td, .onboarding-table td {
+            padding: 10px 12px;
+            border: 1px solid #e0e4ea;
+        }
+        .meta-table tr:nth-child(even), .kpi-table tr:nth-child(even), .handoff-table tr:nth-child(even), 
+        .tools-table tr:nth-child(even), .changelog-table tr:nth-child(even), .onboarding-table tr:nth-child(even) {
+            background: #fafbfc;
+        }
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 24px 0 12px;
+            color: #1A1A1A;
+        }
+        h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin: 18px 0 10px;
+            color: #2d3748;
+        }
+        h4 {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 14px 0 8px;
+            color: #4a5568;
+        }
+        p {
+            margin: 8px 0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        ul, ol {
+            margin: 10px 0 10px 24px;
+            font-size: 14px;
+        }
+        li {
+            margin: 6px 0;
+        }
+        .time-block {
+            background: #f0f9ff;
+            border-left: 3px solid #0ea5e9;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+        .time-block .time {
+            font-weight: 700;
+            color: #0369a1;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .time-block .description {
+            font-size: 14px;
+            color: #334155;
+        }
+        .callout {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 14px 16px;
+            border-radius: 6px;
+            margin: 14px 0;
+            font-size: 14px;
+        }
+        .callout.info {
+            background: #dbeafe;
+            border-left-color: #3b82f6;
+        }
+        .callout.success {
+            background: #d1fae5;
+            border-left-color: #10b981;
+        }
+        .callout.warning {
+            background: #fef3c7;
+            border-left-color: #f59e0b;
+        }
+        .callout strong {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        .workflow-box {
+            background: #fafbfc;
+            border: 2px solid #e0e4ea;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 14px 0;
+        }
+        .workflow-box h4 {
+            margin-top: 0;
+            color: #00C8C8;
+        }
+        .workflow-section {
+            margin: 12px 0;
+        }
+        .workflow-section strong {
+            display: block;
+            color: #4a5568;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 6px;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, monospace;
+            font-size: 13px;
+            color: #e11d48;
+        }
+        .step-number {
+            display: inline-block;
+            width: 26px;
+            height: 26px;
+            background: #00C8C8;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 26px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- HEADER -->
+        <div class="header-block">
+            <h1>P3-SB-VALIDATION – Validation / Micro Store Builder</h1>
+            <p class="subtitle">Pod 3: Media & Store • Rapid Deployment & Conversion Optimization</p>
+        </div>
+
+        <!-- 1. META BLOCK -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">1. Meta Block</div>
+                <div class="section-subtitle">Role Identity & Configuration</div>
+            </div>
+            
+            <div style="margin-bottom: 16px;">
+                <span class="tag">P3-SB-VALIDATION</span>
+                <span class="tag pod">POD 3</span>
+                <span class="tag version">v1.0</span>
+            </div>
+
+            <table class="meta-table">
+                <tr>
+                    <th style="width: 200px;">Attribute</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><strong>Role ID</strong></td>
+                    <td>P3-SB-VALIDATION</td>
+                </tr>
+                <tr>
+                    <td><strong>Role Name</strong></td>
+                    <td>Validation / Micro Store Builder</td>
+                </tr>
+                <tr>
+                    <td><strong>Pod</strong></td>
+                    <td>P3 – Media & Store</td>
+                </tr>
+                <tr>
+                    <td><strong>Pipeline Stages</strong></td>
+                    <td>P2 (receives), P3 (builds & validates), P3+ (optimizes)</td>
+                </tr>
+                <tr>
+                    <td><strong>Upstream Roles</strong></td>
+                    <td>P2 Creative Team (P2-CR-LEAD, P2-CR-DESIGNER), P1 Research (product packets)</td>
+                </tr>
+                <tr>
+                    <td><strong>Downstream Roles</strong></td>
+                    <td>P3 Media Buyer (P3-MB-CORE), P3 Store Ops (P3-SO-MANAGER), P4 Operations</td>
+                </tr>
+                <tr>
+                    <td><strong>Cross-Pod</strong></td>
+                    <td>Yes – Interfaces with P1, P2, P3, P4</td>
+                </tr>
+                <tr>
+                    <td><strong>Default FTE</strong></td>
+                    <td>1.0 FTE (scales to 1.5-2.0 at higher volumes)</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Tools</strong></td>
+                    <td>Shopify, GemPages, PageFly, Replo, Shrine Theme, ClickUp, Notion, Google Drive, Discord/Slack</td>
+                </tr>
+                <tr>
+                    <td><strong>WIP Limits (per 1.0 FTE)</strong></td>
+                    <td>
+                        • Active Store Builds: ≤ 4<br>
+                        • QA Queue: ≤ 3<br>
+                        • Optimization Backlog: ≤ 8
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Weekly Throughput Target</strong></td>
+                    <td>8-12 stores deployed (P2→P3 handoff to launch-ready)</td>
+                </tr>
+                <tr>
+                    <td><strong>Primary KPIs</strong></td>
+                    <td>
+                        • Stores Deployed/Week: 8-12<br>
+                        • Avg Deployment Time: ≤ 4 hours<br>
+                        • QA Pass Rate (First Pass): ≥ 85%<br>
+                        • Store Conversion Rate: ≥ 1.5% baseline<br>
+                        • Handoff Acceptance Rate: ≥ 90%
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Notion DBs</strong></td>
+                    <td>
+                        • <strong>Store Registry</strong> (all stores + status)<br>
+                        • <strong>Store Build Tracker</strong> (active builds)<br>
+                        • <strong>Optimization Queue</strong> (live store improvements)
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Primary ClickUp Spaces</strong></td>
+                    <td>
+                        <strong>Space:</strong> Media & Store<br>
+                        <strong>Folder:</strong> Store Builds<br>
+                        <strong>Lists:</strong> Store Queue, Active Builds, QA Review, Live Stores
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Primary Discord Channels</strong></td>
+                    <td>
+                        • #p3-store-builds (build updates)<br>
+                        • #p3-media-handoffs (handoff coordination)<br>
+                        • #p3-store-qa (QA requests & feedback)
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Version</strong></td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td><strong>Last Updated</strong></td>
+                    <td>December 8, 2025</td>
+                </tr>
+                <tr>
+                    <td><strong>Author</strong></td>
+                    <td>DriveOn SOP Factory v4</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 2. ROLE PURPOSE & CONTEXT -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">2. Role Purpose & Context</div>
+                <div class="section-subtitle">Why This Role Exists in CaniCol v4.0</div>
+            </div>
+
+            <h3>Strategic Purpose</h3>
+            <p>The Validation / Micro Store Builder is the <strong>rapid deployment engine</strong> for DriveOn Commerce's CaniCol v4.0 testing model. This role converts winning creative concepts (P2 outputs) into conversion-optimized validation stores that enable fast, cost-effective product-market fit testing within the tight P3 budget constraints.</p>
+
+            <h3>Economic Context</h3>
+            <p>CaniCol v4.0 operates on <strong>lean-volume portfolio economics</strong>:</p>
+            <ul>
+                <li><strong>~45-60 products/month</strong> enter P1/P2 testing</li>
+                <li><strong>P1+P2 budget: $70-120/product</strong> (standard band $80-100)</li>
+                <li><strong>Hit rate: 4-6%</strong> (2-4 true winners per month)</li>
+                <li><strong>Portfolio thinking:</strong> rapid kill, fast scale winners</li>
+            </ul>
+
+            <p>This role enables that model by:</p>
+            <ol>
+                <li><strong>Speed:</strong> Deploying stores in 3-4 hours (not days), keeping P3 validation cycles tight</li>
+                <li><strong>Consistency:</strong> Using templated Shrine theme + proven page builder patterns to reduce variance</li>
+                <li><strong>Conversion focus:</strong> Building stores that convert at ≥1.5% baseline, maximizing signal from P3 ad spend</li>
+                <li><strong>Scalability:</strong> Handling 8-12 stores/week per FTE without founder heroics</li>
+            </ol>
+
+            <h3>Pod 3 Integration</h3>
+            <p>Pod 3 (Media & Store) is responsible for <strong>validation, scaling, and operations</strong>. The Store Builder role sits at the critical handoff point between:</p>
+            <ul>
+                <li><strong>Upstream (P2 Creative):</strong> Receives creative assets, product briefs, angle decks</li>
+                <li><strong>Downstream (P3 Media Buying):</strong> Delivers launch-ready stores with tracking, compliance, and conversion optimization</li>
+            </ul>
+
+            <p>Without this role, P3 validation would be bottlenecked by slow, inconsistent store builds or forced into low-quality "quick launch" stores that muddy test data.</p>
+
+            <h3>Holdings Alignment</h3>
+            <p>Per <strong>L0-02 Product & Brand Architecture</strong>, DriveOn Commerce is a <strong>dropshipping engine brand</strong> focused on high-velocity testing. The Store Builder role directly enables the "engine" metaphor by treating store deployment as a <strong>repeatable, standardized manufacturing process</strong>, not a creative craft project.</p>
+        </div>
+
+        <!-- 3. CANON CONSTRAINTS -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">3. Canon Constraints</div>
+                <div class="section-subtitle">Non-Negotiable Rules for This Role</div>
+            </div>
+
+            <div class="callout warning">
+                <strong>⚠️ These constraints are binding and non-negotiable.</strong>
+                Any deviation requires a Canon Change Request (CCR) via Canon Registry.
+            </div>
+
+            <h3>Economic Constraints (from L1-01, L2-05)</h3>
+            <ul>
+                <li><strong>P3 Store Build Budget:</strong> Store build labor + tools must fit within overall P3 operational budget (~$30-50/product for all P3 activities)</li>
+                <li><strong>Deployment Speed Target:</strong> ≤4 hours per store (maintains throughput economics)</li>
+                <li><strong>No Custom Development:</strong> All stores must use approved page builders (GemPages, PageFly, Replo) + Shrine theme template. No custom Liquid code without PM approval.</li>
+            </ul>
+
+            <h3>WIP & Throughput Constraints (from L2-03, L2-07)</h3>
+            <ul>
+                <li><strong>Active Store Builds WIP:</strong> ≤ 4 concurrent (per 1.0 FTE)</li>
+                <li><strong>QA Queue WIP:</strong> ≤ 3 awaiting QA review</li>
+                <li><strong>Optimization Backlog WIP:</strong> ≤ 8 live stores in optimization queue</li>
+                <li><strong>Weekly Throughput:</strong> 8-12 stores deployed (cannot drop below 8 without escalation)</li>
+            </ul>
+
+            <h3>Tool & Platform Constraints (from L2, L3)</h3>
+            <ul>
+                <li><strong>Approved Store Stack:</strong>
+                    <ul>
+                        <li>Shopify (e-commerce platform)</li>
+                        <li>GemPages, PageFly, Replo (page builders)</li>
+                        <li>Shrine Theme (template base – prepaid license available)</li>
+                    </ul>
+                </li>
+                <li><strong>Project Management:</strong> ClickUp only (no Trello, Asana, Monday.com)</li>
+                <li><strong>Documentation:</strong> Notion + Google Drive only</li>
+                <li><strong>Communication:</strong> Discord/Slack only (per L3-01)</li>
+            </ul>
+
+            <h3>Quality & Compliance Constraints</h3>
+            <ul>
+                <li><strong>Conversion Baseline:</strong> All stores must be capable of ≥1.5% CR with proper traffic (validated via QA checklist)</li>
+                <li><strong>Load Time:</strong> ≤ 3 seconds on mobile (4G network simulation)</li>
+                <li><strong>Compliance:</strong> Must pass Shopify compliance + payment processor requirements (documented in L2-09 Offer Ladder & Risk Guardrails)</li>
+                <li><strong>Brand Consistency:</strong> Visual consistency with DriveOn Master Brand Platform (L2-08) where applicable to product stores</li>
+            </ul>
+
+            <h3>Handoff Rules (from L2-01 Standard Ops Binding)</h3>
+            <ul>
+                <li><strong>Cannot accept incomplete P2 handoff:</strong> Must include all required creative assets + product brief (see Workflow 1 inputs)</li>
+                <li><strong>Cannot handoff to Media Buyer without QA sign-off:</strong> 100% QA checklist completion required</li>
+                <li><strong>Must document all store configs in Notion Store Registry:</strong> No undocumented stores or "quick launches"</li>
+            </ul>
+        </div>
+
+        <!-- 4. DAY-IN-THE-LIFE TIMELINE -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">4. Day-in-the-Life Timeline</div>
+                <div class="section-subtitle">Typical 8-Hour Workday Structure</div>
+            </div>
+
+            <p>This timeline represents a <strong>standard operational day</strong> at steady-state volume (8-12 stores/week). Adjust blocks based on weekly priorities and incoming queue depth.</p>
+
+            <div class="time-block">
+                <div class="time">9:00 AM - 9:30 AM (30 min)</div>
+                <div class="description">
+                    <strong>Daily Standup & Queue Review</strong><br>
+                    • Review ClickUp "Store Queue" list for new P2 handoffs<br>
+                    • Check Discord #p3-store-builds for overnight messages<br>
+                    • Triage priority: urgent launches, optimization requests, QA blockers<br>
+                    • Update ClickUp statuses for in-progress stores<br>
+                    • Post daily plan to #p3-store-builds
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">9:30 AM - 11:00 AM (90 min)</div>
+                <div class="description">
+                    <strong>Deep Work Block 1: Store Deployment</strong><br>
+                    • Deploy 1-2 new stores from Store Queue (Workflow 1)<br>
+                    • Shrine theme setup + base config<br>
+                    • Initial page builder work (homepage + product page foundation)<br>
+                    • Asset upload and basic product setup<br>
+                    • Target: 2 stores moved from "Store Queue" → "Active Builds"
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">11:00 AM - 12:00 PM (60 min)</div>
+                <div class="description">
+                    <strong>Page Customization & Design Polish</strong><br>
+                    • GemPages/PageFly/Replo page building (Workflow 2)<br>
+                    • Homepage: hero, benefits, trust signals, social proof<br>
+                    • Product page: gallery, copy integration, CTA optimization<br>
+                    • Mobile responsiveness check<br>
+                    • Target: 1-2 stores advanced in build progress
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">12:00 PM - 1:00 PM (60 min)</div>
+                <div class="description">
+                    <strong>Lunch Break + Async Communication</strong><br>
+                    • Respond to Discord/Slack messages<br>
+                    • Review any creative updates or Media Buyer feedback<br>
+                    • Check email for payment processor or compliance notifications
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">1:00 PM - 2:30 PM (90 min)</div>
+                <div class="description">
+                    <strong>Deep Work Block 2: QA & Launch Prep</strong><br>
+                    • Run full QA checklist on 2-3 stores (Workflow 3)<br>
+                    • Mobile + desktop testing<br>
+                    • Cart/checkout flow validation<br>
+                    • Tracking pixel verification (if applicable)<br>
+                    • Fix any QA issues discovered<br>
+                    • Target: 2 stores moved from "Active Builds" → "QA Review" → "Live Stores"
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">2:30 PM - 4:00 PM (90 min)</div>
+                <div class="description">
+                    <strong>Optimization & Iteration Work</strong><br>
+                    • Review live store performance data from Media Buyers (Workflow 5)<br>
+                    • Implement conversion rate optimizations (CRO)<br>
+                    • A/B test setup (if data supports it)<br>
+                    • Update product pages based on customer feedback<br>
+                    • Target: 2-3 optimization tasks completed
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">4:00 PM - 4:45 PM (45 min)</div>
+                <div class="description">
+                    <strong>Handoffs & Documentation</strong><br>
+                    • Complete Media Buyer handoffs (Workflow 4)<br>
+                    • Update Notion Store Registry with all store configs<br>
+                    • Document any new patterns or learnings in Drive<br>
+                    • Post handoff notifications to #p3-media-handoffs<br>
+                    • Update ClickUp custom fields (tracking links, store URLs, etc.)
+                </div>
+            </div>
+
+            <div class="time-block">
+                <div class="time">4:45 PM - 5:00 PM (15 min)</div>
+                <div class="description">
+                    <strong>End-of-Day Review & Planning</strong><br>
+                    • Update personal task tracker<br>
+                    • Flag any blockers for tomorrow<br>
+                    • Review WIP limits (ensure ≤4 active builds, ≤3 QA queue)<br>
+                    • Plan next day's priority builds
+                </div>
+            </div>
+
+            <div class="callout info">
+                <strong>📊 Daily Output Targets:</strong><br>
+                • 2 new store deployments started<br>
+                • 2 stores moved through QA to launch-ready<br>
+                • 2-3 optimization tasks completed<br>
+                • 100% handoff documentation updated
+            </div>
+        </div>
+
+        <!-- 5. CORE WORKFLOWS -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">5. Core Workflows</div>
+                <div class="section-subtitle">Explicit, Step-by-Step Processes</div>
+            </div>
+
+            <!-- WORKFLOW 1 -->
+            <div class="workflow-box">
+                <h4>Workflow 1: Store Setup & Template Deployment</h4>
+                
+                <div class="workflow-section">
+                    <strong>Trigger:</strong>
+                    <p>New product handoff from P2 Creative appears in ClickUp "Store Queue" list with status = <code>READY_FOR_STORE_BUILD</code></p>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Inputs:</strong>
+                    <ul>
+                        <li><strong>From P2 Creative (via ClickUp task):</strong>
+                            <ul>
+                                <li>Product Brief (Notion link or Drive doc)</li>
+                                <li>Creative Assets Package (Drive folder):
+                                    <ul>
+                                        <li>Logo/brand assets (if branded product)</li>
+                                        <li>Product images (5-10 high-res)</li>
+                                        <li>Lifestyle images (3-5)</li>
+                                        <li>Hero/banner images (2-3 variants)</li>
+                                        <li>Video assets (optional, if available)</li>
+                                    </ul>
+                                </li>
+                                <li>Angle Deck (primary selling angle + hooks)</li>
+                                <li>Product Copy (headlines, benefits, descriptions)</li>
+                            </ul>
+                        </li>
+                        <li><strong>From Notion "Product Packets" DB:</strong>
+                            <ul>
+                                <li>Product ID (PRD-YYYYMMDD-XXX)</li>
+                                <li>Supplier link (for product details/specs)</li>
+                                <li>Pricing guidance (AOV target)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Steps:</strong>
+                    <ol>
+                        <li><span class="step-number">1</span> <strong>Validate P2 Handoff:</strong> Open ClickUp task and verify all inputs are present. If incomplete, move to <code>BLOCKED_INCOMPLETE_HANDOFF</code> and notify P2 Creative Lead in #p3-store-builds.</li>
+                        
+                        <li><span class="step-number">2</span> <strong>Create Shopify Store:</strong>
+                            <ul>
+                                <li>Log into Shopify admin</li>
+                                <li>Create new store: <code>[Product_Name]_Validation_Store</code></li>
+                                <li>Set up subdomain: <code>product-name-test.myshopify.com</code></li>
+                                <li>Configure basic settings (timezone, currency, checkout settings)</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">3</span> <strong>Deploy Shrine Theme Template:</strong>
+                            <ul>
+                                <li>Access prepaid Shrine theme library in Shopify</li>
+                                <li>Install Shrine base template (use "Validation V2" preset)</li>
+                                <li>Activate theme and duplicate as backup</li>
+                                <li>Configure theme settings:
+                                    <ul>
+                                        <li>Colors (match product brief if branded, else neutral/high-contrast)</li>
+                                        <li>Typography (sans-serif default for readability)</li>
+                                        <li>Header/footer basics</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">4</span> <strong>Install & Configure Page Builder:</strong>
+                            <ul>
+                                <li>Choose builder based on product type:
+                                    <ul>
+                                        <li><strong>GemPages:</strong> General use, fast deployment</li>
+                                        <li><strong>PageFly:</strong> High-image products, visual heavy</li>
+                                        <li><strong>Replo:</strong> A/B testing focus, iteration-heavy products</li>
+                                    </ul>
+                                </li>
+                                <li>Install app from Shopify App Store</li>
+                                <li>Import baseline template (if available for chosen builder)</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">5</span> <strong>Create Product in Shopify:</strong>
+                            <ul>
+                                <li>Product title (from brief)</li>
+                                <li>Product description (copy from P2 brief)</li>
+                                <li>Upload product images (5-10 from creative package)</li>
+                                <li>Set pricing (use AOV target from research packet)</li>
+                                <li>Configure variants (if applicable)</li>
+                                <li>Set inventory (mark as "track quantity" = off for validation stores)</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">6</span> <strong>Update ClickUp Task:</strong>
+                            <ul>
+                                <li>Move status: <code>READY_FOR_STORE_BUILD</code> → <code>ACTIVE_BUILD</code></li>
+                                <li>Set custom fields:
+                                    <ul>
+                                        <li>Store URL: <code>product-name-test.myshopify.com</code></li>
+                                        <li>Page Builder Used: [GemPages/PageFly/Replo]</li>
+                                        <li>Deployment Started: [timestamp]</li>
+                                    </ul>
+                                </li>
+                                <li>Assign to self</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">7</span> <strong>Update Notion Store Registry:</strong>
+                            <ul>
+                                <li>Create new row in "Store Build Tracker" DB</li>
+                                <li>Fields:
+                                    <ul>
+                                        <li>Store ID: [auto-generated]</li>
+                                        <li>Product ID: PRD-YYYYMMDD-XXX</li>
+                                        <li>Store URL: [Shopify link]</li>
+                                        <li>Status: Active Build</li>
+                                        <li>Builder: [Your name]</li>
+                                        <li>Started Date: [today]</li>
+                                        <li>Target Launch: [today + 1 day]</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">8</span> <strong>Notify P3 Team:</strong> Post to #p3-store-builds:
+                            <pre>🏗️ New Store Build Started
+Product: [Product Name]
+Product ID: PRD-YYYYMMDD-XXX
+Store URL: [link]
+Target Launch: [date]
+Builder: @[Your Name]</pre>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Outputs:</strong>
+                    <ul>
+                        <li>✅ Live Shopify store with Shrine theme deployed</li>
+                        <li>✅ Product created with basic details and images</li>
+                        <li>✅ Page builder installed and ready</li>
+                        <li>✅ ClickUp task updated to <code>ACTIVE_BUILD</code></li>
+                        <li>✅ Notion Store Registry entry created</li>
+                        <li>✅ Team notification posted</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Quality Checks:</strong>
+                    <ul>
+                        <li>Store loads without errors (check frontend)</li>
+                        <li>Product page displays correctly with images</li>
+                        <li>Theme settings match product brief (if branded)</li>
+                        <li>All P2 assets are downloaded and accessible</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Handoff:</strong>
+                    <p>Internal handoff to self for Workflow 2 (Page Customization). No external handoff at this stage.</p>
+                </div>
+            </div>
+
+            <!-- WORKFLOW 2 -->
+            <div class="workflow-box">
+                <h4>Workflow 2: Page Building & Customization</h4>
+                
+                <div class="workflow-section">
+                    <strong>Trigger:</strong>
+                    <p>Store in ClickUp "Active Builds" list with status = <code>ACTIVE_BUILD</code> and basic Shopify setup complete (from Workflow 1)</p>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Inputs:</strong>
+                    <ul>
+                        <li>Deployed Shopify store (from Workflow 1)</li>
+                        <li>Creative Assets Package (from P2)</li>
+                        <li>Angle Deck (primary hooks and selling points)</li>
+                        <li>Product Copy (headlines, benefits, CTA text)</li>
+                        <li>Page Builder Templates (GemPages/PageFly/Replo library)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Steps:</strong>
+                    <ol>
+                        <li><span class="step-number">1</span> <strong>Homepage Build:</strong>
+                            <ul>
+                                <li>Open page builder (GemPages/PageFly/Replo)</li>
+                                <li>Create new homepage using "Validation Homepage V2" template</li>
+                                <li>Customize sections:
+                                    <ul>
+                                        <li><strong>Hero Section:</strong> Primary hook + hero image/video + CTA button</li>
+                                        <li><strong>Problem Section:</strong> Pain points (3-5 bullets)</li>
+                                        <li><strong>Solution Section:</strong> Product benefits (3-5 bullets with icons)</li>
+                                        <li><strong>How It Works:</strong> 3-step process (numbered with icons)</li>
+                                        <li><strong>Social Proof:</strong> Trust badges, testimonials (if available), guarantee</li>
+                                        <li><strong>Final CTA:</strong> Strong offer + urgency (if applicable)</li>
+                                    </ul>
+                                </li>
+                                <li>Replace placeholder images with P2 creative assets</li>
+                                <li>Insert copy from product brief</li>
+                                <li>Configure CTA buttons to link to product page</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">2</span> <strong>Product Page Build:</strong>
+                            <ul>
+                                <li>Open product page in page builder</li>
+                                <li>Use "Validation Product Page V2" template</li>
+                                <li>Customize sections:
+                                    <ul>
+                                        <li><strong>Product Gallery:</strong> 5-10 images, video (if available), zoom enabled</li>
+                                        <li><strong>Product Info:</strong> Title, price, brief description, variant selector</li>
+                                        <li><strong>ATC Button:</strong> High-contrast, above fold, sticky on mobile</li>
+                                        <li><strong>Key Benefits:</strong> 4-6 benefit callouts with icons</li>
+                                        <li><strong>Detailed Description:</strong> Long-form copy from brief</li>
+                                        <li><strong>FAQs:</strong> 3-5 common questions (use template if product brief doesn't have specific FAQs)</li>
+                                        <li><strong>Trust Signals:</strong> Guarantee, shipping, secure checkout badges</li>
+                                    </ul>
+                                </li>
+                                <li>Optimize for mobile (primary traffic source for validation ads)</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">3</span> <strong>Mobile Optimization Pass:</strong>
+                            <ul>
+                                <li>Switch page builder to mobile preview mode</li>
+                                <li>Check all sections render correctly on mobile</li>
+                                <li>Adjust:
+                                    <ul>
+                                        <li>Font sizes (headlines ≥24px, body ≥16px)</li>
+                                        <li>Button sizes (≥44px height for tap targets)</li>
+                                        <li>Image aspect ratios (portrait images for mobile)</li>
+                                        <li>Spacing (increase padding on mobile for readability)</li>
+                                    </ul>
+                                </li>
+                                <li>Test tap/click interactions</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">4</span> <strong>Conversion Optimization Checklist:</strong>
+                            <ul>
+                                <li>✓ Primary CTA above the fold on both desktop and mobile</li>
+                                <li>✓ Hero image/video is high-quality and attention-grabbing</li>
+                                <li>✓ Benefit statements are clear and specific (not vague)</li>
+                                <li>✓ Social proof elements present (trust badges, testimonials, reviews)</li>
+                                <li>✓ Guarantee/risk reversal clearly stated</li>
+                                <li>✓ Checkout flow is 1-2 steps max (Shopify standard or Checkout Extensions)</li>
+                                <li>✓ Product price is visible and clear</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">5</span> <strong>Page Speed Check:</strong>
+                            <ul>
+                                <li>Save and publish pages</li>
+                                <li>Test store load time using:
+                                    <ul>
+                                        <li>Chrome DevTools (Network tab, "Slow 3G" simulation)</li>
+                                        <li>Google PageSpeed Insights (mobile score should be ≥70)</li>
+                                    </ul>
+                                </li>
+                                <li>If load time > 3 seconds or PageSpeed < 70:
+                                    <ul>
+                                        <li>Compress images (use TinyPNG or Shopify image optimization)</li>
+                                        <li>Remove unnecessary page builder elements</li>
+                                        <li>Disable unused theme features</li>
+                                        <li>Re-test until passing</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">6</span> <strong>Internal Preview & Self-QA:</strong>
+                            <ul>
+                                <li>Navigate store as a customer (incognito mode)</li>
+                                <li>Test user flow: Homepage → Product Page → Add to Cart → Checkout (don't complete purchase)</li>
+                                <li>Check for:
+                                    <ul>
+                                        <li>Broken images or links</li>
+                                        <li>Typos or copy errors</li>
+                                        <li>Layout issues on mobile</li>
+                                        <li>CTA buttons working correctly</li>
+                                    </ul>
+                                </li>
+                                <li>Fix any issues found</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">7</span> <strong>Update ClickUp Task:</strong>
+                            <ul>
+                                <li>Move status: <code>ACTIVE_BUILD</code> → <code>BUILD_COMPLETE</code></li>
+                                <li>Add comment: "Homepage and product page built. Ready for QA."</li>
+                                <li>Update custom field: "Build Completed": [timestamp]</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Outputs:</strong>
+                    <ul>
+                        <li>✅ Fully built homepage (all sections complete)</li>
+                        <li>✅ Fully built product page (all sections complete)</li>
+                        <li>✅ Mobile-optimized layouts</li>
+                        <li>✅ Page speed ≤3 seconds</li>
+                        <li>✅ Self-QA complete, no obvious errors</li>
+                        <li>✅ ClickUp task moved to <code>BUILD_COMPLETE</code></li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Quality Checks:</strong>
+                    <ul>
+                        <li>All P2 creative assets are used (nothing missing)</li>
+                        <li>Copy matches product brief and angle deck</li>
+                        <li>Mobile layout passes eyeball test (no text cutoffs, images scale correctly)</li>
+                        <li>CTAs are functional and link correctly</li>
+                        <li>No placeholder text or images remain</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Handoff:</strong>
+                    <p>Internal handoff to self for Workflow 3 (QA & Launch Prep). Store is now ready for formal QA review.</p>
+                </div>
+            </div>
+
+            <!-- WORKFLOW 3 -->
+            <div class="workflow-box">
+                <h4>Workflow 3: Store Validation & QA</h4>
+                
+                <div class="workflow-section">
+                    <strong>Trigger:</strong>
+                    <p>Store in ClickUp with status = <code>BUILD_COMPLETE</code> and all pages built (from Workflow 2)</p>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Inputs:</strong>
+                    <ul>
+                        <li>Built Shopify store (from Workflow 2)</li>
+                        <li>QA Checklist (Drive template: "Store_QA_Checklist_v4.xlsx")</li>
+                        <li>Canon compliance rules (from L2-09 Offer Ladder & Risk Guardrails)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Steps:</strong>
+                    <ol>
+                        <li><span class="step-number">1</span> <strong>Functional QA (Desktop):</strong>
+                            <ul>
+                                <li>Open store in Chrome (desktop mode)</li>
+                                <li>Test full customer journey:
+                                    <ul>
+                                        <li>Homepage loads correctly (no errors, all images load)</li>
+                                        <li>Click CTA → lands on product page</li>
+                                        <li>Product page displays correctly</li>
+                                        <li>Select variant (if applicable) → works correctly</li>
+                                        <li>Click "Add to Cart" → cart updates</li>
+                                        <li>View cart → shows correct product and price</li>
+                                        <li>Click "Checkout" → Shopify checkout loads</li>
+                                        <li>Test info → proceed to payment (don't complete)</li>
+                                    </ul>
+                                </li>
+                                <li>Check all links (header nav, footer links) → no 404s</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">2</span> <strong>Functional QA (Mobile):</strong>
+                            <ul>
+                                <li>Open store in Chrome mobile emulator (iPhone 12 Pro or similar)</li>
+                                <li>Repeat full customer journey from step 1</li>
+                                <li>Additional mobile checks:
+                                    <ul>
+                                        <li>Tap targets are large enough (≥44px)</li>
+                                        <li>Text is readable without zooming</li>
+                                        <li>Images don't overflow or break layout</li>
+                                        <li>Sticky elements (header, ATC button) work correctly</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">3</span> <strong>Performance QA:</strong>
+                            <ul>
+                                <li>Run Google PageSpeed Insights on:
+                                    <ul>
+                                        <li>Homepage URL</li>
+                                        <li>Product page URL</li>
+                                    </ul>
+                                </li>
+                                <li>Required scores:
+                                    <ul>
+                                        <li>Mobile: ≥70 (acceptable), ≥85 (good)</li>
+                                        <li>Desktop: ≥80 (acceptable), ≥90 (good)</li>
+                                    </ul>
+                                </li>
+                                <li>If failing: go back to Workflow 2, step 5 (page speed optimization)</li>
+                                <li>Test load time with Chrome DevTools:
+                                    <ul>
+                                        <li>Network tab → "Slow 3G" throttling</li>
+                                        <li>Load time should be ≤3 seconds</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">4</span> <strong>Content & Copy QA:</strong>
+                            <ul>
+                                <li>Spell check all copy (use Grammarly or browser spell check)</li>
+                                <li>Verify copy matches P2 brief and angle deck</li>
+                                <li>Check for:
+                                    <ul>
+                                        <li>Placeholder text (lorem ipsum, [INSERT X HERE])</li>
+                                        <li>Typos or grammatical errors</li>
+                                        <li>Inconsistent formatting (font sizes, colors)</li>
+                                        <li>Broken formatting (text overlapping images, etc.)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">5</span> <strong>Compliance QA (from L2-09):</strong>
+                            <ul>
+                                <li>Check offer structure:
+                                    <ul>
+                                        <li>No false scarcity (countdown timers, fake limited stock)</li>
+                                        <li>No health claims (if applicable to product category)</li>
+                                        <li>No misleading guarantees (e.g., "100% guaranteed weight loss")</li>
+                                    </ul>
+                                </li>
+                                <li>Check legal pages:
+                                    <ul>
+                                        <li>Privacy Policy exists and is accessible (Shopify default is acceptable for validation stores)</li>
+                                        <li>Terms of Service exists</li>
+                                        <li>Refund Policy exists (30-day minimum per canon)</li>
+                                    </ul>
+                                </li>
+                                <li>Check payment processor requirements (Stripe/Shopify Payments):
+                                    <ul>
+                                        <li>Clear refund policy</li>
+                                        <li>Contact information visible (email or phone)</li>
+                                        <li>No prohibited products (weapons, adult content, etc.)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">6</span> <strong>Conversion Baseline QA:</strong>
+                            <ul>
+                                <li>Evaluate store against ≥1.5% CR baseline criteria:
+                                    <ul>
+                                        <li>✓ Clear value proposition above fold</li>
+                                        <li>✓ High-quality product images (≥5 images)</li>
+                                        <li>✓ Trust signals present (badges, guarantee, testimonials)</li>
+                                        <li>✓ Mobile-optimized (most traffic will be mobile)</li>
+                                        <li>✓ Fast load time (≤3 seconds)</li>
+                                        <li>✓ Simple checkout (Shopify standard checkout)</li>
+                                    </ul>
+                                </li>
+                                <li>If ≥5/6 criteria pass → store is CR-ready</li>
+                                <li>If <5/6 criteria pass → flag for rework</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">7</span> <strong>Document QA Results:</strong>
+                            <ul>
+                                <li>Fill out QA Checklist spreadsheet (Drive template)</li>
+                                <li>Mark each item as:
+                                    <ul>
+                                        <li>✅ PASS</li>
+                                        <li>⚠️ MINOR ISSUE (fix before launch)</li>
+                                        <li>❌ MAJOR ISSUE (blocks launch)</li>
+                                    </ul>
+                                </li>
+                                <li>Take screenshots of any issues</li>
+                                <li>Save checklist to Drive: <code>/DriveOn Commerce/Store Builds/QA Reports/[Product_ID]_QA_Report.xlsx</code></li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">8</span> <strong>Handle QA Outcomes:</strong>
+                            <ul>
+                                <li><strong>If ALL PASS:</strong>
+                                    <ul>
+                                        <li>Move ClickUp status: <code>BUILD_COMPLETE</code> → <code>QA_APPROVED</code></li>
+                                        <li>Proceed to Workflow 4 (Media Buyer Handoff)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>If MINOR ISSUES:</strong>
+                                    <ul>
+                                        <li>Fix issues immediately (≤30 min)</li>
+                                        <li>Re-run affected QA checks</li>
+                                        <li>If pass → move to <code>QA_APPROVED</code></li>
+                                    </ul>
+                                </li>
+                                <li><strong>If MAJOR ISSUES:</strong>
+                                    <ul>
+                                        <li>Move ClickUp status: <code>BUILD_COMPLETE</code> → <code>QA_FAILED</code></li>
+                                        <li>Assign back to self for rework</li>
+                                        <li>Post issue summary to #p3-store-qa</li>
+                                        <li>Return to Workflow 2 to fix, then re-run this workflow</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">9</span> <strong>Update Notion Store Registry:</strong>
+                            <ul>
+                                <li>Change status: "Active Build" → "QA Complete"</li>
+                                <li>Add QA Date: [today]</li>
+                                <li>Add QA Result: [PASS/MINOR/MAJOR]</li>
+                                <li>Link QA Report (Drive URL)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Outputs:</strong>
+                    <ul>
+                        <li>✅ Completed QA Checklist (saved to Drive)</li>
+                        <li>✅ ClickUp task moved to <code>QA_APPROVED</code> (if passing)</li>
+                        <li>✅ Notion Store Registry updated with QA results</li>
+                        <li>✅ Store is launch-ready (if QA passed)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Quality Checks:</strong>
+                    <ul>
+                        <li>100% of QA checklist items completed (no skipped items)</li>
+                        <li>All major issues resolved before handoff</li>
+                        <li>QA report saved to correct Drive location</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Handoff:</strong>
+                    <p><strong>FROM:</strong> Store Builder (P3-SB-VALIDATION) → <strong>TO:</strong> Media Buyer (P3-MB-CORE)<br>
+                    Store is QA-approved and ready for Media Buyer to launch ads. Proceed to Workflow 4.</p>
+                </div>
+            </div>
+
+            <!-- WORKFLOW 4 -->
+            <div class="workflow-box">
+                <h4>Workflow 4: Media Buyer Handoff</h4>
+                
+                <div class="workflow-section">
+                    <strong>Trigger:</strong>
+                    <p>Store in ClickUp with status = <code>QA_APPROVED</code> and QA checklist 100% complete (from Workflow 3)</p>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Inputs:</strong>
+                    <ul>
+                        <li>QA-approved Shopify store</li>
+                        <li>QA Report (Drive link)</li>
+                        <li>Product Brief (from P2)</li>
+                        <li>Creative Assets Package (from P2)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Steps:</strong>
+                    <ol>
+                        <li><span class="step-number">1</span> <strong>Prepare Handoff Package:</strong>
+                            <ul>
+                                <li>Create "Media Buyer Handoff Doc" in Notion (or use template)</li>
+                                <li>Include:
+                                    <ul>
+                                        <li><strong>Store URL:</strong> [Shopify link]</li>
+                                        <li><strong>Product ID:</strong> PRD-YYYYMMDD-XXX</li>
+                                        <li><strong>Product Brief Link:</strong> [Notion or Drive]</li>
+                                        <li><strong>Creative Assets Folder:</strong> [Drive link]</li>
+                                        <li><strong>Primary Angle:</strong> [from angle deck]</li>
+                                        <li><strong>QA Report:</strong> [Drive link]</li>
+                                        <li><strong>Page Builder Used:</strong> [GemPages/PageFly/Replo]</li>
+                                        <li><strong>Tracking Setup Status:</strong> [if pixels/tracking added, note here; otherwise "None - Media Buyer to add"]</li>
+                                        <li><strong>Launch-Ready Date:</strong> [today]</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">2</span> <strong>Update ClickUp Task:</strong>
+                            <ul>
+                                <li>Move status: <code>QA_APPROVED</code> → <code>READY_FOR_MEDIA</code></li>
+                                <li>Assign to Media Buyer (tag their ClickUp user)</li>
+                                <li>Add comment with handoff summary:
+<pre>"Store QA complete and ready for launch.
+- Store URL: [link]
+- QA Report: [link]
+- Handoff Doc: [Notion link]
+@[Media_Buyer_Name] - ready for your ad setup."</pre>
+                                </li>
+                                <li>Set due date: [Today + 2 days] (gives Media Buyer 48h to launch)</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">3</span> <strong>Update Notion Store Registry:</strong>
+                            <ul>
+                                <li>Change status: "QA Complete" → "Handed to Media"</li>
+                                <li>Set "Media Buyer": [Assigned person]</li>
+                                <li>Set "Handoff Date": [today]</li>
+                                <li>Link Handoff Doc (Notion link)</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">4</span> <strong>Notify Media Buyer (Discord):</strong>
+                            <ul>
+                                <li>Post to #p3-media-handoffs:
+<pre>🚀 <strong>Store Ready for Launch</strong>
+
+<strong>Product:</strong> [Product Name]
+<strong>Product ID:</strong> PRD-YYYYMMDD-XXX
+<strong>Store URL:</strong> [link]
+<strong>Handoff Doc:</strong> [Notion link]
+<strong>Primary Angle:</strong> [brief summary]
+
+<strong>QA Status:</strong> ✅ All checks passed
+<strong>Next Step:</strong> @[Media_Buyer_Name] - setup ad campaigns
+
+<strong>Store Builder:</strong> @[Your Name]
+<strong>Handoff Date:</strong> [today]</pre>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">5</span> <strong>Optional: Brief Sync Call (if needed):</strong>
+                            <ul>
+                                <li>If complex product or special requirements → schedule 15-min sync with Media Buyer</li>
+                                <li>Walk through:
+                                    <ul>
+                                        <li>Key angles and hooks</li>
+                                        <li>Any unique store features or CRO elements</li>
+                                        <li>Optimization recommendations based on build learnings</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">6</span> <strong>Archive Build Files:</strong>
+                            <ul>
+                                <li>Move working files from <code>/Store Builds/Active/</code> to <code>/Store Builds/Archive/[Product_ID]/</code> in Drive</li>
+                                <li>Include:
+                                    <ul>
+                                        <li>QA checklist</li>
+                                        <li>Build notes</li>
+                                        <li>Screenshots</li>
+                                        <li>Any custom assets created</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">7</span> <strong>Update WIP Tracking:</strong>
+                            <ul>
+                                <li>Decrement "Active Builds" counter (personal tracker or team dashboard)</li>
+                                <li>Verify WIP limits: ensure still ≤4 active builds, ≤3 in QA queue</li>
+                                <li>Pull next store from ClickUp "Store Queue" if capacity available</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Outputs:</strong>
+                    <ul>
+                        <li>✅ Media Buyer Handoff Doc created (Notion)</li>
+                        <li>✅ ClickUp task moved to <code>READY_FOR_MEDIA</code> and assigned to Media Buyer</li>
+                        <li>✅ Notion Store Registry updated to "Handed to Media"</li>
+                        <li>✅ Discord notification posted to #p3-media-handoffs</li>
+                        <li>✅ Build files archived in Drive</li>
+                        <li>✅ WIP counters updated</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Quality Checks:</strong>
+                    <ul>
+                        <li>All handoff doc fields are complete (no [TBD] or blanks)</li>
+                        <li>Store URL is correct and accessible</li>
+                        <li>QA report is linked and accessible</li>
+                        <li>Media Buyer is tagged/notified correctly</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Handoff:</strong>
+                    <p><strong>FROM:</strong> Store Builder (P3-SB-VALIDATION) → <strong>TO:</strong> Media Buyer (P3-MB-CORE)<br>
+                    <strong>Tool:</strong> ClickUp + Notion + Discord<br>
+                    <strong>Location:</strong> ClickUp task moved to "Live Stores" list (monitored by Media Buyer)<br>
+                    <strong>Output:</strong> Launch-ready store with all documentation</p>
+                </div>
+            </div>
+
+            <!-- WORKFLOW 5 -->
+            <div class="workflow-box">
+                <h4>Workflow 5: Store Optimization & Iteration</h4>
+                
+                <div class="workflow-section">
+                    <strong>Trigger:</strong>
+                    <p>One of the following:
+                    <ul>
+                        <li>Media Buyer requests optimization in #p3-store-qa or via ClickUp task</li>
+                        <li>Store has been live for 7+ days with ≥500 sessions</li>
+                        <li>Conversion rate < 1.0% after initial launch</li>
+                        <li>Weekly optimization review cycle (Fridays)</li>
+                    </ul>
+                    </p>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Inputs:</strong>
+                    <ul>
+                        <li><strong>From Media Buyer:</strong>
+                            <ul>
+                                <li>Shopify Analytics access (sessions, CR%, bounce rate, cart abandonment)</li>
+                                <li>Ad performance data (CTR, CPC, landing page behavior)</li>
+                                <li>Specific optimization requests or pain points</li>
+                            </ul>
+                        </li>
+                        <li><strong>From Shopify Analytics:</strong>
+                            <ul>
+                                <li>Top landing pages</li>
+                                <li>Session recordings (if Hotjar/similar installed)</li>
+                                <li>Cart abandonment rate</li>
+                                <li>Mobile vs desktop performance</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Steps:</strong>
+                    <ol>
+                        <li><span class="step-number">1</span> <strong>Review Performance Data:</strong>
+                            <ul>
+                                <li>Open Shopify Analytics for the store</li>
+                                <li>Review past 7 days:
+                                    <ul>
+                                        <li>Sessions: [number]</li>
+                                        <li>Conversion Rate: [%]</li>
+                                        <li>Bounce Rate: [%]</li>
+                                        <li>Average Session Duration: [seconds]</li>
+                                        <li>Cart Abandonment Rate: [%]</li>
+                                    </ul>
+                                </li>
+                                <li>Identify bottlenecks:
+                                    <ul>
+                                        <li>High bounce rate (>70%) → landing page issue</li>
+                                        <li>Low ATC rate (<5%) → product page issue</li>
+                                        <li>High cart abandonment (>80%) → checkout/pricing issue</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">2</span> <strong>Prioritize Optimization Targets:</strong>
+                            <ul>
+                                <li>Use CRO hierarchy:
+                                    <ol>
+                                        <li><strong>High-impact, low-effort:</strong> Above-fold CTA, hero image, headline</li>
+                                        <li><strong>High-impact, medium-effort:</strong> Product images, benefits section, social proof</li>
+                                        <li><strong>Medium-impact, low-effort:</strong> Button colors, urgency elements, FAQs</li>
+                                        <li><strong>Low-impact or high-effort:</strong> Defer unless data strongly supports</li>
+                                    </ol>
+                                </li>
+                                <li>Select 1-3 optimizations to test (don't change everything at once)</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">3</span> <strong>Implement Optimizations:</strong>
+                            <ul>
+                                <li>Common CRO tactics:
+                                    <ul>
+                                        <li><strong>If bounce rate is high:</strong>
+                                            <ul>
+                                                <li>Improve hero section (stronger hook, better image)</li>
+                                                <li>Reduce page load time (compress images)</li>
+                                                <li>Simplify above-fold content (less clutter)</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>If ATC rate is low:</strong>
+                                            <ul>
+                                                <li>Add more product images (show product in use)</li>
+                                                <li>Strengthen benefit statements</li>
+                                                <li>Add urgency (limited stock, timer if appropriate)</li>
+                                                <li>Improve social proof (add reviews widget if available)</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>If cart abandonment is high:</strong>
+                                            <ul>
+                                                <li>Review pricing (is it competitive?)</li>
+                                                <li>Add free shipping threshold</li>
+                                                <li>Simplify checkout (reduce form fields)</li>
+                                                <li>Add trust badges at checkout</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>Make changes in page builder (GemPages/PageFly/Replo)</li>
+                                <li>Test changes in preview mode before publishing</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">4</span> <strong>A/B Test Setup (if using Replo or capable page builder):</strong>
+                            <ul>
+                                <li>If traffic is sufficient (≥1000 sessions/week):
+                                    <ul>
+                                        <li>Create variant page in page builder</li>
+                                        <li>Set traffic split (50/50 or 80/20 for aggressive tests)</li>
+                                        <li>Define success metric (CR%, ATC rate, etc.)</li>
+                                        <li>Set test duration (minimum 7 days or 100 conversions)</li>
+                                        <li>Document test hypothesis in Notion Optimization Queue</li>
+                                    </ul>
+                                </li>
+                                <li>If traffic is insufficient:
+                                    <ul>
+                                        <li>Make best-practice change directly (no A/B test)</li>
+                                        <li>Monitor before/after performance</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">5</span> <strong>Publish & Monitor:</strong>
+                            <ul>
+                                <li>Publish changes to live store</li>
+                                <li>Clear cache (if using page builder caching)</li>
+                                <li>Test live store as customer (incognito mode)</li>
+                                <li>Set reminder to review performance in 7 days</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">6</span> <strong>Document Optimizations:</strong>
+                            <ul>
+                                <li>Update Notion "Optimization Queue" DB:
+                                    <ul>
+                                        <li>Store ID / Product ID</li>
+                                        <li>Optimization Type: [Hero, Product Images, Social Proof, etc.]</li>
+                                        <li>Hypothesis: [What we're testing and why]</li>
+                                        <li>Date Deployed: [today]</li>
+                                        <li>Status: [Testing / Rolled Back / Winner]</li>
+                                        <li>Results: [Update after 7 days]</li>
+                                    </ul>
+                                </li>
+                                <li>Take screenshots before/after for learning library</li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">7</span> <strong>Notify Media Buyer:</strong>
+                            <ul>
+                                <li>Post to #p3-store-qa:
+<pre>🔧 <strong>Store Optimization Deployed</strong>
+
+<strong>Store:</strong> [Product Name] ([Store URL])
+<strong>Optimization:</strong> [Brief description]
+<strong>Expected Impact:</strong> [Hypothesis]
+<strong>Monitor Period:</strong> 7 days
+
+@[Media_Buyer_Name] - FYI, changes are live.</pre>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li><span class="step-number">8</span> <strong>Follow-Up Review (7 days later):</strong>
+                            <ul>
+                                <li>Return to Shopify Analytics</li>
+                                <li>Compare 7 days before optimization vs 7 days after</li>
+                                <li>Results:
+                                    <ul>
+                                        <li><strong>If improvement (CR% up ≥0.3%):</strong> Mark as "Winner", keep changes</li>
+                                        <li><strong>If neutral (CR% change <0.3%):</strong> Mark as "Neutral", consider rollback or further iteration</li>
+                                        <li><strong>If decline (CR% down >0.3%):</strong> Mark as "Loser", rollback changes immediately</li>
+                                    </ul>
+                                </li>
+                                <li>Update Notion Optimization Queue with results</li>
+                                <li>Share learnings in #p3-store-learnings (for team knowledge)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Outputs:</strong>
+                    <ul>
+                        <li>✅ Store optimizations deployed</li>
+                        <li>✅ Notion Optimization Queue updated with hypothesis and status</li>
+                        <li>✅ Before/after screenshots saved</li>
+                        <li>✅ Media Buyer notified of changes</li>
+                        <li>✅ 7-day review scheduled</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Quality Checks:</strong>
+                    <ul>
+                        <li>Optimizations are data-driven (not guesses)</li>
+                        <li>Changes are documented before publishing</li>
+                        <li>Store still passes basic QA after changes (no broken elements)</li>
+                        <li>Follow-up review is scheduled</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-section">
+                    <strong>Handoff:</strong>
+                    <p><strong>FROM:</strong> Media Buyer (P3-MB-CORE) → <strong>TO:</strong> Store Builder (P3-SB-VALIDATION) → <strong>BACK TO:</strong> Media Buyer<br>
+                    <strong>Tool:</strong> Discord + Notion<br>
+                    <strong>Trigger:</strong> Optimization request or weekly review cycle<br>
+                    <strong>Output:</strong> Optimized store with documented learnings</p>
+                </div>
+            </div>
+
+            <div class="callout success">
+                <strong>✅ Workflow Completeness Check:</strong><br>
+                All 5 core workflows are fully defined with triggers, inputs, steps, outputs, quality checks, and handoffs.
+            </div>
+        </div>
+
+        <!-- 6. HANDOFF & INTERFACE SPECS -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">6. Handoff & Interface Specs</div>
+                <div class="section-subtitle">Cross-Role and Cross-Pod Integration Points</div>
+            </div>
+
+            <p>The Store Builder role sits at a critical handoff junction between P2 (Creative) and P3 (Media). Clear handoff protocols prevent bottlenecks and quality issues.</p>
+
+            <table class="handoff-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">From Role</th>
+                        <th style="width: 15%;">To Role</th>
+                        <th style="width: 15%;">Tool</th>
+                        <th style="width: 25%;">Location</th>
+                        <th style="width: 15%;">Trigger</th>
+                        <th style="width: 15%;">Output</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>P2-CR-LEAD</strong><br>(Creative Lead)</td>
+                        <td><strong>P3-SB-VALIDATION</strong><br>(Store Builder)</td>
+                        <td>ClickUp</td>
+                        <td><strong>Space:</strong> Media & Store<br><strong>List:</strong> Store Queue<br><strong>Status:</strong> READY_FOR_STORE_BUILD</td>
+                        <td>Creative package complete for product that has passed P2 gate</td>
+                        <td>• ClickUp task with all assets<br>• Notion product brief<br>• Drive creative folder</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P3-SB-VALIDATION</strong><br>(Store Builder)</td>
+                        <td><strong>P3-MB-CORE</strong><br>(Media Buyer)</td>
+                        <td>ClickUp + Discord</td>
+                        <td><strong>ClickUp Space:</strong> Media & Store<br><strong>List:</strong> Live Stores<br><strong>Status:</strong> READY_FOR_MEDIA<br><strong>Discord:</strong> #p3-media-handoffs</td>
+                        <td>Store QA complete, all checks passed</td>
+                        <td>• Launch-ready store<br>• QA report (Drive)<br>• Media handoff doc (Notion)<br>• Discord notification</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P3-MB-CORE</strong><br>(Media Buyer)</td>
+                        <td><strong>P3-SB-VALIDATION</strong><br>(Store Builder)</td>
+                        <td>Discord + Notion</td>
+                        <td><strong>Discord:</strong> #p3-store-qa<br><strong>Notion:</strong> Optimization Queue DB</td>
+                        <td>Store live for 7+ days, optimization needed OR CR% < 1.0%</td>
+                        <td>• Optimization request<br>• Performance data<br>• Specific bottlenecks identified</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P3-SB-VALIDATION</strong><br>(Store Builder)</td>
+                        <td><strong>P3-SO-MANAGER</strong><br>(Store Ops Manager)</td>
+                        <td>Notion</td>
+                        <td><strong>Notion DB:</strong> Store Registry<br><strong>Status:</strong> Handed to Media → Live</td>
+                        <td>Store goes live with first ad spend</td>
+                        <td>• Store registry entry<br>• Store login credentials (if needed)<br>• Compliance docs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P4-OP-PM</strong><br>(Operations PM)</td>
+                        <td><strong>P3-SB-VALIDATION</strong><br>(Store Builder)</td>
+                        <td>ClickUp + Discord</td>
+                        <td><strong>Discord:</strong> #p4-operations<br><strong>ClickUp:</strong> Operations space</td>
+                        <td>Process change, tool update, or canon change affecting store builds</td>
+                        <td>• Updated SOP or process doc<br>• Implementation timeline<br>• Training materials (if needed)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Handoff Quality Standards</h3>
+
+            <h4>Minimum Quality Bar for Accepting P2 Handoff</h4>
+            <ul>
+                <li>✅ ClickUp task includes all required fields (Product ID, Brief link, Assets folder link)</li>
+                <li>✅ Product brief is complete (no [TBD] sections)</li>
+                <li>✅ Creative assets folder contains:
+                    <ul>
+                        <li>≥5 product images (high-res, no watermarks)</li>
+                        <li>≥2 lifestyle images</li>
+                        <li>≥1 hero/banner image</li>
+                        <li>Product copy document (headlines, benefits, descriptions)</li>
+                    </ul>
+                </li>
+                <li>✅ Angle deck is present (primary hook identified)</li>
+            </ul>
+            <p><strong>If any item is missing:</strong> Move task to <code>BLOCKED_INCOMPLETE_HANDOFF</code> and notify P2-CR-LEAD immediately. Do not start build.</p>
+
+            <h4>Minimum Quality Bar for Handoff to Media Buyer</h4>
+            <ul>
+                <li>✅ Store passes 100% of QA checklist (no major issues, <3 minor issues)</li>
+                <li>✅ QA report is complete and saved to Drive</li>
+                <li>✅ Media Buyer handoff doc is complete (all fields filled)</li>
+                <li>✅ Store is accessible (not password-protected unless intentional)</li>
+                <li>✅ Store meets conversion baseline criteria (≥5/6 criteria from Workflow 3, step 6)</li>
+            </ul>
+            <p><strong>If any item is missing:</strong> Do not hand off to Media Buyer. Return to appropriate workflow step to fix.</p>
+
+            <h3>Escalation Paths for Blocked Handoffs</h3>
+            <ul>
+                <li><strong>Blocked by incomplete P2 handoff:</strong> Tag P2-CR-LEAD in Discord #p3-store-builds. If not resolved within 24h, escalate to P3 Pod Lead.</li>
+                <li><strong>Blocked by technical issue (Shopify, page builder):</strong> Post to #p4-operations with details. If critical, tag P4-OP-PM.</li>
+                <li><strong>Blocked by unclear requirements or canon conflict:</strong> Tag P3 Pod Lead in Discord. If unresolved, escalate to PM or Canon Owner.</li>
+            </ul>
+        </div>
+
+        <!-- 7. KPIs & QUALITY BAR -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">7. KPIs & Quality Bar</div>
+                <div class="section-subtitle">Performance Metrics and Standards</div>
+            </div>
+
+            <h3>Quantitative KPIs (from L2-07)</h3>
+
+            <table class="kpi-table">
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">KPI</th>
+                        <th style="width: 20%;">Target</th>
+                        <th style="width: 20%;">Acceptable</th>
+                        <th style="width: 30%;">Measurement Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Stores Deployed per Week</strong></td>
+                        <td>8-12</td>
+                        <td>6-8</td>
+                        <td>Count of stores moved from Store Queue → Live Stores in ClickUp per week</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Average Deployment Time</strong></td>
+                        <td>≤ 4 hours</td>
+                        <td>≤ 6 hours</td>
+                        <td>Timestamp delta: Store Queue assignment → QA Approved status</td>
+                    </tr>
+                    <tr>
+                        <td><strong>QA First-Pass Rate</strong></td>
+                        <td>≥ 85%</td>
+                        <td>≥ 70%</td>
+                        <td>(Stores passing QA on first attempt / Total stores QA'd) × 100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Store Conversion Rate (Baseline)</strong></td>
+                        <td>≥ 1.5%</td>
+                        <td>≥ 1.0%</td>
+                        <td>Shopify Analytics: (Orders / Sessions) × 100, measured after first 500 sessions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Handoff Acceptance Rate</strong></td>
+                        <td>≥ 90%</td>
+                        <td>≥ 80%</td>
+                        <td>(Stores accepted by Media Buyer without revision / Total handoffs) × 100</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WIP Compliance</strong></td>
+                        <td>100%</td>
+                        <td>≥ 95%</td>
+                        <td>% of days where WIP limits are respected (≤4 active, ≤3 QA, ≤8 optimization)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Optimization Response Time</strong></td>
+                        <td>≤ 48 hours</td>
+                        <td>≤ 72 hours</td>
+                        <td>Time from Media Buyer optimization request to changes deployed</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Qualitative Standards</h3>
+
+            <h4>Good Store Build (Meets Quality Bar)</h4>
+            <ul>
+                <li><strong>Visual Polish:</strong> Clean layout, no awkward spacing, images are crisp and high-quality, consistent typography</li>
+                <li><strong>Copy Quality:</strong> No typos, matches angle deck, benefit statements are clear and specific (not vague)</li>
+                <li><strong>Mobile Experience:</strong> Text is readable, buttons are tappable, no horizontal scroll, layout doesn't break</li>
+                <li><strong>Load Performance:</strong> ≤3 seconds on 3G, PageSpeed ≥70 mobile</li>
+                <li><strong>Conversion Focus:</strong> CTAs are prominent, value prop is clear above fold, trust signals are present</li>
+                <li><strong>Compliance:</strong> Passes all L2-09 requirements, no false claims or misleading elements</li>
+            </ul>
+
+            <h4>Poor Store Build (Fails Quality Bar)</h4>
+            <ul>
+                <li><strong>Visual Issues:</strong> Images pixelated or broken, text overlaps, inconsistent colors/fonts, looks "template-y" with no customization</li>
+                <li><strong>Copy Issues:</strong> Multiple typos, placeholder text still present, copy doesn't match product or angle</li>
+                <li><strong>Mobile Broken:</strong> Layout breaks on mobile, text too small to read, buttons not tappable</li>
+                <li><strong>Slow Load:</strong> >5 seconds on 3G, PageSpeed <50</li>
+                <li><strong>Poor CRO:</strong> No clear CTA, value prop unclear, no trust signals, feels "scammy" or low-trust</li>
+                <li><strong>Compliance Fails:</strong> Misleading claims, missing legal pages, violates L2-09 rules</li>
+            </ul>
+
+            <h3>How KPIs Are Measured</h3>
+            <ul>
+                <li><strong>Weekly KPI Review:</strong> Every Friday at 4:00 PM, Store Builder exports ClickUp data and Notion Store Registry to calculate weekly KPIs</li>
+                <li><strong>Reporting:</strong> KPIs are posted to #p3-metrics Discord channel by end of day Friday</li>
+                <li><strong>Monthly Review:</strong> P3 Pod Lead reviews monthly KPI trends and discusses with Store Builder in 1:1</li>
+                <li><strong>Escalation Triggers:</strong>
+                    <ul>
+                        <li>If <strong>Stores Deployed/Week</strong> drops below 6 for 2 consecutive weeks → escalate to P3 Pod Lead</li>
+                        <li>If <strong>QA First-Pass Rate</strong> drops below 70% → review build process, identify quality issues</li>
+                        <li>If <strong>Store CR%</strong> is consistently below 1.0% → review CRO approach, may need external audit</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 8. AI USAGE & PROMPT PATTERNS -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">8. AI Usage & Prompt Patterns</div>
+                <div class="section-subtitle">Where and How This Role Uses AI</div>
+            </div>
+
+            <p>The Store Builder role leverages AI for <strong>speed and consistency</strong>, not to replace human judgment. AI is used for ideation, draft generation, and QA assistance—always with human review before implementation.</p>
+
+            <h3>AI Usage Map</h3>
+
+            <h4>1. Copy Optimization & Refinement</h4>
+            <p><strong>Use Case:</strong> When P2 creative copy needs to be adapted for store context (e.g., homepage vs product page) or when copy feels weak/generic.</p>
+            <p><strong>Prompt Pattern:</strong></p>
+            <pre style="background: #f1f5f9; padding: 12px; border-radius: 6px; font-size: 13px; overflow-x: auto;">
+You are a direct-response copywriter for e-commerce product pages.
+
+Product: [Product Name]
+Primary Angle: [From angle deck]
+Target Audience: [From product brief]
+
+Current Copy:
+[Paste P2 copy here]
+
+Task: Rewrite this copy for a product page "benefits" section. Make it:
+1. More specific (avoid vague words like "amazing" or "great")
+2. Benefit-focused (not feature-focused)
+3. Scannable (3-5 short bullet points)
+4. Action-oriented (use active verbs)
+
+Output format: Bullet list, each bullet ≤15 words.
+            </pre>
+            <p><strong>Human Checkpoint:</strong> Review AI output for tone, accuracy, and compliance. Edit before publishing.</p>
+
+            <h4>2. Page Layout & Element Suggestions</h4>
+            <p><strong>Use Case:</strong> When stuck on homepage structure or unsure which elements to prioritize for a specific product type.</p>
+            <p><strong>Prompt Pattern:</strong></p>
+            <pre style="background: #f1f5f9; padding: 12px; border-radius: 6px; font-size: 13px; overflow-x: auto;">
+I'm building a Shopify store for a [product category] product.
+
+Product Details:
+- Product: [Product Name]
+- Price Point: $[X]
+- Target Audience: [Audience]
+- Primary Benefit: [Main selling point]
+
+I'm using [GemPages/PageFly/Replo] and have a 5-section homepage template.
+
+Question: What are the 5 most important homepage sections for this product type, in priority order?
+
+For each section, suggest:
+1. Section name
+2. What to include (be specific, not generic)
+3. Why it matters for this product type
+            </pre>
+            <p><strong>Human Checkpoint:</strong> Validate suggestions against product brief and angle deck. Adapt to fit creative assets available.</p>
+
+            <h4>3. QA Checklist Generation</h4>
+            <p><strong>Use Case:</strong> For new product categories or complex stores, generate a custom QA checklist supplement.</p>
+            <p><strong>Prompt Pattern:</strong></p>
+            <pre style="background: #f1f5f9; padding: 12px; border-radius: 6px; font-size: 13px; overflow-x: auto;">
+I'm QA-testing a Shopify store for a [product category] product (e.g., health supplement, pet product, home decor).
+
+I have a standard QA checklist that covers:
+- Functional tests (links, cart, checkout)
+- Performance tests (load time, mobile)
+- Content tests (typos, copy accuracy)
+- Compliance tests (legal pages, no false claims)
+
+Task: Generate 5-10 additional QA checks specific to [product category] that I should add.
+
+For each check, provide:
+1. What to test
+2. How to test it (specific steps)
+3. Pass/fail criteria
+            </pre>
+            <p><strong>Human Checkpoint:</strong> Review for relevance and feasibility. Add to standard checklist if useful.</p>
+
+            <h4>4. CRO Hypothesis Generation</h4>
+            <p><strong>Use Case:</strong> When optimizing a live store (Workflow 5) and need ideas for A/B tests or improvements.</p>
+            <p><strong>Prompt Pattern:</strong></p>
+            <pre style="background: #f1f5f9; padding: 12px; border-radius: 6px; font-size: 13px; overflow-x: auto;">
+I'm optimizing a live Shopify store with these performance metrics:
+
+- Sessions (7 days): [X]
+- Conversion Rate: [Y%]
+- Bounce Rate: [Z%]
+- Cart Abandonment: [A%]
+- Avg Session Duration: [B seconds]
+
+Product: [Product Name]
+Primary Issue: [e.g., "high bounce rate", "low ATC rate", "high cart abandonment"]
+
+Task: Suggest 3 CRO optimizations to test, prioritized by potential impact.
+
+For each optimization, provide:
+1. What to change (be specific, e.g., "Replace hero image with lifestyle video")
+2. Hypothesis (why this will improve metrics)
+3. Implementation difficulty (Easy/Medium/Hard)
+4. Expected impact (Low/Medium/High)
+            </pre>
+            <p><strong>Human Checkpoint:</strong> Validate suggestions with data. Choose highest-impact, lowest-effort options. Test one at a time.</p>
+
+            <h3>AI Usage Rules</h3>
+            <ul>
+                <li><strong>NEVER publish AI-generated content without human review:</strong> All copy, layout suggestions, and QA checks must be reviewed by Store Builder before implementation</li>
+                <li><strong>NEVER use AI for compliance decisions:</strong> AI cannot determine if content violates L2-09 Offer Ladder & Risk Guardrails. Human judgment required.</li>
+                <li><strong>NEVER let AI change product details:</strong> AI should not modify product pricing, specs, or supplier info. These come from P1 research packets and are non-negotiable.</li>
+                <li><strong>ALWAYS cross-check AI suggestions against canon:</strong> If AI suggests tools, processes, or structures not in L2/L3 canon, flag as non-canon and do not implement.</li>
+            </ul>
+
+            <h3>Recommended AI Tools</h3>
+            <ul>
+                <li><strong>ChatGPT (GPT-4):</strong> Copy refinement, layout suggestions, QA checklists</li>
+                <li><strong>Claude (this tool):</strong> Complex reasoning, multi-step workflows, canon alignment checks</li>
+                <li><strong>Grammarly:</strong> Spell check and grammar QA (not strictly AI, but useful)</li>
+            </ul>
+            <p><strong>Note:</strong> Do not use AI image generators for product images. All images come from P2 Creative or supplier. AI-generated images are not acceptable for validation stores.</p>
+        </div>
+
+        <!-- 9. TOOLS & SYSTEMS REFERENCE -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">9. Tools & Systems Reference</div>
+                <div class="section-subtitle">Approved Tool Stack & Access Requirements</div>
+            </div>
+
+            <table class="tools-table">
+                <thead>
+                    <tr>
+                        <th style="width: 20%;">Tool</th>
+                        <th style="width: 30%;">Use Case</th>
+                        <th style="width: 30%;">Key Features / Views</th>
+                        <th style="width: 20%;">Access Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Shopify</strong></td>
+                        <td>E-commerce platform for creating and managing validation stores</td>
+                        <td>
+                            • Store admin dashboard<br>
+                            • Theme customizer<br>
+                            • Product management<br>
+                            • Analytics<br>
+                            • App marketplace (for page builders)
+                        </td>
+                        <td>Admin (full access)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>GemPages</strong></td>
+                        <td>Drag-and-drop page builder for Shopify (general use, fast deployment)</td>
+                        <td>
+                            • Homepage builder<br>
+                            • Product page builder<br>
+                            • Template library<br>
+                            • Mobile preview<br>
+                            • A/B testing (limited)
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PageFly</strong></td>
+                        <td>Page builder for image-heavy, visual products</td>
+                        <td>
+                            • Visual editor<br>
+                            • Section library<br>
+                            • Mobile optimization<br>
+                            • SEO settings<br>
+                            • Conversion elements
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Replo</strong></td>
+                        <td>Page builder with strong A/B testing for iteration-heavy products</td>
+                        <td>
+                            • Landing page builder<br>
+                            • Native A/B testing<br>
+                            • Analytics integration<br>
+                            • Template variants<br>
+                            • Performance monitoring
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shrine Theme</strong></td>
+                        <td>Base Shopify theme template (prepaid license)</td>
+                        <td>
+                            • "Validation V2" preset<br>
+                            • Theme settings (colors, fonts)<br>
+                            • Mobile-optimized<br>
+                            • Fast load times<br>
+                            • Clean, modern design
+                        </td>
+                        <td>Theme customizer access</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Project management and task tracking</td>
+                        <td>
+                            <strong>Space:</strong> Media & Store<br>
+                            <strong>Folder:</strong> Store Builds<br>
+                            <strong>Lists:</strong> Store Queue, Active Builds, QA Review, Live Stores<br>
+                            <strong>Views:</strong> List view (default), Board view (kanban)<br>
+                            <strong>Custom Fields:</strong> Store URL, Page Builder Used, QA Status, Deployment Date
+                        </td>
+                        <td>Member (can edit tasks in assigned lists)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Documentation, knowledge base, and database management</td>
+                        <td>
+                            <strong>DBs:</strong><br>
+                            • Store Registry (all stores + status)<br>
+                            • Store Build Tracker (active builds)<br>
+                            • Optimization Queue (live store improvements)<br>
+                            <strong>Pages:</strong><br>
+                            • Product Briefs (from P1/P2)<br>
+                            • Media Handoff Docs<br>
+                            • QA Templates
+                        </td>
+                        <td>Editor (can create/edit pages and DB entries)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>File storage and sharing (creative assets, QA reports)</td>
+                        <td>
+                            <strong>Key Folders:</strong><br>
+                            • /DriveOn Commerce/Store Builds/Active/<br>
+                            • /DriveOn Commerce/Store Builds/Archive/<br>
+                            • /DriveOn Commerce/Store Builds/QA Reports/<br>
+                            • /DriveOn Commerce/Product Research/ (read-only, from P1/P2)
+                        </td>
+                        <td>Editor (can upload/edit in Store Builds folders)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Team communication and notifications</td>
+                        <td>
+                            <strong>Channels:</strong><br>
+                            • #p3-store-builds (build updates)<br>
+                            • #p3-media-handoffs (handoff coordination)<br>
+                            • #p3-store-qa (QA requests & feedback)<br>
+                            • #p3-metrics (KPI reporting)<br>
+                            • #p3-store-learnings (CRO insights)
+                        </td>
+                        <td>Member (can post, react, thread)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Chrome DevTools</strong></td>
+                        <td>Browser developer tools for QA and performance testing</td>
+                        <td>
+                            • Network tab (load time testing)<br>
+                            • Mobile emulator (responsive testing)<br>
+                            • Console (error checking)<br>
+                            • Lighthouse (performance audits)
+                        </td>
+                        <td>N/A (browser built-in)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google PageSpeed Insights</strong></td>
+                        <td>Web performance testing and optimization recommendations</td>
+                        <td>
+                            • Mobile score<br>
+                            • Desktop score<br>
+                            • Core Web Vitals<br>
+                            • Optimization suggestions
+                        </td>
+                        <td>Public tool (no login required)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Access Setup (from Onboarding)</h3>
+            <ul>
+                <li><strong>Shopify:</strong> Request admin account from P4 Operations. Will be added to DriveOn Commerce Shopify organization.</li>
+                <li><strong>Page Builders:</strong> Licenses are team-wide. Access granted after Shopify account setup.</li>
+                <li><strong>ClickUp:</strong> P4 Operations adds new user to "Media & Store" space with Member permissions.</li>
+                <li><strong>Notion:</strong> P4 Operations sends workspace invite. New user joins with Editor permissions.</li>
+                <li><strong>Google Drive:</strong> P4 Operations shares key folders. New user has Editor access to /Store Builds/, Viewer access to /Product Research/.</li>
+                <li><strong>Discord:</strong> P4 Operations sends server invite. New user is assigned "P3 - Store Builder" role for channel access.</li>
+            </ul>
+
+            <h3>Tool SOPs & Deep Dives</h3>
+            <p>For detailed tool-specific workflows, see:</p>
+            <ul>
+                <li><strong>L3-01:</strong> Discord Infra Blueprint (channel structure, notification rules)</li>
+                <li><strong>L3-02:</strong> ClickUp Infra Blueprint (spaces, lists, custom fields, automations)</li>
+                <li><strong>L3-03:</strong> Notion Infra Blueprint (database schemas, templates, views)</li>
+                <li><strong>L3-04:</strong> Google Drive Infra Blueprint (folder hierarchy, naming conventions, permissions)</li>
+            </ul>
+        </div>
+
+        <!-- 10. ESCALATION & DECISION RIGHTS -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">10. Escalation & Decision Rights</div>
+                <div class="section-subtitle">Autonomy, Approval Requirements, and When to Escalate</div>
+            </div>
+
+            <h3>Decisions the Store Builder Can Make Alone (No Approval Needed)</h3>
+            <ul>
+                <li>Which page builder to use for a specific product (GemPages, PageFly, or Replo)</li>
+                <li>Specific layout and design choices within a store (section order, image placement, etc.)</li>
+                <li>Minor copy edits to improve clarity or fix typos (as long as core angle/message is preserved)</li>
+                <li>When to deploy standard CRO optimizations (if following best practices and no major changes)</li>
+                <li>Daily priority order for store builds (which stores to work on first)</li>
+                <li>Whether to accept or reject a P2 handoff based on completeness criteria (Workflow 1, step 1)</li>
+            </ul>
+
+            <h3>Decisions Requiring Pod Lead or PM Approval</h3>
+            <ul>
+                <li><strong>Changing core product positioning or angle:</strong> If P2 creative angle feels wrong or needs major revision → escalate to P3 Pod Lead + P2-CR-LEAD</li>
+                <li><strong>Adding custom code or advanced features:</strong> Anything beyond standard page builder capabilities (e.g., custom Liquid code, third-party integrations) → requires PM approval</li>
+                <li><strong>Exceeding WIP limits:</strong> If you need to take on >4 active builds or >8 optimization tasks → requires P3 Pod Lead approval</li>
+                <li><strong>Major compliance gray areas:</strong> If unsure whether product or copy violates L2-09 → escalate to PM or Legal (if available)</li>
+                <li><strong>Process changes to workflows:</strong> If you want to modify standard workflows (e.g., skip QA for certain products) → requires PM approval + Canon Change Request</li>
+            </ul>
+
+            <h3>When to Escalate to Founder / Canon Owner</h3>
+            <ul>
+                <li><strong>Canon conflicts or contradictions:</strong> If you discover a conflict between L0/L1/L2/L3 docs that affects store builds → escalate to Canon Owner (via PM)</li>
+                <li><strong>Major tool or platform issues:</strong> If Shopify, page builders, or core tools are broken and blocking multiple stores → escalate to Founder (via P4-OP-PM)</li>
+                <li><strong>Economic or strategic questions:</strong> If you're unsure whether a product fits the CaniCol model (e.g., very high AOV, unusual supplier terms) → escalate to Founder</li>
+                <li><strong>Ethical or legal concerns:</strong> If a product or offer feels unethical, illegal, or reputationally risky → escalate immediately to Founder (do not proceed with build)</li>
+            </ul>
+
+            <h3>Expected Response Times</h3>
+            <table class="kpi-table">
+                <thead>
+                    <tr>
+                        <th>Escalation Type</th>
+                        <th>Escalate To</th>
+                        <th>Expected Response Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Blocked P2 handoff</td>
+                        <td>P2-CR-LEAD (via Discord #p3-store-builds)</td>
+                        <td>≤ 4 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Technical tool issue (non-critical)</td>
+                        <td>P4-OP-PM (via Discord #p4-operations)</td>
+                        <td>≤ 24 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Technical tool issue (critical, blocks all work)</td>
+                        <td>P4-OP-PM + Founder (via Discord + DM)</td>
+                        <td>≤ 2 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Compliance or positioning question</td>
+                        <td>P3 Pod Lead or PM (via Discord or Slack DM)</td>
+                        <td>≤ 12 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Canon conflict or process change</td>
+                        <td>PM (via Discord or Slack DM)</td>
+                        <td>≤ 48 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Ethical or legal concern</td>
+                        <td>Founder (via Slack DM + Discord tag)</td>
+                        <td>≤ 4 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Escalation Protocol</h3>
+            <ol>
+                <li><strong>Document the issue:</strong> Before escalating, write a clear 2-3 sentence summary of the problem, what you've tried, and what you need</li>
+                <li><strong>Use the right channel:</strong> Follow the escalation table above (don't DM founder for minor issues)</li>
+                <li><strong>Tag relevant people:</strong> Use @mentions in Discord/Slack to ensure visibility</li>
+                <li><strong>Set a deadline:</strong> If time-sensitive, state the deadline (e.g., "Blocks store launch planned for tomorrow")</li>
+                <li><strong>Follow up if no response:</strong> If you don't get a response within expected time, escalate one level up (e.g., Pod Lead → PM → Founder)</li>
+            </ol>
+        </div>
+
+        <!-- 11. ONBOARDING CHECKLIST -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">11. Onboarding Checklist</div>
+                <div class="section-subtitle">First 30 Days: From Zero to Independent Execution</div>
+            </div>
+
+            <p>This checklist ensures new Store Builders can execute independently within 30 days, with clear milestones and sign-offs at each stage.</p>
+
+            <table class="onboarding-table">
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">Day</th>
+                        <th style="width: 40%;">Milestone / Task</th>
+                        <th style="width: 30%;">Success Criteria</th>
+                        <th style="width: 20%;">Sign-Off</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Day 1</strong></td>
+                        <td>
+                            <strong>Access Setup & Canon Reading</strong><br>
+                            • Receive Shopify, ClickUp, Notion, Drive, Discord access<br>
+                            • Read L0-01 (Holdings Charter) + L0-02 (Brand Architecture)<br>
+                            • Read L1-01 (CaniCol Model v4.0)<br>
+                            • Read this SOP (P3-SB-VALIDATION)
+                        </td>
+                        <td>
+                            • All tool logins work<br>
+                            • Can navigate ClickUp, Notion, Drive<br>
+                            • Can explain CaniCol model basics (45-60 products/month, 4-6% winners, tight budgets)
+                        </td>
+                        <td>P4 Operations (access) + P3 Pod Lead (canon quiz)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 2</strong></td>
+                        <td>
+                            <strong>Canon Deep Dive & Tool Exploration</strong><br>
+                            • Read L2-03 (Role Registry & WIP Limits)<br>
+                            • Read L2-05 (Testing Canon)<br>
+                            • Read L2-09 (Offer Ladder & Risk Guardrails)<br>
+                            • Explore Shrine theme + page builder demos (GemPages, PageFly, Replo)
+                        </td>
+                        <td>
+                            • Can explain WIP limits for this role (≤4 active, ≤3 QA, ≤8 optimization)<br>
+                            • Can identify compliance red flags (false scarcity, health claims, etc.)<br>
+                            • Has watched demo videos for all 3 page builders
+                        </td>
+                        <td>P3 Pod Lead (canon quiz)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 3-5</strong></td>
+                        <td>
+                            <strong>Shadowing: Observe 3 Full Store Builds</strong><br>
+                            • Shadow experienced Store Builder<br>
+                            • Observe Workflows 1-3 (Setup, Build, QA) for 3 different products<br>
+                            • Take notes on page builder choices, layout decisions, QA process<br>
+                            • Ask questions in real-time
+                        </td>
+                        <td>
+                            • Has observed ≥3 full store builds (start to QA approval)<br>
+                            • Can explain why specific page builders were chosen<br>
+                            • Can identify ≥5 common QA issues to watch for
+                        </td>
+                        <td>Shadowed Store Builder</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 6-10</strong></td>
+                        <td>
+                            <strong>First Supervised Build</strong><br>
+                            • Build 2 validation stores under supervision<br>
+                            • Store Builder does all work, supervisor reviews at key checkpoints:<br>
+                              1. After Workflow 1 (setup complete)<br>
+                              2. After Workflow 2 (pages built)<br>
+                              3. After Workflow 3 (QA complete)<br>
+                            • Supervisor provides feedback at each checkpoint
+                        </td>
+                        <td>
+                            • Both stores pass QA on first or second attempt<br>
+                            • Deployment time ≤6 hours per store<br>
+                            • No major process skips or shortcuts<br>
+                            • Store meets conversion baseline criteria (≥5/6 from Workflow 3, step 6)
+                        </td>
+                        <td>Supervisor (experienced Store Builder or P3 Pod Lead)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 11-15</strong></td>
+                        <td>
+                            <strong>First Independent Builds (Light Supervision)</strong><br>
+                            • Build 3 stores independently<br>
+                            • Supervisor spot-checks at QA stage only (not during build process)<br>
+                            • Store Builder must follow all workflows without prompting
+                        </td>
+                        <td>
+                            • All 3 stores pass QA on first attempt (≥85% QA checklist pass rate)<br>
+                            • Deployment time ≤5 hours per store<br>
+                            • All documentation (ClickUp, Notion, Drive) is complete and accurate<br>
+                            • Handoffs to Media Buyer are clean (no revision requests)
+                        </td>
+                        <td>Supervisor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 16-20</strong></td>
+                        <td>
+                            <strong>Full Autonomy Test + Optimization Training</strong><br>
+                            • Build 4 stores with zero supervision<br>
+                            • Shadow 2 optimization cycles (Workflow 5)<br>
+                            • Learn A/B testing setup (if using Replo)<br>
+                            • Review past optimization learnings in Notion
+                        </td>
+                        <td>
+                            • All 4 stores meet quality bar (no supervisor intervention needed)<br>
+                            • QA pass rate ≥85%<br>
+                            • Avg deployment time ≤4.5 hours<br>
+                            • Can explain 3-5 common CRO tactics and when to use them
+                        </td>
+                        <td>P3 Pod Lead (spot-check review)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 21-25</strong></td>
+                        <td>
+                            <strong>First Independent Optimization</strong><br>
+                            • Receive 2 optimization requests from Media Buyers<br>
+                            • Execute Workflow 5 independently<br>
+                            • Document hypotheses and results in Notion<br>
+                            • Present learnings to team in #p3-store-learnings
+                        </td>
+                        <td>
+                            • Both optimizations deployed within 48 hours of request<br>
+                            • Documentation is complete (before/after screenshots, hypothesis, results tracking)<br>
+                            • No rollbacks due to breaking changes
+                        </td>
+                        <td>P3 Pod Lead</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Day 26-30</strong></td>
+                        <td>
+                            <strong>Full Production Ramp</strong><br>
+                            • Hit weekly throughput target: 8-12 stores deployed<br>
+                            • Maintain WIP discipline (≤4 active, ≤3 QA, ≤8 optimization)<br>
+                            • Handle 2-3 optimization requests<br>
+                            • Conduct first weekly KPI self-review (Friday)<br>
+                            • Complete 30-day review meeting with P3 Pod Lead
+                        </td>
+                        <td>
+                            • Weekly throughput: 8-12 stores ✅<br>
+                            • QA first-pass rate: ≥80% ✅<br>
+                            • Avg deployment time: ≤4.5 hours ✅<br>
+                            • WIP limits respected: 100% ✅<br>
+                            • Zero escalations due to process confusion<br>
+                            • Can articulate 3 areas for personal improvement
+                        </td>
+                        <td>P3 Pod Lead (30-day review + sign-off)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Required Canon Reading List (First Week)</h3>
+            <ul>
+                <li><strong>L0-01:</strong> DriveOn Holdings Charter (context: why we exist)</li>
+                <li><strong>L0-02:</strong> Product & Brand Architecture (context: brand positioning)</li>
+                <li><strong>L1-01:</strong> CaniCol Model v4.0 (MUST READ: core economics and philosophy)</li>
+                <li><strong>L2-03:</strong> Role Registry & WIP Limits (your role definition + constraints)</li>
+                <li><strong>L2-05:</strong> Testing Canon v4.0 (P1/P2/P3 gates, pass/kill criteria)</li>
+                <li><strong>L2-08:</strong> DriveOn Master Brand Platform & Creative Guardrails (brand rules)</li>
+                <li><strong>L2-09:</strong> Offer Ladder & Risk Guardrails (CRITICAL: compliance rules)</li>
+                <li><strong>L3-01:</strong> Discord Infra Blueprint (channel structure)</li>
+                <li><strong>L3-02:</strong> ClickUp Infra Blueprint (lists, statuses, custom fields)</li>
+                <li><strong>L3-03:</strong> Notion Infra Blueprint (database schemas)</li>
+            </ul>
+
+            <h3>30-Day Review Criteria</h3>
+            <p>At day 30, P3 Pod Lead evaluates the new Store Builder on:</p>
+            <ol>
+                <li><strong>Speed:</strong> Can consistently deploy stores in ≤4.5 hours</li>
+                <li><strong>Quality:</strong> QA first-pass rate ≥80%, stores meet conversion baseline</li>
+                <li><strong>Process Adherence:</strong> Follows all workflows without skipping steps</li>
+                <li><strong>WIP Discipline:</strong> Respects WIP limits 100% of the time</li>
+                <li><strong>Documentation:</strong> All ClickUp, Notion, Drive docs are complete and accurate</li>
+                <li><strong>Communication:</strong> Handoffs are clean, escalations are appropriate and timely</li>
+                <li><strong>Independence:</strong> Can operate without daily supervision</li>
+            </ol>
+            <p><strong>Outcome:</strong></p>
+            <ul>
+                <li>✅ <strong>Pass:</strong> Move to independent operator, remove supervision</li>
+                <li>⚠️ <strong>Conditional Pass:</strong> Identify 1-2 weak areas, extend training by 1-2 weeks, re-review</li>
+                <li>❌ <strong>Fail:</strong> Not a fit for this role, discuss alternative roles or off-boarding</li>
+            </ul>
+        </div>
+
+        <!-- 12. CHANGE LOG -->
+        <div class="card">
+            <div class="card-header">
+                <div class="section-title">12. Change Log</div>
+                <div class="section-subtitle">Version History & Canon Updates</div>
+            </div>
+
+            <table class="changelog-table">
+                <thead>
+                    <tr>
+                        <th style="width: 12%;">Version</th>
+                        <th style="width: 15%;">Date</th>
+                        <th style="width: 20%;">Author</th>
+                        <th style="width: 53%;">Change Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1.0</strong></td>
+                        <td>December 8, 2025</td>
+                        <td>DriveOn SOP Factory v4</td>
+                        <td>
+                            <strong>Initial Release</strong><br>
+                            • Full SOP created for P3-SB-VALIDATION role<br>
+                            • All 12 schema sections implemented<br>
+                            • 5 core workflows defined (Setup, Build, QA, Handoff, Optimization)<br>
+                            • 3 major handoffs specified (P2→P3, P3→Media, Media→P3)<br>
+                            • KPIs aligned with L2-07 Pod KPIs<br>
+                            • Canon constraints from L1-01, L2-03, L2-05, L2-09<br>
+                            • Approved by: [Pending - awaiting P3 Pod Lead review]
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: #999; font-style: italic;">
+                            Future versions will be added here as canon updates trigger SOP revisions
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Linked Canon Dependencies</h3>
+            <p>This SOP is dependent on the following canon documents. If any of these are updated, this SOP must be reviewed for alignment:</p>
+            <ul>
+                <li><strong>L1-01:</strong> CaniCol Model v4.0 (testing volume, budgets, hit rate)</li>
+                <li><strong>L2-03:</strong> Role Registry & WIP Limits v1 (WIP caps, throughput targets)</li>
+                <li><strong>L2-05:</strong> Testing Canon v4.0 (P1/P2/P3 gate definitions)</li>
+                <li><strong>L2-07:</strong> Pod KPIs & TestBank v4.0 (KPI targets and definitions)</li>
+                <li><strong>L2-08:</strong> DriveOn Master Brand Platform & Creative Guardrails v2.0 (brand rules)</li>
+                <li><strong>L2-09:</strong> Offer Ladder & Risk Guardrails v1.2 (compliance rules)</li>
+                <li><strong>L3-02:</strong> ClickUp Infra Blueprint v1 (lists, statuses, fields)</li>
+                <li><strong>L3-03:</strong> Notion Infra Blueprint v1 (database schemas)</li>
+                <li><strong>L3-04:</strong> Google Drive Infra Blueprint v1 (folder structure)</li>
+                <li><strong>L3-OS:</strong> OS Shell Data Model v1 (entity definitions)</li>
+            </ul>
+
+            <h3>Next Review</h3>
+            <p><strong>Scheduled Review Date:</strong> March 8, 2026 (quarterly)</p>
+            <p><strong>Trigger for Early Review:</strong></p>
+            <ul>
+                <li>Major canon update (L0/L1/L2 changes affecting store builds)</li>
+                <li>Tool changes (new page builders, Shopify updates, etc.)</li>
+                <li>Process failures (KPIs consistently miss targets for 3+ weeks)</li>
+                <li>Team feedback (role needs clarification or workflows need adjustment)</li>
+            </ul>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="text-align: center; margin-top: 48px; padding-top: 24px; border-top: 2px solid #e0e4ea; color: #666; font-size: 13px;">
+            <p><strong>DriveOn Commerce – Pod 3: Media & Store</strong></p>
+            <p>Generated by DriveOn SOP Factory v4 • Aligned with CaniCol v4.0 Canon</p>
+            <p style="margin-top: 8px;">For questions or canon conflicts, escalate to P3 Pod Lead or PM via Discord</p>
+        </div>
+
+    </div>
+</body>
+</html>

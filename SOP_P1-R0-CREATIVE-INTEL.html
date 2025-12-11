@@ -1,0 +1,1777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1-R0-CREATIVE-INTEL | Creative Intelligence Researcher SOP</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --gray-dark: #555555;
+            --gray-medium: #777777;
+            --gray-light: #E0E0E0;
+            --surface-white: #FFFFFF;
+            --surface-gray: #F8F8F8;
+            --champagne: #F4E8D0;
+            --status-green: #10B981;
+            --status-yellow: #F59E0B;
+            --status-red: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-gray);
+        }
+
+        header {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .header-title .role-id {
+            color: var(--drive-cyan);
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-chip {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        nav {
+            background: var(--surface-white);
+            border-right: 2px solid var(--gray-light);
+            position: fixed;
+            left: 0;
+            top: 88px;
+            height: calc(100vh - 88px);
+            width: 240px;
+            overflow-y: auto;
+            padding: 1.5rem 0;
+            z-index: 50;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            color: var(--gray-dark);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--surface-gray);
+            color: var(--drive-cyan);
+            border-left: 3px solid var(--drive-cyan);
+        }
+
+        main {
+            margin-left: 240px;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .hero-summary {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A8A8 100%);
+            color: var(--surface-white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,200,200,0.2);
+        }
+
+        .hero-summary h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .hero-box {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .hero-box h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-box ul {
+            list-style: none;
+            font-size: 0.95rem;
+        }
+
+        .hero-box li {
+            padding: 0.25rem 0;
+        }
+
+        .hero-box li:before {
+            content: "▸ ";
+            color: var(--champagne);
+        }
+
+        .section {
+            background: var(--surface-white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--gray-light);
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--carbon-black);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            font-size: 1.25rem;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: 1px solid var(--gray-light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: var(--gray-dark);
+            transition: all 0.2s;
+        }
+
+        .toggle-btn:hover {
+            background: var(--drive-cyan);
+            color: var(--surface-white);
+            border-color: var(--drive-cyan);
+        }
+
+        .section-intro {
+            background: var(--surface-gray);
+            padding: 1rem;
+            border-left: 4px solid var(--drive-cyan);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--gray-dark);
+        }
+
+        .collapsible-content {
+            max-height: 10000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .kpi-card {
+            background: var(--surface-gray);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--drive-cyan);
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--gray-medium);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+
+        .callout {
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-canon {
+            background: #FEF3C7;
+            border-color: #F59E0B;
+        }
+
+        .callout-warning {
+            background: #FEE2E2;
+            border-color: #EF4444;
+        }
+
+        .callout-tip {
+            background: #DBEAFE;
+            border-color: #3B82F6;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .workflow-card {
+            background: var(--surface-gray);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        .workflow-card h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            color: var(--drive-cyan);
+        }
+
+        .workflow-meta {
+            display: flex;
+            gap: 2rem;
+            margin: 0.5rem 0 1rem 0;
+            font-size: 0.875rem;
+            color: var(--gray-medium);
+        }
+
+        .workflow-steps {
+            counter-reset: step-counter;
+            list-style: none;
+        }
+
+        .workflow-steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin: 1rem 0;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .workflow-steps li:last-child {
+            border-bottom: none;
+        }
+
+        .workflow-steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--drive-cyan);
+            color: var(--surface-white);
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.25rem;
+            color: var(--gray-medium);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.875rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        th {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+
+        tr:hover {
+            background: var(--surface-gray);
+        }
+
+        code {
+            background: var(--carbon-black);
+            color: var(--drive-cyan);
+            padding: 0.125rem 0.375rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        .code-block {
+            background: var(--carbon-black);
+            color: var(--drive-cyan);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--drive-cyan);
+        }
+
+        .timeline-block {
+            position: relative;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--surface-gray);
+            border-radius: 6px;
+        }
+
+        .timeline-block:before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 1.25rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--drive-cyan);
+            border-radius: 50%;
+            border: 3px solid var(--surface-white);
+        }
+
+        .timeline-time {
+            font-weight: 700;
+            color: var(--drive-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+
+        .badge-primary {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+        }
+
+        .badge-secondary {
+            background: var(--gray-medium);
+            color: var(--surface-white);
+        }
+
+        .badge-success {
+            background: var(--status-green);
+            color: var(--surface-white);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                position: fixed;
+                left: -240px;
+                transition: left 0.3s;
+                top: 88px;
+                background: var(--surface-white);
+                box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+            }
+
+            nav.open {
+                left: 0;
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>Creative Intelligence Researcher</h1>
+                <div class="role-id">P1-R0-CREATIVE-INTEL | Pod 1: Product Intelligence</div>
+            </div>
+            <span class="status-chip">Active • v1.0</span>
+        </div>
+    </header>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="#hero">Role Overview</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day-in-life">Day-in-the-Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">KPIs & Quality Bar</a></li>
+            <li><a href="#ai-usage">AI Usage</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation</a></li>
+            <li><a href="#onboarding">Onboarding</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero Summary -->
+        <div id="hero" class="hero-summary">
+            <h2>🎯 Creative Intelligence Researcher</h2>
+            <p>You bridge the gap between content trends and product opportunities. Your mission: identify winning creative patterns, hooks, and angles from ads libraries and social platforms, then translate them into actionable intelligence for product research and creative teams.</p>
+            
+            <div class="hero-grid">
+                <div class="hero-box">
+                    <h3>Key Outcomes</h3>
+                    <ul>
+                        <li>15-20 creative intel packets/week</li>
+                        <li>60-80 packets/month</li>
+                        <li>High angle diversity</li>
+                        <li>Actionable swipe files</li>
+                    </ul>
+                </div>
+                <div class="hero-box">
+                    <h3>You Own</h3>
+                    <ul>
+                        <li>Creative pattern analysis</li>
+                        <li>Hook/angle discovery</li>
+                        <li>Swipe file curation</li>
+                        <li>10-12 active intel tracks</li>
+                    </ul>
+                </div>
+                <div class="hero-box">
+                    <h3>Quick Stats</h3>
+                    <ul>
+                        <li>WIP: 8-10 candidates</li>
+                        <li>Daily: 3-5 intel packets</li>
+                        <li>CrossPod: Yes (P1↔P2)</li>
+                        <li>FTE: 0.5-1.0</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canon Constraints -->
+        <section id="canon" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">⚖️</span> Canon Constraints</h2>
+            </div>
+            <div class="section-intro">
+                These are non-negotiable boundaries from L0-L3 canon. Violating these requires a Canon Change Request (CCR).
+            </div>
+            
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Economic Constraints (L1-01, L2-05)</div>
+                <ul>
+                    <li><strong>Testing Volume:</strong> Supporting 45-60 products/month in P1/P2</li>
+                    <li><strong>P1 Budget:</strong> $40-$60 per product</li>
+                    <li><strong>P1+P2 Total:</strong> $70-$120 per product (typical $80-$100)</li>
+                    <li><strong>Test Bank:</strong> ~$4,000-$5,500/month for all P1+P2 spend</li>
+                    <li><strong>Winner Rate:</strong> ~4-6% true winners (2-4 products/month)</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ WIP & Throughput Constraints (L2-03)</div>
+                <ul>
+                    <li><strong>Your WIP Cap:</strong> 8-10 candidates in creative review</li>
+                    <li><strong>Your Throughput:</strong> 5-10 creative-led product suggestions/week</li>
+                    <li><strong>Daily Target:</strong> 3-5 creative intel packets</li>
+                    <li><strong>Monthly Target:</strong> 60-80 intel packets</li>
+                    <li><strong>Active Tracks:</strong> 10-12 concurrent intel themes</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Role Boundaries (L2-02, L2-03)</div>
+                <ul>
+                    <li><strong>CrossPod Status:</strong> Yes - you support both Pod 1 (Product Intelligence) and Pod 2 (Creative Factory)</li>
+                    <li><strong>Owned Gates:</strong> None directly; you support R0/R1 with creative-led angles</li>
+                    <li><strong>Downstream:</strong> Pod 2 Creative Director, Pod 1 Lead Strategist</li>
+                    <li><strong>Upstream:</strong> External platforms (TikTok, FB Ads Library, Minea)</li>
+                    <li><strong>Reports To:</strong> Lead Strategist / Creative Director</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Day in the Life -->
+        <section id="day-in-life" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">📅</span> Day-in-the-Life Timeline</h2>
+                <button class="toggle-btn" onclick="toggleSection('day-content')">Collapse</button>
+            </div>
+            <div id="day-content" class="collapsible-content">
+                <div class="section-intro">
+                    A typical day balances active platform scanning with analysis, documentation, and cross-pod collaboration.
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-block">
+                        <div class="timeline-time">08:00-09:00 | Morning Setup & Queue Review</div>
+                        <p><strong>Focus:</strong> Prioritization & context loading</p>
+                        <ul>
+                            <li>Review overnight notifications from TikTok/Meta/Minea alerts</li>
+                            <li>Check #p1-r0-idea-dump and #p2-briefs Discord channels</li>
+                            <li>Review ClickUp R0 Ideas list for products needing creative angles</li>
+                            <li>Check Notion Creative Intel DB for incomplete packets</li>
+                            <li>Identify 3-5 priority intel tasks for the day</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-block">
+                        <div class="timeline-time">09:00-11:30 | Active Platform Scanning (Block 1)</div>
+                        <p><strong>Focus:</strong> Hook & angle discovery</p>
+                        <ul>
+                            <li>Scan TikTok Creative Center for trending ad formats</li>
+                            <li>Review Facebook Ads Library for winning hooks (CTR signals)</li>
+                            <li>Monitor Minea for high-engagement dropshipping creatives</li>
+                            <li>Screenshot/save promising patterns to Drive swipe folders</li>
+                            <li>Tag patterns by: hook type, angle, format, niche</li>
+                            <li>Complete 2-3 creative intel packets</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-block">
+                        <div class="timeline-time">11:30-12:30 | Documentation & Analysis</div>
+                        <p><strong>Focus:</strong> Intel packet completion</p>
+                        <ul>
+                            <li>Write up findings in Notion Creative Intel DB</li>
+                            <li>Structure packets: Hook → Angle → Format → Best Practice</li>
+                            <li>Link swipe file examples from Drive</li>
+                            <li>Tag by product category, niche, emotional trigger</li>
+                            <li>Update ClickUp tasks to R0_INTEL_COMPLETE</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-block">
+                        <div class="timeline-time">12:30-13:30 | Lunch & Async Collaboration</div>
+                        <p><strong>Focus:</strong> Cross-pod handoffs</p>
+                        <ul>
+                            <li>Post completed intel packets in #p1-r0-idea-dump</li>
+                            <li>Respond to Creative Director questions in #p2-briefs</li>
+                            <li>Review any feedback from Lead Strategist</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-block">
+                        <div class="timeline-time">13:30-16:00 | Active Platform Scanning (Block 2)</div>
+                        <p><strong>Focus:</strong> Niche-specific deep dives</p>
+                        <ul>
+                            <li>Focus on 2-3 priority niches from Lead Strategist</li>
+                            <li>Deep dive into specific product categories</li>
+                            <li>Analyze competitor creative strategies</li>
+                            <li>Identify emerging patterns and format shifts</li>
+                            <li>Complete 1-2 additional intel packets</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-block">
+                        <div class="timeline-time">16:00-17:00 | End-of-Day Review & Planning</div>
+                        <p><strong>Focus:</strong> Quality check & tomorrow's queue</p>
+                        <ul>
+                            <li>Final review of 3-5 completed packets</li>
+                            <li>Update Notion Creative Intel DB with status</li>
+                            <li>Post end-of-day summary in #p1-research-updates</li>
+                            <li>Update ClickUp WIP counts (target: 8-10 active)</li>
+                            <li>Flag any blockers or pattern gaps for tomorrow</li>
+                            <li>Queue priority intel tasks for next day</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mermaid">
+                gantt
+                    title Creative Intelligence Researcher - Daily Timeline
+                    dateFormat HH:mm
+                    axisFormat %H:%M
+                    
+                    section Morning
+                    Queue Review & Setup           :08:00, 1h
+                    
+                    section Core Work
+                    Platform Scanning Block 1      :09:00, 2.5h
+                    Documentation & Analysis       :11:30, 1h
+                    
+                    section Midday
+                    Lunch & Async Collaboration    :12:30, 1h
+                    
+                    section Afternoon
+                    Platform Scanning Block 2      :13:30, 2.5h
+                    End-of-Day Review              :16:00, 1h
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Workflows -->
+        <section id="workflows" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">🔄</span> Core Workflows</h2>
+                <button class="toggle-btn" onclick="toggleSection('workflows-content')">Collapse</button>
+            </div>
+            <div id="workflows-content" class="collapsible-content">
+                <div class="section-intro">
+                    These workflows define how you execute your daily work and hand off deliverables to downstream teams.
+                </div>
+
+                <div class="workflow-card">
+                    <h3>Workflow 1: Creative Pattern Discovery</h3>
+                    <div class="workflow-meta">
+                        <span><strong>Trigger:</strong> Daily routine + strategic niche request</span>
+                        <span><strong>Frequency:</strong> 3-5x/day</span>
+                    </div>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>TikTok Creative Center feeds (trending ads)</li>
+                        <li>Facebook Ads Library search results (high-engagement ads)</li>
+                        <li>Minea platform data (dropshipping ad performance)</li>
+                        <li>Strategic niche priorities from Lead Strategist</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <ol class="workflow-steps">
+                        <li><strong>Platform Scan:</strong> Open TikTok Creative Center, filter by "Last 7 Days" + relevant product categories. Note ads with 1M+ views, high engagement rates, or rapid growth trajectories.</li>
+                        <li><strong>Hook Analysis:</strong> For each promising ad, identify the hook pattern (first 3 seconds). Categorize: Problem callout, Curiosity gap, Before/after, Trend/meme reference, Authority/social proof, or Pattern interrupt.</li>
+                        <li><strong>Angle Extraction:</strong> Determine the core marketing angle: What desire/pain/outcome is being promised? How is it positioned (aspirational, practical, emotional, logical)?</li>
+                        <li><strong>Format Documentation:</strong> Note the creative format: UGC-style, Professional talking head, Product demo, Lifestyle montage, Comparison, Tutorial/how-to, or Meme/trend hijack.</li>
+                        <li><strong>Screenshot & Save:</strong> Capture key frames to Drive folder: /DriveOn Commerce/Product Research/Creative_Intel/[Date]/[Niche]. Include URL in filename for reference.</li>
+                        <li><strong>Pattern Tagging:</strong> Tag with metadata: Hook_Type, Angle_Category, Format, Niche, Estimated_Engagement, Date_Captured, Platform_Source.</li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Screenshots in Drive: /DriveOn Commerce/Product Research/Creative_Intel/</li>
+                        <li>Pattern notes in Notion Creative Intel DB</li>
+                        <li>Tagged categories for retrieval</li>
+                    </ul>
+
+                    <h4>Quality Checks</h4>
+                    <ul>
+                        <li>✓ Hook is clearly identifiable and transferable</li>
+                        <li>✓ Angle maps to a real customer desire/pain</li>
+                        <li>✓ Format is replicable within DriveOn budget constraints</li>
+                        <li>✓ Examples are recent (last 30 days preferred)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-card">
+                    <h3>Workflow 2: Intel Packet Creation</h3>
+                    <div class="workflow-meta">
+                        <span><strong>Trigger:</strong> After discovering 3-5 related patterns</span>
+                        <span><strong>Frequency:</strong> 3-5 packets/day</span>
+                    </div>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Collected creative patterns (screenshots + notes)</li>
+                        <li>Platform performance data</li>
+                        <li>Niche context from existing research</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <ol class="workflow-steps">
+                        <li><strong>Open Notion Template:</strong> Navigate to Notion Creative Intel DB. Click "New" and select "Creative Intel Packet Template".</li>
+                        <li><strong>Fill Packet Header:</strong> Enter Packet_ID (auto-generated), Date, Your Name, Primary Niche, Status (Draft → Review → Complete).</li>
+                        <li><strong>Document Hook Pattern:</strong> Write 2-3 sentence description of the hook pattern. Include specific examples: "This hook uses [specific technique] to achieve [specific outcome]. Example: '[verbatim hook text]'."</li>
+                        <li><strong>Explain Angle Strategy:</strong> Describe the underlying marketing angle: "This angle targets [audience desire/pain] by positioning the product as [specific benefit/transformation]. It works because [psychological/emotional reason]."</li>
+                        <li><strong>Detail Format Specs:</strong> Specify creative format requirements: Length (15s/30s/60s), Visual style, Audio/music requirements, Text overlay patterns, CTA structure.</li>
+                        <li><strong>Link Swipe Files:</strong> Embed Drive links to 3-5 example screenshots. Use format: [Platform] - [Hook Type] - [Date] - [Performance Note]</li>
+                        <li><strong>Add Best Practices:</strong> List 3-5 tactical best practices: "Use [specific technique] in first 3 seconds", "Avoid [common mistake]", "Test [specific variant]".</li>
+                        <li><strong>Tag & Categorize:</strong> Add tags: Niche, Hook_Type, Angle_Category, Format, Confidence_Level (High/Medium/Low), Urgency (Trending/Evergreen).</li>
+                        <li><strong>Quality Check:</strong> Review packet against checklist: Is hook actionable? Is angle clear? Are examples recent? Is it junior-executable?</li>
+                        <li><strong>Submit for Review:</strong> Change status to "Review", assign to Lead Strategist or Creative Director, post link in #p1-research-updates.</li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Completed Creative Intel Packet in Notion</li>
+                        <li>ClickUp task updated to R0_INTEL_COMPLETE</li>
+                        <li>Discord notification in #p1-research-updates</li>
+                    </ul>
+
+                    <h4>Quality Checks</h4>
+                    <ul>
+                        <li>✓ Hook, angle, and format are all documented</li>
+                        <li>✓ 3-5 swipe file examples included</li>
+                        <li>✓ Best practices are actionable and specific</li>
+                        <li>✓ Tags match canonical categories</li>
+                        <li>✓ Packet is junior-executable (clear enough for P2 to implement)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-card">
+                    <h3>Workflow 3: Product-Creative Matching</h3>
+                    <div class="workflow-meta">
+                        <span><strong>Trigger:</strong> R0 product needs creative angle</span>
+                        <span><strong>Frequency:</strong> 5-10x/week</span>
+                    </div>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>R0 product idea from ClickUp R0 Ideas list</li>
+                        <li>Product category and positioning</li>
+                        <li>Existing creative intel packets (Notion DB)</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <ol class="workflow-steps">
+                        <li><strong>Review Product Brief:</strong> Open ClickUp task for R0 product. Read product description, target audience, and any initial angle notes.</li>
+                        <li><strong>Search Intel Library:</strong> Query Notion Creative Intel DB by niche, hook type, and angle category. Look for packets with similar product positioning or audience.</li>
+                        <li><strong>Match 2-3 Angles:</strong> Select 2-3 creative intel packets that could apply to this product. Consider: Hook transferability, Angle alignment with product benefit, Format feasibility within P1 budget.</li>
+                        <li><strong>Adapt Recommendations:</strong> For each matched packet, write specific adaptation notes: "Use [hook pattern] but emphasize [product-specific benefit]", "Replace [generic element] with [product-specific element]".</li>
+                        <li><strong>Create Cross-Link:</strong> In Notion Creative Intel DB, add product to "Applied To Products" field. In ClickUp R0 task, add comment with links to recommended intel packets.</li>
+                        <li><strong>Notify Downstream:</strong> Post in #p1-r0-idea-dump: "Creative intel ready for [Product_ID]: [Hook 1], [Hook 2], [Hook 3]. See ClickUp task for details."</li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>ClickUp comment linking to 2-3 creative intel packets</li>
+                        <li>Adaptation notes for product-specific use</li>
+                        <li>Discord notification with summary</li>
+                    </ul>
+
+                    <h4>Quality Checks</h4>
+                    <ul>
+                        <li>✓ 2-3 distinct angles recommended (not redundant)</li>
+                        <li>✓ Adaptation notes are product-specific</li>
+                        <li>✓ Formats are feasible within P1 creative budget (4-6 creatives)</li>
+                        <li>✓ Examples are recent and relevant</li>
+                    </ul>
+                </div>
+
+                <div class="mermaid">
+                flowchart TD
+                    Start([Daily Start]) --> Scan[Platform Scanning:<br/>TikTok, FB Ads, Minea]
+                    Scan --> Identify{Promising<br/>Pattern?}
+                    Identify -->|Yes| Capture[Capture & Tag:<br/>Screenshot + Notes]
+                    Identify -->|No| Continue[Continue Scanning]
+                    Continue --> Scan
+                    Capture --> Analysis[Analyze:<br/>Hook + Angle + Format]
+                    Analysis --> Save[Save to Drive:<br/>Creative_Intel Folder]
+                    Save --> Count{Enough<br/>Patterns?}
+                    Count -->|No| Scan
+                    Count -->|Yes, 3-5| CreatePacket[Create Intel Packet<br/>in Notion]
+                    CreatePacket --> Document[Document:<br/>Hook, Angle, Format, Best Practices]
+                    Document --> Link[Link Swipe Files<br/>from Drive]
+                    Link --> Tag[Tag & Categorize]
+                    Tag --> Review[Submit for Review:<br/>Lead Strategist/Creative Director]
+                    Review --> Handoff[Post in<br/>#p1-research-updates]
+                    Handoff --> WIP{WIP at<br/>8-10?}
+                    WIP -->|Yes| EOD[End of Day Review]
+                    WIP -->|No| Scan
+                    EOD --> End([Daily End])
+                    
+                    style Start fill:#00C8C8,color:#1A1A1A
+                    style CreatePacket fill:#F4E8D0,color:#1A1A1A
+                    style Review fill:#00C8C8,color:#1A1A1A
+                    style End fill:#00C8C8,color:#1A1A1A
+                </div>
+            </div>
+        </section>
+
+        <!-- Handoffs & Interfaces -->
+        <section id="handoffs" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">🔗</span> Handoffs & Interfaces</h2>
+                <button class="toggle-btn" onclick="toggleSection('handoffs-content')">Collapse</button>
+            </div>
+            <div id="handoffs-content" class="collapsible-content">
+                <div class="section-intro">
+                    Your role sits at the intersection of Pod 1 (Product Intelligence) and Pod 2 (Creative Factory). Clear handoffs are critical.
+                </div>
+
+                <h3>Handoff 1: Creative Intel → Product Research (P1)</h3>
+                <table>
+                    <tr>
+                        <th>Element</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td><strong>FROM</strong></td>
+                        <td>P1-R0-CREATIVE-INTEL (You)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TO</strong></td>
+                        <td>P1-R3-LEAD-STRATEGIST, P1-R1R2-RESEARCH roles</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trigger</strong></td>
+                        <td>Completed creative intel packet with 2-3 product-angle matches</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Required Inputs</strong></td>
+                        <td>
+                            • Notion Creative Intel Packet (status: Complete)<br>
+                            • Drive swipe file links (3-5 examples)<br>
+                            • ClickUp R0 task ID (if product-specific)<br>
+                            • Tags: Niche, Hook_Type, Angle_Category
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Channel</strong></td>
+                        <td>
+                            <strong>Notion:</strong> Creative Intel DB<br>
+                            <strong>ClickUp:</strong> Comment on R0 Ideas task<br>
+                            <strong>Discord:</strong> #p1-r0-idea-dump
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quality Bar</strong></td>
+                        <td>
+                            • Hook pattern is clearly transferable to new products<br>
+                            • Angle maps to a validated customer desire/pain<br>
+                            • Examples are recent (last 30 days preferred)<br>
+                            • Format is replicable within budget constraints
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="code-block">
+<strong>Discord Notification Template:</strong>
+
+📦 Creative Intel Ready: [Packet_ID]
+Niche: [Primary Niche]
+Hook Type: [Hook_Type_Tag]
+Angle: [Brief angle description]
+Products: [Product_ID_1], [Product_ID_2] (if specific)
+Swipe Files: [Count] examples attached in Drive
+Notion: [Link to packet]
+Status: Ready for R1/R2 review
+
+cc: @Lead-Strategist
+                </div>
+
+                <h3>Handoff 2: Creative Intel → Creative Brief (P2)</h3>
+                <table>
+                    <tr>
+                        <th>Element</th>
+                        <th>Details</th>
+                    </tr>
+                    <tr>
+                        <td><strong>FROM</strong></td>
+                        <td>P1-R0-CREATIVE-INTEL (You)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TO</strong></td>
+                        <td>P2-CR-DIRECTOR (Creative Director), P2-CR-COPY (Copywriter)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trigger</strong></td>
+                        <td>R3 product packet approved, needs P1 creative pack</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Required Inputs</strong></td>
+                        <td>
+                            • Notion Creative Intel Packet (with R3 product link)<br>
+                            • Hook/angle/format recommendations<br>
+                            • Swipe file examples (Drive links)<br>
+                            • Best practices for implementation
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Channel</strong></td>
+                        <td>
+                            <strong>Notion:</strong> Link packet to Product OS page<br>
+                            <strong>ClickUp:</strong> Tag in P2 Briefs task<br>
+                            <strong>Discord:</strong> #p2-briefs
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quality Bar</strong></td>
+                        <td>
+                            • 2-3 distinct hook options provided<br>
+                            • Angle strategy is clearly explained<br>
+                            • Format specs are detailed and budget-feasible<br>
+                            • Swipe files are recent and high-performing
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="code-block">
+<strong>Discord Notification Template:</strong>
+
+🎨 Creative Intel for [Product_ID]
+Product: [Product Name]
+Packet: [Packet_ID]
+
+Recommended Hooks:
+1. [Hook Type 1] - [Brief description]
+2. [Hook Type 2] - [Brief description]  
+3. [Hook Type 3] - [Brief description]
+
+Angle Strategy: [One-sentence angle summary]
+Format: [Primary format recommendation]
+
+Swipe Files: [Drive folder link]
+Notion Packet: [Link]
+
+Ready for P1 creative brief.
+cc: @Creative-Director @Copywriter
+                </div>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">💡 Handoff Best Practices</div>
+                    <ul>
+                        <li>Always link Notion packets in ClickUp comments for traceability</li>
+                        <li>Use Discord for immediate visibility, Notion for permanent record</li>
+                        <li>Tag recipients explicitly in Discord to ensure notification</li>
+                        <li>Keep messages concise - details are in Notion/Drive</li>
+                        <li>Update ClickUp task status after posting Discord notification</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPIs & Quality Bar -->
+        <section id="kpis" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">📊</span> KPIs & Quality Bar</h2>
+                <button class="toggle-btn" onclick="toggleSection('kpis-content')">Collapse</button>
+            </div>
+            <div id="kpis-content" class="collapsible-content">
+                <div class="section-intro">
+                    Your performance is measured by volume, quality, and downstream impact.
+                </div>
+
+                <h3>Quantitative KPIs (L2-07)</h3>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Intel Packets/Week</div>
+                        <div class="kpi-value">15-20</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Intel Packets/Month</div>
+                        <div class="kpi-value">60-80</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Daily Target</div>
+                        <div class="kpi-value">3-5</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Active Intel Tracks</div>
+                        <div class="kpi-value">10-12</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">WIP Cap</div>
+                        <div class="kpi-value">8-10</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Angle Diversity</div>
+                        <div class="kpi-value">High</div>
+                    </div>
+                </div>
+
+                <h3>Qualitative Standards</h3>
+                <table>
+                    <tr>
+                        <th>Dimension</th>
+                        <th>Good Example ✅</th>
+                        <th>Bad Example ❌</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Hook Clarity</strong></td>
+                        <td>"Use pattern interrupt with '99% don't know this' + rapid product reveal in first 2 seconds"</td>
+                        <td>"Make it eye-catching and engaging"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Angle Specificity</strong></td>
+                        <td>"Targets time-starved parents by positioning product as 'reclaim 2 hours/week' efficiency gain"</td>
+                        <td>"Good for busy people"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Format Detail</strong></td>
+                        <td>"15s UGC-style: handheld vertical, natural lighting, voiceover callout in first 3s, product demo 3-10s, CTA last 5s"</td>
+                        <td>"Make a UGC video"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Example Relevance</strong></td>
+                        <td>3 examples from last 14 days, all 500K+ views, similar niche</td>
+                        <td>1 example from 6 months ago, different niche</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Actionability</strong></td>
+                        <td>"Test variant: Replace 'hack' language with 'method' for higher trust signal"</td>
+                        <td>"Try different things"</td>
+                    </tr>
+                </table>
+
+                <h3>Measurement & Reporting</h3>
+                <ul>
+                    <li><strong>Daily:</strong> Self-track completed packets in Notion (auto-count by status)</li>
+                    <li><strong>Weekly:</strong> Review WIP count in ClickUp; aim for 8-10 active candidates</li>
+                    <li><strong>Bi-weekly:</strong> Lead Strategist reviews angle diversity across packets</li>
+                    <li><strong>Monthly:</strong> Track downstream adoption: How many packets were used in P1 creative briefs?</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">💡 Leading Indicators of Quality</div>
+                    <ul>
+                        <li><strong>High:</strong> Creative Director requests specific intel for upcoming products</li>
+                        <li><strong>High:</strong> R1/R2 researchers cite your packets when selecting angles</li>
+                        <li><strong>High:</strong> Pod 2 executes briefs without clarification questions</li>
+                        <li><strong>Low:</strong> Packets sit unused in Notion for 30+ days</li>
+                        <li><strong>Low:</strong> Creative Director frequently asks for more examples or clarification</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Usage -->
+        <section id="ai-usage" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">🤖</span> AI Usage & Prompt Patterns</h2>
+                <button class="toggle-btn" onclick="toggleSection('ai-content')">Collapse</button>
+            </div>
+            <div id="ai-content" class="collapsible-content">
+                <div class="section-intro">
+                    AI tools accelerate pattern analysis and documentation. Use these prompts as starting points.
+                </div>
+
+                <h3>AI Use Cases for This Role</h3>
+                <ul>
+                    <li><strong>Pattern Synthesis:</strong> Summarize 5-10 similar ads into a single hook pattern</li>
+                    <li><strong>Angle Extraction:</strong> Analyze ad copy to identify underlying marketing angles</li>
+                    <li><strong>Format Documentation:</strong> Convert video observation notes into structured format specs</li>
+                    <li><strong>Trend Analysis:</strong> Spot emerging creative patterns across multiple examples</li>
+                    <li><strong>Adaptation Suggestions:</strong> Generate product-specific variations of general patterns</li>
+                </ul>
+
+                <h3>Ready-to-Copy Prompts</h3>
+                
+                <div class="workflow-card">
+                    <h3>Prompt 1: Hook Pattern Analysis</h3>
+                    <div class="code-block">
+I'm analyzing winning TikTok/Meta ads for dropshipping products. I have 5 examples of high-performing ads in [NICHE].
+
+Common elements I observe:
+- Hook: [Describe opening 3 seconds]
+- Angle: [Describe marketing angle]
+- Format: [Describe video style]
+
+Please help me:
+1. Identify the core hook pattern (what makes it stop the scroll?)
+2. Explain the underlying angle strategy (what desire/pain does it target?)
+3. Write a transferable pattern description that could apply to similar products
+4. Suggest 2-3 variants to test
+
+Keep the output junior-executable - a creative team should be able to implement this without asking clarifying questions.
+                    </div>
+                </div>
+
+                <div class="workflow-card">
+                    <h3>Prompt 2: Swipe File Synthesis</h3>
+                    <div class="code-block">
+I have 8 screenshots of winning ads in [NICHE] from the last 14 days. They all use similar hooks but with variations.
+
+For each ad, I'll provide:
+- Platform (TikTok/Meta)
+- Estimated views/engagement
+- Hook text (first 3 seconds)
+- Key visual elements
+
+[PASTE AD DETAILS]
+
+Please:
+1. Identify the 2-3 most common hook patterns
+2. Rate each pattern by estimated transferability (High/Medium/Low)
+3. Suggest which pattern would work best for: [PRODUCT DESCRIPTION]
+4. Write adaptation notes for product-specific implementation
+
+Output in Notion-friendly markdown with clear sections.
+                    </div>
+                </div>
+
+                <div class="workflow-card">
+                    <h3>Prompt 3: Product-Angle Matching</h3>
+                    <div class="code-block">
+I have a new product to test: [PRODUCT DESCRIPTION]
+Target audience: [AUDIENCE DESCRIPTION]
+Primary benefit: [BENEFIT DESCRIPTION]
+
+I have 3 creative intel packets I'm considering:
+1. [PACKET 1: Hook type + Angle summary]
+2. [PACKET 2: Hook type + Angle summary]
+3. [PACKET 3: Hook type + Angle summary]
+
+Please:
+1. Rank these packets by fit for this specific product (1 = best fit)
+2. For the top 2 packets, write specific adaptation notes
+3. Identify any gaps: what hook/angle is missing that might work well?
+4. Suggest a creative testing strategy: which 2-3 angles to test first in P1?
+
+Keep recommendations within budget: 4-6 creatives for P1, $40-$60 spend.
+                    </div>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">⚠️ Human Checkpoints (Required)</div>
+                    <ul>
+                        <li><strong>Always review AI-generated pattern descriptions</strong> against actual ad examples</li>
+                        <li><strong>Verify angle alignment</strong> with known customer desires/pains (don't accept AI speculation)</li>
+                        <li><strong>Check format feasibility</strong> within P1 budget constraints before recommending</li>
+                        <li><strong>Validate swipe file relevance</strong> - AI can't assess ad performance or recency</li>
+                        <li><strong>Never use AI-generated creative briefs</strong> without Lead Strategist review</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools & Systems -->
+        <section id="tools" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">🛠️</span> Tools & Systems Reference</h2>
+                <button class="toggle-btn" onclick="toggleSection('tools-content')">Collapse</button>
+            </div>
+            <div id="tools-content" class="collapsible-content">
+                <div class="section-intro">
+                    Your daily toolkit for creative intelligence work.
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Views/Features</th>
+                        <th>Access Level</th>
+                    </tr>
+                    <tr>
+                        <td><strong>TikTok Creative Center</strong></td>
+                        <td>Primary source for trending ad formats and hooks</td>
+                        <td>
+                            • Top Ads (Last 7/30 Days)<br>
+                            • Filter by industry/region<br>
+                            • View metrics: Views, Engagement
+                        </td>
+                        <td>Public access</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Facebook Ads Library</strong></td>
+                        <td>Search competitor ads, analyze messaging patterns</td>
+                        <td>
+                            • Search by keyword/advertiser<br>
+                            • Filter by platform/date<br>
+                            • View active/inactive ads
+                        </td>
+                        <td>Public access</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Minea</strong></td>
+                        <td>Dropshipping-specific ad intelligence and product trends</td>
+                        <td>
+                            • Winning products feed<br>
+                            • Ad performance estimates<br>
+                            • Store analysis
+                        </td>
+                        <td>Team account</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Creative Intel DB, Product OS linkage, documentation</td>
+                        <td>
+                            • <strong>DB:</strong> Creative Intel<br>
+                            • <strong>Views:</strong> Active Packets, By Niche, By Hook Type<br>
+                            • <strong>Templates:</strong> Creative Intel Packet Template
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>Swipe file storage, screenshot organization</td>
+                        <td>
+                            • <strong>Path:</strong> /DriveOn Commerce/Product Research/Creative_Intel/<br>
+                            • <strong>Structure:</strong> [Date]/[Niche]/[Hook_Type]/<br>
+                            • <strong>Naming:</strong> [Platform]_[Hook]_[Date]_[Product].png
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task tracking, R0 queue, status updates</td>
+                        <td>
+                            • <strong>Space:</strong> P1 - Product Intelligence<br>
+                            • <strong>Lists:</strong> R0 Ideas<br>
+                            • <strong>Statuses:</strong> R0_NEW, R0_INTEL_IN_PROGRESS, R0_INTEL_COMPLETE
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Cross-pod communication, handoff notifications</td>
+                        <td>
+                            • <strong>Channels:</strong> #p1-r0-idea-dump, #p1-research-updates, #p2-briefs<br>
+                            • <strong>Use:</strong> Post packet completions, respond to angle requests
+                        </td>
+                        <td>Member</td>
+                    </tr>
+                </table>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">💡 Tool Workflow Integration</div>
+                    <p><strong>Typical Daily Flow:</strong></p>
+                    <ol>
+                        <li>Morning: Check Discord #p1-r0-idea-dump for overnight requests</li>
+                        <li>Platform Scan: TikTok Creative Center + FB Ads Library + Minea</li>
+                        <li>Capture: Screenshot to Drive /Creative_Intel/[Date]/[Niche]/</li>
+                        <li>Document: Create/update packets in Notion Creative Intel DB</li>
+                        <li>Track: Update ClickUp R0 tasks to R0_INTEL_COMPLETE</li>
+                        <li>Handoff: Post completion in Discord #p1-research-updates</li>
+                        <li>EOD: Review WIP in ClickUp (target: 8-10 active)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Escalation -->
+        <section id="escalation" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">🚨</span> Escalation & Decision Rights</h2>
+                <button class="toggle-btn" onclick="toggleSection('escalation-content')">Collapse</button>
+            </div>
+            <div id="escalation-content" class="collapsible-content">
+                <div class="section-intro">
+                    Know what you can decide independently vs. what requires escalation.
+                </div>
+
+                <h3>Decisions You Can Make Alone</h3>
+                <ul>
+                    <li>Which ads/platforms to scan daily (within strategic niche priorities)</li>
+                    <li>How to categorize hooks, angles, and formats in your taxonomy</li>
+                    <li>Which patterns to document in intel packets</li>
+                    <li>How to organize swipe files in Drive</li>
+                    <li>How many examples to include per packet (3-5 is baseline)</li>
+                    <li>Whether a pattern is "trending" vs "evergreen"</li>
+                    <li>Daily prioritization of intel tasks within your WIP cap</li>
+                </ul>
+
+                <h3>Decisions Requiring Lead Strategist Approval</h3>
+                <ul>
+                    <li>Strategic niche priorities (which categories to focus scanning)</li>
+                    <li>New hook/angle taxonomy categories (if existing tags don't fit)</li>
+                    <li>Intel packets that recommend budget changes or gate modifications</li>
+                    <li>Recommending products skip R1/R2 based purely on creative potential</li>
+                    <li>Access requests to new paid intel tools beyond approved stack</li>
+                </ul>
+
+                <h3>Decisions Requiring Creative Director Involvement</h3>
+                <ul>
+                    <li>Creative format recommendations that deviate from P1 budget constraints</li>
+                    <li>Brand compliance questions (e.g., "Is this hook too aggressive?")</li>
+                    <li>Major creative strategy shifts (e.g., "Should we pivot to X format?")</li>
+                    <li>Intel packets with conflicting angle recommendations</li>
+                </ul>
+
+                <h3>When to Escalate (Immediate)</h3>
+                <div class="callout callout-warning">
+                    <div class="callout-title">⚠️ Escalate Immediately If:</div>
+                    <ul>
+                        <li>You discover platform policy changes that affect our creative strategy</li>
+                        <li>A major competitor pivots to a new format/angle we're not tracking</li>
+                        <li>Your WIP consistently exceeds 10 for 3+ days (capacity issue)</li>
+                        <li>Downstream teams (P1/P2) repeatedly reject or ignore your intel packets</li>
+                        <li>You spot a compliance risk (e.g., ads using prohibited claims)</li>
+                        <li>Access to core tools (Minea, TikTok, FB Library) is blocked/limited</li>
+                    </ul>
+                </div>
+
+                <h3>Response Time Expectations</h3>
+                <table>
+                    <tr>
+                        <th>Escalation Type</th>
+                        <th>Expected Response</th>
+                        <th>Channel</th>
+                    </tr>
+                    <tr>
+                        <td>Strategic niche priority question</td>
+                        <td>24 hours</td>
+                        <td>Discord DM to Lead Strategist</td>
+                    </tr>
+                    <tr>
+                        <td>Creative format feasibility check</td>
+                        <td>24 hours</td>
+                        <td>#p2-briefs mention @Creative-Director</td>
+                    </tr>
+                    <tr>
+                        <td>Platform policy change alert</td>
+                        <td>4 hours</td>
+                        <td>#p1-blockers + DM to Lead Strategist</td>
+                    </tr>
+                    <tr>
+                        <td>Tool access blocker</td>
+                        <td>Same day</td>
+                        <td>#p1-blockers + DM to Ops</td>
+                    </tr>
+                    <tr>
+                        <td>Capacity/WIP overload</td>
+                        <td>48 hours</td>
+                        <td>Weekly sync or async via Discord DM</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Onboarding -->
+        <section id="onboarding" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">🎓</span> Onboarding Checklist</h2>
+                <button class="toggle-btn" onclick="toggleSection('onboarding-content')">Collapse</button>
+            </div>
+            <div id="onboarding-content" class="collapsible-content">
+                <div class="section-intro">
+                    30-day ramp plan for new Creative Intelligence Researchers.
+                </div>
+
+                <h3>Week 1: Access Setup & Canon Reading</h3>
+                <ul class="checklist">
+                    <li>Receive access to Notion (Creative Intel DB + Product OS)</li>
+                    <li>Receive access to Google Drive (/DriveOn Commerce/Product Research/Creative_Intel/)</li>
+                    <li>Receive access to ClickUp (P1 - Product Intelligence space)</li>
+                    <li>Join Discord channels: #p1-r0-idea-dump, #p1-research-updates, #p2-briefs</li>
+                    <li>Receive team login credentials for Minea</li>
+                    <li>Read L1-01 (CaniCol Model) - understand testing gates and budget constraints</li>
+                    <li>Read L2-02 (Pod Overview) - understand Pod 1 mission and CrossPod responsibilities</li>
+                    <li>Read L2-03 (Role Registry & WIP Limits) - understand your WIP cap and throughput targets</li>
+                    <li>Read L2-08 (Brand Platform & Creative Guardrails) - understand creative compliance boundaries</li>
+                    <li>Shadow Lead Strategist for 1 hour: Review 3-5 example intel packets</li>
+                    <li>Shadow Creative Director for 1 hour: See how intel packets inform creative briefs</li>
+                </ul>
+
+                <h3>Week 2: Supervised Practice</h3>
+                <ul class="checklist">
+                    <li>Complete 3 supervised intel packets with Lead Strategist review</li>
+                    <li>Practice platform scanning: TikTok Creative Center (1 hour)</li>
+                    <li>Practice platform scanning: Facebook Ads Library (1 hour)</li>
+                    <li>Practice platform scanning: Minea (1 hour)</li>
+                    <li>Learn Drive folder structure: Create 5 properly named screenshot files</li>
+                    <li>Learn Notion packet structure: Fill in all sections of template</li>
+                    <li>Attend Pod 1 weekly sync: Observe prioritization discussion</li>
+                    <li>Milestone: Submit 1 intel packet that receives "Approved" status</li>
+                </ul>
+
+                <h3>Week 3: Semi-Independent Execution</h3>
+                <ul class="checklist">
+                    <li>Complete 8-10 intel packets with async review (not live shadowing)</li>
+                    <li>Maintain WIP of 6-8 active candidates (ramp toward full capacity)</li>
+                    <li>Practice product-creative matching: Link 5 intel packets to R0 products</li>
+                    <li>Post first independent handoff in #p1-research-updates</li>
+                    <li>Receive feedback from Creative Director on 2 packets</li>
+                    <li>Experiment with AI-assisted pattern analysis (supervised)</li>
+                    <li>Milestone: Complete 1 full day independently (3-5 packets, all approved)</li>
+                </ul>
+
+                <h3>Week 4: Full Independence</h3>
+                <ul class="checklist">
+                    <li>Hit target throughput: 15-20 intel packets for the week</li>
+                    <li>Maintain WIP at 8-10 active candidates</li>
+                    <li>Complete 1 niche deep-dive assignment from Lead Strategist</li>
+                    <li>Demonstrate cross-pod collaboration: Work with Creative Director on 1 brief</li>
+                    <li>Manage daily workflow independently (no prompting needed)</li>
+                    <li>Milestone: Lead Strategist signs off on readiness for solo operation</li>
+                </ul>
+
+                <h3>30-Day Review Criteria</h3>
+                <table>
+                    <tr>
+                        <th>Competency</th>
+                        <th>Success Criteria</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Volume</strong></td>
+                        <td>Consistently hitting 15-20 packets/week</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Quality</strong></td>
+                        <td>80%+ of packets approved without major revisions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WIP Management</strong></td>
+                        <td>Maintaining 8-10 active candidates without overflow</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cross-Pod Collaboration</strong></td>
+                        <td>Receiving requests from Creative Director or Lead Strategist</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Tool Proficiency</strong></td>
+                        <td>Can navigate all tools independently</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Canon Compliance</strong></td>
+                        <td>Zero format/budget recommendations that violate canon</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+
+        <!-- Change Log -->
+        <section id="changelog" class="section">
+            <div class="section-header">
+                <h2><span class="section-icon">📝</span> Change Log</h2>
+            </div>
+            <table>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                    <th>Canon Trigger</th>
+                </tr>
+                <tr>
+                    <td>v1.0</td>
+                    <td>2025-12-10</td>
+                    <td>DriveOn SOP Factory v4</td>
+                    <td>Initial SOP creation for P1-R0-CREATIVE-INTEL role. Includes: Role overview, canon constraints, day-in-life timeline, 3 core workflows, handoff specs, KPIs, AI usage patterns, tools reference, escalation procedures, and 30-day onboarding checklist. Aligned with CaniCol v4.0 model.</td>
+                    <td>L2-03 v1 (Role Registry), L2-02 v1 (Pod Overview), L2-07 v4.0 (KPIs)</td>
+                </tr>
+            </table>
+        </section>
+
+    </main>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00A8A8',
+                lineColor: '#555555',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Toggle section visibility
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const button = event.target;
+            
+            if (section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                button.textContent = 'Collapse';
+            } else {
+                section.classList.add('collapsed');
+                button.textContent = 'Expand';
+            }
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                const offset = 100;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile nav toggle (if needed)
+        const nav = document.getElementById('nav');
+        const header = document.querySelector('header');
+        
+        // Add mobile menu button (optional enhancement)
+        if (window.innerWidth <= 768) {
+            const menuBtn = document.createElement('button');
+            menuBtn.textContent = '☰ Menu';
+            menuBtn.style.cssText = 'background: var(--drive-cyan); border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer;';
+            menuBtn.onclick = () => nav.classList.toggle('open');
+            header.querySelector('.header-content').appendChild(menuBtn);
+        }
+    </script>
+
+    <!-- Hidden JSON Structure for Text SOP Generation -->
+    <script type="application/json" id="sop-structure">
+    {
+      "role_id": "P1-R0-CREATIVE-INTEL",
+      "role_name": "Creative Intelligence Researcher",
+      "pod": "P1",
+      "owned_gates": ["Supports R0/R1 with creative-led angles"],
+      "cross_pod": true,
+      "fte_default": "0.5-1.0",
+      "wip_limits": {
+        "active_candidates": "8-10"
+      },
+      "throughput": {
+        "daily": "3-5 creative intel packets",
+        "weekly": "15-20 creative intel packets",
+        "monthly": "60-80 packets",
+        "active_tracks": "10-12"
+      },
+      "kpis": [
+        {
+          "name": "Intel Packets per Week",
+          "target": "15-20",
+          "source_doc": "L2-03, L2-07"
+        },
+        {
+          "name": "Intel Packets per Month",
+          "target": "60-80",
+          "source_doc": "L2-03, L2-07"
+        },
+        {
+          "name": "Active Intel Tracks",
+          "target": "10-12",
+          "source_doc": "01_Role_Pod_Registry_v2"
+        },
+        {
+          "name": "Angle Diversity",
+          "target": "High",
+          "source_doc": "01_Role_Pod_Registry_v2"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "Creative Pattern Discovery",
+          "trigger": "Daily routine + strategic niche request",
+          "inputs": ["TikTok Creative Center feeds", "Facebook Ads Library results", "Minea platform data", "Strategic niche priorities"],
+          "steps": [
+            "Platform Scan: Filter by recent ads, note high engagement",
+            "Hook Analysis: Identify first 3-second pattern and categorize",
+            "Angle Extraction: Determine core marketing angle and positioning",
+            "Format Documentation: Note creative format specifications",
+            "Screenshot & Save: Capture to Drive with proper naming",
+            "Pattern Tagging: Add metadata for retrieval"
+          ],
+          "outputs": ["Screenshots in Drive", "Pattern notes in Notion", "Tagged categories"],
+          "tools": ["TikTok Creative Center", "Facebook Ads Library", "Minea", "Google Drive", "Notion"]
+        },
+        {
+          "name": "Intel Packet Creation",
+          "trigger": "After discovering 3-5 related patterns",
+          "inputs": ["Collected creative patterns", "Platform performance data", "Niche context"],
+          "steps": [
+            "Open Notion Template for Creative Intel Packet",
+            "Fill Packet Header with IDs and metadata",
+            "Document Hook Pattern with specific examples",
+            "Explain Angle Strategy and psychological reasoning",
+            "Detail Format Specs with technical requirements",
+            "Link Swipe Files from Drive",
+            "Add Best Practices (3-5 tactical tips)",
+            "Tag & Categorize with canonical tags",
+            "Quality Check against checklist",
+            "Submit for Review to Lead Strategist/Creative Director"
+          ],
+          "outputs": ["Completed Creative Intel Packet in Notion", "ClickUp task updated", "Discord notification"],
+          "tools": ["Notion", "ClickUp", "Discord", "Google Drive"]
+        },
+        {
+          "name": "Product-Creative Matching",
+          "trigger": "R0 product needs creative angle",
+          "inputs": ["R0 product from ClickUp", "Product category and positioning", "Existing intel packets"],
+          "steps": [
+            "Review Product Brief in ClickUp",
+            "Search Intel Library in Notion by niche/hook/angle",
+            "Match 2-3 Angles based on product fit",
+            "Adapt Recommendations with product-specific notes",
+            "Create Cross-Link in Notion and ClickUp",
+            "Notify Downstream via Discord"
+          ],
+          "outputs": ["ClickUp comment with packet links", "Adaptation notes", "Discord notification"],
+          "tools": ["ClickUp", "Notion", "Discord"]
+        }
+      ],
+      "day_in_life": [
+        {
+          "time_range": "08:00-09:00",
+          "focus": "Morning Setup & Queue Review",
+          "primary_workflows": ["Queue review", "Prioritization"]
+        },
+        {
+          "time_range": "09:00-11:30",
+          "focus": "Active Platform Scanning (Block 1)",
+          "primary_workflows": ["Creative Pattern Discovery"]
+        },
+        {
+          "time_range": "11:30-12:30",
+          "focus": "Documentation & Analysis",
+          "primary_workflows": ["Intel Packet Creation"]
+        },
+        {
+          "time_range": "12:30-13:30",
+          "focus": "Lunch & Async Collaboration",
+          "primary_workflows": ["Handoffs", "Cross-pod communication"]
+        },
+        {
+          "time_range": "13:30-16:00",
+          "focus": "Active Platform Scanning (Block 2)",
+          "primary_workflows": ["Creative Pattern Discovery"]
+        },
+        {
+          "time_range": "16:00-17:00",
+          "focus": "End-of-Day Review & Planning",
+          "primary_workflows": ["Quality check", "WIP management"]
+        }
+      ],
+      "tools": [
+        {
+          "name": "TikTok Creative Center",
+          "use_case": "Primary source for trending ad formats",
+          "access": "Public"
+        },
+        {
+          "name": "Facebook Ads Library",
+          "use_case": "Search competitor ads",
+          "access": "Public"
+        },
+        {
+          "name": "Minea",
+          "use_case": "Dropshipping ad intelligence",
+          "access": "Team account"
+        },
+        {
+          "name": "Notion",
+          "use_case": "Creative Intel DB",
+          "key_dbs": ["Creative Intel"],
+          "access": "Editor"
+        },
+        {
+          "name": "Google Drive",
+          "use_case": "Swipe file storage",
+          "key_paths": ["/DriveOn Commerce/Product Research/Creative_Intel/"],
+          "access": "Editor"
+        },
+        {
+          "name": "ClickUp",
+          "use_case": "Task tracking",
+          "key_lists": ["R0 Ideas"],
+          "access": "Editor"
+        },
+        {
+          "name": "Discord",
+          "use_case": "Cross-pod communication",
+          "key_channels": ["#p1-r0-idea-dump", "#p1-research-updates", "#p2-briefs"],
+          "access": "Member"
+        }
+      ],
+      "upstream_roles": ["External platforms"],
+      "downstream_roles": ["P2-CR-DIRECTOR", "P1-R3-LEAD-STRATEGIST"],
+      "reports_to": "Lead Strategist / Creative Director"
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2-CR-COPY · Copywriter & Concept Writer | DriveOn Commerce v4.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface-white: #FFFFFF;
+            --surface-light: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success-green: #10B981;
+            --warning-yellow: #F59E0B;
+            --danger-red: #EF4444;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-light);
+        }
+        
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-left h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .header-left .role-meta {
+            font-size: 0.875rem;
+            color: var(--drive-cyan);
+            margin-top: 0.25rem;
+        }
+        
+        .status-chip {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.375rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 80px;
+            right: 2rem;
+            width: 220px;
+            background: var(--surface-white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            z-index: 900;
+        }
+        
+        nav h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--carbon-black);
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--drive-cyan);
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem 4rem;
+        }
+        
+        /* Hero Section */
+        .hero-summary {
+            background: linear-gradient(135deg, var(--carbon-black) 0%, #2A2A2A 100%);
+            color: var(--surface-white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-summary h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .key-outcomes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+        
+        .outcome-chip {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .you-own {
+            margin-top: 1.5rem;
+        }
+        
+        .you-own h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            color: var(--drive-cyan);
+        }
+        
+        .you-own ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .you-own ul li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .you-own ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--drive-cyan);
+            font-weight: bold;
+        }
+        
+        /* Section Cards */
+        .section-card {
+            background: var(--surface-white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-gray);
+        }
+        
+        .section-icon {
+            font-size: 1.5rem;
+            margin-right: 0.75rem;
+        }
+        
+        .section-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .section-intro {
+            background: var(--surface-light);
+            padding: 1rem;
+            border-left: 3px solid var(--drive-cyan);
+            margin-bottom: 1.5rem;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Callout Boxes */
+        .callout {
+            padding: 1rem 1rem 1rem 3rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .callout::before {
+            position: absolute;
+            left: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .callout-canon {
+            background: #FEF3C7;
+            border-left: 4px solid #F59E0B;
+        }
+        
+        .callout-canon::before {
+            content: "⚖️";
+        }
+        
+        .callout-warning {
+            background: #FEE2E2;
+            border-left: 4px solid var(--danger-red);
+        }
+        
+        .callout-warning::before {
+            content: "⚠️";
+        }
+        
+        .callout-tip {
+            background: #DBEAFE;
+            border-left: 4px solid #3B82F6;
+        }
+        
+        .callout-tip::before {
+            content: "💡";
+        }
+        
+        .callout h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .callout ul {
+            margin: 0.5rem 0 0 1rem;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9375rem;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        th {
+            background: var(--surface-light);
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+        
+        tr:hover {
+            background: var(--surface-light);
+        }
+        
+        /* Code Blocks */
+        code {
+            background: var(--surface-light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: "Courier New", monospace;
+            font-size: 0.875rem;
+            color: var(--danger-red);
+        }
+        
+        pre {
+            background: var(--carbon-black);
+            color: var(--drive-cyan);
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        pre code {
+            background: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        
+        /* Checklists */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .checklist li {
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: var(--surface-light);
+            border-radius: 4px;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+        
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0.75rem;
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 1rem 0 1rem 2rem;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--drive-cyan);
+        }
+        
+        .timeline-block {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-block::before {
+            content: "";
+            position: absolute;
+            left: -2.5rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            background: var(--drive-cyan);
+            border-radius: 50%;
+        }
+        
+        .timeline-block h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--drive-cyan);
+        }
+        
+        .timeline-block p {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+        
+        /* Handoff Cards */
+        .handoff-card {
+            background: var(--surface-light);
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        .handoff-from, .handoff-to {
+            font-size: 0.875rem;
+        }
+        
+        .handoff-from strong, .handoff-to strong {
+            color: var(--drive-cyan);
+            font-weight: 600;
+        }
+        
+        .handoff-trigger {
+            background: var(--champagne);
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin: 0.75rem 0;
+            font-size: 0.875rem;
+        }
+        
+        /* KPI Strip */
+        .kpi-strip {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .kpi-box {
+            flex: 1;
+            min-width: 200px;
+            background: var(--surface-light);
+            border-left: 4px solid var(--drive-cyan);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+        
+        .kpi-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+        
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+        
+        /* Collapsible Sections */
+        details {
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        
+        summary {
+            background: var(--surface-light);
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            user-select: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        summary:hover {
+            background: #E5E5E5;
+        }
+        
+        summary::after {
+            content: "▼";
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+        
+        details > div {
+            padding: 1.5rem;
+        }
+        
+        /* Mermaid Diagrams */
+        .mermaid {
+            background: var(--surface-white);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                position: static;
+                width: 100%;
+                margin: 1rem 0;
+                max-height: none;
+            }
+            
+            main {
+                padding: 0 1rem 4rem;
+            }
+            
+            .hero-summary {
+                padding: 1.5rem;
+            }
+            
+            .section-card {
+                padding: 1.5rem;
+            }
+            
+            .kpi-box {
+                min-width: 100%;
+            }
+        }
+        
+        /* Hidden JSON */
+        #sop-structure {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <h1>P2-CR-COPY · Copywriter & Concept Writer</h1>
+            <div class="role-meta">Pod 2: Creative Factory | DriveOn Commerce v4.0</div>
+        </div>
+        <div class="status-chip">ACTIVE</div>
+    </header>
+
+    <nav>
+        <h3>Contents</h3>
+        <ul>
+            <li><a href="#hero">Role Overview</a></li>
+            <li><a href="#meta">Meta & Snapshot</a></li>
+            <li><a href="#purpose">Purpose & Context</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day-in-life">Day-in-the-Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">KPIs & Quality Bar</a></li>
+            <li><a href="#ai-usage">AI Usage & Prompts</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation & Decisions</a></li>
+            <li><a href="#onboarding">Onboarding Checklist</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero-summary">
+            <h2>Transform R3 Intel Into High-Converting Copy Assets</h2>
+            <p>You are the voice behind every ad, landing page, and social post. Your words determine whether a scroll becomes a click, a click becomes a purchase. Operating at the intersection of data and creativity, you craft hooks, scripts, angles, and captions that drive DriveOn's lean-volume testing engine.</p>
+            
+            <div class="key-outcomes">
+                <span class="outcome-chip">10-20 Script Sets/Week</span>
+                <span class="outcome-chip">6-8 Products Active</span>
+                <span class="outcome-chip">CTR ≥1.3% Target</span>
+                <span class="outcome-chip">P1/P2 Copy Coverage</span>
+            </div>
+            
+            <div class="you-own">
+                <h3>You Own</h3>
+                <ul>
+                    <li>All ad copy (hooks, scripts, CTAs)</li>
+                    <li>Landing page headlines & body copy</li>
+                    <li>Social media captions</li>
+                    <li>Angle development from R3 packets</li>
+                    <li>Copy QA before creative handoff</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="meta" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📋</span>
+                <h3>Meta & Role Snapshot</h3>
+            </div>
+            
+            <div class="section-intro">
+                This section provides the canonical metadata for P2-CR-COPY. Every field here comes directly from L2-03 (Role Registry) and L2-04 (Glossary & Conventions).
+            </div>
+            
+            <table>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Role ID</td>
+                    <td><code>P2-CR-COPY-XX</code></td>
+                </tr>
+                <tr>
+                    <td>Role Name</td>
+                    <td>Copywriter & Concept Writer</td>
+                </tr>
+                <tr>
+                    <td>Role Type</td>
+                    <td>COPYWRITER</td>
+                </tr>
+                <tr>
+                    <td>Pod</td>
+                    <td>P2 – Creative Factory</td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>CORE</td>
+                </tr>
+                <tr>
+                    <td>CrossPod</td>
+                    <td>Yes (interfaces with P1, P2, P3)</td>
+                </tr>
+                <tr>
+                    <td>FTE</td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td>Owned Gates</td>
+                    <td>Copy assets for ad + landing + social</td>
+                </tr>
+                <tr>
+                    <td>Pipeline Stages</td>
+                    <td>R3 → P1 → P2</td>
+                </tr>
+                <tr>
+                    <td>Upstream Roles</td>
+                    <td>P1-R0-PROBLEM-INTEL, P1-R0-CREATIVE-INTEL, P1-PI-LEAD, P2-CR-DIRECTOR</td>
+                </tr>
+                <tr>
+                    <td>Downstream Roles</td>
+                    <td>P2-CR-HEROEDIT, P2-CR-VOLEDIT, P2-CR-STATIC-DESIGN, P3-MB-BUYER, P2-SM-ORGANIC</td>
+                </tr>
+            </table>
+            
+            <div class="kpi-strip">
+                <div class="kpi-box">
+                    <div class="kpi-label">WIP Cap</div>
+                    <div class="kpi-value">6-8 Products</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Weekly Target</div>
+                    <div class="kpi-value">10-20 Sets</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Monthly Volume</div>
+                    <div class="kpi-value">60-80 Products</div>
+                </div>
+            </div>
+            
+            <h4 style="margin-top: 1.5rem;">Primary Tools</h4>
+            <ul>
+                <li><strong>AI Tools:</strong> ChatGPT, Claude (prompt engineering & rapid iteration)</li>
+                <li><strong>Docs:</strong> Google Docs (drafting & collaboration)</li>
+                <li><strong>Notion:</strong> Product OS, Creative Briefs DB, Angle Library</li>
+                <li><strong>ClickUp:</strong> Copy tasks, status tracking</li>
+                <li><strong>Discord:</strong> #p2-briefs, #p2-copy-handoffs</li>
+            </ul>
+            
+            <h4 style="margin-top: 1.5rem;">Primary Notion DBs</h4>
+            <ul>
+                <li><strong>Product Packets:</strong> R3 intel source</li>
+                <li><strong>Creative Briefs:</strong> Where copy lives before handoff</li>
+                <li><strong>Angle Library:</strong> Proven hooks, objection handling, CTAs</li>
+            </ul>
+            
+            <h4 style="margin-top: 1.5rem;">Primary ClickUp Location</h4>
+            <ul>
+                <li><strong>Space:</strong> P2 – Creative</li>
+                <li><strong>Folder:</strong> Creative Pipeline</li>
+                <li><strong>List:</strong> Briefs</li>
+                <li><strong>Statuses:</strong> Copy_Queue → Copy_Active → Copy_Review → Copy_Approved → Copy_Rejected</li>
+            </ul>
+            
+            <h4 style="margin-top: 1.5rem;">Version & Ownership</h4>
+            <ul>
+                <li><strong>Version:</strong> 1.0</li>
+                <li><strong>Last Updated:</strong> December 10, 2025</li>
+                <li><strong>Author:</strong> DriveOn SOP Factory (v4)</li>
+                <li><strong>Reports To:</strong> P2-CR-DIRECTOR (Creative Director)</li>
+            </ul>
+        </section>
+
+        <section id="purpose" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h3>Role Purpose & Context</h3>
+            </div>
+            
+            <div class="section-intro">
+                Why this role exists in the CaniCol v4.0 model and how it connects to DriveOn's economics and hit-rate goals.
+            </div>
+            
+            <h4>Mission Statement</h4>
+            <p>The Copywriter & Concept Writer transforms R3 product intelligence into high-performing copy systems that give Media Buyers the best chance of hitting P1 pass thresholds (CTR ≥1.3%, CPC ≤$1.20) within the $40-60 P1 budget.</p>
+            
+            <h4 style="margin-top: 1.5rem;">Strategic Context</h4>
+            <p><strong>DriveOn Commerce operates a lean-volume dropshipping model:</strong></p>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li>~45-60 products tested monthly through P1/P2 gates</li>
+                <li>Target 4-6% winner rate (2-4 winners/month)</li>
+                <li>70-80% killed in P1 within 24-48 hours</li>
+                <li>Portfolio-first mindset over individual product attachment</li>
+            </ul>
+            
+            <p><strong>Your copy directly impacts:</strong></p>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li><strong>Top-of-funnel attention:</strong> Hook quality determines scroll-stop rate and CTR</li>
+                <li><strong>Early intent signals:</strong> Script clarity drives ATC/IC depth events</li>
+                <li><strong>Testing velocity:</strong> Fast, on-brief copy keeps 45-60 products/month flowing</li>
+                <li><strong>Economic discipline:</strong> Every word must justify itself within tight P1/P2 budgets</li>
+            </ul>
+            
+            <div class="callout callout-tip">
+                <h4>Why This Role Matters</h4>
+                <p>Research from Meta and TikTok shows that <strong>hook quality (first 3 seconds) accounts for 60-80% of ad performance variance</strong>. In a lean-volume model where most products fail P1, your copy is the first and often only line of defense against wasted spend. A weak hook kills a good product; a strong hook gives a mediocre product a fighting chance.</p>
+            </div>
+            
+            <h4 style="margin-top: 1.5rem;">How You Connect to Holdings & Pods</h4>
+            <ul style="margin: 1rem 0 1rem 1.5rem;">
+                <li><strong>L0 (Holdings):</strong> Support DriveOn Commerce's brand positioning as a lean, data-driven engine (not a hype machine)</li>
+                <li><strong>L1 (Model):</strong> Enable CaniCol's 3-gate testing by providing 4-6 P1 copy variants and 2-4 P2 iterations per product</li>
+                <li><strong>P1 (Intel):</strong> Consume R3 packets with problem/objection intel and creative swipes</li>
+                <li><strong>P2 (Creative):</strong> Feed editors with scripts; receive direction from Creative Director</li>
+                <li><strong>P3 (Media):</strong> Enable Media Buyers to run valid tests with performance-ready copy</li>
+            </ul>
+        </section>
+
+        <section id="canon" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">⚖️</span>
+                <h3>Canon Constraints</h3>
+            </div>
+            
+            <div class="section-intro">
+                Non-negotiable constraints from L0-L3 canon that govern this role. These cannot be modified without a Canon Change Request (CCR).
+            </div>
+            
+            <div class="callout callout-canon">
+                <h4>CaniCol Economics (L1-01, L2-05)</h4>
+                <ul>
+                    <li><strong>P1 budget per product:</strong> $40-60</li>
+                    <li><strong>P1+P2 total per product:</strong> $70-100 (cap $120)</li>
+                    <li><strong>Testing volume:</strong> 45-60 products/month</li>
+                    <li><strong>Winner rate:</strong> 4-6% (2-4/month)</li>
+                    <li><strong>P1 kill rate:</strong> 70-80% within 24-48 hours</li>
+                </ul>
+            </div>
+            
+            <div class="callout callout-canon">
+                <h4>Creative Volume (L2-02, L2-03)</h4>
+                <ul>
+                    <li><strong>P1:</strong> 4-6 creatives per product (baseline)</li>
+                    <li><strong>P2:</strong> +2-4 new variants (6-10 total across P1+P2)</li>
+                    <li><strong>Pod 2 capacity:</strong> 250-400 creative assets/month</li>
+                    <li>Each creative requires copy (hook, script, CTA, caption)</li>
+                </ul>
+            </div>
+            
+            <div class="callout callout-canon">
+                <h4>WIP & Throughput (L2-03)</h4>
+                <ul>
+                    <li><strong>WIP cap:</strong> 6-8 products in active copy development</li>
+                    <li><strong>Weekly throughput:</strong> 10-20 script/angle/copy sets</li>
+                    <li><strong>Daily baseline:</strong> 3-5 products receive copy passes</li>
+                    <li><strong>Monthly volume:</strong> 60-80 products touched</li>
+                </ul>
+            </div>
+            
+            <div class="callout callout-canon">
+                <h4>Pass/Kill Criteria (L2-05)</h4>
+                <ul>
+                    <li><strong>P1 Pass:</strong> CTR ≥1.3% OR CPC ≤$1.20 + ≥1 depth event</li>
+                    <li><strong>P1 Hard Fail:</strong> CTR <0.8% OR CPC >$2.00 OR (CTR <1.0% AND zero depth events)</li>
+                    <li>Your copy must give products a fighting chance to hit these thresholds</li>
+                </ul>
+            </div>
+            
+            <div class="callout callout-warning">
+                <h4>Forbidden Behaviors</h4>
+                <ul>
+                    <li>Guessing at angles without reviewing R3 packets or performance data</li>
+                    <li>Emotional attachment to individual products (portfolio > product)</li>
+                    <li>Creating "spec work" for products outside the active pipeline</li>
+                    <li>Silent exceptions to WIP caps or Creative Director approval</li>
+                    <li>Using tools not in approved stack (no Grammarly Pro, Jasper, Copy.ai without approval)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="day-in-life" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📅</span>
+                <h3>Day-in-the-Life Timeline</h3>
+            </div>
+            
+            <div class="section-intro">
+                A typical 8-hour workday for P2-CR-COPY, time-boxed by focus blocks.
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-block">
+                    <h4>Block 1: Setup & Prioritization (30 min)</h4>
+                    <p><strong>Time:</strong> 9:00 - 9:30 AM</p>
+                    <p><strong>Tools:</strong> ClickUp, Discord, Notion</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Check #p2-briefs Discord for overnight handoffs</li>
+                        <li>Review ClickUp "Copy_Queue" and "Copy_Active" lists</li>
+                        <li>Identify 3-5 priority products for the day (Creative Director assignments + P1 urgents)</li>
+                        <li>Check for any performance alerts from P3 (CTR crashes requiring angle pivots)</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-block">
+                    <h4>Block 2: Core Copy Production (3 hours)</h4>
+                    <p><strong>Time:</strong> 9:30 AM - 12:30 PM</p>
+                    <p><strong>Tools:</strong> ChatGPT/Claude, Google Docs, Notion</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Work through priority queue: 2-3 products per block</li>
+                        <li>For each product:
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Review R3 packet (problem intel, creative swipes, AOV/niche)</li>
+                                <li>Generate 4-6 hook variants using AI + manual refinement</li>
+                                <li>Draft 2-3 script templates (15-30 sec, 30-60 sec formats)</li>
+                                <li>Write 3-5 CTA variations</li>
+                                <li>Add captions for social (TikTok, IG, FB)</li>
+                            </ul>
+                        </li>
+                        <li>Update Notion Creative Brief with copy assets</li>
+                        <li>Move ClickUp task to "Copy_Review"</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-block">
+                    <h4>Block 3: Creative Director Review & Iteration (1 hour)</h4>
+                    <p><strong>Time:</strong> 1:00 - 2:00 PM</p>
+                    <p><strong>Tools:</strong> Discord, ClickUp, Notion</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Ping Creative Director for review of morning's work</li>
+                        <li>Address feedback and iterate on 1-2 priority briefs</li>
+                        <li>Approve finalized copy sets (move to "Copy_Approved")</li>
+                        <li>Prepare handoff notifications for editors</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-block">
+                    <h4>Block 4: Performance-Driven Refinement (2 hours)</h4>
+                    <p><strong>Time:</strong> 2:00 - 4:00 PM</p>
+                    <p><strong>Tools:</strong> Notion Angle Library, ClickUp, AI tools</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Review P1 performance data from P3 (which hooks/angles are winning)</li>
+                        <li>Update Angle Library with proven patterns</li>
+                        <li>Generate P2 copy variants for products that passed P1</li>
+                        <li>Work on 1-2 "rescue" products (P1_BORDERLINE with new angle hypothesis)</li>
+                    </ul>
+                </div>
+                
+                <div class="timeline-block">
+                    <h4>Block 5: Handoffs & Admin (1.5 hours)</h4>
+                    <p><strong>Time:</strong> 4:00 - 5:30 PM</p>
+                    <p><strong>Tools:</strong> Discord, ClickUp, Notion</p>
+                    <ul style="margin-top: 0.5rem;">
+                        <li>Post handoff notifications to #p2-copy-handoffs</li>
+                        <li>Update Product OS with copy status</li>
+                        <li>Log time entries in ClickUp</li>
+                        <li>Review tomorrow's queue and flag any blockers</li>
+                        <li>Quick standup post in Discord (What I did / Tomorrow / Blockers)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="callout callout-tip">
+                <h4>Load Management Tip</h4>
+                <p>If WIP exceeds 8 products or Creative Director review is delayed >24h, immediately escalate to Creative Director or PM. Do not silently let queue build up.</p>
+            </div>
+        </section>
+
+        <section id="workflows" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <h3>Core Workflows</h3>
+            </div>
+            
+            <div class="section-intro">
+                Step-by-step processes for the most critical copy production tasks. Each workflow includes trigger, inputs, actions, outputs, and quality checks.
+            </div>
+            
+            <details open>
+                <summary>Workflow 1: P1 Copy Brief Creation (from R3 Packet)</summary>
+                <div>
+                    <h4>Trigger</h4>
+                    <p>Creative Director assigns product to you OR R3 packet appears in ClickUp "Copy_Queue" with status "Copy_Queue"</p>
+                    
+                    <h4 style="margin-top: 1rem;">Inputs</h4>
+                    <ul>
+                        <li>R3 Product Packet (Notion link from ClickUp task)</li>
+                        <li>P1-R0-PROBLEM-INTEL outputs (objection banks, pain points)</li>
+                        <li>P1-R0-CREATIVE-INTEL swipe files (winning hooks from competitors)</li>
+                        <li>Creative Director brief notes (angle guidance, if any)</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 1rem;">Actions</h4>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Review R3 Packet (10 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Read problem/objection summary</li>
+                                <li>Note AOV range, niche, target demo</li>
+                                <li>Identify 2-3 primary angles (problem-solution, authority, social proof, urgency)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Generate Hook Variants (20 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Use AI prompt (see AI Usage section) to generate 10-15 raw hooks</li>
+                                <li>Manually refine to 4-6 best variants</li>
+                                <li>Ensure diversity: 2 problem-agitate, 2 curiosity-gap, 1-2 authority/social</li>
+                            </ul>
+                        </li>
+                        <li><strong>Draft Scripts (25 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Create 2-3 script templates (15-30s, 30-60s)</li>
+                                <li>Structure: Hook → Problem Agitate → Solution Intro → Benefit Stack → CTA</li>
+                                <li>Keep language simple, direct, benefit-focused</li>
+                            </ul>
+                        </li>
+                        <li><strong>Write CTAs & Captions (10 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>3-5 CTA variations (Shop Now, Learn More, Get Yours, Limited Stock)</li>
+                                <li>TikTok/IG captions (2-3 variants, emoji-light, hashtag strategy)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Populate Notion Creative Brief (5 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Add all copy assets to Creative Brief DB</li>
+                                <li>Link to R3 packet and Product ID</li>
+                                <li>Tag angles used</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update ClickUp Task:</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Move from "Copy_Queue" → "Copy_Review"</li>
+                                <li>Add comment with Notion link</li>
+                                <li>Tag Creative Director for review</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4 style="margin-top: 1rem;">Outputs</h4>
+                    <ul>
+                        <li>Notion Creative Brief with 4-6 hooks, 2-3 scripts, 3-5 CTAs, captions</li>
+                        <li>ClickUp task in "Copy_Review" status</li>
+                        <li>Discord notification in #p2-briefs</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 1rem;">Quality Checks</h4>
+                    <ul class="checklist">
+                        <li>All hooks are under 10 words (scroll-stop friendly)</li>
+                        <li>Scripts follow Hook → Agitate → Solution → CTA structure</li>
+                        <li>At least 2 different angle approaches (diversity)</li>
+                        <li>Language matches target demo (no jargon for mass market)</li>
+                        <li>CTAs are action-oriented and urgent</li>
+                        <li>All fields in Notion Creative Brief are populated</li>
+                    </ul>
+                    
+                    <div class="callout callout-tip">
+                        <h4>Pro Tip: First 3 Seconds Rule</h4>
+                        <p>60-80% of users scroll past in 3 seconds. Your hook must create a "pattern interrupt" immediately. Test: Can you say the hook out loud in under 3 seconds? If not, cut words.</p>
+                    </div>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Workflow 2: P2 Copy Iteration (Performance-Driven)</summary>
+                <div>
+                    <h4>Trigger</h4>
+                    <p>Product passes P1 (P1_PASS status) OR Creative Director requests P2 variants</p>
+                    
+                    <h4 style="margin-top: 1rem;">Inputs</h4>
+                    <ul>
+                        <li>P1 performance data (CTR, CPC, CPA by creative variant)</li>
+                        <li>Original P1 Creative Brief</li>
+                        <li>Creative Director notes on what worked/didn't work</li>
+                        <li>Media Buyer feedback (if available)</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 1rem;">Actions</h4>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Analyze P1 Data (10 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Identify which hooks/angles had highest CTR</li>
+                                <li>Note which scripts led to depth events (ATC/IC)</li>
+                                <li>Look for qualitative signals (comments, DMs if shared by P3)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Generate P2 Variants (30 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Double down on winning angle with 2-3 new hooks</li>
+                                <li>Test 1-2 "risky" hypotheses (counter-positioning, polarization)</li>
+                                <li>Create 1-2 new script variants focused on conversion (more benefit detail, urgency)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Brief & ClickUp:</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Add P2 copy section to Notion Creative Brief</li>
+                                <li>Move ClickUp task to "Copy_P2_Active" status</li>
+                                <li>Tag for Creative Director approval</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4 style="margin-top: 1rem;">Outputs</h4>
+                    <ul>
+                        <li>2-4 new P2 copy variants in Notion</li>
+                        <li>ClickUp task updated to P2 phase</li>
+                    </ul>
+                    
+                    <h4 style="margin-top: 1rem;">Quality Checks</h4>
+                    <ul class="checklist">
+                        <li>P2 variants are meaningfully different from P1 (not just word swaps)</li>
+                        <li>At least one variant tests a new angle or objection handling</li>
+                        <li>Scripts are conversion-focused (more benefit detail, stronger CTAs)</li>
+                    </ul>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Workflow 3: Copy QA & Approval Loop</summary>
+                <div>
+                    <h4>Trigger</h4>
+                    <p>You move ClickUp task to "Copy_Review" OR Creative Director requests revisions</p>
+                    
+                    <h4 style="margin-top: 1rem;">Actions</h4>
+                    <ol style="margin-left: 1.5rem;">
+                        <li><strong>Self-QA (5 min):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Read all copy out loud (catch awkward phrasing)</li>
+                                <li>Check for typos, grammar issues</li>
+                                <li>Verify all links/product names are correct</li>
+                            </ul>
+                        </li>
+                        <li><strong>Tag Creative Director:</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Add ClickUp comment: "@CreativeDirector Copy ready for review: [Notion link]"</li>
+                                <li>Post in #p2-briefs: "🔍 Copy Review: [Product ID] - [Brief Link]"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Handle Feedback (within 2 hours of receiving):</strong>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>If approved → Move to "Copy_Approved" and trigger editor handoff</li>
+                                <li>If revisions → Make changes, re-QA, re-submit</li>
+                                <li>If rejected → Escalate to Creative Director for new angle direction</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4 style="margin-top: 1rem;">SLA</h4>
+                    <p>From "Copy_Review" to "Copy_Approved" should take <24 hours (including Creative Director review time). If delayed, escalate to PM.</p>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Workflow 4: Angle Library Maintenance</summary>
+                <div>
+                    <h4>Trigger</h4>
+                    <p>Weekly (Friday afternoon) OR when P1 performance data shows clear winners</p>
+                    
+                    <h4 style="margin-top: 1rem;">Purpose</h4>
+                    <p>Build a living database of proven hooks, angles, and copy patterns to accelerate future briefs.</p>
+                    
+                    <h4 style="margin-top: 1rem;">Actions</h4>
+                    <ol style="margin-left: 1.5rem;">
+                        <li>Review P1 results from the week</li>
+                        <li>Identify hooks/scripts with CTR >1.5% or CPC <$1.00</li>
+                        <li>Add to Notion Angle Library with:
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Product niche</li>
+                                <li>Angle category (problem-agitate, curiosity, authority, etc.)</li>
+                                <li>Actual copy text</li>
+                                <li>Performance metrics</li>
+                            </ul>
+                        </li>
+                        <li>Tag patterns (e.g., "temporal urgency", "before/after", "secret reveal")</li>
+                    </ol>
+                    
+                    <div class="callout callout-tip">
+                        <h4>Why This Matters</h4>
+                        <p>The Angle Library turns your work into compounding leverage. Instead of starting from zero on every brief, you reference proven patterns and adapt them. This is how you go from 10 briefs/week to 20 without burning out.</p>
+                    </div>
+                </div>
+            </details>
+            
+            <div class="mermaid">
+graph TD
+    A[R3 Packet Ready] --> B[Review R3 + Intel]
+    B --> C[Generate Hooks + Scripts]
+    C --> D[Populate Notion Brief]
+    D --> E[Self-QA]
+    E --> F[Submit to Creative Director]
+    F --> G{Approved?}
+    G -->|Yes| H[Move to Copy_Approved]
+    G -->|Revisions| I[Iterate Copy]
+    I --> F
+    G -->|Rejected| J[Escalate to CD for New Angle]
+    H --> K[Handoff to Editors]
+    K --> L[P1 Launch]
+    L --> M{P1 Pass?}
+    M -->|Yes| N[P2 Copy Iteration]
+    M -->|No| O[Kill or Park]
+    N --> P[P2 Launch]
+            </div>
+        </section>
+
+        <section id="handoffs" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🤝</span>
+                <h3>Handoffs & Interface Specs</h3>
+            </div>
+            
+            <div class="section-intro">
+                How work moves between P2-CR-COPY and other roles. Each handoff includes minimum quality bar, notification channels, and acceptance criteria.
+            </div>
+            
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>FROM:</strong> P1-PI-LEAD / P1-R0-PROBLEM-INTEL</div>
+                    <div class="handoff-to"><strong>TO:</strong> P2-CR-COPY (You)</div>
+                </div>
+                
+                <div class="handoff-trigger"><strong>Trigger:</strong> R3 packet approved and moved to ClickUp "Copy_Queue"</div>
+                
+                <h4>Required Inputs</h4>
+                <ul>
+                    <li>R3 Product Packet with problem/objection intel</li>
+                    <li>Product ID, AOV estimate, niche</li>
+                    <li>Creative swipe files (competitor hooks)</li>
+                    <li>Target demo notes</li>
+                </ul>
+                
+                <h4>Channel</h4>
+                <ul>
+                    <li><strong>ClickUp:</strong> Task appears in "Copy_Queue"</li>
+                    <li><strong>Discord:</strong> Notification in #p2-briefs</li>
+                    <li><strong>Notion:</strong> R3 packet linked in Product OS</li>
+                </ul>
+                
+                <h4>Acceptance Criteria</h4>
+                <ul class="checklist">
+                    <li>R3 packet is marked "R3_APPROVED" status</li>
+                    <li>Problem intel section is populated (not blank)</li>
+                    <li>At least 3 competitor creative swipes included</li>
+                    <li>Product ID follows format: PRD-YYYYMMDD-XXX</li>
+                </ul>
+                
+                <h4>If Inputs Are Incomplete</h4>
+                <p>Ping P1 team in #p2-briefs: "⚠️ [Product ID] R3 packet missing [specific field]. Need before I can start copy."</p>
+            </div>
+            
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>FROM:</strong> P2-CR-COPY (You)</div>
+                    <div class="handoff-to"><strong>TO:</strong> P2-CR-DIRECTOR</div>
+                </div>
+                
+                <div class="handoff-trigger"><strong>Trigger:</strong> Copy brief complete and moved to "Copy_Review"</div>
+                
+                <h4>Required Outputs</h4>
+                <ul>
+                    <li>Notion Creative Brief with 4-6 hooks, 2-3 scripts, CTAs, captions</li>
+                    <li>All copy follows quality checks (see Workflow 1)</li>
+                    <li>ClickUp task in "Copy_Review" with Notion link</li>
+                </ul>
+                
+                <h4>Channel</h4>
+                <ul>
+                    <li><strong>ClickUp:</strong> Tag Creative Director in task comment</li>
+                    <li><strong>Discord:</strong> Post in #p2-briefs with link</li>
+                </ul>
+                
+                <h4>Notification Template</h4>
+                <pre><code>🔍 Copy Review: [Product ID]
+Brief: [Notion Link]
+Highlights: [1-2 sentence summary of angle approach]
+Questions: [Any specific feedback needed]
+@CreativeDirector</code></pre>
+            </div>
+            
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>FROM:</strong> P2-CR-COPY (You)</div>
+                    <div class="handoff-to"><strong>TO:</strong> P2-CR-HEROEDIT / P2-CR-VOLEDIT / P2-CR-STATIC-DESIGN</div>
+                </div>
+                
+                <div class="handoff-trigger"><strong>Trigger:</strong> Creative Director approves copy (status "Copy_Approved")</div>
+                
+                <h4>Required Outputs</h4>
+                <ul>
+                    <li>Finalized copy in Notion Creative Brief</li>
+                    <li>ClickUp task moved to "Copy_Approved"</li>
+                    <li>All scripts formatted for editor use (clear scene/VO notes)</li>
+                </ul>
+                
+                <h4>Channel</h4>
+                <ul>
+                    <li><strong>Discord:</strong> Post in #p2-copy-handoffs</li>
+                    <li><strong>ClickUp:</strong> Tag relevant editor in task</li>
+                </ul>
+                
+                <h4>Notification Template</h4>
+                <pre><code>✅ Copy Approved: [Product ID]
+Brief: [Notion Link]
+Format: [Video/Static/Both]
+Priority: [P1 Urgent / P2 Standard / P3 Scaling]
+Notes: [Any specific creative direction]
+@Editor</code></pre>
+                
+                <h4>Quality Bar for Handoff</h4>
+                <ul class="checklist">
+                    <li>Creative Director approval confirmed</li>
+                    <li>All typos/grammar issues fixed</li>
+                    <li>Scripts include scene/VO breakdowns</li>
+                    <li>Product names, features, prices are accurate</li>
+                </ul>
+            </div>
+            
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-from"><strong>FROM:</strong> P3-MB-BUYER</div>
+                    <div class="handoff-to"><strong>TO:</strong> P2-CR-COPY (You)</div>
+                </div>
+                
+                <div class="handoff-trigger"><strong>Trigger:</strong> P1 performance data available (24-48h after launch) OR P2 iteration request</div>
+                
+                <h4>Required Inputs</h4>
+                <ul>
+                    <li>CTR, CPC, CPA by creative variant</li>
+                    <li>Depth events (ATC, IC, Purchase counts)</li>
+                    <li>Any qualitative feedback (comments, DMs)</li>
+                    <li>Request for P2 variants (if P1_PASS)</li>
+                </ul>
+                
+                <h4>Channel</h4>
+                <ul>
+                    <li><strong>Notion:</strong> Performance data added to Product OS</li>
+                    <li><strong>Discord:</strong> Quick summary in #p2-performance-alerts</li>
+                </ul>
+                
+                <h4>What You Do With This</h4>
+                <ul>
+                    <li>Update Angle Library with winners</li>
+                    <li>Generate P2 copy variants (Workflow 2)</li>
+                    <li>Flag underperforming angles for future avoidance</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="kpis" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h3>KPIs & Quality Bar</h3>
+            </div>
+            
+            <div class="section-intro">
+                How success is measured for P2-CR-COPY. These KPIs come from L2-07 (Pod KPIs & TestBank) and are tracked weekly/monthly.
+            </div>
+            
+            <h4>Primary KPIs (from L2-07)</h4>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target</th>
+                        <th>Measurement</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Hook Performance</strong></td>
+                        <td>≥40% of hooks drive CTR ≥1.3%</td>
+                        <td>P1 data analysis (weekly review)</td>
+                        <td>Notion Product OS + P3 dashboards</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CTR Contribution</strong></td>
+                        <td>Products with your copy average CTR ≥1.2%</td>
+                        <td>Aggregate P1 CTR across all products you touched</td>
+                        <td>Notion Product OS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ad Approval Rate</strong></td>
+                        <td>≥85% first-pass approval from Creative Director</td>
+                        <td>Count of "Copy_Approved" vs "Copy_Rejected" + iterations</td>
+                        <td>ClickUp status history</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Weekly Throughput</strong></td>
+                        <td>10-20 script/angle/copy sets</td>
+                        <td>Count of products moved to "Copy_Approved" per week</td>
+                        <td>ClickUp reports</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WIP Compliance</strong></td>
+                        <td>≤8 products in active copy WIP</td>
+                        <td>Count of tasks in "Copy_Active" + "Copy_Review"</td>
+                        <td>ClickUp dashboard</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="margin-top: 2rem;">Qualitative Quality Bar</h4>
+            
+            <h5 style="margin-top: 1rem;">✅ Good Copy Example</h5>
+            <div style="background: var(--surface-light); padding: 1rem; border-radius: 4px; margin: 0.5rem 0;">
+                <p><strong>Hook:</strong> "This $19 gadget saved me $600 on dog vet bills"</p>
+                <p><strong>Why it works:</strong></p>
+                <ul>
+                    <li>Specific dollar amounts (pattern interrupt)</li>
+                    <li>Clear benefit (saved money)</li>
+                    <li>Relatable problem (pet health costs)</li>
+                    <li>Under 10 words</li>
+                </ul>
+            </div>
+            
+            <h5 style="margin-top: 1rem;">❌ Bad Copy Example</h5>
+            <div style="background: var(--surface-light); padding: 1rem; border-radius: 4px; margin: 0.5rem 0;">
+                <p><strong>Hook:</strong> "Introducing the revolutionary pet wellness monitoring system"</p>
+                <p><strong>Why it fails:</strong></p>
+                <ul>
+                    <li>Generic "revolutionary" claim (low credibility)</li>
+                    <li>No specific benefit or problem</li>
+                    <li>Too long (12 words)</li>
+                    <li>Jargon ("wellness monitoring system")</li>
+                </ul>
+            </div>
+            
+            <div class="callout callout-tip">
+                <h4>Performance Benchmarks (2025 Meta/TikTok)</h4>
+                <ul>
+                    <li><strong>CTR for cold traffic:</strong> <1.0% = poor, 1.0-1.3% = okay, >1.3% = strong</li>
+                    <li><strong>Hook retention:</strong> >50% watch past 3 sec = good hook</li>
+                    <li><strong>Script completion:</strong> >30% watch full ad = good script</li>
+                </ul>
+            </div>
+            
+            <h4 style="margin-top: 2rem;">How KPIs Are Tracked</h4>
+            <ul>
+                <li><strong>Weekly:</strong> Creative Director reviews your Angle Library contributions and ClickUp throughput</li>
+                <li><strong>Monthly:</strong> PM runs ClickUp report on approval rates, WIP compliance, and volume</li>
+                <li><strong>Quarterly:</strong> Full performance review with P1 data analysis (which of your copy led to P1 passes)</li>
+            </ul>
+        </section>
+
+        <section id="ai-usage" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🤖</span>
+                <h3>AI Usage & Prompt Patterns</h3>
+            </div>
+            
+            <div class="section-intro">
+                This role leverages AI (ChatGPT, Claude) heavily for rapid iteration and volume. Below are ready-to-use prompts and best practices.
+            </div>
+            
+            <h4>Core Principle: AI Accelerates, You Curate</h4>
+            <p>AI generates 10-15 raw hooks in 30 seconds. You refine to the best 4-6 based on strategy, performance data, and brand fit. <strong>Never ship AI output raw without manual refinement.</strong></p>
+            
+            <details open>
+                <summary>Prompt 1: P1 Hook Generation</summary>
+                <div>
+                    <pre><code>You are a direct response copywriter specializing in high-CTR hooks for Meta/TikTok ads.
+
+Product: [Product Name]
+Niche: [E.g., Pet Health, Sleep, Kitchen]
+AOV: $[XX]
+Primary Problem: [From R3 packet]
+Target Demo: [E.g., Dog owners 35-55, US]
+
+Generate 12 scroll-stopping ad hooks that:
+1. Are under 10 words each
+2. Use specific numbers or dramatic claims
+3. Address the primary problem directly
+4. Create curiosity or pattern interrupt
+5. Avoid generic phrases like "game changer" or "revolutionary"
+
+Format as a numbered list. Prioritize hooks that would work in first 3 seconds of video.</code></pre>
+                    
+                    <h4 style="margin-top: 1rem;">Human Checkpoint</h4>
+                    <ul class="checklist">
+                        <li>Select 4-6 hooks that align with R3 angle strategy</li>
+                        <li>Remove any that feel too hype or unverifiable</li>
+                        <li>Ensure diversity (2 problem-agitate, 2 curiosity, 1-2 authority)</li>
+                    </ul>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Prompt 2: Script Template Generation</summary>
+                <div>
+                    <pre><code>You are writing a 30-second direct response ad script for Meta/TikTok.
+
+Product: [Product Name]
+Hook (already chosen): "[Hook text]"
+Primary Benefit: [From R3 packet]
+Key Features: [List 2-3]
+CTA: [Shop Now / Get Yours / Limited Stock]
+
+Write a 30-second script following this structure:
+- Hook (3 seconds)
+- Problem Agitate (7 seconds)
+- Solution Introduction (8 seconds)
+- Benefit Stack (8 seconds)
+- CTA + Urgency (4 seconds)
+
+Use simple language, short sentences, and benefit-focused framing. Include [VO] and [Scene] notes for the editor.</code></pre>
+                    
+                    <h4 style="margin-top: 1rem;">Human Checkpoint</h4>
+                    <ul class="checklist">
+                        <li>Verify timing adds up to ~30 seconds when read aloud</li>
+                        <li>Remove any jargon or complex phrases</li>
+                        <li>Ensure Scene notes are clear for editors</li>
+                    </ul>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Prompt 3: CTA Variant Generation</summary>
+                <div>
+                    <pre><code>Generate 5 CTA variations for a [Product Type] ad targeting [Demo].
+
+Current CTA: "Shop Now"
+
+Requirements:
+- Action-oriented verbs
+- Some urgency without being aggressive
+- Mix of direct (Shop Now) and softer (Learn More) approaches
+- Under 4 words each
+
+Format as numbered list.</code></pre>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Prompt 4: Caption Generation (TikTok/IG)</summary>
+                <div>
+                    <pre><code>Write 3 social media caption variants for this product ad:
+
+Product: [Product Name]
+Hook: "[Hook text]"
+Platform: TikTok/Instagram
+Tone: Casual, benefit-focused, minimal emoji
+
+Requirements:
+- 1-2 sentences max
+- Include 1-2 relevant hashtags
+- Drive to link in bio / shop now
+- No clickbait or fake urgency
+
+Format as numbered list.</code></pre>
+                </div>
+            </details>
+            
+            <details>
+                <summary>Prompt 5: P2 Iteration (Performance-Driven)</summary>
+                <div>
+                    <pre><code>Based on P1 performance data, generate 4 new hook variants that iterate on the winning angle.
+
+Winning Hook: "[Best performing hook]"
+CTR: [X.X%]
+Why it worked: [Pattern analysis - e.g., specific number, dramatic claim, problem-focused]
+
+Losing Hook: "[Lowest CTR hook]"
+Why it failed: [Pattern analysis]
+
+Generate 4 new hooks that:
+- Double down on what worked in the winner
+- Avoid patterns from the loser
+- Test small variations (different numbers, different framing)
+- Stay under 10 words</code></pre>
+                </div>
+            </details>
+            
+            <div class="callout callout-warning">
+                <h4>AI Usage Rules</h4>
+                <ul>
+                    <li><strong>Never skip human review:</strong> All AI output must be manually refined before handoff</li>
+                    <li><strong>No sensitive data in prompts:</strong> Don't paste full R3 packets with supplier info or pricing details</li>
+                    <li><strong>Track what works:</strong> When AI generates a hook that passes P1, save the prompt pattern to Angle Library</li>
+                    <li><strong>Iterate prompts:</strong> If AI output is consistently off-target, refine your prompts, don't just regenerate</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="tools" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🛠️</span>
+                <h3>Tools & Systems Reference</h3>
+            </div>
+            
+            <div class="section-intro">
+                Quick reference for all tools you'll use daily. Includes access levels, key views, and links to detailed SOPs.
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Views / Locations</th>
+                        <th>Access Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ChatGPT / Claude</strong></td>
+                        <td>Hook generation, script drafting, rapid iteration</td>
+                        <td>N/A (Direct API or web)</td>
+                        <td>Personal account</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Docs</strong></td>
+                        <td>Drafting scripts, collaboration with Creative Director</td>
+                        <td>DriveOn Commerce > Creative > Copy Drafts</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Product OS, Creative Briefs DB, Angle Library</td>
+                        <td>
+                            • Product Packets DB (read-only)<br>
+                            • Creative Briefs DB (editor)<br>
+                            • Angle Library (editor)
+                        </td>
+                        <td>Editor for Creative DBs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task tracking, WIP management, time tracking</td>
+                        <td>
+                            • Space: P2 – Creative<br>
+                            • Folder: Creative Pipeline<br>
+                            • List: Briefs<br>
+                            • View: "My Copy Queue"
+                        </td>
+                        <td>Member (can edit own tasks)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Real-time comms, handoff notifications, blockers</td>
+                        <td>
+                            • #p2-briefs (main)<br>
+                            • #p2-copy-handoffs<br>
+                            • #p2-performance-alerts
+                        </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>Asset storage (rare for copy, mostly for editors)</td>
+                        <td>DriveOn Commerce > Creative > Copy Assets</td>
+                        <td>Viewer (mostly for reference)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="margin-top: 2rem;">Tool Setup Checklist</h4>
+            <ul class="checklist">
+                <li>ChatGPT or Claude account created and tested</li>
+                <li>Notion access granted to Creative Briefs DB and Angle Library</li>
+                <li>ClickUp "My Copy Queue" view bookmarked</li>
+                <li>Discord role assigned (@Copywriter)</li>
+                <li>Google Drive folder structure reviewed</li>
+            </ul>
+            
+            <h4 style="margin-top: 2rem;">Related SOPs (Future Links)</h4>
+            <ul>
+                <li>SOP_Notion_Creative_Briefs_DB (field definitions, view setup)</li>
+                <li>SOP_ClickUp_Copy_Tasks (status workflow, time tracking)</li>
+                <li>SOP_Discord_Pod2_Comms (channel usage, notification standards)</li>
+            </ul>
+        </section>
+
+        <section id="escalation" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🚨</span>
+                <h3>Escalation & Decision Rights</h3>
+            </div>
+            
+            <div class="section-intro">
+                Know what you can decide alone vs. when to escalate. Clear decision boundaries prevent bottlenecks.
+            </div>
+            
+            <h4>You Can Decide Alone</h4>
+            <ul>
+                <li>Which 4-6 hooks to include in a P1 brief (from AI-generated options)</li>
+                <li>Script structure and phrasing (as long as it follows Hook → Agitate → Solution → CTA)</li>
+                <li>CTA and caption wording</li>
+                <li>Prioritization within your daily queue (unless Creative Director assigns specific order)</li>
+                <li>When to use AI vs. manual drafting</li>
+            </ul>
+            
+            <h4>Requires Creative Director Approval</h4>
+            <ul>
+                <li>All finalized copy before handoff to editors (status: Copy_Review → Copy_Approved)</li>
+                <li>New angle approaches not in R3 packet</li>
+                <li>Any "risky" or polarizing copy (e.g., counter-positioning, heavy sarcasm)</li>
+                <li>Deviation from standard script structure</li>
+            </ul>
+            
+            <h4>Requires PM Escalation</h4>
+            <ul>
+                <li>WIP exceeds 8 products for >24 hours</li>
+                <li>Creative Director review delayed >48 hours</li>
+                <li>R3 packets consistently missing key intel (systemic issue)</li>
+                <li>Need for additional team capacity (too many products, not enough time)</li>
+            </ul>
+            
+            <h4>Requires Founder Escalation</h4>
+            <ul>
+                <li>Request to change WIP caps or throughput targets</li>
+                <li>Proposal for new tools (e.g., paid copywriting SaaS)</li>
+                <li>Major process change (e.g., eliminating Creative Director approval step)</li>
+            </ul>
+            
+            <h4>Expected Response Times</h4>
+            <table>
+                <tr>
+                    <td><strong>Creative Director Review</strong></td>
+                    <td>Within 24 hours (business days)</td>
+                </tr>
+                <tr>
+                    <td><strong>PM Blocker Response</strong></td>
+                    <td>Within 4 hours</td>
+                </tr>
+                <tr>
+                    <td><strong>P1 Intel Clarification</strong></td>
+                    <td>Within 2 hours (during business hours)</td>
+                </tr>
+            </table>
+            
+            <div class="callout callout-warning">
+                <h4>When to Ring the Alarm 🚨</h4>
+                <ul>
+                    <li>WIP cap blown (>10 products in Copy_Active/Copy_Review)</li>
+                    <li>Multiple products delayed >48h due to upstream issues</li>
+                    <li>Systemic quality issues (>30% rejection rate from Creative Director)</li>
+                    <li>Major performance drop (average CTR falls below 1.0% across all your copy)</li>
+                </ul>
+                <p><strong>Action:</strong> Post in #p4-pm-daily-standup with @PM tag and "🚨 BLOCKER"</p>
+            </div>
+        </section>
+
+        <section id="onboarding" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">🎓</span>
+                <h3>Onboarding Checklist</h3>
+            </div>
+            
+            <div class="section-intro">
+                Your first 30 days as P2-CR-COPY, broken into phases with clear competency milestones.
+            </div>
+            
+            <h4>Phase 1: Setup (Days 1-2)</h4>
+            <ul class="checklist">
+                <li>Read L0-01 (Holdings Charter) and L0-02 (Brand Architecture)</li>
+                <li>Read L1-01 (CaniCol Model) – understand 3-gate testing</li>
+                <li>Read L2-05 (Testing Canon) – know P1/P2 pass/kill criteria</li>
+                <li>Read L2-08 (Brand Platform & Creative Guardrails)</li>
+                <li>Get access to all tools (Notion, ClickUp, Discord, ChatGPT/Claude)</li>
+                <li>Review 3-5 past R3 packets and Creative Briefs</li>
+                <li>Shadow Creative Director for half day (watch brief review process)</li>
+            </ul>
+            
+            <h4>Phase 2: Supervised Execution (Days 3-7)</h4>
+            <ul class="checklist">
+                <li>Create first P1 brief under Creative Director guidance (peer programming style)</li>
+                <li>Submit 2-3 briefs for review with expected high revision rate</li>
+                <li>Learn to use AI prompts (generate hooks, refine with CD feedback)</li>
+                <li>Practice ClickUp workflow (Queue → Active → Review → Approved)</li>
+                <li>Attend Pod 2 standup and observe handoff comms</li>
+            </ul>
+            
+            <h4>Phase 3: Independent with Review (Days 8-21)</h4>
+            <ul class="checklist">
+                <li>Create 3-5 P1 briefs independently per day</li>
+                <li>Achieve ≥70% first-pass approval rate from Creative Director</li>
+                <li>Start contributing to Angle Library (add 1-2 entries per week)</li>
+                <li>Handle first P2 iteration (performance-driven copy refinement)</li>
+                <li>Maintain WIP ≤6 products (build good habits early)</li>
+            </ul>
+            
+            <h4>Phase 4: Full Autonomy (Days 22-30)</h4>
+            <ul class="checklist">
+                <li>Hit full throughput (10-20 briefs/week)</li>
+                <li>Achieve ≥85% first-pass approval rate</li>
+                <li>Independently analyze P1 data and iterate for P2</li>
+                <li>Train on new team member or document process improvement</li>
+                <li>30-day review with Creative Director and PM (KPI check)</li>
+            </ul>
+            
+            <div class="callout callout-tip">
+                <h4>Success Indicators at 30 Days</h4>
+                <ul>
+                    <li>You can create a complete P1 brief in <60 minutes</li>
+                    <li>Your copy contributes to ≥1.2% average CTR on P1 tests</li>
+                    <li>Creative Director trusts you to work independently</li>
+                    <li>You've added ≥5 proven patterns to Angle Library</li>
+                    <li>Other Pod 2 members ask you for copy feedback</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="changelog" class="section-card">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <h3>Change Log</h3>
+            </div>
+            
+            <div class="section-intro">
+                Version history for this SOP. All changes must be accompanied by canon updates if they touch L0-L3 material.
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Changes</th>
+                        <th>Canon Docs Updated</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1.0</strong></td>
+                        <td>Dec 10, 2025</td>
+                        <td>DriveOn SOP Factory (v4)</td>
+                        <td>Initial release based on L2-03, L2-05, L2-07 v4.0 canon</td>
+                        <td>N/A (new doc)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: var(--text-secondary); font-style: italic;">Future changes will be logged here</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4 style="margin-top: 1.5rem;">How to Request Changes</h4>
+            <p>If this SOP conflicts with reality or needs updates:</p>
+            <ol style="margin-left: 1.5rem;">
+                <li>Check if the issue is an L0-L3 canon drift (e.g., WIP caps changed but SOP not updated)</li>
+                <li>If canon changed: File a Canon Change Request (CCR) first, then update this SOP</li>
+                <li>If SOP just needs L4 clarification: Submit feedback to Creative Director or PM</li>
+                <li>Never silently edit this HTML without version bump and changelog entry</li>
+            </ol>
+        </section>
+    </main>
+
+    <script type="application/json" id="sop-structure">
+    {
+      "role_id": "P2-CR-COPY-XX",
+      "role_name": "Copywriter & Concept Writer",
+      "pod": "P2 – Creative Factory",
+      "role_type": "COPYWRITER",
+      "status": "CORE",
+      "cross_pod": true,
+      "fte": 1.0,
+      "owned_gates": ["Copy assets for ad + landing + social"],
+      "pipeline_stages": ["R3", "P1", "P2"],
+      "upstream_roles": [
+        "P1-R0-PROBLEM-INTEL",
+        "P1-R0-CREATIVE-INTEL",
+        "P1-PI-LEAD",
+        "P2-CR-DIRECTOR"
+      ],
+      "downstream_roles": [
+        "P2-CR-HEROEDIT",
+        "P2-CR-VOLEDIT",
+        "P2-CR-STATIC-DESIGN",
+        "P3-MB-BUYER",
+        "P2-SM-ORGANIC"
+      ],
+      "wip_limits": {
+        "active_products": 8,
+        "min_active": 6
+      },
+      "throughput": {
+        "daily": "3-5 products (copy passes)",
+        "weekly": "10-20 script/angle/copy sets",
+        "monthly": "60-80 products"
+      },
+      "kpis": [
+        {
+          "name": "Hook Performance",
+          "definition": "≥40% of hooks drive CTR ≥1.3%",
+          "source_doc": "L2-07"
+        },
+        {
+          "name": "CTR Contribution",
+          "definition": "Products average CTR ≥1.2%",
+          "source_doc": "L2-07"
+        },
+        {
+          "name": "Ad Approval Rate",
+          "definition": "≥85% first-pass approval from Creative Director",
+          "source_doc": "L2-07"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "P1 Copy Brief Creation",
+          "trigger": "R3 packet appears in ClickUp Copy_Queue",
+          "inputs": [
+            "R3 Product Packet",
+            "Problem/objection intel",
+            "Creative swipe files"
+          ],
+          "outputs": [
+            "Notion Creative Brief with 4-6 hooks",
+            "2-3 scripts",
+            "CTAs and captions"
+          ],
+          "handoffs": [
+            {
+              "from": "P2-CR-COPY",
+              "to": "P2-CR-DIRECTOR",
+              "channel": "ClickUp + Discord #p2-briefs"
+            }
+          ],
+          "tools": ["ChatGPT/Claude", "Notion", "Google Docs", "ClickUp"]
+        },
+        {
+          "name": "P2 Copy Iteration",
+          "trigger": "Product passes P1 (P1_PASS status)",
+          "inputs": [
+            "P1 performance data (CTR, CPC, CPA)",
+            "Original P1 Creative Brief"
+          ],
+          "outputs": [
+            "2-4 new P2 copy variants"
+          ],
+          "tools": ["AI tools", "Notion"]
+        }
+      ],
+      "day_in_life": [
+        {
+          "time_range": "9:00-9:30",
+          "focus": "Setup & Prioritization",
+          "primary_workflows": ["Queue review", "Priority assignment"]
+        },
+        {
+          "time_range": "9:30-12:30",
+          "focus": "Core Copy Production",
+          "primary_workflows": ["P1 Copy Brief Creation"]
+        },
+        {
+          "time_range": "13:00-14:00",
+          "focus": "Creative Director Review",
+          "primary_workflows": ["Iteration on feedback"]
+        },
+        {
+          "time_range": "14:00-16:00",
+          "focus": "Performance-Driven Refinement",
+          "primary_workflows": ["P2 Copy Iteration", "Angle Library update"]
+        },
+        {
+          "time_range": "16:00-17:30",
+          "focus": "Handoffs & Admin",
+          "primary_workflows": ["Editor handoffs", "Time tracking", "Standup"]
+        }
+      ],
+      "canon_constraints": {
+        "p1_budget": "$40-60 per product",
+        "p1_p2_total": "$70-100 per product (cap $120)",
+        "testing_volume": "45-60 products/month",
+        "creative_count_p1": "4-6 creatives per product",
+        "creative_count_p2": "+2-4 variants (6-10 total)",
+        "pass_criteria": {
+          "ctr": "≥1.3%",
+          "cpc": "≤$1.20"
+        }
+      },
+      "version": "1.0",
+      "last_updated": "2025-12-10",
+      "author": "DriveOn SOP Factory (v4)"
+    }
+    </script>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00C8C8',
+                lineColor: '#666666',
+                secondaryColor: '#F8F8F8',
+                tertiaryColor: '#F4E8D0'
+            }
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = target.offsetTop - headerHeight - 20;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Highlight active nav item on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.color = '#00C8C8';
+                    link.style.fontWeight = '600';
+                } else {
+                    link.style.fontWeight = '400';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2-CR-DIRECTOR | Creative Director SOP | DriveOn Commerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface-white: #FFFFFF;
+            --surface-light: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success-green: #10B981;
+            --warning-yellow: #F59E0B;
+            --error-red: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-light);
+        }
+
+        .page-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav-sidebar {
+            width: 260px;
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-gray);
+            padding: 1.5rem 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .nav-header {
+            padding: 0 1.5rem 1rem;
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 1rem;
+        }
+
+        .role-id-badge {
+            display: inline-block;
+            background: var(--drive-cyan);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+
+        .nav-links {
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 0.5rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            background: var(--surface-light);
+            color: var(--drive-cyan);
+            border-left: 3px solid var(--drive-cyan);
+            padding-left: calc(1.5rem - 3px);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--carbon-black) 0%, #2D2D2D 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .meta-label {
+            opacity: 0.7;
+        }
+
+        .meta-value {
+            font-weight: 600;
+        }
+
+        .key-outcomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .outcome-chip {
+            background: rgba(0, 200, 200, 0.15);
+            border: 1px solid var(--drive-cyan);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        /* Section Cards */
+        .section-card {
+            background: var(--surface-white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-gray);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--surface-light);
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Collapsible Sections */
+        .collapsible-section {
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .collapsible-header {
+            background: var(--surface-light);
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        .collapsible-header:hover {
+            background: var(--champagne);
+        }
+
+        .collapsible-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .collapsible-toggle {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collapsible-content.active {
+            max-height: 5000px;
+        }
+
+        .collapsible-inner {
+            padding: 1.5rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid;
+        }
+
+        .callout-canon {
+            background: rgba(0, 200, 200, 0.1);
+            border-color: var(--drive-cyan);
+        }
+
+        .callout-warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: var(--warning-yellow);
+        }
+
+        .callout-tip {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success-green);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        th {
+            background: var(--surface-light);
+            font-weight: 600;
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--surface-light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: var(--carbon-black);
+            color: var(--drive-cyan);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .badge-wip {
+            background: var(--warning-yellow);
+            color: white;
+        }
+
+        .badge-throughput {
+            background: var(--drive-cyan);
+            color: white;
+        }
+
+        .badge-kpi {
+            background: var(--success-green);
+            color: white;
+        }
+
+        /* Mermaid Diagrams */
+        .diagram-container {
+            background: var(--surface-white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-container {
+                flex-direction: column;
+            }
+
+            .nav-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-gray);
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- Navigation -->
+        <nav class="nav-sidebar">
+            <div class="nav-header">
+                <span class="role-id-badge">P2-CR-DIRECTOR</span>
+                <h2 class="nav-title">Creative Director</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#purpose">Purpose & Context</a></li>
+                <li><a href="#canon">Canon Constraints</a></li>
+                <li><a href="#day-in-life">Day in the Life</a></li>
+                <li><a href="#workflows">Core Workflows</a></li>
+                <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+                <li><a href="#kpis">KPIs & Quality Bar</a></li>
+                <li><a href="#ai-usage">AI Usage & Prompts</a></li>
+                <li><a href="#tools">Tools & Systems</a></li>
+                <li><a href="#escalation">Escalation & Decisions</a></li>
+                <li><a href="#onboarding">Onboarding Checklist</a></li>
+                <li><a href="#changelog">Change Log</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">Creative Director</h1>
+                <p class="hero-subtitle">Turn R3 product intelligence into winning creative systems that drive profitable tests at CaniCol budget levels</p>
+                
+                <div class="hero-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">Role ID:</span>
+                        <span class="meta-value">P2-CR-DIRECTOR</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Pod:</span>
+                        <span class="meta-value">Pod 2 – Creative Factory</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">FTE:</span>
+                        <span class="meta-value">1.0</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Status:</span>
+                        <span class="meta-value">CORE ROLE</span>
+                    </div>
+                </div>
+
+                <div class="key-outcomes">
+                    <div class="outcome-chip">✓ 10-15 products directed/week</div>
+                    <div class="outcome-chip">✓ 250-400 assets/month (pod level)</div>
+                    <div class="outcome-chip">✓ 12-15 products WIP cap</div>
+                    <div class="outcome-chip">✓ P1 creative pack completeness</div>
+                    <div class="outcome-chip">✓ Quality bar enforcement</div>
+                </div>
+            </section>
+
+            <!-- Purpose & Context -->
+            <section id="purpose" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">🎯</span>
+                    <h2 class="section-title">Role Purpose & Context</h2>
+                </div>
+                <p class="section-intro">Why this role exists within the CaniCol v4.0 lean-volume testing model</p>
+
+                <h3>Mission</h3>
+                <p>The Creative Director is the <strong>strategic and operational leader of Pod 2 (Creative Factory)</strong>. You are responsible for transforming R3 Product Packets from Pod 1 into <strong>test-ready creative systems</strong> that maximize the probability of P1/P2 test success while respecting strict economic constraints.</p>
+
+                <h3>How This Role Drives Hit-Rate Economics</h3>
+                <ul>
+                    <li><strong>Portfolio Thinking:</strong> CaniCol v4.0 expects ~4-6% true winners from 45-60 monthly tests. Your creative strategy must balance volume execution with selective quality focus.</li>
+                    <li><strong>Budget Discipline:</strong> P1 tests run on $40-60 budgets. Your creative packs must deliver performance signals within these tight constraints.</li>
+                    <li><strong>Kill Velocity:</strong> 70-80% of products fail P1. Your role includes rapid creative triage—knowing when to iterate vs. when to let a product die.</li>
+                    <li><strong>Cross-Pod Integration:</strong> You bridge Product Intelligence (Pod 1) insights with Media & Store (Pod 3) execution, ensuring creative coherence across the testing pipeline.</li>
+                </ul>
+
+                <h3>Connection to Holdings & Brand Architecture</h3>
+                <p>Per <strong>L0-02</strong>, DriveOn Commerce operates as the "dropshipping engine" under DriveOn Holdings. Your creative work must:</p>
+                <ul>
+                    <li>Respect the <strong>anti-hype, systems-first positioning</strong> defined in brand canon</li>
+                    <li>Follow <strong>L2-08 Master Brand Platform</strong> guidelines for tone, messaging, and visual identity</li>
+                    <li>Maintain quality bar that reflects DriveOn's operational excellence positioning</li>
+                </ul>
+            </section>
+
+            <!-- Canon Constraints -->
+            <section id="canon" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">⚖️</span>
+                    <h2 class="section-title">Canon Constraints</h2>
+                </div>
+                <p class="section-intro">Non-negotiable rules from L0-L3 canon that govern this role</p>
+
+                <div class="callout callout-canon">
+                    <div class="callout-title">⚖️ Economic Constraints (L1-01, L2-05)</div>
+                    <ul>
+                        <li><strong>P1 Creative Volume:</strong> 4-6 creatives per product (baseline)</li>
+                        <li><strong>P2 Creative Volume:</strong> +2-4 new variants only for P1_PASS products</li>
+                        <li><strong>Total per product:</strong> 6-10 creatives across P1+P2</li>
+                        <li><strong>Monthly pod capacity:</strong> 250-400 total assets</li>
+                        <li><strong>P1 Budget Context:</strong> $40-60 spend per product</li>
+                        <li><strong>P1 Pass Criteria:</strong> CTR ≥1.3% OR CPC ≤$1.20 + depth events</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-canon">
+                    <div class="callout-title">⚖️ WIP & Throughput Limits (L2-03, L2-07)</div>
+                    <ul>
+                        <li><strong>WIP Cap:</strong> 12-15 products in active creative development</li>
+                        <li><strong>Weekly Throughput:</strong> 10-15 products directed</li>
+                        <li><strong>Monthly Throughput:</strong> 40-60 products touched</li>
+                        <li><strong>Team Direction:</strong> Manage 6-8 creative specialists across video/static/copy roles</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">⚠️ Quality vs. Volume Balance</div>
+                    <p>You must balance:</p>
+                    <ul>
+                        <li><strong>Velocity:</strong> Support 45-60 tests/month pipeline</li>
+                        <li><strong>Quality:</strong> Maintain standard that gives P1 tests fair chance</li>
+                        <li><strong>Kill Discipline:</strong> Don't over-invest in weak products—portfolio economics depend on rapid iteration</li>
+                    </ul>
+                </div>
+
+                <h3>Handoff Protocol (Non-Negotiable)</h3>
+                <ul>
+                    <li>You receive <strong>R3 Product Packets</strong> from Pod 1 Lead Strategist via #p2-briefs</li>
+                    <li>You deliver <strong>P1 Creative Packs</strong> to Pod 3 Media Buyer via #p3-p1-tests</li>
+                    <li>All handoffs must include: Product ID, creative IDs, Drive folder links, ClickUp task IDs</li>
+                    <li>Timeline: R3 approval → P1 creative pack ready within 3-5 business days</li>
+                </ul>
+            </section>
+
+            <!-- Day in the Life -->
+            <section id="day-in-life" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">📅</span>
+                    <h2 class="section-title">Day in the Life Timeline</h2>
+                </div>
+                <p class="section-intro">Time-boxed daily structure for effective creative direction</p>
+
+                <div class="diagram-container">
+                    <div class="mermaid">
+gantt
+    title Creative Director Daily Timeline
+    dateFormat HH:mm
+    axisFormat %H:%M
+
+    section Morning Setup
+    Pipeline Review & Priorities    :09:00, 30m
+    Pod 2 Daily Standup             :09:30, 15m
+    
+    section Creative Direction
+    R3 Packet Review & Brief Creation   :10:00, 90m
+    Team Check-ins & Feedback          :11:30, 60m
+    
+    section Afternoon Execution
+    Creative Review & QA              :13:00, 90m
+    Performance Data Analysis         :14:30, 60m
+    
+    section End of Day
+    Handoff Prep & Communication      :15:30, 45m
+    Tomorrow's Planning               :16:15, 30m
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Morning Setup (09:00 - 09:45)</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>Pipeline Review & Priorities (30 min)</h4>
+                            <ul>
+                                <li>Open Notion "Product OS" + ClickUp "Creative Pipeline"</li>
+                                <li>Review overnight notifications: new R3 packets, P1 test results, team blockers</li>
+                                <li>Identify 3-5 "must-ship today" deliverables</li>
+                                <li>Check WIP: Are you at/near 12-15 cap? Kill or defer low-priority items</li>
+                            </ul>
+
+                            <h4>Pod 2 Daily Standup (15 min, async Discord #p4-pm-daily-standup)</h4>
+                            <ul>
+                                <li>Post your standup: Yesterday's key completions, today's priorities, blockers</li>
+                                <li>Read team standups: editors, copywriter, designers</li>
+                                <li>Flag any cross-dependencies or resource conflicts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Creative Direction (10:00 - 12:30)</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>R3 Packet Review & Brief Creation (90 min)</h4>
+                            <ul>
+                                <li><strong>Input:</strong> New R3 packets from #p2-briefs</li>
+                                <li><strong>Process per product (15-20 min each):</strong>
+                                    <ul>
+                                        <li>Read R3 packet: offer, angles, risk profile, competitor analysis</li>
+                                        <li>Check creative intel from P1-R0-CREATIVE-INTEL</li>
+                                        <li>Define 2-3 primary angles to test</li>
+                                        <li>Create creative brief in Notion "Creative Briefs" DB</li>
+                                        <li>Assign to appropriate specialists (Hero Editor, Copy, Static Designer)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Output:</strong> 3-5 new creative briefs queued for team</li>
+                            </ul>
+
+                            <h4>Team Check-ins & Feedback (60 min)</h4>
+                            <ul>
+                                <li>Review WIP edits in #p2-edits-hero and #p2-edits-volume</li>
+                                <li>1:1 micro-reviews with editors (15 min each, 4 per week rotation)</li>
+                                <li>Provide directional feedback: hook strength, pacing, on-brief alignment</li>
+                                <li>Clear blockers: asset sourcing delays, copy misalignment, technical issues</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Afternoon Execution (13:00 - 15:30)</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>Creative Review & QA (90 min)</h4>
+                            <ul>
+                                <li>Review completed creatives in Drive "Creative Assets" folders</li>
+                                <li>Quality checklist per asset:
+                                    <ul>
+                                        <li>✓ Hook captures attention in first 3 seconds</li>
+                                        <li>✓ Angle aligns with R3 packet strategy</li>
+                                        <li>✓ On-brand per L2-08 guidelines</li>
+                                        <li>✓ Technical specs meet platform requirements</li>
+                                        <li>✓ CTA and offer clarity</li>
+                                    </ul>
+                                </li>
+                                <li>Approve or request revisions in ClickUp</li>
+                                <li>Tag approved assets as "READY_FOR_P1"</li>
+                            </ul>
+
+                            <h4>Performance Data Analysis (60 min)</h4>
+                            <ul>
+                                <li>Review P1 test results from Pod 3 in Notion "Test Results" view</li>
+                                <li>Identify patterns:
+                                    <ul>
+                                        <li>Which angles/hooks are winning?</li>
+                                        <li>Which formats (UGC, static, hero edit) perform best?</li>
+                                        <li>Any creative-specific failure modes?</li>
+                                    </ul>
+                                </li>
+                                <li>Update team in #p2-briefs with performance insights</li>
+                                <li>Flag P1_PASS products needing P2 variants</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">End of Day Closeout (15:30 - 16:45)</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>Handoff Prep & Communication (45 min)</h4>
+                            <ul>
+                                <li>Complete P1 creative packs for products going to test</li>
+                                <li>Post handoff messages to #p3-p1-tests using standard template</li>
+                                <li>Update ClickUp task statuses: CREATIVE_COMPLETE → TEST_READY</li>
+                                <li>Ensure all Drive folders have proper access for Pod 3</li>
+                            </ul>
+
+                            <h4>Tomorrow's Planning (30 min)</h4>
+                            <ul>
+                                <li>Review tomorrow's pipeline: new R3 packets expected, team capacity</li>
+                                <li>Pre-read any high-priority products for morning briefs</li>
+                                <li>Flag any escalations needed (WIP overload, resource gaps, quality issues)</li>
+                                <li>Clear Slack/Discord notifications and prep for next day</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Workflows -->
+            <section id="workflows" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">⚙️</span>
+                    <h2 class="section-title">Core Workflows</h2>
+                </div>
+                <p class="section-intro">Step-by-step processes for key creative direction responsibilities</p>
+
+                <div class="diagram-container">
+                    <div class="mermaid">
+flowchart TD
+    Start([R3 Packet Approved]) --> Review[Review R3 Packet & Intel]
+    Review --> Angles{Define 2-3<br/>Test Angles}
+    Angles --> Brief[Create Creative Brief]
+    Brief --> Assign[Assign to Specialists]
+    Assign --> Monitor[Monitor WIP & Progress]
+    Monitor --> QA{Review<br/>Creatives}
+    QA -->|Revisions Needed| Feedback[Provide Feedback]
+    Feedback --> Monitor
+    QA -->|Approved| Pack[Compile P1 Creative Pack]
+    Pack --> Handoff[Handoff to Pod 3]
+    Handoff --> End([Creative Pack in Test Queue])
+
+    style Start fill:#00C8C8,color:#fff
+    style End fill:#10B981,color:#fff
+    style Brief fill:#F4E8D0
+    style Pack fill:#F4E8D0
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Workflow 1: R3 → P1 Creative Brief</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>Trigger</h4>
+                            <p>R3 packet approval notification in #p2-briefs from Pod 1 Lead Strategist</p>
+
+                            <h4>Inputs</h4>
+                            <ul>
+                                <li>R3 Product Packet (Notion + Drive)</li>
+                                <li>Creative intel from P1-R0-CREATIVE-INTEL</li>
+                                <li>Historical performance data for similar products</li>
+                            </ul>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Read R3 Packet (10 min)</strong>
+                                    <ul>
+                                        <li>Primary offer & unique mechanism</li>
+                                        <li>Target audience & pain points</li>
+                                        <li>Competitor landscape & differentiation</li>
+                                        <li>AOV, margins, fulfillment constraints</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Review Creative Intel (5 min)</strong>
+                                    <ul>
+                                        <li>Check swipe files for niche/category</li>
+                                        <li>Note winning hooks & formats</li>
+                                        <li>Identify saturated vs. fresh angles</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Define Testing Strategy (10 min)</strong>
+                                    <ul>
+                                        <li>Select 2-3 primary angles (Problem-Agitate, Transformation, Mechanism Reveal, etc.)</li>
+                                        <li>Determine format mix: 60% video, 40% static (typical)</li>
+                                        <li>Plan for 4-6 total P1 variants</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Create Creative Brief in Notion (15 min)</strong>
+                                    <ul>
+                                        <li>Database: "Creative Briefs"</li>
+                                        <li>Fields: Product_ID, Brief_ID, Angles, Hooks, Format_Mix, Key_Benefits, Objections, CTA_Strategy, Brand_Guardrails</li>
+                                        <li>Link to R3 packet and Drive asset folders</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Assign to Team (5 min)</strong>
+                                    <ul>
+                                        <li>Hero Editor: 2-3 video variants</li>
+                                        <li>Volume Editor: 1-2 cutdowns/formats</li>
+                                        <li>Static Designer: 1-2 static ads</li>
+                                        <li>Copy: hooks, scripts, captions</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Set Timeline & ClickUp Tasks (5 min)</strong>
+                                    <ul>
+                                        <li>Create ClickUp tasks in "Creative Pipeline" list</li>
+                                        <li>Due date: 3-5 business days from R3 approval</li>
+                                        <li>Status: BRIEF_CREATED</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>Creative Brief (Notion)</li>
+                                <li>ClickUp tasks assigned to team</li>
+                                <li>Notification in #p2-briefs confirming brief creation</li>
+                            </ul>
+
+                            <h4>Quality Checks</h4>
+                            <ul>
+                                <li>✓ Brief includes 2-3 distinct angles, not just variations</li>
+                                <li>✓ Strategy considers P1 budget constraints ($40-60)</li>
+                                <li>✓ Format mix appropriate for niche (video-heavy for demo products, static OK for simple benefits)</li>
+                                <li>✓ All team members have clear assignments with context</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Workflow 2: Creative Review & QA</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>Trigger</h4>
+                            <p>Team member marks creative as "REVIEW_READY" in ClickUp or posts in #p2-edits-hero / #p2-edits-volume</p>
+
+                            <h4>Inputs</h4>
+                            <ul>
+                                <li>Completed creative assets (Drive folder)</li>
+                                <li>Creative brief & product context (Notion)</li>
+                                <li>Brand guidelines (L2-08)</li>
+                            </ul>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Access Asset (2 min)</strong>
+                                    <ul>
+                                        <li>Navigate to Drive folder: /DriveOn Commerce/Creative Assets/[Product_ID]/</li>
+                                        <li>Open video/static in appropriate viewer</li>
+                                        <li>Have creative brief open side-by-side</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Hook & Attention Review (3-5 min)</strong>
+                                    <ul>
+                                        <li>First 3 seconds: Does it stop the scroll?</li>
+                                        <li>Hook clarity: Is the promise/problem clear?</li>
+                                        <li>Visual quality: Professional or too "AI-slop"?</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Strategic Alignment (3-5 min)</strong>
+                                    <ul>
+                                        <li>Angle: Matches brief? (Problem-Agitate, Transformation, etc.)</li>
+                                        <li>Key benefits: Communicated clearly?</li>
+                                        <li>Objections: Addressed or ignored?</li>
+                                        <li>CTA: Clear and actionable?</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Brand & Compliance Check (2-3 min)</strong>
+                                    <ul>
+                                        <li>Tone: Anti-hype, systems-first (per L2-08)?</li>
+                                        <li>Claims: No unsubstantiated/illegal claims?</li>
+                                        <li>Visual identity: On-brand colors, fonts, style?</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Technical Specs (1-2 min)</strong>
+                                    <ul>
+                                        <li>Format: MP4/MOV for video, PNG/JPG for static?</li>
+                                        <li>Resolution: Meets platform requirements (1080x1920 for reels, 1200x628 for feed, etc.)?</li>
+                                        <li>File size: Under limits for upload?</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Decision & Feedback (3-5 min)</strong>
+                                    <ul>
+                                        <li><strong>Approve:</strong> Move to CREATIVE_APPROVED in ClickUp, add to P1 pack</li>
+                                        <li><strong>Revise:</strong> Provide specific, actionable feedback in ClickUp comment:
+                                            <ul>
+                                                <li>What's working well</li>
+                                                <li>1-3 specific changes needed</li>
+                                                <li>Revised due date (typically +1 day)</li>
+                                            </ul>
+                                        </li>
+                                        <li><strong>Kill:</strong> If fundamentally off-brief or unsalvageable, kill and reassign to different specialist</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>ClickUp status update: CREATIVE_APPROVED or NEEDS_REVISION</li>
+                                <li>Feedback notes in ClickUp (if revisions needed)</li>
+                                <li>Approved assets added to P1 Creative Pack tracking</li>
+                            </ul>
+
+                            <h4>Quality Bar</h4>
+                            <table>
+                                <tr>
+                                    <th>Aspect</th>
+                                    <th>Minimum Standard</th>
+                                </tr>
+                                <tr>
+                                    <td>Hook (first 3s)</td>
+                                    <td>Clear pattern interrupt or curiosity gap</td>
+                                </tr>
+                                <tr>
+                                    <td>Angle Execution</td>
+                                    <td>Matches brief, not generic/off-brief</td>
+                                </tr>
+                                <tr>
+                                    <td>Brand Alignment</td>
+                                    <td>Passes L2-08 tone & visual guidelines</td>
+                                </tr>
+                                <tr>
+                                    <td>Technical Quality</td>
+                                    <td>Platform-ready specs, no upload blockers</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Workflow 3: P1_PASS → P2 Variant Strategy</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>Trigger</h4>
+                            <p>Pod 3 Media Buyer marks product as P1_PASS in Notion and posts results to #p3-p2-optimisation</p>
+
+                            <h4>Inputs</h4>
+                            <ul>
+                                <li>P1 test results (CTR, CPC, depth events by creative)</li>
+                                <li>Original P1 creative brief & pack</li>
+                                <li>Budget remaining: ~$40-50 for P2 top-up</li>
+                            </ul>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Analyze P1 Performance (10 min)</strong>
+                                    <ul>
+                                        <li>Identify winning creative(s): highest CTR, lowest CPC, most depth events</li>
+                                        <li>Note which angle/hook/format performed best</li>
+                                        <li>Check comments/engagement for qualitative insights</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Define P2 Strategy (10 min)</strong>
+                                    <ul>
+                                        <li><strong>Option A - Iterate on Winner:</strong> Create 2-4 variants of best-performing creative (different hooks, formats, CTAs)</li>
+                                        <li><strong>Option B - Test Adjacent Angle:</strong> Try 1-2 creatives on a different angle if P1 was borderline</li>
+                                        <li><strong>Option C - Format Expansion:</strong> If video won, test static; if static won, test video</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Create P2 Brief (10 min)</strong>
+                                    <ul>
+                                        <li>Notion: Update product's Creative Brief with P2 section</li>
+                                        <li>Specify: 2-4 new variants, clear hypotheses, timeline</li>
+                                        <li>Assign to team (typically faster turnaround: 1-2 days)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Prioritize P2 Work (5 min)</strong>
+                                    <ul>
+                                        <li>P2 work is HIGHER priority than new P1 work (winner>new test)</li>
+                                        <li>Ensure team understands urgency—Pod 3 is waiting to scale</li>
+                                        <li>Set tight deadline: 1-2 business days from P1_PASS</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>P2 creative brief in Notion</li>
+                                <li>ClickUp tasks for P2 variants</li>
+                                <li>Team notification in #p2-briefs</li>
+                            </ul>
+
+                            <h4>Quality Checks</h4>
+                            <ul>
+                                <li>✓ P2 strategy is data-informed (not just "make more ads")</li>
+                                <li>✓ Clear hypothesis for each variant (testing specific element)</li>
+                                <li>✓ Timeline respects Pod 3 urgency (winners can't wait)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Workflow 4: Team Capacity & WIP Management</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <h4>Trigger</h4>
+                            <p>Daily (during morning setup) or when approaching WIP limits</p>
+
+                            <h4>Steps</h4>
+                            <ol>
+                                <li><strong>Check Pod-Level WIP (5 min)</strong>
+                                    <ul>
+                                        <li>ClickUp: Count tasks in "BRIEF_CREATED", "IN_PROGRESS", "REVIEW_READY" statuses</li>
+                                        <li>Your cap: 12-15 products concurrently</li>
+                                        <li>If at cap, no new briefs until something ships or gets killed</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Check Individual Role WIP (5 min)</strong>
+                                    <ul>
+                                        <li>Hero Editor: 8-10 edits max</li>
+                                        <li>Volume Editors: 10-12 edits max</li>
+                                        <li>Static Designers: 10-12 assets max</li>
+                                        <li>Copy: 10-12 products max</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Identify Bottlenecks (3 min)</strong>
+                                    <ul>
+                                        <li>Who's overloaded vs. underutilized?</li>
+                                        <li>Are reviews backing up (your bottleneck)?</li>
+                                        <li>Any blockers causing delays (asset sourcing, copy approval)?</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Rebalance & Prioritize (5 min)</strong>
+                                    <ul>
+                                        <li>Shift work between editors if possible</li>
+                                        <li>Defer lowest-priority new products</li>
+                                        <li>Kill stalled products that aren't progressing</li>
+                                        <li>Escalate resource gaps if structural (need more editors)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Communicate Changes (3 min)</strong>
+                                    <ul>
+                                        <li>Update team in #p2-briefs on priority shifts</li>
+                                        <li>Update Pod 1 if you're deferring new R3 intakes</li>
+                                        <li>Flag escalations in #p1-blockers if needed</li>
+                                    </ul>
+                                </li>
+                            </ol>
+
+                            <h4>Outputs</h4>
+                            <ul>
+                                <li>Balanced WIP across team</li>
+                                <li>Clear priority queue for next 1-3 days</li>
+                                <li>Escalations flagged to PM/Founder if needed</li>
+                            </ul>
+
+                            <div class="callout callout-warning">
+                                <div class="callout-title">⚠️ WIP Management Principles</div>
+                                <ul>
+                                    <li><strong>Protect throughput:</strong> Better to ship 10 complete packs than have 20 half-done</li>
+                                    <li><strong>Kill aggressively:</strong> Products that stall >5 days with no clear path forward should be killed</li>
+                                    <li><strong>P2 > P1:</strong> Winners always get priority over new tests</li>
+                                    <li><strong>Escalate early:</strong> Don't silently operate over WIP—flag capacity issues</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Handoffs & Interfaces -->
+            <section id="handoffs" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">🔄</span>
+                    <h2 class="section-title">Handoffs & Interface Specs</h2>
+                </div>
+                <p class="section-intro">How work moves between roles and pods with precise specifications</p>
+
+                <div class="diagram-container">
+                    <div class="mermaid">
+graph LR
+    subgraph Pod1[Pod 1 - Intelligence]
+        R3[R3 Packet<br/>Approved]
+    end
+    
+    subgraph Pod2[Pod 2 - Creative Factory]
+        Brief[Creative<br/>Brief]
+        Team[Creative<br/>Team]
+        Pack[P1 Creative<br/>Pack]
+    end
+    
+    subgraph Pod3[Pod 3 - Media & Store]
+        Test[P1 Test<br/>Setup]
+        Results[P1 Results]
+    end
+    
+    R3 -->|#p2-briefs| Brief
+    Brief --> Team
+    Team --> Pack
+    Pack -->|#p3-p1-tests| Test
+    Test --> Results
+    Results -->|#p3-p2-optimisation| Brief
+    
+    style Pod1 fill:#F4E8D0
+    style Pod2 fill:#00C8C8,color:#fff
+    style Pod3 fill:#F4E8D0
+                    </div>
+                </div>
+
+                <h3>Inbound: R3 Packet → Creative Brief</h3>
+                <table>
+                    <tr>
+                        <th>Element</th>
+                        <th>Specification</th>
+                    </tr>
+                    <tr>
+                        <td><strong>FROM</strong></td>
+                        <td>Pod 1 Lead Strategist (P1-R3-LEAD-STRATEGIST)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TO</strong></td>
+                        <td>You (P2-CR-DIRECTOR)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trigger</strong></td>
+                        <td>R3 packet approval notification in #p2-briefs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Required Inputs</strong></td>
+                        <td>
+                            <ul>
+                                <li>Product_ID (PRD-YYYYMMDD-XXX)</li>
+                                <li>R3 Packet in Notion (full link)</li>
+                                <li>Drive folder with research artifacts</li>
+                                <li>ClickUp task ID</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp Status</strong></td>
+                        <td>R3_APPROVED → CREATIVE_BRIEF_NEEDED</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Timeline</strong></td>
+                        <td>You create brief within 24 hours of R3 approval</td>
+                    </tr>
+                </table>
+
+                <h4>Standard Handoff Message Template</h4>
+                <pre><code>[HANDOFF: R3 → CREATIVE]
+From Pod: P1 Product Intelligence
+To: P2 Creative Director
+Product ID: PRD-20251210-042
+Status: R3_APPROVED
+
+Summary:
+- [2-3 sentence product/offer summary]
+- Primary angle: [angle]
+- Target AOV: $XX
+
+Links:
+- Notion Product Page: [link]
+- R3 Packet: [link]
+- Drive Research Folder: [link]
+- ClickUp Task: [link]
+
+Next: Creative brief within 24h
+Due for P1 Test: [date, typically R3+5 days]</code></pre>
+
+                <h3>Outbound: P1 Creative Pack → Media Buyer</h3>
+                <table>
+                    <tr>
+                        <th>Element</th>
+                        <th>Specification</th>
+                    </tr>
+                    <tr>
+                        <td><strong>FROM</strong></td>
+                        <td>You (P2-CR-DIRECTOR)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TO</strong></td>
+                        <td>Pod 3 Media Buyer (P3-MB-BUYER)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Trigger</strong></td>
+                        <td>All P1 creatives approved and compiled</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Required Outputs</strong></td>
+                        <td>
+                            <ul>
+                                <li>4-6 approved creatives (videos + statics)</li>
+                                <li>Creative IDs (CRT-[Product_ID]-XXX)</li>
+                                <li>Drive folder with organized exports</li>
+                                <li>Copy assets (hooks, captions)</li>
+                                <li>Recommended angle priorities</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp Status</strong></td>
+                        <td>CREATIVE_COMPLETE → TEST_READY</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion Update</strong></td>
+                        <td>Update Product OS: Creative_Pack_Status = COMPLETE</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Channel</strong></td>
+                        <td>#p3-p1-tests</td>
+                    </tr>
+                </table>
+
+                <h4>Standard Handoff Message Template</h4>
+                <pre><code>[HANDOFF: CREATIVE → P1 TEST]
+From: P2 Creative Director
+To: P3 Media Buyer
+Product ID: PRD-20251210-042
+
+Creative Pack Complete ✓
+Total Assets: 6 (4 video, 2 static)
+
+Primary Angles Tested:
+1. Problem-Agitate (Video Hero 01, 02)
+2. Transformation (Video UGC 01, Static 01)
+3. Mechanism Reveal (Video Hero 03, Static 02)
+
+Drive Folder: [link to /Creative Assets/PRD-20251210-042/P1_PACK/]
+- All files exported, named per convention
+- Copy doc included (hooks, captions, headlines)
+
+Recommended Test Priority:
+→ Start with Hero 01 + Static 01 (strongest hooks)
+
+ClickUp: [link]
+Status: TEST_READY
+
+@MediaBuyer ready for P1 setup</code></pre>
+
+                <h3>Lateral: Team Assignment & Feedback</h3>
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>Interface</th>
+                        <th>Tools</th>
+                    </tr>
+                    <tr>
+                        <td>Hero Editor (P2-CR-HEROEDIT)</td>
+                        <td>Brief → Review → Feedback Loop</td>
+                        <td>Notion briefs, #p2-edits-hero, ClickUp tasks</td>
+                    </tr>
+                    <tr>
+                        <td>Volume Editors (P2-CR-EDITOR-VOLUME-X)</td>
+                        <td>Brief → Review → Feedback Loop</td>
+                        <td>Notion briefs, #p2-edits-volume, ClickUp tasks</td>
+                    </tr>
+                    <tr>
+                        <td>Static Designers (P2-CR-STATIC-DESIGNER-X)</td>
+                        <td>Brief → Review → Feedback Loop</td>
+                        <td>Notion briefs, #p2-statics-carousels, ClickUp tasks</td>
+                    </tr>
+                    <tr>
+                        <td>Copywriter (P2-CR-COPY)</td>
+                        <td>Brief → Copy Delivery → Integration</td>
+                        <td>Notion briefs, Google Docs, ClickUp tasks</td>
+                    </tr>
+                </table>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">💡 Handoff Best Practices</div>
+                    <ul>
+                        <li><strong>Always include Product_ID:</strong> Never handoff without clear ID linkage</li>
+                        <li><strong>Link everything:</strong> Notion + ClickUp + Drive in every handoff</li>
+                        <li><strong>Set expectations:</strong> Include timelines and next steps</li>
+                        <li><strong>Tag recipients:</strong> @mention specific people in Discord</li>
+                        <li><strong>Confirm receipt:</strong> Downstream roles acknowledge handoffs within 2 hours</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- KPIs & Quality Bar -->
+            <section id="kpis" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">📊</span>
+                    <h2 class="section-title">KPIs & Quality Bar</h2>
+                </div>
+                <p class="section-intro">Quantitative metrics and qualitative standards for creative direction</p>
+
+                <h3>Primary KPIs (from L2-07)</h3>
+                <table>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target</th>
+                        <th>Measurement</th>
+                        <th>Source</th>
+                    </tr>
+                    <tr>
+                        <td><strong>P1 Creative Pack Completeness</strong></td>
+                        <td>100% of R3 packets → complete P1 packs</td>
+                        <td>Weekly: # complete packs / # R3 packets received</td>
+                        <td>Notion Product OS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Creative Delivery Timeline</strong></td>
+                        <td>≤5 business days R3→P1 pack</td>
+                        <td>Average days from R3 approval to TEST_READY status</td>
+                        <td>ClickUp task timestamps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P1_PASS Lift (Creative Quality Signal)</strong></td>
+                        <td>4-6% P1_PASS rate (portfolio level)</td>
+                        <td>Monthly: # P1_PASS / # P1 tests launched</td>
+                        <td>Notion Test Results</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Asset Quality (First-Pass Approval)</strong></td>
+                        <td>≥70% approved without major revisions</td>
+                        <td>Weekly: # approved first-pass / # submitted for review</td>
+                        <td>ClickUp review outcomes</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pod Throughput</strong></td>
+                        <td>250-400 total assets/month</td>
+                        <td>Monthly: Total creatives shipped across all products</td>
+                        <td>Drive folder counts + Notion tracking</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WIP Discipline</strong></td>
+                        <td>≤15 products concurrently</td>
+                        <td>Daily: Count of products in active creative states</td>
+                        <td>ClickUp pipeline view</td>
+                    </tr>
+                </table>
+
+                <h3>Secondary Performance Indicators</h3>
+                <ul>
+                    <li><strong>Creative Win Rate:</strong> What % of your creatives become the "winning" asset in P1 tests? (Track per format/angle)</li>
+                    <li><strong>P2 Iteration Speed:</strong> Average time to deliver P2 variants after P1_PASS (target: 1-2 days)</li>
+                    <li><strong>Team Utilization:</strong> Are individual specialists consistently hitting their throughput targets?</li>
+                    <li><strong>Angle Diversity:</strong> Are you testing varied angles or defaulting to safe patterns?</li>
+                </ul>
+
+                <h3>Qualitative Quality Bar</h3>
+                
+                <h4>Excellent Creative Direction</h4>
+                <ul>
+                    <li>Briefs are <strong>strategic</strong>, not just task lists—clear angle rationale</li>
+                    <li>Creatives show <strong>angle diversity</strong>—not all "before/after"</li>
+                    <li><strong>First 3 seconds</strong> consistently strong across pack</li>
+                    <li>Brand alignment is <strong>natural</strong>, not forced</li>
+                    <li>Performance data actively <strong>informs</strong> future briefs</li>
+                    <li>Team is <strong>clear on priorities</strong> and rarely blocked</li>
+                </ul>
+
+                <h4>Poor Creative Direction (Failure Modes)</h4>
+                <ul>
+                    <li>Briefs are <strong>vague</strong> or just "make ads for this product"</li>
+                    <li>All creatives use <strong>same angle</strong> (no diversity)</li>
+                    <li>Weak hooks—<strong>no pattern interrupt</strong> in first 3 seconds</li>
+                    <li>Off-brand tone—too hype, too sales-y, or generic</li>
+                    <li>No <strong>performance feedback loop</strong>—same mistakes repeated</li>
+                    <li>Team is confused, blocked, or working on wrong priorities</li>
+                </ul>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">💡 KPI Review Cadence</div>
+                    <ul>
+                        <li><strong>Daily:</strong> WIP count, pipeline status</li>
+                        <li><strong>Weekly:</strong> Throughput, delivery timelines, first-pass approval rate</li>
+                        <li><strong>Monthly:</strong> P1_PASS lift, total pod output, angle performance analysis</li>
+                        <li><strong>Quarterly:</strong> Strategic review with Founder—are creative strategies evolving with market?</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AI Usage & Prompts -->
+            <section id="ai-usage" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">🤖</span>
+                    <h2 class="section-title">AI Usage & Prompt Patterns</h2>
+                </div>
+                <p class="section-intro">Ready-to-use AI prompts for common creative direction tasks</p>
+
+                <div class="callout callout-tip">
+                    <div class="callout-title">💡 AI Usage Philosophy</div>
+                    <p>AI is a <strong>creative accelerator</strong>, not a replacement for strategic direction. Use AI for:</p>
+                    <ul>
+                        <li>Brainstorming angle variations</li>
+                        <li>Drafting brief templates</li>
+                        <li>Analyzing performance patterns</li>
+                        <li>Generating hook/copy options</li>
+                    </ul>
+                    <p><strong>Always human-review</strong> AI outputs for brand alignment and strategic coherence.</p>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Prompt 1: Generate Creative Angles from R3 Packet</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <pre><code>You are a creative strategist for a lean-volume dropshipping business. Your job is to generate 3-5 distinct creative angles for a new product test.
+
+Product Context:
+- Product: [product name & brief description]
+- Primary offer: [offer/promise]
+- Target audience: [audience]
+- Key benefits: [3-5 benefits]
+- Main objections: [2-3 objections]
+- AOV: $[X]
+- Niche: [niche/category]
+
+Constraints:
+- Budget: $40-60 for P1 test
+- Need 4-6 creatives total
+- Must work on cold traffic (Meta/TikTok)
+- Avoid hype/scammy tone
+
+Generate:
+1. 3-5 distinct creative angles (e.g., Problem-Agitate, Transformation, Mechanism Reveal, Social Proof, Curiosity Gap)
+2. For each angle:
+   - 2-3 hook options (first 3 seconds)
+   - Core message/promise
+   - Key visual elements
+   - Format recommendation (video/static)
+   - Why this angle fits the product
+
+Output as structured list, not paragraphs.</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Prompt 2: Analyze P1 Performance & Recommend P2 Strategy</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <pre><code>You are analyzing P1 test results to plan P2 creative variants for a product that passed P1.
+
+P1 Results:
+- Total spend: $[X]
+- Creatives tested: [list with IDs]
+- Performance by creative:
+  [Creative_ID] | Angle | Format | CTR: X% | CPC: $X | ATC: X | IC: X | Purchase: X
+
+Product context:
+- AOV: $[X]
+- Remaining P2 budget: ~$40-50
+- Original brief angles: [list]
+
+Task:
+1. Identify the winning creative(s) and explain why they won
+2. Recommend 2-4 P2 variants with clear hypotheses:
+   - What are we testing? (hook variation, format shift, angle pivot?)
+   - Why do we think this will improve performance?
+   - What's the risk if this doesn't work?
+
+Output:
+- Winning creative analysis (2-3 sentences)
+- P2 variant recommendations (structured list)
+- Recommended test priority order</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Prompt 3: Generate Creative Brief Template</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <pre><code>Generate a creative brief for the following product. Output as Notion-friendly markdown.
+
+Product: [name]
+Product ID: [PRD-XXX]
+R3 Packet: [link]
+
+Key Info from R3:
+- Offer: [summary]
+- Primary audience: [demographic/psychographic]
+- Key benefits: [list]
+- Objections: [list]
+- AOV: $[X]
+- Fulfillment: [domestic/international, timing]
+
+Brief Template to Fill:
+---
+# Creative Brief: [Product Name]
+
+**Product ID:** [ID]
+**Date:** [date]
+**Creative Director:** [your name]
+**Test Gate:** P1
+
+## Product Summary
+[2-3 sentences: what is it, who is it for, why do they care]
+
+## Creative Strategy
+**Primary Angles to Test:**
+1. [Angle 1 name] - [brief rationale]
+2. [Angle 2 name] - [brief rationale]
+3. [Angle 3 name] - [brief rationale]
+
+**Format Mix:**
+- Video: [X] assets ([specify types: hero/UGC/demo])
+- Static: [X] assets ([specify: feed/story/carousel])
+
+## Hook & Messaging
+**Hook Options (First 3 Seconds):**
+- [Hook 1]
+- [Hook 2]
+- [Hook 3]
+
+**Key Benefits to Emphasize:**
+- [Benefit 1]
+- [Benefit 2]
+- [Benefit 3]
+
+**Objections to Address:**
+- [Objection 1] → [How to counter]
+- [Objection 2] → [How to counter]
+
+**CTA Strategy:**
+- Primary CTA: [e.g., "Shop Now", "Learn More", "Get Yours"]
+- Urgency element: [if any]
+
+## Brand Guardrails
+- Tone: [e.g., "Direct, benefit-focused, avoid hype"]
+- Visual style: [e.g., "Clean, product-focused, lifestyle context"]
+- No-gos: [specific things to avoid]
+
+## Assignments
+- **Hero Editor:** [X] video variants ([specify angles])
+- **Volume Editor:** [X] cutdowns/formats
+- **Static Designer:** [X] static ads
+- **Copy:** Hooks, scripts, captions
+
+## Timeline
+- Brief created: [date]
+- Assets due: [date, typically +3-5 days]
+- Handoff to Pod 3: [date]
+
+---</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapsible-section">
+                    <div class="collapsible-header" onclick="toggleCollapsible(this)">
+                        <span class="collapsible-title">Prompt 4: Review Creative for Brand Alignment</span>
+                        <span class="collapsible-toggle">▼</span>
+                    </div>
+                    <div class="collapsible-content">
+                        <div class="collapsible-inner">
+                            <pre><code>Review this creative for alignment with DriveOn brand guidelines.
+
+Creative Description:
+- Format: [video/static]
+- Hook (first 3s): [describe]
+- Main message: [describe]
+- Visual style: [describe]
+- CTA: [describe]
+
+Brand Guidelines (L2-08 Summary):
+- Positioning: Systems-first, anti-hype dropshipping
+- Tone: Direct, benefit-focused, operational excellence
+- Avoid: Get-rich-quick, hype language, fake urgency, dark patterns
+- Visual: Clean, professional, product-focused
+
+Analyze:
+1. Tone Alignment: Is the messaging on-brand or too hype/sales-y?
+2. Visual Alignment: Does it look professional or generic/AI-slop?
+3. Promise/Claims: Any unsubstantiated or problematic claims?
+4. CTA: Appropriate pressure level or too aggressive?
+
+Output:
+- Overall Brand Fit: [PASS / MINOR REVISIONS / MAJOR REVISIONS]
+- Specific Issues: [list if any]
+- Revision Recommendations: [specific changes needed]</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Human Checkpoints</h3>
+                <p>You <strong>MUST</strong> human-review AI outputs before:</p>
+                <ul>
+                    <li>Sending creative briefs to team (AI can draft, you edit)</li>
+                    <li>Making final angle strategy decisions for P2</li>
+                    <li>Approving any creative that will go to paid traffic</li>
+                    <li>Providing performance feedback to team based on AI analysis</li>
+                </ul>
+            </section>
+
+            <!-- Tools & Systems -->
+            <section id="tools" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">🛠️</span>
+                    <h2 class="section-title">Tools & Systems Reference</h2>
+                </div>
+                <p class="section-intro">Approved tools, access levels, and key workflows</p>
+
+                <table>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Views/Databases</th>
+                        <th>Access Level</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Product OS, creative briefs, SOPs</td>
+                        <td>
+                            - Product OS (products DB)<br>
+                            - Creative Briefs DB<br>
+                            - Test Results view<br>
+                            - Canon & SOPs workspace
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task management, pipeline tracking</td>
+                        <td>
+                            Space: "Creative Pipeline"<br>
+                            Lists: Creative Briefs, In Progress, Review, Complete<br>
+                            Statuses: BRIEF_CREATED, IN_PROGRESS, REVIEW_READY, CREATIVE_APPROVED, TEST_READY
+                        </td>
+                        <td>Admin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>Asset storage & delivery</td>
+                        <td>
+                            /DriveOn Commerce/Creative Assets/[Product_ID]/<br>
+                            - Raw_Assets/<br>
+                            - P1_Pack/<br>
+                            - P2_Variants/
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Real-time communication</td>
+                        <td>
+                            - #p2-briefs (inbound from Pod 1)<br>
+                            - #p2-edits-hero (team updates)<br>
+                            - #p2-edits-volume<br>
+                            - #p2-statics-carousels<br>
+                            - #p3-p1-tests (outbound to Pod 3)<br>
+                            - #p3-p2-optimisation (P1 results)
+                        </td>
+                        <td>P2_CREATIVE role</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CapCut / Premiere Pro</strong></td>
+                        <td>Video review & occasional edits</td>
+                        <td>N/A (team's primary editing tools)</td>
+                        <td>Viewer (you review exports)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Figma</strong></td>
+                        <td>Static ad review & feedback</td>
+                        <td>Project: "DriveOn Creative Assets"</td>
+                        <td>Editor (for feedback)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Claude / ChatGPT</strong></td>
+                        <td>AI assistance for briefs & analysis</td>
+                        <td>N/A</td>
+                        <td>Full access</td>
+                    </tr>
+                </table>
+
+                <h3>Key Notion Databases</h3>
+
+                <h4>Product OS (Products DB)</h4>
+                <ul>
+                    <li><strong>Properties:</strong> Product_ID, Status, R3_Date, Creative_Pack_Status, P1_Date, P1_Result, Test_Tier</li>
+                    <li><strong>Your View:</strong> "Awaiting Creative" (Status = R3_APPROVED, Creative_Pack_Status = NEEDED)</li>
+                    <li><strong>Update Trigger:</strong> Change Creative_Pack_Status to COMPLETE when P1 pack ready</li>
+                </ul>
+
+                <h4>Creative Briefs DB</h4>
+                <ul>
+                    <li><strong>Properties:</strong> Brief_ID, Product_ID, Angles, Format_Mix, Hooks, Assignments, Status, Created_Date, Due_Date</li>
+                    <li><strong>Your View:</strong> "Active Briefs" (Status = ACTIVE or IN_PROGRESS)</li>
+                    <li><strong>Update Trigger:</strong> Create new brief for each R3 packet</li>
+                </ul>
+
+                <h3>ClickUp Workspace Binding</h3>
+                <pre><code>Space: "Creative Pipeline"
+Folder: "P1 Creative"
+Lists:
+  - "Brief Queue" (new R3 packets)
+  - "In Progress" (team working)
+  - "Review" (awaiting your approval)
+  - "Complete" (ready for handoff)
+
+Custom Fields:
+  - Product_ID (text)
+  - Creative_Count (number)
+  - Assigned_To (person)
+  - Brief_Link (URL to Notion)
+  - Drive_Folder (URL)
+
+Statuses:
+  BRIEF_NEEDED → BRIEF_CREATED → IN_PROGRESS → REVIEW_READY → CREATIVE_APPROVED → TEST_READY</code></pre>
+
+                <h3>Google Drive Structure</h3>
+                <pre><code>/DriveOn Commerce/
+  /Creative Assets/
+    /PRD-YYYYMMDD-XXX/
+      /Raw_Assets/
+        - B-roll, stock footage, product images
+      /P1_Pack/
+        - CRT-[Product_ID]-001.mp4 (hero video 1)
+        - CRT-[Product_ID]-002.mp4 (hero video 2)
+        - CRT-[Product_ID]-003.mp4 (UGC variant)
+        - CRT-[Product_ID]-004.jpg (static 1)
+        - CRT-[Product_ID]-005.jpg (static 2)
+        - Copy_Doc.txt (hooks, captions, headlines)
+      /P2_Variants/ (if P1_PASS)
+        - [additional creatives]</code></pre>
+            </section>
+
+            <!-- Escalation & Decision Rights -->
+            <section id="escalation" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">🚨</span>
+                    <h2 class="section-title">Escalation & Decision Rights</h2>
+                </div>
+                <p class="section-intro">What you can decide alone vs. when to escalate</p>
+
+                <h3>Decisions You Make Alone</h3>
+                <ul>
+                    <li>Creative angle selection for P1 tests</li>
+                    <li>Format mix (video vs. static) within 4-6 asset range</li>
+                    <li>Assignment of briefs to team specialists</li>
+                    <li>Approval/revision of individual creative assets</li>
+                    <li>P2 variant strategy for P1_PASS products</li>
+                    <li>Daily/weekly priority sequencing within WIP</li>
+                    <li>Team feedback & coaching</li>
+                </ul>
+
+                <h3>Decisions Requiring PM / Founder</h3>
+                <ul>
+                    <li><strong>WIP Cap Exceptions:</strong> Going above 15 products concurrently</li>
+                    <li><strong>Budget Exceptions:</strong> Requesting >6 creatives for P1 (outside canon)</li>
+                    <li><strong>Resource Gaps:</strong> Need to hire additional editor/designer</li>
+                    <li><strong>Strategic Shifts:</strong> Major changes to creative philosophy or pod structure</li>
+                    <li><strong>Brand Guideline Questions:</strong> Uncertain if something violates L2-08</li>
+                    <li><strong>Kill vs. Salvage:</strong> Uncertain whether to kill stalled product or try creative pivot</li>
+                </ul>
+
+                <h3>Escalation Procedures</h3>
+
+                <h4>For Blockers (Operational)</h4>
+                <ol>
+                    <li>Post in #p1-blockers (if cross-pod) or #p4-systems-ops (if infrastructure)</li>
+                    <li>Include:
+                        <ul>
+                            <li>What's blocked</li>
+                            <li>Impact (products affected, timeline at risk)</li>
+                            <li>What you've tried</li>
+                            <li>Decision needed or help requested</li>
+                        </ul>
+                    </li>
+                    <li>Tag PM or relevant role lead</li>
+                    <li>Expected response time: 4 business hours</li>
+                </ol>
+
+                <h4>For Canon Questions (Strategic)</h4>
+                <ol>
+                    <li>Check L2-08 (Brand Platform) and L2-05 (Testing Canon) first</li>
+                    <li>If unclear, post in #sys-canon-updates with question</li>
+                    <li>Tag Founder / Integrator</li>
+                    <li>Expected response time: 1 business day</li>
+                </ol>
+
+                <h4>For Performance Issues (Quality/Team)</h4>
+                <ol>
+                    <li>Document specific issue with examples</li>
+                    <li>Attempt direct feedback first (1:1 with team member)</li>
+                    <li>If persistent, escalate to Founder with:
+                        <ul>
+                            <li>Pattern description</li>
+                            <li>Impact on deliverables</li>
+                            <li>Recommended action</li>
+                        </ul>
+                    </li>
+                    <li>Channel: Direct message or #p4-pm-daily-standup if appropriate</li>
+                </ol>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">⚠️ Escalation Timing</div>
+                    <p><strong>Escalate early, not late.</strong> Key triggers:</p>
+                    <ul>
+                        <li>WIP at 15+ for >2 days with no clear path to clear</li>
+                        <li>Any product stalled >5 business days in creative</li>
+                        <li>Team member consistently missing quality bar after feedback</li>
+                        <li>Resource constraint impacting ability to support 45-60 test pipeline</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Onboarding Checklist -->
+            <section id="onboarding" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">✅</span>
+                    <h2 class="section-title">Onboarding Checklist</h2>
+                </div>
+                <p class="section-intro">30-day ramp plan for new Creative Directors</p>
+
+                <h3>Week 1: Access & Canon Immersion</h3>
+                <ul>
+                    <li>☐ Access setup: Notion, ClickUp, Drive, Discord, Figma</li>
+                    <li>☐ Read L0-02 (Brand Architecture)</li>
+                    <li>☐ Read L1-01 (CaniCol Model v4.0)</li>
+                    <li>☐ Read L2-02 (Pod Overview)</li>
+                    <li>☐ Read L2-05 (Testing Canon—critical for budget/gate understanding)</li>
+                    <li>☐ Read L2-08 (Brand Platform & Creative Guardrails)</li>
+                    <li>☐ Review 5-10 past R3 packets in Notion Product OS</li>
+                    <li>☐ Review 5-10 past P1 creative packs in Drive</li>
+                    <li>☐ Shadow: Attend Pod 2 team standups, observe workflow</li>
+                </ul>
+
+                <h3>Week 2: Supervised Creative Direction</h3>
+                <ul>
+                    <li>☐ Create 2-3 creative briefs under Founder review</li>
+                    <li>☐ Conduct 3-5 creative reviews with feedback from Founder</li>
+                    <li>☐ Practice handoff messages (R3→Brief, Pack→Test)</li>
+                    <li>☐ Review P1 test results and practice P2 strategy planning</li>
+                    <li>☐ Meet 1:1 with each Pod 2 team member (editors, designers, copy)</li>
+                    <li>☐ Shadow Founder in 2-3 performance analysis sessions</li>
+                </ul>
+
+                <h3>Week 3: Semi-Independent Direction</h3>
+                <ul>
+                    <li>☐ Direct 5-8 products end-to-end with spot-check review</li>
+                    <li>☐ Manage WIP independently—practice kill/defer decisions</li>
+                    <li>☐ Deliver first P1 creative packs to Pod 3 independently</li>
+                    <li>☐ Conduct first P2 variant planning session independently</li>
+                    <li>☐ Participate in weekly KPI review with Founder</li>
+                    <li>☐ Flag first escalation appropriately (practice escalation process)</li>
+                </ul>
+
+                <h3>Week 4: Full Independence</h3>
+                <ul>
+                    <li>☐ Direct 10-15 products independently</li>
+                    <li>☐ Manage full Pod 2 team without daily supervision</li>
+                    <li>☐ Deliver P1 packs on-time and on-quality</li>
+                    <li>☐ Conduct performance analysis and adjust strategy independently</li>
+                    <li>☐ Hit WIP discipline targets (≤15 concurrent)</li>
+                    <li>☐ Pass 30-day review with Founder</li>
+                </ul>
+
+                <h3>30-Day Review Criteria</h3>
+                <p>To pass onboarding, you must demonstrate:</p>
+                <ul>
+                    <li><strong>Canon fluency:</strong> Can explain CaniCol model, testing gates, and P1/P2 budgets without reference docs</li>
+                    <li><strong>Brief quality:</strong> Briefs are strategic, angle-diverse, and actionable</li>
+                    <li><strong>Review speed:</strong> Can review 3-5 creatives per hour with quality feedback</li>
+                    <li><strong>Team direction:</strong> Team members report clear priorities and minimal blockers</li>
+                    <li><strong>WIP discipline:</strong> Maintaining ≤15 products concurrently without drift</li>
+                    <li><strong>Handoff quality:</strong> No handoff errors or missing information</li>
+                </ul>
+            </section>
+
+            <!-- Change Log -->
+            <section id="changelog" class="section-card">
+                <div class="section-header">
+                    <span class="section-icon">📝</span>
+                    <h2 class="section-title">Change Log</h2>
+                </div>
+
+                <table>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Changes</th>
+                    </tr>
+                    <tr>
+                        <td>1.0</td>
+                        <td>2025-12-10</td>
+                        <td>DriveOn SOP Factory (Claude)</td>
+                        <td>Initial HTML SOP creation for P2-CR-DIRECTOR role following v4.0 canon</td>
+                    </tr>
+                </table>
+
+                <p><strong>Canon Dependencies:</strong></p>
+                <ul>
+                    <li>L0-02 – Product and Brand Architecture v1</li>
+                    <li>L1-01 – CaniCol Model v4.0</li>
+                    <li>L2-02 – Pod Overview v1</li>
+                    <li>L2-03 – Role Registry and WIP Limits v1</li>
+                    <li>L2-05 – Testing Canon v4.0</li>
+                    <li>L2-07 – Pod KPIs and TestBank v4.0</li>
+                    <li>L2-08 – Master Brand Platform v2.0</li>
+                    <li>L3-01 – Discord Infrastructure Blueprint v1</li>
+                    <li>L3-02 – ClickUp Infrastructure Blueprint v1</li>
+                    <li>L3-03 – Notion Infrastructure Blueprint v1</li>
+                    <li>L3-04 – Google Drive Infrastructure Blueprint v1</li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <!-- Hidden JSON Structure -->
+    <script type="application/json" id="sop-structure">
+    {
+        "role_id": "P2-CR-DIRECTOR",
+        "role_name": "Creative Director",
+        "pod": "Pod 2 - Creative Factory",
+        "fte": 1.0,
+        "status": "CORE",
+        "wip_limits": {
+            "concurrent_products": 15,
+            "briefs_active": 12
+        },
+        "throughput": {
+            "daily": "3-5 products directed",
+            "weekly": "10-15 products in active creative",
+            "monthly": "40-60 products touched"
+        },
+        "kpis": [
+            {
+                "name": "P1 Creative Pack Completeness",
+                "target": "100%",
+                "source": "L2-07"
+            },
+            {
+                "name": "Creative Delivery Timeline",
+                "target": "≤5 business days R3→P1",
+                "source": "L2-07"
+            },
+            {
+                "name": "P1_PASS Lift",
+                "target": "4-6% portfolio level",
+                "source": "L2-05, L2-07"
+            },
+            {
+                "name": "Asset Quality",
+                "target": "≥70% first-pass approval",
+                "source": "L2-07"
+            },
+            {
+                "name": "Pod Throughput",
+                "target": "250-400 assets/month",
+                "source": "L2-02, L2-07"
+            }
+        ],
+        "workflows": [
+            {
+                "name": "R3 → P1 Creative Brief",
+                "trigger": "R3 packet approval in #p2-briefs",
+                "inputs": ["R3 Product Packet", "Creative Intel", "Historical Performance"],
+                "steps": [
+                    "Read R3 packet (10 min)",
+                    "Review creative intel (5 min)",
+                    "Define testing strategy (10 min)",
+                    "Create creative brief in Notion (15 min)",
+                    "Assign to team (5 min)",
+                    "Set timeline & ClickUp tasks (5 min)"
+                ],
+                "outputs": ["Creative Brief (Notion)", "ClickUp tasks", "Notification in #p2-briefs"],
+                "tools": ["Notion Creative Briefs DB", "ClickUp Creative Pipeline", "Discord #p2-briefs"]
+            },
+            {
+                "name": "Creative Review & QA",
+                "trigger": "Team marks creative as REVIEW_READY",
+                "inputs": ["Completed assets", "Creative brief", "Brand guidelines"],
+                "steps": [
+                    "Access asset (2 min)",
+                    "Hook & attention review (3-5 min)",
+                    "Strategic alignment check (3-5 min)",
+                    "Brand & compliance check (2-3 min)",
+                    "Technical specs verify (1-2 min)",
+                    "Decision & feedback (3-5 min)"
+                ],
+                "outputs": ["ClickUp status update", "Feedback notes", "Approved assets"],
+                "tools": ["Google Drive", "ClickUp", "Brand Guidelines L2-08"]
+            },
+            {
+                "name": "P1_PASS → P2 Variant Strategy",
+                "trigger": "Product marked P1_PASS in #p3-p2-optimisation",
+                "inputs": ["P1 test results", "Original brief", "P2 budget"],
+                "steps": [
+                    "Analyze P1 performance (10 min)",
+                    "Define P2 strategy (10 min)",
+                    "Create P2 brief (10 min)",
+                    "Prioritize P2 work (5 min)"
+                ],
+                "outputs": ["P2 creative brief", "ClickUp P2 tasks", "Team notification"],
+                "tools": ["Notion", "ClickUp", "Discord #p2-briefs"]
+            },
+            {
+                "name": "Team Capacity & WIP Management",
+                "trigger": "Daily during morning setup",
+                "inputs": ["ClickUp pipeline status", "Team workload"],
+                "steps": [
+                    "Check pod-level WIP (5 min)",
+                    "Check individual role WIP (5 min)",
+                    "Identify bottlenecks (3 min)",
+                    "Rebalance & prioritize (5 min)",
+                    "Communicate changes (3 min)"
+                ],
+                "outputs": ["Balanced WIP", "Priority queue", "Escalations if needed"],
+                "tools": ["ClickUp", "Discord", "Notion"]
+            }
+        ],
+        "handoffs": [
+            {
+                "type": "inbound",
+                "from": "P1-R3-LEAD-STRATEGIST",
+                "to": "P2-CR-DIRECTOR",
+                "trigger": "R3 approval",
+                "channel": "#p2-briefs",
+                "required_data": ["Product_ID", "R3 Packet link", "Drive folder", "ClickUp task"],
+                "timeline": "Create brief within 24h"
+            },
+            {
+                "type": "outbound",
+                "from": "P2-CR-DIRECTOR",
+                "to": "P3-MB-BUYER",
+                "trigger": "P1 pack complete",RContinue"channel": "#p3-p1-tests",
+"required_data": ["Product_ID", "Creative IDs", "Drive folder", "Copy assets"],
+"timeline": "3-5 days from R3 approval"
+}
+],
+"tools": [
+{
+"name": "Notion",
+"use_case": "Product OS, creative briefs, SOPs",
+"key_dbs": ["Product OS", "Creative Briefs DB", "Test Results"],
+"access": "Editor"
+},
+{
+"name": "ClickUp",
+"use_case": "Task management, pipeline tracking",
+"key_spaces": ["Creative Pipeline"],
+"access": "Admin"
+},
+{
+"name": "Google Drive",
+"use_case": "Asset storage & delivery",
+"key_folders": ["/DriveOn Commerce/Creative Assets/"],
+"access": "Editor"
+},
+{
+"name": "Discord",
+"use_case": "Real-time communication",
+"key_channels": ["#p2-briefs", "#p2-edits-hero", "#p3-p1-tests", "#p3-p2-optimisation"],
+"access": "P2_CREATIVE role"
+}
+],
+"canon_constraints": {
+"p1_creative_volume": "4-6 per product",
+"p2_creative_volume": "2-4 additional",
+"total_per_product": "6-10",
+"monthly_pod_capacity": "250-400 assets",
+"p1_budget_context": "$40-60",
+"wip_cap": "12-15 products",
+"weekly_throughput": "10-15 products directed"
+},
+"version": "1.0",
+"last_updated": "2025-12-10",
+"canon_dependencies": [
+"L0-02",
+"L1-01",
+"L2-02",
+"L2-03",
+"L2-05",
+"L2-07",
+"L2-08",
+"L3-01",
+"L3-02",
+"L3-03",
+"L3-04"
+]
+}
+</script>
+<script>
+    // Initialize Mermaid
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#00C8C8',
+            primaryTextColor: '#1A1A1A',
+            primaryBorderColor: '#00C8C8',
+            lineColor: '#666666',
+            secondaryColor: '#F4E8D0',
+            tertiaryColor: '#F8F8F8'
+        }
+    });
+
+    // Collapsible sections
+    function toggleCollapsible(header) {
+        const content = header.nextElementSibling;
+        const toggle = header.querySelector('.collapsible-toggle');
+        
+        if (content.classList.contains('active')) {
+            content.classList.remove('active');
+            toggle.textContent = '▼';
+        } else {
+            content.classList.add('active');
+            toggle.textContent = '▲';
+        }
+    }
+
+    // Smooth scroll with offset for fixed nav
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

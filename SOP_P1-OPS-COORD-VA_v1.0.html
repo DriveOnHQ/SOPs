@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP: P1-OPS-COORD-VA – Research Ops Coordinator & VA</title>
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════
+           DRIVEON COMMERCE BRAND SYSTEM
+           Drive Cyan: #00C8C8 | Carbon Black: #1A1A1A | Gray: #666666
+           White: #FFFFFF | Light Gray: #F8F8F8 | Champagne: #F4E8D0
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px; /* Prevents nav from covering anchors */
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1A1A1A;
+            background: #F8F8F8;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           NAVIGATION – FIXED BUT NON-BLOCKING
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #1A1A1A;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            height: 64px;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .nav-brand {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #00C8C8;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.25rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+        
+        .nav-links a:hover {
+            border-bottom-color: #00C8C8;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           MAIN LAYOUT
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        main {
+            margin-top: 64px; /* Matches nav height */
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 2rem;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           HERO SECTION
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        .hero {
+            background: linear-gradient(135deg, #1A1A1A 0%, #2A2A2A 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #00C8C8;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .meta-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid #00C8C8;
+        }
+        
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #00C8C8;
+            margin-bottom: 0.25rem;
+        }
+        
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           SECTIONS & CARDS
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        section {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: #1A1A1A;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #00C8C8;
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: #1A1A1A;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            color: #1A1A1A;
+            margin-top: 1rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           INTERACTIVE COMPONENTS
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        details {
+            background: #F8F8F8;
+            border-left: 4px solid #00C8C8;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        summary {
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        summary:hover {
+            color: #00C8C8;
+        }
+        
+        summary::before {
+            content: '▶';
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        details > *:not(summary) {
+            margin-top: 1rem;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           BADGES & STATUS CHIPS
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+        
+        .badge-gate {
+            background: #00C8C8;
+            color: white;
+        }
+        
+        .badge-warning {
+            background: #FFA500;
+            color: white;
+        }
+        
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .badge-info {
+            background: #666;
+            color: white;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           TABLES
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: #1A1A1A;
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background: #F8F8F8;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           CALLOUTS
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        .callout {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid;
+        }
+        
+        .callout-warning {
+            background: #FFF3CD;
+            border-color: #FFA500;
+            color: #856404;
+        }
+        
+        .callout-info {
+            background: #D1ECF1;
+            border-color: #00C8C8;
+            color: #0C5460;
+        }
+        
+        .callout-success {
+            background: #D4EDDA;
+            border-color: #28A745;
+            color: #155724;
+        }
+        
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           CODE & WORKFLOW BLOCKS
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        .workflow-card {
+            background: #F8F8F8;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .workflow-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid #00C8C8;
+        }
+        
+        .workflow-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1A1A1A;
+        }
+        
+        .workflow-step {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .workflow-step::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00C8C8;
+            font-weight: bold;
+        }
+        
+        code {
+            background: #1A1A1A;
+            color: #00C8C8;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        pre {
+            background: #1A1A1A;
+            color: #00C8C8;
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           CHECKLISTS
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+            color: #00C8C8;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           FOOTER
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* ═══════════════════════════════════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════════════════════════════════ */
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                font-size: 0.8rem;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════════════════════════ -->
+
+<nav>
+    <div class="nav-container">
+        <a href="#top" class="nav-brand">DriveOn SOP – P1 Ops Coordinator</a>
+        <ul class="nav-links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#dayinlife">Day-in-Life</a></li>
+            <li><a href="#workflows">Workflows</a></li>
+            <li><a href="#handoffs">Handoffs</a></li>
+            <li><a href="#kpis">KPIs</a></li>
+            <li><a href="#tools">Tools</a></li>
+            <li><a href="#onboarding">Onboarding</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     HERO & META BLOCK
+═══════════════════════════════════════════════════════════════════════ -->
+
+<main>
+    <div class="hero" id="top">
+        <h1>P1-OPS-COORD-VA</h1>
+        <p class="hero-subtitle">Research Ops Coordinator & Virtual Assistant</p>
+        
+        <div class="meta-grid">
+            <div class="meta-card">
+                <div class="meta-label">Role ID</div>
+                <div class="meta-value">P1-OPS-COORD-VA-XX</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">Pod</div>
+                <div class="meta-value">P1 – Product Intelligence</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">Role Type</div>
+                <div class="meta-value">RESEARCH_OPS_VA</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">Status</div>
+                <div class="meta-value">OPTIONAL / DUAL_ONLY</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">FTE</div>
+                <div class="meta-value">0.5 – 1.0</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">Cross-Pod</div>
+                <div class="meta-value">✅ Yes</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">WIP Cap</div>
+                <div class="meta-value">8–10 active ops tasks</div>
+            </div>
+            <div class="meta-card">
+                <div class="meta-label">Throughput</div>
+                <div class="meta-value">Daily updates + 1 weekly report</div>
+            </div>
+        </div>
+    </div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 1: ROLE PURPOSE & CONTEXT
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="overview">
+        <h2>1. Role Purpose & Context</h2>
+        
+        <div class="callout callout-info">
+            <div class="callout-title">🎯 Core Mission</div>
+            You are the <strong>glue</strong> that keeps Product Intelligence running smoothly. Your job is to maintain <strong>data integrity</strong>, <strong>queue hygiene</strong>, and <strong>cross-pod communication</strong> so that researchers can focus on deep work and the rest of the system can trust the data.
+        </div>
+        
+        <h3>Why This Role Exists</h3>
+        <p>The CaniCol model tests <strong>45–60 products/month</strong> through a structured R0→R3 research pipeline. This high-volume system generates hundreds of status updates, ID assignments, link mappings, and cross-pod handoffs every week.</p>
+        
+        <p>Without dedicated operations coordination:</p>
+        <ul>
+            <li>Product IDs get duplicated or mismatched across systems</li>
+            <li>ClickUp tasks drift out of sync with Notion records</li>
+            <li>Drive folders are created with inconsistent naming</li>
+            <li>Researchers waste time on admin work instead of research</li>
+            <li>Pod 2 (Creative) and Pod 3 (Media) receive incomplete or incorrectly formatted packets</li>
+        </ul>
+        
+        <p>Your role prevents these failure modes by being the <strong>central coordinator</strong> for all Product Intelligence operations hygiene.</p>
+        
+        <h3>How This Role Supports CaniCol Economics</h3>
+        <p>CaniCol runs on tight budgets (<strong>$40–$60 per P1 test</strong>, <strong>$70–$120 total P1+P2</strong>) and fast throughput. Every delay or data error costs time and money. By maintaining clean pipelines and accurate records, you:</p>
+        <ul>
+            <li>Enable researchers to hit <strong>3–4 R3 packets/week per person</strong></li>
+            <li>Prevent creative and media teams from blocking on missing or incorrect data</li>
+            <li>Ensure the weekly <strong>PI Pipeline Report</strong> is accurate for founder/integrator decision-making</li>
+            <li>Protect the <strong>portfolio testing model</strong> by keeping the machine running at high volume</li>
+        </ul>
+        
+        <h3>Upstream & Downstream Roles</h3>
+        
+        <table>
+            <tr>
+                <th>Direction</th>
+                <th>Roles</th>
+                <th>Interface</th>
+            </tr>
+            <tr>
+                <td><strong>Upstream</strong></td>
+                <td>
+                    • P1-R2-CORE-RESEARCHER<br>
+                    • P1-R2-SENIOR-RESEARCH<br>
+                    • P1-R3-LEAD-STRATEGIST
+                </td>
+                <td>Receive status updates, packet completions, escalations; maintain their workspace hygiene</td>
+            </tr>
+            <tr>
+                <td><strong>Downstream</strong></td>
+                <td>
+                    • P2-CR-DIRECTOR (Creative)<br>
+                    • P3 Media & Store team<br>
+                    • P4-INTEGRATOR (Ops)
+                </td>
+                <td>Ensure clean handoffs with complete IDs, links, and statuses</td>
+            </tr>
+            <tr>
+                <td><strong>Cross-Pod</strong></td>
+                <td>All pods</td>
+                <td>Update shared databases (Product OS), coordinate on cross-pod questions</td>
+            </tr>
+        </table>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 2: CANON CONSTRAINTS
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="canon">
+        <h2>2. Canon Constraints</h2>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ Non-Negotiable Constraints</div>
+            These constraints come from <strong>L1-01 (CaniCol Model)</strong>, <strong>L2-03 (Role Registry)</strong>, and <strong>L2-05 (Testing Canon)</strong>. You cannot change them without canon approval.
+        </div>
+        
+        <h3>Testing Volume & Economics (L1-01, L2-05)</h3>
+        <ul>
+            <li><strong>45–60 products/month</strong> must flow through R0→R3 pipeline</li>
+            <li>P1 budget: <strong>$40–$60</strong> per product</li>
+            <li>P1+P2 total: <strong>$70–$120</strong> (standard: $80–$100)</li>
+            <li>Test bank: <strong>~$4,000–$5,500/month</strong></li>
+            <li>Hit rate: <strong>4–6% winners</strong> (~2–4 products/month)</li>
+        </ul>
+        
+        <h3>WIP Caps & Throughput (L2-03)</h3>
+        <ul>
+            <li><strong>Your WIP cap:</strong> 8–10 active ops/admin tasks at any time</li>
+            <li><strong>Researcher WIP caps (you monitor but don't control):</strong>
+                <ul>
+                    <li>R1: ≤6 per 1.0 FTE</li>
+                    <li>R2: ≤3 per 1.0 FTE</li>
+                    <li>R3-prep: ≤1 per 1.0 FTE</li>
+                </ul>
+            </li>
+            <li><strong>Throughput targets you support:</strong> 3–4 R3-ready packets/week per researcher</li>
+        </ul>
+        
+        <h3>ID & Naming Conventions (L2-04)</h3>
+        <p>All IDs and entity names must follow <strong>L2-04 Glossary & Conventions v4.0</strong>:</p>
+        <ul>
+            <li><strong>Product IDs:</strong> <code>PRD-YYYYMMDD-XXX</code> (e.g., PRD-20251208-042)</li>
+            <li><strong>Packet IDs:</strong> <code>PCT-[Product_ID]-[RX][NN]</code> (e.g., PCT-PRD-20251208-042-R301)</li>
+            <li><strong>Role IDs:</strong> <code>P[Pod]-[Layer]-[Slug]-XX</code> (e.g., P1-R2-CORE-RESEARCHER-01)</li>
+            <li><strong>No deviation</strong> from these formats without explicit canon change</li>
+        </ul>
+        
+        <h3>Approved Tool Stack (L2/L3)</h3>
+        <p>You may only use and maintain these tools:</p>
+        <ul>
+            <li><strong>ClickUp:</strong> Task management, pipeline tracking</li>
+            <li><strong>Notion:</strong> Product OS, Packets, Canon Registry</li>
+            <li><strong>Google Drive:</strong> Structured file storage</li>
+            <li><strong>Discord/Slack:</strong> Team communication</li>
+        </ul>
+        
+        <p><strong>NOT approved:</strong> Airtable, Asana, Trello, Monday.com, or any other PM/database tools</p>
+        
+        <h3>Gate & Status Rules</h3>
+        <p>Products flow through these gates sequentially:</p>
+        <span class="badge badge-gate">R0</span>
+        <span class="badge badge-gate">R1</span>
+        <span class="badge badge-gate">R2</span>
+        <span class="badge badge-gate">R3</span>
+        <span class="badge badge-gate">P1</span>
+        <span class="badge badge-gate">P2</span>
+        <span class="badge badge-gate">P3</span>
+        
+        <p style="margin-top: 1rem;">You maintain accurate gate statuses in both ClickUp and Notion. A product cannot skip gates (e.g., R1 cannot jump directly to R3).</p>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 3: DAY-IN-THE-LIFE TIMELINE
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="dayinlife">
+        <h2>3. Day-in-the-Life Timeline</h2>
+        
+        <p>Your daily work follows a consistent rhythm of <strong>morning hygiene</strong> → <strong>midday support</strong> → <strong>afternoon updates</strong> → <strong>weekly reporting</strong>.</p>
+        
+        <details>
+            <summary><strong>Block 1: Morning Queue Hygiene (8:00 AM – 9:30 AM)</strong></summary>
+            <div>
+                <h4>Goals</h4>
+                <p>Ensure all R0–R3 pipelines are clean, accurate, and ready for the research team's day.</p>
+                
+                <h4>Actions</h4>
+                <ol>
+                    <li><strong>Open ClickUp P1 Space</strong> → Research Pipeline folder</li>
+                    <li>Review each list (R0 Ideas, R1 Shortlist, R2 Dossiers, R3 Approved Packets):
+                        <ul>
+                            <li>Check for tasks with missing Product_IDs</li>
+                            <li>Check for status mismatches (e.g., task in R1 list but marked R2)</li>
+                            <li>Check for overdue tasks or blockers</li>
+                        </ul>
+                    </li>
+                    <li><strong>Open Notion Product OS database</strong></li>
+                    <li>Cross-reference ClickUp tasks with Notion records:
+                        <ul>
+                            <li>Ensure every ClickUp task has a matching Notion page</li>
+                            <li>Ensure Current Gate matches between systems</li>
+                            <li>Ensure Status field is accurate</li>
+                        </ul>
+                    </li>
+                    <li><strong>Fix any mismatches immediately</strong> (log fixes in #p1-ops-updates Discord channel)</li>
+                    <li><strong>Check Drive folder structure</strong> for new products:
+                        <ul>
+                            <li>Verify folders exist: <code>/02_P1_Product_Intel/Products/[ProductID]_[Name]/</code></li>
+                            <li>Create missing folders using canonical naming</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h4>Outputs</h4>
+                <ul>
+                    <li>Clean ClickUp pipeline (no orphaned tasks)</li>
+                    <li>Synced Notion records</li>
+                    <li>Complete Drive folder structure</li>
+                    <li>Morning status posted to Discord</li>
+                </ul>
+                
+                <h4>Time Budget</h4>
+                <p><strong>90 minutes</strong> (scales with team size; may be 60 minutes for smaller pipelines)</p>
+            </div>
+        </details>
+        
+        <details>
+            <summary><strong>Block 2: Ad-Hoc Support & Micro-Tasks (9:30 AM – 12:00 PM)</strong></summary>
+            <div>
+                <h4>Goals</h4>
+                <p>Respond to researcher requests, handle ID assignments, coordinate cross-pod questions, and clear blockers.</p>
+                
+                <h4>Actions</h4>
+                <ol>
+                    <li>Monitor <strong>#p1-research-requests</strong> Discord channel for:
+                        <ul>
+                            <li>Product ID assignment requests</li>
+                            <li>"Need folder created" requests</li>
+                            <li>"Link broken" or "Can't find file" escalations</li>
+                            <li>Status update requests from P2/P3</li>
+                        </ul>
+                    </li>
+                    <li>Handle micro-tasks as they arrive:
+                        <ul>
+                            <li>Assign new Product IDs (use date + sequential number: PRD-YYYYMMDD-XXX)</li>
+                            <li>Create ClickUp tasks for new R0 ideas</li>
+                            <li>Create Notion pages for new products</li>
+                            <li>Create Drive folders with canonical naming</li>
+                            <li>Update broken links in Notion</li>
+                        </ul>
+                    </li>
+                    <li>Coordinate with P1-R3-LEAD-STRATEGIST on:
+                        <ul>
+                            <li>R3 approval confirmations</li>
+                            <li>Products ready for P2 Creative Brief</li>
+                        </ul>
+                    </li>
+                    <li>Answer P2/P3 questions about:
+                        <ul>
+                            <li>"Where is the packet for PRD-20251208-042?"</li>
+                            <li>"Is this product still active or killed?"</li>
+                            <li>"Who owns this research?"</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h4>Outputs</h4>
+                <ul>
+                    <li>5–10 micro-tasks completed</li>
+                    <li>Zero unanswered requests older than 2 hours</li>
+                    <li>New products properly initialized in all systems</li>
+                </ul>
+                
+                <h4>Time Budget</h4>
+                <p><strong>2.5 hours</strong> (flexible; some days lighter, some heavier)</p>
+            </div>
+        </details>
+        
+        <details>
+            <summary><strong>Block 3: Afternoon Pipeline Updates & Handoffs (1:00 PM – 3:30 PM)</strong></summary>
+            <div>
+                <h4>Goals</h4>
+                <p>Process status changes, coordinate handoffs to P2/P3, and maintain data integrity through afternoon research completions.</p>
+                
+                <h4>Actions</h4>
+                <ol>
+                    <li><strong>Check ClickUp for status transitions:</strong>
+                        <ul>
+                            <li>R1 → R2 transitions (researcher moved task to R2 list)</li>
+                            <li>R2 → R3 transitions (packet marked complete)</li>
+                            <li>R3 → Approved (strategist approved for creative)</li>
+                        </ul>
+                    </li>
+                    <li><strong>For each transition:</strong>
+                        <ol>
+                            <li>Update Notion Product OS: Current Gate field</li>
+                            <li>Update Notion Product OS: Status field</li>
+                            <li>Verify all required fields are populated (AOV estimate, tier, niche route)</li>
+                            <li>Check that Drive folder has all required docs</li>
+                        </ol>
+                    </li>
+                    <li><strong>For R3 approvals specifically:</strong>
+                        <ol>
+                            <li>Verify packet is complete (180-point research, supplier vetted, AOV confirmed)</li>
+                            <li>Post handoff message to <strong>#p2-creative-briefs</strong> Discord channel:
+                                <pre>📦 **New R3 Packet Ready for Creative**
+Product ID: PRD-20251208-042
+Product Name: Sleep Guard Pro
+Researcher: @ResearcherName
+AOV Estimate: $45
+Tier: Tier-L
+Niche Route: Branded Niche
+Packet Link: [Notion URL]
+Next: Creative Director to assign brief</pre>
+                            </li>
+                            <li>Create ClickUp task in P2 – Creative space (Briefs list)</li>
+                            <li>Link ClickUp task to Notion packet</li>
+                        </ol>
+                    </li>
+                    <li><strong>Audit for stale products:</strong>
+                        <ul>
+                            <li>Identify products stuck in same gate >7 days with no activity</li>
+                            <li>DM researcher or strategist to check status</li>
+                            <li>Mark as "Paused" in Notion if confirmed stalled</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h4>Outputs</h4>
+                <ul>
+                    <li>All afternoon transitions synced across systems</li>
+                    <li>3–5 handoff messages sent to P2/P3</li>
+                    <li>Stale products identified and flagged</li>
+                </ul>
+                
+                <h4>Time Budget</h4>
+                <p><strong>2.5 hours</strong></p>
+            </div>
+        </details>
+        
+        <details>
+            <summary><strong>Block 4: End-of-Day Cleanup & Prep (3:30 PM – 5:00 PM)</strong></summary>
+            <div>
+                <h4>Goals</h4>
+                <p>Close out the day with clean systems, prep for tomorrow, and handle any final escalations.</p>
+                
+                <h4>Actions</h4>
+                <ol>
+                    <li><strong>Final queue sweep:</strong>
+                        <ul>
+                            <li>Check all ClickUp lists one more time</li>
+                            <li>Resolve any remaining mismatches</li>
+                            <li>Clear Discord request backlog</li>
+                        </ul>
+                    </li>
+                    <li><strong>Update WIP tracker (internal spreadsheet or Notion page):</strong>
+                        <ul>
+                            <li>Current R0/R1/R2/R3 counts by researcher</li>
+                            <li>Products approved today</li>
+                            <li>Products killed today</li>
+                        </ul>
+                    </li>
+                    <li><strong>Check for canon drift:</strong>
+                        <ul>
+                            <li>Any Product IDs that don't match canonical format?</li>
+                            <li>Any new list/folder names that weren't approved?</li>
+                            <li>Flag to P4-INTEGRATOR if canon violations detected</li>
+                        </ul>
+                    </li>
+                    <li><strong>Prep for tomorrow:</strong>
+                        <ul>
+                            <li>Check calendar for any scheduled reviews or meetings</li>
+                            <li>Identify products that will likely transition tomorrow</li>
+                            <li>Pre-create any needed ClickUp tasks or Notion pages</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h4>Outputs</h4>
+                <ul>
+                    <li>End-of-day status posted to Discord</li>
+                    <li>WIP tracker updated</li>
+                    <li>Tomorrow's prep checklist ready</li>
+                </ul>
+                
+                <h4>Time Budget</h4>
+                <p><strong>90 minutes</strong></p>
+            </div>
+        </details>
+        
+        <details>
+            <summary><strong>Weekly: Friday Afternoon – PI Pipeline Report (3:00 PM – 5:00 PM)</strong></summary>
+            <div>
+                <h4>Goals</h4>
+                <p>Generate the <strong>weekly Product Intelligence Pipeline Report</strong> for founder/integrator/strategist review.</p>
+                
+                <h4>Actions</h4>
+                <ol>
+                    <li><strong>Pull data from Notion Product OS:</strong>
+                        <ul>
+                            <li>Count products at each gate (R0, R1, R2, R3)</li>
+                            <li>Count products by status (In Research, In Creative, Scaling, Paused, Killed)</li>
+                            <li>Identify R3 products approved this week</li>
+                            <li>Identify products killed this week</li>
+                        </ul>
+                    </li>
+                    <li><strong>Pull data from ClickUp:</strong>
+                        <ul>
+                            <li>Total tasks completed this week by list</li>
+                            <li>Researcher throughput (completed R2/R3 packets per person)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Calculate key metrics:</strong>
+                        <ul>
+                            <li>R3 approval rate (R3 approvals / R2 completions)</li>
+                            <li>Average days per gate</li>
+                            <li>Products on track for monthly 45–60 target</li>
+                        </ul>
+                    </li>
+                    <li><strong>Write report in Notion (template page):</strong>
+                        <ul>
+                            <li>Executive Summary (2–3 sentences)</li>
+                            <li>Pipeline Snapshot (table: gate, count, change vs last week)</li>
+                            <li>This Week's Output (R3 approvals, kills, researcher throughput)</li>
+                            <li>Blockers & Escalations (anything slowing the pipeline)</li>
+                            <li>Forecast (are we on track for monthly target?)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Share report:</strong>
+                        <ul>
+                            <li>Post link to <strong>#p4-ops-reports</strong> Discord channel</li>
+                            <li>Tag @P4-INTEGRATOR and @P1-R3-LEAD-STRATEGIST</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <h4>Outputs</h4>
+                <ul>
+                    <li>Weekly PI Pipeline Report (Notion page)</li>
+                    <li>Discord notification to leadership</li>
+                </ul>
+                
+                <h4>Time Budget</h4>
+                <p><strong>2 hours</strong></p>
+            </div>
+        </details>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 4: CORE WORKFLOWS
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="workflows">
+        <h2>4. Core Workflows</h2>
+        
+        <div class="workflow-card">
+            <div class="workflow-header">
+                <div class="workflow-title">Workflow 1: New Product Initialization</div>
+                <span class="badge badge-info">Triggered by researcher request</span>
+            </div>
+            
+            <h4>Trigger</h4>
+            <p>Researcher posts in #p1-research-requests: "Need new product ID and setup for [product name]"</p>
+            
+            <h4>Inputs</h4>
+            <ul>
+                <li>Product name (from researcher)</li>
+                <li>Requesting researcher's name/role</li>
+                <li>Current date (for Product ID generation)</li>
+            </ul>
+            
+            <h4>Steps</h4>
+            <div class="workflow-step">1. <strong>Generate Product ID:</strong> Use format PRD-YYYYMMDD-XXX where XXX is next sequential number for that day</div>
+            <div class="workflow-step">2. <strong>Create ClickUp task</strong> in P1 – Product Intelligence → Research Pipeline → R0 Ideas:
+                <ul>
+                    <li>Task name: <code>[ProductID] · [Product Name]</code></li>
+                    <li>Custom fields: Product_ID (text), Gate (R0), Pod (P1)</li>
+                    <li>Assignee: Requesting researcher</li>
+                </ul>
+            </div>
+            <div class="workflow-step">3. <strong>Create Notion page</strong> in Product OS database:
+                <ul>
+                    <li>Title: <code>[ProductID] · [Product Name]</code></li>
+                    <li>Properties:
+                        <ul>
+                            <li>Product ID: [Generated ID]</li>
+                            <li>Current Gate: R0</li>
+                            <li>Status: Idea</li>
+                            <li>Pod Owner: P1 – Product Intelligence</li>
+                            <li>Primary Owner: [Researcher]</li>
+                        </ul>
+                    </li>
+                    <li>Use Product · Standard Template for page content</li>
+                </ul>
+            </div>
+            <div class="workflow-step">4. <strong>Create Google Drive folder:</strong>
+                <ul>
+                    <li>Path: <code>/02_P1_Product_Intel/Products/[ProductID]_[ProductName]/</code></li>
+                    <li>Subfolders: 01_Research_Raw, 02_Packets_and_Summaries, 03_Supplier_Docs</li>
+                </ul>
+            </div>
+            <div class="workflow-step">5. <strong>Link everything together:</strong>
+                <ul>
+                    <li>In ClickUp task: Add Drive folder link to description</li>
+                    <li>In Notion page: Add Drive folder link property</li>
+                    <li>In Notion page: Add ClickUp task link property</li>
+                </ul>
+            </div>
+            <div class="workflow-step">6. <strong>Reply to researcher</strong> in Discord:
+                <pre>✅ Setup complete for <strong>[Product Name]</strong>
+Product ID: <code>[Generated ID]</code>
+ClickUp Task: [Link]
+Notion Page: [Link]
+Drive Folder: [Link]</pre>
+            </div>
+            
+            <h4>Quality Checks</h4>
+            <ul>
+                <li>✅ Product ID follows canonical format exactly</li>
+                <li>✅ All three systems (ClickUp, Notion, Drive) have matching entities</li>
+                <li>✅ All links are bidirectional and working</li>
+                <li>✅ Researcher can access all locations</li>
+            </ul>
+            
+            <h4>Time Budget</h4>
+            <p><strong>10–15 minutes per product</strong></p>
+        </div>
+        
+        <div class="workflow-card">
+            <div class="workflow-header">
+                <div class="workflow-title">Workflow 2: Gate Transition (R1 → R2)</div>
+                <span class="badge badge-info">Triggered by researcher completing R1</span>
+            </div>
+            
+            <h4>Trigger</h4>
+            <p>Researcher moves ClickUp task from "R1 Shortlist" to "R2 Dossiers" list (or marks R1 complete and creates R2 task)</p>
+            
+            <h4>Inputs</h4>
+            <ul>
+                <li>ClickUp task in new location (R2 Dossiers list)</li>
+                <li>Product ID from task</li>
+            </ul>
+            
+            <h4>Steps</h4>
+            <div class="workflow-step">1. <strong>Verify ClickUp task:</strong>
+                <ul>
+                    <li>Confirm task is in correct list (R2 Dossiers)</li>
+                    <li>Confirm Gate custom field = R2</li>
+                    <li>Confirm Status = "In Research" or "R2 In Progress"</li>
+                </ul>
+            </div>
+            <div class="workflow-step">2. <strong>Update Notion Product OS page:</strong>
+                <ul>
+                    <li>Find page by Product ID</li>
+                    <li>Update Current Gate: R2</li>
+                    <li>Update Status: "In Research" (if not already)</li>
+                    <li>Add timestamp to page: "Entered R2 on [Date]"</li>
+                </ul>
+            </div>
+            <div class="workflow-step">3. <strong>Check Drive folder:</strong>
+                <ul>
+                    <li>Verify R1 research notes/screenshots are in 01_Research_Raw</li>
+                    <li>Create placeholder file in 02_Packets_and_Summaries: "R2_Dossier_[ProductID]_WIP.txt"</li>
+                </ul>
+            </div>
+            <div class="workflow-step">4. <strong>Log transition:</strong>
+                <ul>
+                    <li>Add row to internal WIP tracker spreadsheet</li>
+                    <li>Note: ProductID, Researcher, Date entered R2</li>
+                </ul>
+            </div>
+            <div class="workflow-step">5. <strong>Monitor for completion:</strong>
+                <ul>
+                    <li>Add product to your "Watch List" for next 3–7 days</li>
+                    <li>If stuck >7 days, DM researcher to check progress</li>
+                </ul>
+            </div>
+            
+            <h4>Quality Checks</h4>
+            <ul>
+                <li>✅ ClickUp and Notion show matching gate (R2)</li>
+                <li>✅ Status is consistent across systems</li>
+                <li>✅ Drive folder structure is intact</li>
+            </ul>
+            
+            <h4>Time Budget</h4>
+            <p><strong>5–7 minutes per transition</strong></p>
+        </div>
+        
+        <div class="workflow-card">
+            <div class="workflow-header">
+                <div class="workflow-title">Workflow 3: R3 Approval & Handoff to Creative</div>
+                <span class="badge badge-success">Critical handoff workflow</span>
+            </div>
+            
+            <h4>Trigger</h4>
+            <p>P1-R3-LEAD-STRATEGIST approves packet and moves ClickUp task to "R3 Approved Packets" list</p>
+            
+            <h4>Inputs</h4>
+            <ul>
+                <li>ClickUp task in R3 Approved Packets list</li>
+                <li>Product ID and Packet ID</li>
+                <li>Completed R2/R3 dossier in Drive</li>
+            </ul>
+            
+            <h4>Steps</h4>
+            <div class="workflow-step">1. <strong>Verify packet completeness:</strong>
+                <ul>
+                    <li>Check Drive folder: 02_Packets_and_Summaries has final PDF or doc</li>
+                    <li>Check Notion page: All required fields populated (AOV, Tier, Niche Route, Supplier)</li>
+                    <li>Check ClickUp task: Status = "R3 Approved" or similar</li>
+                </ul>
+            </div>
+            <div class="workflow-step">2. <strong>Update Notion Product OS:</strong>
+                <ul>
+                    <li>Current Gate: R3</li>
+                    <li>Status: "In Creative" (preparing for P2 handoff)</li>
+                    <li>Add timestamp: "R3 approved on [Date]"</li>
+                </ul>
+            </div>
+            <div class="workflow-step">3. <strong>Generate Packet ID</strong> (if not already assigned):
+                <ul>
+                    <li>Format: <code>PCT-[ProductID]-R3XX</code></li>
+                    <li>Example: PCT-PRD-20251208-042-R301</li>
+                    <li>Add to Notion page and ClickUp task</li>
+                </ul>
+            </div>
+            <div class="workflow-step">4. <strong>Create ClickUp task in P2 – Creative space:</strong>
+                <ul>
+                    <li>Space: P2 – Creative</li>
+                    <li>Folder: Creative Pipeline</li>
+                    <li>List: Briefs</li>
+                    <li>Task name: <code>[ProductID] · Creative Brief</code></li>
+                    <li>Custom fields: Product_ID, Packet_ID</li>
+                    <li>Description: Link to Notion packet page and Drive folder</li>
+                    <li>Assignee: P2-CR-DIRECTOR or designated Creative Director</li>
+                </ul>
+            </div>
+            <div class="workflow-step">5. <strong>Post handoff message to Discord #p2-creative-briefs:</strong>
+                <pre>📦 <strong>New R3 Packet Ready for Creative</strong>
+
+Product ID: <code>[ProductID]</code>
+Product Name: <strong>[Name]</strong>
+Researcher: @[ResearcherName]
+Strategist: @[StrategistName]
+
+<strong>Key Details:</strong>
+- AOV Estimate: $[XX]
+- Tier: [Tier-L or Tier-S]
+- Niche Route: [Branded Niche / Micro Store / SEO Catalog]
+- Primary Angle: [Brief angle description]
+
+<strong>Links:</strong>
+- Notion Packet: [URL]
+- Drive Folder: [URL]
+- ClickUp Brief Task: [URL]
+
+<strong>Next Step:</strong> @P2-CR-DIRECTOR to assign creative brief and kickoff</pre>
+            </div>
+            <div class="workflow-step">6. <strong>Update WIP tracker:</strong>
+                <ul>
+                    <li>Mark product as "Handed off to P2"</li>
+                    <li>Remove from P1 active tracking</li>
+                </ul>
+            </div>
+            <div class="workflow-step">7. <strong>Archive P1 ClickUp task</strong> (move to completed or archive status) since P2 now owns execution</div>
+            
+            <h4>Quality Checks</h4>
+            <ul>
+                <li>✅ Packet is complete and meets R3 quality bar (180-point research, vetted supplier)</li>
+                <li>✅ P2 Creative has all needed info (AOV, tier, niche, angle)</li>
+                <li>✅ Both Notion and ClickUp reflect handoff</li>
+                <li>✅ Links work for P2 team</li>
+                <li>✅ Discord notification sent and acknowledged</li>
+            </ul>
+            
+            <h4>Time Budget</h4>
+            <p><strong>15–20 minutes per handoff</strong></p>
+        </div>
+        
+        <div class="workflow-card">
+            <div class="workflow-header">
+                <div class="workflow-title">Workflow 4: Daily Queue Hygiene Sweep</div>
+                <span class="badge badge-info">Morning routine</span>
+            </div>
+            
+            <h4>Trigger</h4>
+            <p>Start of each workday (8:00 AM)</p>
+            
+            <h4>Inputs</h4>
+            <ul>
+                <li>ClickUp P1 – Product Intelligence space</li>
+                <li>Notion Product OS database</li>
+                <li>Google Drive /02_P1_Product_Intel/Products/ folder</li>
+            </ul>
+            
+            <h4>Steps</h4>
+            <div class="workflow-step">1. <strong>Open ClickUp → P1 – Product Intelligence → Research Pipeline</strong></div>
+            <div class="workflow-step">2. <strong>For each list (R0, R1, R2, R3), check:</strong>
+                <ul>
+                    <li>Task count matches expected WIP caps</li>
+                    <li>All tasks have Product_ID filled in</li>
+                    <li>All tasks have correct Gate custom field</li>
+                    <li>No tasks are overdue without reason</li>
+                    <li>No tasks have blocker flags unaddressed</li>
+                </ul>
+            </div>
+            <div class="workflow-step">3. <strong>Open Notion → Product OS database</strong></div>
+            <div class="workflow-step">4. <strong>Filter by Current Gate = R0, R1, R2, R3 (separately)</strong></div>
+            <div class="workflow-step">5. <strong>For each gate, cross-reference with ClickUp:</strong>
+                <ul>
+                    <li>Count should match (±1–2 for in-flight transitions)</li>
+                    <li>Product IDs should match</li>
+                    <li>Status should match</li>
+                </ul>
+            </div>
+            <div class="workflow-step">6. <strong>Fix any mismatches:</strong>
+                <ul>
+                    <li>If ClickUp says R2 but Notion says R1 → Update Notion to R2</li>
+                    <li>If Product_ID is missing → Assign one and update both systems</li>
+                    <li>If task exists in ClickUp but not Notion → Create Notion page</li>
+                    <li>If page exists in Notion but not ClickUp → Create ClickUp task</li>
+                </ul>
+            </div>
+            <div class="workflow-step">7. <strong>Check Drive folders:</strong>
+                <ul>
+                    <li>Open /02_P1_Product_Intel/Products/</li>
+                    <li>Verify a folder exists for every product in R1+ gates</li>
+                    <li>Create missing folders with canonical naming</li>
+                </ul>
+            </div>
+            <div class="workflow-step">8. <strong>Post morning status to Discord #p1-ops-updates:</strong>
+                <pre>🌅 <strong>Morning Queue Status – [Date]</strong>
+
+<strong>Pipeline Snapshot:</strong>
+- R0 Ideas: [X] tasks
+- R1 Shortlist: [X] tasks
+- R2 Dossiers: [X] tasks
+- R3 Approved: [X] tasks
+
+<strong>Fixed Today:</strong>
+- [X] mismatches resolved
+- [X] missing folders created
+- [X] IDs assigned
+
+<strong>Blockers:</strong>
+- [None / or list blockers]
+
+✅ All systems synced and ready for the day</pre>
+            </div>
+            
+            <h4>Quality Checks</h4>
+            <ul>
+                <li>✅ No orphaned tasks (task in ClickUp but not Notion, or vice versa)</li>
+                <li>✅ All Product IDs follow canonical format</li>
+                <li>✅ All gates match across systems</li>
+                <li>✅ All folders exist in Drive</li>
+            </ul>
+            
+            <h4>Time Budget</h4>
+            <p><strong>60–90 minutes</strong> (scales with pipeline volume)</p>
+        </div>
+        
+        <div class="workflow-card">
+            <div class="workflow-header">
+                <div class="workflow-title">Workflow 5: Weekly PI Pipeline Report</div>
+                <span class="badge badge-success">Friday afternoon deliverable</span>
+            </div>
+            
+            <h4>Trigger</h4>
+            <p>Every Friday, 3:00 PM</p>
+            
+            <h4>Inputs</h4>
+            <ul>
+                <li>Notion Product OS database (full week's data)</li>
+                <li>ClickUp completed tasks (past 7 days)</li>
+                <li>Last week's report (for comparison)</li>
+            </ul>
+            
+            <h4>Steps</h4>
+            <div class="workflow-step">1. <strong>Open Notion → Product OS database</strong></div>
+            <div class="workflow-step">2. <strong>Create filters and count:</strong>
+                <ul>
+                    <li>Products at R0 (current)</li>
+                    <li>Products at R1 (current)</li>
+                    <li>Products at R2 (current)</li>
+                    <li>Products at R3 (current)</li>
+                    <li>Products at P1/P2/P3 (handed off)</li>
+                    <li>Products killed this week (Status = Killed, date = this week)</li>
+                </ul>
+            </div>
+            <div class="workflow-step">3. <strong>Calculate deltas vs last week:</strong>
+                <ul>
+                    <li>R0: +/- X</li>
+                    <li>R1: +/- X</li>
+                    <li>R2: +/- X</li>
+                    <li>R3: +/- X</li>
+                </ul>
+            </div>
+            <div class="workflow-step">4. <strong>Pull ClickUp data:</strong>
+                <ul>
+                    <li>Go to P1 – Product Intelligence space</li>
+                    <li>Filter tasks completed in past 7 days</li>
+                    <li>Count by list: R1 completions, R2 completions, R3 approvals</li>
+                </ul>
+            </div>
+            <div class="workflow-step">5. <strong>Calculate researcher throughput:</strong>
+                <ul>
+                    <li>R3 packets approved this week / # of researchers = avg packets/week per researcher</li>
+                    <li>Compare to baseline: 3–4 packets/week per 1.0 FTE</li>
+                </ul>
+            </div>
+            <div class="workflow-step">6. <strong>Check monthly forecast:</strong>
+                <ul>
+                    <li>Current R3 approvals this month (so far)</li>
+                    <li>Projected R3 approvals by month-end</li>
+                    <li>Target: 45–60 products/month</li>
+                    <li>Are we on track? Yes/No</li>
+                </ul>
+            </div>
+            <div class="workflow-step">7. <strong>Identify blockers:</strong>
+                <ul>
+                    <li>Any products stuck >7 days at same gate?</li>
+                    <li>Any researchers over WIP cap?</li>
+                    <li>Any systemic issues (e.g., supplier delays, tool downtime)?</li>
+                </ul>
+            </div>
+            <div class="workflow-step">8. <strong>Write report in Notion</strong> (use template: "PI Pipeline Report – [Date]"):
+                <h4>Structure:</h4>
+                <ul>
+                    <li><strong>Executive Summary</strong> (2–3 sentences on overall health)</li>
+                    <li><strong>Pipeline Snapshot</strong> (table: Gate | Count | Change vs Last Week)</li>
+                    <li><strong>This Week's Output</strong> (R3 approvals, kills, throughput)</li>
+                    <li><strong>Monthly Forecast</strong> (on track for 45–60 target?)</li>
+                    <li><strong>Blockers & Escalations</strong> (anything needing attention)</li>
+                    <li><strong>Notes</strong> (optional: trends, observations)</li>
+                </ul>
+            </div>
+            <div class="workflow-step">9. <strong>Share report:</strong>
+                <ul>
+                    <li>Post link to #p4-ops-reports Discord channel</li>
+                    <li>Tag @P4-INTEGRATOR, @P1-R3-LEAD-STRATEGIST, and @Founder</li>
+                    <li>Post time: Friday 4:00–5:00 PM</li>
+                </ul>
+            </div>
+            
+            <h4>Quality Checks</h4>
+            <ul>
+                <li>✅ All numbers cross-checked between Notion and ClickUp</li>
+                <li>✅ Deltas calculated correctly vs last week</li>
+                <li>✅ Forecast math is accurate</li>
+                <li>✅ Report is clear and actionable (no jargon, no missing context)</li>
+            </ul>
+            
+            <h4>Time Budget</h4>
+            <p><strong>2 hours</strong></p>
+        </div>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 5: HANDOFF & INTERFACE SPECS
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="handoffs">
+        <h2>5. Handoff & Interface Specs</h2>
+        
+        <h3>Handoff 1: P1 → P2 (R3 Packet to Creative)</h3>
+        
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Trigger</strong></td>
+                <td>P1-R3-LEAD-STRATEGIST approves packet, marks ClickUp task as R3 Approved</td>
+            </tr>
+            <tr>
+                <td><strong>Your Role</strong></td>
+                <td>Execute Workflow 3 (R3 Approval & Handoff to Creative)</td>
+            </tr>
+            <tr>
+                <td><strong>ClickUp Actions</strong></td>
+                <td>
+                    1. Archive/complete P1 task in R3 Approved Packets<br>
+                    2. Create new task in P2 – Creative → Creative Pipeline → Briefs<br>
+                    3. Link P2 task to Notion packet and Drive folder
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Notion Actions</strong></td>
+                <td>
+                    1. Update Product OS: Current Gate = R3<br>
+                    2. Update Product OS: Status = "In Creative"<br>
+                    3. Add timestamp: "Handed off to Creative on [Date]"
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Discord Message</strong></td>
+                <td>Post to #p2-creative-briefs with template (see Workflow 3)</td>
+            </tr>
+            <tr>
+                <td><strong>Quality Bar</strong></td>
+                <td>
+                    • Packet is complete (180-point research, vetted supplier)<br>
+                    • All required fields populated (AOV, Tier, Niche Route)<br>
+                    • Drive folder has final dossier PDF/doc<br>
+                    • P2 can access all links
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Handoff Criteria</strong></td>
+                <td>
+                    ✅ Notion shows R3 + "In Creative"<br>
+                    ✅ P2 ClickUp task created and assigned<br>
+                    ✅ Discord notification sent<br>
+                    ✅ P2-CR-DIRECTOR acknowledges receipt (react to Discord message)
+                </td>
+            </tr>
+        </table>
+        
+        <h3>Handoff 2: P1 ↔ P4 (Status Updates to Ops/Integrator)</h3>
+        
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Trigger</strong></td>
+                <td>Daily (morning status) + Weekly (PI Pipeline Report)</td>
+            </tr>
+            <tr>
+                <td><strong>Your Role</strong></td>
+                <td>Generate and share pipeline status updates</td>
+            </tr>
+            <tr>
+                <td><strong>Discord Messages</strong></td>
+                <td>
+                    <strong>Daily:</strong> Post to #p1-ops-updates (morning status)<br>
+                    <strong>Weekly:</strong> Post to #p4-ops-reports (PI Pipeline Report)
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Notion Actions</strong></td>
+                <td>
+                    Weekly report lives in Notion as permanent record<br>
+                    Daily status is ephemeral (Discord only)
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Quality Bar</strong></td>
+                <td>
+                    • Numbers are accurate (cross-checked against source data)<br>
+                    • Deltas are calculated correctly<br>
+                    • Blockers are clearly stated<br>
+                    • Report is actionable (no vague language)
+                </td>
+            </tr>
+        </table>
+        
+        <h3>Handoff 3: P2/P3 → P1 (Status Inquiries)</h3>
+        
+        <table>
+            <tr>
+                <th>Element</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Trigger</strong></td>
+                <td>P2 or P3 team member asks about product status, packet location, or research details</td>
+            </tr>
+            <tr>
+                <td><strong>Your Role</strong></td>
+                <td>Respond quickly with accurate info (target: <2 hours)</td>
+            </tr>
+            <tr>
+                <td><strong>Response Pattern</strong></td>
+                <td>
+                    1. Acknowledge request immediately ("Looking this up now...")<br>
+                    2. Check Notion Product OS for status<br>
+                    3. Check ClickUp for current task location<br>
+                    4. Provide answer with links<br>
+                    5. If product is killed/paused, explain why
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Example Response</strong></td>
+                <td>
+                    <pre>@MediaBuyer – Here's the status for PRD-20251208-042:
+
+<strong>Current Status:</strong> R3 Approved, handed off to Creative on Dec 7
+<strong>Gate:</strong> P1 setup pending (Creative brief in progress)
+<strong>Packet Link:</strong> [Notion URL]
+<strong>Drive Folder:</strong> [Drive URL]
+<strong>ETA:</strong> Creative brief expected by Dec 10
+
+Let me know if you need anything else!</pre>
+                </td>
+            </tr>
+        </table>
+        
+        <h3>Interface: Discord Channels You Monitor</h3>
+        
+        <table>
+            <tr>
+                <th>Channel</th>
+                <th>Purpose</th>
+                <th>Your Role</th>
+            </tr>
+            <tr>
+                <td><strong>#p1-research-requests</strong></td>
+                <td>Researchers request IDs, folders, fixes</td>
+                <td>Respond to all requests within 2 hours; execute micro-tasks</td>
+            </tr>
+            <tr>
+                <td><strong>#p1-ops-updates</strong></td>
+                <td>Daily ops status messages</td>
+                <td>Post morning status; announce major fixes or changes</td>
+            </tr>
+            <tr>
+                <td><strong>#p2-creative-briefs</strong></td>
+                <td>Handoffs from P1 to P2</td>
+                <td>Post R3 handoff messages; coordinate on any follow-up questions</td>
+            </tr>
+            <tr>
+                <td><strong>#p4-ops-reports</strong></td>
+                <td>Weekly reports and escalations</td>
+                <td>Post PI Pipeline Report every Friday; escalate systemic issues</td>
+            </tr>
+            <tr>
+                <td><strong>#p1-p2-p3-questions</strong></td>
+                <td>Cross-pod questions and coordination</td>
+                <td>Answer P2/P3 questions about P1 status; route questions to right person if needed</td>
+            </tr>
+        </table>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 6: KPIs & QUALITY BAR
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="kpis">
+        <h2>6. KPIs & Quality Bar</h2>
+        
+        <div class="callout callout-info">
+            <div class="callout-title">📊 Primary KPIs</div>
+            Your performance is measured by <strong>data integrity</strong>, <strong>turnaround time</strong>, and <strong>administrative accuracy</strong> (from L2-03 Role Registry).
+        </div>
+        
+        <h3>Quantitative KPIs</h3>
+        
+        <table>
+            <tr>
+                <th>KPI</th>
+                <th>Target</th>
+                <th>Measurement</th>
+            </tr>
+            <tr>
+                <td><strong>Data Sync Rate</strong></td>
+                <td>≥98%</td>
+                <td>
+                    % of products where ClickUp, Notion, and Drive all show matching:<br>
+                    • Product ID<br>
+                    • Current Gate<br>
+                    • Status<br>
+                    Measured via weekly audit
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Request Response Time</strong></td>
+                <td>100% <2 hours</td>
+                <td>
+                    % of requests in #p1-research-requests answered within 2 hours during business hours<br>
+                    Measured via Discord message timestamps
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Micro-Task Completion</strong></td>
+                <td>50–75 tasks/week</td>
+                <td>
+                    Count of admin tasks completed (ID assignments, folder creations, link fixes)<br>
+                    Tracked in internal log or ClickUp
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Weekly Report Timeliness</strong></td>
+                <td>100% on-time</td>
+                <td>
+                    PI Pipeline Report posted every Friday by 5:00 PM<br>
+                    Measured via Discord post timestamp
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Canon Compliance</strong></td>
+                <td>100%</td>
+                <td>
+                    % of Product IDs following canonical format (PRD-YYYYMMDD-XXX)<br>
+                    % of folder names following canonical format<br>
+                    Measured via weekly audit
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Zero Orphaned Records</strong></td>
+                <td>≤1% orphan rate</td>
+                <td>
+                    % of products where a record exists in one system (ClickUp/Notion/Drive) but not others<br>
+                    Measured via daily morning sweep
+                </td>
+            </tr>
+        </table>
+        
+        <h3>Qualitative Quality Bar</h3>
+        
+        <h4>✅ Good Performance Looks Like</h4>
+        <ul>
+            <li>Researchers never wait more than 1 hour for ID assignments during normal hours</li>
+            <li>P2/P3 teams can always find what they need without asking you</li>
+            <li>Weekly reports are clear, accurate, and actionable</li>
+            <li>No one complains about broken links or missing folders</li>
+            <li>You catch mismatches <em>before</em> they cause downstream problems</li>
+            <li>Morning status posts show consistent hygiene (no recurring issues week after week)</li>
+        </ul>
+        
+        <h4>⚠️ Warning Signs</h4>
+        <ul>
+            <li>Same types of errors recurring multiple times per week</li>
+            <li>Researchers repeatedly asking "Where's my folder?" or "What's my Product ID?"</li>
+            <li>P2/P3 blocking on incomplete handoffs</li>
+            <li>Weekly report numbers don't match reality (people questioning your data)</li>
+            <li>Canon drift (people inventing new ID formats or naming patterns)</li>
+        </ul>
+        
+        <h4>❌ Unacceptable</h4>
+        <ul>
+            <li>Requests unanswered for >4 hours without explanation</li>
+            <li>Weekly report missed or posted late without advance notice</li>
+            <li>Consistent data mismatches between systems</li>
+            <li>Canon violations you created (e.g., assigning Product IDs that don't follow PRD-YYYYMMDD-XXX format)</li>
+            <li>Handoffs to P2/P3 with missing or incorrect information</li>
+        </ul>
+        
+        <h3>How KPIs Are Measured</h3>
+        
+        <h4>Daily Self-Check</h4>
+        <p>At end of each day, review:</p>
+        <ul>
+            <li>Did I respond to all requests within 2 hours?</li>
+            <li>Did I complete my morning hygiene sweep?</li>
+            <li>Did I process all gate transitions today?</li>
+            <li>Are there any open issues I should escalate?</li>
+        </ul>
+        
+        <h4>Weekly Self-Audit</h4>
+        <p>Every Friday before writing the PI Pipeline Report, audit:</p>
+        <ul>
+            <li>Pick 10 random products from Notion Product OS</li>
+            <li>Check each one for ClickUp/Notion/Drive sync</li>
+            <li>Calculate sync rate: (matching products / total checked) × 100</li>
+            <li>If <98%, investigate root cause and fix</li>
+        </ul>
+        
+        <h4>Monthly Review with P4-INTEGRATOR</h4>
+        <p>Review metrics and feedback:</p>
+        <ul>
+            <li>Data sync rate trend (improving/declining?)</li>
+            <li>Request response time average</li>
+            <li>Researcher satisfaction (informal survey or 1-on-1 check-ins)</li>
+            <li>Canon compliance rate</li>
+            <li>Any systemic issues that need process improvements</li>
+        </ul>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 7: AI USAGE & PROMPT PATTERNS
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="ai">
+        <h2>7. AI Usage & Prompt Patterns</h2>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ AI Use Cases for This Role</div>
+            AI can help with <strong>data processing</strong>, <strong>report formatting</strong>, and <strong>message drafting</strong>, but you must <strong>always verify accuracy</strong> before posting or updating systems.
+        </div>
+        
+        <h3>Where AI Helps</h3>
+        
+        <h4>1. Weekly Report Drafting</h4>
+        <p><strong>Use Case:</strong> Generate the initial draft of the PI Pipeline Report from raw data</p>
+        
+        <p><strong>Prompt Pattern:</strong></p>
+        <pre>You are a Product Intelligence Ops Coordinator at DriveOn Commerce.
+
+Generate a weekly PI Pipeline Report based on this data:
+
+**Current Pipeline Snapshot:**
+- R0: 12 products
+- R1: 8 products
+- R2: 5 products
+- R3: 3 products
+
+**Last Week's Snapshot:**
+- R0: 10 products
+- R1: 9 products
+- R2: 6 products
+- R3: 2 products
+
+**This Week's Activity:**
+- R3 Approvals: 4 products
+- Products Killed: 2 products
+- Researcher Throughput: 3.5 packets/week per researcher
+
+**Monthly Forecast:**
+- R3 approvals so far this month: 18 products
+- Days remaining in month: 8 days
+- Current run rate: 4.5 products/week
+- Projected month-end: 54 products (target: 45–60)
+
+**Blockers:**
+- One product stuck in R2 for 10 days (supplier delays)
+
+Format this as a clear, professional report with sections:
+1. Executive Summary (2-3 sentences)
+2. Pipeline Snapshot (table with deltas)
+3. This Week's Output
+4. Monthly Forecast (on track?)
+5. Blockers & Escalations</pre>
+        
+        <p><strong>Human Checkpoint:</strong></p>
+        <ul>
+            <li>✅ Verify all numbers match your source data</li>
+            <li>✅ Check that deltas are calculated correctly</li>
+            <li>✅ Ensure forecast math is accurate</li>
+            <li>✅ Confirm blockers are accurately described</li>
+        </ul>
+        
+        <h4>2. Discord Message Templates</h4>
+        <p><strong>Use Case:</strong> Generate consistent, professional handoff messages</p>
+        
+        <p><strong>Prompt Pattern:</strong></p>
+        <pre>Generate a Discord handoff message for a new R3 packet ready for Creative:
+
+**Product Details:**
+- Product ID: PRD-20251208-042
+- Product Name: Sleep Guard Pro
+- Researcher: Norman (P1-R2-CORE-RESEARCHER-01)
+- Strategist: Islam (P1-R3-LEAD-STRATEGIST)
+- AOV Estimate: $48
+- Tier: Tier-L
+- Niche Route: Branded Niche
+- Primary Angle: "Stop waking up with neck pain"
+
+**Links:**
+- Notion Packet: https://notion.so/xxx
+- Drive Folder: https://drive.google.com/xxx
+- ClickUp Brief Task: https://clickup.com/xxx
+
+Format this as a clear, professional Discord message for #p2-creative-briefs channel.</pre>
+        
+        <p><strong>Human Checkpoint:</strong></p>
+        <ul>
+            <li>✅ All links work and point to correct resources</li>
+            <li>✅ Product details are accurate</li>
+            <li>✅ Message includes all required elements</li>
+            <li>✅ Tone is professional and helpful</li>
+        </ul>
+        
+        <h4>3. Data Validation & Cleanup</h4>
+        <p><strong>Use Case:</strong> Identify mismatches between ClickUp and Notion</p>
+        
+        <p><strong>Prompt Pattern:</strong></p>
+        <pre>I have two lists:
+
+**ClickUp R2 Dossiers List:**
+- PRD-20251205-001 (Gate: R2)
+- PRD-20251205-002 (Gate: R2)
+- PRD-20251206-003 (Gate: R2)
+- PRD-20251207-004 (Gate: R1) ← Wrong gate!
+
+**Notion Product OS (Current Gate = R2):**
+- PRD-20251205-001
+- PRD-20251205-002
+- PRD-20251206-003
+
+Identify:
+1. Products in ClickUp but not Notion
+2. Products in Notion but not ClickUp  
+3. Products with mismatched gates
+4. Products I need to fix
+
+Provide a clear action list.</pre>
+        
+        <p><strong>Human Checkpoint:</strong></p>
+        <ul>
+            <li>✅ Manually verify AI's findings before making changes</li>
+            <li>✅ Check if "mismatches" are actually legitimate in-flight transitions</li>
+            <li>✅ Don't auto-fix anything without understanding why the mismatch exists</li>
+        </ul>
+        
+        <h3>Where AI Should NOT Be Used</h3>
+        
+        <ul>
+            <li>❌ <strong>Assigning Product IDs:</strong> You must follow the canonical format manually (PRD-YYYYMMDD-XXX)</li>
+            <li>❌ <strong>Approving R3 packets:</strong> Only P1-R3-LEAD-STRATEGIST can approve; you just coordinate</li>
+            <li>❌ <strong>Making canon decisions:</strong> AI cannot decide if a product should be Tier-L vs Tier-S, or which niche route to use</li>
+            <li>❌ <strong>Escalation decisions:</strong> AI cannot determine if something requires founder/integrator attention</li>
+        </ul>
+        
+        <h3>Best Practices</h3>
+        
+        <ol>
+            <li><strong>Always verify AI outputs:</strong> Treat AI as a drafting assistant, not a source of truth</li>
+            <li><strong>Keep prompts specific:</strong> Provide exact data, don't ask AI to "figure it out"</li>
+            <li><strong>Use AI for speed, not decisions:</strong> AI drafts reports faster, but you decide what to say</li>
+            <li><strong>Document your prompts:</strong> Keep a library of working prompts for recurring tasks</li>
+        </ol>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 8: TOOLS & SYSTEMS REFERENCE
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="tools">
+        <h2>8. Tools & Systems Reference</h2>
+        
+        <table>
+            <tr>
+                <th>Tool</th>
+                <th>Use Case</th>
+                <th>Key Views / Lists / DBs</th>
+                <th>Access Level</th>
+            </tr>
+            <tr>
+                <td><strong>ClickUp</strong></td>
+                <td>Task management, pipeline tracking</td>
+                <td>
+                    <strong>Space:</strong> P1 – Product Intelligence<br>
+                    <strong>Folder:</strong> Research Pipeline<br>
+                    <strong>Lists:</strong>
+                    <ul>
+                        <li>R0 Ideas</li>
+                        <li>R1 Shortlist</li>
+                        <li>R2 Dossiers</li>
+                        <li>R3 Approved Packets</li>
+                    </ul>
+                    <strong>Custom Fields:</strong> Product_ID, Gate, Pod
+                </td>
+                <td>Editor (full access to P1 space; can create/edit/move tasks)</td>
+            </tr>
+            <tr>
+                <td><strong>Notion</strong></td>
+                <td>Knowledge base, product records, reporting</td>
+                <td>
+                    <strong>Main DBs:</strong>
+                    <ul>
+                        <li>Product OS (all products, all gates)</li>
+                        <li>SOP Library (role SOPs, templates)</li>
+                        <li>Canon Registry (canon docs)</li>
+                    </ul>
+                    <strong>Key Views:</strong>
+                    <ul>
+                        <li>Pipeline – By Gate (Board view)</li>
+                        <li>P1 Research Queue (Table view, filter: Pod = P1)</li>
+                    </ul>
+                </td>
+                <td>Editor (can create/edit pages; cannot change DB schema without approval)</td>
+            </tr>
+            <tr>
+                <td><strong>Google Drive</strong></td>
+                <td>File storage, packet dossiers, supplier docs</td>
+                <td>
+                    <strong>Shared Drive:</strong> DriveOn Commerce<br>
+                    <strong>Key Folders:</strong>
+                    <ul>
+                        <li>/02_P1_Product_Intel/Products/</li>
+                        <li>/01_Canon_and_Infra/ (reference only)</li>
+                    </ul>
+                    <strong>Naming Pattern:</strong><br>
+                    <code>[ProductID]_[Name]/01_Research_Raw/</code><br>
+                    <code>[ProductID]_[Name]/02_Packets_and_Summaries/</code>
+                </td>
+                <td>Content Manager (can create folders/files, manage permissions)</td>
+            </tr>
+            <tr>
+                <td><strong>Discord</strong></td>
+                <td>Team communication, handoff messages</td>
+                <td>
+                    <strong>Channels You Monitor:</strong>
+                    <ul>
+                        <li>#p1-research-requests</li>
+                        <li>#p1-ops-updates</li>
+                        <li>#p2-creative-briefs</li>
+                        <li>#p4-ops-reports</li>
+                        <li>#p1-p2-p3-questions</li>
+                    </ul>
+                </td>
+                <td>Member (can read/post in all channels; cannot manage channels)</td>
+            </tr>
+            <tr>
+                <td><strong>Slack</strong></td>
+                <td>Alternative to Discord (if workspace uses Slack instead)</td>
+                <td>Same channel structure as Discord</td>
+                <td>Member</td>
+            </tr>
+        </table>
+        
+        <h3>Tool-Specific Tips</h3>
+        
+        <h4>ClickUp Power User Tips</h4>
+        <ul>
+            <li><strong>Keyboard Shortcuts:</strong> Learn <code>Cmd+K</code> (Mac) or <code>Ctrl+K</code> (Windows) for quick task search</li>
+            <li><strong>Bulk Actions:</strong> Select multiple tasks with checkboxes → Use bulk actions to move all to new list at once</li>
+            <li><strong>Custom Views:</strong> Save your "Morning Hygiene Sweep" view with filters: Pod = P1, Status = Active</li>
+            <li><strong>Task Templates:</strong> Create templates for recurring tasks (e.g., "New Product Setup" with all fields pre-filled)</li>
+        </ul>
+        
+        <h4>Notion Power User Tips</h4>
+        <ul>
+            <li><strong>Quick Add:</strong> Use <code>Cmd+N</code> (Mac) or <code>Ctrl+N</code> (Windows) to quick-add a page to current database</li>
+            <li><strong>Filter + Sort:</strong> Save complex views as named views (e.g., "R2 Active This Week")</li>
+            <li><strong>Linked Databases:</strong> Create a linked database view in your personal workspace for daily monitoring</li>
+            <li><strong>Database Templates:</strong> Use the "Product · Standard Template" for all new product pages</li>
+        </ul>
+        
+        <h4>Google Drive Power User Tips</h4>
+        <ul>
+            <li><strong>Starred Folders:</strong> Star the /02_P1_Product_Intel/Products/ folder for quick access</li>
+            <li><strong>Folder Templates:</strong> Keep a "_TEMPLATE_Product_Folder" with subfolder structure; copy when creating new products</li>
+            <li><strong>Search:</strong> Use Drive search with <code>type:folder</code> to find folders, <code>owner:me</code> to find your creations</li>
+        </ul>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 9: ESCALATION & DECISION RIGHTS
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="escalation">
+        <h2>9. Escalation & Decision Rights</h2>
+        
+        <h3>Decisions You Can Make Alone</h3>
+        
+        <div class="callout callout-success">
+            <div class="callout-title">✅ You Have Authority To:</div>
+            <ul>
+                <li>Assign Product IDs following canonical format (PRD-YYYYMMDD-XXX)</li>
+                <li>Create ClickUp tasks for new products in R0 Ideas list</li>
+                <li>Create Notion pages for new products in Product OS</li>
+                <li>Create Google Drive folders with canonical naming</li>
+                <li>Update gate statuses in ClickUp and Notion when tasks move between lists</li>
+                <li>Fix broken links between systems</li>
+                <li>Respond to routine status inquiries from P2/P3</li>
+                <li>Post daily morning status to Discord</li>
+                <li>Generate and post weekly PI Pipeline Report</li>
+            </ul>
+        </div>
+        
+        <h3>Decisions Requiring Pod Lead or PM Approval</h3>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ Escalate To P1-R3-LEAD-STRATEGIST or P4-PM-COORDINATOR:</div>
+            <ul>
+                <li>Killing or pausing a product (only strategist can kill)</li>
+                <li>Changing a product's tier (Tier-L → Tier-S or vice versa)</li>
+                <li>Changing a product's niche route after R3 approval</li>
+                <li>Creating new ClickUp lists or folders (infra changes)</li>
+                <li>Changing naming conventions or ID formats</li>
+                <li>Resolving conflicts between researchers (e.g., duplicate products)</li>
+                <li>Major process changes (e.g., "Should we add a new gate?")</li>
+            </ul>
+        </div>
+        
+        <h3>Decisions Requiring Founder / Integrator Escalation</h3>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">🚨 Escalate To P4-INTEGRATOR or Founder:</div>
+            <ul>
+                <li>Systemic issues affecting multiple researchers or products</li>
+                <li>Canon violations that could affect economics (e.g., someone bypassing WIP caps)</li>
+                <li>Tool failures or integrations breaking (e.g., ClickUp API down)</li>
+                <li>Security issues (e.g., incorrect permissions, data breaches)</li>
+                <li>Monthly forecast showing we'll miss 45–60 target by >20%</li>
+                <li>Researchers consistently over WIP caps despite reminders</li>
+            </ul>
+        </div>
+        
+        <h3>Expected Response Times</h3>
+        
+        <table>
+            <tr>
+                <th>Issue Type</th>
+                <th>Response Time</th>
+                <th>Resolution Time</th>
+            </tr>
+            <tr>
+                <td>Routine request (ID assignment, folder creation)</td>
+                <td><2 hours</td>
+                <td>Same day</td>
+            </tr>
+            <tr>
+                <td>Status inquiry from P2/P3</td>
+                <td><2 hours</td>
+                <td><2 hours</td>
+            </tr>
+            <tr>
+                <td>Broken link or data mismatch</td>
+                <td><4 hours</td>
+                <td>Same day</td>
+            </tr>
+            <tr>
+                <td>Escalation to strategist (product issue)</td>
+                <td>Immediate</td>
+                <td>1–2 business days (depends on strategist)</td>
+            </tr>
+            <tr>
+                <td>Escalation to integrator (systemic issue)</td>
+                <td>Within 24 hours</td>
+                <td>Varies (may require canon change)</td>
+            </tr>
+        </table>
+        
+        <h3>How to Escalate</h3>
+        
+        <h4>Step 1: Document the Issue</h4>
+        <p>Before escalating, gather:</p>
+        <ul>
+            <li>What happened (timeline, specific products/tasks affected)</li>
+            <li>What you've tried to fix it</li>
+            <li>Impact (how many people/products affected, urgency)</li>
+            <li>Your recommendation (what you think should happen)</li>
+        </ul>
+        
+        <h4>Step 2: Choose the Right Channel</h4>
+        <ul>
+            <li><strong>Minor issue, one product:</strong> DM the responsible person (researcher, strategist)</li>
+            <li><strong>Process question, unclear rule:</strong> DM P1-R3-LEAD-STRATEGIST</li>
+            <li><strong>Cross-pod issue:</strong> Post in #p1-p2-p3-questions, tag relevant leads</li>
+            <li><strong>Systemic or urgent:</strong> DM P4-INTEGRATOR immediately, follow up in #p4-ops-escalations</li>
+        </ul>
+        
+        <h4>Step 3: Follow Up</h4>
+        <ul>
+            <li>If no response within expected time, ping again politely</li>
+            <li>If still blocked, escalate one level higher</li>
+            <li>Document resolution in weekly report ("Fixed X issue this week")</li>
+        </ul>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 10: ONBOARDING CHECKLIST
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="onboarding">
+        <h2>10. Onboarding Checklist</h2>
+        
+        <div class="callout callout-info">
+            <div class="callout-title">🎯 Goal</div>
+            By the end of 30 days, you should be able to run daily queue hygiene, handle routine requests, and generate the weekly report independently.
+        </div>
+        
+        <h3>Week 1: Access, Context & Shadowing</h3>
+        
+        <ul class="checklist">
+            <li><strong>Day 1-2: Access Setup</strong>
+                <ul>
+                    <li>ClickUp account created, added to P1 – Product Intelligence space (Editor role)</li>
+                    <li>Notion account created, added to DriveOn Commerce HQ workspace (Editor role)</li>
+                    <li>Google Drive access granted to DriveOn Commerce Shared Drive (Content Manager role)</li>
+                    <li>Discord account added to server, assigned P1_CORE role</li>
+                </ul>
+            </li>
+            <li><strong>Day 1-2: Canon Reading</strong>
+                <ul>
+                    <li>Read L1-01 – CaniCol Model v4.0 (understand testing volume, budgets, hit rate)</li>
+                    <li>Read L2-03 – Role Registry & WIP Limits v1 (understand your role, WIP caps)</li>
+                    <li>Read L2-04 – Glossary & Conventions v4.0 (memorize ID formats)</li>
+                    <li>Read L3-02 – ClickUp Infra Blueprint v1 (understand P1 space structure)</li>
+                    <li>Read L3-03 – Notion Infra Blueprint v1 (understand Product OS database)</li>
+                </ul>
+            </li>
+            <li><strong>Day 3-5: Shadow Current Ops Coordinator (or P4-PM-COORDINATOR if new role)</strong>
+                <ul>
+                    <li>Watch morning queue hygiene sweep (1-2 days)</li>
+                    <li>Watch how they handle requests in Discord (1-2 days)</li>
+                    <li>Watch R3 handoff process (at least 1 handoff)</li>
+                    <li>Watch weekly report generation (Friday afternoon)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Week 2: Supervised Execution</h3>
+        
+        <ul class="checklist">
+            <li><strong>First Supervised Deliverables:</strong>
+                <ul>
+                    <li>Execute morning queue hygiene sweep with supervisor watching (Day 6-7)</li>
+                    <li>Handle 5 routine requests with supervisor reviewing before you post (Day 8-9)</li>
+                    <li>Execute 1 new product initialization with supervisor checking each step (Day 9)</li>
+                    <li>Execute 1 gate transition with supervisor checking each step (Day 10)</li>
+                </ul>
+            </li>
+            <li><strong>Week 2 Check-in with P4-INTEGRATOR or P1-R3-LEAD-STRATEGIST:</strong>
+                <ul>
+                    <li>Review any questions or confusion</li>
+                    <li>Confirm access is working correctly</li>
+                    <li>Get feedback on first week's work</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Week 3: Semi-Independent Execution</h3>
+        
+        <ul class="checklist">
+            <li><strong>First Independent Deliverables:</strong>
+                <ul>
+                    <li>Run morning queue hygiene independently (supervisor spot-checks results)</li>
+                    <li>Handle all routine requests independently (supervisor reviews daily summary)</li>
+                    <li>Execute 3+ new product initializations independently</li>
+                    <li>Execute 5+ gate transitions independently</li>
+                    <li>Execute 1 R3 handoff independently (supervisor reviews handoff message before posting)</li>
+                </ul>
+            </li>
+            <li><strong>Week 3 Milestone: First Weekly Report Draft</strong>
+                <ul>
+                    <li>Generate weekly PI Pipeline Report (supervisor reviews before posting)</li>
+                    <li>Post report to Discord (with supervisor approval)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Week 4: Fully Independent</h3>
+        
+        <ul class="checklist">
+            <li><strong>Full Independence:</strong>
+                <ul>
+                    <li>Run all daily workflows independently</li>
+                    <li>Generate weekly report independently</li>
+                    <li>Handle escalations independently (but still notify supervisor)</li>
+                </ul>
+            </li>
+            <li><strong>Week 4 Check-in: 30-Day Review</strong>
+                <ul>
+                    <li>Review KPIs: Data sync rate, request response time, canon compliance</li>
+                    <li>Review qualitative feedback from researchers and P2/P3 teams</li>
+                    <li>Identify any remaining gaps or training needs</li>
+                    <li>Set goals for Month 2</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>30-Day Review Criteria (Pass/Adjust)</h3>
+        
+        <div class="callout callout-success">
+            <div class="callout-title">✅ Ready for Full Independence If:</div>
+            <ul>
+                <li>Data sync rate ≥95% (measured via weekly audit)</li>
+                <li>Request response time consistently <2 hours</li>
+                <li>Weekly report posted on time and accurate</li>
+                <li>Zero canon violations (all IDs/names follow standards)</li>
+                <li>Positive feedback from researchers and P2/P3 teams</li>
+                <li>Can explain why each workflow step exists (not just following checklist blindly)</li>
+            </ul>
+        </div>
+        
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ Needs Additional Training If:</div>
+            <ul>
+                <li>Data sync rate <90%</li>
+                <li>Frequent requests unanswered >2 hours</li>
+                <li>Weekly report contains errors or missed deadline</li>
+                <li>Canon violations (incorrect ID formats, naming)</li>
+                <li>Negative feedback from team (confusion, frustration)</li>
+                <li>Uncertainty about when to escalate</li>
+            </ul>
+        </div>
+    </section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     SECTION 11: CHANGE LOG
+═══════════════════════════════════════════════════════════════════════ -->
+
+    <section id="changelog">
+        <h2>11. Change Log</h2>
+        
+        <table>
+            <tr>
+                <th>Version</th>
+                <th>Date</th>
+                <th>Author</th>
+                <th>Changes</th>
+            </tr>
+            <tr>
+                <td>1.0</td>
+                <td>2025-12-08</td>
+                <td>DriveOn SOP Factory (v4)</td>
+                <td>
+                    • Initial creation of P1-OPS-COORD-VA HTML SOP<br>
+                    • Based on L2-03 Role Registry v1 and L3 infrastructure blueprints<br>
+                    • Aligned with CaniCol v4.0 economics and WIP caps<br>
+                    • Includes all 12 schema sections<br>
+                    • Workspace bindings for ClickUp, Notion, Drive, Discord
+                </td>
+            </tr>
+        </table>
+        
+        <h3>Future Updates</h3>
+        <p>This SOP should be reviewed and updated when:</p>
+        <ul>
+            <li>L2-03 (Role Registry) changes WIP caps or throughput targets</li>
+            <li>L3 infrastructure blueprints change (new lists, DBs, channels)</li>
+            <li>Team grows and role responsibilities shift</li>
+            <li>New tools are added to approved stack</li>
+            <li>Feedback from role occupant identifies gaps or inefficiencies</li>
+        </ul>
+        
+        <p><strong>Next scheduled review:</strong> Q1 2026 or upon any L2/L3 canon updates</p>
+    </section>
+
+</main>
+
+<!-- ═══════════════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════════════ -->
+
+<footer>
+    <p><strong>DriveOn Commerce</strong> | CaniCol v4.0 Operating System</p>
+    <p>SOP Version 1.0 | Generated 2025-12-08</p>
+    <p>For questions or updates, contact P4-INTEGRATOR or visit the Canon Registry in Notion</p>
+</footer>
+
+</body>
+</html>

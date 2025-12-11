@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP: P4-FI-COMP-01 Finance & Comp Ops Specialist | DriveOn Commerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        /* ══════════════════════════════════════════════════════════════════════
+           DRIVEON DESIGN SYSTEM - CORE VARIABLES
+           ══════════════════════════════════════════════════════════════════════ */
+        :root {
+            --drive-cyan: #00C8C8;
+            --drive-cyan-light: #E6FAFA;
+            --drive-cyan-dark: #009999;
+            --carbon-black: #1A1A1A;
+            --champagne: #F4E8D0;
+            --champagne-light: #FBF7F0;
+            --gray-600: #666666;
+            --gray-400: #999999;
+            --gray-200: #E5E5E5;
+            --gray-100: #F5F5F5;
+            --white: #FFFFFF;
+            --success: #22C55E;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --info: #3B82F6;
+            
+            --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            --font-mono: 'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+            
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           RESET & BASE STYLES
+           ══════════════════════════════════════════════════════════════════════ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-system);
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--gray-100);
+            min-height: 100vh;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           LAYOUT STRUCTURE
+           ══════════════════════════════════════════════════════════════════════ */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .page-container {
+                padding: 1rem;
+            }
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           HEADER & HERO SECTION
+           ══════════════════════════════════════════════════════════════════════ */
+        .sop-header {
+            background: linear-gradient(135deg, var(--carbon-black) 0%, #2D2D2D 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sop-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--drive-cyan);
+            opacity: 0.1;
+            border-radius: 50%;
+            transform: translate(30%, -30%);
+        }
+
+        .header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.375rem 0.875rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .header-badge .pulse {
+            width: 8px;
+            height: 8px;
+            background: var(--carbon-black);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .sop-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+        }
+
+        .sop-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-400);
+            margin-bottom: 1.5rem;
+        }
+
+        .header-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            font-size: 0.875rem;
+            color: var(--gray-400);
+        }
+
+        .header-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-meta-item strong {
+            color: var(--white);
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           NAVIGATION - STICKY TOC
+           ══════════════════════════════════════════════════════════════════════ */
+        .toc-container {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+        }
+
+        .toc-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--carbon-black);
+            padding: 0;
+        }
+
+        .toc-toggle-icon {
+            transition: transform var(--transition-fast);
+        }
+
+        .toc-toggle[aria-expanded="true"] .toc-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .toc-nav {
+            display: none;
+            padding-top: 1rem;
+            margin-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .toc-nav.show {
+            display: block;
+        }
+
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .toc-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .toc-link:hover {
+            background: var(--drive-cyan-light);
+            color: var(--drive-cyan-dark);
+        }
+
+        .toc-link .toc-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--gray-600);
+        }
+
+        .toc-link:hover .toc-num {
+            background: var(--drive-cyan);
+            color: var(--white);
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           SECTION CARDS
+           ══════════════════════════════════════════════════════════════════════ */
+        .section-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 1.5rem;
+            background: var(--gray-100);
+            border-bottom: 1px solid var(--gray-200);
+            cursor: pointer;
+            user-select: none;
+            transition: background var(--transition-fast);
+        }
+
+        .section-header:hover {
+            background: var(--drive-cyan-light);
+        }
+
+        .section-num {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 0.875rem;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--carbon-black);
+            flex-grow: 1;
+        }
+
+        .section-chevron {
+            color: var(--gray-400);
+            transition: transform var(--transition-fast);
+        }
+
+        .section-card.expanded .section-chevron {
+            transform: rotate(180deg);
+        }
+
+        .section-content {
+            display: none;
+            padding: 1.5rem;
+        }
+
+        .section-card.expanded .section-content {
+            display: block;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           META BLOCK - ROLE INFO GRID
+           ══════════════════════════════════════════════════════════════════════ */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .meta-item {
+            background: var(--gray-100);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--drive-cyan);
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gray-600);
+            margin-bottom: 0.375rem;
+        }
+
+        .meta-value {
+            font-size: 0.9375rem;
+            color: var(--carbon-black);
+            font-weight: 500;
+        }
+
+        .meta-value code {
+            background: var(--champagne-light);
+            padding: 0.125rem 0.375rem;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           TAGS & BADGES
+           ══════════════════════════════════════════════════════════════════════ */
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.375rem;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.625rem;
+            background: var(--drive-cyan-light);
+            color: var(--drive-cyan-dark);
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tag--tool {
+            background: var(--champagne-light);
+            color: #8B6914;
+        }
+
+        .tag--pod {
+            background: #E0E7FF;
+            color: #3730A3;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-badge--active {
+            background: #DCFCE7;
+            color: #166534;
+        }
+
+        .status-badge--warning {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           CONTENT ELEMENTS
+           ══════════════════════════════════════════════════════════════════════ */
+        .content-block {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-block:last-child {
+            margin-bottom: 0;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--carbon-black);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h3::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: var(--drive-cyan);
+            border-radius: 2px;
+        }
+
+        h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray-600);
+        }
+
+        ul, ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            color: var(--gray-600);
+        }
+
+        li {
+            margin-bottom: 0.375rem;
+        }
+
+        li::marker {
+            color: var(--drive-cyan);
+        }
+
+        strong {
+            color: var(--carbon-black);
+            font-weight: 600;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           CALLOUT BOXES
+           ══════════════════════════════════════════════════════════════════════ */
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .callout-icon {
+            flex-shrink: 0;
+            font-size: 1.25rem;
+        }
+
+        .callout-content {
+            flex-grow: 1;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .callout--info {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+        }
+
+        .callout--info .callout-title {
+            color: #1E40AF;
+        }
+
+        .callout--warning {
+            background: #FFFBEB;
+            border: 1px solid #FDE68A;
+        }
+
+        .callout--warning .callout-title {
+            color: #92400E;
+        }
+
+        .callout--success {
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+        }
+
+        .callout--success .callout-title {
+            color: #166534;
+        }
+
+        .callout--canon {
+            background: var(--champagne-light);
+            border: 1px solid var(--champagne);
+        }
+
+        .callout--canon .callout-title {
+            color: #8B6914;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           TABLES
+           ══════════════════════════════════════════════════════════════════════ */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--gray-200);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+
+        thead {
+            background: var(--gray-100);
+        }
+
+        th {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--carbon-black);
+            border-bottom: 2px solid var(--gray-200);
+            white-space: nowrap;
+        }
+
+        td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--gray-200);
+            color: var(--gray-600);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background: var(--gray-100);
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           WORKFLOW STEPS
+           ══════════════════════════════════════════════════════════════════════ */
+        .workflow-steps {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .workflow-steps::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gray-200);
+        }
+
+        .workflow-step {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .workflow-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .step-marker {
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--drive-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+            z-index: 1;
+        }
+
+        .step-content {
+            background: var(--gray-100);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--carbon-black);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-details {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           TIMELINE - DAY IN LIFE
+           ══════════════════════════════════════════════════════════════════════ */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .timeline-block {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        @media (max-width: 600px) {
+            .timeline-block {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .timeline-time {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.375rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .timeline-content {
+            background: var(--gray-100);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border-left: 3px solid var(--drive-cyan);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: var(--carbon-black);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-desc {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           KPI CARDS
+           ══════════════════════════════════════════════════════════════════════ */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .kpi-card {
+            background: var(--gray-100);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            text-align: center;
+            border-top: 3px solid var(--drive-cyan);
+        }
+
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--drive-cyan-dark);
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-label {
+            font-size: 0.8125rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           CHECKLISTS
+           ══════════════════════════════════════════════════════════════════════ */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--drive-cyan);
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checklist-text {
+            flex-grow: 1;
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           CODE BLOCKS & PROMPTS
+           ══════════════════════════════════════════════════════════════════════ */
+        .code-block {
+            background: var(--carbon-black);
+            color: #E5E5E5;
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            line-height: 1.5;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-block {
+            background: linear-gradient(135deg, var(--champagne-light) 0%, #FEFCF8 100%);
+            border: 1px solid var(--champagne);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .prompt-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            background: var(--champagne);
+            color: #8B6914;
+            padding: 0.25rem 0.625rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .prompt-text {
+            font-family: var(--font-mono);
+            font-size: 0.8125rem;
+            color: var(--carbon-black);
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           MERMAID DIAGRAMS
+           ══════════════════════════════════════════════════════════════════════ */
+        .diagram-container {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+        }
+
+        .diagram-title {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           FOOTER
+           ══════════════════════════════════════════════════════════════════════ */
+        .sop-footer {
+            background: var(--carbon-black);
+            color: var(--gray-400);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .footer-brand {
+            color: var(--drive-cyan);
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-text {
+            font-size: 0.8125rem;
+        }
+
+        /* ══════════════════════════════════════════════════════════════════════
+           PRINT STYLES
+           ══════════════════════════════════════════════════════════════════════ */
+        @media print {
+            body {
+                background: white;
+            }
+            .toc-container {
+                display: none;
+            }
+            .section-card {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid var(--gray-200);
+            }
+            .section-content {
+                display: block !important;
+            }
+            .section-chevron {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+        <!-- ══════════════════════════════════════════════════════════════════════
+             HEADER
+             ══════════════════════════════════════════════════════════════════════ -->
+        <header class="sop-header">
+            <div class="header-badge">
+                <span class="pulse"></span>
+                Pod 4 — Operations
+            </div>
+            <h1 class="sop-title">Finance & Comp Ops Specialist</h1>
+            <p class="sop-subtitle">Role ID: P4-FI-COMP-01 | Compensation runs, financial hygiene, and pay cycle management</p>
+            <div class="header-meta">
+                <div class="header-meta-item">
+                    <span>📋</span>
+                    <span>Version: <strong>1.0</strong></span>
+                </div>
+                <div class="header-meta-item">
+                    <span>📅</span>
+                    <span>Last Updated: <strong>December 10, 2025</strong></span>
+                </div>
+                <div class="header-meta-item">
+                    <span>✅</span>
+                    <span>Status: <strong>ACTIVE</strong></span>
+                </div>
+                <div class="header-meta-item">
+                    <span>📐</span>
+                    <span>Canon: <strong>v4.0</strong></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             TABLE OF CONTENTS
+             ══════════════════════════════════════════════════════════════════════ -->
+        <nav class="toc-container" aria-label="Table of Contents">
+            <button class="toc-toggle" aria-expanded="false" onclick="toggleTOC()">
+                <span>📑 Table of Contents</span>
+                <svg class="toc-toggle-icon" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </button>
+            <div class="toc-nav" id="tocNav">
+                <ul class="toc-list">
+                    <li><a href="#section-1" class="toc-link"><span class="toc-num">1</span> Meta Block</a></li>
+                    <li><a href="#section-2" class="toc-link"><span class="toc-num">2</span> Role Purpose & Context</a></li>
+                    <li><a href="#section-3" class="toc-link"><span class="toc-num">3</span> Canon Constraints</a></li>
+                    <li><a href="#section-4" class="toc-link"><span class="toc-num">4</span> Day-in-the-Life</a></li>
+                    <li><a href="#section-5" class="toc-link"><span class="toc-num">5</span> Core Workflows</a></li>
+                    <li><a href="#section-6" class="toc-link"><span class="toc-num">6</span> Handoff & Interface Specs</a></li>
+                    <li><a href="#section-7" class="toc-link"><span class="toc-num">7</span> KPIs & Quality Bar</a></li>
+                    <li><a href="#section-8" class="toc-link"><span class="toc-num">8</span> AI Usage & Prompts</a></li>
+                    <li><a href="#section-9" class="toc-link"><span class="toc-num">9</span> Tools & Systems</a></li>
+                    <li><a href="#section-10" class="toc-link"><span class="toc-num">10</span> Escalation & Decisions</a></li>
+                    <li><a href="#section-11" class="toc-link"><span class="toc-num">11</span> Onboarding Checklist</a></li>
+                    <li><a href="#section-12" class="toc-link"><span class="toc-num">12</span> Change Log</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 1: META BLOCK
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card expanded" id="section-1">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">1</span>
+                <h2 class="section-title">Meta Block</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <div class="meta-label">Role ID</div>
+                        <div class="meta-value"><code>P4-FI-COMP-01</code></div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Role Name</div>
+                        <div class="meta-value">Finance & Comp Ops Specialist</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Pod</div>
+                        <div class="meta-value">
+                            <span class="tag tag--pod">P4 – Operations & Integration</span>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Role Type</div>
+                        <div class="meta-value"><code>FINANCE_COMP</code></div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Status</div>
+                        <div class="meta-value">
+                            <span class="status-badge status-badge--active">● CORE</span>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">CrossPod</div>
+                        <div class="meta-value"><strong>Yes</strong> — interfaces with all pods for time/pay data</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Default FTE</div>
+                        <div class="meta-value">0.5 – 1.0 FTE</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Owned Gates</div>
+                        <div class="meta-value">Comp runs & financial hygiene</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">WIP Limits</div>
+                        <div class="meta-value">Current pay run + 3–5 financial tasks</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Weekly Throughput</div>
+                        <div class="meta-value">2–4 pay cycles/month + reconciliations</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Upstream Roles</div>
+                        <div class="meta-value">All pod members (time entries), PM, OWNER</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Downstream Roles</div>
+                        <div class="meta-value">Team members (payouts), OWNER (approvals)</div>
+                    </div>
+                </div>
+
+                <div class="content-block" style="margin-top: 1.5rem;">
+                    <h3>Approved Tools</h3>
+                    <div class="tag-group">
+                        <span class="tag tag--tool">ClickUp</span>
+                        <span class="tag tag--tool">Notion</span>
+                        <span class="tag tag--tool">Google Drive</span>
+                        <span class="tag tag--tool">Discord</span>
+                        <span class="tag tag--tool">Google Sheets</span>
+                        <span class="tag tag--tool">PayPal / Wise</span>
+                    </div>
+                </div>
+
+                <div class="content-block" style="margin-top: 1.5rem;">
+                    <h3>Primary KPIs</h3>
+                    <div class="tag-group">
+                        <span class="tag">Pay Run Accuracy ≥99%</span>
+                        <span class="tag">On-Time Payout Rate 100%</span>
+                        <span class="tag">Reconciliation Variance &lt;1%</span>
+                        <span class="tag">Comp Event Coverage 100%</span>
+                    </div>
+                </div>
+
+                <div class="content-block" style="margin-top: 1.5rem;">
+                    <h3>Primary Workspace Bindings</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Platform</th>
+                                    <th>Location</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ClickUp</strong></td>
+                                    <td>P4 -- Ops & PM → Finance & Comp</td>
+                                    <td>Comp run tasks, invoice tracking</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Notion</strong></td>
+                                    <td>HQ → Section D: People & Roles, Comp Events, Pay Runs</td>
+                                    <td>Compensation data, pay run records</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Google Drive</strong></td>
+                                    <td>/DriveOn Commerce/Finance/Pay Runs/</td>
+                                    <td>Export archives, payout records</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Discord</strong></td>
+                                    <td>#p4-finance-comp</td>
+                                    <td>Comp run readiness, payment questions</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 2: ROLE PURPOSE & CONTEXT
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-2">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">2</span>
+                <h2 class="section-title">Role Purpose & Context</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="content-block">
+                    <h3>Why This Role Exists</h3>
+                    <p>The Finance & Comp Ops Specialist is the <strong>financial backbone of DriveOn Commerce</strong>, ensuring that every team member is paid accurately, on time, and in accordance with their compensation profile. In a lean-volume dropshipping operation running the CaniCol v4.0 model, precise financial tracking is critical because:</p>
+                    <ul>
+                        <li><strong>Multiple compensation types coexist</strong> — hourly, per-deliverable, per-winner bonuses, retainers, and adjustments must all be calculated correctly</li>
+                        <li><strong>Cross-pod visibility is essential</strong> — time entries come from P1, P2, P3, and P4; deliverables span packets, creatives, and campaigns</li>
+                        <li><strong>Test bank economics must be protected</strong> — with $4,000–$5,500/month allocated to testing, financial hygiene prevents budget leakage</li>
+                        <li><strong>Team trust depends on reliability</strong> — consistent, error-free payouts build the foundation for high-performing distributed teams</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Connection to CaniCol Model</h3>
+                    <p>Within the CaniCol v4.0 framework, this role ensures the operational integrity of Pod 4's finance function:</p>
+                    <ul>
+                        <li><strong>Economics enforcement</strong> — Tracks test bank spend ($4k–$5.5k/month) against budget, flags overruns</li>
+                        <li><strong>Winner bonus processing</strong> — When products hit P3 winner status (4–6% expected rate), triggers performance bonus calculations</li>
+                        <li><strong>Capacity alignment</strong> — Time tracking data informs WIP cap adjustments and resource allocation decisions</li>
+                        <li><strong>Cash flow visibility</strong> — Provides OWNER with clear financial picture for monthly planning</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout--info">
+                    <span class="callout-icon">💡</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Pod 4 Mission Context</div>
+                        <p style="margin-bottom: 0;">Pod 4 keeps the entire engine coherent, staffed, on-time, and aligned with canon. This role specifically owns the "on-time" and "aligned" aspects through financial discipline and accurate compensation.</p>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Role Position in Org Flow</h3>
+                    <div class="diagram-container">
+                        <div class="diagram-title">Finance & Comp Position in DriveOn Operations</div>
+                        <div class="mermaid">
+flowchart TB
+    subgraph INPUTS["📥 INPUTS"]
+        TIME["⏱️ Time Entries<br/>(ClickUp)"]
+        DELIV["📦 Deliverables<br/>(Packets, Creatives)"]
+        WIN["🏆 Winner Events<br/>(P3 Performance)"]
+        ADJ["📝 Adjustments<br/>(Manual Corrections)"]
+    end
+    
+    subgraph FICOMP["💰 P4-FI-COMP-01"]
+        COLLECT["Collect &<br/>Validate Data"]
+        CALC["Generate<br/>Comp Events"]
+        RUN["Execute<br/>Pay Run"]
+        RECON["Reconcile &<br/>Archive"]
+    end
+    
+    subgraph OUTPUTS["📤 OUTPUTS"]
+        PAY["💵 Payouts"]
+        RECORDS["📊 Pay Records"]
+        REPORTS["📈 Finance Reports"]
+    end
+    
+    TIME --> COLLECT
+    DELIV --> COLLECT
+    WIN --> COLLECT
+    ADJ --> COLLECT
+    
+    COLLECT --> CALC
+    CALC --> RUN
+    RUN --> RECON
+    
+    RUN --> PAY
+    RECON --> RECORDS
+    RECON --> REPORTS
+    
+    style FICOMP fill:#E6FAFA,stroke:#00C8C8,stroke-width:2px
+    style COLLECT fill:#00C8C8,color:#1A1A1A
+    style CALC fill:#00C8C8,color:#1A1A1A
+    style RUN fill:#00C8C8,color:#1A1A1A
+    style RECON fill:#00C8C8,color:#1A1A1A
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 3: CANON CONSTRAINTS
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-3">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">3</span>
+                <h2 class="section-title">Canon Constraints</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="callout callout--canon">
+                    <span class="callout-icon">📜</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Canon Precedence: L0 → L1 → L2 → L3 → L4</div>
+                        <p style="margin-bottom: 0;">All constraints below flow from the v4.0 canon stack. This role may NOT modify these constraints—only implement them.</p>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Compensation Type Constraints (L3-05)</h3>
+                    <p>Only <strong>five compensation types</strong> are permitted. No other types may be created without canon update:</p>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Comp Type</th>
+                                    <th>Calculation</th>
+                                    <th>Source</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Hourly</strong></td>
+                                    <td><code>rate_per_hour × hours_tracked</code></td>
+                                    <td>ClickUp_Time</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Per_Deliverable</strong></td>
+                                    <td><code>rate_per_unit × units_completed</code></td>
+                                    <td>ClickUp_Deliverable</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Per_Winner</strong></td>
+                                    <td><code>flat or % of net_profit</code></td>
+                                    <td>Manual_Finance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Retainer</strong></td>
+                                    <td><code>fixed weekly/monthly amount</code></td>
+                                    <td>Manual_Finance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Adjustment</strong></td>
+                                    <td><code>manual correction (+/-)</code></td>
+                                    <td>Manual_Finance</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Economic Constraints (L1-01, L2-05)</h3>
+                    <ul>
+                        <li><strong>Test Bank Budget:</strong> $4,000–$5,500/month for P1+P2 testing spend</li>
+                        <li><strong>P1 Spend Cap:</strong> $40–$60 per product</li>
+                        <li><strong>P1+P2 Soft Cap:</strong> $120 per product (standard band $80–$100)</li>
+                        <li><strong>Testing Volume:</strong> 45–60 products/month processed</li>
+                        <li><strong>Winner Rate:</strong> 4–6% expected (2–4 products/month reaching P3)</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>WIP & Process Constraints (L2-03)</h3>
+                    <ul>
+                        <li><strong>WIP Limit:</strong> Current pay run + 3–5 concurrent financial tasks</li>
+                        <li><strong>Throughput Target:</strong> 2–4 pay cycles/month (biweekly or semi-monthly)</li>
+                        <li><strong>Approval Flow:</strong> All Pay Runs require OWNER approval before payout execution</li>
+                        <li><strong>Reconciliation Window:</strong> Must complete within 48 hours of payout</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>ID Format Constraints (L2-04, L3-OS)</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Entity</th>
+                                    <th>ID Format</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Comp Event</td>
+                                    <td><code>CMP-YYYYMM-[PersonCode]-NN</code></td>
+                                    <td>CMP-202512-JD-01</td>
+                                </tr>
+                                <tr>
+                                    <td>Pay Run</td>
+                                    <td><code>PAY-YYYYMM-NN</code></td>
+                                    <td>PAY-202512-01</td>
+                                </tr>
+                                <tr>
+                                    <td>Person Code</td>
+                                    <td><code>2-3 letter initials</code></td>
+                                    <td>JD, MK, ALS</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Non-Negotiable Handoff Rules</h3>
+                    <ul>
+                        <li><strong>Time entries must be approved</strong> before inclusion in comp calculations</li>
+                        <li><strong>Deliverable counts must match ClickUp</strong> — discrepancies require resolution before pay run</li>
+                        <li><strong>Winner bonuses require Product OS confirmation</strong> of P3 winner status</li>
+                        <li><strong>Pay Run status must be "Approved"</strong> before any payout execution</li>
+                        <li><strong>All payouts must be logged</strong> with transaction ID and timestamp</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 4: DAY-IN-THE-LIFE
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-4">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">4</span>
+                <h2 class="section-title">Day-in-the-Life Timeline</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="callout callout--info">
+                    <span class="callout-icon">📅</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Schedule Note</div>
+                        <p style="margin-bottom: 0;">This role operates on 0.5–1.0 FTE. The timeline below represents a typical <strong>pay run day</strong> (occurs 2–4x per month). Non-pay-run days focus on reconciliation, reporting, and ad-hoc financial tasks.</p>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Pay Run Day Schedule</h3>
+                    <div class="timeline">
+                        <div class="timeline-block">
+                            <div class="timeline-time">09:00–09:30</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">🌅 Morning Setup & Period Definition</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> Calendar, previous pay run record<br/>
+                                    <strong>Actions:</strong> Define pay period dates, create Pay Run record in Notion, post #p4-finance-comp notification<br/>
+                                    <strong>Outputs:</strong> Pay Run ID created, team notified of cutoff
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">09:30–11:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">⏱️ Time Export & Hourly Comp Events</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> ClickUp time tracking data<br/>
+                                    <strong>Actions:</strong> Export time entries for period, validate against approvals, generate Hourly comp events per person<br/>
+                                    <strong>Outputs:</strong> Comp Events DB populated with Hourly entries
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">11:00–12:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">📦 Deliverable & Winner Comp Events</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> ClickUp deliverable counts, Product OS winner status<br/>
+                                    <strong>Actions:</strong> Count completed deliverables per person, check for P3 winners, generate Per_Deliverable and Per_Winner comp events<br/>
+                                    <strong>Outputs:</strong> Comp Events DB updated with deliverable and bonus entries
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">12:00–12:30</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">🍽️ Lunch Break</div>
+                                <div class="timeline-desc">Step away, recharge</div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">12:30–13:30</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">💼 Retainers & Adjustments</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> People & Roles DB (Comp Profiles), adjustment requests<br/>
+                                    <strong>Actions:</strong> Apply retainer amounts, process any manual adjustments, verify all comp events complete<br/>
+                                    <strong>Outputs:</strong> Full set of comp events for all team members
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">13:30–14:30</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">🧮 Calculate & Review Pay Totals</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> Complete Comp Events for period<br/>
+                                    <strong>Actions:</strong> Sum comp events per person, cross-check against expected ranges, flag anomalies<br/>
+                                    <strong>Outputs:</strong> Pay Run summary with per-person totals
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">14:30–15:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">✅ OWNER Approval Request</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> Pay Run summary<br/>
+                                    <strong>Actions:</strong> Prepare approval package, post to OWNER via Discord/Slack, update Pay Run status to "Pending_Approval"<br/>
+                                    <strong>Outputs:</strong> Approval request sent, awaiting sign-off
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">15:00–16:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">💵 Payout Execution (Post-Approval)</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> Approved Pay Run<br/>
+                                    <strong>Actions:</strong> Execute payouts via PayPal/Wise, record transaction IDs, update Comp Events to "Paid"<br/>
+                                    <strong>Outputs:</strong> All payouts completed, transaction records logged
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="timeline-block">
+                            <div class="timeline-time">16:00–17:00</div>
+                            <div class="timeline-content">
+                                <div class="timeline-title">📊 Reconciliation & Archive</div>
+                                <div class="timeline-desc">
+                                    <strong>Inputs:</strong> Payout confirmations, Comp Events<br/>
+                                    <strong>Actions:</strong> Reconcile payouts vs. calculated amounts, archive Pay Run to Drive, post completion notification<br/>
+                                    <strong>Outputs:</strong> Pay Run closed, archived, team notified
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Day-in-Life Visual Flow</h3>
+                    <div class="diagram-container">
+                        <div class="diagram-title">Pay Run Day Timeline</div>
+                        <div class="mermaid">
+gantt
+    title Pay Run Day Timeline
+    dateFormat HH:mm
+    axisFormat %H:%M
+    
+    section Setup
+    Period Definition & Notification    :a1, 09:00, 30m
+    
+    section Data Collection
+    Time Export & Hourly Events         :a2, 09:30, 90m
+    Deliverable & Winner Events         :a3, 11:00, 60m
+    
+    section Break
+    Lunch                               :a4, 12:00, 30m
+    
+    section Processing
+    Retainers & Adjustments             :a5, 12:30, 60m
+    Calculate & Review Totals           :a6, 13:30, 60m
+    
+    section Approval
+    OWNER Approval Request              :a7, 14:30, 30m
+    
+    section Execution
+    Payout Execution                    :a8, 15:00, 60m
+    Reconciliation & Archive            :a9, 16:00, 60m
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 5: CORE WORKFLOWS
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-5">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">5</span>
+                <h2 class="section-title">Core Workflows</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <!-- WORKFLOW 1: PAY RUN EXECUTION -->
+                <div class="content-block">
+                    <h3>Workflow 1: Pay Run Execution</h3>
+                    
+                    <div class="callout callout--info">
+                        <span class="callout-icon">🎯</span>
+                        <div class="callout-content">
+                            <div class="callout-title">Trigger</div>
+                            <p style="margin-bottom: 0;">Pay period end date reached (biweekly or semi-monthly per schedule)</p>
+                        </div>
+                    </div>
+
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li><strong>ClickUp Time Tracking:</strong> All time entries for pay period</li>
+                        <li><strong>ClickUp Deliverables:</strong> Completed task counts per person</li>
+                        <li><strong>Notion Product OS:</strong> P3 winner status for bonus calculations</li>
+                        <li><strong>Notion People & Roles DB:</strong> Comp profiles and rate tables</li>
+                    </ul>
+
+                    <h4>Step-by-Step Process</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-marker">1</span>
+                            <div class="step-content">
+                                <div class="step-title">Define Pay Period</div>
+                                <div class="step-details">
+                                    <p><strong>Action:</strong> Create new Pay Run record in Notion Pay Runs DB</p>
+                                    <p><strong>Fields to populate:</strong></p>
+                                    <ul>
+                                        <li><code>Pay_Run_ID</code>: PAY-YYYYMM-NN (e.g., PAY-202512-02)</li>
+                                        <li><code>Period_Start</code>: First day of period</li>
+                                        <li><code>Period_End</code>: Last day of period</li>
+                                        <li><code>Status</code>: "Open"</li>
+                                    </ul>
+                                    <p><strong>Quality check:</strong> Verify no overlap with previous Pay Run period</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">2</span>
+                            <div class="step-content">
+                                <div class="step-title">Export Time Entries from ClickUp</div>
+                                <div class="step-details">
+                                    <p><strong>Location:</strong> ClickUp → Time Tracking view (all spaces)</p>
+                                    <p><strong>Action:</strong> Export time entries for pay period date range</p>
+                                    <p><strong>Filter by:</strong> Period_Start ≤ Entry_Date ≤ Period_End</p>
+                                    <p><strong>Required columns:</strong> Person, Task, Hours, Date, Approval_Status</p>
+                                    <p><strong>Quality check:</strong> All entries must have Approval_Status = "Approved"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">3</span>
+                            <div class="step-content">
+                                <div class="step-title">Generate Hourly Comp Events</div>
+                                <div class="step-details">
+                                    <p><strong>For each person with time entries:</strong></p>
+                                    <ol>
+                                        <li>Sum total approved hours</li>
+                                        <li>Look up hourly rate from People & Roles DB</li>
+                                        <li>Create Comp Event in Notion:</li>
+                                    </ol>
+                                    <div class="code-block">
+Comp_Event_ID: CMP-YYYYMM-[PersonCode]-01
+Person: [Person Name]
+Comp_Type: "Hourly"
+Units: [Total Hours]
+Rate: [Hourly Rate]
+Calc_Amount: Units × Rate
+Source: "ClickUp_Time"
+Status: "Planned"
+Pay_Run: [Current Pay Run ID]
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">4</span>
+                            <div class="step-content">
+                                <div class="step-title">Generate Deliverable Comp Events</div>
+                                <div class="step-details">
+                                    <p><strong>For each person with deliverable-based comp:</strong></p>
+                                    <ol>
+                                        <li>Query ClickUp for completed tasks in pay period</li>
+                                        <li>Count deliverables by type (packets, creatives, listings, etc.)</li>
+                                        <li>Look up per-deliverable rate from People & Roles DB</li>
+                                        <li>Create Comp Event:</li>
+                                    </ol>
+                                    <div class="code-block">
+Comp_Event_ID: CMP-YYYYMM-[PersonCode]-02
+Comp_Type: "Per_Deliverable"
+Unit_Ref: [Deliverable Type]
+Units: [Count]
+Rate: [Per-Unit Rate]
+Calc_Amount: Units × Rate
+Source: "ClickUp_Deliverable"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">5</span>
+                            <div class="step-content">
+                                <div class="step-title">Generate Winner Bonus Events (If Applicable)</div>
+                                <div class="step-details">
+                                    <p><strong>Check Product OS for P3 winners in period:</strong></p>
+                                    <ol>
+                                        <li>Query Notion Product OS: Status = "P3_Winner" AND Winner_Date in pay period</li>
+                                        <li>For each winner, identify eligible team members per bonus structure</li>
+                                        <li>Calculate bonus: flat amount OR percentage of net_profit</li>
+                                        <li>Create Per_Winner Comp Event</li>
+                                    </ol>
+                                    <p><strong>Quality check:</strong> Winner status must be confirmed in Product OS before bonus creation</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">6</span>
+                            <div class="step-content">
+                                <div class="step-title">Add Retainers & Adjustments</div>
+                                <div class="step-details">
+                                    <p><strong>Retainers:</strong></p>
+                                    <ol>
+                                        <li>Query People & Roles DB for active retainer arrangements</li>
+                                        <li>Calculate pro-rata amount for pay period</li>
+                                        <li>Create Retainer Comp Event</li>
+                                    </ol>
+                                    <p><strong>Adjustments:</strong></p>
+                                    <ol>
+                                        <li>Check for pending adjustment requests</li>
+                                        <li>Create Adjustment Comp Events with notes explaining reason</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">7</span>
+                            <div class="step-content">
+                                <div class="step-title">Calculate Pay Per Person</div>
+                                <div class="step-details">
+                                    <p><strong>Action:</strong> Sum all Comp Events per person for this Pay Run</p>
+                                    <div class="code-block">
+Total_Pay = SUM(Calc_Amount) WHERE Pay_Run = [Current Pay Run ID] 
+                                       AND Person = [Person]
+                                    </div>
+                                    <p><strong>Quality checks:</strong></p>
+                                    <ul>
+                                        <li>Compare to previous pay run (flag variance &gt;30%)</li>
+                                        <li>Verify no negative amounts (except valid adjustments)</li>
+                                        <li>Cross-check comp event count per person</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">8</span>
+                            <div class="step-content">
+                                <div class="step-title">Request OWNER Approval</div>
+                                <div class="step-details">
+                                    <p><strong>Prepare approval package:</strong></p>
+                                    <ul>
+                                        <li>Pay Run summary with per-person totals</li>
+                                        <li>Breakdown by comp type</li>
+                                        <li>Flagged anomalies (if any)</li>
+                                        <li>Link to Pay Run record in Notion</li>
+                                    </ul>
+                                    <p><strong>Post to:</strong> #p4-finance-comp (Discord) or DM OWNER</p>
+                                    <p><strong>Update Pay Run Status:</strong> "Pending_Approval"</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">9</span>
+                            <div class="step-content">
+                                <div class="step-title">Execute Payouts (Post-Approval)</div>
+                                <div class="step-details">
+                                    <p><strong>Prerequisites:</strong> Pay Run Status = "Approved"</p>
+                                    <p><strong>For each person:</strong></p>
+                                    <ol>
+                                        <li>Execute payment via PayPal/Wise</li>
+                                        <li>Record transaction ID</li>
+                                        <li>Update all person's Comp Events: Status = "Paid"</li>
+                                    </ol>
+                                    <p><strong>Update Pay Run:</strong> Status = "Paid", Paid_Date = today</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">10</span>
+                            <div class="step-content">
+                                <div class="step-title">Reconcile & Archive</div>
+                                <div class="step-details">
+                                    <p><strong>Reconciliation:</strong></p>
+                                    <ol>
+                                        <li>Compare payout amounts to calculated totals</li>
+                                        <li>Verify all transaction IDs recorded</li>
+                                        <li>Flag any discrepancies for resolution</li>
+                                    </ol>
+                                    <p><strong>Archive:</strong></p>
+                                    <ol>
+                                        <li>Export Pay Run summary to Google Drive</li>
+                                        <li>File path: /DriveOn Commerce/Finance/Pay Runs/[YYYY]/PAY-YYYYMM-NN/</li>
+                                        <li>Update Pay Run Status: "Closed"</li>
+                                    </ol>
+                                    <p><strong>Notification:</strong> Post completion to #p4-finance-comp</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li><strong>Notion:</strong> Complete Pay Run record with all Comp Events</li>
+                        <li><strong>Payment Platform:</strong> Executed payouts with transaction IDs</li>
+                        <li><strong>Google Drive:</strong> Archived Pay Run documentation</li>
+                        <li><strong>Discord:</strong> Team notification of completed pay run</li>
+                    </ul>
+                </div>
+
+                <!-- PAY RUN FLOWCHART -->
+                <div class="content-block">
+                    <h3>Pay Run Process Flow</h3>
+                    <div class="diagram-container">
+                        <div class="diagram-title">Complete Pay Run Workflow</div>
+                        <div class="mermaid">
+flowchart TB
+    START([🚀 Pay Period End]) --> DEFINE["1️⃣ Define Pay Period<br/>Create Pay Run Record"]
+    DEFINE --> EXPORT["2️⃣ Export Time Entries<br/>from ClickUp"]
+    EXPORT --> VALIDATE{All entries<br/>approved?}
+    VALIDATE -->|No| CHASE["Chase approvals<br/>from team leads"]
+    CHASE --> VALIDATE
+    VALIDATE -->|Yes| HOURLY["3️⃣ Generate Hourly<br/>Comp Events"]
+    HOURLY --> DELIV["4️⃣ Generate Deliverable<br/>Comp Events"]
+    DELIV --> WINNER{Any P3<br/>winners?}
+    WINNER -->|Yes| BONUS["5️⃣ Generate Winner<br/>Bonus Events"]
+    WINNER -->|No| RETAIN
+    BONUS --> RETAIN["6️⃣ Add Retainers<br/>& Adjustments"]
+    RETAIN --> CALC["7️⃣ Calculate Pay<br/>Per Person"]
+    CALC --> REVIEW{Anomalies<br/>detected?}
+    REVIEW -->|Yes| INVESTIGATE["Investigate &<br/>Resolve"]
+    INVESTIGATE --> CALC
+    REVIEW -->|No| APPROVAL["8️⃣ Request OWNER<br/>Approval"]
+    APPROVAL --> WAIT{Approved?}
+    WAIT -->|No| REVISE["Revise per<br/>feedback"]
+    REVISE --> APPROVAL
+    WAIT -->|Yes| PAYOUT["9️⃣ Execute<br/>Payouts"]
+    PAYOUT --> RECONCILE["🔟 Reconcile<br/>& Archive"]
+    RECONCILE --> NOTIFY["📢 Post Completion<br/>Notification"]
+    NOTIFY --> END([✅ Pay Run Complete])
+    
+    style START fill:#F4E8D0,stroke:#8B6914
+    style END fill:#22C55E,stroke:#166534,color:#fff
+    style APPROVAL fill:#00C8C8,stroke:#009999
+    style PAYOUT fill:#00C8C8,stroke:#009999
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WORKFLOW 2: MONTHLY RECONCILIATION -->
+                <div class="content-block">
+                    <h3>Workflow 2: Monthly Financial Reconciliation</h3>
+                    
+                    <div class="callout callout--info">
+                        <span class="callout-icon">🎯</span>
+                        <div class="callout-content">
+                            <div class="callout-title">Trigger</div>
+                            <p style="margin-bottom: 0;">First week of each month (covers previous month)</p>
+                        </div>
+                    </div>
+
+                    <h4>Step-by-Step Process</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-marker">1</span>
+                            <div class="step-content">
+                                <div class="step-title">Aggregate Monthly Compensation</div>
+                                <div class="step-details">
+                                    <p>Sum all Pay Runs from previous month. Calculate totals by comp type and by person.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">2</span>
+                            <div class="step-content">
+                                <div class="step-title">Reconcile Against Test Bank</div>
+                                <div class="step-details">
+                                    <p>Compare total P1+P2 spend against $4,000–$5,500 budget. Flag if over/under by &gt;10%.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">3</span>
+                            <div class="step-content">
+                                <div class="step-title">Generate Monthly Finance Report</div>
+                                <div class="step-details">
+                                    <p>Create summary with: Total comp paid, breakdown by type, test bank utilization, variance analysis.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">4</span>
+                            <div class="step-content">
+                                <div class="step-title">Archive & Share</div>
+                                <div class="step-details">
+                                    <p>Save report to Drive: /Finance/Reports/YYYY-MM_Monthly_Finance.pdf. Share with OWNER.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WORKFLOW 3: AD-HOC ADJUSTMENTS -->
+                <div class="content-block">
+                    <h3>Workflow 3: Ad-Hoc Compensation Adjustment</h3>
+                    
+                    <div class="callout callout--info">
+                        <span class="callout-icon">🎯</span>
+                        <div class="callout-content">
+                            <div class="callout-title">Trigger</div>
+                            <p style="margin-bottom: 0;">Request from OWNER or PM for correction/bonus outside normal cycle</p>
+                        </div>
+                    </div>
+
+                    <h4>Step-by-Step Process</h4>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">
+                            <span class="step-marker">1</span>
+                            <div class="step-content">
+                                <div class="step-title">Receive & Document Request</div>
+                                <div class="step-details">
+                                    <p>Log adjustment request with: Person affected, amount, reason, requester, approval status.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">2</span>
+                            <div class="step-content">
+                                <div class="step-title">Verify Authorization</div>
+                                <div class="step-details">
+                                    <p>Confirm OWNER has approved (required for all adjustments). Do NOT proceed without explicit approval.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">3</span>
+                            <div class="step-content">
+                                <div class="step-title">Create Adjustment Comp Event</div>
+                                <div class="step-details">
+                                    <div class="code-block">
+Comp_Event_ID: CMP-YYYYMM-[PersonCode]-ADJ-NN
+Comp_Type: "Adjustment"
+Calc_Amount: [+ or - amount]
+Notes: [Reason for adjustment]
+Source: "Manual_Finance"
+Status: "Approved"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="workflow-step">
+                            <span class="step-marker">4</span>
+                            <div class="step-content">
+                                <div class="step-title">Process in Next Pay Run or Immediate</div>
+                                <div class="step-details">
+                                    <p>Include in next scheduled Pay Run, or execute immediate payout if urgent (with OWNER approval).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 6: HANDOFF & INTERFACE SPECS
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-6">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">6</span>
+                <h2 class="section-title">Handoff & Interface Specs</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="content-block">
+                    <h3>Inbound Interfaces (Data This Role Receives)</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Source</th>
+                                    <th>Data Type</th>
+                                    <th>Platform</th>
+                                    <th>Quality Bar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>All Pods</td>
+                                    <td>Time entries</td>
+                                    <td>ClickUp Time Tracking</td>
+                                    <td>Must be approved by pod lead</td>
+                                </tr>
+                                <tr>
+                                    <td>P1, P2, P3</td>
+                                    <td>Deliverable counts</td>
+                                    <td>ClickUp (completed tasks)</td>
+                                    <td>Status = "Complete"</td>
+                                </tr>
+                                <tr>
+                                    <td>P3</td>
+                                    <td>Winner status</td>
+                                    <td>Notion Product OS</td>
+                                    <td>Status = "P3_Winner" confirmed</td>
+                                </tr>
+                                <tr>
+                                    <td>OWNER</td>
+                                    <td>Adjustment requests</td>
+                                    <td>Discord/Slack DM</td>
+                                    <td>Written approval required</td>
+                                </tr>
+                                <tr>
+                                    <td>PM</td>
+                                    <td>Rate changes</td>
+                                    <td>Notion People & Roles</td>
+                                    <td>Effective_From date set</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Outbound Interfaces (Data This Role Sends)</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Recipient</th>
+                                    <th>Data Type</th>
+                                    <th>Platform</th>
+                                    <th>Timing</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>OWNER</td>
+                                    <td>Pay Run approval request</td>
+                                    <td>Discord #p4-finance-comp</td>
+                                    <td>Before each payout</td>
+                                </tr>
+                                <tr>
+                                    <td>Team</td>
+                                    <td>Pay Run completion notice</td>
+                                    <td>Discord #p4-finance-comp</td>
+                                    <td>After payout execution</td>
+                                </tr>
+                                <tr>
+                                    <td>OWNER</td>
+                                    <td>Monthly finance report</td>
+                                    <td>Google Drive + Discord</td>
+                                    <td>First week of month</td>
+                                </tr>
+                                <tr>
+                                    <td>Individual</td>
+                                    <td>Payment confirmation</td>
+                                    <td>PayPal/Wise notification</td>
+                                    <td>Upon payout</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Discord Notification Templates</h3>
+                    
+                    <h4>Pay Run Opening</h4>
+                    <div class="prompt-block">
+                        <div class="prompt-label">📢 Discord Template</div>
+                        <div class="prompt-text">💰 **Pay Run Opened: PAY-YYYYMM-NN**
+
+📅 Period: [Start Date] – [End Date]
+⏰ Time Entry Cutoff: [Cutoff Date/Time]
+
+**Action Required:**
+• Ensure all time entries are logged in ClickUp
+• Request approval from your pod lead for any pending entries
+
+Questions? Reply in this thread.</div>
+                    </div>
+
+                    <h4>Approval Request</h4>
+                    <div class="prompt-block">
+                        <div class="prompt-label">📢 Discord Template</div>
+                        <div class="prompt-text">✅ **Pay Run Ready for Approval: PAY-YYYYMM-NN**
+
+📊 **Summary:**
+• Total Payout: $X,XXX.XX
+• Team Members: X
+• Comp Events: XX
+
+📋 **Breakdown:**
+• Hourly: $X,XXX.XX
+• Per Deliverable: $XXX.XX
+• Retainers: $X,XXX.XX
+• Adjustments: $XX.XX
+
+🔗 [View Full Pay Run in Notion](link)
+
+@OWNER – Please confirm approval to proceed with payouts.</div>
+                    </div>
+
+                    <h4>Completion Notification</h4>
+                    <div class="prompt-block">
+                        <div class="prompt-label">📢 Discord Template</div>
+                        <div class="prompt-text">🎉 **Pay Run Complete: PAY-YYYYMM-NN**
+
+✅ All payouts executed successfully
+💵 Total Distributed: $X,XXX.XX
+👥 Team Members Paid: X
+
+Funds should arrive in your accounts within 1-3 business days depending on your payment method.
+
+Questions about your payment? DM me directly.</div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Minimum Quality Bar for Handoff Acceptance</h3>
+                    <ul class="checklist">
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>Time entries:</strong> All entries approved by pod lead, no "Pending" status</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>Deliverables:</strong> Task status = "Complete" in ClickUp with valid completion date</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>Winner status:</strong> Product must have P3_Winner status in Product OS before bonus calculation</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>Rate tables:</strong> Current rates with valid Effective_From date in People & Roles DB</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>Adjustments:</strong> Written OWNER approval on file before processing</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 7: KPIs & QUALITY BAR
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-7">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">7</span>
+                <h2 class="section-title">KPIs & Quality Bar</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="content-block">
+                    <h3>Primary KPIs</h3>
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-value">≥99%</div>
+                            <div class="kpi-label">Pay Run Accuracy</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">100%</div>
+                            <div class="kpi-label">On-Time Payout Rate</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">&lt;1%</div>
+                            <div class="kpi-label">Reconciliation Variance</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-value">100%</div>
+                            <div class="kpi-label">Comp Event Coverage</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>KPI Definitions & Measurement</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>KPI</th>
+                                    <th>Definition</th>
+                                    <th>Measurement</th>
+                                    <th>Frequency</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Pay Run Accuracy</strong></td>
+                                    <td>% of comp events calculated correctly (no post-payout corrections needed)</td>
+                                    <td>1 - (Corrections / Total Comp Events)</td>
+                                    <td>Per pay run</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>On-Time Payout</strong></td>
+                                    <td>% of payouts executed by scheduled date</td>
+                                    <td>On-Time Pay Runs / Total Pay Runs</td>
+                                    <td>Monthly</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Reconciliation Variance</strong></td>
+                                    <td>Difference between calculated and actual payout amounts</td>
+                                    <td>|Calculated - Actual| / Calculated</td>
+                                    <td>Per pay run</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Comp Event Coverage</strong></td>
+                                    <td>% of eligible work captured in comp events</td>
+                                    <td>Comp Events Created / Expected Comp Events</td>
+                                    <td>Per pay run</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Quality Standards: Good vs. Needs Improvement</h3>
+                    
+                    <h4>✅ Good Pay Run</h4>
+                    <ul>
+                        <li>All comp events generated within 24 hours of period end</li>
+                        <li>Zero calculation errors requiring post-payout correction</li>
+                        <li>Clear audit trail linking each comp event to source data</li>
+                        <li>OWNER approval obtained before scheduled payout time</li>
+                        <li>All payouts executed within 4 hours of approval</li>
+                        <li>Complete documentation archived to Drive</li>
+                    </ul>
+
+                    <h4>⚠️ Needs Improvement</h4>
+                    <ul>
+                        <li>Missing comp events discovered after payout</li>
+                        <li>Calculation errors requiring adjustment in next cycle</li>
+                        <li>Delayed approval request causing late payout</li>
+                        <li>Incomplete reconciliation or missing documentation</li>
+                        <li>Team questions about pay that could have been prevented</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout--warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Red Line: Zero Tolerance</div>
+                        <p style="margin-bottom: 0;">Executing payouts <strong>without OWNER approval</strong> or creating comp events for <strong>non-approved compensation types</strong> are immediate escalation triggers regardless of other KPI performance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 8: AI USAGE & PROMPTS
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-8">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">8</span>
+                <h2 class="section-title">AI Usage & Prompt Patterns</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="content-block">
+                    <h3>AI-Assisted Tasks</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Task</th>
+                                    <th>AI Role</th>
+                                    <th>Human Checkpoint</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Data validation</td>
+                                    <td>Flag anomalies in time entries</td>
+                                    <td>Review flagged items before proceeding</td>
+                                </tr>
+                                <tr>
+                                    <td>Calculation verification</td>
+                                    <td>Cross-check comp event math</td>
+                                    <td>Confirm totals match expected ranges</td>
+                                </tr>
+                                <tr>
+                                    <td>Report generation</td>
+                                    <td>Draft monthly finance summaries</td>
+                                    <td>Review accuracy before sharing</td>
+                                </tr>
+                                <tr>
+                                    <td>Notification drafting</td>
+                                    <td>Generate Discord messages</td>
+                                    <td>Verify details before posting</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Ready-to-Use Prompts</h3>
+
+                    <h4>Prompt 1: Time Entry Anomaly Detection</h4>
+                    <div class="prompt-block">
+                        <div class="prompt-label">🤖 AI Prompt</div>
+                        <div class="prompt-text">I have exported time entries from ClickUp for pay period [START] to [END]. Please analyze this data and flag any anomalies:
+
+**Data:**
+[Paste time entry export]
+
+**Flag the following:**
+1. Entries with unusually high hours (>10 hours in a single day)
+2. Entries missing approval status
+3. Duplicate entries (same person, task, date)
+4. Entries outside the pay period dates
+5. Entries without associated task IDs
+
+For each flag, provide: Person, Entry Details, Issue Type, Recommended Action.</div>
+                    </div>
+
+                    <h4>Prompt 2: Comp Event Calculation Check</h4>
+                    <div class="prompt-block">
+                        <div class="prompt-label">🤖 AI Prompt</div>
+                        <div class="prompt-text">Please verify these compensation calculations for pay run [PAY_RUN_ID]:
+
+**Person: [Name]**
+- Hourly: [X] hours × $[Y]/hr = $[Z]
+- Deliverables: [A] units × $[B]/unit = $[C]
+- Retainer: $[D]
+- Total: $[E]
+
+**Previous Pay Run Total:** $[F]
+
+Verify:
+1. Math is correct
+2. Total variance from previous pay run (flag if >30%)
+3. Any unusual patterns
+
+Confirm "VERIFIED" or list issues found.</div>
+                    </div>
+
+                    <h4>Prompt 3: Monthly Report Draft</h4>
+                    <div class="prompt-block">
+                        <div class="prompt-label">🤖 AI Prompt</div>
+                        <div class="prompt-text">Generate a monthly finance summary for [MONTH YEAR] using this data:
+
+**Pay Runs Completed:** [List with totals]
+**By Comp Type:**
+- Hourly: $[X]
+- Per Deliverable: $[Y]
+- Per Winner: $[Z]
+- Retainers: $[A]
+- Adjustments: $[B]
+
+**Test Bank Budget:** $4,000-$5,500
+**Actual P1+P2 Spend:** $[C]
+
+Format as:
+1. Executive Summary (2-3 sentences)
+2. Compensation Breakdown table
+3. Budget vs. Actual analysis
+4. Notable items (winners, large adjustments, etc.)
+5. Recommendations (if any)</div>
+                    </div>
+                </div>
+
+                <div class="callout callout--warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Human Checkpoint Required</div>
+                        <p style="margin-bottom: 0;"><strong>Never</strong> execute payouts or create comp events based solely on AI output. All AI-generated calculations and recommendations must be human-verified before action.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 9: TOOLS & SYSTEMS
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-9">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">9</span>
+                <h2 class="section-title">Tools & Systems Reference</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="content-block">
+                    <h3>Primary Tools</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tool</th>
+                                    <th>Use Case</th>
+                                    <th>Key Views / Locations</th>
+                                    <th>Access Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>ClickUp</strong></td>
+                                    <td>Time tracking export, deliverable counts, task management</td>
+                                    <td>P4 -- Ops & PM → Finance & Comp → Comp Runs, Invoices & Payments</td>
+                                    <td>Editor</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Notion</strong></td>
+                                    <td>Comp Events, Pay Runs, People & Roles DBs</td>
+                                    <td>HQ → Section D: Comp Events DB, Pay Runs DB, People & Roles DB</td>
+                                    <td>Editor</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Google Drive</strong></td>
+                                    <td>Archive pay runs, store reports</td>
+                                    <td>/DriveOn Commerce/Finance/Pay Runs/, /Finance/Reports/</td>
+                                    <td>Editor</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Discord</strong></td>
+                                    <td>Team notifications, OWNER approvals</td>
+                                    <td>#p4-finance-comp</td>
+                                    <td>Member</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PayPal / Wise</strong></td>
+                                    <td>Payout execution</td>
+                                    <td>Business account</td>
+                                    <td>Operator (no admin)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Google Sheets</strong></td>
+                                    <td>Calculation worksheets, temp analysis</td>
+                                    <td>/Finance/Worksheets/</td>
+                                    <td>Editor</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-block">
+                    <h3>Notion Database Schemas</h3>
+
+                    <h4>Comp Events DB</h4>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Comp_Event_ID</code></td>
+                                    <td>Title</td>
+                                    <td>CMP-YYYYMM-[PersonCode]-NN</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Person</code></td>
+                                    <td>Relation</td>
+                                    <td>→ People & Roles DB</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Role_ID</code></td>
+                                    <td>Select</td>
+                                    <td>Role performed for this comp</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Comp_Type</code></td>
+                                    <td>Select</td>
+                                    <td>Hourly, Per_Deliverable, Per_Winner, Retainer, Adjustment</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Unit_Ref</code></td>
+                                    <td>Text</td>
+                                    <td>What's being counted (hours, packets, etc.)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Units</code></td>
+                                    <td>Number</td>
+                                    <td>Quantity</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Rate</code></td>
+                                    <td>Number</td>
+                                    <td>Per-unit rate</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Currency</code></td>
+                                    <td>Select</td>
+                                    <td>USD (default)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Calc_Amount</code></td>
+                                    <td>Formula</td>
+                                    <td>Units × Rate</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Source</code></td>
+                                    <td>Select</td>
+                                    <td>ClickUp_Time, ClickUp_Deliverable, Manual_Finance</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Status</code></td>
+                                    <td>Select</td>
+                                    <td>Planned, Approved, Paid</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Pay_Run</code></td>
+                                    <td>Relation</td>
+                                    <td>→ Pay Runs DB</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h4>Pay Runs DB</h4>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Pay_Run_ID</code></td>
+                                    <td>Title</td>
+                                    <td>PAY-YYYYMM-NN</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Period_Start</code></td>
+                                    <td>Date</td>
+                                    <td>First day of pay period</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Period_End</code></td>
+                                    <td>Date</td>
+                                    <td>Last day of pay period</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Status</code></td>
+                                    <td>Select</td>
+                                    <td>Open, Pending_Approval, Approved, Paid, Closed</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Total_Amount</code></td>
+                                    <td>Rollup</td>
+                                    <td>Sum of related Comp Events</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Paid_Date</code></td>
+                                    <td>Date</td>
+                                    <td>When payouts executed</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Approved_By</code></td>
+                                    <td>Person</td>
+                                    <td>OWNER who approved</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 10: ESCALATION & DECISIONS
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-10">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">10</span>
+                <h2 class="section-title">Escalation & Decision Rights</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="content-block">
+                    <h3>Decisions This Role Can Make Alone</h3>
+                    <ul>
+                        <li>Scheduling comp event generation within approved workflows</li>
+                        <li>Choosing time of day to execute approved payouts</li>
+                        <li>Formatting of reports and notifications</li>
+                        <li>Requesting clarification from team members on time entries</li>
+                        <li>Flagging anomalies for review</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Decisions Requiring PM Approval</h3>
+                    <ul>
+                        <li>Changes to pay run schedule (timing, frequency)</li>
+                        <li>Updates to rate tables in People & Roles DB</li>
+                        <li>New team member setup in compensation system</li>
+                        <li>Process improvements to comp workflows</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Decisions Requiring OWNER Approval</h3>
+                    <ul>
+                        <li><strong>All Pay Run payouts</strong> — no exceptions</li>
+                        <li>Any compensation adjustments (positive or negative)</li>
+                        <li>New compensation types or structures</li>
+                        <li>Changes to winner bonus formulas</li>
+                        <li>Exceptions to standard comp policies</li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Escalation Triggers</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Situation</th>
+                                    <th>Escalate To</th>
+                                    <th>Response Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Missing time entry approvals blocking pay run</td>
+                                    <td>PM → Pod Lead</td>
+                                    <td>4 hours</td>
+                                </tr>
+                                <tr>
+                                    <td>Pay run total variance &gt;20% from previous</td>
+                                    <td>OWNER</td>
+                                    <td>Before approval request</td>
+                                </tr>
+                                <tr>
+                                    <td>Disputed compensation amount</td>
+                                    <td>PM → OWNER if unresolved</td>
+                                    <td>24 hours</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment platform issues</td>
+                                    <td>OWNER</td>
+                                    <td>Immediate</td>
+                                </tr>
+                                <tr>
+                                    <td>Request for non-canon comp type</td>
+                                    <td>OWNER</td>
+                                    <td>Before any action</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 11: ONBOARDING CHECKLIST
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-11">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">11</span>
+                <h2 class="section-title">Onboarding Checklist</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="content-block">
+                    <h3>Week 1: Access & Orientation</h3>
+                    <ul class="checklist">
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">ClickUp access: P4 -- Ops & PM space (Editor)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Notion access: HQ workspace, Section D databases (Editor)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Google Drive access: /Finance/ folder (Editor)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Discord access: #p4-finance-comp channel</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">PayPal/Wise operator access (view + send, no admin)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Required Canon Reading</h3>
+                    <ul class="checklist">
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>L1-01</strong> — CaniCol Model v4.0 (economics context)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>L2-03</strong> — Role Registry & WIP Limits (your role definition)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>L3-05</strong> — Time & Payroll Schema (PRIMARY - read thoroughly)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>L3-02</strong> — ClickUp Infra Blueprint (workspace structure)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text"><strong>L3-03</strong> — Notion Infra Blueprint (database locations)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Week 1-2: Shadowing Milestones</h3>
+                    <ul class="checklist">
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Shadow one complete pay run with current Finance lead</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Review last 3 months of Pay Run records in Notion</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Walk through People & Roles DB and understand all comp profiles</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Practice ClickUp time export (sandbox period)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Week 2-3: First Supervised Deliverables</h3>
+                    <ul class="checklist">
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Generate comp events for one pay period (reviewed before approval request)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Draft approval request message (reviewed before sending)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Execute payouts under supervision</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Complete reconciliation for supervised pay run</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>Week 4: First Independent Deliverables</h3>
+                    <ul class="checklist">
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Execute complete pay run independently (spot-checked by PM)</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Handle one ad-hoc adjustment request</span>
+                        </li>
+                        <li>
+                            <span class="checklist-box"></span>
+                            <span class="checklist-text">Generate weekly finance status update</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="content-block">
+                    <h3>30-Day Review Criteria</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Criterion</th>
+                                    <th>Pass Standard</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Canon knowledge</td>
+                                    <td>Can explain 5 comp types and pay run process from memory</td>
+                                </tr>
+                                <tr>
+                                    <td>Pay run execution</td>
+                                    <td>Completed 2+ independent pay runs with &lt;2 errors</td>
+                                </tr>
+                                <tr>
+                                    <td>Tool proficiency</td>
+                                    <td>Navigate ClickUp/Notion/Drive without guidance</td>
+                                </tr>
+                                <tr>
+                                    <td>Communication</td>
+                                    <td>Clear, timely Discord notifications; OWNER reports no confusion</td>
+                                </tr>
+                                <tr>
+                                    <td>Escalation judgment</td>
+                                    <td>Correctly identifies what requires approval vs. independent action</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             SECTION 12: CHANGE LOG
+             ══════════════════════════════════════════════════════════════════════ -->
+        <section class="section-card" id="section-12">
+            <div class="section-header" onclick="toggleSection(this)">
+                <span class="section-num">12</span>
+                <h2 class="section-title">Change Log</h2>
+                <svg class="section-chevron" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+            </div>
+            <div class="section-content">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Author</th>
+                                <th>Changes</th>
+                                <th>Canon Trigger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1.0</strong></td>
+                                <td>2025-12-10</td>
+                                <td>DriveOn SOP Factory</td>
+                                <td>Initial SOP creation per v4.0 canon</td>
+                                <td>L2-03 v1, L3-05 v1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="callout callout--info" style="margin-top: 1rem;">
+                    <span class="callout-icon">📝</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Update Protocol</div>
+                        <p style="margin-bottom: 0;">This SOP must be updated when: (1) L3-05 Time & Payroll Schema changes, (2) L2-03 Role Registry updates this role's definition, (3) New compensation types are added to canon, or (4) Workflow improvements are approved by PM/OWNER.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ══════════════════════════════════════════════════════════════════════
+             FOOTER
+             ══════════════════════════════════════════════════════════════════════ -->
+        <footer class="sop-footer">
+            <div class="footer-brand">DriveOn Commerce</div>
+            <div class="footer-text">
+                SOP: P4-FI-COMP-01 Finance & Comp Ops Specialist | Version 1.0<br>
+                Canon Stack: v4.0 | Generated: December 10, 2025
+            </div>
+        </footer>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         HIDDEN JSON STRUCTURE
+         ══════════════════════════════════════════════════════════════════════ -->
+    <script type="application/json" id="sop-data">
+    {
+        "meta": {
+            "role_id": "P4-FI-COMP-01",
+            "role_name": "Finance & Comp Ops Specialist",
+            "pod": "P4",
+            "pod_name": "Operations & Integration",
+            "role_type": "FINANCE_COMP",
+            "status": "CORE",
+            "cross_pod": true,
+            "default_fte": "0.5-1.0",
+            "owned_gates": ["Comp runs", "Financial hygiene"],
+            "wip_limits": {
+                "concurrent_pay_runs": 1,
+                "concurrent_financial_tasks": "3-5"
+            },
+            "throughput": {
+                "pay_cycles_per_month": "2-4",
+                "includes_reconciliations": true
+            },
+            "upstream_roles": ["All pod members", "PM", "OWNER"],
+            "downstream_roles": ["Team members", "OWNER"],
+            "tools": ["ClickUp", "Notion", "Google Drive", "Discord", "Google Sheets", "PayPal", "Wise"],
+            "primary_kpis": [
+                {"name": "Pay Run Accuracy", "target": "≥99%"},
+                {"name": "On-Time Payout Rate", "target": "100%"},
+                {"name": "Reconciliation Variance", "target": "<1%"},
+                {"name": "Comp Event Coverage", "target": "100%"}
+            ],
+            "version": "1.0",
+            "last_updated": "2025-12-10",
+            "author": "DriveOn SOP Factory",
+            "canon_version": "4.0"
+        },
+        "workspace_bindings": {
+            "clickup": {
+                "space": "P4 -- Ops & PM",
+                "folder": "Finance & Comp",
+                "lists": ["Comp Runs", "Invoices & Payments"]
+            },
+            "notion": {
+                "location": "HQ → Section D",
+                "databases": ["People & Roles", "Comp Events", "Pay Runs"]
+            },
+            "google_drive": {
+                "path": "/DriveOn Commerce/Finance/",
+                "subfolders": ["Pay Runs", "Reports", "Worksheets"]
+            },
+            "discord": {
+                "channel": "#p4-finance-comp"
+            }
+        },
+        "comp_types": [
+            {"type": "Hourly", "formula": "rate_per_hour × hours_tracked", "source": "ClickUp_Time"},
+            {"type": "Per_Deliverable", "formula": "rate_per_unit × units_completed", "source": "ClickUp_Deliverable"},
+            {"type": "Per_Winner", "formula": "flat or % of net_profit", "source": "Manual_Finance"},
+            {"type": "Retainer", "formula": "fixed weekly/monthly", "source": "Manual_Finance"},
+            {"type": "Adjustment", "formula": "manual correction", "source": "Manual_Finance"}
+        ],
+        "id_formats": {
+            "comp_event": "CMP-YYYYMM-[PersonCode]-NN",
+            "pay_run": "PAY-YYYYMM-NN"
+        },
+        "canon_references": {
+            "primary": ["L3-05 Time & Payroll Schema v1"],
+            "secondary": ["L2-03 Role Registry v1", "L3-02 ClickUp Infra v1", "L3-03 Notion Infra v1"],
+            "context": ["L1-01 CaniCol Model v4.0", "L2-02 Pod Overview v1"]
+        }
+    }
+    </script>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         JAVASCRIPT
+         ══════════════════════════════════════════════════════════════════════ -->
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#009999',
+                lineColor: '#666666',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F5F5F5',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            },
+            gantt: {
+                useMaxWidth: true,
+                barHeight: 30,
+                barGap: 8,
+                topPadding: 50,
+                leftPadding: 100,
+                gridLineStartPadding: 50,
+                fontSize: 12,
+                sectionFontSize: 14,
+                numberSectionStyles: 1,
+                axisFormat: '%H:%M'
+            }
+        });
+
+        // Toggle TOC
+        function toggleTOC() {
+            const toggle = document.querySelector('.toc-toggle');
+            const nav = document.getElementById('tocNav');
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            nav.classList.toggle('show');
+        }
+
+        // Toggle Section
+        function toggleSection(header) {
+            const card = header.closest('.section-card');
+            card.classList.toggle('expanded');
+        }
+
+        // Expand all sections on load for better UX
+        document.addEventListener('DOMContentLoaded', function() {
+            // Keep first section expanded, collapse others by default
+            const sections = document.querySelectorAll('.section-card');
+            sections.forEach((section, index) => {
+                if (index > 0) {
+                    section.classList.remove('expanded');
+                }
+            });
+        });
+
+        // Smooth scroll for TOC links
+        document.querySelectorAll('.toc-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                // Expand the section
+                targetSection.classList.add('expanded');
+                
+                // Scroll to section
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                // Close TOC on mobile
+                if (window.innerWidth < 768) {
+                    document.querySelector('.toc-toggle').setAttribute('aria-expanded', 'false');
+                    document.getElementById('tocNav').classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

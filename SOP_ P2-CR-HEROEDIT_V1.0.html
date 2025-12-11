@@ -1,0 +1,1992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2-CR-HEROEDIT - Hero Editor SOP | DriveOn Commerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --porcelain: #F7F9FB;
+            --warm-sand: #F4E8D0;
+            --border-gray: #E0E0E0;
+            --text-secondary: #666666;
+            --success-green: #22C55E;
+            --warning-yellow: #F59E0B;
+            --danger-red: #EF4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--porcelain);
+        }
+
+        header {
+            background: var(--carbon-black);
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .status-chip {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+        }
+
+        nav {
+            position: fixed;
+            left: 0;
+            top: 80px;
+            width: 250px;
+            height: calc(100vh - 80px);
+            background: white;
+            border-right: 1px solid var(--border-gray);
+            padding: 2rem 0;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--carbon-black);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border-left: 3px solid transparent;
+        }
+
+        nav a:hover {
+            background: var(--porcelain);
+            border-left-color: var(--drive-cyan);
+        }
+
+        main {
+            margin-left: 250px;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .hero-summary {
+            background: white;
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .hero-summary h2 {
+            color: var(--drive-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .meta-item {
+            background: var(--porcelain);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--drive-cyan);
+        }
+
+        .meta-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .meta-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+
+        .outcomes-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .outcome-chip {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--porcelain);
+        }
+
+        .section-icon {
+            font-size: 1.5rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.5rem;
+            color: var(--carbon-black);
+        }
+
+        .why-matters {
+            background: var(--porcelain);
+            padding: 1rem;
+            border-left: 4px solid var(--drive-cyan);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .workflow-card {
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: #FAFAFA;
+        }
+
+        .workflow-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .workflow-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+
+        .trigger-badge {
+            background: var(--warm-sand);
+            color: var(--carbon-black);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            padding-left: 2.5rem;
+            position: relative;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1.75rem;
+            height: 1.75rem;
+            background: var(--drive-cyan);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border: 1px solid var(--border-gray);
+            border-radius: 4px;
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0.75rem;
+            font-size: 1.25rem;
+            color: var(--drive-cyan);
+        }
+
+        .callout {
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-constraint {
+            background: #FEF3C7;
+            border-left-color: var(--warning-yellow);
+        }
+
+        .callout-warning {
+            background: #FEE2E2;
+            border-left-color: var(--danger-red);
+        }
+
+        .callout-tip {
+            background: #DBEAFE;
+            border-left-color: var(--drive-cyan);
+        }
+
+        .callout-icon {
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .handoff-card {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #008B8B 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .handoff-card h4 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .handoff-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .handoff-role {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .handoff-arrow {
+            font-size: 2rem;
+        }
+
+        .code-block {
+            background: var(--carbon-black);
+            color: #00FF00;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--drive-cyan);
+        }
+
+        .timeline-block {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-block::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--drive-cyan);
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+
+        .timeline-time {
+            font-weight: 700;
+            color: var(--drive-cyan);
+            margin-bottom: 0.25rem;
+        }
+
+        .timeline-content {
+            background: var(--porcelain);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border-gray);
+        }
+
+        th {
+            background: var(--carbon-black);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background: var(--porcelain);
+        }
+
+        .mermaid {
+            background: white;
+            padding: 2rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+
+        details {
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: white;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--drive-cyan);
+            user-select: none;
+            padding: 0.5rem;
+        }
+
+        summary:hover {
+            background: var(--porcelain);
+            border-radius: 4px;
+        }
+
+        details[open] summary {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                transform: translateX(-100%);
+                z-index: 200;
+            }
+
+            nav.open {
+                transform: translateX(0);
+            }
+
+            main {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .handoff-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .handoff-arrow {
+                transform: rotate(90deg);
+            }
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .kpi-card {
+            background: var(--porcelain);
+            padding: 1.5rem;
+            border-radius: 6px;
+            border-top: 4px solid var(--drive-cyan);
+        }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+
+        .kpi-note {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>P2-CR-HEROEDIT · Hero Editor</h1>
+                <span class="status-chip">CORE · ACTIVE</span>
+            </div>
+            <div style="font-size: 0.875rem; color: #CCCCCC;">
+                Version 1.0 · Dec 2025 · DriveOn Commerce
+            </div>
+        </div>
+    </header>
+
+    <nav id="nav">
+        <ul>
+            <li><a href="#summary">Role Summary</a></li>
+            <li><a href="#purpose">Purpose & Context</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day-in-life">Day-in-the-Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">KPIs & Quality Bar</a></li>
+            <li><a href="#ai-usage">AI Usage</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation & Decisions</a></li>
+            <li><a href="#onboarding">Onboarding Checklist</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero-summary" id="summary">
+            <h2>🎬 Hero Editor · P2-CR-HEROEDIT</h2>
+            <p style="font-size: 1.125rem; margin-bottom: 1.5rem;">
+                You are the <strong>primary video editor</strong> for DriveOn Commerce's P1/P2 testing engine. Your edits are the first thing cold audiences see — they must stop scrolls, communicate value in 3 seconds, and drive depth events (ATC/IC/Purchase) within tight P1 budgets.
+            </p>
+
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Role ID</div>
+                    <div class="meta-value">P2-CR-HEROEDIT-XX</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Pod</div>
+                    <div class="meta-value">P2 · Creative Factory</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">FTE</div>
+                    <div class="meta-value">1.0 (Full-Time)</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Status</div>
+                    <div class="meta-value">CORE · CrossPod</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">WIP Cap</div>
+                    <div class="meta-value">4-6 products<br>6-8 hero edits</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Throughput</div>
+                    <div class="meta-value">8-12 hero edits/week</div>
+                </div>
+            </div>
+
+            <h3 style="margin: 1.5rem 0 1rem; font-size: 1.25rem;">Key Outcomes You Own</h3>
+            <div class="outcomes-list">
+                <div class="outcome-chip">✓ P1 hero video creatives</div>
+                <div class="outcome-chip">✓ P2 iteration variants</div>
+                <div class="outcome-chip">✓ First 3-second hooks</div>
+                <div class="outcome-chip">✓ Test-ready export formats</div>
+                <div class="outcome-chip">✓ On-brief, on-time delivery</div>
+            </div>
+        </section>
+
+        <section class="section" id="purpose">
+            <div class="section-header">
+                <span class="section-icon">🎯</span>
+                <h3>Purpose & Context</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Role Exists:</strong> The CaniCol v4.0 model tests 45-60 products/month at $40-60 P1 budgets. Most products die at P1. Your hero edits must communicate maximum value in minimal time and spend, giving each product its best shot at passing CTR/CPC thresholds.
+            </div>
+
+            <h4 style="margin: 1.5rem 0 1rem;">How You Support DriveOn's Mission</h4>
+            <p style="margin-bottom: 1rem;">
+                DriveOn Commerce runs a <strong>lean-volume testing engine</strong>, not a "bet big on one winner" model. Your role is critical because:
+            </p>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li><strong>Volume Matters:</strong> Pod 2 must produce 250-400 assets/month. You handle the "hero" tier — the highest-quality, primary test creatives (typically 2-3 per product).</li>
+                <li><strong>First Impressions Win:</strong> With $40-60 P1 budgets, we get ~2,000 impressions per product. If the first 3 seconds don't hook, CTR tanks and CPC spikes.</li>
+                <li><strong>Testing Rigor:</strong> Your edits feed P1 tests that use hard numeric thresholds (CTR ≥1.3%, CPC ≤$1.20, depth events). Every frame choice impacts these metrics.</li>
+                <li><strong>Economic Discipline:</strong> Pod 2 creative time is limited. You focus on hero edits; volume editors handle variants. This division keeps quality high and WIP manageable.</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Connection to Holdings & Brand</h4>
+            <p>
+                All DriveOn entities share a <strong>systems-first, anti-hype</strong> positioning (see L2-08 Brand Platform). Your edits must:
+            </p>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li>Avoid fake urgency, countdown timers, or dark patterns</li>
+                <li>Focus on clarity, benefit, and authenticity</li>
+                <li>Match the product's niche/tone (e.g., wellness vs fitness vs golf)</li>
+            </ul>
+        </section>
+
+        <section class="section" id="canon">
+            <div class="section-header">
+                <span class="section-icon">⚖️</span>
+                <h3>Canon Constraints</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> These constraints are binding. Violating them breaks the CaniCol model's economics and could kill profitable products due to bad creative execution.
+            </div>
+
+            <div class="callout callout-constraint">
+                <strong><span class="callout-icon">⚠️</span> L1-01 Economic Constraints</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>P1 Budget:</strong> $40-60 per product (your edits must perform within this)</li>
+                    <li><strong>P1+P2 Total:</strong> $70-120 max (rare Tier-S exception to $150-200)</li>
+                    <li><strong>Test Bank:</strong> ~$4,000-5,500/month total P1+P2 spend across 45-60 products</li>
+                    <li><strong>Hit Rate:</strong> 4-6% true winners (~2-4 products/month reach P3)</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-constraint">
+                <strong><span class="callout-icon">📊</span> L2-03 WIP & Throughput</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>Your WIP Cap:</strong> 4-6 products in active editing; 6-8 hero edits in progress concurrently</li>
+                    <li><strong>Your Weekly Throughput:</strong> 8-12 hero edits/week (final, exported, ready for upload)</li>
+                    <li><strong>Pod 2 Total:</strong> 250-400 assets/month across all editors/designers</li>
+                    <li><strong>Never exceed WIP:</strong> If you hit 6 products, pause intake until handoffs clear</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-constraint">
+                <strong><span class="callout-icon">🎨</span> L2-05 Testing Canon (Metrics Your Edits Impact)</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>P1 Pass Threshold:</strong> CTR ≥1.3% OR CPC ≤$1.20 + at least 1 depth event (ATC/IC/Purchase)</li>
+                    <li><strong>P1 Kill Threshold:</strong> CTR <0.8% OR CPC >$2.00 OR (CTR <1.0% + zero depth events)</li>
+                    <li><strong>Your Responsibility:</strong> First 3 seconds must hook; value prop must be clear by 5 seconds</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-constraint">
+                <strong><span class="callout-icon">🎬</span> Creative Volume Per Product (L2-03)</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>P1 Baseline:</strong> 4-6 creatives per product (you produce 2-3 hero edits; volume editors handle others)</li>
+                    <li><strong>P2 (if P1 passes):</strong> +2-4 new variants based on P1 performance data</li>
+                    <li><strong>Total per product:</strong> ~6-10 creatives across P1+P2</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-warning">
+                <strong><span class="callout-icon">🚫</span> What You Cannot Do</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>Don't guess briefs:</strong> Wait for Creative Director approval before starting edits</li>
+                    <li><strong>Don't ignore scripts:</strong> Copy owns hooks/scripts; you must match the approved copy</li>
+                    <li><strong>Don't over-produce:</strong> If brief says "15s simple hook," don't make a 60s mini-doc</li>
+                    <li><strong>Don't silently park work:</strong> If blocked, escalate to Creative Director immediately</li>
+                    <li><strong>Don't bypass handoff templates:</strong> Use Discord #p2-edits-hero handoff format (see §Handoffs)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="day-in-life">
+            <div class="section-header">
+                <span class="section-icon">📅</span>
+                <h3>Day-in-the-Life Timeline</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> A predictable daily structure keeps you in flow, prevents context-switching chaos, and ensures handoffs happen on time for downstream Media Buyers.
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-block">
+                    <div class="timeline-time">9:00 AM - 9:30 AM · Morning Setup</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Prioritization & context load<br>
+                        <strong>Actions:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Check #p2-edits-hero Discord for overnight updates</li>
+                            <li>Review ClickUp "Hero Edits - Active" view (sorted by due date)</li>
+                            <li>Identify 2-3 products to complete today</li>
+                            <li>Download any new raw footage/b-roll from Drive</li>
+                            <li>Start ClickUp time tracking on first task</li>
+                        </ul>
+                        <strong>Output:</strong> Clear daily plan + time tracking started
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">9:30 AM - 12:30 PM · Deep Work Block 1 (Hero Editing)</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Primary editing session (3 hours uninterrupted)<br>
+                        <strong>Actions:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Work on 1-2 hero edits (first 3-second hooks, transitions, CTA)</li>
+                            <li>Apply Creative Director feedback from previous review cycles</li>
+                            <li>Export first draft and upload to Drive /04_Exports/P1_Tests/</li>
+                            <li>Update ClickUp task status (Active → Review)</li>
+                        </ul>
+                        <strong>Output:</strong> 1-2 hero edits ready for Creative Director review
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">12:30 PM - 1:30 PM · Lunch & Review</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Break + async creative review<br>
+                        <strong>Actions:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Step away from editing to reset eyes/perspective</li>
+                            <li>Review performance data from Pod 3 (what's working in live tests)</li>
+                            <li>Check Discord for Creative Director notes on submitted edits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">1:30 PM - 4:00 PM · Deep Work Block 2 (Revisions & New Edits)</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Incorporate feedback + start next batch<br>
+                        <strong>Actions:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Address Creative Director feedback (re-edit hooks, adjust pacing)</li>
+                            <li>Begin 1-2 new hero edits for tomorrow's pipeline</li>
+                            <li>Organize project files in Drive (move to 03_Project_Files/)</li>
+                            <li>Export approved final versions to /04_Exports/P1_Tests/</li>
+                        </ul>
+                        <strong>Output:</strong> 1-2 final approved edits + 1-2 new WIP edits started
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">4:00 PM - 5:00 PM · Handoffs & Admin</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Handoff to Media Buyers + daily closeout<br>
+                        <strong>Actions:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Post handoff messages in #p2-edits-hero for all completed edits</li>
+                            <li>Update ClickUp tasks (Review → Done; assign to Media Buyer)</li>
+                            <li>Stop time tracking on all active tasks</li>
+                            <li>Quick standup note in #p2-edits-hero: "Completed X edits, WIP Y, blocked Z"</li>
+                        </ul>
+                        <strong>Output:</strong> Clean handoffs + accurate ClickUp statuses + time logged
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">5:00 PM - 5:30 PM · Buffer & Planning</div>
+                    <div class="timeline-content">
+                        <strong>Focus:</strong> Next-day prep + overflow work<br>
+                        <strong>Actions:</strong>
+                        <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                            <li>Preview tomorrow's ClickUp queue</li>
+                            <li>Pre-download assets for tomorrow's edits</li>
+                            <li>Flag any blockers (missing footage, unclear briefs) to Creative Director</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout callout-tip">
+                <strong><span class="callout-icon">💡</span> Pro Tips for Flow</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>Batch similar edits:</strong> If you have 3 edits for similar products (e.g., all fitness), group them in one session to reuse techniques</li>
+                    <li><strong>Protect deep work blocks:</strong> Turn off non-urgent notifications 9:30-12:30 and 1:30-4:00</li>
+                    <li><strong>Review performance data:</strong> Spend 15 minutes daily checking what's working in live P1 tests (CTR, thumb-stop rate)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="workflows">
+            <div class="section-header">
+                <span class="section-icon">⚙️</span>
+                <h3>Core Workflows</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> These are your repeatable processes. Master them to maintain 8-12 edits/week without burnout or quality loss.
+            </div>
+
+            <!-- Workflow 1 -->
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <h4 class="workflow-title">Workflow 1: Produce P1 Hero Edit (New Product)</h4>
+                    <span class="trigger-badge">TRIGGER: Creative Director assigns brief</span>
+                </div>
+
+                <h5 style="margin: 1rem 0 0.5rem;">Inputs</h5>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>ClickUp Task:</strong> "P1 Hero Edit - [Product_ID]" (in "Hero Edits" list, status = "Active")</li>
+                    <li><strong>Notion:</strong> Product OS page (Product_ID, niche, AOV, target audience)</li>
+                    <li><strong>Drive:</strong> /03_P2_Creative/Products/[Product_ID]/01_Briefs/P1_Creative_Brief.pdf</li>
+                    <li><strong>Drive:</strong> /03_P2_Creative/Products/[Product_ID]/02_Raw_Footage_and_UGC/ (all source files)</li>
+                    <li><strong>From Copy:</strong> Approved scripts/hooks in brief or Notion "Scripts" property</li>
+                </ul>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Steps</h5>
+                <ol class="step-list">
+                    <li><strong>Load context:</strong> Read P1 Creative Brief. Note: hook angle, first 3-second strategy, CTA, format (9:16 vs 16:9 vs 1:1).</li>
+                    <li><strong>Import assets:</strong> Download all raw footage/b-roll from Drive /02_Raw_Footage_and_UGC/ into your editing software (CapCut/Premiere).</li>
+                    <li><strong>Structure timeline:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>0-3 seconds: Hook (pattern interrupt, problem/benefit)</li>
+                            <li>3-10 seconds: Value prop (what it is, why it matters)</li>
+                            <li>10-20 seconds: Social proof or demo</li>
+                            <li>20-30 seconds: CTA + offer</li>
+                        </ul>
+                    </li>
+                    <li><strong>Edit first pass:</strong> Focus on pacing, clarity, and script adherence. Use jump cuts, b-roll overlays, text overlays as specified in brief.</li>
+                    <li><strong>Apply brand guardrails:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>No fake countdown timers or scarcity</li>
+                            <li>No over-hyped language ("miracle," "secret," "life-changing")</li>
+                            <li>Clean, modern aesthetic (avoid neon overload, meme clutter)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Export first draft:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Format: MP4, H.264, 1080p minimum</li>
+                            <li>Naming: CRT-[Product_ID]-P1-HERO-v1.mp4</li>
+                            <li>Save to: Drive /03_P2_Creative/Products/[Product_ID]/04_Exports/P1_Tests/</li>
+                        </ul>
+                    </li>
+                    <li><strong>Request review:</strong> Update ClickUp task status to "Review" and assign to Creative Director. Post in #p2-edits-hero:
+                        <div class="code-block">
+🎬 [REVIEW REQUEST]
+Product: PRD-20251208-042
+Edit: CRT-PRD-20251208-042-P1-HERO-v1
+Drive: [link]
+ClickUp: [task link]
+Notes: First pass on sleep guard hook. Used "tired of waking up" angle per brief.
+                        </div>
+                    </li>
+                    <li><strong>Iterate on feedback:</strong> Creative Director will either approve or request changes. If changes: re-edit, export v2, re-submit. Typical cycle: 1-2 revisions.</li>
+                    <li><strong>Final approval:</strong> Once Creative Director approves, update ClickUp status to "Approved" and save final file as CRT-[Product_ID]-P1-HERO-FINAL.mp4</li>
+                </ol>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Outputs</h5>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>Drive:</strong> Final approved edit in /04_Exports/P1_Tests/</li>
+                    <li><strong>ClickUp:</strong> Task status = "Done," assigned to Media Buyer</li>
+                    <li><strong>Project File:</strong> Saved to /03_Project_Files/ for future P2 iterations</li>
+                </ul>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Quality Checks</h5>
+                <ul class="checklist">
+                    <li>First 3 seconds hook visually and align with script</li>
+                    <li>Audio levels balanced (voiceover, music, SFX)</li>
+                    <li>No watermarks or non-compliant elements</li>
+                    <li>CTA is clear and matches brief (e.g., "Shop Now," "Learn More")</li>
+                    <li>Export format matches platform spec (9:16 for TikTok/Reels, 16:9 for YouTube, 1:1 for Feed)</li>
+                </ul>
+            </div>
+
+            <!-- Workflow 2 -->
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <h4 class="workflow-title">Workflow 2: Produce P2 Iteration Variants</h4>
+                    <span class="trigger-badge">TRIGGER: P1 passes + Creative Director requests P2 variants</span>
+                </div>
+
+                <h5 style="margin: 1rem 0 0.5rem;">Inputs</h5>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>P1 Performance Data:</strong> From Pod 3 (CTR, CPC, which hooks worked)</li>
+                    <li><strong>Creative Director Brief:</strong> "Test new hook" OR "iterate on winning creative"</li>
+                    <li><strong>Existing P1 Project File:</strong> Drive /03_Project_Files/[Product_ID]/P1_HERO_v1.prproj (or .capcut)</li>
+                </ul>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Steps</h5>
+                <ol class="step-list">
+                    <li><strong>Review P1 data:</strong> Check Pod 3 performance summary. Identify which creative had best CTR/CPC and why (first 3s? specific hook? format?).</li>
+                    <li><strong>Load P1 project file:</strong> Open existing project from /03_Project_Files/. Duplicate timeline.</li>
+                    <li><strong>Apply P2 strategy:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>If testing new hook:</strong> Replace first 3-10 seconds with new angle (e.g., problem-based → benefit-based)</li>
+                            <li><strong>If iterating on winner:</strong> Keep hook, adjust middle section (add testimonial, change demo angle, test different CTA)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Export P2 variants:</strong> Typically 2-4 new versions. Naming: CRT-[Product_ID]-P2-HERO-v1/v2/v3.mp4</li>
+                    <li><strong>Save to Drive:</strong> /04_Exports/P2_Tests/</li>
+                    <li><strong>Request review:</strong> Post in #p2-edits-hero with comparison to P1 performance</li>
+                </ol>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Outputs</h5>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>Drive:</strong> 2-4 P2 variant edits in /04_Exports/P2_Tests/</li>
+                    <li><strong>ClickUp:</strong> P2 task status = "Done"</li>
+                    <li><strong>Discord:</strong> Handoff message with P1 vs P2 comparison notes</li>
+                </ul>
+            </div>
+
+            <!-- Workflow 3 -->
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <h4 class="workflow-title">Workflow 3: Daily Handoff to Media Buyers</h4>
+                    <span class="trigger-badge">TRIGGER: End of editing block (4-5 PM daily)</span>
+                </div>
+
+                <h5 style="margin: 1rem 0 0.5rem;">Steps</h5>
+                <ol class="step-list">
+                    <li><strong>Collect completed edits:</strong> List all edits exported and approved today.</li>
+                    <li><strong>Post handoff in #p2-edits-hero:</strong> Use canonical template (see §Handoffs below).</li>
+                    <li><strong>Update ClickUp:</strong> Change task status from "Review" to "Done"; reassign to Media Buyer (P3 role).</li>
+                    <li><strong>Verify Drive links:</strong> Ensure all files are in /04_Exports/ and shareable.</li>
+                </ol>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Quality Check</h5>
+                <ul class="checklist">
+                    <li>All edits have correct file naming (CRT-[Product_ID]-P1/P2-HERO-FINAL.mp4)</li>
+                    <li>ClickUp tasks updated with Drive links</li>
+                    <li>Handoff message includes Product_ID, CRT_ID, and any special notes</li>
+                </ul>
+            </div>
+
+            <!-- Workflow 4 -->
+            <div class="workflow-card">
+                <div class="workflow-header">
+                    <h4 class="workflow-title">Workflow 4: Performance Review & Learning Loop</h4>
+                    <span class="trigger-badge">TRIGGER: Weekly (Friday afternoon or Monday morning)</span>
+                </div>
+
+                <h5 style="margin: 1rem 0 0.5rem;">Purpose</h5>
+                <p style="margin: 0.5rem 0;">
+                    Review what worked and what didn't in last week's P1 tests to improve future edits.
+                </p>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Steps</h5>
+                <ol class="step-list">
+                    <li><strong>Pull P1 performance data:</strong> Ask Media Buyer or check Pod 3 dashboard for last week's P1 results (CTR, CPC, pass/fail).</li>
+                    <li><strong>Map edits to outcomes:</strong> Which of your hero edits had CTR >1.3%? Which failed (<0.8%)? What were the hook patterns?</li>
+                    <li><strong>Identify patterns:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Did problem-based hooks outperform benefit-based?</li>
+                            <li>Did UGC-style work better than polished b-roll?</li>
+                            <li>Did text overlays help or hurt thumb-stop rate?</li>
+                        </ul>
+                    </li>
+                    <li><strong>Document learnings:</strong> Update a shared Notion page "Hero Edit Playbook" with 2-3 takeaways.</li>
+                    <li><strong>Share with Creative Director:</strong> Brief async message in #p2-edits-hero: "This week: problem hooks +20% CTR vs benefit hooks. Recommend more problem-first for next batch."</li>
+                </ol>
+
+                <h5 style="margin: 1.5rem 0 0.5rem;">Output</h5>
+                <ul style="margin-left: 1.5rem; line-height: 1.8;">
+                    <li><strong>Notion:</strong> Updated "Hero Edit Playbook" with data-backed patterns</li>
+                    <li><strong>Next week's edits:</strong> Apply learnings to improve CTR/CPC performance</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="handoffs">
+            <div class="section-header">
+                <span class="section-icon">🔄</span>
+                <h3>Handoffs & Interface Specs</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> Clean handoffs prevent bottlenecks. Media Buyers need exact file locations, product context, and CRT IDs to launch tests on time.
+            </div>
+
+            <!-- Handoff 1: From Creative Director -->
+            <div class="handoff-card">
+                <h4>Incoming: Creative Director → You (New Brief Assignment)</h4>
+                <div class="handoff-grid">
+                    <div class="handoff-role">
+                        <strong>FROM</strong><br>
+                        Creative Director<br>
+                        (P2-CR-DIRECTOR-XX)
+                    </div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-role">
+                        <strong>TO</strong><br>
+                        You (Hero Editor)<br>
+                        (P2-CR-HEROEDIT-XX)
+                    </div>
+                </div>
+                
+                <strong>Trigger:</strong> R3 product packet approved, Creative Director creates P1 brief<br>
+                <strong>Channel:</strong> Discord #p2-briefs + ClickUp assignment<br>
+                
+                <strong>Required Inputs:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>ClickUp task "P1 Hero Edit - [Product_ID]" (status = "To Do," assigned to you)</li>
+                    <li>Notion Product OS page link (Product_ID, niche, AOV, audience)</li>
+                    <li>Drive P1 Creative Brief (angles, hooks, formats, reference examples)</li>
+                    <li>Drive raw footage/b-roll folder (/02_Raw_Footage_and_UGC/)</li>
+                </ul>
+
+                <strong>Acceptance Criteria:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Brief is complete (no "TBD" fields)</li>
+                    <li>Raw footage is uploaded and organized by Asset Sourcer</li>
+                    <li>Scripts/hooks are approved by Copywriter</li>
+                </ul>
+
+                <strong>Your Response:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Acknowledge in Discord #p2-edits-hero: "Brief received for [Product_ID]. ETA first draft: [date]."</li>
+                    <li>Update ClickUp task status to "Active" and start time tracking</li>
+                </ul>
+            </div>
+
+            <!-- Handoff 2: To Creative Director -->
+            <div class="handoff-card">
+                <h4>Outgoing: You → Creative Director (Review Request)</h4>
+                <div class="handoff-grid">
+                    <div class="handoff-role">
+                        <strong>FROM</strong><br>
+                        You (Hero Editor)<br>
+                        (P2-CR-HEROEDIT-XX)
+                    </div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-role">
+                        <strong>TO</strong><br>
+                        Creative Director<br>
+                        (P2-CR-DIRECTOR-XX)
+                    </div>
+                </div>
+                
+                <strong>Trigger:</strong> You complete first draft of hero edit<br>
+                <strong>Channel:</strong> Discord #p2-edits-hero + ClickUp status change<br>
+                
+                <strong>Handoff Template (Discord):</strong>
+                <div class="code-block">
+🎬 [REVIEW REQUEST]
+From: @YourName (P2-CR-HEROEDIT-XX)
+To: @CreativeDirector (P2-CR-DIRECTOR-XX)
+Product ID: PRD-YYYYMMDD-XXX
+Creative ID: CRT-PRD-YYYYMMDD-XXX-P1-HERO-v1
+ClickUp Task: [task link]
+Drive Link: [/04_Exports/P1_Tests/ link]
+
+Summary:
+- Hook: [describe first 3-second approach]
+- Format: [9:16 / 16:9 / 1:1]
+- Duration: [15s / 30s / 60s]
+- Script adherence: [on-brief / minor deviation noted]
+
+Notes:
+- [Any creative choices or blockers]
+- [Questions for director]
+
+Ready for review by: [timestamp]
+                </div>
+
+                <strong>ClickUp Actions:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Status: "Active" → "Review"</li>
+                    <li>Assignee: Creative Director</li>
+                    <li>Add Drive link to task description</li>
+                </ul>
+            </div>
+
+            <!-- Handoff 3: To Media Buyers -->
+            <div class="handoff-card">
+                <h4>Outgoing: You → Media Buyers (Final Approved Edits)</h4>
+                <div class="handoff-grid">
+                    <div class="handoff-role">
+                        <strong>FROM</strong><br>
+                        You (Hero Editor)<br>
+                        (P2-CR-HEROEDIT-XX)
+                    </div>
+                    <div class="handoff-arrow">→</div>
+                    <div class="handoff-role">
+                        <strong>TO</strong><br>
+                        Media Buyer<br>
+                        (P3-MB-BUYER-XX)
+                    </div>
+                </div>
+                
+                <strong>Trigger:</strong> Creative Director approves edit; ready for P1 test upload<br>
+                <strong>Channel:</strong> Discord #p3-p1-tests (cross-pod handoff) + ClickUp<br>
+                
+                <strong>Handoff Template (Discord):</strong>
+                <div class="code-block">
+✅ [HANDOFF - P1 HERO EDITS READY]
+From: @YourName (P2-CR-HEROEDIT-XX)
+To: @MediaBuyer (P3-MB-BUYER-XX)
+Product ID: PRD-YYYYMMDD-XXX
+Gate: P1 (Smoke Test)
+ClickUp Task: [task link]
+Notion Page: [Product OS link]
+Drive Folder: /03_P2_Creative/Products/[Product_ID]/04_Exports/P1_Tests/
+
+Creatives:
+- CRT-PRD-YYYYMMDD-XXX-P1-HERO-v1.mp4 (Hook: [summary])
+- CRT-PRD-YYYYMMDD-XXX-P1-HERO-v2.mp4 (Hook: [summary])
+- CRT-PRD-YYYYMMDD-XXX-P1-HERO-v3.mp4 (Hook: [summary])
+
+Total: 3 hero edits
+Format: 9:16 (TikTok/Reels primary)
+Duration: 15-30s each
+Brief: [link to P1 Creative Brief]
+
+Special Notes:
+- [Any platform-specific considerations]
+- [Recommended test sequence if applicable]
+
+Deadline/SLA: Ready for immediate upload
+                </div>
+
+                <strong>ClickUp Actions:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>Status: "Review" → "Done"</li>
+                    <li>Assignee: Media Buyer (Pod 3)</li>
+                    <li>Add all Drive links + CRT IDs to task</li>
+                    <li>Stop time tracking</li>
+                </ul>
+
+                <strong>Minimum Quality Bar:</strong>
+                <ul style="margin-top: 0.5rem;">
+                    <li>All edits approved by Creative Director</li>
+                    <li>Correct file naming (CRT-[Product_ID]-P1-HERO-FINAL.mp4)</li>
+                    <li>Export format matches platform spec (resolution, aspect ratio, codec)</li>
+                    <li>No watermarks, draft elements, or non-compliant content</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-warning">
+                <strong><span class="callout-icon">⚠️</span> Handoff Rejection Protocol</strong>
+                <p style="margin-top: 0.5rem;">
+                    If Media Buyer receives incomplete handoff (missing files, wrong format, unclear CRT IDs), they are allowed to push back. You must fix within 2 hours or escalate to Creative Director. Repeated handoff failures impact your performance review.
+                </p>
+            </div>
+        </section>
+
+        <section class="section" id="kpis">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h3>KPIs & Quality Bar</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> These metrics determine your performance review, compensation adjustments, and whether you're meeting CaniCol model throughput requirements.
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-label">Weekly Throughput</div>
+                    <div class="kpi-value">8-12</div>
+                    <div class="kpi-note">Hero edits completed and handed off per week (final, approved, exported)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">WIP Discipline</div>
+                    <div class="kpi-value">4-6</div>
+                    <div class="kpi-note">Products in active editing; never exceed 6 concurrently</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">On-Time Delivery</div>
+                    <div class="kpi-value">≥90%</div>
+                    <div class="kpi-note">% of edits delivered by ClickUp due date (or within 24h of brief assignment for P1)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">First-Pass Approval Rate</div>
+                    <div class="kpi-value">≥70%</div>
+                    <div class="kpi-note">% of edits approved by Creative Director without major revisions</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">P1 Creative Performance (Indirect)</div>
+                    <div class="kpi-value">CTR ≥1.3%</div>
+                    <div class="kpi-note">% of your hero edits that meet P1 pass threshold (CTR or CPC). Target: 25-35% of edits contribute to P1_PASS products.</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-label">Handoff Cleanliness</div>
+                    <div class="kpi-value">≥95%</div>
+                    <div class="kpi-note">% of handoffs that don't require Media Buyer follow-up (correct files, naming, links)</div>
+                </div>
+            </div>
+
+            <h4 style="margin: 2rem 0 1rem;">Qualitative Standards (Good vs Bad)</h4>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Dimension</th>
+                        <th style="color: var(--success-green);">✓ Good Example</th>
+                        <th style="color: var(--danger-red);">✗ Bad Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>First 3 Seconds</strong></td>
+                        <td>Pattern interrupt (e.g., "Stop scrolling if you're tired of waking up sore") + quick visual hook (product in use)</td>
+                        <td>Generic talking head with no hook; product not visible until 5+ seconds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Script Adherence</strong></td>
+                        <td>Matches approved copy word-for-word; text overlays reinforce voiceover</td>
+                        <td>Ad-libbed script; mismatched text overlays; missing key benefit</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Brand Compliance</strong></td>
+                        <td>Clean, modern aesthetic; no fake urgency; clear CTA</td>
+                        <td>Countdown timer ("Only 3 left!"); neon text overload; "miracle" language</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pacing</strong></td>
+                        <td>Jump cuts every 2-3 seconds; dynamic but not chaotic; holds attention</td>
+                        <td>Slow, talking-head monologue; no visual variety; viewers drop off</td>
+                    </tr>
+                    <tr>
+                        <td><strong>File Organization</strong></td>
+                        <td>Project files saved in /03_Project_Files/; exports in /04_Exports/; correct CRT naming</td>
+                        <td>Random desktop saves; no version control; generic "video1.mp4" naming</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin: 2rem 0 1rem;">How KPIs Are Measured</h4>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li><strong>Weekly Throughput:</strong> ClickUp task completion count (status = "Done") per week, filtered by your assignee</li>
+                <li><strong>On-Time Delivery:</strong> Compare ClickUp "Done" timestamp vs due date; automated weekly report from PM</li>
+                <li><strong>First-Pass Approval:</strong> Creative Director logs "Approved" vs "Needs Revision" in ClickUp custom field; monthly review</li>
+                <li><strong>P1 Performance:</strong> Media Buyer shares P1 results dashboard; map your CRT IDs to pass/fail outcomes</li>
+                <li><strong>Handoff Cleanliness:</strong> Media Buyer flags incomplete handoffs in Discord; PM tracks monthly</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <strong><span class="callout-icon">💡</span> Performance Review Cadence</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>Weekly:</strong> Self-check throughput (aim for 8-12 edits)</li>
+                    <li><strong>Monthly:</strong> Creative Director reviews first-pass approval rate and creative performance</li>
+                    <li><strong>Quarterly:</strong> Comprehensive review with PM (all KPIs + qualitative feedback)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="ai-usage">
+            <div class="section-header">
+                <span class="section-icon">🤖</span>
+                <h3>AI Usage & Prompt Patterns</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> AI can accelerate your workflow (script refinement, b-roll suggestions, caption generation), but you remain responsible for final output quality and brand compliance.
+            </div>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Where You Use AI in This Role</h4>
+            <ol style="margin-left: 2rem; line-height: 1.8;">
+                <li><strong>Hook Ideation (Brainstorming):</strong> Generate alternative first-3-second hooks based on product brief</li>
+                <li><strong>Script Punching-Up:</strong> Tighten or reframe copy for better flow/pacing</li>
+                <li><strong>Caption/Subtitle Generation:</strong> Auto-transcribe voiceover and create .srt files</li>
+                <li><strong>B-Roll Sourcing Suggestions:</strong> Ask AI for stock footage keywords or scene ideas</li>
+                <li><strong>Performance Analysis:</strong> Summarize P1 data patterns and suggest next iteration angles</li>
+            </ol>
+
+            <h4 style="margin: 2rem 0 1rem;">Ready-to-Copy AI Prompts</h4>
+
+            <details>
+                <summary><strong>Prompt 1: Generate Alternative Hook Ideas</strong></summary>
+                <div class="code-block">
+You are a performance creative strategist for DriveOn Commerce, a lean-volume dropshipping testing engine. We test 45-60 products/month with $40-60 P1 budgets and strict CTR/CPC thresholds (CTR ≥1.3%, CPC ≤$1.20).
+
+I need 5 alternative first-3-second hook ideas for a new product:
+
+**Product:** [Product Name]
+**Niche:** [e.g., Sleep/Recovery]
+**Target Audience:** [e.g., 25-45, fitness enthusiasts, poor sleep]
+**Core Benefit:** [e.g., "Reduces back pain while sleeping"]
+**Current Hook (from brief):** "[existing hook]"
+
+Requirements:
+- Each hook must be 3 seconds or less (7-10 words max)
+- Focus on pattern interrupt or problem identification
+- Avoid hype language ("miracle," "secret," "life-changing")
+- Suggest visual + text overlay for each
+
+Output format:
+Hook 1: [text]
+Visual: [shot description]
+Text Overlay: [on-screen text]
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 2: Tighten Script for Better Pacing</strong></summary>
+                <div class="code-block">
+You are a video editor assistant for performance marketing. I need to tighten this 30-second ad script to improve pacing and maintain viewer attention.
+
+**Original Script:**
+"[paste script]"
+
+**Constraints:**
+- Keep script between 25-30 seconds when read aloud
+- Maintain core benefit and CTA
+- Remove filler words and redundancies
+- Ensure one idea per sentence (no run-ons)
+
+**Brand Guardrails:**
+- Avoid fake urgency or scarcity language
+- No exaggerated claims
+- Clear, direct language (we're not gurus, we're systems-first)
+
+Output:
+- Tightened script with word count
+- Note any cuts or changes you made
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 3: Generate Captions/Subtitles from Voiceover</strong></summary>
+                <div class="code-block">
+You are a subtitle generator. I will provide a video voiceover transcript. Generate .srt formatted subtitles optimized for social media ads (TikTok/Reels).
+
+**Transcript:**
+"[paste transcript or upload audio]"
+
+**Requirements:**
+- Max 2-3 words per subtitle line (for readability on mobile)
+- Sync to natural speech pauses
+- Use simple punctuation (avoid complex formatting)
+- Highlight key benefit words in CAPS (e.g., "SLEEP BETTER")
+
+Output: .srt file format
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 4: B-Roll Sourcing Keyword Suggestions</strong></summary>
+                <div class="code-block">
+You are a b-roll sourcing assistant for performance creative. I need stock footage keyword suggestions for a product ad.
+
+**Product:** [Product Name]
+**Niche:** [e.g., Golf Performance]
+**Target Emotion:** [e.g., Calm, Focused, Energized]
+**Scenes Needed:**
+- Hook (0-3s): [e.g., golfer frustrated on course]
+- Value Prop (3-10s): [e.g., product in use, close-up]
+- Social Proof (10-20s): [e.g., happy user testimonial]
+
+Output:
+- 5-10 stock footage keywords per scene
+- Avoid generic "business people smiling" clichés
+- Focus on authentic, relatable moments
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 5: Analyze P1 Performance & Suggest P2 Iteration</strong></summary>
+                <div class="code-block">
+You are a performance creative analyst for DriveOn Commerce. I need help analyzing P1 test results and suggesting a P2 iteration strategy.
+
+**P1 Results:**
+- Product: [Product Name]
+- CRT-001 (Hook: "Tired of waking up sore?"): CTR 1.5%, CPC $1.10, 3 ATC
+- CRT-002 (Hook: "Sleep better tonight"): CTR 0.9%, CPC $1.80, 0 ATC
+- CRT-003 (Hook: "Doctor-recommended sleep support"): CTR 1.2%, CPC $1.30, 1 ATC
+
+**Question:** Which creative should we iterate on for P2, and what should we test?
+
+**Constraints:**
+- P1 pass threshold: CTR ≥1.3% OR CPC ≤$1.20 + depth event
+- P2 budget: +$40-50 (total P1+P2 = $80-100)
+- We can test 2-4 P2 variants
+
+Output:
+- Recommended P2 strategy (which CRT to iterate on)
+- 2-3 specific variations to test (e.g., new hook, different CTA, format change)
+- Rationale based on P1 data
+                </div>
+            </details>
+
+            <h4 style="margin: 2rem 0 1rem;">Human Checkpoints (Where AI Must Be Reviewed)</h4>
+            <div class="callout callout-warning">
+                <strong><span class="callout-icon">🚨</span> ALWAYS Review AI Outputs For:</strong>
+                <ul style="margin-top: 0.5rem; margin-left: 1.5rem;">
+                    <li><strong>Brand Compliance:</strong> AI may suggest fake urgency, exaggerated claims, or guru language (reject these)</li>
+                    <li><strong>Script Accuracy:</strong> Ensure tightened scripts maintain original benefit and don't introduce errors</li>
+                    <li><strong>Platform Specs:</strong> AI doesn't always know current platform rules (e.g., Meta's 20% text limit on thumbnails)</li>
+                    <li><strong>Creative Judgment:</strong> AI can brainstorm, but final creative decisions require human taste and performance intuition</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="tools">
+            <div class="section-header">
+                <span class="section-icon">🛠️</span>
+                <h3>Tools & Systems Reference</h3>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Views/Lists/DBs</th>
+                        <th>Access Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>CapCut / Premiere Pro</strong></td>
+                        <td>Primary video editing software</td>
+                        <td>Project files saved in Drive /03_Project_Files/</td>
+                        <td>Full</td>
+                    </tr>
+                    <tr>
+                        <td><strong>After Effects</strong></td>
+                        <td>Motion graphics, text animations (optional, for advanced edits)</td>
+                        <td>-</td>
+                        <td>Full</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task management, WIP tracking, time tracking</td>
+                        <td>
+                            <strong>Space:</strong> P2 - Creative<br>
+                            <strong>Folder:</strong> Hero Edits<br>
+                            <strong>List:</strong> Hero Edits - Active, Hero Edits - Review, Hero Edits - Done<br>
+                            <strong>Views:</strong> "Hero Editor Workload" (filtered by your assignee)
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Product context, creative briefs, performance playbooks</td>
+                        <td>
+                            <strong>DB:</strong> Product OS (read-only)<br>
+                            <strong>DB:</strong> Creative Briefs (read/comment)<br>
+                            <strong>Page:</strong> "Hero Edit Playbook" (shared learning doc)
+                        </td>
+                        <td>Viewer + Commenter</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>Asset storage, exports, project file versioning</td>
+                        <td>
+                            <strong>Path:</strong> /03_P2_Creative/Products/[Product_ID]/<br>
+                            - /01_Briefs/<br>
+                            - /02_Raw_Footage_and_UGC/<br>
+                            - /03_Project_Files/<br>
+                            - /04_Exports/P1_Tests/ & P2_Tests/
+                        </td>
+                        <td>Editor (full access to /03_P2_Creative/)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Real-time comms, handoffs, daily standups</td>
+                        <td>
+                            <strong>Channels:</strong><br>
+                            - #p2-edits-hero (your primary channel)<br>
+                            - #p2-briefs (incoming briefs)<br>
+                            - #p3-p1-tests (handoffs to Media Buyers)
+                        </td>
+                        <td>Member (P2_CORE role)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 style="margin: 2rem 0 1rem;">Tool-Specific Notes</h4>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li><strong>ClickUp Time Tracking:</strong> Always track time on tasks, not free-floating. Use "Start Timer" when you begin editing, "Stop Timer" when you switch tasks or take breaks. PM reviews weekly time vs throughput.</li>
+                <li><strong>Drive File Naming:</strong> Follow strict CRT ID format: CRT-[Product_ID]-P1/P2-HERO-v1/v2/FINAL.mp4. Never use generic names like "video1.mp4" or "final_final_v3.mp4".</li>
+                <li><strong>Discord Threads:</strong> For complex products with multiple revisions, create a thread in #p2-edits-hero to keep discussion organized.</li>
+            </ul>
+        </section>
+
+        <section class="section" id="escalation">
+            <div class="section-header">
+                <span class="section-icon">🚨</span>
+                <h3>Escalation & Decision Rights</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> Knowing when to decide vs escalate prevents bottlenecks and protects you from making decisions outside your authority.
+            </div>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Decisions You Can Make Alone</h4>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li>Choice of editing technique (jump cuts, b-roll overlays, transitions) within brief parameters</li>
+                <li>Minor pacing adjustments (e.g., trim 2 seconds from middle section to improve flow)</li>
+                <li>Selection of stock footage or b-roll from approved asset packs</li>
+                <li>Export format details (bitrate, codec) as long as resolution/aspect ratio match brief</li>
+                <li>Requesting clarification from Creative Director on ambiguous brief elements</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Decisions Requiring Creative Director Approval</h4>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li><strong>Major script changes:</strong> Reordering sections, changing hook angle, altering CTA</li>
+                <li><strong>Format changes:</strong> Switching from 9:16 to 16:9, or changing duration (15s → 30s)</li>
+                <li><strong>Brand guardrail questions:</strong> "Is this countdown timer okay?" (Answer: No, but escalate if unsure)</li>
+                <li><strong>Budget/time overruns:</strong> If a product requires >4 hours of editing (significantly above average)</li>
+                <li><strong>Asset gaps:</strong> If raw footage is insufficient or wrong format, escalate to Asset Sourcer via Creative Director</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Decisions Requiring PM / Founder Escalation</h4>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li><strong>WIP cap violation:</strong> If you're consistently hitting 6+ products and can't keep up with 8-12/week throughput</li>
+                <li><strong>Tool/software needs:</strong> Requesting new editing software or plugin purchases</li>
+                <li><strong>Systemic blockers:</strong> If Asset Sourcer is consistently late or Creative Director reviews are taking >48 hours</li>
+                <li><strong>Canon conflicts:</strong> If a Creative Director request violates brand guardrails (e.g., "add fake timer")</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Expected Response Times</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Escalation Type</th>
+                        <th>To Whom</th>
+                        <th>Expected Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Brief clarification</td>
+                        <td>Creative Director</td>
+                        <td>Within 2 hours (same day)</td>
+                    </tr>
+                    <tr>
+                        <td>Review request</td>
+                        <td>Creative Director</td>
+                        <td>Within 24 hours (approve/revise)</td>
+                    </tr>
+                    <tr>
+                        <td>Asset gap (missing footage)</td>
+                        <td>Creative Director → Asset Sourcer</td>
+                        <td>Within 4 hours (urgent) or 24 hours (non-urgent)</td>
+                    </tr>
+                    <tr>
+                        <td>WIP overflow</td>
+                        <td>PM</td>
+                        <td>Within 24 hours (capacity adjustment)</td>
+                    </tr>
+                    <tr>
+                        <td>Canon conflict</td>
+                        <td>PM / Founder</td>
+                        <td>Within 48 hours (canon interpretation)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section" id="onboarding">
+            <div class="section-header">
+                <span class="section-icon">🎓</span>
+                <h3>Onboarding Checklist</h3>
+            </div>
+
+            <div class="why-matters">
+                <strong>Why This Matters:</strong> A structured 30-day ramp ensures you're productive and autonomous by week 5, not fumbling with tools or missing canon constraints.
+            </div>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Phase 1: Access & Context (Days 1-3)</h4>
+            <ul class="checklist">
+                <li><strong>Day 1:</strong> Receive all tool access (ClickUp, Notion, Drive, Discord) and confirm login</li>
+                <li><strong>Day 1:</strong> Read this SOP (P2-CR-HEROEDIT) in full, take notes on canon constraints</li>
+                <li><strong>Day 1:</strong> Review L1-01 CaniCol Model (understand P1/P2/P3 gates and economics)</li>
+                <li><strong>Day 2:</strong> Review L2-05 Testing Canon (memorize P1 pass/kill thresholds: CTR, CPC, depth events)</li>
+                <li><strong>Day 2:</strong> Review L2-08 Brand Platform & Creative Guardrails (know what's banned: fake urgency, hype, etc.)</li>
+                <li><strong>Day 3:</strong> Shadow Creative Director: Sit in on 1-2 brief reviews to see approval process</li>
+                <li><strong>Day 3:</strong> Explore Drive structure (/03_P2_Creative/) and ClickUp Hero Edits lists</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Phase 2: Supervised Editing (Days 4-10)</h4>
+            <ul class="checklist">
+                <li><strong>Day 4-5:</strong> First hero edit (with live Creative Director feedback): Choose a simple product (15s, 9:16, clear brief)</li>
+                <li><strong>Day 6-7:</strong> Second hero edit (with async Creative Director feedback): Practice handoff template in Discord</li>
+                <li><strong>Day 8-10:</strong> Complete 2-3 hero edits independently, submit for review</li>
+                <li><strong>Day 10:</strong> Check-in with Creative Director: Review first-pass approval rate, pacing, and any blockers</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Phase 3: Independent Production (Days 11-20)</h4>
+            <ul class="checklist">
+                <li><strong>Week 3:</strong> Aim for 6-8 hero edits (below full throughput but ramping up)</li>
+                <li><strong>Week 3:</strong> Practice full workflow: brief intake → edit → review → handoff → Drive organization</li>
+                <li><strong>Week 3:</strong> Start tracking time in ClickUp on every task</li>
+                <li><strong>End of Week 3:</strong> Mid-onboarding review with Creative Director: Are you on track for 8-12/week?</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Phase 4: Full Autonomy (Days 21-30)</h4>
+            <ul class="checklist">
+                <li><strong>Week 4:</strong> Hit 8-12 hero edits/week (full throughput)</li>
+                <li><strong>Week 4:</strong> Complete at least one P2 iteration (practice performance-based editing)</li>
+                <li><strong>Week 4:</strong> Participate in weekly performance review loop (analyze P1 data, document learnings)</li>
+                <li><strong>Day 30:</strong> 30-day review with Creative Director + PM: Assess KPIs, approve for independent work</li>
+            </ul>
+
+            <h4 style="margin: 1.5rem 0 1rem;">30-Day Success Criteria</h4>
+            <ul style="margin-left: 2rem; line-height: 1.8;">
+                <li><strong>Throughput:</strong> Consistently delivering 8-12 hero edits/week</li>
+                <li><strong>Quality:</strong> First-pass approval rate ≥60% (will improve to 70%+ after 60 days)</li>
+                <li><strong>Process Adherence:</strong> All handoffs use correct template; all files in correct Drive locations</li>
+                <li><strong>Canon Knowledge:</strong> Can recite P1 pass/kill thresholds and brand guardrails without looking them up</li>
+                <li><strong>Autonomy:</strong> Able to execute full workflow (brief → edit → handoff) without Creative Director supervision</li>
+            </ul>
+        </section>
+
+        <section class="section" id="changelog">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <h3>Change Log</h3>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Change Summary</th>
+                        <th>Linked Canon Updates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1.0</strong></td>
+                        <td>2025-12-08</td>
+                        <td>DriveOn SOP Factory (v4)</td>
+                        <td>Initial SOP creation. Aligns with L1-01 CaniCol v4.0, L2-03 Role Registry, L2-05 Testing Canon, L2-08 Brand Platform.</td>
+                        <td>
+                            L1-01 CaniCol Model v4.0<br>
+                            L2-03 Role Registry v1<br>
+                            L2-05 Testing Canon v4<br>
+                            L2-08 Brand Platform v2.0
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: var(--text-secondary); font-style: italic;">
+                            Future updates will be logged here with version increments and change summaries.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-tip" style="margin-top: 2rem;">
+                <strong><span class="callout-icon">📢</span> SOP Update Protocol</strong>
+                <p style="margin-top: 0.5rem;">
+                    This SOP is L4 canon and must stay synchronized with L0-L3 updates. If L1-01 (CaniCol model), L2-03 (WIP caps), L2-05 (testing thresholds), or L2-08 (brand guardrails) change, this SOP must be revised within 7 days. Creative Director and PM are jointly responsible for triggering SOP updates via Canon Registry.
+                </p>
+            </div>
+        </section>
+
+        <!-- Diagrams Section -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <h3>Visual Workflows & Diagrams</h3>
+            </div>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Pipeline Flow: R3 → P1 Hero Edits → P1 Test</h4>
+            <div class="mermaid">
+graph LR
+    A[R3 Packet Approved] --> B[Creative Director Creates Brief]
+    B --> C[Hero Editor Receives Assignment]
+    C --> D{Edit First Draft}
+    D --> E[Submit for Review]
+    E --> F{Creative Director Review}
+    F -->|Approved| G[Export Final]
+    F -->|Revisions Needed| D
+    G --> H[Handoff to Media Buyer]
+    H --> I[P1 Test Launch]
+    I --> J{P1 Results}
+    J -->|PASS| K[P2 Iteration Request]
+    J -->|FAIL| L[Kill Product]
+    K --> D
+    
+    style A fill:#F4E8D0
+    style G fill:#22C55E
+    style L fill:#EF4444
+    style K fill:#00C8C8
+            </div>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Role Swimlane: Who Does What</h4>
+            <div class="mermaid">
+graph TB
+    subgraph Pod1[Pod 1 - Product Intelligence]
+        R3[R3 Researcher<br>Approves Packet]
+    end
+    
+    subgraph Pod2[Pod 2 - Creative Factory]
+        CD[Creative Director<br>Creates Brief & Reviews]
+        HE[Hero Editor<br>Produces Edits]
+        COPY[Copywriter<br>Provides Scripts]
+        ASSET[Asset Sourcer<br>Provides Raw Footage]
+    end
+    
+    subgraph Pod3[Pod 3 - Media & Store]
+        MB[Media Buyer<br>Launches P1 Tests]
+    end
+    
+    R3 --> CD
+    CD --> HE
+    COPY --> HE
+    ASSET --> HE
+    HE --> CD
+    CD --> MB
+    MB --> HE
+    
+    style HE fill:#00C8C8,stroke:#1A1A1A,stroke-width:3px
+    style CD fill:#F4E8D0
+    style MB fill:#F4E8D0
+            </div>
+
+            <h4 style="margin: 1.5rem 0 1rem;">Day-in-the-Life Timeline</h4>
+            <div class="mermaid">
+gantt
+    title Hero Editor Daily Schedule
+    dateFormat HH:mm
+    axisFormat %H:%M
+    
+    section Morning
+    Setup & Prioritization :done, setup, 09:00, 30m
+    
+    section Deep Work 1
+    Hero Editing (Uninterrupted) :active, edit1, 09:30, 3h
+    
+    section Midday
+    Lunch & Review :crit, lunch, 12:30, 1h
+    
+    section Deep Work 2
+    Revisions & New Edits :active, edit2, 13:30, 2.5h
+    
+    section Closeout
+    Handoffs & Admin :done, handoff, 16:00, 1h
+    Buffer & Planning :buffer, 17:00, 30m
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Embedded JSON Structure for Future Text/Notion Generation -->
+    <script type="application/json" id="sop-structure">
+{
+  "role_id": "P2-CR-HEROEDIT-XX",
+  "role_name": "Hero Editor (Primary Ads)",
+  "pod": "P2 - Creative Factory",
+  "status": "CORE",
+  "cross_pod": true,
+  "fte": 1.0,
+  "wip_limits": {
+    "products_active": "4-6",
+    "edits_in_progress": "6-8"
+  },
+  "throughput": {
+    "weekly_hero_edits": "8-12"
+  },
+  "upstream_roles": [
+    "P2-CR-DIRECTOR-XX (Creative Director)",
+    "P2-CR-COPY-XX (Copywriter)",
+    "P2-CR-ASSET-XX (Asset Sourcer)"
+  ],
+  "downstream_roles": [
+    "P3-MB-BUYER-XX (Media Buyer)",
+    "P2-CR-VOLEDIT-XX (Volume Editor)"
+  ],
+  "owned_gates": [
+    "P1 hero video creatives",
+    "P2 iteration variants"
+  ],
+  "core_workflows": [
+    {
+      "name": "Produce P1 Hero Edit (New Product)",
+      "trigger": "Creative Director assigns brief",
+      "inputs": [
+        "ClickUp task (Hero Edits list, status = Active)",
+        "Notion Product OS page",
+        "Drive P1 Creative Brief",
+        "Drive raw footage/b-roll"
+      ],
+      "steps": [
+        "Load context from brief",
+        "Import assets to editing software",
+        "Structure timeline (0-3s hook, 3-10s value prop, 10-20s proof, 20-30s CTA)",
+        "Edit first pass",
+        "Apply brand guardrails",
+        "Export first draft",
+        "Request review from Creative Director",
+        "Iterate on feedback",
+        "Final approval and export"
+      ],
+      "outputs": [
+        "Drive: Final approved edit in /04_Exports/P1_Tests/",
+        "ClickUp: Task status = Done, assigned to Media Buyer",
+        "Project file saved in /03_Project_Files/"
+      ],
+      "tools": ["CapCut/Premiere", "Drive", "ClickUp", "Discord"]
+    },
+    {
+      "name": "Produce P2 Iteration Variants",
+      "trigger": "P1 passes + Creative Director requests P2 variants",
+      "inputs": [
+        "P1 performance data (CTR, CPC)",
+        "Creative Director P2 brief",
+        "Existing P1 project file"
+      ],
+      "steps": [
+        "Review P1 data",
+        "Load P1 project file",
+        "Apply P2 strategy (new hook or iterate on winner)",
+        "Export P2 variants (2-4 versions)",
+        "Request review"
+      ],
+      "outputs": [
+        "Drive: 2-4 P2 variant edits in /04_Exports/P2_Tests/",
+        "ClickUp: P2 task status = Done",
+        "Discord: Handoff with P1 vs P2 comparison"
+      ],
+      "tools": ["CapCut/Premiere", "Drive", "ClickUp", "Discord"]
+    }
+  ],
+  "day_in_life_blocks": [
+    {
+      "time_range": "9:00-9:30 AM",
+      "focus": "Morning Setup & Prioritization",
+      "primary_workflows": ["Context load", "Daily planning"]
+    },
+    {
+      "time_range": "9:30 AM-12:30 PM",
+      "focus": "Deep Work Block 1 (Hero Editing)",
+      "primary_workflows": ["Produce P1 Hero Edit"]
+    },
+    {
+      "time_range": "1:30-4:00 PM",
+      "focus": "Deep Work Block 2 (Revisions & New Edits)",
+      "primary_workflows": ["Revisions", "Start new edits"]
+    },
+    {
+      "time_range": "4:00-5:00 PM",
+      "focus": "Handoffs & Admin",
+      "primary_workflows": ["Daily Handoff to Media Buyers"]
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Weekly Throughput",
+      "definition": "Hero edits completed and handed off per week",
+      "target": "8-12",
+      "source_doc_id": "L2-03"
+    },
+    {
+      "name": "WIP Discipline",
+      "definition": "Products in active editing concurrently",
+      "target": "4-6 (never exceed 6)",
+      "source_doc_id": "L2-03"
+    },
+    {
+      "name": "On-Time Delivery",
+      "definition": "% of edits delivered by ClickUp due date",
+      "target": "≥90%",
+      "source_doc_id": "L2-07"
+    },
+    {
+      "name": "First-Pass Approval Rate",
+      "definition": "% of edits approved without major revisions",
+      "target": "≥70%",
+      "source_doc_id": "L2-07"
+    }
+  ],
+  "tools": [
+    {
+      "name": "CapCut / Premiere Pro",
+      "use_case": "Primary video editing",
+      "key_views": "Project files in Drive /03_Project_Files/",
+      "access_level": "Full"
+    },
+    {
+      "name": "ClickUp",
+      "use_case": "Task management, WIP tracking",
+      "key_views": "Space: P2 - Creative, List: Hero Edits - Active/Review/Done",
+      "access_level": "Editor"
+    },
+    {
+      "name": "Notion",
+      "use_case": "Product context, creative briefs",
+      "key_views": "DB: Product OS, DB: Creative Briefs",
+      "access_level": "Viewer + Commenter"
+    },
+    {
+      "name": "Google Drive",
+      "use_case": "Asset storage, exports",
+      "key_views": "/03_P2_Creative/Products/[Product_ID]/",
+      "access_level": "Editor"
+    },
+    {
+      "name": "Discord",
+      "use_case": "Real-time comms, handoffs",
+      "key_views": "#p2-edits-hero, #p2-briefs, #p3-p1-tests",
+      "access_level": "Member (P2_CORE)"
+    }
+  ],
+  "canon_constraints": {
+    "l1_01_economics": {
+      "p1_budget": "$40-60 per product",
+      "p1_p2_total": "$70-120 max",
+      "test_bank_monthly": "$4,000-5,500",
+      "hit_rate": "4-6% (2-4 products/month)"
+    },
+    "l2_03_wip_throughput": {
+      "wip_cap": "4-6 products, 6-8 edits",
+      "weekly_throughput": "8-12 hero edits",
+      "pod2_total": "250-400 assets/month"
+    },
+    "l2_05_testing_canon": {
+      "p1_pass": "CTR ≥1.3% OR CPC ≤$1.20 + depth event",
+      "p1_kill": "CTR <0.8% OR CPC >$2.00"
+    },
+    "l2_08_brand_guardrails": {
+      "forbidden": ["fake urgency", "countdown timers", "exaggerated claims", "guru language"],
+      "required": ["clear CTA", "authentic tone", "clean aesthetic"]
+    }
+  },
+  "version": "1.0",
+  "last_updated": "2025-12-08",
+  "author": "DriveOn SOP Factory (v4)"
+}
+    </script>
+
+    <script>
+        // Initialize Mermaid diagrams
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#1A1A1A',
+                lineColor: '#666666',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F7F9FB'
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Mobile nav toggle (for responsive design)
+        const navToggle = document.createElement('button');
+        navToggle.innerHTML = '☰';
+        navToggle.style.cssText = 'display: none; position: fixed; top: 20px; left: 20px; z-index: 300; background: var(--drive-cyan); color: white; border: none; padding: 0.75rem 1rem; border-radius: 6px; font-size: 1.5rem; cursor: pointer;';
+        document.body.appendChild(navToggle);
+
+        if (window.innerWidth <= 768) {
+            navToggle.style.display = 'block';
+        }
+
+        navToggle.addEventListener('click', () => {
+            const nav = document.getElementById('nav');
+            nav.classList.toggle('open');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 768) {
+                navToggle.style.display = 'block';
+            } else {
+                navToggle.style.display = 'none';
+                document.getElementById('nav').classList.remove('open');
+            }
+        });
+    </script>
+</body>
+</html>

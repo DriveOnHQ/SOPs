@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1-R0-SCOUT | R0 Scout Researcher | DriveOn Commerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --secondary-text: #666666;
+            --surface: #FFFFFF;
+            --surface-alt: #F8F8F8;
+            --border: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --info: #3B82F6;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-alt);
+        }
+
+        header {
+            background: var(--carbon-black);
+            color: var(--surface);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .header-title h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+        }
+
+        .header-title .subtitle {
+            font-size: 0.875rem;
+            color: #999;
+            font-weight: 400;
+        }
+
+        .status-chips {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .chip {
+            padding: 0.375rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .chip-optional {
+            background: var(--warning);
+            color: var(--surface);
+        }
+
+        .chip-pod {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+        }
+
+        nav {
+            background: var(--surface);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 74px;
+            z-index: 90;
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .nav-link {
+            padding: 0.5rem 1rem;
+            color: var(--secondary-text);
+            text-decoration: none;
+            white-space: nowrap;
+            border-radius: 6px;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: var(--surface-alt);
+            color: var(--drive-cyan);
+        }
+
+        main {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .hero-summary {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A0A0 100%);
+            color: var(--surface);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 200, 200, 0.15);
+        }
+
+        .hero-summary h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .hero-box {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-box h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+        }
+
+        .hero-box ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .hero-box li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9375rem;
+        }
+
+        .hero-box li:before {
+            content: "✓";
+            font-weight: bold;
+            font-size: 1.125rem;
+        }
+
+        .section {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--drive-cyan);
+        }
+
+        .section-icon {
+            font-size: 1.75rem;
+        }
+
+        .section-title {
+            flex: 1;
+        }
+
+        .section-title h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+            margin-bottom: 0.25rem;
+        }
+
+        .section-title .section-why {
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+            font-style: italic;
+        }
+
+        .collapse-toggle {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--secondary-text);
+            transition: all 0.2s;
+        }
+
+        .collapse-toggle:hover {
+            background: var(--drive-cyan);
+            color: var(--surface);
+            border-color: var(--drive-cyan);
+        }
+
+        .content-box {
+            background: var(--surface-alt);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-box h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--carbon-black);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .callout-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .callout-content {
+            flex: 1;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .callout-canon {
+            background: #FEF3C7;
+            border-color: var(--warning);
+        }
+
+        .callout-warning {
+            background: #FEE2E2;
+            border-color: var(--danger);
+        }
+
+        .callout-tip {
+            background: #DBEAFE;
+            border-color: var(--info);
+        }
+
+        .callout-success {
+            background: #D1FAE5;
+            border-color: var(--success);
+        }
+
+        .checklist {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--surface);
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .checklist li:hover {
+            border-color: var(--drive-cyan);
+            box-shadow: 0 2px 6px rgba(0, 200, 200, 0.1);
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--drive-cyan);
+            border-radius: 4px;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .workflow-step {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .workflow-step:before {
+            content: attr(data-step);
+            position: absolute;
+            top: -12px;
+            left: 1rem;
+            background: var(--drive-cyan);
+            color: var(--surface);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .workflow-step h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--carbon-black);
+        }
+
+        .workflow-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .workflow-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+        }
+
+        .workflow-meta-item strong {
+            color: var(--carbon-black);
+        }
+
+        .handoff-card {
+            background: linear-gradient(135deg, #F0FDFA 0%, #E0F2FE 100%);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .handoff-flow {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .handoff-role {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: var(--carbon-black);
+            color: #10B981;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .tool-card:hover {
+            border-color: var(--drive-cyan);
+            box-shadow: 0 4px 12px rgba(0, 200, 200, 0.1);
+        }
+
+        .tool-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--drive-cyan);
+        }
+
+        .tool-card .tool-use {
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+            margin-bottom: 0.75rem;
+        }
+
+        .tool-card .tool-location {
+            font-size: 0.8125rem;
+            color: var(--carbon-black);
+            background: var(--surface-alt);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', monospace;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .kpi-card {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .kpi-card:hover {
+            border-color: var(--drive-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 200, 200, 0.15);
+        }
+
+        .kpi-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            color: var(--secondary-text);
+            font-weight: 600;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .timeline-block {
+            background: var(--surface-alt);
+            border-left: 4px solid var(--drive-cyan);
+            padding: 1.25rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .timeline-time {
+            font-weight: 700;
+            color: var(--drive-cyan);
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-focus {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .mermaid {
+            background: var(--surface);
+            padding: 2rem 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        th {
+            background: var(--carbon-black);
+            color: var(--surface);
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        tr:hover {
+            background: var(--surface-alt);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            nav {
+                padding: 0.75rem 1rem;
+            }
+
+            main {
+                padding: 0 1rem;
+                margin: 1rem auto;
+            }
+
+            .section {
+                padding: 1.5rem 1rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-grid,
+            .kpi-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>P1-R0-SCOUT-XX | R0 Scout Researcher</h1>
+                <div class="subtitle">DriveOn Commerce • CaniCol v4.0 • Product Intelligence Pipeline</div>
+            </div>
+            <div class="status-chips">
+                <span class="chip chip-optional">OPTIONAL</span>
+                <span class="chip chip-pod">POD 1 • INTEL</span>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-content">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#canon" class="nav-link">Canon Constraints</a>
+            <a href="#day-in-life" class="nav-link">Day-in-the-Life</a>
+            <a href="#workflows" class="nav-link">Core Workflows</a>
+            <a href="#handoffs" class="nav-link">Handoffs</a>
+            <a href="#kpis" class="nav-link">KPIs</a>
+            <a href="#ai-usage" class="nav-link">AI Prompts</a>
+            <a href="#tools" class="nav-link">Tools & Systems</a>
+            <a href="#escalation" class="nav-link">Escalation</a>
+            <a href="#onboarding" class="nav-link">Onboarding</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Summary -->
+        <div class="hero-summary" id="overview">
+            <h2>🎯 Your Mission: Feed the Pipeline with High-Potential Product Signals</h2>
+            <p style="margin-bottom: 1.5rem; font-size: 1.0625rem; line-height: 1.7;">
+                As an R0 Scout, you are the <strong>first filter</strong> in DriveOn's product testing machine. 
+                Your job is to scan the digital landscape at high speed, capture promising product signals, 
+                and pass qualified ideas to R1 researchers. You focus on <strong>breadth over depth</strong> — 
+                finding 20-30 ideas weekly, with 8-12 advancing to deeper research.
+            </p>
+
+            <div class="hero-grid">
+                <div class="hero-box">
+                    <h3>Key Outcomes</h3>
+                    <ul>
+                        <li>20-30 product signals captured weekly</li>
+                        <li>8-12 ideas advanced to R1 stage</li>
+                        <li>Pipeline stays full and flowing</li>
+                        <li>Obvious bad fits filtered early</li>
+                    </ul>
+                </div>
+                <div class="hero-box">
+                    <h3>You Own</h3>
+                    <ul>
+                        <li>R0 gate (signal capture & triage)</li>
+                        <li>Platform scanning & trend monitoring</li>
+                        <li>Quick plausibility filtering</li>
+                        <li>R0 → R1 handoff decisions</li>
+                    </ul>
+                </div>
+                <div class="hero-box">
+                    <h3>WIP & Rhythm</h3>
+                    <ul>
+                        <li>WIP Cap: 12 R0 ideas in progress</li>
+                        <li>Cycle time: 1-3 hours per idea</li>
+                        <li>Weekly throughput: 20-30 scans</li>
+                        <li>High-speed, low-depth workflow</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canon Constraints Section -->
+        <section class="section" id="canon">
+            <div class="section-header">
+                <span class="section-icon">⚖️</span>
+                <div class="section-title">
+                    <h2>Canon Constraints</h2>
+                    <div class="section-why">Non-negotiable rules from L0-L3 that govern this role</div>
+                </div>
+            </div>
+
+            <div class="callout callout-canon">
+                <span class="callout-icon">⚖️</span>
+                <div class="callout-content">
+                    <div class="callout-title">CaniCol Model Economics (L1-01, L2-05)</div>
+                    <p>Your scouting feeds a system targeting <strong>45-60 products/month</strong> reaching P1/P2 tests. 
+                    To hit this, Pod 1 needs <strong>12-15 R3 packets weekly</strong>. Your R0 → R1 conversion rate 
+                    (roughly 40-60%) must maintain pipeline velocity without flooding downstream researchers.</p>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-content">
+                    <div class="callout-title">WIP Discipline (L2-03)</div>
+                    <p><strong>Never exceed 12 R0 ideas in active scouting</strong> at any time. When you hit WIP cap, 
+                    you must either kill weak candidates or hand off qualified ones to R1 before capturing new signals. 
+                    WIP violations trigger capacity reviews, not WIP inflation.</p>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>📋 Key Canon References</h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 0.75rem;">
+                    <li><strong>L1-01 (CaniCol Model v4.0):</strong> Research pipeline structure (R0→R1→R2→R3), volume targets, hit rate expectations</li>
+                    <li><strong>L2-02 (Pod Overview):</strong> P1 mission, inputs, outputs, and throughput expectations</li>
+                    <li><strong>L2-03 (Role Registry):</strong> P1-R0-SCOUT WIP limits (12), throughput targets (20-30/week), role boundaries</li>
+                    <li><strong>L2-04 (Glossary):</strong> Product ID formats, gate definitions, workspace naming conventions</li>
+                    <li><strong>L2-05 (Testing Canon):</strong> What happens after R3 (why quality at R0 matters downstream)</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <div class="callout-title">Your Role in the System</div>
+                    <p>R0 Scout is <strong>OPTIONAL</strong> — the role exists when pipeline volume demands dedicated signal capture. 
+                    It can be combined with VA work or content mining. If pipeline volume drops or you're consistently under WIP cap, 
+                    this role may be consolidated into R1 researchers.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day-in-the-Life Section -->
+        <section class="section" id="day-in-life">
+            <div class="section-header">
+                <span class="section-icon">📅</span>
+                <div class="section-title">
+                    <h2>Day-in-the-Life Timeline</h2>
+                    <div class="section-why">How your typical day flows, hour by hour</div>
+                </div>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-block">
+                    <div class="timeline-time">🌅 08:00 - 09:00 • Morning Setup</div>
+                    <div class="timeline-focus">Pipeline Check & Prioritization</div>
+                    <ul class="checklist" style="margin-top: 0.75rem;">
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Check ClickUp R0 Ideas list — review WIP count (must be ≤12)</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Scan #p1-r0-idea-dump Discord for overnight signals from team</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Review yesterday's batch — which ideas need quick decisions today?</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Identify 3-5 priority platform scans for today (TikTok trends, Meta ad library, Minea)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">⚡ 09:00 - 12:00 • Core Scanning Block 1</div>
+                    <div class="timeline-focus">Platform Scanning & Signal Capture</div>
+                    <ul class="checklist" style="margin-top: 0.75rem;">
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>TikTok trend feed scan: 30-45 min (FYP, Creative Center, trending sounds)</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Facebook/Instagram Ad Library scan: 30-45 min (new ads, viral patterns)</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Minea spy tool session: 30-45 min (filter for volume spikes, new launches)</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>AliExpress/Alibaba quick scans: 20-30 min (rising products, supplier availability)</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Log 8-12 new product signals in ClickUp with basic metadata</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">🍴 12:00 - 13:00 • Lunch & Quick Triage</div>
+                    <div class="timeline-focus">Mid-Day Review</div>
+                    <ul class="checklist" style="margin-top: 0.75rem;">
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Review morning captures — spot any obvious kills or standouts</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Kill 2-3 weak ideas to keep WIP under cap before afternoon scan</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">⚡ 13:00 - 16:00 • Core Scanning Block 2</div>
+                    <div class="timeline-focus">Second Platform Round & Qualification</div>
+                    <ul class="checklist" style="margin-top: 0.75rem;">
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Rotate through alternate sources: Reddit, niche forums, Product Hunt, Twitter trends</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Cross-reference morning signals — are any gaining momentum?</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Run quick plausibility checks on 10-15 candidates from morning batch</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Capture 6-10 additional signals from afternoon scans</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">📊 16:00 - 17:00 • Daily Handoff & Cleanup</div>
+                    <div class="timeline-focus">R0 → R1 Decisions & Pipeline Hygiene</div>
+                    <ul class="checklist" style="margin-top: 0.75rem;">
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Review all R0 candidates — make final kill/advance decisions for 8-12 products</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Move qualified ideas to R1 in ClickUp (status: R0 → R1_Shortlist)</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Post handoff message in #p1-r1-shortlist Discord with links to top 3-5 strongest candidates</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Archive killed ideas with brief kill reason (1-2 sentence note)</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Update daily throughput tracker in Notion: [signals captured] / [advanced to R1] / [killed]</span>
+                        </li>
+                        <li>
+                            <span class="checkbox"></span>
+                            <span>Check WIP — target ending day at 8-10 active R0 to leave headroom for tomorrow</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mermaid">
+                graph LR
+                    A[Morning<br/>Setup] --> B[Platform<br/>Scan 1]
+                    B --> C[Quick<br/>Triage]
+                    C --> D[Platform<br/>Scan 2]
+                    D --> E[Daily<br/>Handoff]
+                    
+                    style A fill:#00C8C8,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+                    style B fill:#F4E8D0,stroke:#00C8C8,stroke-width:2px
+                    style C fill:#F4E8D0,stroke:#00C8C8,stroke-width:2px
+                    style D fill:#F4E8D0,stroke:#00C8C8,stroke-width:2px
+                    style E fill:#00C8C8,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+            </div>
+        </section>
+
+        <!-- Core Workflows Section -->
+        <section class="section" id="workflows">
+            <div class="section-header">
+                <span class="section-icon">🔄</span>
+                <div class="section-title">
+                    <h2>Core Workflows</h2>
+                    <div class="section-why">Step-by-step execution guides for your main responsibilities</div>
+                </div>
+            </div>
+
+            <!-- Workflow 1: Platform Scanning -->
+            <div class="workflow-step" data-step="WORKFLOW 1">
+                <h4>🔍 Platform Scanning & Signal Capture</h4>
+                <div class="workflow-meta">
+                    <span class="workflow-meta-item"><strong>Trigger:</strong> Daily scheduled scanning blocks</span>
+                    <span class="workflow-meta-item"><strong>Frequency:</strong> 2x daily (morning + afternoon)</span>
+                    <span class="workflow-meta-item"><strong>Duration:</strong> 90-120 min per block</span>
+                </div>
+
+                <div class="content-box">
+                    <h3>📥 Inputs</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Your curated feed sources (TikTok FYP, Meta Ad Library, Minea filters)</li>
+                        <li>Current WIP count from ClickUp R0 Ideas list</li>
+                        <li>Strategic themes from Pod Lead (if any special focus this week)</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h3>⚙️ Steps</h3>
+                    <ol style="list-style-type: decimal; padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><strong>Check WIP headroom:</strong> If at 10-12 active R0 ideas, kill 2-3 weak ones before scanning. Never scan if at WIP cap.</li>
+                        <li><strong>TikTok scan (30-45 min):</strong>
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem;">
+                                <li>Scroll FYP and "For You" ad feed for 15-20 min — look for repetition (same product, multiple creators)</li>
+                                <li>TikTok Creative Center → Top Ads → Filter by Views/Engagement spikes in last 7 days</li>
+                                <li>Check trending sounds/hashtags — any product-related themes emerging?</li>
+                                <li>Note 3-5 product signals with basic metadata (product type, hook angle, engagement pattern)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Meta Ad Library scan (30-45 min):</strong>
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem;">
+                                <li>Search broad categories (beauty, fitness, tech, home) + "Shop Now" / "Learn More" filter</li>
+                                <li>Sort by "Recently Active" — look for ads that just launched (1-7 days old) with high spend indicators</li>
+                                <li>Click through to landing pages — note product, offer, pricing, angle</li>
+                                <li>Cross-reference with Minea to see if it's a known winner or new launch</li>
+                            </ul>
+                        </li>
+                        <li><strong>Minea spy tool session (30-45 min):</strong>
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem;">
+                                <li>Filter: Last 7 days, Engagement spike, US/UK/CA markets</li>
+                                <li>Scan "New Winning Products" feed — look for 5k+ engagement, 100k+ views</li>
+                                <li>Check supplier links — is it available on AliExpress/Alibaba? MOQ reasonable?</li>
+                                <li>Note 3-5 candidates that pass initial sniff test</li>
+                            </ul>
+                        </li>
+                        <li><strong>Quick AliExpress/Alibaba check (20-30 min):</strong>
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem;">
+                                <li>For top 5-8 signals from above, verify supplier availability</li>
+                                <li>Check: orders (500+?), reviews (4.5+ stars?), shipping options (to US/UK?)</li>
+                                <li>Red flag: MOQ >100 units, long lead times (>30 days), quality complaints</li>
+                                <li>Pass: Reasonable pricing, multiple suppliers, fast shipping options</li>
+                            </ul>
+                        </li>
+                        <li><strong>Log signals in ClickUp (10-15 min):</strong>
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem;">
+                                <li>For each qualified signal, create R0 task in ClickUp → P1 Product Intelligence → Research Pipeline → R0 Ideas</li>
+                                <li>Task name: PRD-YYYYMMDD-XXX · [Product Name]</li>
+                                <li>Fill custom fields: Product_ID (generate), Pod (P1), Gate (R0), Status (Backlog → Active)</li>
+                                <li>Task description (brief bullet format):
+                                    <ul style="margin-top: 0.25rem;">
+                                        <li>Signal source (TikTok/Meta/Minea/Other)</li>
+                                        <li>Product type & core promise</li>
+                                        <li>Hook/angle observed</li>
+                                        <li>Supplier link (if found)</li>
+                                        <li>Initial gut: "Strong signal" / "Maybe" / "Weak but curious"</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Notion Product OS:</strong> For top 3-5 signals, create placeholder pages in Notion Product OS with status "R0_Scouting" linked to ClickUp task.</li>
+                    </ol>
+                </div>
+
+                <div class="content-box">
+                    <h3>📤 Outputs</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>8-12 new R0 tasks created in ClickUp per scan block</li>
+                        <li>3-5 Notion Product OS placeholder pages for strongest signals</li>
+                        <li>Updated WIP count (should not exceed 12 total R0 active)</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-warning">
+                    <span class="callout-icon">⚠️</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Common Failure Mode: WIP Bloat</div>
+                        <p>Don't scan if you're at WIP cap. Don't capture "maybes" just to fill quota. 
+                        Quality > quantity. If you're consistently hitting 20+ captures but only 4-5 advance to R1, 
+                        you're being too lenient at R0. Tighten your filter.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflow 2: R0 Plausibility Check -->
+            <div class="workflow-step" data-step="WORKFLOW 2">
+                <h4>✅ R0 Plausibility Check & Kill/Advance Decision</h4>
+                <div class="workflow-meta">
+                    <span class="workflow-meta-item"><strong>Trigger:</strong> After capturing signal, before handoff</span>
+                    <span class="workflow-meta-item"><strong>Frequency:</strong> Daily, end-of-day</span>
+                    <span class="workflow-meta-item"><strong>Duration:</strong> 5-10 min per product</span>
+                </div>
+
+                <div class="content-box">
+                    <h3>📥 Inputs</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>R0 tasks in ClickUp with status "Active" (captured during scanning)</li>
+                        <li>Basic product info from task description (signal source, product type, hook, supplier link)</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h3>⚙️ Steps (5-10 min per product)</h3>
+                    <ol style="list-style-type: decimal; padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><strong>Run R0 Kill Checklist</strong> (2-3 min) — if ANY of these are true, kill immediately:
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem; background: #FEE2E2; padding: 0.75rem; border-radius: 6px;">
+                                <li>❌ <strong>Obvious scam/pyramid/MLM</strong> pattern (health claims, income promises, "system")</li>
+                                <li>❌ <strong>Platform policy violation</strong> (weapons, adult, drugs, counterfeit brands)</li>
+                                <li>❌ <strong>Impossible logistics</strong> (perishable, oversized, requires special licensing)</li>
+                                <li>❌ <strong>Zero demand signal</strong> (no trend, no ad activity, no social proof)</li>
+                                <li>❌ <strong>Saturated commodity</strong> with no unique angle (generic phone case, basic tee, etc.)</li>
+                                <li>❌ <strong>No viable supplier</strong> (only 1-2 suppliers, MOQ >100, lead time >45 days)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Check for "Pass to R1" signals</strong> (2-3 min) — need at LEAST 2-3 of these:
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem; background: #D1FAE5; padding: 0.75rem; border-radius: 6px;">
+                                <li>✅ <strong>Clear trend spike</strong> (multiple creators, rising engagement, recent surge)</li>
+                                <li>✅ <strong>Strong hook/angle</strong> visible in creative (problem/solution, transformation, curiosity gap)</li>
+                                <li>✅ <strong>Reasonable economics</strong> (estimated landed cost allows 2-3x markup, AOV $30-150 range)</li>
+                                <li>✅ <strong>Multiple suppliers</strong> available (3+ on Ali, reasonable MOQ, fast shipping)</li>
+                                <li>✅ <strong>Engagement quality</strong> (comments asking where to buy, saves, shares)</li>
+                                <li>✅ <strong>Competitor validation</strong> (similar products getting traction, not oversaturated yet)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Make decision</strong> (1 min):
+                            <ul style="margin-top: 0.5rem; list-style-type: circle; padding-left: 1.5rem;">
+                                <li><strong>KILL (R0_FAIL):</strong> If failed kill checklist OR fewer than 2 pass signals → Move to "Killed" status in ClickUp, add 1-2 sentence kill reason in comments</li>
+                                <li><strong>ADVANCE TO R1:</strong> If passed kill checklist AND has 2-3+ pass signals → Update status to "R1_Shortlist", assign to R1 researcher (if known), add handoff note</li>
+                                <li><strong>PARK (rare):</strong> If borderline but interesting → Tag as "R0_Parked", move to separate ClickUp list for later review</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Notion Product OS:</strong> For advanced products, update status from "R0_Scouting" to "R1_Shortlist". For killed products, archive or mark as "R0_Killed".</li>
+                    </ol>
+                </div>
+
+                <div class="content-box">
+                    <h3>📤 Outputs</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>8-12 R0 → R1 handoff decisions made daily</li>
+                        <li>Clear kill log (1-2 sentence reason per killed product)</li>
+                        <li>Clean R1_Shortlist queue for downstream researchers</li>
+                        <li>WIP back under cap (target 8-10 active R0 at EOD)</li>
+                    </ul>
+                </div>
+
+                <div class="callout callout-tip">
+                    <span class="callout-icon">💡</span>
+                    <div class="callout-content">
+                        <div class="callout-title">Speed vs Accuracy Trade-off</div>
+                        <p>R0 plausibility is intentionally shallow. You're not doing deep research — that's R1/R2's job. 
+                        Aim for <strong>70-80% accuracy</strong> on pass/fail decisions. If you're spending >10 min per product at R0, 
+                        you're going too deep. Trust your gut, document your reasoning in 1-2 sentences, and move on.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workflow 3: R0 → R1 Handoff -->
+            <div class="workflow-step" data-step="WORKFLOW 3">
+                <h4>🤝 R0 → R1 Handoff Communication</h4>
+                <div class="workflow-meta">
+                    <span class="workflow-meta-item"><strong>Trigger:</strong> End of day, after batch decisions</span>
+                    <span class="workflow-meta-item"><strong>Frequency:</strong> Daily</span>
+                    <span class="workflow-meta-item"><strong>Duration:</strong> 10-15 min</span>
+                </div>
+
+                <div class="content-box">
+                    <h3>📥 Inputs</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>8-12 products advanced to R1_Shortlist in ClickUp today</li>
+                        <li>ClickUp task links for each advanced product</li>
+                        <li>Brief handoff notes (why this passed R0, what to prioritize in R1)</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h3>⚙️ Steps</h3>
+                    <ol style="list-style-type: decimal; padding-left: 1.5rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><strong>Verify handoff readiness:</strong> All R1 tasks have Product_ID, Gate=R1, Status=R1_Shortlist, basic description filled.</li>
+                        <li><strong>Identify top 3-5 priority candidates</strong> from today's batch (strongest signals, clearest angles, best supplier availability).</li>
+                        <li><strong>Post handoff message in #p1-r1-shortlist Discord channel</strong> using template below.</li>
+                        <li><strong>Optional: Tag R1 researcher(s)</strong> if you know who's taking next batch, or just post for pool.</li>
+                        <li><strong>Update daily throughput tracker</strong> in Notion: Today's stats [signals scanned] / [R0 captures] / [R1 handoffs] / [kills].</li>
+                    </ol>
+                </div>
+
+                <div class="code-block">
+📦 **R0 → R1 Daily Handoff | [Date]**
+
+**Today's Batch:** 12 products advanced to R1
+**Top Priorities:** 3 products flagged for fast-track R1 review
+
+**🔥 Priority 1:** [PRD-YYYYMMDD-XXX] - [Product Name]
+ClickUp: [Task Link]
+Signal: TikTok trend spike (2M views, 15k saves in 48h)
+Angle: Problem/solution for [pain point]
+Supplier: 5+ on Ali, fast ship, good reviews
+**Next Step:** R1 to verify demand depth + competitor landscape
+
+**🔥 Priority 2:** [PRD-YYYYMMDD-YYY] - [Product Name]
+ClickUp: [Task Link]
+Signal: Meta ad library (new launch, high spend signals)
+Angle: Transformation/before-after visual hook
+Supplier: 3+ suppliers, MOQ <50, reasonable pricing
+**Next Step:** R1 to map competitor pricing + review quality concerns
+
+**🔥 Priority 3:** [PRD-YYYYMMDD-ZZZ] - [Product Name]
+ClickUp: [Task Link]
+Signal: Minea (engagement spike, multi-platform presence)
+Angle: Curiosity gap + social proof (as seen on TikTok)
+Supplier: Established supplier, branded packaging available
+**Next Step:** R1 to check margin structure + shipping constraints
+
+**📋 Full R1 Queue:** [Link to ClickUp R1 Shortlist view]
+
+**📊 Today's Stats:**
+- Platforms scanned: TikTok, Meta, Minea, Ali
+- Signals captured: 18
+- Advanced to R1: 12
+- Killed at R0: 6
+- WIP at EOD: 10 active R0
+
+**Notes:**
+- Seeing trend spike in [category/niche]
+- Multiple products showing [specific hook/angle] pattern
+- Supplier availability strong this week
+
+cc: @R1-Research-Lead (if applicable)
+                </div>
+
+                <div class="content-box">
+                    <h3>📤 Outputs</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.5rem;">
+                        <li>Clear handoff message posted in #p1-r1-shortlist Discord</li>
+                        <li>All R1 tasks properly formatted and ready for pickup</li>
+                        <li>Daily stats logged in Notion throughput tracker</li>
+                        <li>R1 researchers have context to prioritize their next batch</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mermaid">
+                graph TD
+                    Start([Daily Scanning]) --> Scan[Platform Scan<br/>TikTok/Meta/Minea]
+                    Scan --> Capture{Capture<br/>Signals?}
+                    Capture -->|Yes| Log[Log in ClickUp<br/>R0 Ideas]
+                    Capture -->|No| Scan
+                    
+                    Log --> WIP{WIP at<br/>Cap?}
+                    WIP -->|Yes| Kill[Kill Weak<br/>Candidates]
+                    WIP -->|No| Check[Run R0<br/>Plausibility]
+                    Kill --> Check
+                    
+                    Check --> Decision{Pass<br/>R0?}
+                    Decision -->|No| KillR0[R0_FAIL<br/>Archive]
+                    Decision -->|Yes| Advance[Advance to<br/>R1_Shortlist]
+                    
+                    Advance --> Handoff[Post Discord<br/>Handoff]
+                    Handoff --> End([EOD Complete])
+                    
+                    style Start fill:#00C8C8,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+                    style Scan fill:#F4E8D0,stroke:#00C8C8,stroke-width:2px
+                    style Log fill:#F4E8D0,stroke:#00C8C8,stroke-width:2px
+                    style Check fill:#F4E8D0,stroke:#00C8C8,stroke-width:2px
+                    style Advance fill:#10B981,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+                    style Handoff fill:#00C8C8,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+                    style End fill:#00C8C8,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+                    style Decision fill:#F59E0B,stroke:#1A1A1A,stroke-width:2px
+            </div>
+        </section>
+
+        <!-- Handoffs Section -->
+        <section class="section" id="handoffs">
+            <div class="section-header">
+                <span class="section-icon">🤝</span>
+                <div class="section-title">
+                    <h2>Handoffs & Interfaces</h2>
+                    <div class="section-why">How work moves between you and other roles</div>
+                </div>
+            </div>
+
+            <div class="handoff-card">
+                <h3 style="margin-bottom: 1rem; color: var(--carbon-black);">Primary Handoff: R0 Scout → R1 Researcher</h3>
+                <div class="handoff-flow">
+                    <span class="handoff-role">P1-R0-SCOUT-XX</span>
+                    <span class="handoff-arrow">→</span>
+                    <span class="handoff-role">P1-R1-SCOUT-SOURCING-XX</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div>
+                        <strong style="display: block; margin-bottom: 0.5rem;">📥 What You Provide:</strong>
+                        <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.875rem;">
+                            <li>R1_Shortlist ClickUp task with Product_ID</li>
+                            <li>Basic signal metadata (source, hook, supplier link)</li>
+                            <li>1-2 sentence rationale for R0 pass</li>
+                            <li>Priority flag (if top 3-5 candidate)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 0.5rem;">✅ Quality Bar:</strong>
+                        <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.875rem;">
+                            <li>Task fully structured (ID, gate, status)</li>
+                            <li>No obvious red flags (policy, scam, logistics)</li>
+                            <li>Supplier link works and shows availability</li>
+                            <li>Signal is recent (last 7-14 days max)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="display: block; margin-bottom: 0.5rem;">📡 Notification:</strong>
+                        <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.875rem;">
+                            <li><strong>Channel:</strong> #p1-r1-shortlist (Discord)</li>
+                            <li><strong>Timing:</strong> Daily batch, EOD (16:00-17:00)</li>
+                            <li><strong>Format:</strong> Use handoff template (see Workflow 3)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="handoff-card" style="background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-color: var(--warning);">
+                <h3 style="margin-bottom: 1rem; color: var(--carbon-black);">Optional: Creative Intel Researcher → R0 Scout</h3>
+                <div class="handoff-flow">
+                    <span class="handoff-role">P1-R0-CREATIVE-INTEL-XX</span>
+                    <span class="handoff-arrow">→</span>
+                    <span class="handoff-role">P1-R0-SCOUT-XX</span>
+                </div>
+
+                <div style="margin-top: 1rem;">
+                    <strong style="display: block; margin-bottom: 0.5rem;">📥 What You Receive:</strong>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.875rem; margin-bottom: 1rem;">
+                        <li>Creative-led product suggestions from P1-R0-CREATIVE-INTEL role (if active)</li>
+                        <li>These arrive as Discord messages in #p1-r0-idea-dump or ClickUp comments</li>
+                        <li>Format: "Viral hook X → suggests product Y → supplier Z"</li>
+                    </ul>
+                    <strong style="display: block; margin-bottom: 0.5rem;">✅ Your Action:</strong>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.875rem;">
+                        <li>Treat these as priority R0 captures (creative angle already validated)</li>
+                        <li>Fast-track through R0 plausibility if creative signal is strong</li>
+                        <li>Still apply R0 kill checklist (policy, logistics, supplier viability)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout callout-tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <div class="callout-title">When R1 Pushes Back</div>
+                    <p>If R1 researchers consistently reject your handoffs (>30% rejection rate), schedule a 15-min sync with 
+                    the R1 lead to align on R0 pass criteria. You may be letting through too many weak signals, 
+                    or R1's bar may have shifted. Goal: <strong>40-60% R0 → R1 pass rate</strong> at steady state.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- KPIs Section -->
+        <section class="section" id="kpis">
+            <div class="section-header">
+                <span class="section-icon">📊</span>
+                <div class="section-title">
+                    <h2>KPIs & Quality Bar</h2>
+                    <div class="section-why">How success is measured for this role</div>
+                </div>
+            </div>
+
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-value">20-30</div>
+                    <div class="kpi-label">Ideas Captured/Week</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">8-12</div>
+                    <div class="kpi-label">Advanced to R1/Week</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">40-60%</div>
+                    <div class="kpi-label">R0→R1 Pass Rate</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">≤12</div>
+                    <div class="kpi-label">Max WIP (R0 Ideas)</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value">1-3hr</div>
+                    <div class="kpi-label">Cycle Time per Idea</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-value"><10%</div>
+                    <div class="kpi-label">R1 Rejection Rate</div>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>🎯 Quantitative Metrics (from L2-07)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Target</th>
+                            <th>Measured How</th>
+                            <th>Source Doc</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Weekly Throughput</strong></td>
+                            <td>20-30 signals captured<br/>8-12 advanced to R1</td>
+                            <td>ClickUp task creation count<br/>Status transitions R0→R1</td>
+                            <td>L2-03 (Role Registry)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R0→R1 Pass Rate</strong></td>
+                            <td>40-60%</td>
+                            <td>(R1 handoffs / R0 captures) × 100</td>
+                            <td>L2-07 (Pod KPIs)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WIP Compliance</strong></td>
+                            <td>≤12 R0 ideas active at any time</td>
+                            <td>ClickUp active task count (Gate=R0, Status=Active)</td>
+                            <td>L2-03 (WIP Limits)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cycle Time</strong></td>
+                            <td>1-3 hours per idea (capture → decision)</td>
+                            <td>ClickUp time tracking or manual log</td>
+                            <td>L2-03</td>
+                        </tr>
+                        <tr>
+                            <td><strong>R1 Rejection Rate</strong></td>
+                            <td><10% (R1 sends back to R0 or kills immediately)</td>
+                            <td>R1 feedback loop tracking</td>
+                            <td>L2-07</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="content-box">
+                <h3>🎨 Qualitative Standards</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1rem;">
+                    <div>
+                        <strong style="color: var(--success); display: block; margin-bottom: 0.75rem;">✅ Good R0 Signal (Pass to R1)</strong>
+                        <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <li>Clear trend momentum (viral video, ad spend spike, multiple creators)</li>
+                            <li>Strong hook visible in creative (problem/solution, transformation, curiosity)</li>
+                            <li>3+ suppliers on Ali, MOQ <50, fast ship options</li>
+                            <li>Engagement shows buying intent (comments asking "where to buy")</li>
+                            <li>Recent signal (last 7-14 days), not stale trend</li>
+                            <li>Reasonable economics (2-3x markup potential, AOV $30-150)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong style="color: var(--danger); display: block; margin-bottom: 0.75rem;">❌ Bad R0 Signal (Kill at R0)</strong>
+                        <ul style="list-style-type: disc; padding-left: 1.5rem; font-size: 0.875rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <li>Scam/pyramid/MLM pattern (income claims, "system", health miracles)</li>
+                            <li>Policy violation (weapons, adult, drugs, counterfeits)</li>
+                            <li>Impossible logistics (perishable, oversized, special licensing)</li>
+                            <li>Zero demand signal (no social proof, no trend, no ad activity)</li>
+                            <li>Saturated commodity with no angle (generic phone case, basic tee)</li>
+                            <li>No viable supplier (1-2 only, MOQ >100, lead time >45 days)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-content">
+                    <div class="callout-title">Performance Review Triggers</div>
+                    <p><strong>Yellow flags</strong> (coaching needed): WIP violations (>12 for 3+ days), pass rate <30% or >70% for 2+ weeks, 
+                    R1 rejection rate >15%.<br/>
+                    <strong>Red flags</strong> (formal review): Consistent WIP violations, pass rate <20% or >80% for 4+ weeks, 
+                    multiple policy violation captures, zero throughput for 3+ days without approved time off.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Usage Section -->
+        <section class="section" id="ai-usage">
+            <div class="section-header">
+                <span class="section-icon">🤖</span>
+                <div class="section-title">
+                    <h2>AI Usage & Prompt Patterns</h2>
+                    <div class="section-why">Ready-to-use AI prompts for your daily work</div>
+                </div>
+            </div>
+
+            <div class="callout callout-success">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <div class="callout-title">AI Role in R0 Scouting</div>
+                    <p>AI can accelerate platform scanning, pattern recognition, and batch categorization. 
+                    Use it for: <strong>(1)</strong> analyzing screenshot batches from TikTok/Meta, <strong>(2)</strong> generating quick 
+                    plausibility assessments, <strong>(3)</strong> drafting handoff notes. Always human-verify: <strong>never hand off an AI-only decision</strong>.</p>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>🔍 Prompt 1: Batch Screenshot Analysis</h3>
+                <p style="font-size: 0.875rem; margin-bottom: 0.75rem; color: var(--secondary-text);">
+                    <strong>Use case:</strong> You've captured 10-15 screenshots from TikTok FYP. Need quick pattern recognition and product extraction.
+                </p>
+                <div class="code-block">
+I'm an R0 Scout for a lean-volume dropshipping operation (DriveOn Commerce, CaniCol v4.0 model).
+I've just captured 15 screenshots from TikTok's FYP showing products that might be viral signals.
+
+Analyze these images and extract:
+1. Product type/category
+2. Core promise or transformation shown
+3. Hook/angle used (problem/solution, transformation, curiosity gap, etc.)
+4. Engagement cues (if visible: views, likes, comments, saves)
+5. Your gut assessment: "Strong signal" / "Maybe" / "Weak"
+
+Format your output as a numbered list (1-15) with these 5 data points per product.
+
+**Important constraints:**
+- Skip any obvious scams, policy violations (weapons/adult/drugs), or oversaturated commodities
+- Flag any that look like they might have logistical nightmares (perishable, oversized)
+- Prioritize signals that show buying intent (comments like "where to buy", "link?")
+
+Start with the strongest 3 signals first, then the rest.
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>✅ Prompt 2: Quick Plausibility Check</h3>
+                <p style="font-size: 0.875rem; margin-bottom: 0.75rem; color: var(--secondary-text);">
+                    <strong>Use case:</strong> You've captured a product idea but want AI to help run the R0 kill checklist before you decide.
+                </p>
+                <div class="code-block">
+I'm evaluating this product for R0 → R1 handoff in our lean-volume dropshipping pipeline.
+
+**Product:** [Product name/type]
+**Signal source:** [TikTok/Meta/Minea]
+**Hook observed:** [Brief description]
+**Supplier link:** [AliExpress URL or "not yet found"]
+
+Run the R0 Kill Checklist:
+1. Is this an obvious scam, pyramid scheme, or MLM? (health claims, income promises, "system")
+2. Does it violate platform policy? (weapons, adult, drugs, counterfeit brands)
+3. Are there impossible logistics? (perishable, oversized, requires special licensing)
+4. Is there zero demand signal? (no trend, no ad activity, no social proof)
+5. Is it a saturated commodity with no unique angle? (generic phone case, basic tee)
+6. Is there no viable supplier? (only 1-2 suppliers, MOQ >100, lead time >45 days)
+
+Then check for R0 Pass Signals (need 2-3+):
+- Clear trend spike (multiple creators, rising engagement, recent surge)
+- Strong hook/angle visible
+- Reasonable economics (2-3x markup potential, AOV $30-150)
+- Multiple suppliers available (3+ on Ali, MOQ <50, fast ship)
+- Engagement quality (comments asking where to buy, saves, shares)
+- Competitor validation (similar products getting traction, not oversaturated)
+
+**Output:**
+- KILL or ADVANCE decision
+- 1-2 sentence rationale
+- Priority level if advancing (High/Medium/Low)
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>📝 Prompt 3: Handoff Note Generator</h3>
+                <p style="font-size: 0.875rem; margin-bottom: 0.75rem; color: var(--secondary-text);">
+                    <strong>Use case:</strong> EOD handoff — you need to write concise handoff notes for 8-12 products advancing to R1.
+                </p>
+                <div class="code-block">
+I'm handing off these R0-passed products to R1 researchers. For each, write a concise 2-3 sentence handoff note.
+
+**Format:**
+- Signal: [Where found + key metric]
+- Angle: [Hook/promise observed]
+- Supplier: [Availability summary]
+- Next Step: [What R1 should focus on]
+
+**Products to process:**
+[Paste list of 8-12 products with basic metadata]
+
+Keep it tight, actionable, junior-friendly. Focus on what R1 needs to know to prioritize their research.
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>🧠 Prompt 4: Trend Pattern Recognition</h3>
+                <p style="font-size: 0.875rem; margin-bottom: 0.75rem; color: var(--secondary-text);">
+                    <strong>Use case:</strong> End of week — you want to spot emerging patterns across your R0 captures.
+                </p>
+                <div class="code-block">
+Here are my R0 product captures from this week (20-30 products).
+
+Analyze for emerging patterns:
+1. Product categories showing momentum (any 3+ products in same niche?)
+2. Hook/angle patterns (any specific problem/solution combos recurring?)
+3. Platform trends (TikTok vs Meta — which is hotter this week?)
+4. Supplier/logistics patterns (any supply chain red flags or opportunities?)
+
+**Output:**
+- Top 3 trend observations
+- 1-2 actionable recommendations for next week's scanning focus
+- Any early warning signs (saturation, policy shifts, supplier issues)
+
+Keep it strategic but brief (200-300 words max).
+                </div>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-content">
+                    <div class="callout-title">Human Checkpoints</div>
+                    <p><strong>Never trust AI decisions without verification:</strong> (1) Always manually check supplier links AI suggests, 
+                    (2) Always verify platform policy before advancing a product AI flagged as "clean", 
+                    (3) Never use AI-generated Product IDs or task structures — those must follow canon L2-04 formats exactly.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools & Systems Section -->
+        <section class="section" id="tools">
+            <div class="section-header">
+                <span class="section-icon">🛠️</span>
+                <div class="section-title">
+                    <h2>Tools & Systems Reference</h2>
+                    <div class="section-why">Your approved tool stack and how to use each</div>
+                </div>
+            </div>
+
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <h4>📱 TikTok</h4>
+                    <div class="tool-use">Primary scanning platform for viral product signals, trend monitoring, and creative hook discovery</div>
+                    <div class="tool-location">
+                        <strong>Access:</strong> Personal TikTok account + TikTok Creative Center<br/>
+                        <strong>Views:</strong> FYP, Creative Center → Top Ads, Trending Sounds
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h4>📘 Meta Ad Library</h4>
+                    <div class="tool-use">Facebook/Instagram ad discovery, spend signals, landing page analysis</div>
+                    <div class="tool-location">
+                        <strong>Access:</strong> facebook.com/ads/library<br/>
+                        <strong>Filters:</strong> Active ads, "Shop Now" CTA, Last 7-30 days
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h4>🔍 Minea</h4>
+                    <div class="tool-use">Spy tool for winning product discovery, engagement metrics, supplier links</div>
+                    <div class="tool-location">
+                        <strong>Access:</strong> Team Minea account<br/>
+                        <strong>Views:</strong> New Winning Products, Engagement Spikes, US/UK/CA filters
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h4>🛒 AliExpress / Alibaba</h4>
+                    <div class="tool-use">Supplier verification, pricing research, MOQ and shipping checks</div>
+                    <div class="tool-location">
+                        <strong>Access:</strong> Public platforms (no login required for browsing)<br/>
+                        <strong>Key Checks:</strong> Order count, reviews, shipping options, MOQ
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h4>✅ ClickUp</h4>
+                    <div class="tool-use">Task management, WIP tracking, R0 → R1 handoffs, time tracking</div>
+                    <div class="tool-location">
+                        <strong>Space:</strong> P1 -- Product Intelligence<br/>
+                        <strong>List:</strong> Research Pipeline → R0 Ideas<br/>
+                        <strong>Status Flow:</strong> Backlog → Active → R1_Shortlist / Killed
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h4>📝 Notion</h4>
+                    <div class="tool-use">Product OS database, packet tracking, research documentation</div>
+                    <div class="tool-location">
+                        <strong>DB:</strong> Product OS<br/>
+                        <strong>Views:</strong> R0 Scouting, R1 Shortlist<br/>
+                        <strong>Properties:</strong> Product_ID, Status, Signal_Source, Hook
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h4>💬 Discord</h4>
+                    <div class="tool-use">Team communication, handoffs, blockers, daily updates</div>
+                    <div class="tool-location">
+                        <strong>Primary Channels:</strong><br/>
+                        #p1-r0-idea-dump (signal sharing)<br/>
+                        #p1-r1-shortlist (R0→R1 handoffs)<br/>
+                        #p1-blockers (issues & questions)
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <h4>📁 Google Drive</h4>
+                    <div class="tool-use">Screenshot storage, reference files, batch image captures</div>
+                    <div class="tool-location">
+                        <strong>Path:</strong> /DriveOn Commerce/02_P1_Product_Intel/R0_Ideas<br/>
+                        <strong>Structure:</strong> Folders by date (YYYY-MM-DD) for daily captures
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>🔐 Access Levels & Permissions</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tool</th>
+                            <th>Access Level</th>
+                            <th>What You Can Do</th>
+                            <th>What You Cannot Do</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ClickUp</strong></td>
+                            <td>Member (P1 Space)</td>
+                            <td>Create/edit R0 tasks, move to R1, time tracking</td>
+                            <td>Change custom fields, delete lists, modify statuses</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Notion</strong></td>
+                            <td>Editor (Product OS)</td>
+                            <td>Create product pages, update status, add notes</td>
+                            <td>Change DB schema, delete databases, modify templates</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discord</strong></td>
+                            <td>P1 Role</td>
+                            <td>Post in P1 channels, DM team, read all pods</td>
+                            <td>@everyone, manage channels, pin messages (ask admins)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Drive</strong></td>
+                            <td>Editor (P1 folders)</td>
+                            <td>Upload files, create folders (by date), organize captures</td>
+                            <td>Move/delete shared folders, change permissions</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout callout-tip">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <div class="callout-title">Tool Tips for High-Speed Scanning</div>
+                    <p><strong>Browser setup:</strong> Use 2 monitors or split-screen — left side for platform scanning (TikTok/Meta), 
+                    right side for ClickUp + Notion. <strong>Keyboard shortcuts:</strong> Cmd/Ctrl+T for new tabs, Cmd/Ctrl+W to close, 
+                    Cmd/Ctrl+Tab to switch. <strong>Minea filters:</strong> Save your favorite filter combos (US/UK/CA + Last 7 days + Engagement spike) 
+                    as bookmarks for one-click access.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Escalation Section -->
+        <section class="section" id="escalation">
+            <div class="section-header">
+                <span class="section-icon">🚨</span>
+                <div class="section-title">
+                    <h2>Escalation & Decision Rights</h2>
+                    <div class="section-why">When to decide alone, when to escalate</div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div class="content-box">
+                    <h3 style="color: var(--success);">✅ You Decide Independently</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><strong>R0 Kill Decisions:</strong> If product fails kill checklist, kill immediately without asking</li>
+                        <li><strong>R0 → R1 Advancement:</strong> If product passes 2-3+ R0 signals, advance to R1 without approval</li>
+                        <li><strong>WIP Management:</strong> Decide which weak candidates to kill to free up WIP headroom</li>
+                        <li><strong>Platform Prioritization:</strong> Choose which platforms to scan each day based on recent signal quality</li>
+                        <li><strong>Daily Handoff Timing:</strong> Post handoff when ready (EOD target, but flexible 15:00-17:00)</li>
+                        <li><strong>Screenshot Organization:</strong> Decide folder structure and naming in your Drive folder</li>
+                    </ul>
+                </div>
+
+                <div class="content-box">
+                    <h3 style="color: var(--warning);">⚠️ Escalate to R1 Lead or PM</h3>
+                    <ul style="list-style-type: disc; padding-left: 1.5rem; margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <li><strong>R1 Rejection Pattern:</strong> If >30% of your R0 handoffs are rejected by R1 for 2+ weeks</li>
+                        <li><strong>Policy Uncertainty:</strong> If unsure whether product violates platform policy (weapons/adult/drugs borderline cases)</li>
+                        <li><strong>WIP Overload:</strong> If consistently at 12+ WIP for 5+ days and can't kill enough to free capacity</li>
+                        <li><strong>Tool Access Issues:</strong> If Minea/ClickUp/Notion access breaks or credentials don't work</li>
+                        <li><strong>Strategic Shift Needed:</strong> If you notice major trend shifts (entire niche drying up, new platform emerging)</li>
+                        <li><strong>Zero Throughput:</strong> If scanning for 2+ days and finding zero viable signals (may indicate tool issues)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="content-box" style="margin-top: 1.5rem;">
+                <h3>📞 Escalation Paths & Response Times</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Issue Type</th>
+                            <th>Escalate To</th>
+                            <th>Channel</th>
+                            <th>Expected Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>R1 Quality Issues</strong></td>
+                            <td>P1-R3-LEAD-STRATEGIST (PI Lead)</td>
+                            <td>#p1-blockers Discord or DM</td>
+                            <td>Same day</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WIP/Process Blockers</strong></td>
+                            <td>P4-PM-MANAGER (Project Manager)</td>
+                            <td>#p4-pm-daily-standup Discord</td>
+                            <td>Within 4 hours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tool/Access Issues</strong></td>
+                            <td>P4-OP-INTEGRATOR (Ops Integrator)</td>
+                            <td>#p4-systems-ops Discord</td>
+                            <td>Within 2 hours (critical)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Policy/Legal Uncertainty</strong></td>
+                            <td>PI Lead + Founder (if major)</td>
+                            <td>DM PI Lead → they escalate if needed</td>
+                            <td>Same day (critical)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Strategic/Market Shifts</strong></td>
+                            <td>P1-R3-LEAD-STRATEGIST</td>
+                            <td>#p1-r3-approvals Discord (weekly review)</td>
+                            <td>Next weekly sync</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">⚠️</span>
+                <div class="callout-content">
+                    <div class="callout-title">Never Silently Struggle</div>
+                    <p>If you're blocked for >4 hours and haven't escalated, that's a problem. DriveOn's velocity depends on fast feedback loops. 
+                    <strong>Don't wait for permission to ask for help.</strong> Use #p1-blockers or DM the relevant lead immediately.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Onboarding Section -->
+        <section class="section" id="onboarding">
+            <div class="section-header">
+                <span class="section-icon">🎓</span>
+                <div class="section-title">
+                    <h2>Onboarding Checklist</h2>
+                    <div class="section-why">Your 30-day ramp plan from day one to full independence</div>
+                </div>
+            </div>
+
+            <div class="content-box">
+                <h3>📋 Pre-Day-1: Access Setup (HR/Ops handles this)</h3>
+                <ul class="checklist">
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>ClickUp:</strong> Added to P1 -- Product Intelligence space, Member access to R0 Ideas list</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Notion:</strong> Editor access to DriveOn Commerce HQ workspace + Product OS database</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Discord:</strong> Added to DriveOn Commerce HQ server with P1 role</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Google Drive:</strong> Editor access to /DriveOn Commerce/02_P1_Product_Intel folder</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Minea:</strong> Team account credentials shared via secure method</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Time Tracking:</strong> ClickUp time tracking enabled on your account</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3>📚 Day 1-2: Canon Reading & Context Building</h3>
+                <ul class="checklist">
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Read L1-01 (CaniCol Model v4.0):</strong> Understand the 45-60 products/month testing philosophy, R0→R3 pipeline, hit rate expectations (~30 min)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Read L2-02 (Pod Overview):</strong> Understand P1 mission, inputs, outputs, how you fit in the system (~20 min)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Read L2-03 (Role Registry) - R0 Scout section:</strong> Your exact WIP limits, throughput targets, role boundaries (~15 min)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Read L2-04 (Glossary):</strong> Product ID formats, gate definitions, workspace naming conventions (~20 min)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Skim L2-05 (Testing Canon):</strong> Understand what happens to products after R3 — why your R0 filtering matters (~15 min)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Watch this SOP</strong> as a video walkthrough or do a screen-share with your onboarding buddy (~45 min)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3>👀 Day 3-5: Shadowing & Tool Setup</h3>
+                <ul class="checklist">
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Shadow R1 researcher:</strong> Watch 2-3 R0 → R1 handoffs, see what R1 does with your future handoffs (~2 hours)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Set up your scanning workspace:</strong> 2-monitor setup or split-screen, browser tabs organized, Minea filters saved (~1 hour)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Practice platform scans:</strong> Do 3 full scanning blocks (TikTok + Meta + Minea) with your buddy observing, get feedback (~6 hours)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Create 5 practice R0 tasks in ClickUp:</strong> Use correct Product_ID format, fill custom fields, write basic descriptions (~1 hour)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Run R0 plausibility check on 10 practice products:</strong> Use kill checklist + pass signals, get buddy to review your decisions (~2 hours)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3>🚀 Day 6-10: Supervised Execution</h3>
+                <ul class="checklist">
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>First supervised scanning day:</strong> Capture 10-15 signals with buddy reviewing at EOD, correct any mistakes (~4 hours)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>First supervised handoff:</strong> Advance 5-8 products to R1, post handoff message in Discord, get feedback from R1 lead (~2 hours)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>WIP management drill:</strong> Deliberately get to 12 WIP, practice killing weak candidates to free capacity (~1 hour)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Second supervised scanning day:</strong> Increase to 15-20 captures, faster cadence, buddy spot-checks at EOD (~4 hours)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Review first week stats:</strong> Calculate your R0→R1 pass rate, WIP compliance, cycle time — discuss with PI Lead (~30 min)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3>⚡ Day 11-20: Independent Execution with Check-ins</h3>
+                <ul class="checklist">
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Week 2 full autonomy:</strong> Run full scanning + handoff workflow independently, buddy reviews your EOD handoffs async (~5 days)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Hit baseline throughput:</strong> Target 20-30 captures/week, 8-12 R1 handoffs, WIP ≤12 at all times</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Week 3 quality focus:</strong> Track R1 rejection rate (target <10%), adjust R0 filtering if needed</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>First 1:1 with PI Lead:</strong> Review 2-week performance, discuss any bottlenecks or tool issues (~30 min)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Pattern recognition exercise:</strong> At week 3 EOW, analyze your 40-60 total captures for emerging trends, present to team (~1 hour)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="content-box">
+                <h3>🎯 Day 21-30: Full Independence & Optimization</h3>
+                <ul class="checklist">
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Week 4 full speed:</strong> No buddy reviews, you own the R0 → R1 flow end-to-end</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Optimize your scanning workflow:</strong> Experiment with scan timing, platform mix, capture techniques to hit throughput consistently</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>30-day review meeting:</strong> PI Lead + PM review your KPIs (throughput, pass rate, WIP compliance, R1 feedback), discuss next 90 days (~45 min)</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Competency milestone:</strong> You can consistently hit 20-30/week captures, 40-60% pass rate, <10% R1 rejection, WIP never exceeds 12</span>
+                    </li>
+                    <li>
+                        <span class="checkbox"></span>
+                        <span><strong>Optional: Cross-training:</strong> Shadow P1-R0-CREATIVE-INTEL or P1-R1-SCOUT-SOURCING to understand adjacent roles (~2 hours)</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="callout callout-success">
+                <span class="callout-icon">🎉</span>
+                <div class="callout-content">
+                    <div class="callout-title">Onboarding Success Criteria</div>
+                    <p>By Day 30, you should be able to: <strong>(1)</strong> Run full scanning + handoff workflow without supervision, 
+                    <strong>(2)</strong> Hit baseline throughput (20-30 captures, 8-12 R1 handoffs weekly), 
+                    <strong>(3)</strong> Maintain WIP ≤12 consistently, <strong>(4)</strong> Achieve 40-60% R0→R1 pass rate with <10% R1 rejection, 
+                    <strong>(5)</strong> Independently troubleshoot tool issues and escalate blockers appropriately.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Change Log Section -->
+        <section class="section" id="changelog">
+            <div class="section-header">
+                <span class="section-icon">📝</span>
+                <div class="section-title">
+                    <h2>Change Log</h2>
+                    <div class="section-why">Version history and updates to this SOP</div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Changes</th>
+                        <th>Canon Trigger</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>v1.0</strong></td>
+                        <td>2025-12-10</td>
+                        <td>Claude (DriveOn SOP Factory v4)</td>
+                        <td>Initial creation based on CaniCol v4.0 canon (L0-L3). Includes all 12 schema sections: role overview, canon constraints, day-in-life, workflows, handoffs, KPIs, AI prompts, tools, escalation, onboarding, change log. Fully aligned with L2-03 WIP limits (12 R0 active), L2-07 throughput targets (20-30/week), L3-02/L3-03 workspace bindings.</td>
+                        <td>L1-01 (CaniCol v4.0), L2-03 (Role Registry v1), L2-05 (Testing Canon v4), L3-02 (ClickUp Blueprint v1), L3-03 (Notion Blueprint v1)</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: var(--secondary-text); font-style: italic;">Future updates will be logged here as canon evolves or role scope changes</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-tip" style="margin-top: 1.5rem;">
+                <span class="callout-icon">💡</span>
+                <div class="callout-content">
+                    <div class="callout-title">How This SOP Stays Current</div>
+                    <p>This SOP is automatically regenerated whenever L0-L3 canon documents are updated and the changes affect the R0 Scout role. 
+                    If you notice conflicts between this SOP and canon, or between this SOP and actual workspace reality (ClickUp/Notion/Discord), 
+                    immediately flag to <strong>P4-OP-INTEGRATOR</strong> via #p4-systems-ops. Do not silently work around canon drift.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="application/json" id="sop-structure">
+    {
+      "role_id": "P1-R0-SCOUT-XX",
+      "role_name": "R0 Scout Researcher",
+      "pod": "P1",
+      "status": "OPTIONAL",
+      "cross_pod": false,
+      "default_fte": 1.0,
+      "owned_gates": ["R0"],
+      "wip_limits": {
+        "R0_ideas_in_progress": 12
+      },
+      "throughput_targets": {
+        "weekly_captures": "20-30",
+        "weekly_r1_handoffs": "8-12",
+        "r0_to_r1_pass_rate": "40-60%"
+      },
+      "kpis": [
+        {
+          "name": "Weekly Throughput",
+          "definition": "20-30 signals captured, 8-12 advanced to R1",
+          "source_doc_id": "L2-03"
+        },
+        {
+          "name": "R0→R1 Pass Rate",
+          "definition": "40-60% of R0 captures advance to R1",
+          "source_doc_id": "L2-07"
+        },
+        {
+          "name": "WIP Compliance",
+          "definition": "≤12 R0 ideas active at any time",
+          "source_doc_id": "L2-03"
+        },
+        {
+          "name": "Cycle Time",
+          "definition": "1-3 hours per idea (capture → decision)",
+          "source_doc_id": "L2-03"
+        },
+        {
+          "name": "R1 Rejection Rate",
+          "definition": "<10% of R0 handoffs rejected by R1",
+          "source_doc_id": "L2-07"
+        }
+      ],
+      "workflows": [
+        {
+          "name": "Platform Scanning & Signal Capture",
+          "trigger": "Daily scheduled scanning blocks (2x daily)",
+          "inputs": ["Curated feed sources", "Current WIP count", "Strategic themes"],
+          "steps": [
+            "Check WIP headroom - must be <12 before scanning",
+            "TikTok scan (30-45 min): FYP, Creative Center, trending sounds",
+            "Meta Ad Library scan (30-45 min): Recent ads, Shop Now filter",
+            "Minea spy tool session (30-45 min): Engagement spikes, new winners",
+            "Quick AliExpress/Alibaba check (20-30 min): Supplier verification",
+            "Log signals in ClickUp (10-15 min): Create R0 tasks with metadata",
+            "Update Notion Product OS: Placeholder pages for top signals"
+          ],
+          "outputs": ["8-12 new R0 tasks in ClickUp", "3-5 Notion placeholder pages", "Updated WIP count"],
+          "handoffs": "Internal handoff within R0 (capture → triage)",
+          "tools": ["TikTok", "Meta Ad Library", "Minea", "AliExpress", "Alibaba", "ClickUp", "Notion"]
+        },
+        {
+          "name": "R0 Plausibility Check & Kill/Advance Decision",
+          "trigger": "After capturing signal, before handoff (EOD)",
+          "inputs": ["R0 tasks with status Active", "Basic product metadata"],
+          "steps": [
+            "Run R0 Kill Checklist (2-3 min): Check for scams, policy violations, logistics issues",
+            "Check for Pass to R1 signals (2-3 min): Need 2-3+ positive indicators",
+            "Make decision (1 min): KILL vs ADVANCE vs PARK",
+            "Update Notion Product OS: Status changes (R0_Scouting → R1_Shortlist or R0_Killed)"
+          ],
+          "outputs": ["8-12 R0→R1 decisions daily", "Clear kill log", "Clean R1_Shortlist queue", "WIP back under cap"],
+          "handoffs": "R0 → R1 handoff decisions",
+          "tools": ["ClickUp", "Notion"]
+        },
+        {
+          "name": "R0 → R1 Handoff Communication",
+          "trigger": "End of day, after batch decisions",
+          "inputs": ["8-12 products advanced to R1", "ClickUp task links", "Handoff notes"],
+          "steps": [
+            "Verify handoff readiness: All R1 tasks properly formatted",
+            "Identify top 3-5 priority candidates",
+            "Post handoff message in #p1-r1-shortlist Discord",
+            "Optional: Tag R1 researcher(s)",
+            "Update daily throughput tracker in Notion"
+          ],
+          "outputs": ["Discord handoff message posted", "R1 tasks ready for pickup", "Daily stats logged"],
+          "handoffs": "Primary handoff to P1-R1-SCOUT-SOURCING-XX or P1-R1R2-RESEARCH-XX",
+          "tools": ["Discord", "ClickUp", "Notion"]
+        }
+      ],
+      "day_in_life": [
+        {
+          "time_range": "08:00-09:00",
+          "focus": "Morning Setup & Prioritization",
+          "primary_workflows": ["Pipeline check", "WIP review", "Platform prioritization"]
+        },
+        {
+          "time_range": "09:00-12:00",
+          "focus": "Core Scanning Block 1",
+          "primary_workflows": ["Platform Scanning & Signal Capture"]
+        },
+        {
+          "time_range": "12:00-13:00",
+          "focus": "Lunch & Quick Triage",
+          "primary_workflows": ["Mid-day review", "Quick kill decisions"]
+        },
+        {
+          "time_range": "13:00-16:00",
+          "focus": "Core Scanning Block 2",
+          "primary_workflows": ["Platform Scanning & Signal Capture (second round)"]
+        },
+        {
+          "time_range": "16:00-17:00",
+          "focus": "Daily Handoff & Cleanup",
+          "primary_workflows": ["R0 Plausibility Check", "R0 → R1 Handoff Communication"]
+        }
+      ],
+      "tools": [
+        {
+          "name": "TikTok",
+          "use_case": "Primary scanning platform for viral product signals",
+          "location": "Personal TikTok account + TikTok Creative Center"
+        },
+        {
+          "name": "Meta Ad Library",
+          "use_case": "Facebook/Instagram ad discovery, spend signals",
+          "location": "facebook.com/ads/library"
+        },
+        {
+          "name": "Minea",
+          "use_case": "Spy tool for winning product discovery",
+          "location": "Team Minea account"
+        },
+        {
+          "name": "AliExpress / Alibaba",
+          "use_case": "Supplier verification, pricing research",
+          "location": "Public platforms"
+        },
+        {
+          "name": "ClickUp",
+          "use_case": "Task management, WIP tracking, R0→R1 handoffs",
+          "location": "P1 -- Product Intelligence > Research Pipeline > R0 Ideas"
+        },
+        {
+          "name": "Notion",
+          "use_case": "Product OS database, packet tracking",
+          "location": "Product OS database, R0 Scouting view"
+        },
+        {
+          "name": "Discord",
+          "use_case": "Team communication, handoffs, blockers",
+          "location": "#p1-r0-idea-dump, #p1-r1-shortlist, #p1-blockers"
+        },
+        {
+          "name": "Google Drive",
+          "use_case": "Screenshot storage, reference files",
+          "location": "/DriveOn Commerce/02_P1_Product_Intel/R0_Ideas"
+        }
+      ],
+      "handoff_specs": [
+        {
+          "from_role": "P1-R0-SCOUT-XX",
+          "to_role": "P1-R1-SCOUT-SOURCING-XX or P1-R1R2-RESEARCH-XX",
+          "trigger": "EOD batch decisions (16:00-17:00)",
+          "required_inputs": ["R1_Shortlist ClickUp task", "Product_ID", "Signal metadata", "Pass rationale"],
+          "channel": "#p1-r1-shortlist (Discord)",
+          "quality_bar": "No red flags, supplier link works, signal recent (<14 days)"
+        }
+      ],
+      "escalation": [
+        {
+          "decision_type": "R0 kill/advance decisions",
+          "decide_alone": true,
+          "requires_approval": false
+        },
+        {
+          "decision_type": "WIP management (killing weak candidates)",
+          "decide_alone": true,
+          "requires_approval": false
+        },
+        {
+          "decision_type": "R1 rejection pattern (>30% for 2+ weeks)",
+          "decide_alone": false,
+          "escalate_to": "P1-R3-LEAD-STRATEGIST",
+          "channel": "#p1-blockers or DM"
+        },
+        {
+          "decision_type": "Policy/legal uncertainty",
+          "decide_alone": false,
+          "escalate_to": "P1-R3-LEAD-STRATEGIST + Founder (if major)",
+          "channel": "DM PI Lead"
+        }
+      ],
+      "canon_references": [
+        "L1-01 (CaniCol Model v4.0)",
+        "L2-02 (Pod Overview)",
+        "L2-03 (Role Registry & WIP Limits)",
+        "L2-04 (Glossary & Conventions)",
+        "L2-05 (Testing Canon)",
+        "L3-02 (ClickUp Infra Blueprint)",
+        "L3-03 (Notion Infra Blueprint)"
+      ]
+    }
+    </script>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00C8C8',
+                lineColor: '#00C8C8',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const headerOffset = 150; // Account for sticky header + nav
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Highlight active section in nav
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.style.color = '';
+                link.style.background = '';
+                if (link.getAttribute('href') === '#' + current) {
+                    link.style.color = '#00C8C8';
+                    link.style.background = '#F8F8F8';
+                }
+            });
+        });
+
+        // Interactive checkboxes (client-side only, no backend)
+        document.querySelectorAll('.checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.style.background = this.style.background === 'rgb(0, 200, 200)' ? '' : '#00C8C8';
+                this.innerHTML = this.style.background ? '✓' : '';
+                this.style.color = '#FFF';
+                this.style.fontWeight = 'bold';
+            });
+        });
+    </script>
+</body>
+</html>

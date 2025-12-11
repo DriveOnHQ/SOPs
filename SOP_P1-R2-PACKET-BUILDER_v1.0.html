@@ -1,0 +1,2080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1-R2-PACKET-BUILDER | DriveOn Commerce SOP v1.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface-white: #FFFFFF;
+            --surface-gray: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success: #28A745;
+            --warning: #FFC107;
+            --danger: #DC3545;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-gray);
+            padding-bottom: 60px;
+        }
+
+        /* Header */
+        header {
+            background: var(--surface-white);
+            border-bottom: 3px solid var(--drive-cyan);
+            padding: 1.25rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header-title {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .header-title h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+            margin-bottom: 0.25rem;
+        }
+
+        .role-meta {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .badge-pod { background: var(--drive-cyan); color: white; }
+        .badge-status { background: var(--champagne); color: var(--carbon-black); }
+        .badge-fte { background: var(--border-gray); color: var(--carbon-black); }
+
+        /* Navigation */
+        .nav-toggle {
+            display: none;
+            background: var(--drive-cyan);
+            color: white;
+            border: none;
+            padding: 0.65rem 1.25rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-toggle:hover {
+            background: #00A0A0;
+        }
+
+        nav {
+            position: fixed;
+            left: 0;
+            top: 90px;
+            width: 260px;
+            height: calc(100vh - 90px);
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-gray);
+            overflow-y: auto;
+            padding: 1.5rem 0;
+            z-index: 999;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 0.25rem;
+        }
+
+        nav a {
+            display: block;
+            padding: 0.65rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        nav a:hover {
+            background: var(--surface-gray);
+            color: var(--carbon-black);
+            border-left-color: var(--drive-cyan);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            margin-left: 260px;
+        }
+
+        /* Hero Block */
+        .hero-block {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A0A0 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 16px rgba(0, 200, 200, 0.15);
+        }
+
+        .hero-block h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.25rem;
+            font-weight: 700;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.75rem;
+        }
+
+        .hero-section h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.85rem;
+            font-weight: 600;
+            opacity: 0.95;
+        }
+
+        .hero-list {
+            list-style: none;
+        }
+
+        .hero-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.75rem;
+            position: relative;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .hero-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: var(--champagne);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface-white);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border-gray);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--surface-gray);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .card-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+            flex: 1;
+        }
+
+        .card-intro {
+            background: var(--surface-gray);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.75rem;
+            border-left: 4px solid var(--drive-cyan);
+        }
+
+        .card-intro strong {
+            color: var(--drive-cyan);
+            font-weight: 600;
+        }
+
+        /* Collapsible Sections */
+        details {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 1.25rem;
+            background: var(--surface-gray);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.05rem;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+        }
+
+        summary:hover {
+            background: #E8E8E8;
+        }
+
+        summary::before {
+            content: "▶";
+            display: inline-block;
+            transition: transform 0.2s;
+            color: var(--drive-cyan);
+            font-size: 0.85rem;
+        }
+
+        details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        details .content {
+            padding: 1.5rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 1.75rem;
+        }
+
+        li {
+            margin-bottom: 0.65rem;
+            line-height: 1.6;
+        }
+
+        li strong {
+            color: var(--drive-cyan);
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-canon {
+            background: #FFF8E6;
+            border-color: var(--champagne);
+        }
+
+        .callout-warning {
+            background: #FFF3CD;
+            border-color: var(--warning);
+        }
+
+        .callout-tip {
+            background: #E7F9F0;
+            border-color: var(--success);
+        }
+
+        .callout-danger {
+            background: #F8D7DA;
+            border-color: var(--danger);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        th {
+            background: var(--drive-cyan);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        tr:hover {
+            background: var(--surface-gray);
+        }
+
+        /* Code Blocks */
+        pre {
+            background: #2D2D2D;
+            color: #F8F8F2;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Handoff Cards */
+        .handoff-card {
+            background: var(--surface-gray);
+            border-left: 4px solid var(--drive-cyan);
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .handoff-label {
+            font-weight: 700;
+            color: var(--drive-cyan);
+        }
+
+        .handoff-trigger {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding: 1rem 0;
+            margin: 1.5rem 0;
+        }
+
+        .timeline-block {
+            min-width: 200px;
+            background: var(--surface-white);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .timeline-time {
+            font-weight: 700;
+            color: var(--drive-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-task {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* KPI Strip */
+        .kpi-strip {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .kpi-box {
+            flex: 1;
+            min-width: 200px;
+            background: var(--surface-white);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .kpi-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            padding: 0.85rem;
+            padding-left: 2.5rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-gray);
+            transition: background 0.2s;
+        }
+
+        .checklist li:hover {
+            background: var(--surface-gray);
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0.85rem;
+            font-size: 1.2rem;
+            color: var(--drive-cyan);
+        }
+
+        /* Mermaid Diagrams */
+        .mermaid {
+            background: var(--surface-white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid var(--border-gray);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .nav-toggle {
+                display: block;
+            }
+
+            nav {
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+            }
+
+            nav.active {
+                transform: translateX(0);
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            .hero-block {
+                padding: 1.5rem;
+            }
+
+            .card {
+                padding: 1.25rem;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline {
+                flex-direction: column;
+            }
+
+            .timeline-block {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="header-title">
+                <h1>📦 Packet Builder / Intel Ops</h1>
+                <div class="role-meta">
+                    <span class="badge badge-pod">Pod 1 • Product Intelligence</span>
+                    <span class="badge badge-status">OPTIONAL / DUAL</span>
+                    <span class="badge badge-fte">0.5-1.0 FTE</span>
+                </div>
+            </div>
+            <button class="nav-toggle" onclick="toggleNav()">📑 Contents</button>
+        </div>
+    </header>
+
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#purpose">Role Purpose</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day-in-life">Day-in-the-Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">KPIs & Quality</a></li>
+            <li><a href="#ai-usage">AI Usage</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation</a></li>
+            <li><a href="#onboarding">Onboarding</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero Block -->
+        <div class="hero-block" id="overview">
+            <h2>Packet Builder • Intel Ops</h2>
+            <p style="font-size: 1.05rem; margin-bottom: 1.5rem; opacity: 0.95;">Transform raw research into pristine, R3-ready product packets that meet DriveOn's structural standards and enable instant decision-making.</p>
+            
+            <div class="hero-grid">
+                <div class="hero-section">
+                    <h3>🎯 Key Outcomes</h3>
+                    <ul class="hero-list">
+                        <li>10-15 fully formatted packets/week</li>
+                        <li>Perfect packet structure & IDs</li>
+                        <li>Zero formatting errors at R3</li>
+                        <li>Fast researcher handoff cycles</li>
+                        <li>Consistent visual quality</li>
+                    </ul>
+                </div>
+                
+                <div class="hero-section">
+                    <h3>✅ You Own</h3>
+                    <ul class="hero-list">
+                        <li>Packet formatting & structure</li>
+                        <li>Screenshot capture & annotation</li>
+                        <li>Supplier data organization</li>
+                        <li>ID tagging & linking</li>
+                        <li>QA checks before R3 handoff</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Role Purpose -->
+        <section class="card" id="purpose">
+            <div class="card-header">
+                <span class="card-icon">🎯</span>
+                <h2>Role Purpose & Context</h2>
+            </div>
+            
+            <div class="card-intro">
+                <strong>Why this role exists:</strong> High-cognition researchers should focus on market intelligence and strategic calls, not formatting. This role offloads all packet structure, visual polish, and data entry work so researchers can move faster through the R1→R2→R3 pipeline.
+            </div>
+
+            <p><strong>In CaniCol v4.0:</strong> We need <strong>45-60 R3-ready packets/month</strong> to fuel P1 tests. Every hour researchers spend on formatting is an hour not spent finding winners. The Packet Builder role ensures:</p>
+            
+            <ul>
+                <li><strong>Speed:</strong> Researchers hand off rough dossiers and get back polished packets in 4-8 hours</li>
+                <li><strong>Consistency:</strong> Every packet follows the exact same structure, making R3 reviews faster</li>
+                <li><strong>Quality:</strong> No broken links, missing screenshots, or ID errors reach the R3 Lead</li>
+                <li><strong>Scalability:</strong> As research volume grows, formatting doesn't become a bottleneck</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Strategic Value</div>
+                <p>This role enables researchers to handle 3-4 R3 packets/week instead of 2-3. That 33% throughput gain compounds across the entire P1 testing funnel.</p>
+            </div>
+        </section>
+
+        <!-- Canon Constraints -->
+        <section class="card" id="canon">
+            <div class="card-header">
+                <span class="card-icon">⚖️</span>
+                <h2>Canon Constraints</h2>
+            </div>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Non-Negotiable Rules</div>
+                <p>These constraints come from <strong>L1-01 CaniCol Model</strong> and <strong>L2-03 Role Registry</strong>. Do not modify packet structure, IDs, or workflows without explicit canon updates.</p>
+            </div>
+
+            <h3 style="margin-top: 1.5rem;">Economic & Volume Context</h3>
+            <ul>
+                <li>DriveOn tests <strong>45-60 products/month</strong> at P1/P2 level</li>
+                <li>P1 budget: <strong>$40-60/product</strong></li>
+                <li>P1+P2 total: <strong>$70-120/product</strong></li>
+                <li>Target hit rate: <strong>4-6% true winners</strong></li>
+            </ul>
+
+            <h3 style="margin-top: 1.5rem;">WIP & Throughput Limits</h3>
+            <div class="kpi-strip">
+                <div class="kpi-box">
+                    <div class="kpi-label">WIP Cap</div>
+                    <div class="kpi-value">6-8</div>
+                    <div class="kpi-label" style="margin-top: 0.5rem;">Packets Active</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Throughput</div>
+                    <div class="kpi-value">10-15</div>
+                    <div class="kpi-label" style="margin-top: 0.5rem;">Packets/Week</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Turnaround</div>
+                    <div class="kpi-value">4-8h</div>
+                    <div class="kpi-label" style="margin-top: 0.5rem;">Per Packet</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 1.5rem;">RACI Boundaries</h3>
+            <ul>
+                <li><strong>Responsible (R)</strong> for:
+                    <ul>
+                        <li>Perfect packet structure (all sections complete)</li>
+                        <li>Product IDs, Packet IDs, and all linking</li>
+                        <li>Screenshot capture and annotation</li>
+                        <li>Supplier data formatting</li>
+                        <li>Drive folder organization</li>
+                    </ul>
+                </li>
+                <li><strong>NOT Responsible</strong> for:
+                    <ul>
+                        <li>Research decisions (product viability, scoring)</li>
+                        <li>Angle development or creative strategy</li>
+                        <li>Supplier negotiation or selection</li>
+                        <li>R3 approval decisions</li>
+                    </ul>
+                </li>
+                <li><strong>Consulted (C)</strong> when:
+                    <ul>
+                        <li>Template changes are proposed</li>
+                        <li>New packet sections are needed</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Critical Boundary</div>
+                <p>You are NOT a researcher. If a packet has missing research data (e.g., no competitor pricing, unclear angles), flag it back to the researcher. Do not fill in gaps with your own research.</p>
+            </div>
+        </section>
+
+        <!-- Day in the Life -->
+        <section class="card" id="day-in-life">
+            <div class="card-header">
+                <span class="card-icon">⏰</span>
+                <h2>Day-in-the-Life Timeline</h2>
+            </div>
+
+            <div class="card-intro">
+                <strong>Daily rhythm:</strong> Mornings for batch processing, afternoons for active formatting, end-of-day handoffs. Most days process 2-3 packets from R2 intake to R3-ready.
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-block">
+                    <div class="timeline-time">9:00-9:30 AM</div>
+                    <div class="timeline-task"><strong>Queue Review</strong><br>Check ClickUp R2 list, prioritize by due date, check Discord handoffs</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-time">9:30-12:00 PM</div>
+                    <div class="timeline-task"><strong>Batch Processing</strong><br>Screenshot capture, data entry, ID creation for 2-3 packets</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-time">12:00-1:00 PM</div>
+                    <div class="timeline-task"><strong>Break & Quick QA</strong><br>Review morning work, fix obvious errors</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-time">1:00-4:00 PM</div>
+                    <div class="timeline-task"><strong>Deep Formatting</strong><br>Notion page polish, Drive organization, supplier docs</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-time">4:00-5:00 PM</div>
+                    <div class="timeline-task"><strong>Handoffs & Sync</strong><br>Final QA, move to R3, Discord notifications, update ClickUp</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Typical Daily Load (1.0 FTE)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Activity</th>
+                        <th>Time Budget</th>
+                        <th>Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>New packet intake (R2→Formatting)</td>
+                        <td>30 min/packet</td>
+                        <td>2-3 packets</td>
+                    </tr>
+                    <tr>
+                        <td>Screenshot capture & annotation</td>
+                        <td>45 min/packet</td>
+                        <td>2-3 packets</td>
+                    </tr>
+                    <tr>
+                        <td>Notion page structure & linking</td>
+                        <td>60 min/packet</td>
+                        <td>2-3 packets</td>
+                    </tr>
+                    <tr>
+                        <td>Final QA & handoff prep</td>
+                        <td>20 min/packet</td>
+                        <td>2-3 packets</td>
+                    </tr>
+                    <tr>
+                        <td>Queue management & coordination</td>
+                        <td>60 min/day</td>
+                        <td>Ongoing</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Core Workflows -->
+        <section class="card" id="workflows">
+            <div class="card-header">
+                <span class="card-icon">🔄</span>
+                <h2>Core Workflows</h2>
+            </div>
+
+            <div class="mermaid">
+                graph TD
+                    A[R2 Research Complete] -->|Researcher Handoff| B[Packet Builder Intake]
+                    B --> C{Has All Required Data?}
+                    C -->|No| D[Flag Back to Researcher]
+                    C -->|Yes| E[Create Product & Packet IDs]
+                    E --> F[Build Drive Folder Structure]
+                    F --> G[Capture Screenshots]
+                    G --> H[Format Notion Packet Page]
+                    H --> I[QA Check: 12-Point]
+                    I --> J{QA Pass?}
+                    J -->|No| K[Fix Issues]
+                    K --> I
+                    J -->|Yes| L[Handoff to R3 Lead]
+                    
+                    style A fill:#E8F5E9
+                    style L fill:#E8F5E9
+                    style I fill:#FFF9C4
+                    style C fill:#FFF9C4
+            </div>
+
+            <details open>
+                <summary>Workflow 1: R2 Packet Intake & Initial Setup</summary>
+                <div class="content">
+                    <div class="handoff-card">
+                        <div class="handoff-header">
+                            <span class="handoff-label">TRIGGER</span>
+                            <span class="handoff-trigger">Researcher moves ClickUp task to "R2_READY_FOR_BUILD" + Discord ping</span>
+                        </div>
+                    </div>
+
+                    <h4>Inputs Required</h4>
+                    <ul>
+                        <li>ClickUp task in "R2_READY_FOR_BUILD" status</li>
+                        <li>Notion Product Page created (minimal data okay)</li>
+                        <li>Researcher notes (can be rough)</li>
+                        <li>At least 3-5 competitor URLs</li>
+                        <li>At least 1 supplier URL</li>
+                    </ul>
+
+                    <h4>Step-by-Step</h4>
+                    <ol>
+                        <li><strong>Open ClickUp task</strong> and verify it's actually ready (has notes, not empty)</li>
+                        <li><strong>Check Notion Product Page</strong> exists via ClickUp link
+                            <ul>
+                                <li>If missing, ping researcher in Discord #p1-r2-dossiers</li>
+                                <li>If present, proceed</li>
+                            </ul>
+                        </li>
+                        <li><strong>Generate IDs if missing:</strong>
+                            <ul>
+                                <li>Product ID: <code>PRD-YYYYMMDD-XXX</code> (date + 3-digit index)</li>
+                                <li>Packet ID: <code>PCT-PRD-YYYYMMDD-XXX-R2NN</code> (R2 version number)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update ClickUp task</strong> with Product ID and Packet ID in custom fields</li>
+                        <li><strong>Create Drive folder:</strong> <code>/02_P1_Product_Intel/Products/PRD-YYYYMMDD-XXX_ShortName/</code></li>
+                        <li><strong>Create subfolders:</strong>
+                            <ul>
+                                <li><code>01_Research_Raw/</code></li>
+                                <li><code>02_Packets_and_Summaries/</code></li>
+                                <li><code>03_Supplier_Docs/</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Move task to "FORMATTING_IN_PROGRESS"</strong></li>
+                        <li><strong>Note start time</strong> in ClickUp (for time tracking)</li>
+                    </ol>
+
+                    <div class="callout callout-tip">
+                        <div class="callout-title">💡 Pro Tip</div>
+                        <p>Use a naming template doc with today's date. Just increment the XXX counter for each new product. Keeps IDs consistent and fast.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Workflow 2: Screenshot Capture & Visual Assets</summary>
+                <div class="content">
+                    <h4>Purpose</h4>
+                    <p>Capture high-quality, annotated screenshots of competitor products, ads, supplier pages, and pricing to create a visual research record.</p>
+
+                    <h4>Tools</h4>
+                    <ul>
+                        <li>Browser extensions: Full Page Screen Capture, GoFullPage, or similar</li>
+                        <li>Annotation tool: Skitch, Snagit, or built-in OS tools</li>
+                        <li>File naming standard: <code>PRD-YYYYMMDD-XXX_[type]_[source].png</code></li>
+                    </ul>
+
+                    <h4>Screenshot Types (Minimum Set)</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Screenshot Type</th>
+                                <th>Quantity</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Product page (main competitor)</td>
+                                <td>1-2</td>
+                                <td>Show offer structure, pricing, hero image</td>
+                            </tr>
+                            <tr>
+                                <td>Competitor ads (FB/TikTok)</td>
+                                <td>3-5</td>
+                                <td>Show creative angles and hooks</td>
+                            </tr>
+                            <tr>
+                                <td>Supplier listing</td>
+                                <td>1-2</td>
+                                <td>Show product specs, MOQ, lead time</td>
+                            </tr>
+                            <tr>
+                                <td>Price comparison table</td>
+                                <td>1</td>
+                                <td>Show our margin opportunity</td>
+                            </tr>
+                            <tr>
+                                <td>Customer reviews</td>
+                                <td>1-2</td>
+                                <td>Show pain points and objections</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Step-by-Step</h4>
+                    <ol>
+                        <li><strong>Open all URLs</strong> from researcher notes in separate tabs</li>
+                        <li><strong>For each competitor product page:</strong>
+                            <ul>
+                                <li>Capture full page screenshot</li>
+                                <li>Annotate: circle price, highlight key claims, note shipping</li>
+                                <li>Save as: <code>PRD-YYYYMMDD-XXX_competitor_[name].png</code></li>
+                                <li>Upload to Drive: <code>01_Research_Raw/</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>For ads (use FB Ads Library or TikTok Creative Center):</strong>
+                            <ul>
+                                <li>Screenshot 3-5 top-performing ads</li>
+                                <li>Note ad copy hooks in annotation</li>
+                                <li>Save as: <code>PRD-YYYYMMDD-XXX_ad_[platform]_NN.png</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>For supplier pages:</strong>
+                            <ul>
+                                <li>Capture product listing + specs</li>
+                                <li>Annotate: unit price, MOQ, shipping terms</li>
+                                <li>Save as: <code>PRD-YYYYMMDD-XXX_supplier_[name].png</code></li>
+                                <li>Upload to Drive: <code>03_Supplier_Docs/</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Create a price comparison table</strong> in Sheets or Notion:
+                            <ul>
+                                <li>Columns: Source, Retail Price, Supplier Cost, Margin %</li>
+                                <li>Screenshot this table</li>
+                                <li>Embed in Notion packet</li>
+                            </ul>
+                        </li>
+                        <li><strong>Organize all screenshots</strong> in Drive folders</li>
+                        <li><strong>Link Drive folder</strong> in Notion packet (embed images inline)</li>
+                    </ol>
+
+                    <div class="callout callout-warning">
+                        <div class="callout-title">⚠️ Common Mistakes</div>
+                        <ul>
+                            <li>Screenshots cut off price or shipping info → Always capture FULL page</li>
+                            <li>Filenames are generic like "Screenshot 1.png" → Use structured naming</li>
+                            <li>No annotations → Add arrows/highlights so R3 Lead can scan quickly</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Workflow 3: Notion Packet Page Structure</summary>
+                <div class="content">
+                    <h4>Canonical Packet Structure</h4>
+                    <p>Every packet must follow this exact section order. Do NOT skip sections or reorder.</p>
+
+                    <div style="background: var(--surface-gray); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+                        <h4 style="margin-top: 0;">Required Sections</h4>
+                        <ol>
+                            <li><strong>📋 Meta & IDs</strong>
+                                <ul>
+                                    <li>Product ID</li>
+                                    <li>Packet ID</li>
+                                    <li>Current Gate (R2/R3)</li>
+                                    <li>Researcher name</li>
+                                    <li>Date created</li>
+                                    <li>ClickUp task link</li>
+                                    <li>Drive folder link</li>
+                                </ul>
+                            </li>
+                            <li><strong>🎯 Product Overview</strong>
+                                <ul>
+                                    <li>Short description (2-3 sentences)</li>
+                                    <li>Target avatar</li>
+                                    <li>Problem it solves</li>
+                                    <li>Primary angle/hook</li>
+                                </ul>
+                            </li>
+                            <li><strong>💰 Economics Snapshot</strong>
+                                <ul>
+                                    <li>Target AOV</li>
+                                    <li>Supplier cost (range)</li>
+                                    <li>Est. margin %</li>
+                                    <li>Shipping/handling notes</li>
+                                </ul>
+                            </li>
+                            <li><strong>🔍 Competitive Intel</strong>
+                                <ul>
+                                    <li>Top 3-5 competitors (with links)</li>
+                                    <li>Price comparison table (embedded)</li>
+                                    <li>Screenshots of competitor products</li>
+                                    <li>Key differentiators</li>
+                                </ul>
+                            </li>
+                            <li><strong>📦 Supplier Details</strong>
+                                <ul>
+                                    <li>Supplier name(s)</li>
+                                    <li>Supplier URL(s)</li>
+                                    <li>Unit cost</li>
+                                    <li>MOQ</li>
+                                    <li>Lead time</li>
+                                    <li>Shipping terms</li>
+                                </ul>
+                            </li>
+                            <li><strong>🎨 Creative Angles</strong>
+                                <ul>
+                                    <li>Primary angle (from researcher)</li>
+                                    <li>2-3 alternative angles</li>
+                                    <li>Ad creative examples (screenshots)</li>
+                                    <li>Hook patterns observed</li>
+                                </ul>
+                            </li>
+                            <li><strong>⚠️ Risk Flags</strong>
+                                <ul>
+                                    <li>Quality concerns</li>
+                                    <li>Fulfillment issues</li>
+                                    <li>Compliance notes</li>
+                                    <li>Market saturation level</li>
+                                </ul>
+                            </li>
+                            <li><strong>📊 Research Score (if provided by researcher)</strong>
+                                <ul>
+                                    <li>Overall score (e.g., 85/100)</li>
+                                    <li>Breakdown by category</li>
+                                </ul>
+                            </li>
+                            <li><strong>🔗 Links & Resources</strong>
+                                <ul>
+                                    <li>All competitor URLs</li>
+                                    <li>All supplier URLs</li>
+                                    <li>FB Ads Library search link</li>
+                                    <li>TikTok Creative Center link</li>
+                                    <li>Drive folder link</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <h4>Formatting Standards</h4>
+                    <ul>
+                        <li><strong>Headings:</strong> Use Notion H2 for main sections, H3 for subsections</li>
+                        <li><strong>Tables:</strong> Always format tabular data in Notion tables (not text)</li>
+                        <li><strong>Images:</strong> Embed inline, not as separate blocks at the end</li>
+                        <li><strong>Links:</strong> Use descriptive text, not raw URLs (e.g., "AliExpress Supplier" not "https://...")</li>
+                        <li><strong>Callouts:</strong> Use for risk flags and important notes</li>
+                    </ul>
+
+                    <h4>Step-by-Step Build Process</h4>
+                    <ol>
+                        <li><strong>Duplicate the Notion template</strong> "Product Packet Template" from SOP Library</li>
+                        <li><strong>Rename page:</strong> <code>PCT-PRD-YYYYMMDD-XXX-R2NN • [Product Name]</code></li>
+                        <li><strong>Fill Meta section:</strong> All IDs, links, researcher, date</li>
+                        <li><strong>Copy researcher notes</strong> into appropriate sections (don't just paste everything into Overview)</li>
+                        <li><strong>Build tables:</strong>
+                            <ul>
+                                <li>Competitor pricing table (Name | Price | URL | Notes)</li>
+                                <li>Supplier options table (Supplier | Cost | MOQ | Lead Time | URL)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Embed screenshots</strong> from Drive directly into Notion (use /image command)</li>
+                        <li><strong>Format all URLs</strong> as named links</li>
+                        <li><strong>Add property tags</strong> (in Notion DB):
+                            <ul>
+                                <li>Status: R2_FORMATTING → R2_QA → R3_READY</li>
+                                <li>Researcher: [person]</li>
+                                <li>Date: [today]</li>
+                            </ul>
+                        </li>
+                        <li><strong>Run 12-point QA</strong> (see Workflow 5)</li>
+                    </ol>
+                </div>
+            </details>
+
+            <details>
+                <summary>Workflow 4: Drive Folder Organization</summary>
+                <div class="content">
+                    <h4>Folder Structure (Per Product)</h4>
+                    <pre>/02_P1_Product_Intel/Products/PRD-YYYYMMDD-XXX_ShortName/
+├── 01_Research_Raw/
+│   ├── screenshots/
+│   ├── competitor_exports/
+│   └── notes/
+├── 02_Packets_and_Summaries/
+│   ├── PCT-PRD-YYYYMMDD-XXX-R201.pdf (if PDF exported)
+│   └── research_summary.docx (optional)
+└── 03_Supplier_Docs/
+    ├── supplier_quotes/
+    ├── product_specs/
+    └── compliance_docs/</pre>
+
+                    <h4>File Naming Rules</h4>
+                    <ul>
+                        <li><strong>Always</strong> start with Product ID: <code>PRD-YYYYMMDD-XXX_</code></li>
+                        <li><strong>Use descriptive suffixes:</strong> <code>_competitor_shopify.png</code>, <code>_supplier_alibaba.png</code></li>
+                        <li><strong>No spaces in filenames:</strong> Use underscores <code>_</code></li>
+                        <li><strong>Use lowercase</strong> for file extensions: <code>.png</code> not <code>.PNG</code></li>
+                    </ul>
+
+                    <h4>Permissions</h4>
+                    <ul>
+                        <li>Product Intelligence Pod: <strong>Editor</strong></li>
+                        <li>Creative Pod: <strong>Viewer</strong></li>
+                        <li>Media & Store Pod: <strong>Viewer</strong></li>
+                    </ul>
+
+                    <div class="callout callout-tip">
+                        <div class="callout-title">💡 Organization Hack</div>
+                        <p>Create a Notion database view that auto-generates Drive folder links. Just paste the Product ID and it builds the full path.</p>
+                    </div>
+                </div>
+            </details>
+
+            <details>
+                <summary>Workflow 5: 12-Point QA Checklist</summary>
+                <div class="content">
+                    <p><strong>Run this before every R3 handoff.</strong> If any item fails, fix it before moving forward.</p>
+
+                    <ul class="checklist">
+                        <li><strong>IDs Complete:</strong> Product ID and Packet ID present in Notion and ClickUp</li>
+                        <li><strong>Drive Folder:</strong> Folder structure created, all files uploaded with correct naming</li>
+                        <li><strong>Notion Structure:</strong> All 9 required sections present (Meta, Overview, Economics, Competitive, Supplier, Creative, Risk, Score, Links)</li>
+                        <li><strong>Screenshots:</strong> Minimum 5 screenshots embedded (competitors, ads, supplier)</li>
+                        <li><strong>Tables:</strong> Price comparison and supplier tables complete with data</li>
+                        <li><strong>Links:</strong> All URLs work, no broken links, all named (not raw URLs)</li>
+                        <li><strong>Economics:</strong> AOV, supplier cost, margin % all filled in</li>
+                        <li><strong>Supplier Data:</strong> At least 1 supplier with cost, MOQ, lead time</li>
+                        <li><strong>Visual Quality:</strong> Images clear, not blurry, annotations visible</li>
+                        <li><strong>No Typos:</strong> Spell check product name, headings, tables</li>
+                        <li><strong>ClickUp Updated:</strong> Custom fields filled, task moved to correct status</li>
+                        <li><strong>Notion Properties:</strong> Status, Researcher, Date all set correctly</li>
+                    </ul>
+
+                    <div class="callout callout-danger">
+                        <div class="callout-title">🚫 Auto-Reject Triggers</div>
+                        <p>R3 Lead will immediately reject packets with:</p>
+                        <ul>
+                            <li>Missing Product ID or Packet ID</li>
+                            <li>No supplier cost data</li>
+                            <li>Fewer than 3 screenshots</li>
+                            <li>Broken Drive folder link</li>
+                        </ul>
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- Handoffs -->
+        <section class="card" id="handoffs">
+            <div class="card-header">
+                <span class="card-icon">🔀</span>
+                <h2>Handoffs & Interfaces</h2>
+            </div>
+
+            <div class="mermaid">
+                graph LR
+                    A[P1-R1R2-RESEARCH] -->|R2 Complete| B[P1-R2-PACKET-BUILDER]
+                    C[P1-R2-SENIOR-RESEARCH] -->|R2 Complete| B
+                    B -->|QA Pass| D[P1-R3-LEAD-STRATEGIST]
+                    B -->|Missing Data| A
+                    B -->|Missing Data| C
+                    
+                    style B fill:#00C8C8,color:#fff
+                    style D fill:#E8F5E9
+            </div>
+
+            <h3 style="margin-top: 2rem;">Inbound: From Researchers (R2→Formatting)</h3>
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <span class="handoff-label">FROM</span>
+                    <span>P1-R1R2-RESEARCH or P1-R2-SENIOR-RESEARCH</span>
+                </div>
+                <div class="handoff-header">
+                    <span class="handoff-label">TRIGGER</span>
+                    <span class="handoff-trigger">ClickUp status → "R2_READY_FOR_BUILD" + Discord ping in #p1-r2-dossiers</span>
+                </div>
+                
+                <h4 style="margin-top: 1rem;">Required Inputs</h4>
+                <ul>
+                    <li>Notion Product Page with basic data (even if rough)</li>
+                    <li>Researcher notes (can be unformatted)</li>
+                    <li>At least 3 competitor URLs</li>
+                    <li>At least 1 supplier URL with cost estimate</li>
+                    <li>Primary angle/hook identified</li>
+                </ul>
+
+                <h4>What You Do</h4>
+                <ol>
+                    <li>Acknowledge in Discord (react with 👀 emoji)</li>
+                    <li>Check if inputs are complete (if not, ping researcher immediately)</li>
+                    <li>Move ClickUp task to "FORMATTING_IN_PROGRESS"</li>
+                    <li>Begin Workflow 1 (Intake & Setup)</li>
+                </ol>
+
+                <h4>Discord Message Template</h4>
+                <pre>🔔 R2 Packet Received
+
+Product: [Product Name]
+Researcher: @[Name]
+ClickUp: [Link]
+
+Starting formatting now. ETA: [time]</pre>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Outbound: To R3 Lead (Formatting→R3)</h3>
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <span class="handoff-label">TO</span>
+                    <span>P1-R3-LEAD-STRATEGIST</span>
+                </div>
+                <div class="handoff-header">
+                    <span class="handoff-label">TRIGGER</span>
+                    <span class="handoff-trigger">12-point QA complete, all sections filled</span>
+                </div>
+                
+                <h4 style="margin-top: 1rem;">Required Outputs</h4>
+                <ul>
+                    <li>Notion packet page: 100% complete, all sections filled</li>
+                    <li>Drive folder: All screenshots and docs organized</li>
+                    <li>ClickUp task: Status = "R3_READY", all custom fields updated</li>
+                    <li>12-point QA: All items checked</li>
+                </ul>
+
+                <h4>What You Do</h4>
+                <ol>
+                    <li>Run full 12-point QA (Workflow 5)</li>
+                    <li>Update ClickUp:
+                        <ul>
+                            <li>Status: "FORMATTING_COMPLETE"</li>
+                            <li>Assign to: P1-R3-LEAD-STRATEGIST</li>
+                            <li>Add comment: "Packet ready for R3 review"</li>
+                        </ul>
+                    </li>
+                    <li>Update Notion:
+                        <ul>
+                            <li>Status property: "R3_READY"</li>
+                        </ul>
+                    </li>
+                    <li>Post handoff in Discord #p1-r3-approvals</li>
+                </ol>
+
+                <h4>Discord Handoff Template</h4>
+                <pre>[HANDOFF]
+From Pod: P1 Product Intelligence
+To: R3 Lead (@Islam)
+
+Product ID: PRD-YYYYMMDD-XXX
+Packet ID: PCT-PRD-YYYYMMDD-XXX-R2NN
+Product: [Name]
+
+Summary:
+- AOV Target: $XX
+- Primary Angle: [angle]
+- Key Risk: [if any]
+
+Links:
+- Notion: [link]
+- ClickUp: [link]
+- Drive: [link]
+
+QA Status: ✅ 12/12 checks passed
+Ready for R3 review.</pre>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Quality Standards for Handoffs</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Quality Bar</th>
+                        <th>Acceptance Criteria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Completeness</strong></td>
+                        <td>All 9 sections present, no "TBD" or blank fields in critical data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Visual Quality</strong></td>
+                        <td>Screenshots clear, properly annotated, embedded in correct sections</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data Accuracy</strong></td>
+                        <td>All numbers match source docs, links work, IDs correct</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Formatting</strong></td>
+                        <td>Consistent style, tables formatted, proper headings, no typos in product name</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Turnaround</strong></td>
+                        <td>4-8 hours from R2_READY_FOR_BUILD to R3_READY</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Handoff Efficiency Hack</div>
+                <p>Create saved Discord message templates in a Notion doc. Just copy/paste and fill in the blanks. Saves 2-3 minutes per handoff.</p>
+            </div>
+        </section>
+
+        <!-- KPIs -->
+        <section class="card" id="kpis">
+            <div class="card-header">
+                <span class="card-icon">📊</span>
+                <h2>KPIs & Quality Bar</h2>
+            </div>
+
+            <div class="card-intro">
+                <strong>Success metrics:</strong> Speed, accuracy, and zero R3 rejects. You enable researchers to focus on strategy while you handle execution.
+            </div>
+
+            <h3>Primary KPIs (Weekly)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target (1.0 FTE)</th>
+                        <th>Measurement Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Packets Completed</strong></td>
+                        <td>10-15/week</td>
+                        <td>Count of ClickUp tasks moved to "R3_READY"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Turnaround Time</strong></td>
+                        <td>4-8 hours avg</td>
+                        <td>Time from R2_READY_FOR_BUILD to R3_READY</td>
+                    </tr>
+                    <tr>
+                        <td><strong>First-Pass QA Rate</strong></td>
+                        <td>≥95%</td>
+                        <td>% of packets that pass 12-point QA first try</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R3 Rejection Rate</strong></td>
+                        <td>≤5%</td>
+                        <td>% of packets rejected by R3 Lead for formatting errors</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Link Accuracy</strong></td>
+                        <td>100%</td>
+                        <td>% of packets with zero broken links at handoff</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem;">Quality Indicators</h3>
+            
+            <h4>✅ Good Performance Looks Like:</h4>
+            <ul>
+                <li>R3 Lead can review a packet in 5-10 minutes (not hunting for data)</li>
+                <li>All screenshots are crisp, properly annotated, and load fast</li>
+                <li>Researcher says: "I can hand this off and forget it"</li>
+                <li>Zero "where is the supplier cost?" questions from R3 Lead</li>
+                <li>Packets are visually consistent (same structure, same quality)</li>
+            </ul>
+
+            <h4>❌ Poor Performance Looks Like:</h4>
+            <ul>
+                <li>R3 Lead has to ping you for missing data</li>
+                <li>Screenshots are blurry or cut off key info</li>
+                <li>Drive folders are messy (files in wrong places, bad naming)</li>
+                <li>ClickUp and Notion have conflicting data (wrong IDs, outdated status)</li>
+                <li>Turnaround time creeps above 10 hours</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Self-Audit Practice</div>
+                <p>Every Friday, pick 2 random packets from the week and re-run the 12-point QA. If you find errors you missed, add a note to your checklist to catch it next time.</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Reporting</h3>
+            <p><strong>Weekly summary to PM/R3 Lead:</strong></p>
+            <ul>
+                <li>Packets completed (count)</li>
+                <li>Avg turnaround time</li>
+                <li>Rejections or resubmissions</li>
+                <li>Blockers or bottlenecks (if any)</li>
+            </ul>
+            <p>Format: Quick Discord message in #p4-pm-daily-standup on Friday EOD.</p>
+        </section>
+
+        <!-- AI Usage -->
+        <section class="card" id="ai-usage">
+            <div class="card-header">
+                <span class="card-icon">🤖</span>
+                <h2>AI Usage & Prompt Patterns</h2>
+            </div>
+
+            <div class="card-intro">
+                <strong>AI Role:</strong> Use AI to speed up formatting, generate price comparison tables, and catch QA errors. Do NOT use AI for research decisions or strategy.
+            </div>
+
+            <h3>Approved AI Use Cases</h3>
+            <ol>
+                <li><strong>Price Comparison Tables:</strong> Extract competitor pricing from screenshots/URLs</li>
+                <li><strong>Screenshot Annotation:</strong> Auto-highlight price, shipping, key claims</li>
+                <li><strong>File Organization:</strong> Batch rename files to match ID standards</li>
+                <li><strong>QA Assistance:</strong> Check for broken links, missing sections, typos</li>
+                <li><strong>Data Entry:</strong> Extract supplier specs from PDFs into Notion tables</li>
+            </ol>
+
+            <h3 style="margin-top: 2rem;">Ready-to-Use Prompts</h3>
+
+            <details>
+                <summary>Prompt 1: Extract Pricing Data</summary>
+                <div class="content">
+                    <pre>I have screenshots of 5 competitor product pages for [product name]. 
+
+Please create a pricing comparison table with these columns:
+- Competitor Name
+- Retail Price (USD)
+- Shipping Cost
+- Total Customer Price
+- URL
+- Key Features (3-5 bullets)
+
+Screenshots: [attach images]
+
+Format as a Markdown table I can paste into Notion.</pre>
+                </div>
+            </details>
+
+            <details>
+                <summary>Prompt 2: Organize Research Notes</summary>
+                <div class="content">
+                    <pre>I have rough research notes from a product researcher. Please organize them into these sections:
+
+1. Product Overview (2-3 sentences)
+2. Target Avatar
+3. Primary Angle/Hook
+4. Competitive Intel (bullet list)
+5. Supplier Details (name, cost, MOQ, lead time)
+6. Risk Flags (any concerns)
+
+Notes:
+[paste notes]
+
+Keep the researcher's language but organize it into clear sections. Don't add new research or opinions.</pre>
+                </div>
+            </details>
+
+            <details>
+                <summary>Prompt 3: QA Check a Notion Packet</summary>
+                <div class="content">
+                    <pre>I'm about to hand off a product packet to the R3 Lead. Please review it against this 12-point checklist:
+
+1. Product ID and Packet ID present
+2. Drive folder link works
+3. All 9 sections present (Meta, Overview, Economics, Competitive, Supplier, Creative, Risk, Score, Links)
+4. At least 5 screenshots embedded
+5. Price comparison table complete
+6. All URLs work (not broken)
+7. AOV, supplier cost, margin % filled in
+8. At least 1 supplier with cost/MOQ/lead time
+9. Images are clear (not blurry)
+10. No typos in product name or headings
+11. ClickUp custom fields filled
+12. Notion properties set (Status, Researcher, Date)
+
+Packet URL: [Notion link]
+
+Flag any missing or incomplete items.</pre>
+                </div>
+            </details>
+
+            <details>
+                <summary>Prompt 4: Generate Screenshot Annotations</summary>
+                <div class="content">
+                    <pre>I have a screenshot of a competitor product page. Please tell me what I should annotate/highlight:
+
+1. What elements should I circle or arrow? (price, shipping, guarantees, etc.)
+2. What text should I pull out for callouts?
+3. What comparisons should I make to our target offer?
+
+Screenshot: [attach image]
+
+Product context: We're planning to sell this at $XX with [angle].</pre>
+                </div>
+            </details>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ AI Boundaries</div>
+                <ul>
+                    <li><strong>NEVER use AI to:</strong> Make research decisions, score products, or determine angles</li>
+                    <li><strong>ALWAYS verify:</strong> AI-extracted data against source documents (don't trust blindly)</li>
+                    <li><strong>HUMAN CHECKPOINT:</strong> Review every AI output before adding to packet</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Human Checkpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>AI Task</th>
+                        <th>Human Checkpoint</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Price extraction</td>
+                        <td>Verify numbers match screenshots</td>
+                    </tr>
+                    <tr>
+                        <td>Screenshot annotation suggestions</td>
+                        <td>Check that callouts make sense for our angle</td>
+                    </tr>
+                    <tr>
+                        <td>File batch renaming</td>
+                        <td>Spot-check 3-5 filenames match Product ID standard</td>
+                    </tr>
+                    <tr>
+                        <td>QA checklist review</td>
+                        <td>Manually verify 3-5 items AI flagged as "complete"</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Tools -->
+        <section class="card" id="tools">
+            <div class="card-header">
+                <span class="card-icon">🛠️</span>
+                <h2>Tools & Systems Reference</h2>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Views/Features</th>
+                        <th>Access Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task management, WIP tracking</td>
+                        <td>
+                            <strong>Space:</strong> P1 - Product Intelligence<br>
+                            <strong>Folder:</strong> Research Pipeline<br>
+                            <strong>Lists:</strong> R2 Dossiers, R3 Approved<br>
+                            <strong>Statuses:</strong> R2_READY_FOR_BUILD, FORMATTING_IN_PROGRESS, R3_READY<br>
+                            <strong>Custom Fields:</strong> Product_ID, Packet_ID, Researcher, Gate
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Packet pages, knowledge base</td>
+                        <td>
+                            <strong>Databases:</strong> Product OS, Packets OS<br>
+                            <strong>Templates:</strong> Product Packet Template<br>
+                            <strong>Views:</strong> R2 In Progress, R3 Ready<br>
+                            <strong>Properties:</strong> Status, Researcher, Date, Product_ID
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>File storage, screenshots, docs</td>
+                        <td>
+                            <strong>Path:</strong> /02_P1_Product_Intel/Products/<br>
+                            <strong>Subfolders:</strong> 01_Research_Raw, 02_Packets_and_Summaries, 03_Supplier_Docs<br>
+                            <strong>Naming:</strong> PRD-YYYYMMDD-XXX_[type]_[source]
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Handoff notifications, coordination</td>
+                        <td>
+                            <strong>Channels:</strong> #p1-r2-dossiers, #p1-r3-approvals<br>
+                            <strong>Templates:</strong> Handoff messages, status updates<br>
+                            <strong>Pings:</strong> @P1-R3-LEAD-STRATEGIST
+                        </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Screenshot Tools</strong></td>
+                        <td>Capture full pages, annotate</td>
+                        <td>
+                            <strong>Browser:</strong> GoFullPage, Full Page Screen Capture<br>
+                            <strong>Annotation:</strong> Skitch, Snagit, OS built-in<br>
+                            <strong>Format:</strong> PNG preferred
+                        </td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI Tools (Optional)</strong></td>
+                        <td>Data extraction, QA assistance</td>
+                        <td>
+                            <strong>Use cases:</strong> Price tables, file organization, QA checks<br>
+                            <strong>Checkpoint:</strong> Always verify AI outputs
+                        </td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem;">Quick Access Links</h3>
+            <ul>
+                <li><strong>ClickUp R2 Board:</strong> [Space] → Research Pipeline → R2 Dossiers</li>
+                <li><strong>Notion Product OS:</strong> DriveOn Commerce HQ → Products OS</li>
+                <li><strong>Drive Product Folders:</strong> Shared Drive → 02_P1_Product_Intel → Products</li>
+                <li><strong>Discord Handoff Channel:</strong> #p1-r2-dossiers</li>
+                <li><strong>Packet Template:</strong> Notion → SOP Library DB → Product Packet Template</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Bookmark This</div>
+                <p>Create a browser bookmark folder called "Packet Building" with direct links to: ClickUp R2 list, Notion Product OS, Drive Products folder, Discord #p1-r2-dossiers. Opens all 4 tabs with one click.</p>
+            </div>
+        </section>
+
+        <!-- Escalation -->
+        <section class="card" id="escalation">
+            <div class="card-header">
+                <span class="card-icon">🚨</span>
+                <h2>Escalation & Decision Rights</h2>
+            </div>
+
+            <h3>You Can Decide Alone:</h3>
+            <ul>
+                <li>How to organize Drive folders (within canon structure)</li>
+                <li>Which screenshot tool to use</li>
+                <li>How to annotate screenshots for clarity</li>
+                <li>Order of processing packets (based on due dates)</li>
+                <li>Minor formatting adjustments (fonts, spacing, etc.)</li>
+            </ul>
+
+            <h3>You Must Escalate To Researcher When:</h3>
+            <ul>
+                <li>Research data is incomplete (missing pricing, no supplier, unclear angle)</li>
+                <li>URLs are broken or don't match product description</li>
+                <li>Screenshots don't show required info (e.g., price is cut off)</li>
+                <li>You can't determine which competitor is "primary"</li>
+            </ul>
+
+            <h3>You Must Escalate To R3 Lead When:</h3>
+            <ul>
+                <li>Researcher is unresponsive for >4 hours on missing data</li>
+                <li>You're blocked on 3+ packets due to incomplete research</li>
+                <li>You discover a structural issue with packet template</li>
+                <li>WIP is consistently above 8 packets</li>
+            </ul>
+
+            <h3>You Must Escalate To PM When:</h3>
+            <ul>
+                <li>ClickUp or Notion workspace is broken (can't access, permissions issue)</li>
+                <li>Drive folder permissions are wrong</li>
+                <li>Researchers are consistently handing off incomplete work</li>
+                <li>You need access to a new tool or integration</li>
+            </ul>
+
+            <h3>Response Time Expectations</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Issue Type</th>
+                        <th>Escalate To</th>
+                        <th>Expected Response</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Missing research data</td>
+                        <td>Researcher (direct ping)</td>
+                        <td>2-4 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Blocked on multiple packets</td>
+                        <td>R3 Lead</td>
+                        <td>Same day</td>
+                    </tr>
+                    <tr>
+                        <td>Tool/access issue</td>
+                        <td>PM</td>
+                        <td>24 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Urgent blocker (P1 test launch pending)</td>
+                        <td>R3 Lead + PM</td>
+                        <td>1-2 hours</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ When NOT to Escalate</div>
+                <ul>
+                    <li>Normal 4-8 hour turnaround time (that's expected)</li>
+                    <li>Researcher notes are "messy" but complete (your job to organize)</li>
+                    <li>You're not sure how to format something (check template first)</li>
+                    <li>Minor typos in researcher notes (fix them)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Onboarding -->
+        <section class="card" id="onboarding">
+            <div class="card-header">
+                <span class="card-icon">🎓</span>
+                <h2>Onboarding Checklist</h2>
+            </div>
+
+            <div class="card-intro">
+                <strong>30-Day Ramp Plan:</strong> Week 1 = Setup & shadow. Week 2 = Assisted packets. Week 3-4 = Independent work with spot checks.
+            </div>
+
+            <h3>Week 1: Setup & Learning</h3>
+            <ul class="checklist">
+                <li><strong>Day 1:</strong> Access setup (ClickUp, Notion, Drive, Discord)</li>
+                <li><strong>Day 1:</strong> Read this SOP top to bottom</li>
+                <li><strong>Day 1-2:</strong> Read canon docs:
+                    <ul>
+                        <li>L1-01 CaniCol Model v4.0 (understand testing economics)</li>
+                        <li>L2-03 Role Registry (understand your WIP caps)</li>
+                        <li>L2-04 Glossary (learn ID formats)</li>
+                        <li>L3-02 ClickUp Blueprint (understand lists/statuses)</li>
+                        <li>L3-03 Notion Blueprint (understand DB structure)</li>
+                        <li>L3-04 Drive Blueprint (understand folder structure)</li>
+                    </ul>
+                </li>
+                <li><strong>Day 2-3:</strong> Shadow an existing packet build (watch researcher or senior builder)</li>
+                <li><strong>Day 3-4:</strong> Practice on 1 sample packet (use a completed packet as reference)</li>
+                <li><strong>Day 5:</strong> Build your first real packet with supervision (researcher or R3 Lead reviews before handoff)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Week 2: Assisted Practice</h3>
+            <ul class="checklist">
+                <li>Build 3-5 packets with spot checks from R3 Lead</li>
+                <li>Learn screenshot tools and annotation techniques</li>
+                <li>Practice Discord handoff messages</li>
+                <li>Run 12-point QA on all packets</li>
+                <li>Get feedback on formatting quality</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Week 3-4: Independent Work</h3>
+            <ul class="checklist">
+                <li>Handle full packet load (6-8 WIP, 10-15/week if 1.0 FTE)</li>
+                <li>Average turnaround: 4-8 hours</li>
+                <li>First-pass QA rate: ≥90% (improving to 95%)</li>
+                <li>R3 rejection rate: ≤10% (improving to 5%)</li>
+                <li>Weekly check-in with R3 Lead or PM</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">30-Day Review Criteria</h3>
+            <p>At 30 days, you should demonstrate:</p>
+            <ul>
+                <li>✅ Can complete 2-3 packets/day independently</li>
+                <li>✅ 12-point QA passes on first try (≥90% of packets)</li>
+                <li>✅ Zero major errors (broken links, missing IDs, wrong Drive folders)</li>
+                <li>✅ Handoff messages are clear and complete</li>
+                <li>✅ Know when to escalate vs. when to solve independently</li>
+                <li>✅ Can explain packet structure and why each section matters</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Speed-Up Tips</div>
+                <ul>
+                    <li>Create a "Daily Startup" checklist (browser tabs, tools, lists)</li>
+                    <li>Build a personal template doc with Discord messages and common text</li>
+                    <li>Keep a "mistakes log" to track and fix recurring errors</li>
+                    <li>Ask for feedback early and often (don't wait for 30-day review)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Change Log -->
+        <section class="card" id="changelog">
+            <div class="card-header">
+                <span class="card-icon">📝</span>
+                <h2>Change Log</h2>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Change Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>v1.0</td>
+                        <td>2025-12-11</td>
+                        <td>DriveOn SOP Factory (Claude)</td>
+                        <td>Initial HTML SOP creation based on L2-03 Role Registry and canon stack. Includes all workflows, QA checklist, handoff templates, and 2025 UX best practices.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-canon" style="margin-top: 2rem;">
+                <div class="callout-title">⚖️ Canon Alignment</div>
+                <p>This SOP is derived from:</p>
+                <ul>
+                    <li><strong>L1-01:</strong> CaniCol Model v4.0 (economics, volume targets)</li>
+                    <li><strong>L2-03:</strong> Role Registry and WIP Limits v1 (role definition, throughput)</li>
+                    <li><strong>L2-04:</strong> Glossary and Conventions v4.0 (ID formats)</li>
+                    <li><strong>L3-02:</strong> ClickUp Infra Blueprint v1 (lists, statuses)</li>
+                    <li><strong>L3-03:</strong> Notion Infra Blueprint v1 (DB structure, templates)</li>
+                    <li><strong>L3-04:</strong> Google Drive Infra Blueprint v1 (folder structure)</li>
+                </ul>
+                <p style="margin-top: 1rem;"><strong>If canon changes:</strong> This SOP must be updated to reflect new WIP caps, ID formats, or workflow changes. Do not modify packet structure without updating L2/L3 canon first.</p>
+            </div>
+        </section>
+
+        <!-- Hidden JSON Structure -->
+        <script type="application/json" id="sop-structure">
+{
+  "role_id": "P1-R2-PACKET-BUILDER-XX",
+  "role_name": "Packet Builder / Intel Ops",
+  "pod": "P1",
+  "status": "OPTIONAL / DUAL_ONLY",
+  "fte_range": [0.5, 1.0],
+  "owned_gates": [],
+  "wip_limits": {
+    "packets_in_formatting": [6, 8]
+  },
+  "throughput": {
+    "packets_per_week": [10, 15],
+    "turnaround_hours": [4, 8]
+  },
+  "upstream_roles": [
+    "P1-R1R2-RESEARCH",
+    "P1-R2-SENIOR-RESEARCH"
+  ],
+  "downstream_roles": [
+    "P1-R3-LEAD-STRATEGIST"
+  ],
+  "workflows": [
+    {
+      "name": "R2 Packet Intake & Initial Setup",
+      "trigger": "ClickUp status → R2_READY_FOR_BUILD + Discord ping",
+      "inputs": ["ClickUp task", "Notion Product Page", "Researcher notes", "3+ competitor URLs", "1+ supplier URL"],
+      "steps": [
+        "Verify task readiness",
+        "Check Notion page exists",
+        "Generate Product ID and Packet ID",
+        "Update ClickUp custom fields",
+        "Create Drive folder structure",
+        "Create subfolders",
+        "Move task to FORMATTING_IN_PROGRESS",
+        "Note start time"
+      ],
+      "outputs": ["IDs created", "Drive folders ready", "ClickUp updated"],
+      "tools": ["ClickUp", "Notion", "Google Drive"]
+    },
+    {
+      "name": "Screenshot Capture & Visual Assets",
+      "trigger": "IDs created, Drive folders ready",
+      "inputs": ["Competitor URLs", "Supplier URLs", "Ad platform links"],
+      "steps": [
+        "Open all URLs",
+        "Capture competitor product pages",
+        "Annotate screenshots",
+        "Capture ads from FB/TikTok",
+        "Capture supplier pages",
+        "Create price comparison table",
+        "Organize in Drive",
+        "Link Drive folder in Notion"
+      ],
+      "outputs": ["5+ screenshots", "Annotated images", "Price table", "Drive organized"],
+      "tools": ["Browser screenshot tools", "Annotation tools", "Google Drive"]
+    },
+    {
+      "name": "Notion Packet Page Structure",
+      "trigger": "Screenshots captured, data organized",
+      "inputs": ["All screenshots", "Researcher notes", "Competitor data", "Supplier data"],
+      "steps": [
+        "Duplicate Notion template",
+        "Rename page with Packet ID",
+        "Fill Meta section",
+        "Copy notes to appropriate sections",
+        "Build tables",
+        "Embed screenshots",
+        "Format URLs",
+        "Add property tags"
+      ],
+      "outputs": ["Complete Notion packet page with 9 sections"],
+      "tools": ["Notion"]
+    },
+    {
+      "name": "12-Point QA Checklist",
+      "trigger": "Packet page complete",
+      "inputs": ["Complete Notion page", "Drive folder", "ClickUp task"],
+      "steps": [
+        "Check IDs complete",
+        "Check Drive folder structure",
+        "Check all 9 sections present",
+        "Check screenshots (min 5)",
+        "Check tables complete",
+        "Check all links work",
+        "Check economics data",
+        "Check supplier data",
+        "Check visual quality",
+        "Check for typos",
+        "Check ClickUp updated",
+        "Check Notion properties"
+      ],
+      "outputs": ["QA pass/fail status"],
+      "tools": ["Checklist"]
+    }
+  ],
+  "handoffs": [
+    {
+      "from": "P1-R1R2-RESEARCH / P1-R2-SENIOR-RESEARCH",
+      "to": "P1-R2-PACKET-BUILDER",
+      "trigger": "ClickUp → R2_READY_FOR_BUILD + Discord ping",
+      "channel": "Discord #p1-r2-dossiers",
+      "required_inputs": ["Notion Product Page", "Basic research data", "3+ competitor URLs", "1+ supplier URL"],
+      "sla_hours": "Acknowledge within 1 hour"
+    },
+    {
+      "from": "P1-R2-PACKET-BUILDER",
+      "to": "P1-R3-LEAD-STRATEGIST",
+      "trigger": "12-point QA complete",
+      "channel": "Discord #p1-r3-approvals",
+      "required_outputs": ["Complete Notion packet", "Drive folder organized", "ClickUp task updated"],
+      "sla_hours": "4-8 hours turnaround"
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Packets Completed",
+      "target": "10-15/week",
+      "measurement": "ClickUp tasks moved to R3_READY",
+      "source": "L2-03"
+    },
+    {
+      "name": "Turnaround Time",
+      "target": "4-8 hours avg",
+      "measurement": "Time from R2_READY_FOR_BUILD to R3_READY",
+      "source": "L2-03"
+    },
+    {
+      "name": "First-Pass QA Rate",
+      "target": "≥95%",
+      "measurement": "% passing 12-point QA first try",
+      "source": "Quality standards"
+    },
+    {
+      "name": "R3 Rejection Rate",
+      "target": "≤5%",
+      "measurement": "% rejected by R3 Lead for formatting errors",
+      "source": "Quality standards"
+    },
+    {
+      "name": "Link Accuracy",
+      "target": "100%",
+      "measurement": "% packets with zero broken links",
+      "source": "Quality standards"
+    }
+  ],
+  "tools": [
+    {
+      "name": "ClickUp",
+      "space": "P1 - Product Intelligence",
+      "folder": "Research Pipeline",
+      "lists": ["R2 Dossiers", "R3 Approved"],
+      "statuses": ["R2_READY_FOR_BUILD", "FORMATTING_IN_PROGRESS", "R3_READY"]
+    },
+    {
+      "name": "Notion",
+      "databases": ["Product OS", "Packets OS"],
+      "templates": ["Product Packet Template"],
+      "properties": ["Status", "Researcher", "Date", "Product_ID", "Packet_ID"]
+    },
+    {
+      "name": "Google Drive",
+      "path": "/02_P1_Product_Intel/Products/",
+      "subfolders": ["01_Research_Raw", "02_Packets_and_Summaries", "03_Supplier_Docs"],
+      "naming": "PRD-YYYYMMDD-XXX_[type]_[source]"
+    },
+    {
+      "name": "Discord",
+      "channels": ["#p1-r2-dossiers", "#p1-r3-approvals"]
+    }
+  ],
+  "canon_docs": [
+    "L1-01_CaniCol_Model_v4.0",
+    "L2-03_Role_Registry_and_WIP_Limits_v1",
+    "L2-04_Glossary_and_Conventions_v4.0",
+    "L3-02_ClickUp_Infra_Blueprint_v1",
+    "L3-03_Notion_Infra_Blueprint_v1",
+    "L3-04_Google_Drive_Infra_Blueprint_v1"
+  ],
+  "version": "1.0",
+  "last_updated": "2025-12-11",
+  "author": "DriveOn SOP Factory"
+}
+        </script>
+    </main>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00C8C8',
+                lineColor: '#666666',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Navigation toggle for mobile
+        function toggleNav() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        // Smooth scroll with offset for fixed header
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                const headerOffset = 100;
+                const elementPosition = targetElement.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Close mobile nav after click
+                if (window.innerWidth <= 968) {
+                    document.getElementById('mainNav').classList.remove('active');
+                }
+            });
+        });
+
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.getElementById('mainNav');
+            const toggle = document.querySelector('.nav-toggle');
+            
+            if (window.innerWidth <= 968 && 
+                !nav.contains(event.target) && 
+                !toggle.contains(event.target) &&
+                nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

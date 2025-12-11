@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P1-R1-SCOUT-SOURCING - Scout & Supplier Sourcing Specialist SOP</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --gray-text: #555555;
+            --light-gray: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--light-gray);
+        }
+        
+        header {
+            background: var(--white);
+            border-bottom: 3px solid var(--drive-cyan);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        h1 {
+            font-size: 1.75rem;
+            color: var(--carbon-black);
+            font-weight: 700;
+        }
+        
+        .role-id {
+            font-family: 'Courier New', monospace;
+            color: var(--drive-cyan);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .status-chip {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            background: var(--drive-cyan);
+            color: var(--white);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        nav {
+            position: fixed;
+            right: 2rem;
+            top: 120px;
+            width: 250px;
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        nav h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-text);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav li {
+            margin-bottom: 0.5rem;
+        }
+        
+        nav a {
+            color: var(--carbon-black);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        nav a:hover {
+            background: var(--light-gray);
+            color: var(--drive-cyan);
+        }
+        
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem 4rem 2rem;
+        }
+        
+        .hero-summary {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--drive-cyan);
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .meta-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-text);
+            font-weight: 600;
+        }
+        
+        .meta-value {
+            font-size: 1rem;
+            color: var(--carbon-black);
+            font-weight: 500;
+        }
+        
+        .key-outcomes {
+            margin-top: 1.5rem;
+        }
+        
+        .key-outcomes h3 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--carbon-black);
+        }
+        
+        .outcome-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .chip {
+            background: var(--champagne);
+            color: var(--carbon-black);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        
+        section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--carbon-black);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        section h3 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem 0;
+            color: var(--carbon-black);
+        }
+        
+        .section-icon {
+            font-size: 1.5rem;
+        }
+        
+        .why-matters {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--gray-text);
+            border-left: 3px solid var(--drive-cyan);
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li:before {
+            content: '☐';
+            position: absolute;
+            left: 0;
+            color: var(--drive-cyan);
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        
+        .callout {
+            padding: 1rem 1rem 1rem 3rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .callout:before {
+            position: absolute;
+            left: 1rem;
+            font-size: 1.25rem;
+        }
+        
+        .callout-canon {
+            background: #EFF6FF;
+            border-left: 4px solid #3B82F6;
+        }
+        
+        .callout-canon:before {
+            content: '⚖️';
+        }
+        
+        .callout-warning {
+            background: #FEF3C7;
+            border-left: 4px solid var(--warning);
+        }
+        
+        .callout-warning:before {
+            content: '⚠️';
+        }
+        
+        .callout-tip {
+            background: #F0FDF4;
+            border-left: 4px solid var(--success);
+        }
+        
+        .callout-tip:before {
+            content: '💡';
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        th {
+            background: var(--light-gray);
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+        
+        code {
+            background: var(--light-gray);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--carbon-black);
+        }
+        
+        pre {
+            background: var(--carbon-black);
+            color: var(--champagne);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        pre code {
+            background: none;
+            color: var(--champagne);
+            padding: 0;
+        }
+        
+        .handoff-card {
+            background: var(--light-gray);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 1.5rem;
+        }
+        
+        .collapsible {
+            margin: 1rem 0;
+        }
+        
+        .collapsible-trigger {
+            background: var(--light-gray);
+            border: 1px solid var(--border-gray);
+            padding: 1rem;
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        
+        .collapsible-trigger:hover {
+            background: var(--drive-cyan);
+            color: var(--white);
+        }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .collapsible-content.active {
+            max-height: 2000px;
+            padding: 1rem;
+            border: 1px solid var(--border-gray);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+        }
+        
+        .kpi-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .kpi-badge {
+            background: var(--drive-cyan);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--drive-cyan);
+        }
+        
+        .timeline-block {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-block:before {
+            content: '';
+            position: absolute;
+            left: -1.6rem;
+            top: 0.4rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--drive-cyan);
+        }
+        
+        .timeline-time {
+            font-weight: 600;
+            color: var(--drive-cyan);
+            margin-bottom: 0.25rem;
+        }
+        
+        .timeline-content {
+            background: var(--light-gray);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+        
+        @media (max-width: 1200px) {
+            nav {
+                position: static;
+                width: 100%;
+                margin-bottom: 2rem;
+                max-height: none;
+            }
+            
+            main {
+                margin-right: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.25rem;
+            }
+            
+            main {
+                padding: 0 1rem 2rem 1rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <div class="role-id">P1-R1-SCOUT-SOURCING-XX</div>
+                <h1>Scout & Supplier Sourcing Specialist</h1>
+            </div>
+            <span class="status-chip">CORE ROLE · v1.0</span>
+        </div>
+    </header>
+
+    <nav>
+        <h3>Contents</h3>
+        <ul>
+            <li><a href="#meta">Meta & Snapshot</a></li>
+            <li><a href="#purpose">Role Purpose</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day-in-life">Day in the Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs</a></li>
+            <li><a href="#kpis">KPIs & Quality</a></li>
+            <li><a href="#ai-usage">AI Usage</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation</a></li>
+            <li><a href="#onboarding">Onboarding</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="hero-summary">
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <span class="meta-label">Pod</span>
+                    <span class="meta-value">P1 · Product Intelligence</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Owned Gates</span>
+                    <span class="meta-value">R1 (Market + Supplier)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Cross-Pod</span>
+                    <span class="meta-value">Yes (works with P2/P3)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">FTE</span>
+                    <span class="meta-value">1.0</span>
+                </div>
+            </div>
+
+            <div class="key-outcomes">
+                <h3>Key Outcomes You Own</h3>
+                <div class="outcome-chips">
+                    <span class="chip">20-40 R1 packets/week</span>
+                    <span class="chip">Supplier viability verified</span>
+                    <span class="chip">Fast R0→R1 qualification</span>
+                    <span class="chip">Clean supplier data in Product OS</span>
+                </div>
+            </div>
+
+            <div class="key-outcomes">
+                <h3>You Own (RACI)</h3>
+                <ul>
+                    <li><strong>Accountable (A)</strong> for supplier sourcing viability: pricing, MOQ, lead time, shipping</li>
+                    <li><strong>Responsible (R)</strong> for recording supplier data into Product OS/packet</li>
+                    <li><strong>Consulted (C)</strong> at R2/R3 when supplier constraints affect go/no-go</li>
+                </ul>
+            </div>
+        </div>
+
+        <section id="purpose">
+            <h2><span class="section-icon">🎯</span>Role Purpose & Context</h2>
+            <div class="why-matters">
+                <strong>Why this role exists:</strong> The CaniCol model tests 45-60 products/month at tight budgets ($40-60 P1, $70-120 P1+P2). This only works if we have a fast, high-volume R1 pipeline that filters out unviable products BEFORE expensive research and creative work begins. You are the first quality gate after R0 idea dumping.
+            </div>
+
+            <p>Your job is <strong>breadth with intelligent filtering</strong>. You turn raw product ideas (from R0 scouts, trend feeds, spy tools) into vetted R1 packets that have:</p>
+            <ul>
+                <li>Confirmed supplier availability with realistic pricing</li>
+                <li>Clear market plausibility (not just "trending" but sellable)</li>
+                <li>Basic logistics sanity (MOQ, lead time, shipping windows)</li>
+                <li>Clean data recorded in Product OS for R2 researchers</li>
+            </ul>
+
+            <p>You are NOT responsible for:</p>
+            <ul>
+                <li>Deep competitive research (that's R2)</li>
+                <li>Final R3 go/no-go decisions (that's PI Lead Strategist)</li>
+                <li>Creative angle development (that's P2)</li>
+            </ul>
+
+            <div class="callout callout-canon">
+                <strong>Canon Anchor:</strong> This role supports the CaniCol v4.0 lean-volume model (L1-01). By maintaining a clean R1 funnel with supplier verification, you enable downstream researchers to focus on depth rather than basic sourcing grunt work.
+            </div>
+        </section>
+
+        <section id="canon">
+            <h2><span class="section-icon">⚖️</span>Canon Constraints for This Role</h2>
+            <div class="why-matters">
+                These constraints from L0-L3 canon are non-negotiable. If you encounter conflicts, escalate immediately.
+            </div>
+
+            <h3>Economic Constraints (from L1-01, L2-05)</h3>
+            <ul>
+                <li>Testing volume target: <strong>~45-60 products/month</strong> reach P1/P2</li>
+                <li>P1 budget: <strong>$40-$60</strong> per product</li>
+                <li>P1+P2 total: <strong>$70-$120</strong> (standard $80-$100)</li>
+                <li>This means products must have <strong>realistic AOV and margin potential</strong> to work at these budgets</li>
+            </ul>
+
+            <h3>WIP & Throughput (from L2-03)</h3>
+            <ul>
+                <li><strong>R1 WIP cap:</strong> 8-10 packets in progress</li>
+                <li><strong>Supplier checks:</strong> ~6 active at a time</li>
+                <li><strong>Weekly throughput:</strong> 20-40 R1 packets completed</li>
+                <li>Never let your ClickUp R1 list exceed 10 active items without escalating</li>
+            </ul>
+
+            <h3>Tool Stack (from L2/L3)</h3>
+            <ul>
+                <li><strong>Approved tools only:</strong> TikTok, AliExpress/Alibaba, CJ, Notion, ClickUp, Google Drive</li>
+                <li><strong>No unapproved tools:</strong> Airtable, Asana, random product research SaaS without PM approval</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <strong>Common Mistake:</strong> Spending too much time on deep research at R1. Your job is fast filtering and supplier verification. If you find yourself spending 2+ hours on one product at R1, you're doing R2 work—hand it to R2 researchers instead.
+            </div>
+        </section>
+
+        <section id="day-in-life">
+            <h2><span class="section-icon">📅</span>Day-in-the-Life Timeline</h2>
+            <div class="why-matters">
+                A typical 8-hour day for a 1.0 FTE Scout & Sourcing Specialist. Adjust blocks based on pipeline load.
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-block">
+                    <div class="timeline-time">8:00 - 8:30 AM</div>
+                    <div class="timeline-content">
+                        <strong>Morning Setup & Prioritization</strong>
+                        <ul class="checklist">
+                            <li>Check ClickUp R1 Shortlist for urgent items</li>
+                            <li>Review Discord #p1-r0-idea-dump for new R0 submissions</li>
+                            <li>Check supplier email responses overnight</li>
+                            <li>Sync with PI Lead on priorities for the day</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">8:30 - 11:00 AM</div>
+                    <div class="timeline-content">
+                        <strong>R0 → R1 Triage Block</strong>
+                        <p>Process 8-10 R0 ideas into R1 packets. Target: 2-3 completed R1 packets this block.</p>
+                        <ul class="checklist">
+                            <li>Pull R0 ideas from ClickUp R0 Ideas list</li>
+                            <li>Quick market plausibility check (30 min per product)</li>
+                            <li>Initial supplier sourcing (AliExpress, Alibaba)</li>
+                            <li>Kill obvious non-starters, promote viable ones to R1</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">11:00 - 12:00 PM</div>
+                    <div class="timeline-content">
+                        <strong>Supplier Validation Block</strong>
+                        <p>Deep dive on 2-3 products needing supplier verification.</p>
+                        <ul class="checklist">
+                            <li>Contact suppliers for quotes (MOQ, pricing, lead time)</li>
+                            <li>Verify shipping options and restrictions</li>
+                            <li>Document findings in Notion Product OS</li>
+                            <li>Update ClickUp task with supplier validation status</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">12:00 - 1:00 PM</div>
+                    <div class="timeline-content">
+                        <strong>Lunch / Buffer</strong>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">1:00 - 3:00 PM</div>
+                    <div class="timeline-content">
+                        <strong>R1 Packet Assembly Block</strong>
+                        <p>Complete 3-5 R1 packets with supplier data.</p>
+                        <ul class="checklist">
+                            <li>Finalize Product OS entries with all supplier fields</li>
+                            <li>Upload supplier quotes/screenshots to Drive</li>
+                            <li>Move ClickUp tasks to R1_COMPLETE status</li>
+                            <li>Handoff to R2 researchers via Discord</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">3:00 - 4:00 PM</div>
+                    <div class="timeline-content">
+                        <strong>Quality Check & Cleanup</strong>
+                        <ul class="checklist">
+                            <li>Review completed R1 packets for data quality</li>
+                            <li>Follow up on pending supplier responses</li>
+                            <li>Update WIP count in ClickUp dashboard</li>
+                            <li>Flag any blockers in #p1-blockers</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-block">
+                    <div class="timeline-time">4:00 - 5:00 PM</div>
+                    <div class="timeline-content">
+                        <strong>Forward Scouting & Learning</strong>
+                        <ul class="checklist">
+                            <li>Browse TikTok/Meta feeds for emerging products</li>
+                            <li>Check spy tools for trending products</li>
+                            <li>Add interesting finds to R0 backlog</li>
+                            <li>Quick end-of-day status update in Discord</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="callout callout-tip">
+                <strong>Pro Tip:</strong> Batch similar tasks together. Do all your AliExpress searches in one block, all your Notion data entry in another. Context switching kills speed.
+            </div>
+        </section>
+
+        <section id="workflows">
+            <h2><span class="section-icon">⚙️</span>Core Workflows</h2>
+            <div class="why-matters">
+                These are your 3 main workflows. Each has specific inputs, steps, and quality gates.
+            </div>
+
+            <div class="collapsible">
+                <button class="collapsible-trigger">
+                    <span>Workflow 1: R0 → R1 Triage & Qualification</span>
+                    <span>▼</span>
+                </button>
+                <div class="collapsible-content">
+                    <h3>Trigger</h3>
+                    <p>New R0 idea appears in ClickUp "R0 Ideas" list OR Discord #p1-r0-idea-dump</p>
+
+                    <h3>Inputs</h3>
+                    <ul>
+                        <li>Product concept (name, category, link to inspiration)</li>
+                        <li>Source signal (TikTok video, ad library screenshot, spy tool report)</li>
+                        <li>Rough price point estimate (if available)</li>
+                    </ul>
+
+                    <h3>Steps</h3>
+                    <ol>
+                        <li><strong>Quick market check (10 min):</strong>
+                            <ul>
+                                <li>Is this product type selling on Amazon/similar platforms?</li>
+                                <li>Are there existing reviews/social proof?</li>
+                                <li>Does it fit a clear pain point or desire?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Initial supplier search (15 min):</strong>
+                            <ul>
+                                <li>Search AliExpress, Alibaba for similar products</li>
+                                <li>Find 2-3 potential suppliers</li>
+                                <li>Screenshot price ranges and product images</li>
+                            </ul>
+                        </li>
+                        <li><strong>Plausibility assessment (5 min):</strong>
+                            <ul>
+                                <li>Can we realistically sell this at 2-3x supplier cost?</li>
+                                <li>Are there obvious compliance/shipping red flags?</li>
+                                <li>Does MOQ look reasonable (typically <500 units)?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Decision:</strong>
+                            <ul>
+                                <li><strong>KILL:</strong> Move to ClickUp status "R1_FAIL", add kill reason in comments</li>
+                                <li><strong>PROMOTE:</strong> Create Product ID, move to "R1 Shortlist", proceed to Workflow 2</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Outputs</h3>
+                    <ul>
+                        <li>ClickUp task moved to R1 Shortlist with Product_ID assigned</li>
+                        <li>Initial supplier screenshots saved to Drive /02_P1_Product_Intel/Products/[ProductID]/01_Research_Raw/</li>
+                        <li>Basic plausibility notes in ClickUp task description</li>
+                    </ul>
+
+                    <h3>Quality Check</h3>
+                    <p>Before promoting to R1, ask: "If I handed this to an R2 researcher right now, could they immediately start deep research without re-doing supplier search?"</p>
+
+                    <div class="callout callout-warning">
+                        <strong>Kill Criteria:</strong> No viable suppliers found, obvious compliance issues, market too saturated with no angle, pricing math doesn't work even optimistically.
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <button class="collapsible-trigger">
+                    <span>Workflow 2: Supplier Validation & Data Recording</span>
+                    <span>▼</span>
+                </button>
+                <div class="collapsible-content">
+                    <h3>Trigger</h3>
+                    <p>Product promoted to R1 Shortlist and needs formal supplier validation</p>
+
+                    <h3>Inputs</h3>
+                    <ul>
+                        <li>Product_ID from ClickUp</li>
+                        <li>2-3 potential suppliers identified in Workflow 1</li>
+                        <li>Product specification requirements (if any from R0 notes)</li>
+                    </ul>
+
+                    <h3>Steps</h3>
+                    <ol>
+                        <li><strong>Contact top 2 suppliers (30 min):</strong>
+                            <ul>
+                                <li>Send inquiry via AliExpress message or Alibaba</li>
+                                <li>Request: MOQ, unit price at different quantities, lead time, shipping options, payment terms</li>
+                                <li>Ask about customization options (packaging, branding) if relevant</li>
+                            </ul>
+                        </li>
+                        <li><strong>Document supplier responses (15 min):</strong>
+                            <ul>
+                                <li>Create entry in Notion Products OS → Supplier Info section</li>
+                                <li>Required fields: Supplier Name, Contact, MOQ, Unit Price, Lead Time, Shipping Method, Notes</li>
+                                <li>Upload supplier quotes/screenshots to Drive /02_P1_Product_Intel/Products/[ProductID]/03_Supplier_Docs/</li>
+                            </ul>
+                        </li>
+                        <li><strong>Calculate basic unit economics (10 min):</strong>
+                            <ul>
+                                <li>Supplier cost + shipping estimate = landed cost</li>
+                                <li>Potential retail price (2.5-3x landed cost for dropship/test products)</li>
+                                <li>Does this give room for P1 test profitability?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Flag issues (5 min):</strong>
+                            <ul>
+                                <li>If MOQ > 500 units → flag as "High MOQ Risk"</li>
+                                <li>If lead time > 4 weeks → flag as "Slow Sourcing"</li>
+                                <li>If no responsive suppliers → escalate or kill</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update ClickUp task:</strong>
+                            <ul>
+                                <li>Set custom field "Supplier_Validated" = Yes</li>
+                                <li>Add supplier summary in task comments</li>
+                                <li>Move status to R1_COMPLETE</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h3>Outputs</h3>
+                    <ul>
+                        <li>Complete supplier data in Notion Products OS</li>
+                        <li>Supplier documents in Drive folder</li>
+                        <li>ClickUp task ready for R2 handoff</li>
+                    </ul>
+
+                    <h3>Quality Check</h3>
+                    <p>R2 researcher should be able to see: exact supplier pricing, realistic lead time, and any sourcing risks WITHOUT having to contact suppliers again.</p>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <button class="collapsible-trigger">
+                    <span>Workflow 3: R1 → R2 Handoff</span>
+                    <span>▼</span>
+                </button>
+                <div class="collapsible-content">
+                    <h3>Trigger</h3>
+                    <p>R1 packet complete (supplier validated, data recorded)</p>
+
+                    <h3>Inputs</h3>
+                    <ul>
+                        <li>Completed R1 ClickUp task with all data</li>
+                        <li>Notion Products OS entry populated</li>
+                        <li>Drive folder with supplier docs</li>
+                    </ul>
+
+                    <h3>Steps</h3>
+                    <ol>
+                        <li><strong>Final quality sweep (5 min):</strong>
+                            <ul>
+                                <li>Verify Product_ID is correct in all systems</li>
+                                <li>Check that all required Notion fields are filled</li>
+                                <li>Ensure Drive folder structure matches template</li>
+                            </ul>
+                        </li>
+                        <li><strong>ClickUp handoff:</strong>
+                            <ul>
+                                <li>Move task from "R1 Shortlist" list to "R2 Dossiers" list</li>
+                                <li>Change status to R2_PENDING</li>
+                                <li>Assign to next available R2 researcher (or leave unassigned for pull system)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Discord notification:</strong>
+                            <ul>
+                                <li>Post in #p1-r1-shortlist channel:</li>
+                            </ul>
+<pre><code>✅ R1 Complete: [Product_ID] - [Product Name]
+Supplier: [Best Supplier Name]
+MOQ: [X units] | Cost: $[Y] | Lead: [Z days]
+Notion: [Link]
+ClickUp: [Link]
+Ready for R2 deep research</code></pre>
+                        </li>
+                    </ol>
+
+                    <h3>Outputs</h3>
+                    <ul>
+                        <li>ClickUp task in R2 queue</li>
+                        <li>Discord handoff notification sent</li>
+                        <li>Clean data trail for R2 researcher to pick up</li>
+                    </ul>
+
+                    <h3>Quality Check</h3>
+                    <p>If R2 researcher comes back with "missing supplier data" or "need to re-source", that's a handoff failure. Review your Workflow 2 execution.</p>
+                </div>
+            </div>
+
+            <div class="mermaid">
+graph TD
+    Start([R0 Idea Dump]) --> Triage{Quick Market<br/>Check}
+    Triage -->|No viable<br/>suppliers| Kill1[R1_FAIL]
+    Triage -->|Plausible| Supplier[Supplier<br/>Validation]
+    Supplier --> Contact[Contact 2-3<br/>Suppliers]
+    Contact --> Wait{Responses<br/>Received?}
+    Wait -->|No response<br/>48h| Kill2[R1_FAIL or<br/>Escalate]
+    Wait -->|Good quotes| Document[Document in<br/>Notion + Drive]
+    Document --> Calculate[Calculate Unit<br/>Economics]
+    Calculate --> Viable{Margin<br/>Viable?}
+    Viable -->|No| Kill3[R1_FAIL]
+    Viable -->|Yes| Complete[R1_COMPLETE]
+    Complete --> Handoff[Hand to R2<br/>via ClickUp]
+    Handoff --> Notify[Discord<br/>Notification]
+    Notify --> End([R2 Research])
+    
+    style Start fill:#00C8C8,color:#fff
+    style End fill:#00C8C8,color:#fff
+    style Complete fill:#10B981,color:#fff
+    style Kill1 fill:#EF4444,color:#fff
+    style Kill2 fill:#EF4444,color:#fff
+    style Kill3 fill:#EF4444,color:#fff
+            </div>
+        </section>
+
+        <section id="handoffs">
+            <h2><span class="section-icon">🤝</span>Handoff & Interface Specs</h2>
+            <div class="why-matters">
+                You interact with R0 Scouts upstream and R2 Researchers downstream. Clean handoffs prevent bottlenecks.
+            </div>
+
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <span><strong>FROM:</strong> R0 Scout (or Platform Feeds)</span>
+                    <span class="handoff-arrow">→</span>
+                    <span><strong>TO:</strong> You (R1 Scout-Sourcing)</span>
+                </div>
+                
+                <h4>Trigger:</h4>
+                <p>New task appears in ClickUp "R0 Ideas" list with status R0_SUBMITTED</p>
+
+                <h4>Required Inputs:</h4>
+                <ul class="checklist">
+                    <li>Product concept/name</li>
+                    <li>Source link (TikTok, ad, spy tool)</li>
+                    <li>Category/niche tag</li>
+                </ul>
+
+                <h4>Your Acceptance Criteria:</h4>
+                <p>If R0 submission is missing source link or is just text with no context, reject back to R0 scout or add yourself.</p>
+
+                <h4>Tool Flow:</h4>
+                <ul>
+                    <li><strong>ClickUp:</strong> R0 Ideas list → status change triggers your review</li>
+                    <li><strong>Discord:</strong> Optional ping in #p1-r0-idea-dump</li>
+                </ul>
+            </div>
+
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <span><strong>FROM:</strong> You (R1 Scout-Sourcing)</span>
+                    <span class="handoff-arrow">→</span>
+                    <span><strong>TO:</strong> R2 Researcher</span>
+                </div>
+                
+                <h4>Trigger:</h4>
+                <p>You complete Workflow 2 (supplier validation) and move task to R1_COMPLETE</p>
+
+                <h4>Required Outputs (Quality Gate):</h4>
+                <ul class="checklist">
+                    <li>Product_ID assigned and in Notion Products OS</li>
+                    <li>At least 1 validated supplier with MOQ, pricing, lead time</li>
+                    <li>Supplier docs uploaded to Drive /03_Supplier_Docs/</li>
+                    <li>Basic unit economics noted (landed cost, potential retail)</li>
+                    <li>Any red flags clearly documented</li>
+                </ul>
+
+                <h4>Tool Flow:</h4>
+                <ul>
+                    <li><strong>ClickUp:</strong> Move task from "R1 Shortlist" list to "R2 Dossiers" list, status → R2_PENDING</li>
+                    <li><strong>Notion:</strong> Products OS entry must have Supplier fields populated</li>
+                    <li><strong>Drive:</strong> Product folder exists with proper structure</li>
+                    <li><strong>Discord:</strong> Post handoff notification in #p1-r1-shortlist</li>
+                </ul>
+
+                <h4>Handoff Template (Discord #p1-r1-shortlist):</h4>
+<pre><code>✅ R1 Complete: PRD-YYYYMMDD-XXX - [Product Name]
+📦 Supplier: [Name] | MOQ: [X] | Cost: $[Y] | Lead: [Z] days
+📊 Margin potential: [Good/Ok/Tight]
+⚠️ Risks: [List any flags or "None"]
+🔗 Notion: [Link to Products OS entry]
+🔗 ClickUp: [Link to task]
+📁 Drive: [Link to product folder]
+
+Ready for R2 deep research. [Optional: Tag R2 researcher if assigned]</code></pre>
+            </div>
+
+            <div class="callout callout-tip">
+                <strong>Pull System:</strong> R2 researchers can "pull" from your R1 queue when they have capacity. You don't need to manually assign unless PI Lead directs priority products.
+            </div>
+        </section>
+
+        <section id="kpis">
+            <h2><span class="section-icon">📊</span>KPIs & Quality Bar</h2>
+            <div class="why-matters">
+                Your performance is measured on speed, volume, and supplier data quality—not on whether products eventually become winners (that's an R2/R3 call).
+            </div>
+
+            <h3>Quantitative KPIs (from L2-03, L2-07)</h3>
+            <div class="kpi-strip">
+                <div class="kpi-badge">20-40 R1 packets/week</div>
+                <div class="kpi-badge">8-10 R1 WIP (never exceed)</div>
+                <div class="kpi-badge">~6 supplier checks active</div>
+                <div class="kpi-badge">40-50 product finds/week</div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target</th>
+                        <th>How Measured</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>R1 Packet Volume</strong></td>
+                        <td>20-40/week</td>
+                        <td>ClickUp tasks moved to R1_COMPLETE status</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Speed-to-Packet</strong></td>
+                        <td><2 days avg R0→R1</td>
+                        <td>Time from R0_SUBMITTED to R1_COMPLETE</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Supplier Data Completeness</strong></td>
+                        <td>>95%</td>
+                        <td>% of R1 handoffs with all required supplier fields</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R1 Kill Rate</strong></td>
+                        <td>40-60% of R0</td>
+                        <td>R1_FAIL / Total R0 inputs (filtering is good)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>R2 Bounce-Back Rate</strong></td>
+                        <td><5%</td>
+                        <td>R2 researchers sending back for missing data</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Qualitative Standards</h3>
+            
+            <h4>Good R1 Packet (Example):</h4>
+            <ul>
+                <li>✅ Product_ID: PRD-20251208-042</li>
+                <li>✅ 2 suppliers documented with exact quotes</li>
+                <li>✅ MOQ: 200 units, Cost: $8.50, Lead: 15 days</li>
+                <li>✅ Screenshots and supplier contacts in Drive</li>
+                <li>✅ Quick margin math: retail $25-30 → healthy margin</li>
+                <li>✅ Flagged: "Supplier B offers customizable packaging"</li>
+            </ul>
+
+            <h4>Bad R1 Packet (Example):</h4>
+            <ul>
+                <li>❌ No Product_ID assigned</li>
+                <li>❌ Supplier info just says "Check AliExpress"</li>
+                <li>❌ No pricing or MOQ data</li>
+                <li>❌ Empty Drive folder</li>
+                <li>❌ No handoff notification sent</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <strong>Common Failure Mode:</strong> Spending too long per product trying to find "perfect" suppliers. Your job is viable sourcing, not optimization. If you have 2 decent suppliers with clear data, that's enough—hand it off.
+            </div>
+        </section>
+
+        <section id="ai-usage">
+            <h2><span class="section-icon">🤖</span>AI Usage & Prompt Patterns</h2>
+            <div class="why-matters">
+                AI can speed up market research and supplier communication. Use it to augment your judgment, not replace it.
+            </div>
+
+            <h3>When to Use AI</h3>
+            <ul>
+                <li><strong>Product category research:</strong> "What are common pain points in [category]?"</li>
+                <li><strong>Competitive analysis:</strong> "Summarize Amazon reviews for [similar product]"</li>
+                <li><strong>Supplier communication drafts:</strong> "Write a professional inquiry to supplier about MOQ and lead time"</li>
+                <li><strong>Pricing sanity checks:</strong> "Is $X retail realistic for [product type]?"</li>
+            </ul>
+
+            <h3>Ready-to-Copy Prompts</h3>
+
+            <div class="collapsible">
+                <button class="collapsible-trigger">
+                    <span>Prompt 1: Quick Market Plausibility Check</span>
+                    <span>▼</span>
+                </button>
+                <div class="collapsible-content">
+<pre><code>I'm evaluating a product for dropshipping viability: [Product Name/Description].
+
+Context:
+- Target market: US consumers
+- Budget constraints: Must be profitable at $40-60 P1 test spend
+- Typical margin: 2.5-3x landed cost for test products
+
+Please analyze:
+1. Is there clear demand/pain point for this product?
+2. What's the typical price range on Amazon/major retailers?
+3. Are there obvious compliance or shipping red flags?
+4. Quick gut check: viable or not worth testing?
+
+Keep your response to 3-4 bullet points. I need speed over depth.</code></pre>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <button class="collapsible-trigger">
+                    <span>Prompt 2: Supplier Inquiry Template</span>
+                    <span>▼</span>
+                </button>
+                <div class="collapsible-content">
+<pre><code>I need to contact a supplier on AliExpress/Alibaba for [Product Name].
+
+Write a professional inquiry message asking for:
+1. Minimum Order Quantity (MOQ)
+2. Unit price at different quantities (100, 200, 500 units)
+3. Production lead time
+4. Shipping options to USA and estimated costs
+5. Payment terms and methods
+6. Possibility of custom packaging/branding
+
+Keep it concise and professional. The supplier should be able to respond quickly with specific numbers.</code></pre>
+                </div>
+            </div>
+
+            <div class="collapsible">
+                <button class="collapsible-trigger">
+                    <span>Prompt 3: Competitive Pricing Research</span>
+                    <span>▼</span>
+                </button>
+                <div class="collapsible-content">
+<pre><code>Product: [Name/Description]
+Supplier Cost: $[X]
+Potential Retail: $[Y]
+
+Analyze:
+1. What do similar products sell for on Amazon/direct-to-consumer sites?
+2. Is my proposed retail price ($[Y]) in a reasonable range?
+3. What's the typical margin in this category?
+4. Red flags or considerations for pricing strategy?
+
+Focus on US market, DTC/dropshipping context. Keep it practical.</code></pre>
+                </div>
+            </div>
+
+            <h3>Human Checkpoints</h3>
+            <p><strong>Never blindly trust AI for:</strong></p>
+            <ul>
+                <li>Final supplier selection (always verify quotes yourself)</li>
+                <li>Compliance/legal assessments (escalate to PM or legal if unsure)</li>
+                <li>Go/no-go decisions (use AI for research, but you make the call)</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <strong>Pro Tip:</strong> Use AI for the first draft of supplier messages, but always personalize before sending. Suppliers can tell when you're using generic templates.
+            </div>
+        </section>
+
+        <section id="tools">
+            <h2><span class="section-icon">🛠️</span>Tools & Systems Reference</h2>
+            <div class="why-matters">
+                Your daily workflow touches 5 core systems. Know exactly where everything lives.
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Locations</th>
+                        <th>Access Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task management, pipeline tracking</td>
+                        <td>
+                            Space: <code>P1 -- Product Intelligence</code><br>
+                            Folder: <code>Research Pipeline</code><br>
+                            Lists: <code>R0 Ideas</code>, <code>R1 Shortlist</code>
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Product data, structured info</td>
+                        <td>
+                            DB: <code>Products OS</code><br>
+                            Key Properties: Product_ID, Supplier Info, MOQ, Unit_Cost, Lead_Time
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>File storage (screenshots, quotes)</td>
+                        <td>
+                            Path: <code>/02_P1_Product_Intel/Products/[ProductID]_[Name]/</code><br>
+                            Subfolders: <code>01_Research_Raw</code>, <code>03_Supplier_Docs</code>
+                        </td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Notifications, handoffs</td>
+                        <td>
+                            Channels: <code>#p1-r0-idea-dump</code>, <code>#p1-r1-shortlist</code>, <code>#p1-blockers</code>
+                        </td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AliExpress/<br>Alibaba</strong></td>
+                        <td>Supplier sourcing, quotes</td>
+                        <td>Search by product category/keywords</td>
+                        <td>Public access<br>(account req'd for quotes)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>TikTok/<br>Spy Tools</strong></td>
+                        <td>Product discovery, trends</td>
+                        <td>Feed monitoring, ad library searches</td>
+                        <td>Varies by tool</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Critical Field Mappings (ClickUp Custom Fields)</h3>
+            <ul>
+                <li><code>Product_ID</code> (Text) - Always populate before R1_COMPLETE</li>
+                <li><code>Gate</code> (Dropdown) - Set to R1</li>
+                <li><code>Pod</code> (Dropdown) - Set to P1</li>
+                <li><code>Supplier_Validated</code> (Checkbox) - Check when Workflow 2 complete</li>
+                <li><code>Owner_Role</code> (Dropdown) - Set to P1-R1-SCOUT-SOURCING-XX</li>
+            </ul>
+
+            <h3>Notion Products OS Required Fields (For R1)</h3>
+            <ul>
+                <li><code>Product_ID</code> (Title field)</li>
+                <li><code>Status</code> (Select) - Set to R1_COMPLETE</li>
+                <li><code>Supplier_Name</code> (Text)</li>
+                <li><code>Supplier_Contact</code> (Text or URL)</li>
+                <li><code>MOQ</code> (Number)</li>
+                <li><code>Unit_Cost</code> (Number)</li>
+                <li><code>Lead_Time_Days</code> (Number)</li>
+                <li><code>Shipping_Method</code> (Text)</li>
+                <li><code>Sourcing_Notes</code> (Text) - Any red flags or special considerations</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <strong>Data Quality Rule:</strong> If a field is required and you can't fill it (supplier non-responsive, no clear answer), escalate in #p1-blockers rather than leaving it blank. Blank data = broken handoff.
+            </div>
+        </section>
+
+        <section id="escalation">
+            <h2><span class="section-icon">🚨</span>Escalation & Decision Rights</h2>
+            <div class="why-matters">
+                Know what you own, what needs approval, and when to escalate.
+            </div>
+
+            <h3>Decisions You Can Make Alone</h3>
+            <ul>
+                <li>✅ Kill a product at R1 if suppliers are non-viable (document reason in ClickUp)</li>
+                <li>✅ Choose between multiple suppliers (pick best based on price/MOQ/lead time)</li>
+                <li>✅ Re-prioritize your daily task order based on pipeline needs</li>
+                <li>✅ Decide how deep to research at R1 (stay fast, don't over-research)</li>
+            </ul>
+
+            <h3>Decisions Requiring PI Lead or PM</h3>
+            <ul>
+                <li>🔺 Promoting a product to R2 that has unusual characteristics (very high MOQ, exotic sourcing, complex logistics)</li>
+                <li>🔺 Requesting access to new supplier platforms or paid tools</li>
+                <li>🔺 Changing the R1 qualification criteria or kill rules</li>
+                <li>🔺 Recommending a process change that affects R2 researchers</li>
+            </ul>
+
+            <h3>When to Escalate</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Situation</th>
+                        <th>Escalate To</th>
+                        <th>Channel</th>
+                        <th>Response Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>R1 WIP > 10 for 2+ days</td>
+                        <td>PI Lead Strategist</td>
+                        <td>#p1-blockers</td>
+                        <td>Same day</td>
+                    </tr>
+                    <tr>
+                        <td>Supplier unresponsive for >3 days on priority product</td>
+                        <td>PI Lead Strategist</td>
+                        <td>#p1-blockers</td>
+                        <td>Next day</td>
+                    </tr>
+                    <tr>
+                        <td>Can't find ANY viable supplier for R0 idea</td>
+                        <td>Kill it, document, no escalation needed</td>
+                        <td>ClickUp comment</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Compliance/legal concern (restricted product)</td>
+                        <td>PM or PI Lead</td>
+                        <td>#p1-blockers + @PM</td>
+                        <td>Same day</td>
+                    </tr>
+                    <tr>
+                        <td>R2 bounce-back rate >10% (data quality issue)</td>
+                        <td>PI Lead Strategist</td>
+                        <td>Direct message + #p1-blockers</td>
+                        <td>Next day</td>
+                    </tr>
+                    <tr>
+                        <td>Tool/system not working (ClickUp, Notion, Drive)</td>
+                        <td>P4 Ops Coordinator</td>
+                        <td>Depends on severity; #p4-ops-support or direct</td>
+                        <td>Within 2 hours (critical)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Escalation Message Template (Discord #p1-blockers)</h3>
+<pre><code>🚨 Blocker: [Brief description]
+📦 Product: [Product_ID or "N/A" if general issue]
+⏰ Impact: [e.g., "R1 WIP stuck at 12", "Priority product delayed"]
+🤔 What I tried: [List 2-3 things you attempted]
+❓ Need: [Specific ask - decision, resource, help]
+👤 Tag: [@PI-Lead or @PM]</code></pre>
+
+            <div class="callout callout-tip">
+                <strong>Escalation Philosophy:</strong> Escalate early on blockers that affect throughput (WIP overload, tool issues). Don't escalate on individual product decisions unless truly exceptional.
+            </div>
+        </section>
+
+        <section id="onboarding">
+            <h2><span class="section-icon">🎓</span>Onboarding Checklist</h2>
+            <div class="why-matters">
+                New to this role? Complete these milestones to reach full productivity.
+            </div>
+
+            <h3>Week 1: Access & Foundations</h3>
+            <ul class="checklist">
+                <li>Get access to ClickUp Space "P1 -- Product Intelligence"</li>
+                <li>Get access to Notion workspace and Products OS database</li>
+                <li>Get access to Google Drive "DriveOn Commerce" shared drive</li>
+                <li>Join Discord channels: #p1-r0-idea-dump, #p1-r1-shortlist, #p1-blockers</li>
+                <li>Create accounts on AliExpress and Alibaba (use company email)</li>
+                <li>Read canon docs: L1-01 (CaniCol Model), L2-03 (Role Registry), L2-05 (Testing Canon)</li>
+                <li>Shadow PI Lead or senior R2 researcher for 1-2 handoffs</li>
+                <li>Complete 3 R1 packets under supervision (get feedback on each)</li>
+            </ul>
+
+            <h3>Week 2: Supervised Execution</h3>
+            <ul class="checklist">
+                <li>Independently complete 5-8 R1 packets (PI Lead reviews outputs)</li>
+                <li>Practice all 3 core workflows at least 2x each</li>
+                <li>Learn to use ClickUp custom fields and Notion database properly</li>
+                <li>Send first few Discord handoff notifications (get feedback on format)</li>
+                <li>Attend weekly PI pod sync meeting</li>
+                <li>Get familiar with Drive folder structure (create 3-5 product folders correctly)</li>
+            </ul>
+
+            <h3>Week 3: Independent Operation</h3>
+            <ul class="checklist">
+                <li>Achieve 15-20 R1 packets/week independently</li>
+                <li>Maintain R1 WIP <10 consistently</li>
+                <li>Zero R2 bounce-backs for missing data</li>
+                <li>Correctly escalate at least one blocker using proper format</li>
+                <li>Conduct supplier outreach for 5+ products (get quotes)</li>
+            </ul>
+
+            <h3>30-Day Review Criteria</h3>
+            <p><strong>Quantitative:</strong></p>
+            <ul>
+                <li>✅ Averaging 20+ R1 packets/week</li>
+                <li>✅ R1 WIP consistently <10</li>
+                <li>✅ <5% R2 bounce-back rate</li>
+                <li>✅ Speed-to-packet <2 days average</li>
+            </ul>
+
+            <p><strong>Qualitative:</strong></p>
+            <ul>
+                <li>✅ Can independently identify viable vs non-viable products quickly</li>
+                <li>✅ Writes clear, professional supplier inquiries</li>
+                <li>✅ Understands when to escalate vs decide independently</li>
+                <li>✅ Maintains clean data in all systems (no sloppy handoffs)</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <strong>Learning Resources:</strong>
+                <ul>
+                    <li>Canon docs in Notion Canon Registry</li>
+                    <li>Example R1 packets in Drive /02_P1_Product_Intel/_Index_and_Logs/Examples/</li>
+                    <li>Past Discord #p1-r1-shortlist messages for handoff templates</li>
+                    <li>Weekly PI pod syncs for Q&A and updates</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="changelog">
+            <h2><span class="section-icon">📝</span>Change Log</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Changes</th>
+                        <th>Canon Updates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>v1.0</td>
+                        <td>2025-12-08</td>
+                        <td>DriveOn SOP Factory (AI)</td>
+                        <td>Initial SOP creation following DriveOn v4 canon and Project Instructions</td>
+                        <td>Based on L1-01 v4.0, L2-03 v1, L2-05 v4.0, L3-01/02/03/04 v1</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: var(--gray-text); font-style: italic;">Future updates will be documented here</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script type="application/json" id="sop-structure">
+    {
+        "role_id": "P1-R1-SCOUT-SOURCING-XX",
+        "role_name": "Scout & Supplier Sourcing Specialist",
+        "role_type": "R1_SCOUT_SOURCING",
+        "pod": "P1",
+        "status": "CORE",
+        "cross_pod": true,
+        "default_fte": 1.0,
+        "owned_gates": ["R1"],
+        "wip_limits": {
+            "R1_packets": 10,
+            "supplier_checks": 6
+        },
+        "throughput_targets": {
+            "r1_packets_per_week": {"min": 20, "max": 40},
+            "product_finds_per_week": {"min": 40, "max": 50},
+            "r1_candidates_per_day": {"min": 8, "max": 10}
+        },
+        "kpis": [
+            {
+                "name": "R1 Packet Volume",
+                "target": "20-40/week",
+                "source_doc": "L2-03",
+                "measurement": "ClickUp tasks R1_COMPLETE"
+            },
+            {
+                "name": "Speed-to-Packet",
+                "target": "<2 days avg",
+                "source_doc": "L2-07",
+                "measurement": "Time R0_SUBMITTED to R1_COMPLETE"
+            },
+            {
+                "name": "Supplier Data Completeness",
+                "target": ">95%",
+                "source_doc": "L2-03",
+                "measurement": "% R1 handoffs with all required fields"
+            },
+            {
+                "name": "R2 Bounce-Back Rate",
+                "target": "<5%",
+                "source_doc": "L2-03",
+                "measurement": "R2 tasks returned for missing data"
+            }
+        ],
+        "workflows": [
+            {
+                "name": "R0 → R1 Triage & Qualification",
+                "trigger": "New R0 idea in ClickUp or Discord",
+                "inputs": ["Product concept", "Source signal", "Price estimate"],
+                "steps": [
+                    "Quick market check (10 min)",
+                    "Initial supplier search (15 min)",
+                    "Plausibility assessment (5 min)",
+                    "Decision: KILL or PROMOTE to R1"
+                ],
+                "outputs": ["ClickUp task in R1 Shortlist", "Supplier screenshots in Drive", "Plausibility notes"],
+                "tools": ["ClickUp", "AliExpress", "Alibaba", "Google Drive"],
+                "handoffs": ["To: Self (for Workflow 2) OR Kill decision"]
+            },
+            {
+                "name": "Supplier Validation & Data Recording",
+                "trigger": "Product in R1 Shortlist needs validation",
+                "inputs": ["Product_ID", "2-3 potential suppliers", "Specs"],
+                "steps": [
+                    "Contact top 2 suppliers (30 min)",
+                    "Document responses in Notion (15 min)",
+                    "Calculate unit economics (10 min)",
+                    "Flag issues (5 min)",
+                    "Update ClickUp to R1_COMPLETE"
+                ],
+                "outputs": ["Complete supplier data in Notion", "Supplier docs in Drive", "R1_COMPLETE status"],
+                "tools": ["AliExpress", "Alibaba", "Notion Products OS", "Google Drive", "ClickUp"],
+                "handoffs": ["To: R2 Researcher via Workflow 3"]
+            },
+            {
+                "name": "R1 → R2 Handoff",
+                "trigger": "R1 packet complete",
+                "inputs": ["Completed R1 ClickUp task", "Notion entry", "Drive folder"],
+                "steps": [
+                    "Final quality sweep (5 min)",
+                    "Move ClickUp task to R2 Dossiers list",
+                    "Change status to R2_PENDING",
+                    "Post Discord notification"
+                ],
+                "outputs": ["ClickUp task in R2 queue", "Discord notification", "Clean handoff"],
+                "tools": ["ClickUp", "Discord", "Notion", "Google Drive"],
+                "handoffs": ["To: R2 Researcher"]
+            }
+        ],
+        "day_in_life": [
+            {
+                "time_range": "8:00-8:30",
+                "focus": "Morning Setup",
+                "primary_workflows": ["Priority check", "Supplier email review"],
+                "tools_used": ["ClickUp", "Discord", "Email"]
+            },
+            {
+                "time_range": "8:30-11:00",
+                "focus": "R0→R1 Triage",
+                "primary_workflows": ["Workflow 1: R0→R1 Triage"],
+                "tools_used": ["ClickUp", "AliExpress", "Alibaba"],
+                "target": "2-3 R1 packets completed"
+            },
+            {
+                "time_range": "11:00-12:00",
+                "focus": "Supplier Validation",
+                "primary_workflows": ["Workflow 2: Supplier Validation"],
+                "tools_used": ["AliExpress", "Alibaba", "Notion", "Drive"],
+                "target": "2-3 products validated"
+            },
+            {
+                "time_range": "13:00-15:00",
+                "focus": "R1 Packet Assembly",
+                "primary_workflows": ["Workflow 2 completion", "Workflow 3: Handoff"],
+                "tools_used": ["Notion", "Drive", "ClickUp", "Discord"],
+                "target": "3-5 R1 packets handed off"
+            },
+            {
+                "time_range": "15:00-16:00",
+                "focus": "Quality & Cleanup",
+                "primary_workflows": ["Quality review", "Follow-ups", "Blocker flags"],
+                "tools_used": ["ClickUp", "Discord", "Notion"]
+            },
+            {
+                "time_range": "16:00-17:00",
+                "focus": "Forward Scouting",
+                "primary_workflows": ["Trend monitoring", "R0 backlog building"],
+                "tools_used": ["TikTok", "Spy tools", "ClickUp"]
+            }
+        ],
+        "tools": [
+            {
+                "name": "ClickUp",
+                "use_case": "Task management, pipeline tracking",
+                "key_locations": ["Space: P1 -- Product Intelligence", "Lists: R0 Ideas, R1 Shortlist"],
+                "access_level": "Editor"
+            },
+            {
+                "name": "Notion",
+                "use_case": "Product data, structured info",
+                "key_locations": ["DB: Products OS"],
+                "access_level": "Editor"
+            },
+            {
+                "name": "Google Drive",
+                "use_case": "File storage",
+                "key_locations": ["/02_P1_Product_Intel/Products/[ProductID]/"],
+                "access_level": "Editor"
+            },
+            {
+                "name": "Discord",
+                "use_case": "Notifications, handoffs",
+                "key_locations": ["#p1-r0-idea-dump", "#p1-r1-shortlist", "#p1-blockers"],
+                "access_level": "Member"
+            },
+            {
+                "name": "AliExpress/Alibaba",
+                "use_case": "Supplier sourcing",
+                "key_locations": ["Product search and messaging"],
+                "access_level": "Account required"
+            }
+        ],
+        "upstream_roles": ["P1-R0-SCOUT-XX", "Platform Feeds"],
+        "downstream_roles": ["P1-R1R2-RESEARCH-XX", "P1-R2-SENIOR-RESEARCH-XX"],
+        "canon_refs": {
+            "economics": "L1-01_CaniCol_Model_v4.0",
+            "role_wip": "L2-03_Role_Registry_and_WIP_Limits_v1",
+            "testing": "L2-05_Testing_Canon_v4.0",
+            "kpis": "L2-07_Pod_KPIs_and_TestBank_v4.0",
+            "clickup": "L3-02_ClickUp_Infra_Blueprint_v1",
+            "notion": "L3-03_Notion_Infra_Blueprint_v1",
+            "drive": "L3-04_Google_Drive_Infra_Blueprint_v1",
+            "discord": "L3-01_Discord_Infra_Blueprint_v1"
+        },
+        "version": "1.0",
+        "last_updated": "2025-12-08",
+        "author": "DriveOn SOP Factory v4"
+    }
+    </script>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'default',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00C8C8',
+                lineColor: '#555555',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Collapsible functionality
+        document.querySelectorAll('.collapsible-trigger').forEach(trigger => {
+            trigger.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const arrow = this.querySelector('span:last-child');
+                
+                if (content.classList.contains('active')) {
+                    content.classList.remove('active');
+                    arrow.textContent = '▼';
+                } else {
+                    content.classList.add('active');
+                    arrow.textContent = '▲';
+                }
+            });
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 100; // Account for sticky header
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Active nav link highlighting
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.pageYOffset >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                link.style.fontWeight = '';
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.style.color = '#00C8C8';
+                    link.style.fontWeight = '600';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

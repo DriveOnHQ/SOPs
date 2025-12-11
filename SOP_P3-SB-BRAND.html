@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P3-SB-BRAND · Brand Store Builder SOP | DriveOn Commerce v4.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --gray-text: #555555;
+            --light-gray: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --white: #FFFFFF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--light-gray);
+        }
+
+        .header {
+            background: var(--carbon-black);
+            color: var(--white);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--drive-cyan);
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .status-chip {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .sidebar h2 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gray-text);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .sidebar nav ul {
+            list-style: none;
+        }
+
+        .sidebar nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar nav a {
+            color: var(--carbon-black);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            display: block;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .sidebar nav a:hover {
+            background: var(--light-gray);
+            color: var(--drive-cyan);
+        }
+
+        .main-content {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A0A0 100%);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .hero-box {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-box h3 {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-box ul {
+            list-style: none;
+        }
+
+        .hero-box li {
+            font-size: 0.9375rem;
+            margin-bottom: 0.25rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .hero-box li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 100px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            color: var(--drive-cyan);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-gray);
+        }
+
+        .section h3 {
+            font-size: 1.25rem;
+            color: var(--carbon-black);
+            margin: 1.5rem 0 1rem;
+        }
+
+        .section h4 {
+            font-size: 1.125rem;
+            color: var(--carbon-black);
+            margin: 1rem 0 0.75rem;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--drive-cyan);
+        }
+
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout.canon {
+            background: #EBF5FF;
+            border-color: var(--drive-cyan);
+        }
+
+        .callout.warning {
+            background: #FEF3C7;
+            border-color: var(--warning);
+        }
+
+        .callout.tip {
+            background: #D1FAE5;
+            border-color: var(--success);
+        }
+
+        .callout-icon {
+            font-size: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9375rem;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        th {
+            background: var(--light-gray);
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+
+        tr:hover {
+            background: var(--light-gray);
+        }
+
+        .checklist {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .checklist li {
+            padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0.5rem;
+            font-size: 1.25rem;
+            color: var(--drive-cyan);
+        }
+
+        .workflow-step {
+            background: var(--light-gray);
+            padding: 1rem 1.25rem;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            border-left: 4px solid var(--drive-cyan);
+        }
+
+        .workflow-step strong {
+            color: var(--drive-cyan);
+        }
+
+        code {
+            background: var(--light-gray);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        pre {
+            background: var(--carbon-black);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge.wip {
+            background: var(--champagne);
+            color: var(--carbon-black);
+        }
+
+        .badge.throughput {
+            background: var(--drive-cyan);
+            color: var(--white);
+        }
+
+        .badge.kpi {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .mermaid {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-gray);
+        }
+
+        details {
+            margin: 1rem 0;
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 1rem;
+            background: var(--light-gray);
+            cursor: pointer;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        summary:hover {
+            background: var(--border-gray);
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        details > *:not(summary) {
+            padding: 1rem;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+                max-height: none;
+                display: none;
+            }
+
+            .sidebar.active {
+                display: block;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media print {
+            .sidebar, .nav-toggle {
+                display: none;
+            }
+
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div>
+                <h1>P3-SB-BRAND · Brand Store Builder</h1>
+                <p style="margin-top: 0.25rem; opacity: 0.8;">Pod 3 · Media & Store · DriveOn Commerce v4.0</p>
+            </div>
+            <div class="header-meta">
+                <span class="status-chip">ACTIVE · SENIOR</span>
+                <span class="status-chip">FTE: 1.0</span>
+                <button class="nav-toggle" onclick="document.querySelector('.sidebar').classList.toggle('active')">
+                    Contents
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Contents</h2>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Role Snapshot</a></li>
+                    <li><a href="#purpose">Purpose & Context</a></li>
+                    <li><a href="#canon">Canon Constraints</a></li>
+                    <li><a href="#day-in-life">Day in the Life</a></li>
+                    <li><a href="#workflows">Core Workflows</a></li>
+                    <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+                    <li><a href="#kpis">KPIs & Quality Bar</a></li>
+                    <li><a href="#ai-usage">AI Usage & Prompts</a></li>
+                    <li><a href="#tools">Tools & Systems</a></li>
+                    <li><a href="#escalation">Escalation & Decisions</a></li>
+                    <li><a href="#onboarding">Onboarding Checklist</a></li>
+                    <li><a href="#changelog">Change Log</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section id="hero" class="hero">
+                <h2>Brand / Niche Store Builder</h2>
+                <p>Senior store architect responsible for building premium, conversion-optimized brand stores for P3_WINNER and TIER_A_WINNER products. You transform validated winners into durable, high-AOV brand experiences aligned with DriveOn's anti-noise positioning.</p>
+                
+                <div class="hero-grid">
+                    <div class="hero-box">
+                        <h3>You Own</h3>
+                        <ul>
+                            <li>Brand/niche store builds</li>
+                            <li>Major CRO initiatives</li>
+                            <li>Premium UX design</li>
+                            <li>AOV/LTV optimization</li>
+                            <li>OS-aligned archetypes</li>
+                        </ul>
+                    </div>
+                    <div class="hero-box">
+                        <h3>Key Outcomes</h3>
+                        <ul>
+                            <li>2–4 brand stores/month</li>
+                            <li>15–25% CVR uplift via CRO</li>
+                            <li>20–40% AOV increase</li>
+                            <li>Premium brand equity</li>
+                            <li>Scalable store systems</li>
+                        </ul>
+                    </div>
+                    <div class="hero-box">
+                        <h3>Your Rhythm</h3>
+                        <ul>
+                            <li>WIP: 2–3 active builds</li>
+                            <li>WIP: 3–4 CRO projects</li>
+                            <li>0.25–0.5 stores/day</li>
+                            <li>1–2 stores/week baseline</li>
+                            <li>Deep work over velocity</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="purpose" class="section">
+                <h2>1. Purpose & Context</h2>
+                
+                <h3>Why This Role Exists</h3>
+                <p>The CaniCol model (L1-01) produces 2–4 true winners per month from ~45–60 tests. Most products fail. The few that reach P3_WINNER or TIER_A status deserve premium brand treatment—not generic 1-page test stores.</p>
+                
+                <p>You are the architect who transforms validated winners into:</p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Durable brand experiences with coherent narratives</li>
+                    <li>High-conversion stores optimized for AOV and LTV</li>
+                    <li>Scalable systems that don't require founder heroics</li>
+                    <li>Premium positioning aligned with DriveOn's anti-hype thesis</li>
+                </ul>
+
+                <h3>How This Supports CaniCol Economics</h3>
+                <p>Winners fund the testing engine. By maximizing AOV, LTV, and conversion rate, you:</p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Expand margins to protect the $4,000–$5,500/month test bank</li>
+                    <li>Create brand equity that compounds over time</li>
+                    <li>Reduce reliance on paid acquisition through organic lift</li>
+                    <li>Build portfolio assets that can support 2–4 winners simultaneously</li>
+                </ul>
+
+                <div class="callout canon">
+                    <div class="callout-title"><span class="callout-icon">⚖️</span>Canon Anchor</div>
+                    <p>This role implements L0-02 (Product & Brand Architecture) and L2-06 (Scaling Tiers). You work exclusively on products that have passed P2 and entered P3_WINNER or TIER_A_WINNER status per L2-05 testing thresholds.</p>
+                </div>
+            </section>
+
+            <section id="canon" class="section">
+                <h2>2. Canon Constraints</h2>
+
+                <h3>Economic Discipline</h3>
+                <div class="card">
+                    <h4>Winner Qualification Gates</h4>
+                    <p>You only build for products that meet strict P3_WINNER or TIER_A_WINNER criteria:</p>
+                    
+                    <strong>P3_WINNER Entry (14–30 day window):</strong>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>CAC ≤ 0.5 × AOV (back to P2 requirement)</li>
+                        <li>ROAS ≥ 1.3–1.5</li>
+                        <li>Budgets scaled 2–3× vs P2 without economics breaking</li>
+                        <li>Operations confirmed scalable (fulfillment SLA, CS manageable)</li>
+                    </ul>
+
+                    <strong style="display: block; margin-top: 1rem;">TIER_A_WINNER Entry (30+ day window):</strong>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>CAC ≤ 0.4 × AOV (elite threshold)</li>
+                        <li>ROAS ≥ 1.5</li>
+                        <li>Stable across multiple audiences/geos</li>
+                        <li>Creative refresh cycles proven sustainable</li>
+                    </ul>
+                </div>
+
+                <h3>WIP & Throughput Limits</h3>
+                <div class="card">
+                    <p><strong>From L2-03 (Role Registry) and L2-07 (Pod KPIs):</strong></p>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Limit/Target</th>
+                            <th>Rationale</th>
+                        </tr>
+                        <tr>
+                            <td>Active Brand Builds</td>
+                            <td>2–3 max</td>
+                            <td>Deep UX work; low WIP by design</td>
+                        </tr>
+                        <tr>
+                            <td>CRO Projects</td>
+                            <td>3–4 concurrent</td>
+                            <td>Ongoing optimization for existing winners</td>
+                        </tr>
+                        <tr>
+                            <td>Monthly Throughput</td>
+                            <td>2–4 brand stores or major upgrades</td>
+                            <td>Quality over velocity</td>
+                        </tr>
+                        <tr>
+                            <td>Daily Baseline</td>
+                            <td>0.25–0.5 brand stores</td>
+                            <td>Deep work requires concentrated time</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="callout warning">
+                    <div class="callout-title"><span class="callout-icon">⚠️</span>Common Failure Mode</div>
+                    <p>Taking on too many builds simultaneously. Brand stores require 40–80 hours of deep work per build (strategy, design, copy, CRO setup, testing). Exceeding WIP caps produces mediocre stores that fail to lift AOV/CVR.</p>
+                </div>
+
+                <h3>Brand Architecture Rules</h3>
+                <p><strong>From L0-02 & L0-02B:</strong> Every brand store must route to one of three lanes:</p>
+                
+                <div class="card">
+                    <h4>Lane C1 — DriveOn Standard (Flagship Wellness)</h4>
+                    <p>Recovery-first performance wellness products that align with anti-noise, systems-first positioning. Products must support clear routines and honest, non-hype claims.</p>
+                </div>
+
+                <div class="card">
+                    <h4>Lane C2 — 1P Micro-Brands (Category-Focused)</h4>
+                    <p>Distinct category-specific brands (e.g., posture brand, recovery tools, golf accessories). Must have multi-year niche potential and earn their own identity.</p>
+                </div>
+
+                <div class="card">
+                    <h4>Lane C3 — General/SEO Catalog (Monetization)</h4>
+                    <p>Profitable but "boring" residual winners that don't fit C1/C2 narratives. Optimized for organic/SEO and long-tail sales with low operator attention.</p>
+                </div>
+
+                <div class="callout canon">
+                    <div class="callout-title"><span class="callout-icon">⚖️</span>Brand Routing Decision</div>
+                    <p>Lane routing is NOT automatic. Before building, confirm routing with Founder/Integrator based on: economics (margin, LTV potential), brand fit (alignment with DriveOn thesis), category potential (multi-year roadmap), and operational load.</p>
+                </div>
+
+                <h3>Creative & Brand Guardrails</h3>
+                <p><strong>From L2-08 (Master Brand Platform):</strong> All brand stores must express:</p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>Clarity Over Noise:</strong> Reduce complexity into just-enough structure. Name tradeoffs instead of hiding them.</li>
+                    <li><strong>Runnable Systems, Not One-Off Tips:</strong> Everything resolves into executable steps for imperfect humans with jobs, families, fatigue.</li>
+                    <li><strong>Tested & Simulated, Not Just Theorized:</strong> Explicit about what is tested, what is modeled, what is hypothesis.</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Forbidden:</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>Countdown timers, fake urgency, or scarcity</li>
+                    <li>Dark patterns or deceptive UX</li>
+                    <li>"Miracle" positioning or unproven claims</li>
+                    <li>Generic wellness vibes without substance</li>
+                </ul>
+            </section>
+
+            <section id="day-in-life" class="section">
+                <h2>3. Day in the Life Timeline</h2>
+
+                <div class="mermaid">
+gantt
+    title Brand Store Builder — Typical Week
+    dateFormat YYYY-MM-DD
+    section Monday
+    Morning: Review P3 pipeline & prioritize builds :active, 2024-01-01, 2h
+    Design: Wireframe new brand store structure :2024-01-01, 4h
+    Afternoon: CRO analysis on existing store :2024-01-01, 2h
+    section Tuesday
+    Strategy: Brand positioning workshop :2024-01-02, 3h
+    Build: Theme setup & structure :2024-01-02, 4h
+    Review: Media Buyer sync on store readiness :2024-01-02, 1h
+    section Wednesday
+    Deep Work: Copy, collections, product pages :active, 2024-01-03, 6h
+    Testing: QA flows & mobile UX :2024-01-03, 2h
+    section Thursday
+    Build: Complete integrations (GA, pixels) :2024-01-04, 3h
+    CRO: A/B test setup for existing winner :2024-01-04, 3h
+    Handoff: Store launch briefing :2024-01-04, 2h
+    section Friday
+    Review: Performance analysis of recent launches :2024-01-05, 2h
+    Planning: Next week's build priorities :2024-01-05, 2h
+    Documentation: Update store registry :2024-01-05, 2h
+    Learning: Theme updates & CRO research :2024-01-05, 2h
+                </div>
+
+                <h3>Morning Block (2–3 hours)</h3>
+                <div class="workflow-step">
+                    <strong>Review & Prioritize</strong> — Check ClickUp P3/Store pipeline, Notion Product OS for new P3_WINNERs, Discord #p3-stores-brand for overnight updates. Confirm which builds are active, blocked, or ready for next phase.
+                </div>
+
+                <h3>Core Execution Block (4–6 hours)</h3>
+                <div class="workflow-step">
+                    <strong>Deep Work</strong> — Uninterrupted focus on one primary build (strategy, wireframes, theme setup, collections, copy) OR one major CRO initiative (A/B test design, checkout optimization, upsell flow). Minimize context-switching.
+                </div>
+
+                <h3>Afternoon Block (2–3 hours)</h3>
+                <div class="workflow-step">
+                    <strong>Coordination & Polish</strong> — Sync with Media Buyer on store readiness, QA mobile UX, update Notion store pages, respond to CRO questions, prepare handoff documentation.
+                </div>
+
+                <h3>End-of-Day (30 minutes)</h3>
+                <div class="workflow-step">
+                    <strong>Update & Log</strong> — Update ClickUp task statuses, post handoff notifications in Discord, log time entries, flag any blockers for tomorrow.
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-title"><span class="callout-icon">💡</span>Rhythm Tip</div>
+                    <p>Protect your deep work blocks fiercely. Brand stores require 4–6 hour uninterrupted sessions for strategy, design, and UX work. Schedule coordination tasks (syncs, QA, handoffs) in afternoon blocks only.</p>
+                </div>
+            </section>
+
+            <section id="workflows" class="section">
+                <h2>4. Core Workflows</h2>
+
+                <div class="mermaid">
+flowchart TD
+    A[Product Reaches P3_WINNER] --> B{Brand Routing Decision}
+    B -->|C1 Flagship| C[DriveOn Standard Build]
+    B -->|C2 Micro-Brand| D[Category Brand Build]
+    B -->|C3 General/SEO| E[Catalog Build]
+    
+    C --> F[Brand Strategy Phase]
+    D --> F
+    E --> F
+    
+    F --> G[Store Architecture Phase]
+    G --> H[Theme & Design Build]
+    H --> I[Collections & Navigation]
+    I --> J[Product Pages & Copy]
+    J --> K[CRO Setup & Integrations]
+    K --> L[QA & Testing]
+    L --> M{Quality Check}
+    
+    M -->|Pass| N[Launch Handoff]
+    M -->|Issues| H
+    
+    N --> O[Post-Launch CRO]
+    O --> P[Ongoing Optimization]
+    
+    style A fill:#00C8C8,color:#fff
+    style N fill:#10B981,color:#fff
+    style M fill:#F59E0B,color:#fff
+                </div>
+
+                <details open>
+                    <summary>Workflow 1 — New Brand Store Build (Full Build)</summary>
+                    
+                    <h4>Trigger</h4>
+                    <p>Product reaches P3_WINNER or TIER_A_WINNER status; brand routing decision confirmed by Founder/Integrator.</p>
+
+                    <h4>Inputs</h4>
+                    <ul class="checklist">
+                        <li>Notion Product OS page with complete research packet</li>
+                        <li>P2/P3 test results showing validated economics</li>
+                        <li>Creative assets from Pod 2 (hero videos, static ads, angles)</li>
+                        <li>Brand routing decision documented in Product page</li>
+                        <li>Drive folder: /04_P3_Media_and_Stores/Stores/[StoreID]</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    
+                    <div class="workflow-step">
+                        <strong>1. Brand Strategy (4–8 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Review research packet: avatar, problem, promise, angles</li>
+                            <li>Map to DriveOn brand pillars (Clarity, Systems, Tested)</li>
+                            <li>Define brand narrative: Who is this for? What system does it support?</li>
+                            <li>Create positioning document (1–2 pages) in Drive folder /01_Strategy</li>
+                            <li>Identify competing stores for UX benchmarking</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>2. Store Architecture (6–10 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Select premium Shopify theme (Prestige, Empire, Impulse)</li>
+                            <li>Design information architecture: Collections, nav structure, footer</li>
+                            <li>Plan upsell/bundle strategy based on AOV goals</li>
+                            <li>Wireframe key pages: Home, Collection, PDP, About, How It Works</li>
+                            <li>Document structure in Notion Store page</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>3. Theme Setup & Design (8–12 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Install and configure Shopify theme</li>
+                            <li>Set up brand colors (DriveOn palette or custom for C2)</li>
+                            <li>Configure typography for readability and trust</li>
+                            <li>Create/upload brand assets (logo, favicon, banners)</li>
+                            <li>Build homepage: hero, featured products, trust elements, story blocks</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>4. Collections & Navigation (4–6 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Create collections: Featured, Bundles, Category-specific</li>
+                            <li>Set up smart collections with rules</li>
+                            <li>Configure filters and sorting options</li>
+                            <li>Build navigation menu with clear hierarchy</li>
+                            <li>Add breadcrumbs for UX and SEO</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>5. Product Pages & Copy (10–16 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write product descriptions: problem → system → how to use</li>
+                            <li>Add trust elements: reviews, guarantees, social proof</li>
+                            <li>Set up product galleries with lifestyle + detail shots</li>
+                            <li>Create FAQ sections addressing objections</li>
+                            <li>Build "How to Use" or "System Integration" blocks</li>
+                            <li>Add upsell/cross-sell recommendations</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>6. CRO Setup & Integrations (4–8 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Install Google Analytics 4 + GTM</li>
+                            <li>Configure Meta Pixel with standard + custom events</li>
+                            <li>Set up TikTok Pixel if scaling to TikTok</li>
+                            <li>Add email capture: exit intent, browse abandonment</li>
+                            <li>Configure cart abandonment flows (Klaviyo/Omnisend)</li>
+                            <li>Add trust badges and security seals</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>7. QA & Testing (4–6 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Test checkout flow: guest + account, mobile + desktop</li>
+                            <li>Verify pixel firing: Add to Cart, Initiate Checkout, Purchase</li>
+                            <li>Check mobile UX: load speed, tap targets, readability</li>
+                            <li>Test all links, images, and embedded media</li>
+                            <li>Run Core Web Vitals check (PageSpeed Insights)</li>
+                            <li>Document known issues in ClickUp task</li>
+                        </ul>
+                    </div>
+
+                    <h4>Quality Checks (Must Pass)</h4>
+                    <ul class="checklist">
+                        <li>Brand narrative aligns with DriveOn positioning (no hype)</li>
+                        <li>Mobile conversion flow is smooth (70%+ of traffic is mobile)</li>
+                        <li>Pixel tracking verified (test purchases fire correctly)</li>
+                        <li>Load time &lt; 3s on mobile (LCP under 2.5s)</li>
+                        <li>Legal pages present: Privacy, Terms, Refunds, Shipping</li>
+                        <li>All product pages have FAQs addressing top objections</li>
+                    </ul>
+
+                    <h4>Outputs</h4>
+                    <ul class="checklist">
+                        <li>Live Shopify store with admin access documented</li>
+                        <li>Notion Store page updated with URL, theme, structure notes</li>
+                        <li>Drive folder with strategy docs, wireframes, asset backups</li>
+                        <li>ClickUp task moved to "Ready for Launch"</li>
+                        <li>Discord handoff notification in #p3-stores-brand</li>
+                    </ul>
+
+                    <h4>Handoff</h4>
+                    <p>Post in <code>#p3-stores-brand</code>:</p>
+                    <pre><code>🏪 NEW BRAND STORE READY
+
+Product ID: PRD-20251208-042
+Store ID: STR-BRD-SleepGuard
+Lane: C1 (DriveOn Standard)
+Store URL: sleepguard.driveon.co
+
+Build Summary:
+- Premium store build for P3_WINNER
+- 5-page structure: Home, Shop, How It Works, About, FAQ
+- Upsell bundles configured (Sleep Stack)
+- Mobile CVR optimized, load time 2.1s
+
+Ready For:
+@MediaBuyer - Launch P3 campaigns
+@SEO-Specialist - Begin SEO optimization
+
+Notion: [link]
+Drive: [link]
+ClickUp: [link]</code></pre>
+                </details>
+
+                <details>
+                    <summary>Workflow 2 — CRO Optimization (Existing Winner)</summary>
+                    
+                    <h4>Trigger</h4>
+                    <p>Store has been live 14–30 days; baseline conversion data available; CVR or AOV below target.</p>
+
+                    <h4>Inputs</h4>
+                    <ul class="checklist">
+                        <li>GA4 analytics: CVR, bounce rate, exit pages, user flow</li>
+                        <li>Heatmaps/recordings (Hotjar/Microsoft Clarity)</li>
+                        <li>Meta/TikTok ad performance: CTR, landing page view rate</li>
+                        <li>Customer feedback or CS objections</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    
+                    <div class="workflow-step">
+                        <strong>1. Data Analysis (2–4 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Identify highest-exit pages and drop-off points</li>
+                            <li>Review heatmaps: What's getting clicked? What's ignored?</li>
+                            <li>Analyze mobile vs desktop performance gaps</li>
+                            <li>Check cart abandonment rate and reasons</li>
+                            <li>Document findings in Notion CRO project page</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>2. Hypothesis Formation (1–2 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Prioritize changes by expected impact × ease</li>
+                            <li>Common wins: Clearer CTAs, trust elements, faster load, simplified checkout</li>
+                            <li>Create test plan: Control vs Variant A (vs Variant B if multivariate)</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>3. Implementation (4–8 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Build variant pages or A/B test in Shopify</li>
+                            <li>Set up split test (Google Optimize / Shopify Scripts / custom)</li>
+                            <li>QA both control and variant flows</li>
+                            <li>Set success metrics: CVR, AOV, revenue per session</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>4. Monitor & Report (Ongoing)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Run test for 7–14 days or 100+ conversions per variant</li>
+                            <li>Check statistical significance (p &lt; 0.05)</li>
+                            <li>Document results in Notion CRO page</li>
+                            <li>Implement winner permanently or iterate on loser</li>
+                        </ul>
+                    </div>
+
+                    <h4>Outputs</h4>
+                    <ul class="checklist">
+                        <li>Implemented CRO changes (test or permanent)</li>
+                        <li>Notion CRO page with hypothesis, results, learnings</li>
+                        <li>Updated store if test wins (backup old version)</li>
+                        <li>Discord summary in #p3-stores-brand</li>
+                    </ul>
+                </details>
+
+                <details>
+                    <summary>Workflow 3 — Store Lane Migration (Validation → Brand)</summary>
+                    
+                    <h4>Trigger</h4>
+                    <p>Product launched with validation store (Lane C0/VAL), passes P3_WINNER criteria, brand routing decision confirms C1 or C2.</p>
+
+                    <h4>Inputs</h4>
+                    <ul class="checklist">
+                        <li>Existing validation store data (CVR, AOV, top traffic sources)</li>
+                        <li>Learnings from P1/P2/P3 tests (winning angles, objections)</li>
+                        <li>Brand routing decision (C1 vs C2)</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    
+                    <div class="workflow-step">
+                        <strong>1. Audit Existing Store (2–3 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>What worked? (High-performing pages, CTAs, angles)</li>
+                            <li>What didn't? (Confusing nav, missing trust elements)</li>
+                            <li>Review customer feedback and CS tickets</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>2. Build New Brand Store (Follow Workflow 1)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Import learnings from validation store</li>
+                            <li>Elevate brand positioning and narrative</li>
+                            <li>Add premium design and CRO elements</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>3. Migration & Redirect (2–4 hours)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Set up 301 redirects from old validation URLs</li>
+                            <li>Update Meta/TikTok campaign URLs to new store</li>
+                            <li>Migrate email subscribers to new Klaviyo/Omnisend list</li>
+                            <li>Update Notion Product page with new Store URL</li>
+                            <li>Archive old validation store (keep backup)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Outputs</h4>
+                    <ul class="checklist">
+                        <li>New brand store live with redirects configured</li>
+                        <li>Updated ad campaigns pointing to new URLs</li>
+                        <li>Migration documented in Notion</li>
+                        <li>Old validation store archived in Drive /99_Archive</li>
+                    </ul>
+                </details>
+            </section>
+
+            <section id="handoffs" class="section">
+                <h2>5. Handoffs & Interface Specs</h2>
+
+                <div class="mermaid">
+sequenceDiagram
+    participant P1 as Pod 1<br/>Product Intel
+    participant P2 as Pod 2<br/>Creative
+    participant Founder as Founder/<br/>Integrator
+    participant You as You<br/>Brand Builder
+    participant MB as Media Buyer
+    participant SEO as SEO Specialist
+    
+    P1->>You: P3_WINNER packet ready
+    P2->>You: Hero creatives & assets
+    Founder->>You: Brand routing decision
+    
+    You->>You: Build brand store (4–8 weeks)
+    
+    You->>MB: Store ready for launch
+    You->>SEO: Store ready for SEO
+    You->>Founder: CRO recommendations
+    
+    MB->>You: Performance feedback
+    You->>You: Ongoing CRO optimization
+                </div>
+
+                <h3>Inbound Handoffs</h3>
+
+                <div class="card">
+                    <h4>FROM: Pod 1 Product Intelligence (P1-R3-LEAD-STRATEGIST)</h4>
+                    <p><strong>Trigger:</strong> Product reaches P3_WINNER or TIER_A_WINNER</p>
+                    <p><strong>Channel:</strong> Notion Product OS + Discord #p3-stores-brand</p>
+                    
+                    <p><strong>Required Inputs:</strong></p>
+                    <ul class="checklist">
+                        <li>Notion Product page with R3 packet (avatar, angles, research)</li>
+                        <li>Validated economics (P2/P3 test results, CAC/ROAS)</li>
+                        <li>Supplier confirmed and reliable</li>
+                        <li>Drive folder with research assets</li>
+                    </ul>
+
+                    <p><strong>Quality Bar:</strong> Research score ≥ 80/100, no unresolved supplier or fulfillment blockers.</p>
+                </div>
+
+                <div class="card">
+                    <h4>FROM: Pod 2 Creative Factory (P2-CR-DIRECTOR)</h4>
+                    <p><strong>Trigger:</strong> Hero creatives finalized for P3_WINNER</p>
+                    <p><strong>Channel:</strong> Drive folder + Discord #p2-creative-exports</p>
+                    
+                    <p><strong>Required Inputs:</strong></p>
+                    <ul class="checklist">
+                        <li>Hero video ads (3–5 winning angles)</li>
+                        <li>Static ads and carousels (10–15 variants)</li>
+                        <li>Product images (lifestyle + detail shots)</li>
+                        <li>Winning copy hooks and CTAs</li>
+                        <li>Brand assets if custom (logos, colors, fonts)</li>
+                    </ul>
+
+                    <p><strong>Quality Bar:</strong> Assets exported in web-ready formats (MP4 ≤ 10MB, JPG/PNG optimized), organized in Drive /04_Exports.</p>
+                </div>
+
+                <div class="card">
+                    <h4>FROM: Founder/Integrator</h4>
+                    <p><strong>Trigger:</strong> Brand routing decision required</p>
+                    <p><strong>Channel:</strong> Notion Product page + async Discord thread</p>
+                    
+                    <p><strong>Required Inputs:</strong></p>
+                    <ul class="checklist">
+                        <li>Lane assignment (C1 Flagship, C2 Micro-Brand, or C3 General)</li>
+                        <li>Strategic context (multi-year roadmap, brand fit reasoning)</li>
+                        <li>Budget approval if requires custom domain/premium theme</li>
+                    </ul>
+
+                    <p><strong>Quality Bar:</strong> Clear written decision with rationale documented in Notion.</p>
+                </div>
+
+                <h3>Outbound Handoffs</h3>
+
+                <div class="card">
+                    <h4>TO: Media Buyer (P3-MB-BUYER)</h4>
+                    <p><strong>Trigger:</strong> Brand store build complete and QA passed</p>
+                    <p><strong>Channel:</strong> Discord #p3-stores-brand</p>
+                    
+                    <p><strong>Deliverables:</strong></p>
+                    <ul class="checklist">
+                        <li>Live store URL (production, not staging)</li>
+                        <li>Pixel verification (Meta, TikTok, GA4 all firing)</li>
+                        <li>Collection/product URLs for ad campaigns</li>
+                        <li>Mobile UX confirmed smooth (test purchases completed)</li>
+                        <li>Notion Store page with structure notes</li>
+                    </ul>
+
+                    <p><strong>Message Template:</strong></p>
+                    <pre><code>🏪 BRAND STORE READY FOR LAUNCH
+
+Product ID: [PRD-ID]
+Store ID: [STR-BRD-ID]
+Store URL: [url]
+Lane: [C1/C2/C3]
+
+Build Summary:
+- [1-sentence description]
+- Key pages: [list]
+- Upsells configured: [bundles]
+- Load time: [X.Xs]
+
+Ready For:
+@MediaBuyer - Launch P3 campaigns
+
+Links:
+Notion: [link]
+Drive: [link]
+ClickUp: [link]</code></pre>
+                </div>
+
+                <div class="card">
+                    <h4>TO: SEO/CRO Specialist (P3-SEO-CRO-LIFECYCLE)</h4>
+                    <p><strong>Trigger:</strong> Brand store launched; 30-day mark for organic optimization</p>
+                    <p><strong>Channel:</strong> Discord #p3-general-seo</p>
+                    
+                    <p><strong>Deliverables:</strong></p>
+                    <ul class="checklist">
+                        <li>Store structure map (collections, pages, hierarchy)</li>
+                        <li>Initial meta descriptions and title tags</li>
+                        <li>Schema markup implemented (Product, Organization, BreadcrumbList)</li>
+                        <li>Sitemap.xml generated and submitted</li>
+                        <li>Google Search Console access</li>
+                    </ul>
+
+                    <p><strong>Collaboration Note:</strong> You own initial SEO foundation (schema, structure, meta tags). SEO Specialist owns ongoing optimization (keyword targeting, content expansion, link building).</p>
+                </div>
+
+                <div class="card">
+                    <h4>TO: Founder/Integrator (CRO Recommendations)</h4>
+                    <p><strong>Trigger:</strong> Store live 14–30 days; CRO opportunities identified</p>
+                    <p><strong>Channel:</strong> Notion CRO page + async review</p>
+                    
+                    <p><strong>Deliverables:</strong></p>
+                    <ul class="checklist">
+                        <li>Performance summary (CVR, AOV, bounce rate vs targets)</li>
+                        <li>Top 3 CRO hypotheses with expected impact</li>
+                        <li>Test plan (A/B setup, timeline, success metrics)</li>
+                        <li>Budget/resource request if needed</li>
+                    </ul>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-title"><span class="callout-icon">💡</span>Handoff Best Practice</div>
+                    <p>Always include three links: Notion (knowledge hub), Drive (assets), ClickUp (task tracking). This ensures downstream roles have everything they need without hunting across tools.</p>
+                </div>
+            </section>
+
+            <section id="kpis" class="section">
+                <h2>6. KPIs & Quality Bar</h2>
+
+                <h3>Primary KPIs (From L2-07)</h3>
+                <table>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target</th>
+                        <th>Measurement</th>
+                        <th>Reporting</th>
+                    </tr>
+                    <tr>
+                        <td>Brand UX Quality</td>
+                        <td>≥ 8/10 internal score</td>
+                        <td>Rubric: brand narrative, mobile UX, load speed, trust elements</td>
+                        <td>Per build, documented in Notion</td>
+                    </tr>
+                    <tr>
+                        <td>AOV Uplift</td>
+                        <td>+20–40% vs validation store</td>
+                        <td>GA4: Average Order Value comparison</td>
+                        <td>30-day post-launch</td>
+                    </tr>
+                    <tr>
+                        <td>CVR Uplift (CRO)</td>
+                        <td>+15–25% per test iteration</td>
+                        <td>A/B test results (statistical significance)</td>
+                        <td>Per CRO project</td>
+                    </tr>
+                    <tr>
+                        <td>Build Quality</td>
+                        <td>Zero critical bugs at launch</td>
+                        <td>QA checklist completion, post-launch bug count</td>
+                        <td>Per build</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Throughput</td>
+                        <td>2–4 brand stores or major upgrades</td>
+                        <td>ClickUp tasks completed (status: Launched)</td>
+                        <td>Monthly review</td>
+                    </tr>
+                </table>
+
+                <h3>Quality Bar Standards</h3>
+
+                <h4>Brand Narrative (Good vs Bad)</h4>
+                <div class="card">
+                    <p><strong>✅ GOOD:</strong></p>
+                    <blockquote style="background: var(--light-gray); padding: 1rem; border-left: 4px solid var(--success); margin: 0.5rem 0;">
+                        "Sleep Guard Pro supports your recovery system with temperature-regulated sleep. No hype—just deep sleep physics: lower core temp = faster sleep onset. Validated in 60-day test with 2,400 users."
+                    </blockquote>
+                    <p style="margin-top: 1rem;"><strong>Why it works:</strong> Clear problem (recovery), clear mechanism (temp regulation), tested claim with specifics.</p>
+
+                    <p style="margin-top: 1.5rem;"><strong>❌ BAD:</strong></p>
+                    <blockquote style="background: var(--light-gray); padding: 1rem; border-left: 4px solid var(--error); margin: 0.5rem 0;">
+                        "Revolutionary sleep technology! Scientists HATE this one trick! Transform your life overnight with our miracle cooling system! Limited time: 70% off!"
+                    </blockquote>
+                    <p style="margin-top: 1rem;"><strong>Why it fails:</strong> Hype language, unproven claims, fake urgency. Contradicts DriveOn anti-noise positioning.</p>
+                </div>
+
+                <h4>Mobile UX (Good vs Bad)</h4>
+                <div class="card">
+                    <p><strong>✅ GOOD:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Product images load in &lt; 1s on 4G</li>
+                        <li>Add to Cart button always visible (sticky on scroll)</li>
+                        <li>Tap targets ≥ 44px (iOS accessibility standard)</li>
+                        <li>Checkout completes in 3 taps (no forced account creation)</li>
+                        <li>FAQ accordion expands smoothly without jank</li>
+                    </ul>
+
+                    <p style="margin-top: 1.5rem;"><strong>❌ BAD:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Hero image is 5MB, blocks rendering for 8+ seconds</li>
+                        <li>CTA button hidden below fold, requires scrolling to find</li>
+                        <li>Small text (10px) unreadable on mobile without zoom</li>
+                        <li>Checkout requires account creation before seeing total</li>
+                        <li>Image galleries cause horizontal scroll (broken layout)</li>
+                    </ul>
+                </div>
+
+                <h4>CRO Setup (Good vs Bad)</h4>
+                <div class="card">
+                    <p><strong>✅ GOOD:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Meta Pixel fires Purchase event with correct value + currency</li>
+                        <li>Exit-intent popup offers 10% off (first-time only)</li>
+                        <li>Cart abandonment email sends after 1 hour with discount</li>
+                        <li>Upsell appears in cart: "Complete your system" bundle</li>
+                        <li>Trust badges: "30-day guarantee" + "4.8★ from 1,200 reviews"</li>
+                    </ul>
+
+                    <p style="margin-top: 1.5rem;"><strong>❌ BAD:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Pixel not installed; no conversion tracking data</li>
+                        <li>Popup appears instantly (before user reads anything)</li>
+                        <li>No email capture; losing 70% of visitors permanently</li>
+                        <li>No upsells or bundles; every sale is single-product</li>
+                        <li>Generic "buy now" CTA; no trust or urgency elements</li>
+                    </ul>
+                </div>
+
+                <h3>Performance Benchmarks</h3>
+                <p>Targets based on 2024–2025 Shopify/ecommerce industry standards:</p>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Target (Brand Store)</th>
+                        <th>Industry Avg (Validation)</th>
+                    </tr>
+                    <tr>
+                        <td>Conversion Rate (Mobile)</td>
+                        <td>2.5–4%</td>
+                        <td>1.5–2%</td>
+                    </tr>
+                    <tr>
+                        <td>Average Order Value</td>
+                        <td>$60–$120</td>
+                        <td>$40–$60</td>
+                    </tr>
+                    <tr>
+                        <td>Bounce Rate</td>
+                        <td>&lt; 50%</td>
+                        <td>60–70%</td>
+                    </tr>
+                    <tr>
+                        <td>Load Time (Mobile)</td>
+                        <td>&lt; 3s (LCP &lt; 2.5s)</td>
+                        <td>4–6s</td>
+                    </tr>
+                    <tr>
+                        <td>Cart Abandonment</td>
+                        <td>&lt; 65%</td>
+                        <td>70–80%</td>
+                    </tr>
+                </table>
+
+                <div class="callout canon">
+                    <div class="callout-title"><span class="callout-icon">⚖️</span>Quality Over Velocity</div>
+                    <p>Your WIP is intentionally low (2–3 active builds) because brand stores require deep work. Rushing to hit 6–8 builds/month produces mediocre stores that fail to lift economics. Protect the 2–4/month throughput target.</p>
+                </div>
+            </section>
+
+            <section id="ai-usage" class="section">
+                <h2>7. AI Usage & Prompt Patterns</h2>
+
+                <p>You use AI to accelerate strategy, copywriting, and CRO analysis—NOT to replace human judgment on brand positioning or UX decisions.</p>
+
+                <h3>AI-Assisted Tasks</h3>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li><strong>Brand Strategy:</strong> Generate positioning options, competitor analysis summaries</li>
+                    <li><strong>Copywriting:</strong> Draft product descriptions, FAQs, email flows</li>
+                    <li><strong>CRO Analysis:</strong> Interpret GA4 data, suggest A/B test hypotheses</li>
+                    <li><strong>Technical Setup:</strong> Generate Liquid code snippets, GTM tags</li>
+                </ul>
+
+                <h3>Ready-to-Use Prompts</h3>
+
+                <details>
+                    <summary>Prompt 1 — Brand Positioning Strategy</summary>
+                    <pre><code>I'm building a brand store for a winning dropshipping product. Help me develop positioning.
+
+Product: [Product Name]
+Problem: [1-sentence customer problem]
+Solution: [How product solves it]
+Test Results: CAC $[X], ROAS [Y], AOV $[Z]
+Winning Angles: [List 2-3 angles from P2/P3 tests]
+
+Context:
+- This store is part of DriveOn Commerce (systems-first, anti-hype positioning)
+- Target: high-output adults (desk workers, ex-athletes, golfers)
+- Brand pillars: Clarity Over Noise, Runnable Systems, Tested & Simulated
+
+Task:
+1. Generate 3 positioning options (1-2 sentences each)
+2. For each option, explain: Who is this for? What system does it support?
+3. Recommend which option best aligns with DriveOn's thesis
+4. Flag any positioning risks (hype language, unproven claims)
+
+Return: Structured analysis with clear recommendation.</code></pre>
+                </details>
+
+                <details>
+                    <summary>Prompt 2 — Product Page Copy</summary>
+                    <pre><code>Write a product page description for a Shopify store.
+
+Product: [Product Name]
+Positioning: [1-sentence brand narrative from strategy]
+Target Avatar: [Who this is for]
+Key Benefit: [Primary outcome]
+How It Works: [Mechanism in 1-2 sentences]
+
+Constraints:
+- NO hype language ("revolutionary", "miracle", "scientists hate")
+- NO fake urgency or scarcity
+- NO unproven claims
+- YES to clear systems thinking
+- YES to honest tradeoffs
+- YES to tested/validated framing
+
+Structure:
+1. Problem Hook (2-3 sentences)
+2. How This Helps (system explanation, 3-4 sentences)
+3. How to Use (step-by-step, 3-5 bullets)
+4. What to Expect (realistic timeline and results)
+5. FAQ (address top 3 objections)
+
+Tone: Direct, analytical, non-hype. Like a knowledgeable friend, not a salesperson.
+
+Return: Full product description ready to paste into Shopify.</code></pre>
+                </details>
+
+                <details>
+                    <summary>Prompt 3 — CRO Hypothesis Generator</summary>
+                    <pre><code>I'm analyzing a brand store for CRO opportunities. Help me prioritize hypotheses.
+
+Store Data:
+- Conversion Rate: [X%]
+- Bounce Rate: [Y%]
+- Top Exit Pages: [List]
+- Avg Time on Page: [Z seconds]
+- Mobile vs Desktop CVR: [M% vs D%]
+
+Observations:
+- [Key finding 1 from heatmaps/analytics]
+- [Key finding 2]
+- [Key finding 3]
+
+Context:
+- Store is 30 days old, P3_WINNER product
+- Target AOV: $80-120, current: $[X]
+- Traffic: 70% mobile, 30% desktop
+
+Task:
+1. Generate 5 CRO hypotheses ranked by: Expected Impact (High/Med/Low) × Ease (Easy/Med/Hard)
+2. For each hypothesis:
+   - What to change
+   - Why this might work
+   - How to test it (A/B setup)
+   - Success metric
+3. Recommend top 2 to test first
+
+Return: Prioritized list with implementation notes.</code></pre>
+                </details>
+
+                <details>
+                    <summary>Prompt 4 — Shopify Liquid Code Helper</summary>
+                    <pre><code>I need a Shopify Liquid snippet for [specific functionality].
+
+Context:
+- Theme: [Theme name, e.g., Prestige]
+- Use case: [e.g., "Show upsell bundle in cart if certain products present"]
+- Technical level: [Intermediate Liquid knowledge]
+
+Requirements:
+- [Specific requirement 1]
+- [Specific requirement 2]
+- Must be mobile-friendly
+- Must not break existing theme functionality
+
+Task:
+1. Provide working Liquid code with comments
+2. Explain where to paste it (which file, line number if possible)
+3. List any theme settings that need to be configured
+4. Provide fallback if Liquid feature not available in theme
+
+Return: Code snippet + implementation instructions.</code></pre>
+                </details>
+
+                <h3>Human Checkpoints (AI Output Must Be Reviewed)</h3>
+                <ul class="checklist">
+                    <li>Brand positioning: Confirm no hype, aligns with DriveOn thesis</li>
+                    <li>Product copy: Verify claims are testable, tradeoffs are named</li>
+                    <li>CRO hypotheses: Sanity-check against GA4 data before implementing</li>
+                    <li>Code snippets: Test in staging environment before pushing live</li>
+                </ul>
+
+                <div class="callout warning">
+                    <div class="callout-title"><span class="callout-icon">⚠️</span>AI Limitations</div>
+                    <p>AI cannot make brand routing decisions (C1/C2/C3), cannot assess visual design quality, and cannot evaluate mobile UX without screenshots. Always review AI outputs against canon and quality standards.</p>
+                </div>
+            </section>
+
+            <section id="tools" class="section">
+                <h2>8. Tools & Systems Reference</h2>
+
+                <table>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Views/Features</th>
+                        <th>Access Level</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Shopify</strong></td>
+                        <td>Store building, theme customization, admin</td>
+                        <td>Theme Editor, Product Pages, Collections, Settings</td>
+                        <td>Admin (full access)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task tracking, store build pipeline</td>
+                        <td>Space: P3 – Media & Store<br/>Folder: Stores<br/>List: Brand Stores</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Product research, store documentation</td>
+                        <td>Product OS (filtered: P3_WINNER, TIER_A)<br/>Store Registry (custom view: Brand Stores)</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>Assets, strategy docs, backups</td>
+                        <td>/04_P3_Media_and_Stores/Stores/[StoreID]</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Cross-pod communication, handoffs</td>
+                        <td>#p3-stores-brand (primary)<br/>#p3-p3-scaling (for winner updates)</td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Analytics 4</strong></td>
+                        <td>Store performance analysis</td>
+                        <td>Conversion funnel, user flow, exit pages</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Tag Manager</strong></td>
+                        <td>Pixel/tracking management</td>
+                        <td>Tags, Triggers, Variables (Meta/TikTok pixels)</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Meta Events Manager</strong></td>
+                        <td>Facebook Pixel verification</td>
+                        <td>Test Events, Event Match Quality</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Klaviyo / Omnisend</strong></td>
+                        <td>Email/SMS flows (abandonment, post-purchase)</td>
+                        <td>Flows, Campaigns, Segments</td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hotjar / MS Clarity</strong></td>
+                        <td>Heatmaps, session recordings</td>
+                        <td>Recordings, Heatmaps, Feedback</td>
+                        <td>Viewer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PageSpeed Insights</strong></td>
+                        <td>Core Web Vitals, load speed testing</td>
+                        <td>Web report (mobile + desktop)</td>
+                        <td>Public tool</td>
+                    </tr>
+                </table>
+
+                <h3>ClickUp Workspace Structure</h3>
+                <div class="card">
+                    <h4>Space: P3 — Media & Store</h4>
+                    <p><strong>Folder: Stores</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li><strong>List: Brand Stores</strong> (your primary workspace)
+                            <ul style="margin-left: 2rem;">
+                                <li>Statuses: Backlog → Strategy → Build → QA → Ready → Launched → Optimizing</li>
+                                <li>Custom Fields: Product_ID, Store_ID, Lane (C1/C2/C3), Store_URL, Theme, Launch_Date</li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Standard Views:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li><strong>Active Builds (Board):</strong> Group by Status, filter: Status ∈ {Strategy, Build, QA}</li>
+                        <li><strong>By Lane (Board):</strong> Group by Lane, filter: Status != Killed</li>
+                        <li><strong>CRO Projects (List):</strong> Filter: Status = Optimizing, sort by last updated</li>
+                    </ul>
+                </div>
+
+                <h3>Notion Database Structure</h3>
+                <div class="card">
+                    <h4>Product OS (Primary Reference)</h4>
+                    <p><strong>Filtered View: P3 Winners → Brand Stores</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Filter: Status = P3_WINNER OR TIER_A_WINNER</li>
+                        <li>Filter: Lane = C1 OR C2 (exclude C3/General)</li>
+                        <li>Sort: Last Updated (descending)</li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Key Properties You Use:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Product_ID, Product_Name, Current_Gate, Lane</li>
+                        <li>P3 Metrics: CAC, ROAS, AOV (from test results)</li>
+                        <li>Research Packet (relation to Packets OS)</li>
+                        <li>Creative Assets (relation to Creatives OS)</li>
+                        <li>Store_URL, Store_ID (you populate these)</li>
+                    </ul>
+                </div>
+
+                <h3>Google Drive Folder Structure</h3>
+                <div class="card">
+                    <h4>/04_P3_Media_and_Stores/Stores/[StoreID]</h4>
+                    <p><strong>Standard Folder Template (Per Store):</strong></p>
+                    <pre style="background: var(--light-gray); color: var(--carbon-black); padding: 1rem;"><code>STR-BRD-[BrandName]/
+├── 01_Strategy/
+│   ├── Brand_Positioning.pdf
+│   ├── Competitor_Analysis.xlsx
+│   └── Wireframes.fig
+├── 02_Assets/
+│   ├── Logo.svg
+│   ├── Banners/
+│   └── Product_Images/
+├── 03_Theme_Backups/
+│   ├── Theme_Export_YYYYMMDD.zip
+│   └── Custom_CSS.css
+├── 04_Copy/
+│   ├── Product_Descriptions.docx
+│   ├── FAQ_Content.docx
+│   └── Email_Flows.docx
+└── 05_CRO_Reports/
+    ├── 30Day_Performance.pdf
+    └── AB_Test_Results.xlsx</code></pre>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-title"><span class="callout-icon">💡</span>Tool Integration Tip</div>
+                    <p>Always link ClickUp task → Notion Product page → Drive folder. Use URL custom fields in ClickUp to maintain three-way linkage. This prevents "lost" stores and ensures handoff continuity.</p>
+                </div>
+            </section>
+
+            <section id="escalation" class="section">
+                <h2>9. Escalation & Decision Rights</h2>
+
+                <h3>Decisions You Own (No Approval Needed)</h3>
+                <ul class="checklist">
+                    <li>Theme selection (within approved premium themes)</li>
+                    <li>Store structure and navigation hierarchy</li>
+                    <li>Product page layout and copy (within brand guidelines)</li>
+                    <li>CRO test design and A/B variants</li>
+                    <li>Collection organization and filters</li>
+                    <li>Email/SMS flow setup (standard abandonment, post-purchase)</li>
+                    <li>Minor design tweaks (colors, spacing, fonts within theme)</li>
+                </ul>
+
+                <h3>Decisions Requiring Pod Lead / Integrator Approval</h3>
+                <ul class="checklist">
+                    <li>Custom theme development (outside approved themes)</li>
+                    <li>Significant infrastructure changes (domain migration, platform switch)</li>
+                    <li>Budget over $500 for tools/plugins (e.g., premium page builder)</li>
+                    <li>Launching store with known UX issues (trade-off decision)</li>
+                    <li>Major brand narrative changes (affects positioning)</li>
+                </ul>
+
+                <h3>Decisions Requiring Founder / Canon Owner</h3>
+                <ul class="checklist">
+                    <li>Brand routing decision (C1 vs C2 vs C3)</li>
+                    <li>Creating new micro-brand (C2) outside existing lanes</li>
+                    <li>Brand positioning that deviates from DriveOn thesis</li>
+                    <li>Legal/compliance concerns (claims, guarantees, refund policies)</li>
+                </ul>
+
+                <h3>When to Escalate</h3>
+
+                <div class="card">
+                    <h4>Performance Issues (Immediate)</h4>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Store CVR &lt; 1% after 30 days (significantly below target)</li>
+                        <li>Bounce rate &gt; 70% consistently</li>
+                        <li>Load time &gt; 5s on mobile (critical UX failure)</li>
+                        <li>Pixel tracking completely broken (no Purchase events firing)</li>
+                    </ul>
+                    <p><strong>Action:</strong> Post in #p3-stores-brand with @Integrator, include GA4 screenshot</p>
+                </div>
+
+                <div class="card">
+                    <h4>Brand/Positioning Conflicts (Same Day)</h4>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Product claims cannot be validated (no test data, supplier unverifiable)</li>
+                        <li>Creative assets use hype language that contradicts DriveOn positioning</li>
+                        <li>Founder requests positioning that conflicts with canon brand guidelines</li>
+                    </ul>
+                    <p><strong>Action:</strong> Create Notion doc with conflict summary, tag Founder/Integrator</p>
+                </div>
+
+                <div class="card">
+                    <h4>Resource/WIP Constraints (Within 24h)</h4>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>Active builds exceed WIP cap (3+ active, all complex)</li>
+                        <li>Simultaneous urgent requests from Media Buyer + Founder</li>
+                        <li>Build requires skills outside your scope (custom app development)</li>
+                    </ul>
+                    <p><strong>Action:</strong> Post in #p4-pm-daily-standup, propose prioritization</p>
+                </div>
+
+                <h3>Expected Response Times</h3>
+                <table>
+                    <tr>
+                        <th>Escalation Type</th>
+                        <th>To</th>
+                        <th>Expected Response</th>
+                    </tr>
+                    <tr>
+                        <td>Critical performance issue</td>
+                        <td>Integrator</td>
+                        <td>&lt; 4 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Brand routing decision</td>
+                        <td>Founder</td>
+                        <td>&lt; 24 hours (async OK)</td>
+                    </tr>
+                    <tr>
+                        <td>WIP/priority conflict</td>
+                        <td>PM / Integrator</td>
+                        <td>&lt; 8 hours</td>
+                    </tr>
+                    <tr>
+                        <td>Budget approval (&gt; $500)</td>
+                        <td>Founder</td>
+                        <td>&lt; 48 hours</td>
+                    </tr>
+                </table>
+
+                <div class="callout warning">
+                    <div class="callout-title"><span class="callout-icon">⚠️</span>Do NOT Proceed If...</div>
+                    <p>Brand routing is unclear (C1 vs C2 vs C3), product claims are unverifiable, or positioning directly contradicts L2-08 brand guardrails. Building a store with these unresolved creates drift and rework.</p>
+                </div>
+            </section>
+
+            <section id="onboarding" class="section">
+                <h2>10. Onboarding Checklist</h2>
+
+                <h3>Week 1 — Access & Canon</h3>
+                <ul class="checklist">
+                    <li><strong>Read canon docs (4–6 hours):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>L0-02 — Product & Brand Architecture</li>
+                            <li>L0-02B — Branded Niche Flagship Positioning</li>
+                            <li>L1-01 — CaniCol Model v4.0</li>
+                            <li>L2-05 — Testing Canon (P3_WINNER criteria)</li>
+                            <li>L2-06 — Scaling Tiers & P3 Strategy</li>
+                            <li>L2-08 — DriveOn Master Brand Platform</li>
+                        </ul>
+                    </li>
+                    <li><strong>Get access to tools:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Shopify Admin (store owner access)</li>
+                            <li>ClickUp Space: P3 – Media & Store</li>
+                            <li>Notion: Product OS, Store Registry views</li>
+                            <li>Google Drive: /04_P3_Media_and_Stores/Stores</li>
+                            <li>Discord: #p3-stores-brand, #p3-p3-scaling</li>
+                            <li>GA4 + GTM (editor access)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Shadow existing store:</strong> Review 1–2 live brand stores, identify what makes them "on-brand"</li>
+                </ul>
+
+                <h3>Week 2 — First Supervised Build</h3>
+                <ul class="checklist">
+                    <li>Select a simple P3_WINNER (not Tier A) for first build</li>
+                    <li>Complete brand strategy phase with Founder review</li>
+                    <li>Build wireframes and navigation structure</li>
+                    <li>Set up theme and homepage (with senior review at each phase)</li>
+                    <li>Daily check-ins with Pod Lead or Integrator</li>
+                </ul>
+
+                <h3>Week 3 — Complete First Build</h3>
+                <ul class="checklist">
+                    <li>Finish product pages, collections, and copy</li>
+                    <li>Set up tracking (GA4, Meta Pixel, GTM)</li>
+                    <li>Run full QA checklist (mobile + desktop)</li>
+                    <li>Present store to Founder/Integrator for final review</li>
+                    <li>Execute launch handoff to Media Buyer</li>
+                </ul>
+
+                <h3>Week 4 — First CRO Project</h3>
+                <ul class="checklist">
+                    <li>Analyze first build's 14-day performance data</li>
+                    <li>Identify 1–2 CRO opportunities (with guidance)</li>
+                    <li>Design and implement A/B test</li>
+                    <li>Document learnings in Notion</li>
+                </ul>
+
+                <h3>30-Day Review Criteria</h3>
+                <div class="card">
+                    <p><strong>Ready for Independent Work If:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>✅ Completed 1 full brand store build (launched and live)</li>
+                        <li>✅ Store passes quality bar: CVR ≥ 2%, load time &lt; 3s, no critical bugs</li>
+                        <li>✅ Can articulate DriveOn brand pillars and apply them to positioning</li>
+                        <li>✅ Understands P3_WINNER vs TIER_A criteria and lane routing logic</li>
+                        <li>✅ Completed 1 CRO project (A/B test with documented results)</li>
+                        <li>✅ Consistently uses ClickUp/Notion/Drive linkage (no "lost" stores)</li>
+                        <li>✅ Handoff communication is clear (uses templates, includes all links)</li>
+                    </ul>
+
+                    <p style="margin-top: 1rem;"><strong>Needs More Support If:</strong></p>
+                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                        <li>❌ First build required extensive rework (positioning off-brand)</li>
+                        <li>❌ Struggles to balance quality vs velocity (takes 8+ weeks for simple build)</li>
+                        <li>❌ Frequently escalates decisions that should be owned independently</li>
+                        <li>❌ QA checklist incomplete (launches with critical mobile UX issues)</li>
+                    </ul>
+                </div>
+
+                <div class="callout tip">
+                    <div class="callout-title"><span class="callout-icon">💡</span>Onboarding Success Pattern</div>
+                    <p>Best new Brand Builders shadow 2–3 stores in Week 1, then tackle a "medium complexity" first build (validated winner, not elite Tier A). Attempting Tier A or multi-product brand as first build typically results in rework and frustration.</p>
+                </div>
+            </section>
+
+            <section id="changelog" class="section">
+                <h2>11. Change Log</h2>
+
+                <table>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Changes</th>
+                    </tr>
+                    <tr>
+                        <td>1.0</td>
+                        <td>2025-12-09</td>
+                        <td>DriveOn SOP Factory v4</td>
+                        <td>Initial HTML SOP created from v4.0 canon. Covers: role purpose, canon constraints, workflows (new build, CRO, lane migration), handoffs, KPIs, AI usage, tools, escalation, onboarding. Aligned with L2-03, L2-05, L2-06, L2-07, L2-08, L0-02.</td>
+                    </tr>
+                </table>
+
+                <p style="margin-top: 1.5rem;"><strong>Canon Dependencies:</strong></p>
+                <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                    <li>L0-02 (Product & Brand Architecture) — Brand routing logic</li>
+                    <li>L0-02B (Branded Niche Flagship Positioning) — DriveOn Wellness lane definition</li>
+                    <li>L1-01 (CaniCol Model) — Winner economics and hit rates</li>
+                    <li>L2-03 (Role Registry) — WIP caps and throughput targets</li>
+                    <li>L2-05 (Testing Canon) — P3_WINNER and TIER_A entry criteria</li>
+                    <li>L2-06 (Scaling Tiers) — P3 strategy and lane definitions</li>
+                    <li>L2-07 (Pod KPIs) — Brand store KPI targets</li>
+                    <li>L2-08 (Master Brand Platform) — Creative and brand guardrails</li>
+                    <li>L3-02 (ClickUp Blueprint) — P3 store pipeline structure</li>
+                    <li>L3-03 (Notion Blueprint) — Product OS and Store Registry</li>
+                    <li>L3-04 (Drive Blueprint) — Store folder structure</li>
+                </ul>
+
+                <p style="margin-top: 1.5rem;"><strong>Next Review:</strong> Quarterly (March 2026) or when L2-06/L2-08 undergo major revision.</p>
+            </section>
+        </main>
+    </div>
+
+    <script type="application/json" id="sop-structure">
+    {
+        "role_id": "P3-SB-BRAND-XX",
+        "role_name": "Brand / Niche Store Builder",
+        "role_type": "STORE_BUILDER_BRAND",
+        "pod": "P3",
+        "status": "CORE",
+        "cross_pod": true,
+        "fte": 1.0,
+        "seniority": "Senior",
+        "owned_gates": ["Brand/niche store builds", "Major CRO"],
+        "wip_limits": {
+            "active_brand_builds": "2-3",
+            "cro_projects": "3-4"
+        },
+        "throughput": {
+            "daily_baseline": "0.25-0.5 brand stores",
+            "weekly_baseline": "1-2 brand stores",
+            "monthly_baseline": "2-4 brand stores or major upgrades"
+        },
+        "kpis": [
+            {
+                "name": "Brand UX Quality",
+                "target": "≥ 8/10 internal score",
+                "source_doc": "L2-07"
+            },
+            {
+                "name": "AOV Uplift",
+                "target": "+20-40% vs validation store",
+                "source_doc": "L2-07"
+            },
+            {
+                "name": "CVR Uplift (CRO)",
+                "target": "+15-25% per test iteration",
+                "source_doc": "L2-07"
+            },
+            {
+                "name": "Build Quality",
+                "target": "Zero critical bugs at launch",
+                "source_doc": "L2-07"
+            },
+            {
+                "name": "Monthly Throughput",
+                "target": "2-4 brand stores or major upgrades",
+                "source_doc": "L2-03, L2-07"
+            }
+        ],
+        "tools": [
+            "Shopify",
+            "ClickUp",
+            "Notion",
+            "Google Drive",
+            "Discord",
+            "Google Analytics 4",
+            "Google Tag Manager",
+            "Meta Events Manager",
+            "Klaviyo/Omnisend",
+            "Hotjar/MS Clarity",
+            "PageSpeed Insights"
+        ],
+        "workflows": [
+            {
+                "name": "New Brand Store Build (Full Build)",
+                "trigger": "Product reaches P3_WINNER or TIER_A_WINNER; routing confirmed",
+                "inputs": [
+                    "Notion Product OS page with R3 packet",
+                    "P2/P3 test results",
+                    "Creative assets from Pod 2",
+                    "Brand routing decision",
+                    "Drive folder structure"
+                ],
+                "steps": [
+                    "Brand Strategy (4-8 hours)",
+                    "Store Architecture (6-10 hours)",
+                    "Theme Setup & Design (8-12 hours)",
+                    "Collections & Navigation (4-6 hours)",
+                    "Product Pages & Copy (10-16 hours)",
+                    "CRO Setup & Integrations (4-8 hours)",
+                    "QA & Testing (4-6 hours)"
+                ],
+                "outputs": [
+                    "Live Shopify store",
+                    "Notion Store page updated",
+                    "Drive folder with docs/backups",
+                    "ClickUp task: Ready for Launch",
+                    "Discord handoff notification"
+                ],
+                "handoff": {
+                    "to_roles": ["P3-MB-BUYER", "P3-SEO-CRO-LIFECYCLE"],
+                    "channel": "#p3-stores-brand"
+                }
+            },
+            {
+                "name": "CRO Optimization (Existing Winner)",
+                "trigger": "Store live 14-30 days; baseline conversion data available",
+                "inputs": [
+                    "GA4 analytics",
+                    "Heatmaps/recordings",
+                    "Ad performance data",
+                    "Customer feedback"
+                ],
+                "steps": [
+                    "Data Analysis (2-4 hours)",
+                    "Hypothesis Formation (1-2 hours)",
+                    "Implementation (4-8 hours)",
+                    "Monitor & Report (7-14 days)"
+                ],
+                "outputs": [
+                    "Implemented CRO changes",
+                    "Notion CRO page with results",
+                    "Updated store if test wins",
+                    "Discord summary"
+                ]
+            },
+            {
+                "name": "Store Lane Migration (Validation → Brand)",
+                "trigger": "Product passes P3_WINNER; routing decision confirms C1 or C2",
+                "inputs": [
+                    "Existing validation store data",
+                    "P1/P2/P3 test learnings",
+                    "Brand routing decision"
+                ],
+                "steps": [
+                    "Audit Existing Store (2-3 hours)",
+                    "Build New Brand Store (follow Workflow 1)",
+                    "Migration & Redirect (2-4 hours)"
+                ],
+                "outputs": [
+                    "New brand store live with redirects",
+                    "Updated ad campaigns",
+                    "Migration documented",
+                    "Old store archived"
+                ]
+            }
+        ],
+        "canon_constraints": {
+            "economics": {
+                "p3_winner_entry": {
+                    "cac": "≤ 0.5 × AOV",
+                    "roas": "≥ 1.3-1.5",
+                    "budget_scaling": "2-3× vs P2",
+                    "window": "14-30 days"
+                },
+                "tier_a_winner_entry": {
+                    "cac": "≤ 0.4 × AOV",
+                    "roas": "≥ 1.5",
+                    "window": "30+ days",
+                    "stability": "Multiple audiences/geos proven"
+                }
+            },
+            "brand_lanes": {
+                "C1": "DriveOn Standard (Flagship Wellness)",
+                "C2": "1P

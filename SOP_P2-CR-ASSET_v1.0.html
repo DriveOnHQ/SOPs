@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2-CR-ASSET-XX – Asset & B-Roll Sourcer SOP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --gray-text: #666666;
+            --light-gray: #F8F8F8;
+            --champagne: #F4E8D0;
+            --white: #FFFFFF;
+            --nav-height: 64px;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-height) + 20px);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--white);
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--nav-height);
+            background: var(--white);
+            border-bottom: 2px solid var(--drive-cyan);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+            margin-right: 2rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-text);
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--drive-cyan);
+        }
+        
+        /* Main Layout */
+        main {
+            margin-top: var(--nav-height);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 3rem 2rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A0A0 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero .role-id {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .meta-item {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        
+        .meta-item h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .meta-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        /* Section Styles */
+        section {
+            margin-bottom: 4rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--carbon-black);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--drive-cyan);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--carbon-black);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            color: var(--carbon-black);
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--gray-text);
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--white);
+            border: 1px solid #E0E0E0;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--carbon-black);
+            margin: 0;
+        }
+        
+        /* Callout Boxes */
+        .callout {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        
+        .callout-warning {
+            background: #FFF9E6;
+            border-color: #FFA500;
+        }
+        
+        .callout-info {
+            background: #E6F7FF;
+            border-color: var(--drive-cyan);
+        }
+        
+        .callout-success {
+            background: #E8F5E9;
+            border-color: #4CAF50;
+        }
+        
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        th {
+            background: var(--light-gray);
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--gray-text);
+        }
+        
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+        
+        .badge-gate {
+            background: var(--drive-cyan);
+            color: var(--white);
+        }
+        
+        .badge-pod {
+            background: var(--champagne);
+            color: var(--carbon-black);
+        }
+        
+        .badge-wip {
+            background: #FFA500;
+            color: var(--white);
+        }
+        
+        /* Accordion/Details */
+        details {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--drive-cyan);
+        }
+        
+        summary {
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+            color: var(--carbon-black);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        summary:hover {
+            color: var(--drive-cyan);
+        }
+        
+        details[open] summary {
+            margin-bottom: 1rem;
+        }
+        
+        /* Workflow Steps */
+        .workflow-step {
+            background: var(--white);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 4rem;
+        }
+        
+        .workflow-step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2rem;
+            height: 2rem;
+            background: var(--drive-cyan);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        .workflow-step h4 {
+            margin-top: 0;
+        }
+        
+        /* Code/Command Blocks */
+        code {
+            background: var(--light-gray);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        pre {
+            background: var(--carbon-black);
+            color: var(--drive-cyan);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+        }
+        
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding-left: 2rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--drive-cyan);
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                height: auto;
+                padding: 1rem;
+            }
+            
+            .nav-brand {
+                margin-bottom: 0.5rem;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            main {
+                padding: 2rem 1rem;
+            }
+            
+            html {
+                scroll-padding-top: 100px;
+            }
+        }
+        
+        /* Quick Jump Box */
+        .quick-jump {
+            background: var(--light-gray);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .quick-jump h3 {
+            margin-top: 0;
+            color: var(--drive-cyan);
+        }
+        
+        .quick-jump-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .quick-jump a {
+            background: var(--white);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--gray-text);
+            transition: all 0.2s;
+            display: block;
+            text-align: center;
+        }
+        
+        .quick-jump a:hover {
+            background: var(--drive-cyan);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">DriveOn SOP – Asset Sourcer</div>
+        <div class="nav-links">
+            <a href="#overview">Overview</a>
+            <a href="#purpose">Purpose</a>
+            <a href="#constraints">Constraints</a>
+            <a href="#day-in-life">Day-in-Life</a>
+            <a href="#workflows">Workflows</a>
+            <a href="#handoffs">Handoffs</a>
+            <a href="#kpis">KPIs</a>
+            <a href="#tools">Tools</a>
+            <a href="#onboarding">Onboarding</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="role-id">P2-CR-ASSET-XX</div>
+            <h1>Asset & B-Roll Sourcer</h1>
+            <p style="font-size: 1.1rem; opacity: 0.95; max-width: 800px;">
+                The engine room behind every creative. You source, organize, and deliver ready-to-use raw materials that keep 4-6 P1 creatives per product moving through the pipeline at CaniCol velocity.
+            </p>
+            
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <h3>Pod</h3>
+                    <p>P2 – Creative Factory</p>
+                </div>
+                <div class="meta-item">
+                    <h3>Status</h3>
+                    <p>CORE at Scale</p>
+                </div>
+                <div class="meta-item">
+                    <h3>WIP Cap</h3>
+                    <p>8-10 Products</p>
+                </div>
+                <div class="meta-item">
+                    <h3>Throughput</h3>
+                    <p>10-20 Asset Packs/Week</p>
+                </div>
+                <div class="meta-item">
+                    <h3>FTE</h3>
+                    <p>1.0</p>
+                </div>
+                <div class="meta-item">
+                    <h3>CrossPod</h3>
+                    <p>true</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Jump -->
+        <div class="quick-jump">
+            <h3>🔖 Quick Navigation</h3>
+            <div class="quick-jump-grid">
+                <a href="#overview">🎯 Role Overview</a>
+                <a href="#purpose">📜 Purpose & Context</a>
+                <a href="#constraints">⚠️ Canon Constraints</a>
+                <a href="#day-in-life">⏰ Day Timeline</a>
+                <a href="#workflows">⚙️ Core Workflows</a>
+                <a href="#handoffs">🔄 Handoffs</a>
+                <a href="#kpis">📊 KPIs & Quality</a>
+                <a href="#ai-usage">🤖 AI Usage</a>
+                <a href="#tools">🛠️ Tools Reference</a>
+                <a href="#escalation">🚨 Escalation</a>
+                <a href="#onboarding">📚 Onboarding</a>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <section id="overview">
+            <h2>Role Overview</h2>
+            
+            <div class="card">
+                <h3>When You Should Use This SOP</h3>
+                <p>You are <code>P2-CR-ASSET-XX</code> if your daily work is:</p>
+                <ul>
+                    <li>Sourcing product footage, B-roll, lifestyle clips, and stock assets for 8-10 products in parallel</li>
+                    <li>Organizing raw materials into clean, editor-ready asset packs</li>
+                    <li>Coordinating with Creative Director and editors to ensure material matches brief requirements</li>
+                    <li>Maintaining licensing documentation and avoiding copyright issues</li>
+                    <li>Delivering 10-20 complete asset packs per week to support P1/P2 creative production</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-info">
+                <div class="callout-title">🎯 Core Responsibility</div>
+                <p>You are <strong>responsible (R)</strong> for sourcing and organizing raw creative materials. You are <strong>not</strong> editing videos or deciding creative strategy – that's the editors and Creative Director. Your job is to find, organize, and deliver the raw ingredients that make their work possible.</p>
+            </div>
+
+            <h3>Upstream & Downstream Flow</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Direction</th>
+                        <th>Roles</th>
+                        <th>What You Receive/Send</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Upstream</strong></td>
+                        <td>P2-CR-DIRECTOR-XX<br>P2-CR-COPY-XX<br>P1-R2/R3 (Intel)</td>
+                        <td>Creative briefs, product info, angle requirements, hook ideas, R3 packets with product context</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Downstream</strong></td>
+                        <td>P2-CR-HEROEDIT-XX<br>P2-CR-VOLEDIT-XX<br>P2-CR-STATIC-DESIGN-XX</td>
+                        <td>Organized asset packs: product footage, B-roll, lifestyle clips, hooks, music suggestions, licensing docs</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Purpose & Context -->
+        <section id="purpose">
+            <h2>Role Purpose & Context</h2>
+            
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">🎬</span>
+                    <h3 class="card-title">Why This Role Exists</h3>
+                </div>
+                <p>DriveOn Commerce tests <strong>45-60 products/month</strong> through P1/P2. Each product needs <strong>4-6 P1 creatives</strong>, totaling 250-400 assets/month across the Creative Factory.</p>
+                
+                <p><strong>The bottleneck:</strong> Editors can't source, organize, and edit at CaniCol velocity. When one person tries to do both, throughput collapses or quality suffers.</p>
+                
+                <p><strong>Your role solves this:</strong> By specializing in sourcing and organizing raw materials, you let editors focus 100% on editing. This division of labor is standard in high-performing creative teams and is how modern performance marketing teams hit 250+ assets/month with quality.</p>
+            </div>
+
+            <h3>How You Support CaniCol Economics</h3>
+            
+            <div class="card">
+                <p>CaniCol v4.0 relies on:</p>
+                <ul>
+                    <li><strong>P1 Budget:</strong> $40-$60 per product</li>
+                    <li><strong>P1+P2 Total:</strong> $70-$120 (typically $80-$100)</li>
+                    <li><strong>Hit Rate:</strong> ~4-6% winners (~2-4 products/month)</li>
+                    <li><strong>Test Bank:</strong> ~$4,000-$5,500/month for P1+P2</li>
+                </ul>
+                
+                <p>Your sourcing speed and quality directly impact whether editors can hit 4-6 P1 creatives per product on time and on budget. Delays in asset delivery cascade into missed test windows and wasted budget.</p>
+            </div>
+
+            <h3>Connection to Pods & Holdings</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Connection</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>L0 – Holdings</strong></td>
+                        <td>DriveOn Commerce is the testing engine under DriveOn Holdings. You're part of the system that discovers and validates products at scale.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>L1 – CaniCol Model</strong></td>
+                        <td>You enable the lean-volume testing philosophy: lots of small tests, fast iteration, portfolio thinking.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P2 – Creative Factory</strong></td>
+                        <td>You're the raw material pipeline. Without your work, P2 can't hit 250-400 assets/month.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P3 – Media & Store</strong></td>
+                        <td>Indirectly: P3 media buyers need 4-6 P1 creatives per product on schedule. You help ensure that happens.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Canon Constraints -->
+        <section id="constraints">
+            <h2>Canon Constraints</h2>
+            
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Non-Negotiable Rules</div>
+                <p>These constraints come from <strong>L0-L3 canon</strong> and cannot be changed at the L4 (implementation) level. If reality conflicts with these, escalate to Creative Director or PM.</p>
+            </div>
+
+            <div class="card">
+                <h3>Economic Constraints (L1-01, L2-05)</h3>
+                <ul>
+                    <li><strong>Testing Volume:</strong> 45-60 products/month in P1/P2</li>
+                    <li><strong>Creative Target:</strong> 4-6 P1 creatives per product baseline</li>
+                    <li><strong>Pod Capacity:</strong> 250-400 total assets/month (P2 pod-wide)</li>
+                    <li><strong>No Budget Changes:</strong> You cannot increase P1 or P2 budgets to "buy better assets"</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>WIP & Throughput Constraints (L2-03, L2-07)</h3>
+                <ul>
+                    <li><strong>Your WIP Cap:</strong> 8-10 products in asset-sourcing in parallel (per 1.0 FTE)</li>
+                    <li><strong>Your Throughput:</strong> 10-20 ready-to-use asset packs/week</li>
+                    <li><strong>Editor WIP Caps:</strong> Hero editors: 4-6 products / 6-8 edits; Volume editors: 8-10 edits</li>
+                    <li><strong>Do Not Exceed WIP:</strong> If you're at 10 products and a new one arrives, it waits in backlog or you escalate</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Pass/Kill Criteria & Testing Canon (L2-05)</h3>
+                <p>You do not make pass/kill decisions, but understanding them helps you prioritize:</p>
+                <ul>
+                    <li><strong>P1 Pass Sketch:</strong> CTR, CPC, depth event thresholds (editors and buyers decide, not you)</li>
+                    <li><strong>P1 Fail = No P2 Assets:</strong> If a product fails P1, there's no need for P2 variants (usually)</li>
+                    <li><strong>P2 Pass → P3:</strong> Winners get scaled; you may need to source additional refresh assets later</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Approved Tool Stack (L2/L3)</h3>
+                <p><strong>You may use:</strong></p>
+                <ul>
+                    <li><strong>ClickUp:</strong> Task tracking, asset request statuses</li>
+                    <li><strong>Notion:</strong> Product OS, creative briefs, asset library index</li>
+                    <li><strong>Google Drive:</strong> File storage and delivery</li>
+                    <li><strong>Discord:</strong> Handoff notifications and quick questions</li>
+                    <li><strong>Sourcing Platforms:</strong> Pexels, Pixabay, Envato (via team account), supplier content (via approved channels)</li>
+                </ul>
+                
+                <p><strong>You may NOT:</strong></p>
+                <ul>
+                    <li>Introduce new paid tools without approval (e.g., expensive stock libraries not in budget)</li>
+                    <li>Use unapproved file-sharing services (Dropbox, WeTransfer, etc.)</li>
+                    <li>Store assets outside Drive or ClickUp-linked locations</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">🚫 No UGC Creator / Self-Filming Unless Canonized</div>
+                <p>As of v4.0 canon, there is <strong>no approved UGC creator network or self-filming content strategy</strong>. All sourcing is via supplier content, stock platforms, or existing web-available footage.</p>
+                <p>If a Creative Director or PM asks for UGC-style content, that means: find existing clips that <em>look</em> like UGC (user reviews, unboxings, lifestyle use), not commission new creators. If this changes, canon will be updated and you'll be notified.</p>
+            </div>
+        </section>
+
+        <!-- Day-in-the-Life Timeline -->
+        <section id="day-in-life">
+            <h2>Day-in-the-Life Timeline</h2>
+            
+            <p>This is a <strong>typical daily rhythm</strong> for a 1.0 FTE Asset Sourcer managing 8-10 products in parallel. Adjust based on current WIP and urgency.</p>
+
+            <details open>
+                <summary>🌅 Block 1: Morning Setup (30-45 min) – 9:00-9:45 AM</summary>
+                <div style="margin-top: 1rem;">
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>ClickUp task list (P2 – Creative > Briefs list)</li>
+                        <li>Discord #p2-assets channel (overnight notifications)</li>
+                        <li>Your personal sourcing queue from yesterday</li>
+                    </ul>
+
+                    <h4>Actions</h4>
+                    <ol>
+                        <li><strong>Check ClickUp "Briefs" list:</strong> Identify any new creative brief tasks assigned to you or marked "Asset Request"</li>
+                        <li><strong>Review Discord #p2-assets:</strong> Check for urgent requests from Creative Director or editors</li>
+                        <li><strong>Update ClickUp statuses:</strong> Move any completed asset packs from "Active" to "Review"</li>
+                        <li><strong>Triage new requests:</strong> If WIP > 10, mark new tasks as "Backlog" and notify PM/Creative Director</li>
+                        <li><strong>Set daily priority list:</strong> Choose 2-3 products that need asset delivery today (based on editor schedules and P1 test dates)</li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Daily priority list (2-3 products for asset delivery today)</li>
+                        <li>ClickUp statuses updated</li>
+                        <li>Any blockers posted in Discord #p2-blockers if WIP is overloaded</li>
+                    </ul>
+
+                    <h4>Tools</h4>
+                    <p>ClickUp, Discord, Notion (Product OS for product context)</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>🔍 Block 2: Deep Sourcing Session 1 (90-120 min) – 10:00 AM-12:00 PM</summary>
+                <div style="margin-top: 1rem;">
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Creative brief for Product A (from ClickUp task)</li>
+                        <li>R3 packet (linked in Notion Product OS)</li>
+                        <li>Angle and hook requirements from Creative Director</li>
+                    </ul>
+
+                    <h4>Actions</h4>
+                    <ol>
+                        <li><strong>Read creative brief:</strong> Understand hooks, angles, target audience, product USPs</li>
+                        <li><strong>Source product footage:</strong>
+                            <ul>
+                                <li>Check supplier site for videos/images (if provided in R3 packet)</li>
+                                <li>Search stock platforms (Pexels, Pixabay) for product category (e.g., "kitchen gadget", "sleep mask")</li>
+                                <li>Look for existing web content (YouTube reviews, unboxings) – note URLs for reference, download if licensable</li>
+                            </ul>
+                        </li>
+                        <li><strong>Source B-roll:</strong>
+                            <ul>
+                                <li>Lifestyle clips matching hooks (e.g., "morning routine" for coffee products, "travel" for luggage)</li>
+                                <li>Problem/solution visuals (e.g., "messy kitchen" → "organized kitchen")</li>
+                                <li>Emotional/relatable scenes (happy people, frustration, relief)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Organize files:</strong>
+                            <ul>
+                                <li>Create Drive folder: <code>/03_P2_Creative/Products/[ProductID]_[ShortName]/02_Raw_Footage_and_UGC/</code></li>
+                                <li>Subfolders: <code>Product_Footage/</code>, <code>Lifestyle_Broll/</code>, <code>Hooks_and_Intros/</code></li>
+                                <li>Name files clearly: <code>PRD-20251208-042_Product_Demo_01.mp4</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Document licensing:</strong> Create a <code>_LICENSING_NOTES.txt</code> file in the asset pack folder listing sources and license types</li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Organized Drive folder with 10-20 raw clips for Product A</li>
+                        <li>Licensing documentation file</li>
+                        <li>Updated ClickUp task with link to Drive folder</li>
+                    </ul>
+
+                    <h4>Tools</h4>
+                    <p>Pexels, Pixabay, Google Drive, ClickUp, Notion</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>🍽️ Block 3: Lunch & Admin (45-60 min) – 12:00-1:00 PM</summary>
+                <div style="margin-top: 1rem;">
+                    <h4>Actions</h4>
+                    <ul>
+                        <li>Lunch break</li>
+                        <li>Quick check of Discord for urgent requests</li>
+                        <li>Update time tracking in ClickUp for morning work</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>🎬 Block 4: Deep Sourcing Session 2 + Handoffs (120-150 min) – 1:00-3:30 PM</summary>
+                <div style="margin-top: 1rem;">
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Creative briefs for Products B and C</li>
+                        <li>Asset pack from Block 2 (Product A) ready for handoff</li>
+                    </ul>
+
+                    <h4>Actions</h4>
+                    <ol>
+                        <li><strong>Complete Product A handoff:</strong>
+                            <ul>
+                                <li>Post in Discord #p2-assets: "📦 Asset Pack Ready: PRD-20251208-042 | [Product Name] | [Drive Link] | Assigned to @HeroEditor"</li>
+                                <li>Update ClickUp task: Status → "Review", add comment with asset count and notes</li>
+                            </ul>
+                        </li>
+                        <li><strong>Start sourcing for Product B:</strong> Repeat sourcing workflow (see Block 2)</li>
+                        <li><strong>Start sourcing for Product C:</strong> If B is moving fast, begin C in parallel</li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Product A handed off to editor</li>
+                        <li>Product B asset pack 50-75% complete</li>
+                        <li>Product C asset pack started (25-50% complete)</li>
+                    </ul>
+
+                    <h4>Tools</h4>
+                    <p>Same as Block 2, plus Discord for handoffs</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>📊 Block 5: Quality Check & Queue Prep (45-60 min) – 3:30-4:30 PM</summary>
+                <div style="margin-top: 1rem;">
+                    <h4>Actions</h4>
+                    <ol>
+                        <li><strong>Review today's completed packs:</strong> Spot-check 1-2 packs for file naming, organization, licensing notes</li>
+                        <li><strong>Check editor feedback:</strong> If any editor flagged issues in Discord or ClickUp, fix immediately or escalate if it's a sourcing problem beyond your control</li>
+                        <li><strong>Prep tomorrow's queue:</strong> Look at ClickUp "Briefs" list and identify 2-3 products for tomorrow's priority</li>
+                        <li><strong>Update ClickUp:</strong> Ensure all active tasks have accurate status and time tracked</li>
+                        <li><strong>Post end-of-day summary in Discord:</strong> "#p2-assets: Today delivered 3 asset packs (PRD-X, PRD-Y, PRD-Z). In progress: 5 products. On track for 12-15 packs this week."</li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Quality spot-check complete</li>
+                        <li>Tomorrow's priority list set</li>
+                        <li>End-of-day summary posted</li>
+                    </ul>
+
+                    <h4>Tools</h4>
+                    <p>ClickUp, Discord, Google Drive</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>🔄 Block 6: Creative Sync (Optional, Weekly) – 4:30-5:00 PM</summary>
+                <div style="margin-top: 1rem;">
+                    <p><strong>Frequency:</strong> Once per week (typically Friday)</p>
+                    
+                    <h4>Actions</h4>
+                    <ul>
+                        <li>Join P2 Creative team sync (15-30 min)</li>
+                        <li>Share WIP status, blockers, and asset sourcing trends</li>
+                        <li>Get feedback on asset quality and editor satisfaction</li>
+                        <li>Discuss any upcoming high-priority products or special requests</li>
+                    </ul>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Action items for next week</li>
+                        <li>Clarifications on any edge cases or new sourcing strategies</li>
+                    </ul>
+                </div>
+            </details>
+
+            <div class="callout callout-info">
+                <div class="callout-title">💡 Daily Throughput Math</div>
+                <p>If you complete 2-3 asset packs per day at quality, that's <strong>10-15 packs/week</strong>, which fits the canon target of 10-20 packs/week. On busy weeks with simpler products, you may hit 15-20. On slower weeks with complex products or many revisions, you may hit 10-12. Both are within tolerance.</p>
+            </div>
+        </section>
+
+        <!-- Core Workflows -->
+        <section id="workflows">
+            <h2>Core Workflows</h2>
+
+            <!-- Workflow 1 -->
+            <div class="card">
+                <h3>Workflow 1: New Asset Request (Standard Flow)</h3>
+                
+                <div class="workflow-step" data-step="1">
+                    <h4>Receive Asset Request</h4>
+                    <p><strong>Trigger:</strong> Creative Director or PM assigns you a ClickUp task in "Briefs" list with tag "Asset Request"</p>
+                    <p><strong>Inputs:</strong></p>
+                    <ul>
+                        <li>ClickUp task: <code>PRD-YYYYMMDD-XXX · Asset Sourcing</code></li>
+                        <li>Linked Notion creative brief with hooks, angles, product info</li>
+                        <li>R3 packet (linked in Product OS)</li>
+                    </ul>
+                </div>
+
+                <div class="workflow-step" data-step="2">
+                    <h4>Check WIP Capacity</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Count your current "Active" tasks in ClickUp</li>
+                        <li>If WIP < 10: Accept task → Status = "Active", start timer</li>
+                        <li>If WIP = 10: Mark task as "Backlog", post in Discord #p2-blockers: "WIP at cap (10 products). New request PRD-X in backlog. Need prioritization from @CreativeDirector"</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="3">
+                    <h4>Read Brief & Product Context</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Open linked Notion creative brief</li>
+                        <li>Note: hooks (first 3 seconds), angles (problem/solution), target audience, USPs</li>
+                        <li>Open R3 packet (if available) for product specs, supplier info, competitive context</li>
+                        <li>If brief is unclear or missing key info: post in #p2-briefs: "@CreativeDirector – brief for PRD-X needs clarification on [specific question]". Do not start sourcing until clarified.</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="4">
+                    <h4>Source Product Footage</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li><strong>Check supplier content first:</strong>
+                            <ul>
+                                <li>If R3 packet lists supplier site with videos/images, download and save to Drive</li>
+                                <li>Name files: <code>PRD-YYYYMMDD-XXX_Supplier_Demo_01.mp4</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Search stock platforms:</strong>
+                            <ul>
+                                <li>Pexels: Search product category (e.g., "kitchen gadget", "water bottle")</li>
+                                <li>Pixabay: Same search strategy</li>
+                                <li>Envato (if team has account): More polished commercial footage</li>
+                            </ul>
+                        </li>
+                        <li><strong>Web research (for reference only):</strong>
+                            <ul>
+                                <li>YouTube: Search "[product name] review" or "unboxing"</li>
+                                <li>Note URLs in a <code>_REFERENCE_LINKS.txt</code> file (do not download without checking license)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Quality bar:</strong> 1080p minimum, clean framing, no heavy branding (unless it's the product's own branding)</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="5">
+                    <h4>Source B-Roll & Lifestyle Clips</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li><strong>Hook-based sourcing:</strong> For each hook in the brief, find 2-3 B-roll clips
+                            <ul>
+                                <li>Example: Hook = "Tired of messy cables?" → Search "messy desk", "tangled cables", "frustration"</li>
+                                <li>Example: Hook = "Perfect for travel" → Search "packing suitcase", "airport", "travel lifestyle"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Emotion & Relatability:</strong> Find clips showing:
+                            <ul>
+                                <li>Problem state (frustration, mess, inconvenience)</li>
+                                <li>Solution state (satisfaction, clean, organized)</li>
+                                <li>Use cases (people using similar products in real contexts)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Diversity:</strong> Include different demographics, settings, and moods (per brief guidance)</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="6">
+                    <h4>Organize Files in Drive</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Navigate to: <code>/03_P2_Creative/Products/</code></li>
+                        <li>Create folder: <code>PRD-YYYYMMDD-XXX_[ShortName]/</code></li>
+                        <li>Inside, create:
+                            <ul>
+                                <li><code>01_Briefs/</code> (copy of brief if not in Notion)</li>
+                                <li><code>02_Raw_Footage_and_UGC/</code>
+                                    <ul>
+                                        <li><code>Product_Footage/</code> (10-15 clips)</li>
+                                        <li><code>Lifestyle_Broll/</code> (15-25 clips, organized by hook if many)</li>
+                                        <li><code>Hooks_and_Intros/</code> (any specific first-3-seconds clips)</li>
+                                    </ul>
+                                </li>
+                                <li><code>_LICENSING_NOTES.txt</code> (see next step)</li>
+                                <li><code>_REFERENCE_LINKS.txt</code> (optional; URLs for inspiration)</li>
+                            </ul>
+                        </li>
+                        <li><strong>File naming convention:</strong> <code>PRD-YYYYMMDD-XXX_[Type]_[Number].mp4</code>
+                            <ul>
+                                <li>Example: <code>PRD-20251208-042_Product_Demo_01.mp4</code></li>
+                                <li>Example: <code>PRD-20251208-042_Broll_Morning_03.mp4</code></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="7">
+                    <h4>Document Licensing</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Create <code>_LICENSING_NOTES.txt</code> in the asset pack folder</li>
+                        <li>For each clip, note:
+                            <ul>
+                                <li>File name</li>
+                                <li>Source (e.g., "Pexels", "Pixabay", "Supplier site")</li>
+                                <li>License type (e.g., "CC0 Public Domain", "Supplier provided", "Envato Standard License")</li>
+                                <li>Any attribution requirements</li>
+                            </ul>
+                        </li>
+                        <li>Example format:
+                            <pre><code>PRD-20251208-042_Product_Demo_01.mp4
+Source: Supplier (example.com/product-video)
+License: Supplier provided for promotional use
+Attribution: None required
+
+PRD-20251208-042_Broll_Morning_01.mp4
+Source: Pexels.com
+License: CC0 (Free for commercial use, no attribution)
+Attribution: None required</code></pre>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="8">
+                    <h4>Quality Check & Self-Review</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Scan through all clips (quick preview):
+                            <ul>
+                                <li>Are they 1080p or better?</li>
+                                <li>Are they on-brief (matching hooks and angles)?</li>
+                                <li>Are file names correct and consistent?</li>
+                            </ul>
+                        </li>
+                        <li>Check licensing notes: Is every clip documented?</li>
+                        <li>If any issues: fix now (before handoff)</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="9">
+                    <h4>Handoff to Editors</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Update ClickUp task:
+                            <ul>
+                                <li>Status → "Review"</li>
+                                <li>Add comment: "Asset pack complete. [X] product clips, [Y] B-roll clips. Drive link: [link]. Ready for editing. Licensing notes included."</li>
+                            </ul>
+                        </li>
+                        <li>Post in Discord #p2-assets:
+                            <pre><code>📦 **Asset Pack Ready**
+Product: PRD-20251208-042 | [Product Name]
+Clips: 12 product footage, 18 B-roll
+Drive: [link]
+Assigned: @HeroEditor @VolumeEditor
+Notes: See brief for hook/angle guidance. Licensing documented.</code></pre>
+                        </li>
+                        <li>If specific editor was assigned in ClickUp, tag them in Discord message</li>
+                        <li>Stop ClickUp timer on this task</li>
+                    </ol>
+                </div>
+
+                <div class="callout callout-success">
+                    <div class="callout-title">✅ Quality Bar for This Workflow</div>
+                    <ul>
+                        <li>10-30 total clips per asset pack (mix of product and B-roll)</li>
+                        <li>All clips 1080p minimum, clean framing</li>
+                        <li>File naming consistent and clear</li>
+                        <li>Licensing documented for every clip</li>
+                        <li>Organized Drive folder following canon structure</li>
+                        <li>Handoff message includes all necessary context</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Workflow 2 -->
+            <div class="card">
+                <h3>Workflow 2: Urgent Asset Request (Fast-Track)</h3>
+                
+                <p><strong>Trigger:</strong> Creative Director or PM posts in Discord: "URGENT: PRD-X needs assets ASAP for P1 test launch tomorrow"</p>
+
+                <div class="workflow-step" data-step="1">
+                    <h4>Acknowledge & Assess</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Reply in Discord: "On it. ETA for asset pack: [time]"</li>
+                        <li>If you're already at WIP cap or in middle of another urgent task: "Currently on PRD-Y (urgent). Can start PRD-X in [X hours]. Confirm priority?"</li>
+                        <li>If Creative Director confirms PRD-X is higher priority: pause current work, mark PRD-X as "Active", start timer</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="2">
+                    <h4>Fast-Track Sourcing</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li><strong>Focus on core assets only:</strong> 5-8 product clips, 8-12 B-roll clips (reduced from normal 10-30 total)</li>
+                        <li><strong>Use fastest sources:</strong> Supplier content first, then Pexels/Pixabay (skip deep web research)</li>
+                        <li><strong>Organize quickly:</strong> Single Drive folder, basic file naming (don't over-optimize)</li>
+                        <li><strong>Licensing:</strong> Still required, but keep it simple (one-line per clip if needed)</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="3">
+                    <h4>Immediate Handoff</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Post in Discord as soon as ready (don't wait for quality check if truly urgent)</li>
+                        <li>ClickUp: Status → "Review", add comment with Drive link and "URGENT - basic asset pack, may need refresh later"</li>
+                        <li>If editor finds issues, fix immediately (treat as active work-in-progress even after handoff)</li>
+                    </ol>
+                </div>
+
+                <div class="callout callout-warning">
+                    <div class="callout-title">⚠️ Fast-Track Risks</div>
+                    <p>Fast-tracked assets may need a "refresh" sourcing pass later. Always flag this in the handoff message: "Note: Fast-tracked pack, may want to source additional clips for P2 if this product passes P1."</p>
+                </div>
+            </div>
+
+            <!-- Workflow 3 -->
+            <div class="card">
+                <h3>Workflow 3: P2 Refresh Assets (Post-P1 Pass)</h3>
+                
+                <p><strong>Trigger:</strong> Product passes P1, Creative Director requests P2 variant assets</p>
+
+                <div class="workflow-step" data-step="1">
+                    <h4>Review P1 Performance Data</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Ask Creative Director or check Notion Product OS: Which P1 creatives performed best?</li>
+                        <li>Note winning hooks and angles (e.g., "morning routine hook had highest CTR")</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="2">
+                    <h4>Source Variant-Specific Assets</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li><strong>Focus on winners:</strong> If "morning routine" hook won, source 5-10 more morning-themed B-roll clips</li>
+                        <li><strong>New angles:</strong> If brief asks for new angle (e.g., "travel" instead of "home use"), source travel-specific clips</li>
+                        <li><strong>Avoid redundancy:</strong> Don't re-source the same clips as P1 pack; only new material</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="3">
+                    <h4>Organize P2 Assets Separately</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>In existing product folder, create: <code>02_Raw_Footage_and_UGC/P2_Variants/</code></li>
+                        <li>Name files: <code>PRD-YYYYMMDD-XXX_P2_Variant_Broll_01.mp4</code></li>
+                        <li>Update licensing notes file with new clips</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="4">
+                    <h4>Handoff</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Post in Discord #p2-assets: "📦 P2 Refresh Assets Ready: PRD-X | [Drive link] | Focus: [winning angle] variants"</li>
+                        <li>ClickUp: Create new task or update existing with "P2 Assets Added" comment</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Workflow 4 -->
+            <div class="card">
+                <h3>Workflow 4: Asset Revision (Editor Feedback Loop)</h3>
+                
+                <p><strong>Trigger:</strong> Editor posts in Discord or ClickUp: "PRD-X assets need revisions: [specific issue]"</p>
+
+                <div class="workflow-step" data-step="1">
+                    <h4>Understand Issue</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Read feedback carefully: Is it a sourcing issue (wrong clips) or organization issue (bad file names)?</li>
+                        <li>If unclear: Ask follow-up questions in Discord or task comments</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="2">
+                    <h4>Prioritize Fix</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>If editor is blocked (can't edit without fix): Treat as urgent, fix within 1-2 hours</li>
+                        <li>If editor can work around it (nice-to-have additional clips): Fix within 1 day</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="3">
+                    <h4>Execute Fix</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li><strong>Sourcing fix:</strong> Find the missing/better clips, add to Drive folder</li>
+                        <li><strong>Organization fix:</strong> Rename files, reorganize folders, update licensing notes</li>
+                        <li><strong>Verify:</strong> Spot-check that issue is resolved</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="4">
+                    <h4>Notify Editor</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Reply in same Discord thread or ClickUp comment: "Fixed. [Brief description of what changed]. Ready to continue."</li>
+                        <li>If fix required significant re-sourcing, update ClickUp time tracking</li>
+                    </ol>
+                </div>
+
+                <div class="callout callout-info">
+                    <div class="callout-title">💡 Revision Minimization</div>
+                    <p>Most revisions come from: (1) unclear briefs, (2) wrong understanding of hooks/angles, (3) file organization mess. To minimize:</p>
+                    <ul>
+                        <li>Always read briefs carefully and ask questions upfront</li>
+                        <li>Use consistent file naming every time</li>
+                        <li>Include licensing notes from the start</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Workflow 5 -->
+            <div class="card">
+                <h3>Workflow 5: Weekly Asset Library Maintenance</h3>
+                
+                <p><strong>Trigger:</strong> End of week (Friday afternoon or Monday morning)</p>
+
+                <div class="workflow-step" data-step="1">
+                    <h4>Review Week's Asset Packs</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Open ClickUp: Filter tasks by "Status = Done" and "Assignee = Me" for the past week</li>
+                        <li>Count delivered asset packs: Should be 10-20 per week</li>
+                        <li>If significantly lower or higher: Note in your weekly summary for PM/Creative Director</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="2">
+                    <h4>Identify Reusable Assets</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Look for B-roll clips that are generic and high-quality (e.g., "morning coffee", "packing suitcase")</li>
+                        <li>Copy these to: <code>/03_P2_Creative/Global_Assets/Reusable_Broll/</code></li>
+                        <li>Organize by category: <code>Lifestyle_Home/</code>, <code>Lifestyle_Travel/</code>, <code>Emotions/</code>, etc.</li>
+                        <li>Update Notion "Asset Library Index" page (if one exists) with new additions</li>
+                    </ol>
+                    <p><strong>Why this matters:</strong> Reusable assets speed up future sourcing. If you already have a "morning routine" library, next time that angle appears, you can pull from library first.</p>
+                </div>
+
+                <div class="workflow-step" data-step="3">
+                    <h4>Archive Old Products</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Check with PM or Creative Director: Which products are definitively killed (P1_FAIL, no P2)?</li>
+                        <li>Move killed product folders to: <code>/03_P2_Creative/Products/_ARCHIVE_[YYYY]/</code></li>
+                        <li>This keeps Drive clean and speeds up navigation</li>
+                    </ol>
+                </div>
+
+                <div class="workflow-step" data-step="4">
+                    <h4>Update Weekly Summary</h4>
+                    <p><strong>Actions:</strong></p>
+                    <ol>
+                        <li>Post in Discord #p2-assets (or wherever weekly summaries go):
+                            <pre><code>📊 **Asset Sourcing – Week of [Date]**
+Delivered: [X] asset packs
+Products supported: [List of PRD IDs]
+Avg clips per pack: [Y]
+Revisions: [Z] (reasons: ...)
+Reusable library additions: [N] clips
+Blockers: [None / describe if any]
+Next week plan: [X] products in queue</code></pre>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Handoff & Interface Specs -->
+        <section id="handoffs">
+            <h2>Handoff & Interface Specs</h2>
+            
+            <div class="card">
+                <h3>Primary Handoff: Asset Packs → Editors</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>What</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ClickUp Status Transition</strong></td>
+                            <td>Your task: "Active" → "Review"<br>
+                            Editor's edit task: "Backlog" → "Active" (they do this, not you)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Notion DB Changes</strong></td>
+                            <td>Product OS: Update "Creative_Assets_Status" property to "Sourced" (if this field exists)<br>
+                            Creative Brief: Add link to Drive asset pack in comments or "Asset Pack URL" field</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Drive File Updates</strong></td>
+                            <td>Ensure Drive folder permissions: Editors have "Edit" access<br>
+                            Link in ClickUp task and Discord handoff message</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Discord Notification</strong></td>
+                            <td>Channel: #p2-assets<br>
+                            Format: See "Discord Message Template" below</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Discord Message Template (Standard Handoff)</h4>
+                <pre><code>📦 **Asset Pack Ready**
+
+Product: PRD-YYYYMMDD-XXX | [Product Name]
+Brief: [Notion link]
+
+**Asset Summary:**
+- Product footage: [X] clips
+- B-roll / lifestyle: [Y] clips
+- Hooks/intros: [Z] clips (if any)
+- Total: [X+Y+Z] clips
+
+**Drive:** [Link to asset pack folder]
+
+**Assigned:** @[HeroEditor] @[VolumeEditor]
+
+**Notes:**
+- Licensing documented in _LICENSING_NOTES.txt
+- Organized by: Product_Footage / Lifestyle_Broll / Hooks_and_Intros
+- See brief for hook/angle guidance
+
+**Special Instructions (if any):** [e.g., "Focus on morning routine angle for P1 hero edit"]</code></pre>
+
+                <h4>Minimum Quality Bar for Handoff Acceptance</h4>
+                <ul>
+                    <li><strong>Completeness:</strong> At least 10 total clips (product + B-roll combined)</li>
+                    <li><strong>Resolution:</strong> All clips 1080p minimum</li>
+                    <li><strong>Organization:</strong> Files in correct Drive subfolders, named per convention</li>
+                    <li><strong>Licensing:</strong> <code>_LICENSING_NOTES.txt</code> present and complete</li>
+                    <li><strong>Relevance:</strong> Clips match creative brief hooks and angles</li>
+                </ul>
+
+                <p>If editors reject handoff (e.g., "These clips don't match the brief"), treat as a revision request (see Workflow 4).</p>
+            </div>
+
+            <div class="card">
+                <h3>Secondary Handoff: Feedback Loop with Creative Director</h3>
+                
+                <p><strong>When:</strong> When asset pack is unusual, experimental, or you're unsure if it meets quality bar</p>
+
+                <h4>ClickUp</h4>
+                <ol>
+                    <li>Set task status to "Review"</li>
+                    <li>Assign task to Creative Director (or tag them in comments)</li>
+                    <li>Add comment: "Asset pack complete, but [specific concern/question]. Please review before I hand off to editors."</li>
+                </ol>
+
+                <h4>Discord</h4>
+                <ol>
+                    <li>Post in #p2-briefs (not #p2-assets, since this is pre-handoff)</li>
+                    <li>Format: "@CreativeDirector – PRD-X asset pack needs your eyes before editor handoff. [Link]. Concern: [describe]."</li>
+                </ol>
+
+                <h4>Expected Response Time</h4>
+                <ul>
+                    <li><strong>Standard:</strong> Within 4-8 hours (same day)</li>
+                    <li><strong>Urgent:</strong> Within 1-2 hours (if product launch is imminent)</li>
+                </ul>
+
+                <p>If Creative Director approves, proceed to standard editor handoff. If they request changes, treat as a revision.</p>
+            </div>
+        </section>
+
+        <!-- KPIs & Quality Bar -->
+        <section id="kpis">
+            <h2>KPIs & Quality Bar</h2>
+            
+            <div class="card">
+                <h3>Quantitative KPIs (from L2-07)</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>KPI</th>
+                            <th>Target</th>
+                            <th>How Measured</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Weekly Throughput</strong></td>
+                            <td>10-20 asset packs/week</td>
+                            <td>Count of ClickUp tasks with Status = "Done" and Type = "Asset Pack" per week</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WIP Compliance</strong></td>
+                            <td>≤ 10 products in "Active" status</td>
+                            <td>ClickUp filter: "Assignee = You" AND "Status = Active" (count should be ≤ 10)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Revision Rate</strong></td>
+                            <td>< 20% of asset packs require revisions</td>
+                            <td>Count tasks where editors requested revisions / total delivered packs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Licensing Compliance</strong></td>
+                            <td>100% of asset packs have licensing notes</td>
+                            <td>Spot-check random sample (PM or Creative Director audits 5-10 packs/month)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Handoff Timeliness</strong></td>
+                            <td>95% of packs delivered by promised date</td>
+                            <td>ClickUp due dates vs actual completion dates</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card">
+                <h3>Qualitative Standards</h3>
+                
+                <h4>Good Asset Pack Example</h4>
+                <div class="callout callout-success">
+                    <ul>
+                        <li><strong>Variety:</strong> 10-15 product clips showing different angles, uses, contexts</li>
+                        <li><strong>Hook Alignment:</strong> B-roll clips directly support each hook in the brief (e.g., "morning routine" hook → 5+ morning-themed clips)</li>
+                        <li><strong>Quality:</strong> All clips 1080p+, clean framing, no watermarks (except licensed stock watermarks that editors can crop)</li>
+                        <li><strong>Organization:</strong> Subfolders make sense (Product_Footage / Lifestyle_Broll), file names are clear</li>
+                        <li><strong>Licensing:</strong> Every clip documented, sources noted, no red flags</li>
+                        <li><strong>Editor Feedback:</strong> Editor says "Great pack, easy to work with" or no revision requests</li>
+                    </ul>
+                </div>
+
+                <h4>Poor Asset Pack Example</h4>
+                <div class="callout callout-warning">
+                    <ul>
+                        <li><strong>Too Few Clips:</strong> Only 5-6 total clips (not enough variety for editors)</li>
+                        <li><strong>Off-Brief:</strong> Clips don't match hooks (e.g., brief says "home use", all clips are outdoor/travel)</li>
+                        <li><strong>Low Quality:</strong> 720p or blurry clips, heavy watermarks, bad framing</li>
+                        <li><strong>Messy Organization:</strong> All files dumped in one folder with cryptic names like "video1.mp4", "clip.mp4"</li>
+                        <li><strong>No Licensing:</strong> No <code>_LICENSING_NOTES.txt</code> file, editors don't know if clips are safe to use</li>
+                        <li><strong>Editor Feedback:</strong> "Can't use most of these, need to re-source" (revision required)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>How KPIs Are Measured & Reported</h3>
+                
+                <h4>Weekly Self-Tracking</h4>
+                <p>You maintain a simple spreadsheet or Notion page:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Week</th>
+                            <th>Packs Delivered</th>
+                            <th>Revisions</th>
+                            <th>WIP (end of week)</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Dec 1-7</td>
+                            <td>12</td>
+                            <td>2 (16%)</td>
+                            <td>8</td>
+                            <td>On track</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 8-14</td>
+                            <td>15</td>
+                            <td>1 (6%)</td>
+                            <td>9</td>
+                            <td>High week, simpler products</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>Monthly PM Review</h4>
+                <p>PM or Creative Director reviews:</p>
+                <ul>
+                    <li>ClickUp data (throughput, WIP trends)</li>
+                    <li>Editor satisfaction (informal feedback or survey)</li>
+                    <li>Licensing compliance (spot-check audit)</li>
+                </ul>
+                <p>If KPIs are consistently below target: 1:1 meeting to identify blockers or training needs.</p>
+            </div>
+        </section>
+
+        <!-- AI Usage -->
+        <section id="ai-usage">
+            <h2>AI Usage & Prompt Patterns</h2>
+            
+            <div class="card">
+                <h3>Where This Role Uses AI</h3>
+                
+                <h4>1. Search Query Generation (for stock platforms)</h4>
+                <p><strong>Use Case:</strong> You have a creative brief with abstract hooks like "Feel confident anywhere" and need to translate this into search terms for Pexels/Pixabay.</p>
+                
+                <p><strong>Prompt Pattern:</strong></p>
+                <pre><code>I'm sourcing B-roll clips for an ecommerce ad. The product is [product name/category], and the creative hook is "[hook from brief]". Generate 10 search keywords I can use on stock video platforms like Pexels and Pixabay to find relevant lifestyle and B-roll clips. Focus on emotions, settings, and actions that align with the hook.</code></pre>
+
+                <p><strong>Example Output:</strong></p>
+                <pre><code>Hook: "Perfect for busy mornings"
+Keywords: morning routine, coffee brewing, rushing to work, waking up, breakfast prep, getting ready, alarm clock, sunrise, stressed morning, organized morning</code></pre>
+
+                <p><strong>Human Checkpoint:</strong> You review the keywords and pick the 3-5 most relevant before searching. Don't blindly use all 10.</p>
+
+                <h4>2. File Organization Suggestions</h4>
+                <p><strong>Use Case:</strong> You have 25 clips for a complex product with multiple hooks and want to organize them into logical subfolders.</p>
+
+                <p><strong>Prompt Pattern:</strong></p>
+                <pre><code>I have 25 video clips for a product. The creative brief has these hooks: [Hook 1], [Hook 2], [Hook 3]. I want to organize the clips into subfolders. Suggest a folder structure that makes it easy for video editors to find clips for each hook.</code></pre>
+
+                <p><strong>Example Output:</strong></p>
+                <pre><code>Suggested structure:
+- Product_Footage/ (all product demos)
+- Lifestyle_Broll/
+  - Hook_1_Morning_Routine/
+  - Hook_2_Travel/
+  - Hook_3_Home_Organization/
+- Generic_Broll/ (clips that work for multiple hooks)</code></pre>
+
+                <p><strong>Human Checkpoint:</strong> You adapt the structure to fit your actual clips. If a hook has only 2-3 clips, you may not need a separate subfolder.</p>
+
+                <h4>3. Licensing Quick-Check (with caution)</h4>
+                <p><strong>Use Case:</strong> You found a clip on a platform you're less familiar with (e.g., Envato) and want to understand the license terms quickly.</p>
+
+                <p><strong>Prompt Pattern:</strong></p>
+                <pre><code>I'm sourcing clips for an ecommerce ad that will run on Facebook/TikTok. I found a clip on [platform] with this license: "[paste license text]". Can I use this for paid ads? What are the key restrictions?</code></pre>
+
+                <p><strong>Human Checkpoint:</strong> ALWAYS verify AI's answer against the platform's actual license page. Do not rely solely on AI for licensing decisions. If unsure, escalate to Creative Director or PM.</p>
+
+                <h4>4. Batch File Renaming Scripts (Advanced)</h4>
+                <p><strong>Use Case:</strong> You have 30 clips with default names like "pexels-12345.mp4" and want to rename them to match DriveOn conventions.</p>
+
+                <p><strong>Prompt Pattern:</strong></p>
+                <pre><code>Write a bash script that renames all .mp4 files in a folder to the format: PRD-YYYYMMDD-XXX_[Type]_[Number].mp4. The script should:
+1. Ask me for the Product ID (e.g., PRD-20251208-042)
+2. Ask me for the Type (e.g., "Product" or "Broll")
+3. Rename files sequentially (01, 02, 03, etc.)</code></pre>
+
+                <p><strong>Human Checkpoint:</strong> Test the script on a copy of the files first, not the originals. Only use if you're comfortable with command-line tools.</p>
+            </div>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">🤖 AI Limitations & Risks</div>
+                <ul>
+                    <li><strong>AI cannot verify licenses:</strong> It may misinterpret terms. Always check platform docs yourself.</li>
+                    <li><strong>AI search suggestions may be generic:</strong> Use them as a starting point, refine based on actual brief.</li>
+                    <li><strong>AI cannot assess creative fit:</strong> Only you (and editors) can judge if a clip matches the hook/angle.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Tools & Systems Reference -->
+        <section id="tools">
+            <h2>Tools & Systems Reference</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Views / Lists / DBs</th>
+                        <th>Access Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task tracking, WIP management, time tracking</td>
+                        <td>Space: "P2 – Creative"<br>
+                        Lists: "Briefs", "Hero Edits", "Volume Edits"<br>
+                        Views: "My Active Tasks", "By Product", "By Gate"</td>
+                        <td>Editor (can create, edit, comment on tasks)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Product OS, creative briefs, asset library index</td>
+                        <td>DBs: "Product OS", "Creative Briefs"<br>
+                        Pages: "Asset Library Index" (if exists), "Canon Registry"</td>
+                        <td>Editor (can read, comment, edit non-canon pages)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>File storage, asset pack delivery</td>
+                        <td>Path: <code>/03_P2_Creative/Products/</code><br>
+                        <code>/03_P2_Creative/Global_Assets/</code></td>
+                        <td>Editor (can create folders, upload/download files)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Handoffs, quick questions, blockers</td>
+                        <td>Channels: #p2-assets, #p2-briefs, #p2-blockers</td>
+                        <td>P2_CORE role (can post, read, react)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pexels</strong></td>
+                        <td>Free stock video sourcing</td>
+                        <td>Web search, download clips</td>
+                        <td>No account required (use anonymously or team account if available)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pixabay</strong></td>
+                        <td>Free stock video sourcing</td>
+                        <td>Web search, download clips</td>
+                        <td>No account required (or team account)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Envato</strong></td>
+                        <td>Premium stock video (if team has subscription)</td>
+                        <td>Elements or Market (check with Creative Director)</td>
+                        <td>Shared team account (if available)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>AI (ChatGPT / Claude)</strong></td>
+                        <td>Search query generation, file organization suggestions</td>
+                        <td>N/A (use as needed, see AI Usage section)</td>
+                        <td>Personal use (follow AI usage guidelines in canon)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tool-Specific SOPs (if they exist)</h3>
+            <ul>
+                <li><strong>ClickUp SOP:</strong> L3-02 – ClickUp_Infra_Blueprint_v1 (for detailed workspace structure)</li>
+                <li><strong>Notion SOP:</strong> L3-03 – Notion_Infra_Blueprint_v1 (for DB schemas and templates)</li>
+                <li><strong>Google Drive SOP:</strong> L3-04 – Google_Drive_Infra_Blueprint_v1 (for folder structure and naming)</li>
+                <li><strong>Discord SOP:</strong> L3-01 – Discord_Infra_Blueprint_v1 (for channel usage and message templates)</li>
+            </ul>
+        </section>
+
+        <!-- Escalation & Decision Rights -->
+        <section id="escalation">
+            <h2>Escalation & Decision Rights</h2>
+            
+            <div class="card">
+                <h3>Decisions You Can Make Alone</h3>
+                <ul>
+                    <li><strong>Which clips to download:</strong> As long as they're on-brief and properly licensed</li>
+                    <li><strong>File organization:</strong> Subfolder structure within your asset packs (as long as you follow DriveOn conventions)</li>
+                    <li><strong>Search keywords:</strong> Which terms to use on stock platforms</li>
+                    <li><strong>Minor revisions:</strong> If editor asks for "2-3 more B-roll clips of X", just source and deliver</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Decisions Requiring Creative Director or PM</h3>
+                <ul>
+                    <li><strong>Priority conflicts:</strong> If you're at WIP cap and two urgent requests arrive simultaneously</li>
+                    <li><strong>Budget for paid assets:</strong> If free stock isn't cutting it and you want to buy premium clips (Creative Director decides if budget allows)</li>
+                    <li><strong>Major revisions:</strong> If editor says "This whole pack is off-brief, need to start over" (Creative Director reviews brief and decides next steps)</li>
+                    <li><strong>New sourcing strategies:</strong> If you want to try a new platform or approach (PM/Creative Director approves before implementing)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>When to Escalate to Founder / Canon Owner</h3>
+                <ul>
+                    <li><strong>Chronic WIP overload:</strong> If you're consistently at 10+ products for 2+ weeks and new requests keep piling up (signals need for hiring or process change)</li>
+                    <li><strong>Canon conflicts:</strong> If you encounter a situation where canon rules (WIP caps, throughput targets) are impossible to meet due to external factors (escalate via PM → Founder)</li>
+                    <li><strong>Major licensing risks:</strong> If you discover DriveOn has been using clips with unclear/violated licensing (escalate to Creative Director → PM → Founder)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Expected Response Times</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Escalation Type</th>
+                            <th>To Whom</th>
+                            <th>Expected Response</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Brief clarification question</td>
+                            <td>Creative Director</td>
+                            <td>Within 2-4 hours (same day)</td>
+                        </tr>
+                        <tr>
+                            <td>Urgent priority conflict</td>
+                            <td>PM or Creative Director</td>
+                            <td>Within 1 hour</td>
+                        </tr>
+                        <tr>
+                            <td>WIP overload blocker</td>
+                            <td>PM</td>
+                            <td>Within 4 hours (same day)</td>
+                        </tr>
+                        <tr>
+                            <td>Licensing concern</td>
+                            <td>Creative Director or PM</td>
+                            <td>Within 24 hours</td>
+                        </tr>
+                        <tr>
+                            <td>Canon change request</td>
+                            <td>PM → Founder</td>
+                            <td>Within 1 week (scheduled review)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Escalation Message Template (Discord)</h3>
+            <pre><code>🚨 **Escalation: [Brief Title]**
+
+**Issue:** [Describe problem in 1-2 sentences]
+
+**Context:**
+- Product: PRD-YYYYMMDD-XXX
+- Current Status: [e.g., "At WIP cap", "Brief unclear", "Licensing concern"]
+- Impact: [e.g., "Blocking P1 test launch tomorrow", "May cause revision loop"]
+
+**What I Need:**
+[Specific ask: "Clarify hook requirements", "Prioritize between PRD-X and PRD-Y", "Approve budget for premium clips"]
+
+**Urgency:** [Low / Medium / High / Blocking]
+
+@[Relevant Person/Role]</code></pre>
+        </section>
+
+        <!-- Onboarding Checklist -->
+        <section id="onboarding">
+            <h2>Onboarding Checklist</h2>
+            
+            <div class="card">
+                <h3>Access Setup (Day 1)</h3>
+                <ul class="checklist">
+                    <li>ClickUp account created, added to "P2 – Creative" space</li>
+                    <li>Notion account, added to "Product OS" and "Creative Briefs" DBs (Editor permissions)</li>
+                    <li>Google Drive access to <code>/03_P2_Creative/</code> folder tree (Editor permissions)</li>
+                    <li>Discord account, assigned "P2_CORE" role, access to #p2-assets, #p2-briefs, #p2-blockers</li>
+                    <li>Pexels / Pixabay accounts (or confirm anonymous use is OK)</li>
+                    <li>Envato account (if team subscription exists) or note "not available"</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Required Canon Docs to Read (Day 1-2)</h3>
+                <ul class="checklist">
+                    <li><strong>L1-01:</strong> CaniCol_Model_v4.0 (understand testing economics, 4-6 creatives/product target)</li>
+                    <li><strong>L2-02:</strong> Pod_Overview_P1_P2_P3_P4_v1 (understand P2 Creative Factory mission and flow)</li>
+                    <li><strong>L2-03:</strong> Role_Registry_and_WIP_Limits_v1 (your WIP caps, throughput targets)</li>
+                    <li><strong>L2-07:</strong> Pod_KPIs_and_TestBank_v4.0 (pod-level KPIs, how your work fits in)</li>
+                    <li><strong>L3-02:</strong> ClickUp_Infra_Blueprint_v1 (ClickUp structure, statuses, custom fields)</li>
+                    <li><strong>L3-04:</strong> Google_Drive_Infra_Blueprint_v1 (Drive folder structure, file naming)</li>
+                    <li><strong>This SOP:</strong> P2-CR-ASSET-XX SOP (full read-through)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Shadowing Milestones (Day 3-5)</h3>
+                <ul class="checklist">
+                    <li><strong>Day 3:</strong> Shadow existing Asset Sourcer or Creative Director on 1-2 asset packs (observe workflow)</li>
+                    <li><strong>Day 4:</strong> Review 3-5 past asset packs in Drive (see what "good" looks like)</li>
+                    <li><strong>Day 5:</strong> Join Creative Director for brief review session (understand how briefs are written and what sourcing requirements mean)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>First Supervised Deliverables (Week 2)</h3>
+                <ul class="checklist">
+                    <li><strong>Task 1:</strong> Source assets for 1 simple product (e.g., single-hook, straightforward category like "kitchen gadget")</li>
+                    <li><strong>Review:</strong> Creative Director or senior team member reviews your asset pack before handoff to editor</li>
+                    <li><strong>Feedback:</strong> Incorporate feedback, make revisions</li>
+                    <li><strong>Task 2:</strong> Source assets for 1 moderate-complexity product (e.g., 2-3 hooks, multiple angles)</li>
+                    <li><strong>Review:</strong> Same review process, less hand-holding</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>First Independent Deliverables (Week 3)</h3>
+                <ul class="checklist">
+                    <li><strong>Task 3-5:</strong> Source assets for 3 products independently (no pre-handoff review, but Creative Director available for questions)</li>
+                    <li><strong>Handoff:</strong> Deliver directly to editors via standard workflow</li>
+                    <li><strong>Monitor:</strong> Track editor feedback and revision requests</li>
+                    <li><strong>Target:</strong> ≤ 1 revision per 3 packs (33% or lower revision rate)</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>30-Day Review Criteria</h3>
+                <p><strong>Meeting at end of Week 4 with Creative Director and PM:</strong></p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criterion</th>
+                            <th>Pass Bar</th>
+                            <th>Your Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Throughput</td>
+                            <td>≥ 8 asset packs delivered (in final 2 weeks)</td>
+                            <td>[To be filled]</td>
+                        </tr>
+                        <tr>
+                            <td>WIP Management</td>
+                            <td>Never exceeded WIP cap of 10 without escalation</td>
+                            <td>[To be filled]</td>
+                        </tr>
+                        <tr>
+                            <td>Quality / Revisions</td>
+                            <td>≤ 30% revision rate</td>
+                            <td>[To be filled]</td>
+                        </tr>
+                        <tr>
+                            <td>Licensing Compliance</td>
+                            <td>100% of packs have licensing notes</td>
+                            <td>[To be filled]</td>
+                        </tr>
+                        <tr>
+                            <td>Editor Satisfaction</td>
+                            <td>No major complaints, editors say "easy to work with"</td>
+                            <td>[To be filled]</td>
+                        </tr>
+                        <tr>
+                            <td>Canon Knowledge</td>
+                            <td>Can explain CaniCol model, WIP caps, and handoff workflow without referencing SOP</td>
+                            <td>[To be filled]</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p><strong>Outcome:</strong></p>
+                <ul>
+                    <li><strong>Pass:</strong> Move to full independent work, remove supervisor review requirement</li>
+                    <li><strong>Conditional Pass:</strong> Extend onboarding 1-2 weeks, focus on specific weak area (e.g., licensing compliance)</li>
+                    <li><strong>Not Ready:</strong> Discuss alternative role or additional training</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Change Log -->
+        <section id="changelog">
+            <h2>Change Log</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Change Summary</th>
+                        <th>Linked Canon Updates</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.0</td>
+                        <td>2025-12-08</td>
+                        <td>DriveOn SOP Factory (Claude)</td>
+                        <td>Initial SOP creation for P2-CR-ASSET-XX role. Built from v4.0 canon: L1-01, L2-02, L2-03, L2-07, L3-01, L3-02, L3-04. Integrated 2025 dropshipping asset sourcing best practices for execution workflows.</td>
+                        <td>CaniCol v4.0, Role Registry v1, Pod Overview v1, ClickUp Blueprint v1, Drive Blueprint v1</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="callout callout-info">
+                <div class="callout-title">📝 How to Propose Changes</div>
+                <p>If you discover a gap, conflict, or improvement opportunity in this SOP:</p>
+                <ol>
+                    <li>Post in Discord #p2-briefs or #sys-canon-updates with tag "@PM"</li>
+                    <li>Include: Section of SOP, current text, proposed change, rationale</li>
+                    <li>PM reviews and either: (a) updates SOP directly (minor fixes), or (b) escalates to Creative Director / Founder for canon change if it impacts L0-L3 rules</li>
+                </ol>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Simple active nav link tracking
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-links a');
+        
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+    </script>
+</body>
+</html>

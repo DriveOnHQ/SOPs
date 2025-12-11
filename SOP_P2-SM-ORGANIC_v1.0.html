@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P2-SM-ORGANIC-01 | Social Media & Organic Specialist SOP v1.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface-white: #FFFFFF;
+            --surface-light: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --warning-red: #E74C3C;
+            --success-green: #27AE60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background-color: var(--surface-light);
+        }
+        
+        /* Header */
+        header {
+            background: var(--surface-white);
+            border-bottom: 3px solid var(--drive-cyan);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .role-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .role-id {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+            font-family: 'Space Grotesk', monospace;
+        }
+        
+        .status-chip {
+            background: var(--drive-cyan);
+            color: white;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .nav-toggle {
+            display: none;
+            background: var(--drive-cyan);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            left: 0;
+            top: 100px;
+            width: 280px;
+            height: calc(100vh - 100px);
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-gray);
+            overflow-y: auto;
+            padding: 1.5rem 0;
+            z-index: 50;
+            transition: transform 0.3s ease;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        
+        nav a:hover {
+            background: var(--surface-light);
+            color: var(--carbon-black);
+            border-left-color: var(--drive-cyan);
+        }
+        
+        /* Main Content */
+        main {
+            margin-left: 280px;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+        
+        /* Hero Summary */
+        .hero-summary {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A8A8 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 16px rgba(0, 200, 200, 0.2);
+        }
+        
+        .hero-summary h1 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hero-summary .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+        }
+        
+        .key-outcomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .outcome-chip {
+            background: rgba(255,255,255,0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+            font-weight: 500;
+        }
+        
+        /* Cards */
+        .section-card {
+            background: var(--surface-white);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-gray);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--surface-light);
+        }
+        
+        .section-icon {
+            font-size: 1.75rem;
+        }
+        
+        .section-intro {
+            background: var(--surface-light);
+            padding: 1rem 1.25rem;
+            border-left: 4px solid var(--drive-cyan);
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        /* Collapsible Sections */
+        details {
+            margin-bottom: 1rem;
+        }
+        
+        summary {
+            cursor: pointer;
+            padding: 1rem;
+            background: var(--surface-light);
+            border-radius: 6px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s;
+        }
+        
+        summary:hover {
+            background: var(--champagne);
+        }
+        
+        summary::after {
+            content: '▼';
+            font-size: 0.8rem;
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+        
+        details .content {
+            padding: 1.5rem 1rem 0.5rem;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin: 0.5rem 0;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        th {
+            background: var(--surface-light);
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+        
+        tr:hover {
+            background: var(--surface-light);
+        }
+        
+        /* Callouts */
+        .callout {
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        
+        .callout-canon {
+            background: #FFF9E6;
+            border-color: var(--drive-cyan);
+        }
+        
+        .callout-warning {
+            background: #FFF5F5;
+            border-color: var(--warning-red);
+        }
+        
+        .callout-tip {
+            background: #F0FFF4;
+            border-color: var(--success-green);
+        }
+        
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Code Blocks */
+        pre, code {
+            font-family: 'Courier New', monospace;
+            background: var(--surface-light);
+            border-radius: 4px;
+        }
+        
+        code {
+            padding: 0.2rem 0.4rem;
+            font-size: 0.9rem;
+        }
+        
+        pre {
+            padding: 1rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--border-gray);
+        }
+        
+        /* Checklists */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+            position: relative;
+            background: var(--surface-light);
+            margin: 0.5rem 0;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+        
+        .checklist li:hover {
+            background: var(--champagne);
+        }
+        
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 0.75rem;
+            font-size: 1.25rem;
+            color: var(--drive-cyan);
+        }
+        
+        /* Handoff Cards */
+        .handoff-card {
+            background: var(--surface-light);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+        
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 1.5rem;
+        }
+        
+        /* Timeline */
+        .timeline {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+        
+        .timeline-block {
+            flex: 1;
+            min-width: 150px;
+            background: var(--surface-light);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .timeline-label {
+            font-weight: 700;
+            color: var(--drive-cyan);
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-content {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        /* KPI Strip */
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .kpi-box {
+            background: var(--surface-white);
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        
+        .kpi-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+        }
+        
+        /* Mermaid Diagrams */
+        .mermaid {
+            background: var(--surface-white);
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                transform: translateX(-100%);
+            }
+            
+            nav.active {
+                transform: translateX(0);
+            }
+            
+            main {
+                margin-left: 0;
+            }
+            
+            .nav-toggle {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+            
+            .hero-summary {
+                padding: 1.5rem;
+            }
+            
+            .hero-summary h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section-card {
+                padding: 1.5rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+            
+            .key-outcomes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="role-badge">
+                <div class="role-id">P2-SM-ORGANIC-01</div>
+                <span class="status-chip">ACTIVE v1.0</span>
+            </div>
+            <button class="nav-toggle" onclick="document.querySelector('nav').classList.toggle('active')">
+                ☰ Contents
+            </button>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#hero">Role Overview</a></li>
+            <li><a href="#meta">Meta & Role Snapshot</a></li>
+            <li><a href="#purpose">Role Purpose & Context</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day-in-life">Day-in-the-Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">KPIs & Quality Bar</a></li>
+            <li><a href="#ai-usage">AI Usage & Prompts</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation & Decisions</a></li>
+            <li><a href="#onboarding">Onboarding Checklist</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero Summary -->
+        <div class="hero-summary" id="hero">
+            <h1>Social Media & Organic Specialist</h1>
+            <div class="subtitle">Pod 2 · Creative Factory · Organic Growth Engine</div>
+            <p style="margin: 1rem 0;">Build organic brand presence for P2+ winners through consistent, on-brand content across Instagram, TikTok, and YouTube Shorts. Transform winning paid ads into authentic organic content that drives engagement, trust, and compounding reach.</p>
+            
+            <div class="key-outcomes">
+                <div class="outcome-chip">🎯 3–5 Active Brands</div>
+                <div class="outcome-chip">📅 3–7 Posts/Week/Channel</div>
+                <div class="outcome-chip">📈 Organic Reach Growth</div>
+                <div class="outcome-chip">💬 Community Engagement</div>
+                <div class="outcome-chip">🔄 Content Repurposing</div>
+            </div>
+        </div>
+
+        <!-- Meta Block -->
+        <section class="section-card" id="meta">
+            <h2 class="section-title">
+                <span class="section-icon">📋</span>
+                Meta & Role Snapshot
+            </h2>
+            
+            <table>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><strong>Role ID</strong></td>
+                    <td><code>P2-SM-ORGANIC-01</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Role Type</strong></td>
+                    <td>SOCIAL_ORGANIC_SPECIALIST</td>
+                </tr>
+                <tr>
+                    <td><strong>Pod</strong></td>
+                    <td>Pod 2 – Creative Factory</td>
+                </tr>
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td>CORE (once there are winners)</td>
+                </tr>
+                <tr>
+                    <td><strong>Cross-Pod</strong></td>
+                    <td>Yes – interfaces with P1 (intel), P2 (creative), P3 (media/stores)</td>
+                </tr>
+                <tr>
+                    <td><strong>Default FTE</strong></td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td><strong>Owned Gates</strong></td>
+                    <td>Organic channels for P2+ winners</td>
+                </tr>
+                <tr>
+                    <td><strong>Pipeline Stages</strong></td>
+                    <td>P2_PASS → P3 winners (ongoing organic nurture)</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top: 2rem;">WIP Limits (1.0 FTE)</h3>
+            <div class="kpi-strip">
+                <div class="kpi-box">
+                    <div class="kpi-label">Active Brands</div>
+                    <div class="kpi-value">3–5</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Content Calendars</div>
+                    <div class="kpi-value">3–4</div>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Posts/Week/Channel</div>
+                    <div class="kpi-value">3–7</div>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Key Interfaces</h3>
+            <ul>
+                <li><strong>Upstream:</strong> P1 Product Intelligence (brand positioning), P2 Creative Director (winning ad assets), P2 Static Designers (graphics)</li>
+                <li><strong>Downstream:</strong> Brand social channels, community audiences, P3 Media Buyers (performance insights)</li>
+                <li><strong>Lateral:</strong> P3 Store Builders (brand consistency), P4 PM (scheduling and reporting)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Primary Tools & Workspaces</h3>
+            <table style="margin-top: 1rem;">
+                <tr>
+                    <th>Tool</th>
+                    <th>Primary Use</th>
+                </tr>
+                <tr>
+                    <td><strong>Instagram Business</strong></td>
+                    <td>Content posting, Stories, Reels, engagement</td>
+                </tr>
+                <tr>
+                    <td><strong>TikTok Creator</strong></td>
+                    <td>Short-form video publishing, trends</td>
+                </tr>
+                <tr>
+                    <td><strong>YouTube Studio</strong></td>
+                    <td>Shorts publishing, channel management</td>
+                </tr>
+                <tr>
+                    <td><strong>Canva / Figma</strong></td>
+                    <td>Quick graphics, carousel posts, templates</td>
+                </tr>
+                <tr>
+                    <td><strong>CapCut</strong></td>
+                    <td>Mobile video editing, quick remixes</td>
+                </tr>
+                <tr>
+                    <td><strong>Notion</strong></td>
+                    <td>Content calendar DB, brand guidelines, caption bank</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Drive</strong></td>
+                    <td>/03_P2_Creative/Products/[ProductID]/05_Organic_Content</td>
+                </tr>
+                <tr>
+                    <td><strong>Discord</strong></td>
+                    <td>#p2-organic-social</td>
+                </tr>
+                <tr>
+                    <td><strong>ClickUp</strong></td>
+                    <td>Space: P2 – Creative > Folder: Creative Pipeline > List: Organic Content</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Purpose -->
+        <section class="section-card" id="purpose">
+            <h2 class="section-title">
+                <span class="section-icon">🎯</span>
+                Role Purpose & Context
+            </h2>
+            
+            <div class="section-intro">
+                <strong>Why this role exists:</strong> Winning paid ads create immediate revenue, but organic social creates compounding brand equity. This role transforms validated winners into lasting organic audiences.
+            </div>
+
+            <h3>Strategic Context</h3>
+            <p>In the CaniCol v4.0 model:</p>
+            <ul>
+                <li>45–60 products enter P1/P2 testing monthly</li>
+                <li>4–6% become true winners (2–4 products/month)</li>
+                <li>Winners deserve sustained organic visibility to maximize lifetime value</li>
+                <li>Organic content de-risks paid media dependency and builds trust</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">How This Role Supports DriveOn Economics</h3>
+            <ol>
+                <li><strong>Brand Equity Compounding:</strong> Organic followers = free impressions for future winners</li>
+                <li><strong>CPA Reduction:</strong> Organic traffic supplements paid, improving blended CAC</li>
+                <li><strong>Creative Asset Efficiency:</strong> Repurpose winning ads → 3x content leverage</li>
+                <li><strong>Trust Signal:</strong> Active organic presence = credibility in paid funnel</li>
+                <li><strong>Winner Lane Support:</strong> Organic feeds brand stores (Lane C1/C2) with engaged audiences</li>
+            </ol>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 2025 Best Practice</div>
+                <p>Modern audiences demand consistent organic presence. According to 2025 data, brands with regular posting schedules see 33% higher engagement rates. This role ensures DriveOn winners don't just test well—they build audiences.</p>
+            </div>
+        </section>
+
+        <!-- Canon Constraints -->
+        <section class="section-card" id="canon">
+            <h2 class="section-title">
+                <span class="section-icon">⚖️</span>
+                Canon Constraints
+            </h2>
+            
+            <div class="section-intro">
+                These constraints are <strong>non-negotiable</strong> and derived from L0–L3 canon. All workflows must respect these boundaries.
+            </div>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Brand Platform Guardrails (L2-08)</div>
+                <ul>
+                    <li><strong>Voice:</strong> Direct, calm, competent, grounded, systems-minded</li>
+                    <li><strong>Banned language:</strong> "Guaranteed results", "effortless", "secret hack", hype/FOMO language</li>
+                    <li><strong>Claims:</strong> All health/performance claims must be adequately substantiated</li>
+                    <li><strong>Visual style:</strong> Clean, modern, high contrast, restrained palette</li>
+                    <li><strong>No fake scarcity:</strong> Countdown timers, fake stock counters, invented urgency</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-canon" style="margin-top: 1rem;">
+                <div class="callout-title">⚖️ WIP & Throughput Limits (L2-03)</div>
+                <ul>
+                    <li><strong>Active brands:</strong> 3–5 maximum per 1.0 FTE</li>
+                    <li><strong>Content calendars:</strong> 3–4 active calendars</li>
+                    <li><strong>Posting cadence:</strong> 3–7 posts/week per channel (per brand)</li>
+                    <li><strong>Quality > quantity:</strong> Consistent, on-brand content beats sporadic volume</li>
+                </ul>
+            </div>
+
+            <div class="callout callout-canon" style="margin-top: 1rem;">
+                <div class="callout-title">⚖️ Activation Trigger</div>
+                <p>This role activates <strong>only after P2_PASS winners exist</strong>. Do not build organic channels for P1-only products. Wait for validated winners with proven economics and creative angles.</p>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Content Repurposing Rules</h3>
+            <ul>
+                <li>Organic content should primarily <strong>repurpose winning paid ads</strong></li>
+                <li>Avoid creating net-new content from scratch unless strategically justified</li>
+                <li>Use proven hooks, angles, and visuals from P2/P3 creatives</li>
+                <li>Adapt format (square → 9:16, remove CTA overlays) but keep core message</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Common Failure Modes</div>
+                <ul>
+                    <li>Building organic presence for products that never pass P2</li>
+                    <li>Posting inconsistently or abandoning channels mid-growth</li>
+                    <li>Creating off-brand content that contradicts DriveOn positioning</li>
+                    <li>Ignoring engagement (posting without community management)</li>
+                    <li>Using trending audio/formats that don't align with brand voice</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Day in the Life -->
+        <section class="section-card" id="day-in-life">
+            <h2 class="section-title">
+                <span class="section-icon">⏰</span>
+                Day-in-the-Life Timeline
+            </h2>
+            
+            <div class="section-intro">
+                <strong>Standard daily flow for 1.0 FTE managing 3–5 brand channels.</strong> Adjust blocks based on posting schedule and campaign priorities.
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-block">
+                    <div class="timeline-label">Morning (9:00–10:30)</div>
+                    <div class="timeline-content">Setup & Engagement</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-label">Mid-Morning (10:30–12:30)</div>
+                    <div class="timeline-content">Content Creation</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-label">Lunch (12:30–13:00)</div>
+                    <div class="timeline-content">Break</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-label">Afternoon (13:00–15:30)</div>
+                    <div class="timeline-content">Scheduling & Planning</div>
+                </div>
+                <div class="timeline-block">
+                    <div class="timeline-label">Late Day (15:30–17:00)</div>
+                    <div class="timeline-content">Review & Handoffs</div>
+                </div>
+            </div>
+
+            <details open>
+                <summary><strong>Morning Block:</strong> Setup & Engagement (9:00–10:30)</summary>
+                <div class="content">
+                    <h4>Focus: Start the day with community touch and daily triage</h4>
+                    <ul>
+                        <li>Check all active channels (IG/TikTok/YT) for new comments, DMs, mentions</li>
+                        <li>Respond to engagement within 2 hours (authentic, brief, on-brand)</li>
+                        <li>Review overnight post performance in native analytics</li>
+                        <li>Flag any posts underperforming or overperforming for Creative Director review</li>
+                        <li>Update Notion content calendar with actuals (reach, engagement, saves)</li>
+                        <li>Check #p2-organic-social Discord for any urgent handoffs or changes</li>
+                    </ul>
+                    <p><strong>Output:</strong> Engaged community, performance snapshot logged</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Mid-Morning Block:</strong> Content Creation (10:30–12:30)</summary>
+                <div class="content">
+                    <h4>Focus: Batch-create content for upcoming calendar slots</h4>
+                    <ul>
+                        <li>Pull winning ads from Drive: <code>/03_P2_Creative/Products/[ProductID]/04_Exports/P2_Tests</code></li>
+                        <li>Repurpose ads into organic formats:
+                            <ul>
+                                <li>Remove direct CTAs, add value-driven captions</li>
+                                <li>Adapt aspect ratios (1:1, 4:5, 9:16)</li>
+                                <li>Add subtitles, hooks, or organic music if needed</li>
+                            </ul>
+                        </li>
+                        <li>Create 2–4 pieces of content per session (Stories, Reels, Carousels)</li>
+                        <li>Save to Drive: <code>/03_P2_Creative/Products/[ProductID]/05_Organic_Content</code></li>
+                        <li>Draft captions using brand voice + AI assist (see AI prompts)</li>
+                        <li>Add to Notion content calendar with target publish dates</li>
+                    </ul>
+                    <p><strong>Output:</strong> 2–4 ready-to-schedule organic posts</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Afternoon Block:</strong> Scheduling & Planning (13:00–15:30)</summary>
+                <div class="content">
+                    <h4>Focus: Schedule content, plan upcoming weeks, stay aligned with campaign calendar</h4>
+                    <ul>
+                        <li>Schedule posts in native platforms or Later/Buffer (if approved)</li>
+                        <li>Confirm posting times align with audience peak activity</li>
+                        <li>Review next week's content calendar:
+                            <ul>
+                                <li>Identify gaps (missing posts, unbalanced content mix)</li>
+                                <li>Request additional assets from Creative Director if needed</li>
+                                <li>Plan content around product launches, P3 scaling pushes, or seasonal hooks</li>
+                            </ul>
+                        </li>
+                        <li>Update ClickUp tasks: <code>P2 – Creative > Creative Pipeline > Organic Content</code></li>
+                        <li>Coordinate with P3 Store Builders for any brand store launches needing organic support</li>
+                    </ul>
+                    <p><strong>Output:</strong> 7–14 posts scheduled, next week planned</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Late Day Block:</strong> Review & Handoffs (15:30–17:00)</summary>
+                <div class="content">
+                    <h4>Focus: Quality check, reporting, and cross-pod coordination</h4>
+                    <ul>
+                        <li>Final review of scheduled posts (spelling, brand compliance, CTAs)</li>
+                        <li>Update weekly dashboard in Notion:
+                            <ul>
+                                <li>Total posts published</li>
+                                <li>Engagement trends (followers, reach, saves)</li>
+                                <li>Top-performing content (what's working)</li>
+                            </ul>
+                        </li>
+                        <li>Post daily standup in #p4-pm-daily-standup:
+                            <ul>
+                                <li>Posts published today</li>
+                                <li>Content created for upcoming week</li>
+                                <li>Any blockers (missing assets, brand questions)</li>
+                            </ul>
+                        </li>
+                        <li>Send handoff to Creative Director if new asset requests needed</li>
+                        <li>Clear inbox, prep tomorrow's priority list</li>
+                    </ul>
+                    <p><strong>Output:</strong> Daily log complete, handoffs sent, queue ready for tomorrow</p>
+                </div>
+            </details>
+
+            <div class="callout callout-tip" style="margin-top: 1.5rem;">
+                <div class="callout-title">💡 2025 Best Practice: Batching & Consistency</div>
+                <p>Modern social media management emphasizes <strong>batch content creation</strong> (2-hour blocks) over reactive daily posting. This allows you to maintain consistent quality and posting frequency without daily content scrambles. Plan 1-2 weeks ahead, but leave 20% calendar space for timely/trending content.</p>
+            </div>
+        </section>
+
+        <!-- Core Workflows -->
+        <section class="section-card" id="workflows">
+            <h2 class="section-title">
+                <span class="section-icon">⚙️</span>
+                Core Workflows
+            </h2>
+            
+            <div class="section-intro">
+                <strong>Step-by-step processes for key responsibilities.</strong> Follow these workflows to maintain quality, consistency, and canon compliance.
+            </div>
+
+            <div class="mermaid">
+                flowchart TD
+                    Start[New P2_PASS Winner] --> Eval{Organic<br/>Potential?}
+                    Eval -->|Yes| Setup[Setup Brand Channels]
+                    Eval -->|No| Park[Park - Wait for More Winners]
+                    
+                    Setup --> Calendar[Build 30-Day Content Calendar]
+                    Calendar --> Assets[Pull Winning Ads from Drive]
+                    Assets --> Repurpose[Repurpose to Organic Format]
+                    Repurpose --> Schedule[Schedule Posts]
+                    
+                    Schedule --> Publish[Publish & Monitor]
+                    Publish --> Engage[Community Engagement]
+                    Engage --> Analyze[Analyze Performance]
+                    
+                    Analyze --> Iterate{Adjust<br/>Strategy?}
+                    Iterate -->|Yes| Calendar
+                    Iterate -->|No| Publish
+                    
+                    style Start fill:#00C8C8,color:#fff
+                    style Setup fill:#F4E8D0
+                    style Publish fill:#27AE60,color:#fff
+                    style Park fill:#E74C3C,color:#fff
+            </div>
+
+            <details open>
+                <summary><strong>Workflow 1:</strong> New Winner → Organic Channel Setup</summary>
+                <div class="content">
+                    <h4>Trigger</h4>
+                    <p>P2_PASS winner confirmed by Media Buyer + Creative Director</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Product ID: <code>PRD-YYYYMMDD-XXX</code></li>
+                        <li>Winning ads from Drive: <code>/03_P2_Creative/Products/[ProductID]/04_Exports/P2_Tests</code></li>
+                        <li>Brand positioning from R3 packet (Notion Product DB)</li>
+                        <li>Store URL (if launched): from P3 Store Builder</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Evaluate organic potential</strong> (coordinate with Creative Director):
+                            <ul>
+                                <li>Does this product have visual/storytelling appeal?</li>
+                                <li>Is the brand name/positioning organic-friendly?</li>
+                                <li>Do we have 5+ winning creatives to repurpose?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Setup social channels</strong> (if greenlit):
+                            <ul>
+                                <li>Instagram Business Account (link to brand store if exists)</li>
+                                <li>TikTok Creator Account</li>
+                                <li>YouTube Channel (for Shorts)</li>
+                                <li>Use brand name from L0-02 product architecture</li>
+                                <li>Bio: short, value-focused, link to store or landing page</li>
+                            </ul>
+                        </li>
+                        <li><strong>Create Notion content calendar DB entry</strong>:
+                            <ul>
+                                <li>Brand name, product ID</li>
+                                <li>Target posting frequency (3–7/week per channel)</li>
+                                <li>Content pillars (education, social proof, lifestyle, product features)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Create Drive folder</strong>: <code>/03_P2_Creative/Products/[ProductID]/05_Organic_Content</code></li>
+                        <li><strong>Build 30-day content calendar</strong> (see Workflow 2)</li>
+                        <li><strong>Post setup notification</strong> in #p2-organic-social:
+                            <pre><code>[NEW BRAND]
+Brand: [Brand Name]
+Product ID: PRD-YYYYMMDD-XXX
+Channels: IG / TikTok / YT Shorts
+Content Calendar: [Notion link]
+First Post Target: YYYY-MM-DD
+Owner: @P2-SM-ORGANIC-01</code></pre>
+                        </li>
+                    </ol>
+                    
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Active social channels (IG/TikTok/YT)</li>
+                        <li>Notion content calendar populated</li>
+                        <li>Drive folder structure ready</li>
+                        <li>ClickUp task created in <code>Organic Content</code> list</li>
+                    </ul>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul class="checklist">
+                        <li>Brand name matches L0-02 product architecture</li>
+                        <li>Bio copy follows L2-08 voice/tone guidelines</li>
+                        <li>All channels linked to correct store/landing page</li>
+                        <li>Content calendar has at least 2 weeks planned ahead</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Workflow 2:</strong> Monthly Content Calendar Build</summary>
+                <div class="content">
+                    <h4>Trigger</h4>
+                    <p>Beginning of month OR new brand channel launch</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Last month's performance data (Notion analytics)</li>
+                        <li>Available winning creatives from Drive</li>
+                        <li>P3 campaign calendar (upcoming launches, promotions)</li>
+                        <li>Brand seasonal hooks (holidays, industry events)</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Set monthly targets per brand</strong>:
+                            <ul>
+                                <li>Posts per week: 3–7 per channel (IG/TikTok/YT)</li>
+                                <li>Content mix: 60% repurposed ads, 20% educational, 20% engagement/UGC</li>
+                            </ul>
+                        </li>
+                        <li><strong>Audit available assets</strong>:
+                            <ul>
+                                <li>Review winning P2/P3 ads in Drive</li>
+                                <li>Identify top 10 best-performing creatives for repurposing</li>
+                                <li>Note any asset gaps (need new graphics, B-roll, etc.)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Map content pillars to calendar slots</strong>:
+                            <ul>
+                                <li><strong>Monday:</strong> Educational (how-to, tips)</li>
+                                <li><strong>Wednesday:</strong> Product feature/benefit</li>
+                                <li><strong>Friday:</strong> Social proof (testimonial, UGC)</li>
+                                <li>Adjust based on platform (TikTok = trends, IG = aesthetics, YT Shorts = snackable)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Schedule specific posts</strong> in Notion:
+                            <ul>
+                                <li>Date, platform, content type, asset source</li>
+                                <li>Draft caption (or prompt for AI-generated caption)</li>
+                                <li>Status: Planned → In Progress → Scheduled → Published</li>
+                            </ul>
+                        </li>
+                        <li><strong>Leave 20% calendar space open</strong> for:
+                            <ul>
+                                <li>Trending audio/challenges</li>
+                                <li>Real-time campaign tie-ins</li>
+                                <li>Community-generated content ideas</li>
+                            </ul>
+                        </li>
+                        <li><strong>Review with Creative Director</strong> (if first-time brand):
+                            <ul>
+                                <li>Share Notion calendar link</li>
+                                <li>Confirm content mix aligns with brand strategy</li>
+                                <li>Get approval on repurposing approach</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>30-day content calendar in Notion (3–5 brands)</li>
+                        <li>Asset requests sent to Creative Director (if gaps exist)</li>
+                        <li>ClickUp tasks created for each week's batch</li>
+                    </ul>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul class="checklist">
+                        <li>All brands have 2+ weeks scheduled ahead</li>
+                        <li>Content mix follows 60/20/20 repurpose/education/engagement split</li>
+                        <li>No two consecutive posts use the same creative</li>
+                        <li>Captions follow L2-08 voice/tone (no banned language)</li>
+                        <li>All posts have clear value proposition (not just product shots)</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Workflow 3:</strong> Repurpose Winning Ad → Organic Post</summary>
+                <div class="content">
+                    <h4>Trigger</h4>
+                    <p>Scheduled calendar slot needs content creation</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Winning ad file: <code>/03_P2_Creative/Products/[ProductID]/04_Exports/P2_Tests/CRT-XXX.mp4</code></li>
+                        <li>Ad performance data (CTR, engagement from P3 Media Buyer)</li>
+                        <li>Brand voice guidelines (Notion or L2-08)</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Download winning ad</strong> from Drive</li>
+                        <li><strong>Adapt for organic format</strong>:
+                            <ul>
+                                <li><strong>Video:</strong> Remove CTA overlays, add subtitles if needed, adjust aspect ratio (9:16 for Reels/TikTok, 1:1 for IG feed)</li>
+                                <li><strong>Image:</strong> Remove promotional text, enhance for feed aesthetics</li>
+                                <li><strong>Carousel:</strong> Reformat slides, add value-first narrative</li>
+                            </ul>
+                        </li>
+                        <li><strong>Edit in CapCut or Canva</strong>:
+                            <ul>
+                                <li>Quick edits only (5–15 min per piece)</li>
+                                <li>Add trending music (if brand-appropriate)</li>
+                                <li>Use templates from Canva for consistency</li>
+                            </ul>
+                        </li>
+                        <li><strong>Write organic caption</strong>:
+                            <ul>
+                                <li>Hook (first line): value or curiosity</li>
+                                <li>Body: explain benefit, tell story, or educate</li>
+                                <li>CTA: soft (visit link in bio, follow for more, save for later)</li>
+                                <li>No banned language from L2-08</li>
+                                <li>Use AI prompt if needed (see AI Usage section)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Add hashtags</strong> (5–10 per post):
+                            <ul>
+                                <li>Mix: 3 niche, 3 medium, 2 broad</li>
+                                <li>Avoid spammy or off-brand tags</li>
+                            </ul>
+                        </li>
+                        <li><strong>Export and save</strong>:
+                            <ul>
+                                <li>Save to Drive: <code>/03_P2_Creative/Products/[ProductID]/05_Organic_Content/</code></li>
+                                <li>File naming: <code>ORG-[ProductID]-[Platform]-[Date]-[Number].mp4</code></li>
+                                <li>Example: <code>ORG-PRD-20251208-042-IG-20251215-01.mp4</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Notion calendar</strong>:
+                            <ul>
+                                <li>Mark status: Planned → In Progress → Ready to Schedule</li>
+                                <li>Attach Drive link to calendar entry</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>1 organic post ready to schedule (video/image + caption)</li>
+                        <li>File saved in Drive with proper naming</li>
+                        <li>Notion calendar updated with asset link</li>
+                    </ul>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul class="checklist">
+                        <li>No direct CTAs or promotional overlays remain</li>
+                        <li>Caption follows DriveOn voice (L2-08)</li>
+                        <li>Video has subtitles (if dialogue-heavy)</li>
+                        <li>Aspect ratio correct for platform (9:16, 1:1, 4:5)</li>
+                        <li>File under 100MB (platform limits)</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Workflow 4:</strong> Daily Community Engagement Routine</summary>
+                <div class="content">
+                    <h4>Trigger</h4>
+                    <p>Every morning (9:00–10:00) OR after each post publishes</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Comments, DMs, mentions across IG/TikTok/YT</li>
+                        <li>Brand voice guidelines (L2-08)</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Check each active channel</strong>:
+                            <ul>
+                                <li>Instagram: Comments, DMs, Story mentions</li>
+                                <li>TikTok: Comments, duets, stitches</li>
+                                <li>YouTube: Comments on Shorts</li>
+                            </ul>
+                        </li>
+                        <li><strong>Respond to engagement within 2 hours</strong>:
+                            <ul>
+                                <li><strong>Positive comments:</strong> Thank, add value, or ask follow-up question</li>
+                                <li><strong>Questions:</strong> Answer directly, offer to DM for detailed help</li>
+                                <li><strong>Negative feedback:</strong> Acknowledge, offer solution, escalate if product issue</li>
+                                <li><strong>Spam/trolls:</strong> Hide or delete (no engagement)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Like and engage with 10–15 posts</strong> in niche:
+                            <ul>
+                                <li>Follow relevant accounts (potential customers, influencers)</li>
+                                <li>Comment thoughtfully on posts using brand voice</li>
+                                <li>Build community presence (not just broadcasting)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Flag any urgent issues</strong>:
+                            <ul>
+                                <li>Product complaints → escalate to P3 Store Builder or P4 Ops</li>
+                                <li>Viral negative comment → alert Creative Director immediately</li>
+                                <li>Influencer/partnership inquiry → forward to Creative Director or PM</li>
+                            </ul>
+                        </li>
+                        <li><strong>Log engagement metrics</strong> in Notion:
+                            <ul>
+                                <li>Comments responded to today</li>
+                                <li>DMs handled</li>
+                                <li>Community sentiment (positive/neutral/negative)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                    
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>All engagement addressed within 2 hours</li>
+                        <li>Community sentiment logged in Notion</li>
+                        <li>Urgent issues escalated to relevant roles</li>
+                    </ul>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul class="checklist">
+                        <li>Responses use brand voice (no generic copy-paste)</li>
+                        <li>No unread DMs older than 24 hours</li>
+                        <li>Negative feedback handled professionally (no defensiveness)</li>
+                        <li>Community building (not just reactive responses)</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Workflow 5:</strong> Weekly Performance Review & Iteration</summary>
+                <div class="content">
+                    <h4>Trigger</h4>
+                    <p>End of week (Friday afternoon) OR monthly review cycle</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Native analytics (IG Insights, TikTok Analytics, YT Studio)</li>
+                        <li>Notion content calendar with published posts</li>
+                        <li>P3 Media Buyer data (if organic drives store traffic)</li>
+                    </ul>
+                    
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Export weekly metrics</strong> per brand:
+                            <ul>
+                                <li>Reach, impressions, engagement rate</li>
+                                <li>Follower growth</li>
+                                <li>Top 3 performing posts (saves, shares, comments)</li>
+                                <li>Bottom 3 posts (what didn't work)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Notion dashboard</strong>:
+                            <ul>
+                                <li>Add metrics to weekly row</li>
+                                <li>Flag top/bottom performers</li>
+                                <li>Note any trends (content types, posting times, topics)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Identify patterns</strong>:
+                            <ul>
+                                <li>What content format is winning? (Reels vs Carousels vs Static)</li>
+                                <li>What topics resonate? (Education vs Social proof vs Lifestyle)</li>
+                                <li>What posting times perform best?</li>
+                            </ul>
+                        </li>
+                        <li><strong>Adjust next week's calendar</strong>:
+                            <ul>
+                                <li>Double down on winning formats</li>
+                                <li>Test new angles based on insights</li>
+                                <li>Retire underperforming content types</li>
+                            </ul>
+                        </li>
+                        <li><strong>Report to Creative Director</strong> (monthly or on request):
+                            <ul>
+                                <li>Top 5 organic wins (and why they worked)</li>
+                                <li>Any content gaps or asset requests</li>
+                                <li>Follower growth trajectory per brand</li>
+                            </ul>
+                        </li>
+                        <li><strong>Post weekly update</strong> in #p2-organic-social:
+                            <pre><code>[WEEKLY ORGANIC UPDATE]
+Week: YYYY-MM-DD to YYYY-MM-DD
+Brands Active: [Brand 1], [Brand 2], [Brand 3]
+Total Posts Published: [X]
+Top Performer: [Post link + metric]
+Key Learning: [1 sentence insight]
+Next Week Focus: [content theme or test]</code></pre>
+                        </li>
+                    </ol>
+                    
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Notion dashboard updated with weekly metrics</li>
+                        <li>Next week's calendar adjusted based on insights</li>
+                        <li>Weekly update posted in Discord</li>
+                        <li>Monthly report to Creative Director (if due)</li>
+                    </ul>
+                    
+                    <h4>Quality Checks</h4>
+                    <ul class="checklist">
+                        <li>All brands have metrics logged (no missing data)</li>
+                        <li>Top/bottom performers clearly identified</li>
+                        <li>At least 1 actionable insight per brand</li>
+                        <li>Next week's calendar reflects learnings</li>
+                    </ul>
+                </div>
+            </details>
+        </section>
+
+        <!-- Handoffs -->
+        <section class="section-card" id="handoffs">
+            <h2 class="section-title">
+                <span class="section-icon">🔄</span>
+                Handoffs & Interfaces
+            </h2>
+            
+            <div class="section-intro">
+                <strong>Clear handoff protocols ensure smooth cross-pod coordination.</strong> Use these templates and channels for all major handoffs.
+            </div>
+
+            <h3>Handoff 1: P2 Creative Director → P2-SM-ORGANIC</h3>
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <span>FROM: P2-CR-DIRECTOR-XX</span>
+                    <span class="handoff-arrow">→</span>
+                    <span>TO: P2-SM-ORGANIC-01</span>
+                </div>
+                
+                <p><strong>Trigger:</strong> New P2_PASS winner ready for organic rollout</p>
+                <p><strong>Channel:</strong> #p2-organic-social (Discord)</p>
+                
+                <h4>Required Inputs</h4>
+                <ul>
+                    <li>Product ID: <code>PRD-YYYYMMDD-XXX</code></li>
+                    <li>Brand name & positioning</li>
+                    <li>Drive folder with winning P2 ads: <code>/03_P2_Creative/Products/[ProductID]/04_Exports/P2_Tests</code></li>
+                    <li>Top 5 performing creatives (CRT IDs + performance metrics)</li>
+                    <li>Store URL (if launched)</li>
+                    <li>Green light for organic channel setup (yes/no/wait)</li>
+                </ul>
+                
+                <h4>Notification Template</h4>
+                <pre><code>[HANDOFF: New Winner for Organic]
+From: @P2-CR-DIRECTOR-01
+To: @P2-SM-ORGANIC-01
+
+Product ID: PRD-YYYYMMDD-XXX
+Brand Name: [Brand Name]
+P2 Performance: [quick metrics]
+
+Top Creatives:
+- CRT-PRD-XXX-001: [CTR / Engagement]
+- CRT-PRD-XXX-002: [CTR / Engagement]
+- CRT-PRD-XXX-003: [CTR / Engagement]
+
+Assets Location:
+Drive: /03_P2_Creative/Products/PRD-XXX/04_Exports/P2_Tests
+Notion: [Product Page link]
+
+Store URL: [if exists]
+
+Action: Setup organic channels + 30-day calendar
+Due: YYYY-MM-DD
+Priority: [High / Normal]</code></pre>
+
+                <h4>Quality Gate</h4>
+                <ul class="checklist">
+                    <li>At least 5 winning creatives available</li>
+                    <li>Brand positioning documented in Notion</li>
+                    <li>All assets in Drive with proper CRT IDs</li>
+                    <li>Green light confirmed by Creative Director</li>
+                </ul>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Handoff 2: P2-SM-ORGANIC → P3 Store Builder</h3>
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <span>FROM: P2-SM-ORGANIC-01</span>
+                    <span class="handoff-arrow">→</span>
+                    <span>TO: P3-SB-BRAND-XX</span>
+                </div>
+                
+                <p><strong>Trigger:</strong> Organic channel active + store needs social media integration</p>
+                <p><strong>Channel:</strong> #p3-stores-brand (Discord)</p>
+                
+                <h4>Required Inputs</h4>
+                <ul>
+                    <li>Brand name</li>
+                    <li>Active social handles (IG / TikTok / YT)</li>
+                    <li>Social proof assets (top posts, UGC, testimonials)</li>
+                    <li>Embed/widget requests for store (IG feed, review carousel)</li>
+                </ul>
+                
+                <h4>Notification Template</h4>
+                <pre><code>[HANDOFF: Social Integration for Store]
+From: @P2-SM-ORGANIC-01
+To: @P3-SB-BRAND-01
+
+Brand: [Brand Name]
+Store URL: [URL]
+
+Social Handles:
+- Instagram: @[handle] ([X] followers)
+- TikTok: @[handle] ([X] followers)
+- YouTube: [channel] ([X] subscribers)
+
+Social Proof Assets:
+- Drive: /03_P2_Creative/Products/[ProductID]/05_Organic_Content/Social_Proof
+- Top posts: [links to 3–5 best performers]
+
+Store Integration Requests:
+- [ ] Instagram feed embed on homepage
+- [ ] Social proof carousel on PDP
+- [ ] Social handles in footer
+
+Due: YYYY-MM-DD</code></pre>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Handoff 3: P2-SM-ORGANIC → P3 Media Buyer</h3>
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <span>FROM: P2-SM-ORGANIC-01</span>
+                    <span class="handoff-arrow">→</span>
+                    <span>TO: P3-MB-BUYER-XX</span>
+                </div>
+                
+                <p><strong>Trigger:</strong> Organic content driving significant traffic or engagement</p>
+                <p><strong>Channel:</strong> #p3-p2-optimisation (Discord)</p>
+                
+                <h4>Required Inputs</h4>
+                <ul>
+                    <li>Brand name + Product ID</li>
+                    <li>Viral/high-performing organic post (link + metrics)</li>
+                    <li>Recommendation to test as paid ad</li>
+                </ul>
+                
+                <h4>Notification Template</h4>
+                <pre><code>[ORGANIC WINNER: Test as Paid?]
+From: @P2-SM-ORGANIC-01
+To: @P3-MB-BUYER-01
+
+Product: [Brand Name] (PRD-YYYYMMDD-XXX)
+Organic Post: [IG/TikTok link]
+
+Performance:
+- Reach: [X]
+- Engagement Rate: [Y%]
+- Saves/Shares: [Z]
+- Comments: [A]
+
+Why This Could Work Paid:
+- [1 sentence insight]
+
+Asset Location:
+Drive: /03_P2_Creative/Products/[ProductID]/05_Organic_Content/[filename]
+
+Recommendation: Test in P2 or P3
+Priority: [High / Normal / FYI only]</code></pre>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Escalation Paths</h3>
+            <table>
+                <tr>
+                    <th>Issue Type</th>
+                    <th>Escalate To</th>
+                    <th>Channel</th>
+                    <th>Response SLA</th>
+                </tr>
+                <tr>
+                    <td>Brand voice uncertainty</td>
+                    <td>P2 Creative Director</td>
+                    <td>#p2-organic-social</td>
+                    <td>Same day</td>
+                </tr>
+                <tr>
+                    <td>Missing assets for calendar</td>
+                    <td>P2 Creative Director</td>
+                    <td>#p2-organic-social</td>
+                    <td>2 business days</td>
+                </tr>
+                <tr>
+                    <td>Product complaint/issue</td>
+                    <td>P3 Store Builder + P4 PM</td>
+                    <td>#p3-stores-brand</td>
+                    <td>Same day</td>
+                </tr>
+                <tr>
+                    <td>Viral negative comment</td>
+                    <td>Creative Director + Founder</td>
+                    <td>#p2-organic-social</td>
+                    <td>Immediate (within 1 hour)</td>
+                </tr>
+                <tr>
+                    <td>Platform account issue</td>
+                    <td>P4 Ops Integrator</td>
+                    <td>#p4-systems-ops</td>
+                    <td>Same day</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- KPIs -->
+        <section class="section-card" id="kpis">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                KPIs & Quality Bar
+            </h2>
+            
+            <div class="section-intro">
+                <strong>Quantitative metrics and qualitative standards to measure success.</strong> Track these weekly in Notion, review monthly with Creative Director.
+            </div>
+
+            <h3>Primary KPIs (from L2-07)</h3>
+            <div class="kpi-strip">
+                <div class="kpi-box">
+                    <div class="kpi-label">Consistency</div>
+                    <div class="kpi-value">100%</div>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">All scheduled posts publish on time</p>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Engagement Rate</div>
+                    <div class="kpi-value">2.5%+</div>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Target: 2.5–5% per post (likes + comments + saves / reach)</p>
+                </div>
+                <div class="kpi-box">
+                    <div class="kpi-label">Follower Growth</div>
+                    <div class="kpi-value">Real</div>
+                    <p style="font-size: 0.85rem; margin-top: 0.5rem;">Organic, engaged followers (no buying)</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 2rem;">Detailed Metrics by Channel</h3>
+            <table>
+                <tr>
+                    <th>Metric</th>
+                    <th>Target</th>
+                    <th>Source</th>
+                    <th>Frequency</th>
+                </tr>
+                <tr>
+                    <td><strong>Posts Published</strong></td>
+                    <td>3–7 per week per channel</td>
+                    <td>Notion calendar</td>
+                    <td>Weekly</td>
+                </tr>
+                <tr>
+                    <td><strong>Engagement Rate</strong></td>
+                    <td>2.5–5% avg</td>
+                    <td>Native analytics (IG/TikTok/YT)</td>
+                    <td>Weekly</td>
+                </tr>
+                <tr>
+                    <td><strong>Reach Growth</strong></td>
+                    <td>+10–20% MoM</td>
+                    <td>Native analytics</td>
+                    <td>Monthly</td>
+                </tr>
+                <tr>
+                    <td><strong>Follower Growth</strong></td>
+                    <td>+50–200 per brand per month</td>
+                    <td>Native analytics</td>
+                    <td>Monthly</td>
+                </tr>
+                <tr>
+                    <td><strong>Community Response Time</strong></td>
+                    <td><2 hours</td>
+                    <td>Manual log (Notion)</td>
+                    <td>Daily</td>
+                </tr>
+                <tr>
+                    <td><strong>Content Repurpose Ratio</strong></td>
+                    <td>60% from paid ads</td>
+                    <td>Notion calendar tags</td>
+                    <td>Monthly</td>
+                </tr>
+                <tr>
+                    <td><strong>Brand Voice Compliance</strong></td>
+                    <td>100% (no off-brand posts)</td>
+                    <td>Creative Director review</td>
+                    <td>Spot checks</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top: 2rem;">Qualitative Standards</h3>
+            
+            <h4>Good Organic Content</h4>
+            <ul>
+                <li>✅ Value-first (education, entertainment, or inspiration before promotion)</li>
+                <li>✅ On-brand voice (matches L2-08: direct, calm, competent)</li>
+                <li>✅ Native format (doesn't look like an ad)</li>
+                <li>✅ Clear hook in first 3 seconds (video) or first line (caption)</li>
+                <li>✅ Subtitles on video (80% watch without sound)</li>
+                <li>✅ Authentic engagement (responds to comments, builds community)</li>
+                <li>✅ Consistent posting (no 3-week gaps)</li>
+            </ul>
+
+            <h4>Bad Organic Content</h4>
+            <ul>
+                <li>❌ Obviously repurposed ad (CTA overlays, promo text still visible)</li>
+                <li>❌ Spammy captions (too many emojis, excessive hashtags, "link in bio" spam)</li>
+                <li>❌ Off-brand voice (hype language, FOMO tactics, fake scarcity)</li>
+                <li>❌ Low-effort posts (product photos with no context or story)</li>
+                <li>❌ Inconsistent posting (radio silence for weeks, then 10 posts in one day)</li>
+                <li>❌ Ignoring engagement (comments unanswered, DMs ignored)</li>
+                <li>❌ Trend-chasing without brand fit (using trending audio that contradicts positioning)</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 2025 Best Practice: Engagement Rate Over Vanity Metrics</div>
+                <p>In 2025, algorithms prioritize engagement (saves, shares, meaningful comments) over raw reach. A post with 1,000 reach and 5% engagement beats 10,000 reach with 0.5% engagement. Focus on content that drives saves and shares—these signal value to algorithms.</p>
+            </div>
+        </section>
+
+        <!-- AI Usage -->
+        <section class="section-card" id="ai-usage">
+            <h2 class="section-title">
+                <span class="section-icon">🤖</span>
+                AI Usage & Prompt Patterns
+            </h2>
+            
+            <div class="section-intro">
+                <strong>AI accelerates content creation while maintaining brand voice.</strong> Use these prompts for caption writing, content planning, and engagement responses. Always review AI output for L2-08 compliance.
+            </div>
+
+            <details open>
+                <summary><strong>Prompt 1:</strong> Generate Organic Caption from Winning Ad</summary>
+                <div class="content">
+                    <p><strong>Use when:</strong> Repurposing a P2 ad into organic post</p>
+                    <pre><code>You are writing an Instagram/TikTok caption for [Brand Name], a DriveOn Commerce brand.
+
+DriveOn Brand Voice (L2-08):
+- Direct, calm, competent, grounded, systems-minded
+- No hype language, no "guaranteed results", no fake scarcity
+- Value-first, educational tone
+
+Context:
+This is a repurposed ad for [Product Name]. The original ad focused on [hook/angle from paid creative].
+
+Original Ad Hook: "[winning ad hook]"
+Original Ad CTA: "[paid ad CTA]"
+
+Task:
+Write an organic caption that:
+1. Removes direct sales language
+2. Focuses on value/education/entertainment
+3. Uses DriveOn voice (no hype, no FOMO)
+4. Includes a soft CTA (follow, save, visit link in bio)
+5. 100–150 characters (short and punchy)
+
+Output:
+[Caption only, no explanation]</code></pre>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 2:</strong> Monthly Content Calendar Themes</summary>
+                <div class="content">
+                    <p><strong>Use when:</strong> Planning monthly content pillars</p>
+                    <pre><code>You are a social media strategist for [Brand Name], a DriveOn Commerce brand.
+
+Brand Context:
+- Product: [brief product description]
+- Target Audience: [customer persona]
+- Current Followers: [X on IG, Y on TikTok]
+- Recent Top Posts: [themes that worked]
+
+Task:
+Generate 4 weekly content themes for [Month] that:
+1. Align with DriveOn positioning (systems-first, anti-noise, value-driven)
+2. Mix education (60%), social proof (20%), lifestyle/engagement (20%)
+3. Are specific enough to generate 3–5 post ideas per theme
+4. Work across IG, TikTok, and YT Shorts
+
+Output format:
+Week 1 Theme: [Theme Name]
+- Post Idea 1: [brief]
+- Post Idea 2: [brief]
+- Post Idea 3: [brief]
+
+[Repeat for Weeks 2–4]</code></pre>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 3:</strong> Engagement Response Templates</summary>
+                <div class="content">
+                    <p><strong>Use when:</strong> Responding to comments/DMs at scale</p>
+                    <pre><code>You are the social media manager for [Brand Name], responding to customer comments.
+
+DriveOn Brand Voice:
+- Helpful, direct, non-salesy
+- Competent but not robotic
+- Avoid excessive emojis or hype language
+
+Comment Type: [Question / Positive / Negative / Spam]
+Comment Text: "[actual comment]"
+
+Task:
+Write a 1–2 sentence response that:
+1. Addresses the comment directly
+2. Uses natural, friendly tone (not corporate)
+3. Offers value or next step (if question)
+4. Stays on-brand (no hype, no defensive language)
+
+Output:
+[Response only, no explanation]</code></pre>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 4:</strong> Hashtag Research for Niche</summary>
+                <div class="content">
+                    <p><strong>Use when:</strong> Finding relevant hashtags for new brand</p>
+                    <pre><code>You are a social media strategist researching hashtags for [Brand Name].
+
+Product Category: [niche/category]
+Target Audience: [customer persona]
+Platform: Instagram / TikTok
+
+Task:
+Generate 15 hashtags organized by reach:
+- 5 Niche Hashtags (<50K posts) - highly targeted
+- 5 Medium Hashtags (50K–500K posts) - balance reach and relevance
+- 5 Broad Hashtags (500K+ posts) - discovery potential
+
+Rules:
+- No spammy tags (#followforfollow, #like4like)
+- No off-brand tags (#hustle, #grind, #bossup)
+- Focus on product benefits, lifestyle, and target customer interests
+
+Output format:
+Niche:
+1. #[tag] ([post count])
+...
+
+Medium:
+6. #[tag] ([post count])
+...
+
+Broad:
+11. #[tag] ([post count])
+...</code></pre>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 5:</strong> Post Performance Analysis</summary>
+                <div class="content">
+                    <p><strong>Use when:</strong> Analyzing top/bottom performers for insights</p>
+                    <pre><code>You are analyzing organic social performance for [Brand Name].
+
+Top 3 Performing Posts:
+1. [Post type, format, hook, metric]
+2. [Post type, format, hook, metric]
+3. [Post type, format, hook, metric]
+
+Bottom 3 Posts:
+1. [Post type, format, hook, metric]
+2. [Post type, format, hook, metric]
+3. [Post type, format, hook, metric]
+
+Task:
+Identify patterns and provide 3 actionable insights:
+1. What content formats/themes are working?
+2. What should we double down on?
+3. What should we stop doing?
+
+Output format:
+Pattern 1: [observation]
+Recommendation: [action]
+
+Pattern 2: [observation]
+Recommendation: [action]
+
+Pattern 3: [observation]
+Recommendation: [action]</code></pre>
+                </div>
+            </details>
+
+            <h3 style="margin-top: 2rem;">Human Review Checkpoints</h3>
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Always Review AI Output For</div>
+                <ul class="checklist">
+                    <li>Brand voice compliance (L2-08 violations)</li>
+                    <li>Banned language ("guaranteed", "effortless", "secret", etc.)</li>
+                    <li>Accuracy (AI can hallucinate product features or benefits)</li>
+                    <li>Context (AI doesn't know current trends or platform updates)</li>
+                    <li>Tone (ensure it's not too corporate or too casual)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Tools -->
+        <section class="section-card" id="tools">
+            <h2 class="section-title">
+                <span class="section-icon">🛠️</span>
+                Tools & Systems Reference
+            </h2>
+            
+            <div class="section-intro">
+                <strong>Approved tool stack and workspace bindings.</strong> No new tools may be added without Canon Change Request.
+            </div>
+
+            <h3>Core Tools</h3>
+            <table>
+                <tr>
+                    <th>Tool</th>
+                    <th>Use Case</th>
+                    <th>Key Features Used</th>
+                    <th>Access Level</th>
+                </tr>
+                <tr>
+                    <td><strong>Instagram Business</strong></td>
+                    <td>Primary organic channel</td>
+                    <td>Feed posts, Reels, Stories, DMs, Insights</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td><strong>TikTok Creator</strong></td>
+                    <td>Short-form video discovery</td>
+                    <td>Post publishing, duets/stitches, Analytics</td>
+                    <td>Admin</td>
+                </tr>
+                <tr>
+                    <td><strong>YouTube Studio</strong></td>
+                    <td>Shorts publishing</td>
+                    <td>Upload Shorts, basic analytics</td>
+                    <td>Editor</td>
+                </tr>
+                <tr>
+                    <td><strong>Canva Pro</strong></td>
+                    <td>Quick graphics, templates</td>
+                    <td>Carousels, static posts, Story templates</td>
+                    <td>Editor</td>
+                </tr>
+                <tr>
+                    <td><strong>CapCut</strong></td>
+                    <td>Mobile video editing</td>
+                    <td>Quick edits, subtitles, trending templates</td>
+                    <td>Creator</td>
+                </tr>
+                <tr>
+                    <td><strong>Notion</strong></td>
+                    <td>Content calendar & brand guidelines</td>
+                    <td>Calendar DB, caption bank, performance log</td>
+                    <td>Editor</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Drive</strong></td>
+                    <td>Asset storage</td>
+                    <td>Folder: /03_P2_Creative/Products/[ID]/05_Organic_Content</td>
+                    <td>Editor</td>
+                </tr>
+                <tr>
+                    <td><strong>Discord</strong></td>
+                    <td>Team communication</td>
+                    <td>Channel: #p2-organic-social</td>
+                    <td>Member</td>
+                </tr>
+                <tr>
+                    <td><strong>ClickUp</strong></td>
+                    <td>Task management</td>
+                    <td>Space: P2 > Folder: Creative Pipeline > List: Organic Content</td>
+                    <td>Editor</td>
+                </tr>
+            </table>
+
+            <h3 style="margin-top: 2rem;">Notion Workspace Structure</h3>
+            <h4>Content Calendar DB (Primary)</h4>
+            <ul>
+                <li><strong>Properties:</strong>
+                    <ul>
+                        <li>Brand (Select: Brand 1, Brand 2, etc.)</li>
+                        <li>Platform (Select: IG, TikTok, YT Shorts)</li>
+                        <li>Post Type (Select: Reel, Carousel, Static, Story)</li>
+                        <li>Publish Date (Date)</li>
+                        <li>Status (Select: Planned, In Progress, Scheduled, Published)</li>
+                        <li>Caption (Text)</li>
+                        <li>Asset Link (URL to Drive)</li>
+                        <li>Reach (Number)</li>
+                        <li>Engagement Rate (Number)</li>
+                        <li>Content Pillar (Select: Education, Social Proof, Lifestyle, Product Feature)</li>
+                    </ul>
+                </li>
+                <li><strong>Views:</strong>
+                    <ul>
+                        <li>Calendar View (grouped by Brand)</li>
+                        <li>Board View (grouped by Status)</li>
+                        <li>Table View (for performance analysis)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Brand Guidelines DB (Reference)</h4>
+            <ul>
+                <li>One page per brand with:
+                    <ul>
+                        <li>Brand positioning (from R3 packet)</li>
+                        <li>Voice & tone guidelines (L2-08 excerpt)</li>
+                        <li>Visual style guide (colors, fonts, imagery)</li>
+                        <li>Hashtag bank</li>
+                        <li>Top-performing post examples</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">ClickUp Workspace Structure</h3>
+            <ul>
+                <li><strong>Space:</strong> P2 – Creative Factory</li>
+                <li><strong>Folder:</strong> Creative Pipeline</li>
+                <li><strong>List:</strong> Organic Content
+                    <ul>
+                        <li><strong>Custom Fields:</strong>
+                            <ul>
+                                <li>Brand (Dropdown)</li>
+                                <li>Platform (Dropdown: IG / TikTok / YT)</li>
+                                <li>Week Target (Date Range)</li>
+                                <li>Posts Completed (Number)</li>
+                                <li>Drive Folder (URL)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Statuses:</strong>
+                            <ul>
+                                <li>Planning</li>
+                                <li>Asset Gathering</li>
+                                <li>Content Creation</li>
+                                <li>Scheduled</li>
+                                <li>Published</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Drive Folder Structure</h3>
+            <pre><code>/DriveOn Commerce/
+  03_P2_Creative/
+    Products/
+      [ProductID]_[ShortName]/
+        05_Organic_Content/
+          IG_Feed/
+          IG_Reels/
+          TikTok/
+          YT_Shorts/
+          Social_Proof/
+            (testimonial screenshots, UGC, top comments)</code></pre>
+
+            <h3 style="margin-top: 2rem;">Discord Channel Usage</h3>
+            <ul>
+                <li><strong>#p2-organic-social:</strong> Main channel for handoffs, updates, questions</li>
+                <li><strong>#p4-pm-daily-standup:</strong> Daily async standup (post by end of day)</li>
+                <li><strong>#p3-stores-brand:</strong> Coordination with brand store builders</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 2025 Tool Trend: Centralized Content Hubs</div>
+                <p>Modern social media management is moving toward centralized content hubs (like Notion + Drive combos) rather than scattered spreadsheets. This SOP's Notion + Drive setup follows 2025 best practices for team collaboration and version control.</p>
+            </div>
+        </section>
+
+        <!-- Escalation -->
+        <section class="section-card" id="escalation">
+            <h2 class="section-title">
+                <span class="section-icon">🚨</span>
+                Escalation & Decision Rights
+            </h2>
+            
+            <div class="section-intro">
+                <strong>Clear boundaries on what you own vs. what requires escalation.</strong> When in doubt, escalate early—especially for brand or legal concerns.
+            </div>
+
+            <h3>Decisions You Own (No Escalation Needed)</h3>
+            <ul>
+                <li>Daily posting times and scheduling</li>
+                <li>Caption writing (as long as it follows L2-08 voice)</li>
+                <li>Hashtag selection</li>
+                <li>Comment/DM responses (standard engagement)</li>
+                <li>Content format choices (Reel vs Carousel vs Static)</li>
+                <li>Repurposing approach (how to adapt winning ads)</li>
+                <li>Weekly content calendar adjustments based on performance</li>
+                <li>Engagement tactics (likes, follows, community building)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Decisions Requiring Creative Director Approval</h3>
+            <ul>
+                <li>New brand channel setup (which winners get organic presence)</li>
+                <li>Major content strategy shifts (changing posting frequency, pivoting content mix)</li>
+                <li>Off-brand content requests (if uncertain about L2-08 compliance)</li>
+                <li>Influencer partnerships or UGC collaborations</li>
+                <li>Paid promotion of organic posts (boosting)</li>
+                <li>Brand voice questions (new product categories, sensitive topics)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Decisions Requiring PM or Founder Approval</h3>
+            <ul>
+                <li>New tool additions (scheduling platforms, analytics tools)</li>
+                <li>Budget requests (paid boosts, influencer payments)</li>
+                <li>Major crises (viral negative content, legal threats)</li>
+                <li>Cross-pod resource requests (need more creative assets than available)</li>
+            </ul>
+
+            <h3 style="margin-top: 2rem;">Escalation Matrix</h3>
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Escalate To</th>
+                    <th>When</th>
+                    <th>SLA</th>
+                </tr>
+                <tr>
+                    <td>Uncertain if content is on-brand</td>
+                    <td>Creative Director</td>
+                    <td>Before publishing</td>
+                    <td>Same day</td>
+                </tr>
+                <tr>
+                    <td>Product complaint in comments</td>
+                    <td>P3 Store Builder + P4 PM</td>
+                    <td>Within 2 hours</td>
+                    <td>Same day resolution</td>
+                </tr>
+                <tr>
+                    <td>Viral negative post/comment</td>
+                    <td>Creative Director + Founder</td>
+                    <td>Immediately</td>
+                    <td><1 hour</td>
+                </tr>
+                <tr>
+                    <td>Legal/compliance concern</td>
+                    <td>Founder (via P4 PM)</td>
+                    <td>Before publishing</td>
+                    <td>Same day</td>
+                </tr>
+                <tr>
+                    <td>Platform account locked/suspended</td>
+                    <td>P4 Ops Integrator</td>
+                    <td>Immediately</td>
+                    <td>Same day</td>
+                </tr>
+                <tr>
+                    <td>Need more assets than available</td>
+                    <td>Creative Director</td>
+                    <td>During planning (weekly)</td>
+                    <td>2 business days</td>
+                </tr>
+                <tr>
+                    <td>Influencer partnership inquiry</td>
+                    <td>Creative Director</td>
+                    <td>Within 24 hours</td>
+                    <td>3 business days</td>
+                </tr>
+            </table>
+
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Never Publish Before Escalating If</div>
+                <ul>
+                    <li>You're unsure if content violates L2-08 brand guidelines</li>
+                    <li>Content contains health claims or earnings promises</li>
+                    <li>Content references competitors or controversial topics</li>
+                    <li>A follower makes legal threats or serious accusations</li>
+                    <li>You're responding to a crisis situation</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Onboarding -->
+        <section class="section-card" id="onboarding">
+            <h2 class="section-title">
+                <span class="section-icon">🎓</span>
+                Onboarding Checklist
+            </h2>
+            
+            <div class="section-intro">
+                <strong>30-day ramp to full productivity.</strong> Complete each phase before moving to the next. Review competency with Creative Director at 30 days.
+            </div>
+
+            <details open>
+                <summary><strong>Week 1:</strong> Foundation & Access (Days 1–5)</summary>
+                <div class="content">
+                    <h4>Learning Goals</h4>
+                    <ul>
+                        <li>Understand DriveOn brand positioning and CaniCol v4.0 model</li>
+                        <li>Get access to all tools and workspaces</li>
+                        <li>Review existing organic channels (if any)</li>
+                    </ul>
+                    
+                    <h4>Tasks</h4>
+                    <ul class="checklist">
+                        <li>Read L0-02 (Product & Brand Architecture)</li>
+                        <li>Read L1-01 (CaniCol Model)</li>
+                        <li>Read L2-08 (Brand Platform & Creative Guardrails) — THIS IS CRITICAL</li>
+                        <li>Get access to:
+                            <ul>
+                                <li>Instagram Business accounts (all active brands)</li>
+                                <li>TikTok Creator accounts</li>
+                                <li>YouTube channels</li>
+                                <li>Canva Pro</li>
+                                <li>CapCut (install on phone/computer)</li>
+                                <li>Notion (Content Calendar DB + Brand Guidelines)</li>
+                                <li>Google Drive (/03_P2_Creative)</li>
+                                <li>Discord (#p2-organic-social)</li>
+                                <li>ClickUp (P2 – Creative > Organic Content list)</li>
+                            </ul>
+                        </li>
+                        <li>Shadow Creative Director for 1–2 hours: review recent winning ads</li>
+                        <li>Audit existing organic channels (if any):
+                            <ul>
+                                <li>Posting consistency</li>
+                                <li>Engagement rates</li>
+                                <li>Brand voice compliance</li>
+                            </ul>
+                        </li>
+                        <li>Post introduction in #p2-organic-social Discord</li>
+                    </ul>
+                    
+                    <h4>Deliverable</h4>
+                    <p>Audit memo (1 page) summarizing current organic presence + 3 immediate opportunities</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Week 2:</strong> Content Creation Practice (Days 6–12)</summary>
+                <div class="content">
+                    <h4>Learning Goals</h4>
+                    <ul>
+                        <li>Master content repurposing workflow</li>
+                        <li>Write on-brand captions</li>
+                        <li>Use AI prompts for efficiency</li>
+                    </ul>
+                    
+                    <h4>Tasks</h4>
+                    <ul class="checklist">
+                        <li>Repurpose 5 winning P2 ads into organic posts (supervised by Creative Director):
+                            <ul>
+                                <li>2 Reels (IG/TikTok)</li>
+                                <li>2 Carousels (IG)</li>
+                                <li>1 Static post (IG feed)</li>
+                            </ul>
+                        </li>
+                        <li>Write 10 captions using brand voice (get Creative Director feedback on all 10)</li>
+                        <li>Practice AI prompt usage:
+                            <ul>
+                                <li>Generate 5 captions using Prompt 1</li>
+                                <li>Edit AI output for brand voice</li>
+                            </ul>
+                        </li>
+                        <li>Attend 1 Creative Director review session (observe how winning ads are evaluated)</li>
+                        <li>Set up Notion Content Calendar for 1 test brand (populate 2 weeks ahead)</li>
+                    </ul>
+                    
+                    <h4>Deliverable</h4>
+                    <p>5 repurposed organic posts (ready to publish, awaiting Creative Director approval)</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Week 3:</strong> End-to-End Workflow (Days 13–19)</summary>
+                <div class="content">
+                    <h4>Learning Goals</h4>
+                    <ul>
+                        <li>Run full workflow independently (with review checkpoints)</li>
+                        <li>Build 30-day content calendar</li>
+                        <li>Practice community engagement</li>
+                    </ul>
+                    
+                    <h4>Tasks</h4>
+                    <ul class="checklist">
+                        <li>Build 30-day content calendar for 1 brand:
+                            <ul>
+                                <li>Map content pillars</li>
+                                <li>Schedule posts (3–7 per week)</li>
+                                <li>Draft all captions</li>
+                            </ul>
+                        </li>
+                        <li>Create 10 pieces of content (all formats):
+                            <ul>
+                                <li>Reels, Carousels, Statics, Stories</li>
+                            </ul>
+                        </li>
+                        <li>Schedule and publish 5 posts (with Creative Director spot-check approval)</li>
+                        <li>Run daily engagement routine for 1 week:
+                            <ul>
+                                <li>Respond to comments/DMs</li>
+                                <li>Engage with 10–15 posts in niche</li>
+                            </ul>
+                        </li>
+                        <li>Complete Workflow 1 (New Winner → Channel Setup) for 1 test brand (simulated)</li>
+                        <li>Log performance data in Notion (reach, engagement, top posts)</li>
+                    </ul>
+                    
+                    <h4>Deliverable</h4>
+                    <p>30-day content calendar + 5 published posts + weekly engagement log</p>
+                </div>
+            </details>
+
+            <details>
+                <summary><strong>Week 4:</strong> Full Ownership & Review (Days 20–30)</summary>
+                <div class="content">
+                    <h4>Learning Goals</h4>
+                    <ul>
+                        <li>Manage 2–3 active brands independently</li>
+                        <li>Run full day-in-the-life routine</li>
+                        <li>Demonstrate KPI tracking and iteration</li>
+                    </ul>
+                    
+                    <h4>Tasks</h4>
+                    <ul class="checklist">
+                        <li>Take ownership of 2–3 active brands:
+                            <ul>
+                                <li>Build/update content calendars for all</li>
+                                <li>Schedule 2 weeks ahead for each</li>
+                            </ul>
+                        </li>
+                        <li>Publish 15–20 posts across all brands (no Creative Director pre-approval needed)</li>
+                        <li>Run daily engagement routine for all brands (morning block)</li>
+                        <li>Complete weekly performance review:
+                            <ul>
+                                <li>Update Notion dashboard with metrics</li>
+                                <li>Identify top/bottom performers</li>
+                                <li>Adjust next week's calendar based on insights</li>
+                            </ul>
+                        </li>
+                        <li>Send 2 cross-pod handoffs:
+                            <ul>
+                                <li>1 to Creative Director (asset request)</li>
+                                <li>1 to P3 Store Builder (social integration request)</li>
+                            </ul>
+                        </li>
+                        <li>Practice escalation: flag 1 real or simulated issue to Creative Director</li>
+                    </ul>
+                    
+                    <h4>Deliverable</h4>
+                    <p>30-day review document:
+                        <ul>
+                            <li>Total posts published (per brand, per platform)</li>
+                            <li>Engagement trends</li>
+                            <li>Top 5 performing posts (and why they worked)</li>
+                            <li>3 learnings for next 30 days</li>
+                        </ul>
+                    </p>
+                </div>
+            </details>
+
+            <h3 style="margin-top: 2rem;">30-Day Competency Review</h3>
+            <p><strong>Conducted by:</strong> P2 Creative Director</p>
+            <p><strong>Pass criteria:</strong></p>
+            <ul class="checklist">
+                <li>Can independently build and maintain content calendars for 3–5 brands</li>
+                <li>All published content follows L2-08 brand voice (no violations)</li>
+                <li>Consistently hits 3–7 posts/week per channel target</li>
+                <li>Community engagement routine runs daily without reminders</li>
+                <li>Performance data logged weekly in Notion</li>
+                <li>No missed escalations (knows when to ask for help)</li>
+                <li>Demonstrates understanding of CaniCol model and winner economics</li>
+            </ul>
+        </section>
+
+        <!-- Change Log -->
+        <section class="section-card" id="changelog">
+            <h2 class="section-title">
+                <span class="section-icon">📝</span>
+                Change Log
+            </h2>
+            
+            <table>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Changes</th>
+                    <th>Canon Updates</th>
+                </tr>
+                <tr>
+                    <td><strong>v1.0</strong></td>
+                    <td>2025-12-11</td>
+                    <td>DriveOn SOP Factory (Claude)</td>
+                    <td>
+                        <ul>
+                            <li>Initial SOP creation</li>
+                            <li>Based on L2-03 Role Registry</li>
+                            <li>Integrated 2025 content calendar best practices</li>
+                            <li>Added AI prompt patterns</li>
+                            <li>Structured for junior execution</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>L2-03_Role_Registry_WIP_Limits_v1</li>
+                            <li>L2-08_Brand_Platform_Creative_Guardrails_v2</li>
+                            <li>L3-01_Discord_Infra_v1</li>
+                            <li>L3-04_Google_Drive_Infra_v1</li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <!-- Hidden JSON Structure -->
+    <script type="application/json" id="sop-structure">
+    {
+        "role_id": "P2-SM-ORGANIC-01",
+        "role_name": "Social Media & Organic Specialist",
+        "role_type": "SOCIAL_ORGANIC_SPECIALIST",
+        "pod": "P2",
+        "status": "CORE",
+        "version": "1.0",
+        "owned_gates": ["Organic channels for P2+ winners"],
+        "wip_limits": {
+            "active_brands": "3-5",
+            "content_calendars": "3-4",
+            "posts_per_week_per_channel": "3-7"
+        },
+        "weekly_throughput": {
+            "posts_published": "9-35 (across all brands/channels)",
+            "content_created": "10-20 pieces",
+            "engagement_responses": "daily"
+        },
+        "kpis": [
+            {"name": "Consistency", "definition": "100% scheduled posts published on time", "source": "L2-07"},
+            {"name": "Engagement Rate", "definition": "2.5-5% avg per post", "source": "Native analytics"},
+            {"name": "Follower Growth", "definition": "Organic, engaged followers (real growth)", "source": "Native analytics"}
+        ],
+        "workflows": [
+            {
+                "name": "New Winner → Organic Channel Setup",
+                "trigger": "P2_PASS winner confirmed",
+                "inputs": ["Product ID", "Winning ads from Drive", "Brand positioning", "Store URL"],
+                "steps": [
+                    "Evaluate organic potential",
+                    "Setup social channels (IG/TikTok/YT)",
+                    "Create Notion content calendar entry",
+                    "Create Drive folder structure",
+                    "Build 30-day content calendar",
+                    "Post setup notification"
+                ],
+                "outputs": ["Active channels", "Content calendar", "Drive folder"],
+                "handoffs": {"to": "Creative Director", "channel": "#p2-organic-social"},
+                "tools": ["Instagram", "TikTok", "YouTube", "Notion", "Drive", "Discord"]
+            },
+            {
+                "name": "Monthly Content Calendar Build",
+                "trigger": "Beginning of month OR new brand launch",
+                "inputs": ["Last month performance", "Available creatives", "Campaign calendar"],
+                "steps": [
+                    "Set monthly targets",
+                    "Audit available assets",
+                    "Map content pillars to calendar",
+                    "Schedule specific posts in Notion",
+                    "Leave 20% calendar space open",
+                    "Review with Creative Director"
+                ],
+                "outputs": ["30-day content calendar", "Asset requests", "ClickUp tasks"],
+                "handoffs": {"to": "Creative Director", "channel": "#p2-organic-social"},
+                "tools": ["Notion", "Drive", "ClickUp"]
+            },
+            {
+                "name": "Repurpose Winning Ad → Organic Post",
+                "trigger": "Scheduled calendar slot needs content",
+                "inputs": ["Winning ad file", "Ad performance data", "Brand voice guidelines"],
+                "steps": [
+                    "Download winning ad from Drive",
+                    "Adapt for organic format",
+                    "Edit in CapCut or Canva",
+                    "Write organic caption",
+                    "Add hashtags",
+                    "Export and save to Drive",
+                    "Update Notion calendar"
+                ],
+                "outputs": ["1 organic post ready", "File in Drive", "Notion updated"],
+                "handoffs": null,
+                "tools": ["Drive", "CapCut", "Canva", "Notion"]
+            },
+            {
+                "name": "Daily Community Engagement Routine",
+                "trigger": "Every morning OR after post publishes",
+                "inputs": ["Comments", "DMs", "Mentions"],
+                "steps": [
+                    "Check each active channel",
+                    "Respond to engagement within 2 hours",
+                    "Like and engage with 10-15 posts in niche",
+                    "Flag urgent issues",
+                    "Log engagement metrics in Notion"
+                ],
+                "outputs": ["All engagement addressed", "Sentiment logged", "Issues escalated"],
+                "handoffs": {"escalation_paths": ["Creative Director", "P3 Store Builder", "P4 PM"]},
+                "tools": ["Instagram", "TikTok", "YouTube", "Notion"]
+            },
+            {
+                "name": "Weekly Performance Review & Iteration",
+                "trigger": "End of week (Friday)",
+                "inputs": ["Native analytics", "Notion calendar", "Media Buyer data"],
+                "steps": [
+                    "Export weekly metrics",
+                    "Update Notion dashboard",
+                    "Identify patterns",
+                    "Adjust next week calendar",
+                    "Report to Creative Director",
+                    "Post weekly update in Discord"
+                ],
+                "outputs": ["Notion dashboard updated", "Calendar adjusted", "Weekly Discord update"],
+                "handoffs": {"to": "Creative Director", "channel": "#p2-organic-social"},
+                "tools": ["Native Analytics", "Notion", "Discord"]
+            }
+        ],
+        "day_in_life": [
+            {
+                "time_range": "9:00-10:30",
+                "focus": "Setup & Engagement",
+                "primary_workflows": ["Daily Community Engagement Routine"],
+                "outputs": ["Engaged community", "Performance snapshot"]
+            },
+            {
+                "time_range": "10:30-12:30",
+                "focus": "Content Creation",
+                "primary_workflows": ["Repurpose Winning Ad → Organic Post"],
+                "outputs": ["2-4 ready-to-schedule posts"]
+            },
+            {
+                "time_range": "13:00-15:30",
+                "focus": "Scheduling & Planning",
+                "primary_workflows": ["Monthly Content Calendar Build (partial)"],
+                "outputs": ["7-14 posts scheduled", "Next week planned"]
+            },
+            {
+                "time_range": "15:30-17:00",
+                "focus": "Review & Handoffs",
+                "primary_workflows": ["Weekly Performance Review (Friday only)"],
+                "outputs": ["Daily log complete", "Handoffs sent"]
+            }
+        ],
+        "tools": [
+            {"name": "Instagram Business", "use_case": "Primary organic channel", "access_level": "Admin"},
+            {"name": "TikTok Creator", "use_case": "Short-form video discovery", "access_level": "Admin"},
+            {"name": "YouTube Studio", "use_case": "Shorts publishing", "access_level": "Editor"},
+            {"name": "Canva Pro", "use_case": "Quick graphics", "access_level": "Editor"},
+            {"name": "CapCut", "use_case": "Mobile video editing", "access_level": "Creator"},
+            {"name": "Notion", "use_case": "Content calendar", "access_level": "Editor"},
+            {"name": "Google Drive", "use_case": "Asset storage", "access_level": "Editor"},
+            {"name": "Discord", "use_case": "Team communication", "access_level": "Member"},
+            {"name": "ClickUp", "use_case": "Task management", "access_level": "Editor"}
+        ],
+        "canon_references": [
+            "L0-02_Product_and_Brand_Architecture_v1",
+            "L1-01_CaniCol_Model_v4.0",
+            "L2-03_Role_Registry_and_WIP_Limits_v1",
+            "L2-07_Pod_KPIs_and_TestBank_v4.0",
+            "L2-08_DriveOn_Master_Brand_Platform_&_Creative_Guardrails_v2.0",
+            "L3-01_Discord_Infra_Blueprint_v1",
+            "L3-04_Google_Drive_Infra_Blueprint_v1"
+        ]
+    }
+    </script>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#00C8C8',
+                lineColor: '#666666',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Smooth scroll with offset for fixed header
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const headerOffset = 120;
+                const elementPosition = target.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Close mobile nav after click
+                if (window.innerWidth <= 1024) {
+                    document.querySelector('nav').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

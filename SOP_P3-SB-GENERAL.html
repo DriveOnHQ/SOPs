@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P3-SB-GENERAL – General/PMax Store Builder SOP</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --secondary-text: #555555;
+            --surface-white: #FFFFFF;
+            --surface-light: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success-green: #10B981;
+            --warning-yellow: #F59E0B;
+            --danger-red: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-light);
+        }
+
+        header {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .chip {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .chip-pod {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+        }
+
+        .chip-status {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .chip-wip {
+            background: var(--warning-yellow);
+            color: var(--carbon-black);
+        }
+
+        nav {
+            position: fixed;
+            right: 2rem;
+            top: 120px;
+            width: 200px;
+            background: var(--surface-white);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1rem;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+        }
+
+        nav h3 {
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary-text);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            color: var(--carbon-black);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.25rem 0;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--drive-cyan);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem 2rem 2rem;
+            margin-right: 260px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #008B8B 100%);
+            color: var(--carbon-black);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .key-outcomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .outcome-card {
+            background: rgba(255,255,255,0.9);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--carbon-black);
+        }
+
+        .outcome-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-text);
+        }
+
+        .outcome-card p {
+            font-weight: 600;
+        }
+
+        section {
+            background: var(--surface-white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--border-gray);
+        }
+
+        section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--carbon-black);
+            border-bottom: 2px solid var(--drive-cyan);
+            padding-bottom: 0.5rem;
+        }
+
+        section h3 {
+            font-size: 1.2rem;
+            margin: 1.5rem 0 1rem 0;
+            color: var(--carbon-black);
+        }
+
+        section h4 {
+            font-size: 1rem;
+            margin: 1rem 0 0.5rem 0;
+            color: var(--secondary-text);
+        }
+
+        .callout {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-canon {
+            background: #FEF3C7;
+            border-color: var(--warning-yellow);
+        }
+
+        .callout-warning {
+            background: #FEE2E2;
+            border-color: var(--danger-red);
+        }
+
+        .callout-tip {
+            background: #DBEAFE;
+            border-color: #3B82F6;
+        }
+
+        .callout-icon {
+            font-size: 1.2rem;
+            margin-right: 0.5rem;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--border-gray);
+        }
+
+        th {
+            background: var(--surface-light);
+            font-weight: 600;
+        }
+
+        code {
+            background: var(--surface-light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: transparent;
+            color: var(--surface-white);
+            padding: 0;
+        }
+
+        .handoff-card {
+            background: var(--surface-light);
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .handoff-card h4 {
+            margin-top: 0;
+            color: var(--drive-cyan);
+        }
+
+        .workflow-step {
+            background: var(--surface-light);
+            border-left: 4px solid var(--drive-cyan);
+            padding: 1rem;
+            margin: 0.75rem 0;
+            border-radius: 4px;
+        }
+
+        .workflow-step strong {
+            color: var(--drive-cyan);
+        }
+
+        details {
+            margin: 1rem 0;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 0;
+        }
+
+        summary {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            background: var(--surface-light);
+            border-radius: 8px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+
+        summary:hover {
+            background: #E5E5E5;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid var(--border-gray);
+            border-radius: 8px 8px 0 0;
+        }
+
+        details .content {
+            padding: 1.5rem;
+        }
+
+        .mermaid {
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                position: static;
+                width: 100%;
+                margin-bottom: 2rem;
+                max-height: none;
+            }
+
+            main {
+                margin-right: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            main {
+                padding: 0 1rem 1rem 1rem;
+            }
+
+            .key-outcomes {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .kpi-card {
+            background: var(--surface-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--drive-cyan);
+        }
+
+        .kpi-card .label {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-card .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-black);
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .timeline-block {
+            background: var(--surface-light);
+            border-left: 4px solid var(--drive-cyan);
+            padding: 1rem 1rem 1rem 1.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .timeline-block .time {
+            font-weight: 700;
+            color: var(--drive-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: var(--champagne);
+            color: var(--carbon-black);
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏪 P3-SB-GENERAL – General/PMax Store Builder</h1>
+        <div class="header-meta">
+            <span class="chip chip-pod">Pod 3 – Media & Store</span>
+            <span class="chip chip-status">CORE ROLE</span>
+            <span class="chip chip-wip">WIP: 3-4 structural | 4-6 collection</span>
+            <span>FTE: 1.0</span>
+            <span>Version: 1.0</span>
+        </div>
+    </header>
+
+    <nav>
+        <h3>Navigation</h3>
+        <ul>
+            <li><a href="#hero">Role Overview</a></li>
+            <li><a href="#purpose">Purpose & Context</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day">Day-in-the-Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">KPIs & Quality Bar</a></li>
+            <li><a href="#ai">AI Usage & Prompts</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation & Decisions</a></li>
+            <li><a href="#onboarding">Onboarding Checklist</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="hero" id="hero">
+            <h2>General/PMax Store Builder & SEO Specialist</h2>
+            <p><strong>Mission:</strong> Build and maintain the structural foundation of DriveOn's general catalog store—the SEO-friendly, Google Shopping-optimized storefront that aggregates winning products into a long-term compounding traffic and revenue engine.</p>
+            
+            <div class="key-outcomes">
+                <div class="outcome-card">
+                    <h4>You Own</h4>
+                    <p>General catalog store structure (collections, navigation, PDP templates, filters)</p>
+                </div>
+                <div class="outcome-card">
+                    <h4>You Enable</h4>
+                    <p>Organic search traffic, Google Shopping/PMax campaigns, long-term SEO compounding</p>
+                </div>
+                <div class="outcome-card">
+                    <h4>You Collaborate With</h4>
+                    <p>P3-SEO-GOOGLE (tight partnership), P3-MB-BUYER (PMax campaigns), P1 Research (product data)</p>
+                </div>
+            </div>
+        </div>
+
+        <section id="purpose">
+            <h2>1. Role Purpose & Context</h2>
+            
+            <h3>Why This Role Exists</h3>
+            <p>DriveOn Commerce operates a <strong>three-lane store routing strategy</strong> for winners that pass P2:</p>
+            <ul>
+                <li><strong>Validation Lane:</strong> Fast micro/1-page stores for P1/P2 testing</li>
+                <li><strong>Brand Lane:</strong> Deep brand/niche stores for premium winners</li>
+                <li><strong>General/SEO Lane (YOUR LANE):</strong> Catalog-style general store for Google Shopping, PMax, and organic search</li>
+            </ul>
+
+            <p>The <strong>General/SEO Lane</strong> is where DriveOn aggregates <strong>P2_PASS and P3 winners</strong> into a unified storefront optimized for:</p>
+            <ul>
+                <li><strong>Google Shopping feeds</strong> and PMax campaigns</li>
+                <li><strong>Organic search traffic</strong> through SEO-friendly collections, internal linking, and schema markup</li>
+                <li><strong>Long-term compounding revenue</strong> from products that graduate out of paid testing</li>
+            </ul>
+
+            <h3>How This Connects to CaniCol v4.0</h3>
+            <p>DriveOn tests <strong>45-60 products/month</strong> in P1/P2. Only <strong>4-6% become true winners</strong> (≈2-4 products/month). These winners need a home where they can generate revenue <strong>without ongoing high-spend paid media</strong>.</p>
+            
+            <p>The general catalog store is that home. Your job is to build the <strong>structural foundation</strong>—the collections, navigation, filters, PDP templates, and UX patterns—that make the store:</p>
+            <ul>
+                <li>Easy for Google to crawl and rank</li>
+                <li>Easy for shoppers to navigate and convert</li>
+                <li>Easy for the SEO specialist to optimize and scale</li>
+                <li>Compatible with Google Shopping feeds and PMax campaigns</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <span class="callout-icon">💡</span>
+                <strong>Key Insight:</strong> You're NOT building individual product landing pages (that's P3-SB-VALIDATION). You're building the <strong>container system</strong>—the collections, category pages, and navigation structure—that holds 20, 50, or 100+ products as DriveOn scales.
+            </div>
+        </section>
+
+        <section id="canon">
+            <h2>2. Canon Constraints</h2>
+            
+            <div class="callout callout-canon">
+                <span class="callout-icon">⚖️</span>
+                <strong>Canon Authority:</strong> L1-01 CaniCol Model, L2-03 Role Registry, L2-06 Scaling Tiers, L2-07 Pod KPIs
+            </div>
+
+            <h3>Non-Negotiable Economic & Volume Constraints</h3>
+            <ul>
+                <li><strong>Testing Volume:</strong> 45-60 products/month reach P1/P2</li>
+                <li><strong>Winner Rate:</strong> 4-6% true winners (≈2-4 products/month graduate to general store)</li>
+                <li><strong>Not Your Lane:</strong> P1/P2 validation stores, brand/niche stores (those are other roles)</li>
+                <li><strong>Your Lane:</strong> General catalog store—one unified storefront for SEO + Shopping</li>
+            </ul>
+
+            <h3>WIP & Throughput Constraints</h3>
+            <table>
+                <tr>
+                    <th>Constraint</th>
+                    <th>Value</th>
+                    <th>Source</th>
+                </tr>
+                <tr>
+                    <td>WIP – Structural Changes</td>
+                    <td>3-4 active</td>
+                    <td>L2-03</td>
+                </tr>
+                <tr>
+                    <td>WIP – Collection/Landing Tasks</td>
+                    <td>4-6 active</td>
+                    <td>L2-03</td>
+                </tr>
+                <tr>
+                    <td>Weekly Throughput</td>
+                    <td>4-6 catalog/collection improvements</td>
+                    <td>L2-03, L2-07</td>
+                </tr>
+                <tr>
+                    <td>FTE Standard</td>
+                    <td>1.0</td>
+                    <td>L2-03</td>
+                </tr>
+            </table>
+
+            <h3>Handoff & Collaboration Rules</h3>
+            <ul>
+                <li><strong>Tight Partnership with P3-SEO-GOOGLE:</strong> You build the structure, they optimize it. Weekly sync required.</li>
+                <li><strong>Products Enter Via:</strong> P2_PASS or P3_WINNER routing decisions from media buyer</li>
+                <li><strong>Feed Data Source:</strong> Product properties in Notion Product OS + Shopify metafields</li>
+                <li><strong>No Solo SEO Decisions:</strong> Schema, metadata, URL structure changes require P3-SEO-GOOGLE approval</li>
+            </ul>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">⚠️</span>
+                <strong>Common Failure Mode:</strong> Building collections or navigation WITHOUT coordinating with SEO specialist leads to keyword cannibalization, poor URL structure, and wasted crawl budget. Always sync before structural changes.
+            </div>
+        </section>
+
+        <section id="day">
+            <h2>3. Day-in-the-Life Timeline</h2>
+            
+            <p>Standard workday structure for P3-SB-GENERAL (1.0 FTE). Times are flexible but blocks should follow this sequence:</p>
+
+            <div class="timeline-block">
+                <div class="time">Block 1: Morning Setup & Prioritization (30-45 min)</div>
+                <ul>
+                    <li>Review ClickUp <code>General/SEO Store</code> list for new tasks</li>
+                    <li>Check #p3-general-seo Discord for overnight updates from SEO specialist</li>
+                    <li>Review Notion Product OS for new P2_PASS/P3 products ready for catalog</li>
+                    <li>Prioritize today's work: structural changes > collections > landing page tweaks</li>
+                </ul>
+            </div>
+
+            <div class="timeline-block">
+                <div class="time">Block 2: Structural Work (2-3 hours)</div>
+                <ul>
+                    <li><strong>Navigation updates:</strong> Add/edit menu items, mega-menu collections</li>
+                    <li><strong>Collection creation/editing:</strong> Build new category or niche collections</li>
+                    <li><strong>Filter setup:</strong> Configure Shopify filters for product attributes</li>
+                    <li><strong>Template updates:</strong> Edit PDP templates for schema/layout improvements</li>
+                </ul>
+                <div class="callout callout-tip">
+                    <span class="callout-icon">💡</span>
+                    <strong>Focus:</strong> This is deep work. Minimize interruptions. Use Shopify theme editor + page builders for complex layouts.
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="time">Block 3: Collection & Landing Page Tasks (1.5-2 hours)</div>
+                <ul>
+                    <li>Add new P2_PASS products to relevant collections</li>
+                    <li>Update collection descriptions with SEO-optimized copy (from P3-SEO-GOOGLE)</li>
+                    <li>Create/update collection landing pages with content modules</li>
+                    <li>Test collection filters and sorting options</li>
+                </ul>
+            </div>
+
+            <div class="timeline-block">
+                <div class="time">Block 4: Quality Checks & Handoffs (45-60 min)</div>
+                <ul>
+                    <li>Mobile responsive testing for new collections/pages</li>
+                    <li>Core Web Vitals check (load time, CLS, LCP) using PageSpeed Insights</li>
+                    <li>Shopping feed validation: ensure new products appear correctly in Merchant Center</li>
+                    <li>Update ClickUp tasks with completion notes + URLs</li>
+                    <li>Post handoff in #p3-general-seo for SEO specialist review</li>
+                </ul>
+            </div>
+
+            <div class="timeline-block">
+                <div class="time">Block 5: Weekly Sync & Planning (1 hour, 1x/week)</div>
+                <ul>
+                    <li>Weekly sync with P3-SEO-GOOGLE: review analytics, plan next structural changes</li>
+                    <li>Review Google Search Console data: which collections are gaining/losing traffic</li>
+                    <li>Plan upcoming collection strategy based on product pipeline (from P1 research)</li>
+                    <li>Identify technical debt: broken links, outdated templates, filter issues</li>
+                </ul>
+            </div>
+
+            <div class="mermaid">
+graph LR
+    A[Morning<br/>Setup] --> B[Structural<br/>Work]
+    B --> C[Collection<br/>Tasks]
+    C --> D[Quality<br/>Checks]
+    D --> E[Handoffs]
+    E --> F{Weekly<br/>Sync?}
+    F -->|Yes| G[Strategy<br/>Planning]
+    F -->|No| H[End Day]
+    G --> H
+    
+    style A fill:#00C8C8,color:#1A1A1A
+    style B fill:#F4E8D0
+    style C fill:#F4E8D0
+    style D fill:#10B981,color:white
+    style E fill:#00C8C8,color:#1A1A1A
+    style G fill:#3B82F6,color:white
+</div>
+        </section>
+
+        <section id="workflows">
+            <h2>4. Core Workflows</h2>
+
+            <details open>
+                <summary>Workflow 1: Create New Collection for Product Category</summary>
+                <div class="content">
+                    <p><strong>Trigger:</strong> 3+ P2_PASS products in same niche/category OR SEO specialist requests new collection for keyword targeting</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Notion Product OS: List of products in category</li>
+                        <li>Keyword research from P3-SEO-GOOGLE (target keywords, search volume)</li>
+                        <li>Existing collection structure (to avoid duplication/cannibalization)</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <div class="workflow-step">
+                        <strong>Step 1:</strong> Coordinate with P3-SEO-GOOGLE
+                        <ul>
+                            <li>Confirm target keywords and collection URL structure</li>
+                            <li>Get SEO-optimized collection title, description, meta description</li>
+                            <li>Verify this collection won't cannibalize existing pages</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 2:</strong> Create Collection in Shopify Admin
+                        <ul>
+                            <li>Products > Collections > Create collection</li>
+                            <li>Set collection type: Manual or Automated (based on product tags/type)</li>
+                            <li>Add collection title (keyword-rich, from SEO specialist)</li>
+                            <li>Add collection description (SEO-optimized copy, 150-300 words)</li>
+                            <li>Set collection image (high-quality, relevant to niche)</li>
+                            <li>Configure SEO settings: URL handle, meta title, meta description</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 3:</strong> Add Products to Collection
+                        <ul>
+                            <li>If automated: Set conditions (product type, tags, vendor)</li>
+                            <li>If manual: Add products one by one from Product OS list</li>
+                            <li>Set product order: Bestselling, Manual, Price (low to high), etc.</li>
+                            <li>Verify all products display correctly with images and pricing</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 4:</strong> Configure Collection Page Layout
+                        <ul>
+                            <li>Use theme editor or page builder (PageFly/GemPages) to customize layout</li>
+                            <li>Add content modules: hero banner, category description, trust badges</li>
+                            <li>Configure filters: price, tags, product type, custom attributes</li>
+                            <li>Set up sorting options: Bestselling, Price, Newest</li>
+                            <li>Add schema markup (BreadcrumbList, CollectionPage) if not automated</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 5:</strong> Update Navigation
+                        <ul>
+                            <li>Add collection to main navigation menu (if top-level category)</li>
+                            <li>Add to mega-menu or dropdown (if sub-category)</li>
+                            <li>Update footer links if relevant</li>
+                            <li>Test navigation on desktop and mobile</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 6:</strong> Quality Checks
+                        <ul>
+                            <li>Mobile responsive test (all breakpoints)</li>
+                            <li>Page speed test (PageSpeed Insights, target LCP < 2.5s)</li>
+                            <li>Filter functionality test (all combinations)</li>
+                            <li>Shopping feed validation (check Google Merchant Center)</li>
+                            <li>Internal linking check (breadcrumbs, related collections)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li><strong>Live collection URL:</strong> driveon.com/collections/[collection-slug]</li>
+                        <li><strong>ClickUp task updated:</strong> Status = Done, URL added, QA checklist completed</li>
+                        <li><strong>Handoff in #p3-general-seo:</strong> Collection live, ready for SEO optimization</li>
+                        <li><strong>Notion Product OS updated:</strong> Products linked to collection</li>
+                    </ul>
+
+                    <h4>Quality Bar</h4>
+                    <ul>
+                        <li>Collection loads in < 3 seconds on mobile (4G)</li>
+                        <li>All products display with correct images, prices, titles</li>
+                        <li>Filters work on all devices</li>
+                        <li>Breadcrumbs and navigation are correct</li>
+                        <li>Meta title < 60 characters, meta description < 160 characters</li>
+                        <li>No 404 errors, no broken images</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>Workflow 2: Update PDP Template for New Product Attributes</summary>
+                <div class="content">
+                    <p><strong>Trigger:</strong> New product type requires additional fields (e.g., sizing chart, material specifications) OR SEO specialist requests schema/layout changes</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Template change request from P3-SEO-GOOGLE or media buyer</li>
+                        <li>Product attribute requirements (from Product OS or research packets)</li>
+                        <li>Current PDP template structure</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <div class="workflow-step">
+                        <strong>Step 1:</strong> Assess Template Change Scope
+                        <ul>
+                            <li>Determine if this is a global template change or product-type-specific</li>
+                            <li>Identify which products will be affected</li>
+                            <li>Check for conflicts with existing metafields or custom fields</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 2:</strong> Create/Update Metafields (if needed)
+                        <ul>
+                            <li>Shopify Admin > Settings > Custom data > Products</li>
+                            <li>Add new metafield definitions (e.g., product.specs.material, product.specs.dimensions)</li>
+                            <li>Set field type (single line text, multi-line, number, file, etc.)</li>
+                            <li>Set validation rules if applicable</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 3:</strong> Edit PDP Template
+                        <ul>
+                            <li>Theme editor > Sections > Product template</li>
+                            <li>Add new content blocks for attributes (specs table, sizing chart, etc.)</li>
+                            <li>Use liquid tags to display metafields: <code>{{ product.metafields.specs.material }}</code></li>
+                            <li>Style new elements to match existing design system</li>
+                            <li>Add schema markup for new attributes (Product, Offer, AggregateRating)</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 4:</strong> Test Template Changes
+                        <ul>
+                            <li>Preview template on 3-5 representative products</li>
+                            <li>Test on desktop, tablet, mobile</li>
+                            <li>Verify metafields display correctly (or gracefully hide if empty)</li>
+                            <li>Check page speed impact (compare before/after)</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 5:</strong> Populate Metafields for Existing Products
+                        <ul>
+                            <li>Bulk edit via Shopify Admin or CSV import</li>
+                            <li>Coordinate with P1 research or P3-SB-VALIDATION for data</li>
+                            <li>QA sample of updated products</li>
+                        </ul>
+                    </div>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li><strong>Updated PDP template:</strong> Live on all affected products</li>
+                        <li><strong>Metafield documentation:</strong> Added to Notion/Drive for future reference</li>
+                        <li><strong>Handoff notes:</strong> Posted in #p3-general-seo with before/after examples</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>Workflow 3: Implement Navigation/Filter Changes for SEO</summary>
+                <div class="content">
+                    <p><strong>Trigger:</strong> SEO specialist requests navigation changes based on search console data OR filter optimization for product discovery</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Change request from P3-SEO-GOOGLE with specific keywords/structure</li>
+                        <li>Google Search Console data showing high-impression, low-CTR queries</li>
+                        <li>Current navigation structure and filter setup</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <div class="workflow-step">
+                        <strong>Step 1:</strong> Map New Navigation Structure
+                        <ul>
+                            <li>Review proposed changes with SEO specialist</li>
+                            <li>Sketch navigation hierarchy (top-level > sub-categories > filters)</li>
+                            <li>Identify URL structure implications (301 redirects needed?)</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 2:</strong> Update Main Navigation
+                        <ul>
+                            <li>Shopify Admin > Online Store > Navigation</li>
+                            <li>Edit main menu: add/remove/reorder items</li>
+                            <li>Update mega-menu dropdowns (if using custom theme/app)</li>
+                            <li>Set up mobile menu behavior</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 3:</strong> Configure Advanced Filters
+                        <ul>
+                            <li>Use Shopify's native filters OR filter app (Search & Discovery, Product Filter & Search)</li>
+                            <li>Add filter options: price, product type, tags, custom attributes</li>
+                            <li>Set filter display order and grouping</li>
+                            <li>Enable URL parameter tracking for filtered pages (for SEO/analytics)</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 4:</strong> Internal Linking Updates
+                        <ul>
+                            <li>Add breadcrumbs to all product/collection pages</li>
+                            <li>Update footer links to reflect new navigation</li>
+                            <li>Add "related collections" modules to PDPs</li>
+                            <li>Implement faceted navigation breadcrumbs for filtered views</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 5:</strong> 301 Redirect Setup (if URLs changed)
+                        <ul>
+                            <li>Identify old URLs that changed</li>
+                            <li>Set up 301 redirects in Shopify Admin > Navigation > URL Redirects</li>
+                            <li>Test all redirects (use redirect checker tool)</li>
+                            <li>Update sitemap (usually auto-updates in Shopify)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li><strong>Live navigation changes:</strong> Main menu, mobile menu, footer updated</li>
+                        <li><strong>Filter system:</strong> Active on all collection pages</li>
+                        <li><strong>Redirect log:</strong> Documented in Notion/Drive</li>
+                        <li><strong>Handoff to SEO:</strong> Changes live, ready for Search Console monitoring</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details>
+                <summary>Workflow 4: Add New P2_PASS Product to General Catalog</summary>
+                <div class="content">
+                    <p><strong>Trigger:</strong> Product passes P2 testing and is routed to General/SEO lane</p>
+                    
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li>Notion Product OS: Product marked as P2_PASS, Lane = General/SEO</li>
+                        <li>Product data: title, description, images, variants, pricing (from validation store or P1 research)</li>
+                        <li>Category/collection assignment from SEO specialist</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <div class="workflow-step">
+                        <strong>Step 1:</strong> Verify Product Data
+                        <ul>
+                            <li>Check Shopify product page: title, description, images, variants, pricing</li>
+                            <li>Verify metafields are populated (specs, features, shipping info)</li>
+                            <li>Ensure product status = Active</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 2:</strong> Assign to Collections
+                        <ul>
+                            <li>Add product to 2-4 relevant collections (category, niche, best-sellers, new arrivals)</li>
+                            <li>Set product order within collections (manual or auto-sort)</li>
+                            <li>Verify product displays correctly in collection views</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 3:</strong> Optimize PDP for Catalog Store
+                        <ul>
+                            <li>Switch product to catalog PDP template (vs validation store template)</li>
+                            <li>Add related products module</li>
+                            <li>Add reviews/rating widget (if using review app)</li>
+                            <li>Add trust badges, shipping info, return policy</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 4:</strong> Shopping Feed Verification
+                        <ul>
+                            <li>Check Google Merchant Center: product should appear in feed within 24 hours</li>
+                            <li>Verify product data: title, image, price, availability, GTIN (if applicable)</li>
+                            <li>Fix any feed errors flagged by Merchant Center</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-step">
+                        <strong>Step 5:</strong> Update Tracking & Handoff
+                        <ul>
+                            <li>Update Notion Product OS: Catalog_Added = True, Collections_Added = [list]</li>
+                            <li>Update ClickUp task: Status = Done</li>
+                            <li>Post in #p3-general-seo: Product live in catalog, ready for SEO optimization</li>
+                        </ul>
+                    </div>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li><strong>Product live in general catalog:</strong> Accessible via collections and search</li>
+                        <li><strong>Shopping feed updated:</strong> Product appears in Google Merchant Center</li>
+                        <li><strong>Notion/ClickUp updated:</strong> Product status reflects catalog addition</li>
+                    </ul>
+                </div>
+            </details>
+
+            <div class="mermaid">
+graph TD
+    A[New P2_PASS Product] --> B{Lane Routing}
+    B -->|Validation| C[P3-SB-VALIDATION]
+    B -->|Brand| D[P3-SB-BRAND]
+    B -->|General/SEO| E[P3-SB-GENERAL]
+    
+    E --> F[Verify Product Data]
+    F --> G[Assign to Collections]
+    G --> H[Optimize PDP]
+    H --> I[Feed Verification]
+    I --> J[Handoff to SEO]
+    
+    J --> K[P3-SEO-GOOGLE<br/>Optimization]
+    K --> L[Organic Traffic<br/>+ Shopping Campaigns]
+    
+    style E fill:#00C8C8,color:#1A1A1A
+    style J fill:#10B981,color:white
+    style L fill:#3B82F6,color:white
+</div>
+        </section>
+
+        <section id="handoffs">
+            <h2>5. Handoffs & Interface Specs</h2>
+
+            <div class="handoff-card">
+                <h4>📥 INBOUND: From P3-MB-BUYER (Media Buyer)</h4>
+                <p><strong>Trigger:</strong> Product passes P2, routed to General/SEO lane</p>
+                <p><strong>Channel:</strong> Notion Product OS update + #p3-general-seo notification</p>
+                <p><strong>Required Inputs:</strong></p>
+                <ul>
+                    <li>Product_ID with Lane = "General/SEO"</li>
+                    <li>Product data complete in Shopify (images, description, variants)</li>
+                    <li>Performance data from P2 test (CTR, CPC, AOV, ROAS)</li>
+                </ul>
+                <p><strong>Expected Response Time:</strong> Add to collections within 48 hours</p>
+            </div>
+
+            <div class="handoff-card">
+                <h4>📥 INBOUND: From P3-SEO-GOOGLE (SEO Specialist)</h4>
+                <p><strong>Trigger:</strong> SEO specialist identifies optimization opportunity from Search Console data</p>
+                <p><strong>Channel:</strong> ClickUp task in <code>General/SEO Store</code> list + #p3-general-seo</p>
+                <p><strong>Required Inputs:</strong></p>
+                <ul>
+                    <li>Target keywords and search volume data</li>
+                    <li>Proposed URL structure or collection name</li>
+                    <li>SEO-optimized copy (title, description, meta tags)</li>
+                    <li>Priority level (urgent/high/normal)</li>
+                </ul>
+                <p><strong>Expected Response Time:</strong> Acknowledge within 24 hours, implement within 3-5 business days</p>
+            </div>
+
+            <div class="handoff-card">
+                <h4>📤 OUTBOUND: To P3-SEO-GOOGLE (SEO Specialist)</h4>
+                <p><strong>Trigger:</strong> Structural change completed (new collection, navigation update, template change)</p>
+                <p><strong>Channel:</strong> #p3-general-seo + ClickUp task comment</p>
+                <p><strong>Required Outputs:</strong></p>
+                <ul>
+                    <li>Live URL(s) of changed pages</li>
+                    <li>Before/after screenshots (for significant changes)</li>
+                    <li>List of affected products/collections</li>
+                    <li>Any technical notes (redirects, schema changes, etc.)</li>
+                </ul>
+                <p><strong>Template Message:</strong></p>
+                <pre><code>[HANDOFF]
+From: P3-SB-GENERAL
+To: P3-SEO-GOOGLE
+
+Change Type: [New Collection / Navigation Update / Template Change]
+URLs Affected: [list]
+Products Added: [count]
+
+Technical Notes:
+- [Any redirects, metafields, schema changes]
+
+Ready For:
+☐ On-page SEO optimization
+☐ Internal linking updates
+☐ Search Console monitoring
+
+QA Checklist:
+✓ Mobile responsive
+✓ Page speed < 3s
+✓ Filters functional
+✓ Shopping feed validated
+✓ Breadcrumbs correct
+
+Live: [URL]
+ClickUp Task: [link]</code></pre>
+            </div>
+
+            <div class="handoff-card">
+                <h4>📤 OUTBOUND: To P3-MB-BUYER (for PMax Campaigns)</h4>
+                <p><strong>Trigger:</strong> New collection created that's suitable for PMax asset group</p>
+                <p><strong>Channel:</strong> #p3-general-seo notification</p>
+                <p><strong>Required Outputs:</strong></p>
+                <ul>
+                    <li>Collection URL</li>
+                    <li>Product count in collection</li>
+                    <li>Average AOV and margin for products in collection</li>
+                    <li>Recommended campaign structure (if applicable)</li>
+                </ul>
+            </div>
+
+            <h3>Weekly Sync Cadence</h3>
+            <p><strong>P3-SB-GENERAL ↔ P3-SEO-GOOGLE Weekly Sync (60 min)</strong></p>
+            <ul>
+                <li><strong>Agenda:</strong>
+                    <ul>
+                        <li>Review Search Console data: which collections are gaining/losing traffic</li>
+                        <li>Identify structural optimization opportunities</li>
+                        <li>Plan upcoming collection builds based on product pipeline</li>
+                        <li>Technical debt review: broken links, outdated templates, filter issues</li>
+                    </ul>
+                </li>
+                <li><strong>Outputs:</strong> Prioritized backlog in ClickUp, SEO optimization roadmap</li>
+            </ul>
+        </section>
+
+        <section id="kpis">
+            <h2>6. KPIs & Quality Bar</h2>
+
+            <h3>Primary KPIs (from L2-07)</h3>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="label">Weekly Throughput</div>
+                    <div class="value">4-6</div>
+                    <small>Catalog/collection improvements per week</small>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Structural Changes WIP</div>
+                    <div class="value">3-4</div>
+                    <small>Active structural projects</small>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Collection/Landing WIP</div>
+                    <div class="value">4-6</div>
+                    <small>Active collection tasks</small>
+                </div>
+                <div class="kpi-card">
+                    <div class="label">Products Added/Week</div>
+                    <div class="value">2-4</div>
+                    <small>New P2_PASS products to catalog</small>
+                </div>
+            </div>
+
+            <h3>Quality Standards</h3>
+            
+            <h4>Technical Quality Bar</h4>
+            <ul>
+                <li><strong>Page Speed:</strong> LCP < 2.5s on mobile (4G), CLS < 0.1</li>
+                <li><strong>Mobile Responsive:</strong> All layouts functional on 320px, 768px, 1024px, 1440px breakpoints</li>
+                <li><strong>Browser Compatibility:</strong> Chrome, Safari, Firefox, Edge (latest 2 versions)</li>
+                <li><strong>Accessibility:</strong> ARIA labels on interactive elements, sufficient color contrast (4.5:1)</li>
+                <li><strong>Feed Validation:</strong> 100% of products pass Google Merchant Center validation</li>
+            </ul>
+
+            <h4>SEO Quality Bar (in partnership with P3-SEO-GOOGLE)</h4>
+            <ul>
+                <li><strong>Meta Tags:</strong> Title < 60 chars, description < 160 chars, keyword-optimized</li>
+                <li><strong>URL Structure:</strong> Clean, keyword-rich, hyphen-separated (e.g., /collections/sleep-aids)</li>
+                <li><strong>Schema Markup:</strong> Product, Offer, BreadcrumbList, AggregateRating on all PDPs</li>
+                <li><strong>Internal Linking:</strong> Breadcrumbs on all pages, related collections on PDPs</li>
+                <li><strong>Image Optimization:</strong> Alt tags on all images, file names descriptive, < 200KB per image</li>
+            </ul>
+
+            <h4>UX Quality Bar</h4>
+            <ul>
+                <li><strong>Navigation Clarity:</strong> 3-click rule (any product reachable in 3 clicks from homepage)</li>
+                <li><strong>Filter Functionality:</strong> Filters work on all devices, maintain URL state, reset properly</li>
+                <li><strong>Collection Layouts:</strong> Consistent grid, clear product info (image, title, price, rating)</li>
+                <li><strong>Product Discovery:</strong> Related products, recently viewed, "customers also bought" modules</li>
+            </ul>
+
+            <div class="callout callout-tip">
+                <span class="callout-icon">💡</span>
+                <strong>Good vs Bad Examples:</strong>
+                <ul>
+                    <li><strong>GOOD:</strong> Collection "Sleep Aids & Relaxation" with 15 products, keyword-optimized description, filters for price/rating/type, fast load time, mobile-friendly</li>
+                    <li><strong>BAD:</strong> Collection "Products" with 100+ mixed items, no description, slow load time, broken filters on mobile, no breadcrumbs</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="ai">
+            <h2>7. AI Usage & Prompt Patterns</h2>
+
+            <h3>Where AI Helps This Role</h3>
+            <ul>
+                <li><strong>Collection Description Writing:</strong> Draft SEO-optimized descriptions from product lists</li>
+                <li><strong>Schema Markup Generation:</strong> Create Product/Offer JSON-LD from product data</li>
+                <li><strong>Filter Configuration:</strong> Plan filter logic from product attributes</li>
+                <li><strong>URL Structure Planning:</strong> Generate SEO-friendly URL schemes</li>
+                <li><strong>QA Checklist Automation:</strong> Create testing checklists for new features</li>
+            </ul>
+
+            <h3>Ready-to-Use AI Prompts</h3>
+
+            <details>
+                <summary>Prompt 1: Generate Collection Description (SEO-Optimized)</summary>
+                <div class="content">
+                    <pre><code>I need an SEO-optimized collection description for a Shopify collection.
+
+Collection Details:
+- Name: [Collection Name]
+- Target Keywords: [keyword1, keyword2, keyword3]
+- Products in Collection: [brief list or categories]
+- Target Audience: [avatar description]
+- Unique Value Proposition: [what makes these products special]
+
+Requirements:
+1. 150-300 words
+2. Natural keyword integration (no keyword stuffing)
+3. Include a clear value proposition in the first 2 sentences
+4. Address customer pain points
+5. End with a soft call-to-action
+6. Use simple, clear language (8th grade reading level)
+7. Include internal linking opportunities (mention related collections naturally)
+
+Please output:
+1. Collection description (body text)
+2. Meta description (< 160 characters)
+3. Page title suggestion (< 60 characters, keyword-optimized)</code></pre>
+                </div>
+            </details>
+
+            <details>
+                <summary>Prompt 2: Generate Product Schema Markup (JSON-LD)</summary>
+                <div class="content">
+                    <pre><code>Generate Product schema markup (JSON-LD) for a Shopify product.
+
+Product Data:
+- Name: [Product Name]
+- Description: [short description]
+- Brand: [DriveOn Commerce or specific brand]
+- SKU: [SKU]
+- Price: [USD amount]
+- Currency: USD
+- Availability: InStock
+- Image URLs: [list of image URLs]
+- Rating (if available): [average rating] out of 5
+- Review Count (if available): [number]
+
+Requirements:
+1. Use Product schema from schema.org
+2. Include Offer schema nested inside Product
+3. Include AggregateRating if review data is available
+4. Include breadcrumb schema (BreadcrumbList) from homepage → collection → product
+5. Ensure all required properties are included
+6. Output valid JSON-LD that can be inserted into a Shopify theme template
+
+Please output:
+1. Complete JSON-LD schema markup
+2. Liquid template code showing where to insert this in a Shopify theme (with metafield references where applicable)</code></pre>
+                </div>
+            </details>
+
+            <details>
+                <summary>Prompt 3: Plan Filter Logic for Collection</summary>
+                <div class="content">
+                    <pre><code>I'm setting up product filters for a Shopify collection. Help me plan the filter configuration.
+
+Collection Context:
+- Collection Name: [Collection Name]
+- Product Types in Collection: [list product types]
+- Product Attributes: [list all attributes: tags, price range, variants, custom metafields]
+- Target Customer: [who shops this collection]
+- Typical Use Cases: [how customers browse this collection]
+
+Current Filter Capabilities:
+- Shopify native filters (tags, price, product type, variants)
+- Custom metafields available: [list if any]
+
+Requirements:
+1. Recommend 3-5 filter options that are most useful for this collection
+2. Prioritize filters that help customers narrow down choices without overwhelming them
+3. Consider mobile UX (fewer filters on mobile)
+4. Suggest filter display order (most important → least important)
+5. Recommend which filters should be multi-select vs single-select
+6. Identify any missing product attributes that would make filters more useful
+
+Please output:
+1. Recommended filter configuration (filter name, type, options)
+2. Display order and rationale
+3. Mobile vs desktop recommendations
+4. Any product tagging or metafield standardization needed to support these filters</code></pre>
+                </div>
+            </details>
+
+            <h3>Human Checkpoints (Always Review AI Output)</h3>
+            <ul>
+                <li><strong>SEO Copy:</strong> Verify keyword density is natural (< 2-3% for primary keyword)</li>
+                <li><strong>Schema Markup:</strong> Validate JSON-LD using Google's Rich Results Test</li>
+                <li><strong>URLs:</strong> Ensure URLs follow Shopify best practices (lowercase, hyphens, no special chars)</li>
+                <li><strong>Technical Specs:</strong> Double-check all Liquid template code before deploying to theme</li>
+            </ul>
+        </section>
+
+        <section id="tools">
+            <h2>8. Tools & Systems Reference</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use Case</th>
+                        <th>Key Features / Views</th>
+                        <th>Access Level</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Shopify Admin</strong></td>
+                        <td>Store management, product/collection editing</td>
+                        <td>Products, Collections, Navigation, Themes, Apps</td>
+                        <td>Admin (full access)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Shopify Theme Editor</strong></td>
+                        <td>Template customization, layout editing</td>
+                        <td>Visual editor, code editor (Liquid), preview</td>
+                        <td>Admin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PageFly / GemPages</strong></td>
+                        <td>Advanced landing pages, collection page customization</td>
+                        <td>Drag-drop builder, templates, responsive design</td>
+                        <td>Admin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ClickUp</strong></td>
+                        <td>Task management, workflow tracking</td>
+                        <td>Space: <code>P3 -- Media & Store</code><br/>List: <code>General/SEO Store</code></td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notion</strong></td>
+                        <td>Product database, knowledge base</td>
+                        <td>DB: <code>Product OS</code>, <code>SOP Library</code></td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Drive</strong></td>
+                        <td>File storage, asset backups</td>
+                        <td>Path: <code>/04_P3_Media_and_Stores/Stores/03_General_SEO_Store</code></td>
+                        <td>Editor</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Discord</strong></td>
+                        <td>Team communication, handoffs</td>
+                        <td>Channel: <code>#p3-general-seo</code></td>
+                        <td>Member</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Merchant Center</strong></td>
+                        <td>Shopping feed monitoring, product validation</td>
+                        <td>Products, Diagnostics, Feed rules</td>
+                        <td>Viewer (read-only, SEO specialist owns)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Search Console</strong></td>
+                        <td>SEO monitoring, collection performance</td>
+                        <td>Performance, Coverage, Enhancements</td>
+                        <td>Viewer (read-only, SEO specialist owns)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PageSpeed Insights</strong></td>
+                        <td>Page speed testing, Core Web Vitals</td>
+                        <td>Performance scores, diagnostics, recommendations</td>
+                        <td>Public tool (no login)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Workspace Bindings</h3>
+            
+            <h4>ClickUp</h4>
+            <ul>
+                <li><strong>Space:</strong> P3 -- Media & Store</li>
+                <li><strong>Folder:</strong> Stores</li>
+                <li><strong>List:</strong> General/SEO Store</li>
+                <li><strong>Custom Fields:</strong> Product_ID, Store_ID (STR-GEN-main), Task_Key, Priority_Level</li>
+                <li><strong>Statuses:</strong> Backlog → Active → Review → Done → Archived</li>
+            </ul>
+
+            <h4>Notion</h4>
+            <ul>
+                <li><strong>Primary DB:</strong> Product OS (filter: Lane = "General/SEO")</li>
+                <li><strong>Key Properties:</strong> Product_ID, Current_Gate, Lane, Catalog_Added, Collections_Added</li>
+                <li><strong>Primary View:</strong> "General/SEO Products" (filter: Lane = General/SEO, Status = Active)</li>
+            </ul>
+
+            <h4>Google Drive</h4>
+            <ul>
+                <li><strong>Path:</strong> /DriveOn Commerce/04_P3_Media_and_Stores/Stores/03_General_SEO_Store</li>
+                <li><strong>Subfolders:</strong>
+                    <ul>
+                        <li>01_Configs_and_Backups (theme exports, metafield docs)</li>
+                        <li>02_Assets (collection banners, category images)</li>
+                        <li>03_Copy_and_Pages (collection descriptions, SEO copy)</li>
+                        <li>04_Tracking_and_Feeds (feed exports, schema docs)</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>Discord</h4>
+            <ul>
+                <li><strong>Primary Channel:</strong> #p3-general-seo</li>
+                <li><strong>Message Types:</strong> Handoffs, updates, questions for SEO specialist</li>
+                <li><strong>Pinned:</strong> Handoff template, weekly sync agenda</li>
+            </ul>
+        </section>
+
+        <section id="escalation">
+            <h2>9. Escalation & Decision Rights</h2>
+
+            <h3>Decisions You Own (No Approval Needed)</h3>
+            <ul>
+                <li>Adding new products to existing collections</li>
+                <li>Updating collection order/sorting</li>
+                <li>Minor layout tweaks within existing templates</li>
+                <li>Filter configuration (price, tags, product type)</li>
+                <li>Image optimization and asset management</li>
+                <li>Quality checks and bug fixes</li>
+            </ul>
+
+            <h3>Decisions Requiring P3-SEO-GOOGLE Approval</h3>
+            <ul>
+                <li>Creating new collections (keyword/URL implications)</li>
+                <li>Changing navigation structure</li>
+                <li>Modifying URL handles or redirects</li>
+                <li>Schema markup changes</li>
+                <li>Meta tag strategy changes</li>
+                <li>Internal linking structure changes</li>
+            </ul>
+
+            <h3>Decisions Requiring PM or Integrator</h3>
+            <ul>
+                <li>Major template overhauls (affects multiple products)</li>
+                <li>New app installations (cost/complexity implications)</li>
+                <li>Theme changes (switching themes)</li>
+                <li>Structural changes that affect brand/validation stores</li>
+                <li>Changes that require developer support</li>
+            </ul>
+
+            <h3>When to Escalate</h3>
+
+            <div class="callout callout-warning">
+                <span class="callout-icon">⚠️</span>
+                <strong>Escalate Immediately If:</strong>
+                <ul>
+                    <li>Shopping feed has critical errors affecting > 10% of products</li>
+                    <li>Site-wide technical issue (broken navigation, filter errors, slow load times)</li>
+                    <li>Conflict between SEO requirements and UX/conversion best practices</li>
+                    <li>Scope creep: request requires > 1 week of work</li>
+                    <li>Unclear requirements or conflicting inputs from stakeholders</li>
+                </ul>
+            </div>
+
+            <h3>Expected Response Times</h3>
+            <table>
+                <tr>
+                    <th>Escalation Type</th>
+                    <th>Channel</th>
+                    <th>Response Time</th>
+                </tr>
+                <tr>
+                    <td>SEO-related question</td>
+                    <td>#p3-general-seo (@ P3-SEO-GOOGLE)</td>
+                    <td>< 4 hours (business hours)</td>
+                </tr>
+                <tr>
+                    <td>Technical blocker (theme/app issue)</td>
+                    <td>#p4-systems-ops + ClickUp task</td>
+                    <td>< 24 hours</td>
+                </tr>
+                <tr>
+                    <td>Scope/priority question</td>
+                    <td>ClickUp comment + PM tag</td>
+                    <td>< 24 hours</td>
+                </tr>
+                <tr>
+                    <td>Critical site issue</td>
+                    <td>Discord DM to Integrator + #p4-systems-ops</td>
+                    <td>Immediate</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="onboarding">
+            <h2>10. Onboarding Checklist</h2>
+
+            <h3>Phase 1: Access & Setup (Days 1-2)</h3>
+            <ul class="checklist">
+                <li>Shopify Admin access (admin level)</li>
+                <li>Theme editor access</li>
+                <li>PageFly/GemPages access (if used)</li>
+                <li>ClickUp access (P3 space, General/SEO Store list)</li>
+                <li>Notion access (Product OS, SOP Library)</li>
+                <li>Google Drive access (/04_P3_Media_and_Stores/Stores/03_General_SEO_Store)</li>
+                <li>Discord access (#p3-general-seo)</li>
+                <li>Google Merchant Center access (viewer)</li>
+                <li>Google Search Console access (viewer)</li>
+            </ul>
+
+            <h3>Phase 2: Canon & Context (Days 2-3)</h3>
+            <ul class="checklist">
+                <li>Read: L1-01 CaniCol Model v4.0 (understand testing philosophy)</li>
+                <li>Read: L2-03 Role Registry (your WIP limits and throughput targets)</li>
+                <li>Read: L2-06 Scaling Tiers & P3 Strategy (understand lane routing)</li>
+                <li>Read: L2-07 Pod KPIs (your KPIs and quality standards)</li>
+                <li>Review: Current general catalog store (browse live site)</li>
+                <li>Review: Existing collections and navigation structure</li>
+                <li>Review: Notion Product OS (products in General/SEO lane)</li>
+            </ul>
+
+            <h3>Phase 3: Shadowing & First Tasks (Days 4-7)</h3>
+            <ul class="checklist">
+                <li>Shadow P3-SEO-GOOGLE for 1-2 hours (understand SEO priorities)</li>
+                <li>Attend weekly sync meeting (observe workflow)</li>
+                <li>Complete first supervised task: Add 1 product to existing collections</li>
+                <li>Complete second supervised task: Update collection description (SEO-provided copy)</li>
+                <li>Complete third supervised task: Create QA checklist for a collection page</li>
+                <li>Review: PageSpeed Insights results for 3-5 key collection pages</li>
+            </ul>
+
+            <h3>Phase 4: First Independent Deliverables (Week 2)</h3>
+            <ul class="checklist">
+                <li>Independent task 1: Add 3-5 new P2_PASS products to catalog (full workflow)</li>
+                <li>Independent task 2: Create new collection from scratch (with SEO coordination)</li>
+                <li>Independent task 3: Implement filter changes on existing collection</li>
+                <li>Independent task 4: Complete handoff to P3-SEO-GOOGLE (use template)</li>
+                <li>Complete: First weekly sync co-facilitation with SEO specialist</li>
+            </ul>
+
+            <h3>Phase 5: 30-Day Review (End of Month 1)</h3>
+            <ul class="checklist">
+                <li>Self-assessment: Completed X collections, Y products added (compare to targets)</li>
+                <li>Review meeting with Integrator/PM: Discuss quality, pace, blockers</li>
+                <li>KPI check: Are you hitting 4-6 improvements/week?</li>
+                <li>Identify: Top 3 skills to develop in next 30 days</li>
+                <li>Confirm: Independent operator status or need additional shadowing</li>
+            </ul>
+
+            <h3>Onboarding Success Criteria</h3>
+            <div class="callout callout-tip">
+                <span class="callout-icon">✅</span>
+                <strong>You're ready for independent operation when you can:</strong>
+                <ul>
+                    <li>Add a new P2_PASS product to catalog in < 2 hours (end-to-end)</li>
+                    <li>Create a new collection from scratch in < 4 hours (with SEO coordination)</li>
+                    <li>Complete a handoff to SEO specialist using the standard template (no supervision)</li>
+                    <li>Identify and fix basic technical issues (broken filters, slow load times) without escalation</li>
+                    <li>Maintain WIP discipline (3-4 structural, 4-6 collection tasks max)</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="changelog">
+            <h2>11. Change Log</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Version</th>
+                        <th>Date</th>
+                        <th>Author</th>
+                        <th>Changes</th>
+                        <th>Canon Updates Triggered By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.0</td>
+                        <td>2025-12-09</td>
+                        <td>DriveOn SOP Factory v4</td>
+                        <td>Initial release. Complete SOP for P3-SB-GENERAL role covering all workflows, handoffs, KPIs, and onboarding.</td>
+                        <td>L1-01 CaniCol v4.0, L2-03 Role Registry v1, L2-06 Scaling Tiers v4.0, L2-07 Pod KPIs v4.0</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Maintenance Schedule</h3>
+            <ul>
+                <li><strong>Quarterly Review:</strong> Q1 2026 (March 2026) – verify WIP limits, throughput targets, tool stack still accurate</li>
+                <li><strong>Trigger for Update:</strong> Any L0/L1/L2 canon changes affecting Pod 3, store routing strategy, or SEO/Shopping workflows</li>
+                <li><strong>Owner:</strong> P4-OP-INTEGRATOR in coordination with P3 Pod Lead</li>
+            </ul>
+        </section>
+    </main>
+
+    <script type="application/json" id="sop-structure">
+    {
+        "role_id": "P3-SB-GENERAL-XX",
+        "role_name": "General/PMax Store Builder & SEO Specialist",
+        "pod": "P3 - Media & Store",
+        "status": "CORE",
+        "cross_pod": true,
+        "fte": 1.0,
+        "owned_gates": ["Structure of general catalog store (collections, nav, UX)"],
+        "wip_limits": {
+            "structural_changes": "3-4 active",
+            "collection_landing_tasks": "4-6 active"
+        },
+        "throughput": {
+            "weekly": "4-6 catalog/collection improvements",
+            "products_added_weekly": "2-4 new P2_PASS products"
+        },
+        "workflows": [
+            {
+                "name": "Create New Collection for Product Category",
+                "trigger": "3+ P2_PASS products in same niche OR SEO specialist requests new collection",
+                "inputs": ["Notion Product OS", "Keyword research from P3-SEO-GOOGLE", "Existing collection structure"],
+                "steps": [
+                    "Coordinate with P3-SEO-GOOGLE",
+                    "Create Collection in Shopify Admin",
+                    "Add Products to Collection",
+                    "Configure Collection Page Layout",
+                    "Update Navigation",
+                    "Quality Checks"
+                ],
+                "outputs": ["Live collection URL", "ClickUp task updated", "Handoff in #p3-general-seo", "Notion Product OS updated"],
+                "tools": ["Shopify", "PageFly/GemPages", "Notion", "ClickUp", "Discord"]
+            },
+            {
+                "name": "Update PDP Template for New Product Attributes",
+                "trigger": "New product type requires additional fields OR SEO specialist requests changes",
+                "inputs": ["Template change request", "Product attribute requirements", "Current PDP template"],
+                "steps": [
+                    "Assess Template Change Scope",
+                    "Create/Update Metafields",
+                    "Edit PDP Template",
+                    "Test Template Changes",
+                    "Populate Metafields for Existing Products"
+                ],
+                "outputs": ["Updated PDP template live", "Metafield documentation", "Handoff notes"],
+                "tools": ["Shopify", "Theme Editor", "Notion", "ClickUp"]
+            },
+            {
+                "name": "Implement Navigation/Filter Changes for SEO",
+                "trigger": "SEO specialist requests navigation changes OR filter optimization needed",
+                "inputs": ["Change request from P3-SEO-GOOGLE", "Google Search Console data", "Current navigation structure"],
+                "steps": [
+                    "Map New Navigation Structure",
+                    "Update Main Navigation",
+                    "Configure Advanced Filters",
+                    "Internal Linking Updates",
+                    "301 Redirect Setup"
+                ],
+                "outputs": ["Live navigation changes", "Filter system active", "Redirect log", "Handoff to SEO"],
+                "tools": ["Shopify", "Filter apps", "Notion", "ClickUp", "Discord"]
+            },
+            {
+                "name": "Add New P2_PASS Product to General Catalog",
+                "trigger": "Product passes P2, routed to General/SEO lane",
+                "inputs": ["Notion Product OS (P2_PASS, Lane=General/SEO)", "Product data", "Category assignment"],
+                "steps": [
+                    "Verify Product Data",
+                    "Assign to Collections",
+                    "Optimize PDP for Catalog Store",
+                    "Shopping Feed Verification",
+                    "Update Tracking & Handoff"
+                ],
+                "outputs": ["Product live in catalog", "Shopping feed updated", "Notion/ClickUp updated"],
+                "tools": ["Shopify", "Google Merchant Center", "Notion", "ClickUp", "Discord"]
+            }
+        ],
+        "kpis": [
+            {
+                "name": "Weekly Throughput",
+                "target": "4-6 catalog/collection improvements per week",
+                "source": "L2-07"
+            },
+            {
+                "name": "Structural Changes WIP",
+                "target": "3-4 active",
+                "source": "L2-03"
+            },
+            {
+                "name": "Collection/Landing WIP",
+                "target": "4-6 active",
+                "source": "L2-03"
+            },
+            {
+                "name": "Products Added Weekly",
+                "target": "2-4 new P2_PASS products",
+                "source": "L2-07"
+            },
+            {
+                "name": "Page Speed (LCP)",
+                "target": "< 2.5s on mobile",
+                "source": "Quality Standards"
+            },
+            {
+                "name": "Shopping Feed Validation",
+                "target": "100% of products pass Merchant Center",
+                "source": "Quality Standards"
+            }
+        ],
+        "tools": [
+            {"name": "Shopify Admin", "use": "Store management, product/collection editing", "access": "Admin"},
+            {"name": "Shopify Theme Editor", "use": "Template customization", "access": "Admin"},
+            {"name": "PageFly/GemPages", "use": "Advanced landing pages", "access": "Admin"},
+            {"name": "ClickUp", "use": "Task management", "location": "P3 -- Media & Store > Stores > General/SEO Store", "access": "Editor"},
+            {"name": "Notion", "use": "Product database", "location": "Product OS (Lane=General/SEO)", "access": "Editor"},
+            {"name": "Google Drive", "use": "File storage", "location": "/04_P3_Media_and_Stores/Stores/03_General_SEO_Store", "access": "Editor"},
+            {"name": "Discord", "use": "Communication", "location": "#p3-general-seo", "access": "Member"},
+            {"name": "Google Merchant Center", "use": "Shopping feed monitoring", "access": "Viewer"},
+            {"name": "Google Search Console", "use": "SEO monitoring", "access": "Viewer"}
+        ],
+        "version": "1.0",
+        "last_updated": "2025-12-09",
+        "author": "DriveOn SOP Factory v4"
+    }
+    </script>
+
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#1A1A1A',
+                lineColor: '#555555',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // Offset for fixed header
+                    window.scrollBy(0, -100);
+                }
+            });
+        });
+
+        // Highlight current section in nav
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('nav a').forEach(link => {
+                        link.style.color = '';
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.style.color = '#00C8C8';
+                            link.style.fontWeight = '700';
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

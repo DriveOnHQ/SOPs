@@ -1,0 +1,2498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP: PM Manager (P4-PM-MANAGER-XX) | DriveOn Commerce</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface-white: #FFFFFF;
+            --surface-gray: #F8F8F8;
+            --border-gray: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success-green: #10B981;
+            --warning-yellow: #F59E0B;
+            --danger-red: #EF4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-gray);
+        }
+        
+        /* Header */
+        header {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .role-title h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .role-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+        
+        .status-chip {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+        
+        /* Navigation */
+        .nav-toggle {
+            display: none;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        nav {
+            position: fixed;
+            left: 0;
+            top: 90px;
+            width: 280px;
+            height: calc(100vh - 90px);
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-gray);
+            overflow-y: auto;
+            padding: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+        
+        nav ul {
+            list-style: none;
+        }
+        
+        nav a {
+            display: block;
+            padding: 0.75rem 2rem;
+            color: var(--carbon-black);
+            text-decoration: none;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        
+        nav a:hover {
+            background: var(--surface-gray);
+            border-left-color: var(--drive-cyan);
+        }
+        
+        nav a.active {
+            color: var(--drive-cyan);
+            font-weight: 600;
+            border-left-color: var(--drive-cyan);
+            background: var(--surface-gray);
+        }
+        
+        /* Main Content */
+        main {
+            margin-left: 280px;
+            padding: 2rem;
+            max-width: calc(1400px + 280px);
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Hero Summary */
+        .hero-summary {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #008B8B 100%);
+            color: var(--surface-white);
+            padding: 3rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,200,200,0.2);
+        }
+        
+        .hero-summary h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-summary .role-id {
+            font-family: 'Courier New', monospace;
+            font-size: 1.125rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.95;
+        }
+        
+        .key-outcomes, .you-own {
+            margin-top: 1.5rem;
+        }
+        
+        .key-outcomes h3, .you-own h3 {
+            font-size: 1.125rem;
+            margin-bottom: 0.75rem;
+            opacity: 0.95;
+        }
+        
+        .chip-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .chip {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .you-own ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .you-own li::before {
+            content: "→ ";
+            color: var(--champagne);
+            font-weight: bold;
+        }
+        
+        /* Section Cards */
+        .section {
+            background: var(--surface-white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .section-header h2 {
+            font-size: 1.5rem;
+            color: var(--carbon-black);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section-icon {
+            color: var(--drive-cyan);
+            font-size: 1.75rem;
+        }
+        
+        .collapse-toggle {
+            background: var(--surface-gray);
+            border: 1px solid var(--border-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .collapse-toggle:hover {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border-color: var(--drive-cyan);
+        }
+        
+        .section-intro {
+            background: var(--champagne);
+            padding: 1rem 1.5rem;
+            border-left: 4px solid var(--drive-cyan);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .section-content {
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .section-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+        }
+        
+        /* Callouts */
+        .callout {
+            padding: 1.25rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        
+        .callout-canon {
+            background: #FEF3C7;
+            border-left-color: #F59E0B;
+        }
+        
+        .callout-warning {
+            background: #FEE2E2;
+            border-left-color: #EF4444;
+        }
+        
+        .callout-tip {
+            background: #DBEAFE;
+            border-left-color: #3B82F6;
+        }
+        
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Lists */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-gray);
+        }
+        
+        th {
+            background: var(--surface-gray);
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+        
+        tr:hover {
+            background: var(--surface-gray);
+        }
+        
+        /* Workflow Cards */
+        .workflow-card {
+            background: var(--surface-gray);
+            border: 1px solid var(--border-gray);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .workflow-card h4 {
+            color: var(--drive-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+        
+        .workflow-steps {
+            counter-reset: step-counter;
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .workflow-steps li {
+            counter-increment: step-counter;
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.25rem;
+        }
+        
+        .workflow-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2rem;
+            height: 2rem;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Handoff Cards */
+        .handoff-card {
+            border: 2px solid var(--drive-cyan);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background: linear-gradient(to right, rgba(0,200,200,0.05), transparent);
+        }
+        
+        .handoff-meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .handoff-meta-item strong {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Code Blocks */
+        pre {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+        
+        /* Checklists */
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+        
+        .checklist li {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: var(--surface-gray);
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .checklist li::before {
+            content: "☐";
+            font-size: 1.25rem;
+            color: var(--drive-cyan);
+            flex-shrink: 0;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--drive-cyan);
+        }
+        
+        .timeline-block {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-block::before {
+            content: "";
+            position: absolute;
+            left: -1.75rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--drive-cyan);
+            border-radius: 50%;
+            border: 3px solid var(--surface-white);
+        }
+        
+        .timeline-time {
+            font-weight: 600;
+            color: var(--drive-cyan);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* KPI Strip */
+        .kpi-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .kpi-card {
+            background: var(--surface-gray);
+            padding: 1.25rem;
+            border-radius: 6px;
+            border-left: 4px solid var(--drive-cyan);
+        }
+        
+        .kpi-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+        
+        /* Diagram Container */
+        .diagram-container {
+            background: var(--surface-white);
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 968px) {
+            .nav-toggle {
+                display: block;
+            }
+            
+            nav {
+                transform: translateX(-100%);
+            }
+            
+            nav.open {
+                transform: translateX(0);
+            }
+            
+            main {
+                margin-left: 0;
+            }
+            
+            .hero-summary {
+                padding: 2rem 1.5rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            header {
+                padding: 1rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .role-title h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hero-summary h2 {
+                font-size: 1.5rem;
+            }
+            
+            main {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="role-title">
+                <h1>PM Manager (Project Manager)</h1>
+                <div class="role-meta">
+                    <span>P4-PM-MANAGER-XX</span>
+                    <span>•</span>
+                    <span>Pod 4 – Operations & PM</span>
+                    <span>•</span>
+                    <span class="status-chip">CORE ROLE</span>
+                </div>
+            </div>
+            <button class="nav-toggle" onclick="toggleNav()">☰ Contents</button>
+        </div>
+    </header>
+    
+    <nav id="sidebar">
+        <ul>
+            <li><a href="#hero" onclick="scrollToSection('hero')">Overview</a></li>
+            <li><a href="#meta" onclick="scrollToSection('meta')">Meta & Role Snapshot</a></li>
+            <li><a href="#purpose" onclick="scrollToSection('purpose')">Role Purpose & Context</a></li>
+            <li><a href="#canon" onclick="scrollToSection('canon')">Canon Constraints</a></li>
+            <li><a href="#day-in-life" onclick="scrollToSection('day-in-life')">Day-in-the-Life</a></li>
+            <li><a href="#workflows" onclick="scrollToSection('workflows')">Core Workflows</a></li>
+            <li><a href="#handoffs" onclick="scrollToSection('handoffs')">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis" onclick="scrollToSection('kpis')">KPIs & Quality Bar</a></li>
+            <li><a href="#ai-usage" onclick="scrollToSection('ai-usage')">AI Usage & Prompts</a></li>
+            <li><a href="#tools" onclick="scrollToSection('tools')">Tools & Systems</a></li>
+            <li><a href="#escalation" onclick="scrollToSection('escalation')">Escalation & Decision Rights</a></li>
+            <li><a href="#onboarding" onclick="scrollToSection('onboarding')">Onboarding Checklist</a></li>
+            <li><a href="#changelog" onclick="scrollToSection('changelog')">Change Log</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="content-wrapper">
+            <!-- Hero Summary -->
+            <section id="hero" class="hero-summary">
+                <div class="role-id">P4-PM-MANAGER-XX | CrossPod: TRUE | FTE: 1.0</div>
+                <h2>The Cross-Pod Orchestrator</h2>
+                <p style="font-size: 1.125rem; margin-bottom: 2rem; opacity: 0.95;">
+                    As PM Manager, you are the central nervous system of DriveOn Commerce's testing engine. You ensure the 45-60 products/month throughput target is met while maintaining WIP discipline, clearing blockers, and keeping all pods synchronized. You don't own any specific testing gate, but you own the delivery flow that makes every gate possible.
+                </p>
+                
+                <div class="key-outcomes">
+                    <h3>Key Outcomes You Own</h3>
+                    <div class="chip-container">
+                        <div class="chip">On-Time Delivery</div>
+                        <div class="chip">WIP Enforcement</div>
+                        <div class="chip">Blocker Resolution</div>
+                        <div class="chip">Cross-Pod Visibility</div>
+                        <div class="chip">Throughput Consistency</div>
+                    </div>
+                </div>
+                
+                <div class="you-own">
+                    <h3>You Own</h3>
+                    <ul>
+                        <li>4-6 product test batches flowing through the pipeline each week</li>
+                        <li>6-8 active projects in motion, 3-4 in planning stages</li>
+                        <li>Daily coordination across P1 (Product Intelligence), P2 (Creative), P3 (Media & Store)</li>
+                        <li>ClickUp project hygiene, status accuracy, and WIP cap enforcement</li>
+                        <li>Sprint planning, retrospectives, and capacity forecasting</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Meta Block -->
+            <section id="meta" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">📋</span> Meta & Role Snapshot</h2>
+                </div>
+                <div class="section-content">
+                    <table>
+                        <tr>
+                            <th>Attribute</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Role ID</strong></td>
+                            <td><code>P4-PM-MANAGER-XX</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Role Type</strong></td>
+                            <td>PROJECT_MANAGER</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pod</strong></td>
+                            <td>P4 – Operations & PM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pipeline Stages</strong></td>
+                            <td>Cross-pod (R0→R1→R2→R3→P1→P2→P3)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Upstream Roles</strong></td>
+                            <td>Integrator, Pod Leads (P1/P2/P3)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Downstream Roles</strong></td>
+                            <td>All pods (P1/P2/P3/P4)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CrossPod</strong></td>
+                            <td>TRUE</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status</strong></td>
+                            <td>CORE (Active)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Default FTE</strong></td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>WIP Limits</strong></td>
+                            <td>6-8 active projects; 3-4 in planning</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Weekly Throughput Target</strong></td>
+                            <td>4-6 product test batches/week</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary KPIs</strong></td>
+                            <td>On-time delivery, WIP enforcement, blocker resolution time</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Core Tools</strong></td>
+                            <td>ClickUp, Notion, Discord/Slack</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary Notion DBs</strong></td>
+                            <td>Product Packets, Tests, People & Roles, Canon Registry</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary ClickUp Spaces</strong></td>
+                            <td>P1-Product Intelligence, P2-Creative, P3-Media & Store, P4-Ops & PM</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary Discord Channels</strong></td>
+                            <td>#p4-pm-coordination, #blockers, #daily-standups, pod-specific channels</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reports To</strong></td>
+                            <td>Integrator (P4-OP-INTEGRATOR-XX)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Version</strong></td>
+                            <td>1.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Last Updated</strong></td>
+                            <td>2025-12-09</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Author</strong></td>
+                            <td>DriveOn SOP Factory v4.0</td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Role Purpose & Context -->
+            <section id="purpose" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">🎯</span> Role Purpose & Context</h2>
+                </div>
+                <div class="section-intro">
+                    Why this role exists: To translate the CaniCol v4.0 model's strategic intent into daily operational reality across four specialized pods, ensuring the 45-60 products/month testing volume flows smoothly without bottlenecks or WIP overload.
+                </div>
+                <div class="section-content">
+                    <h3>Strategic Context</h3>
+                    <p>DriveOn Commerce operates under the <strong>CaniCol v4.0</strong> lean-volume testing model. This model is built on systematic testing constraints:</p>
+                    <ul>
+                        <li><strong>Testing Volume:</strong> ~45-60 products/month reach P1/P2 stages</li>
+                        <li><strong>Economics:</strong> $40-60 per P1 test, $70-120 total P1+P2 budget per product</li>
+                        <li><strong>Hit Rate:</strong> Only 4-6% become true winners (~2-4 products/month)</li>
+                        <li><strong>Portfolio Distribution:</strong> 70-80% killed in P1, 10-16% reach P2, 4-10% reach P3</li>
+                    </ul>
+                    
+                    <p>These constraints aren't arbitrary—they're the mathematical backbone of a sustainable dropshipping operation. As PM Manager, your job is to <strong>protect these constraints</strong> while maximizing flow.</p>
+                    
+                    <h3>Why This Role Matters</h3>
+                    <p>Without dedicated project management, DriveOn would face:</p>
+                    <ul>
+                        <li><strong>Pod Siloing:</strong> P1 (Product Intelligence) doesn't know P2's (Creative) capacity; P2 doesn't know P3's (Media & Store) schedule</li>
+                        <li><strong>WIP Creep:</strong> Pods take on too much work, quality drops, throughput collapses</li>
+                        <li><strong>Invisible Blockers:</strong> Critical issues go unreported for days, cascading into missed deadlines</li>
+                        <li><strong>Chaos at Scale:</strong> What works at 20 products/month breaks at 50+</li>
+                    </ul>
+                    
+                    <p>You exist to prevent these failure modes while keeping the system humane and sustainable for operators.</p>
+                    
+                    <h3>How You Support Holdings (L0) and Model (L1)</h3>
+                    <p><strong>Holdings Level (L0):</strong> DriveOn Commerce is one product under DriveOn Holdings. Your coordination ensures Commerce delivers on its mandate: profitable, scalable product testing that generates 2-4 winners/month.</p>
+                    
+                    <p><strong>Model Level (L1):</strong> CaniCol v4.0 requires tight orchestration across three core phases (research, creative, testing) and four pods. You make the model real by:</p>
+                    <ul>
+                        <li>Enforcing gate transitions (R3→P1→P2→P3)</li>
+                        <li>Protecting economic constraints (budgets, timelines)</li>
+                        <li>Maintaining throughput without quality collapse</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Canon Constraints -->
+            <section id="canon" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">⚖️</span> Canon Constraints</h2>
+                </div>
+                <div class="section-intro">
+                    These are non-negotiable rules from L0-L3 canon that directly govern your work. Violating these constraints breaks the CaniCol model.
+                </div>
+                <div class="section-content">
+                    <div class="callout callout-canon">
+                        <div class="callout-title">⚖️ Canon Rule: Volume & Economics</div>
+                        <p><strong>From L1-01 (CaniCol Model) and L2-05 (Testing Canon):</strong></p>
+                        <ul>
+                            <li>Target: 45-60 products/month in P1/P2 pipeline</li>
+                            <li>P1 budget: $40-60 per product</li>
+                            <li>P1+P2 total: $70-120 per product (standard band $80-100)</li>
+                            <li>Test Bank: ≈$4,000-$5,500/month P1+P2 spend</li>
+                            <li>Winner rate: 4-6% (roughly 2-4 products/month)</li>
+                        </ul>
+                        <p><strong>Your Role:</strong> Never schedule more tests than the budget allows. If a media buyer requests 10 P1 tests in one day and the budget is exhausted, you say NO.</p>
+                    </div>
+                    
+                    <div class="callout callout-canon">
+                        <div class="callout-title">⚖️ Canon Rule: WIP Caps Per Role</div>
+                        <p><strong>From L2-03 (Role Registry & WIP Limits):</strong></p>
+                        <ul>
+                            <li><strong>Research (P1) per 1.0 FTE:</strong> R1 ≤10, R2 ≤6, R3 ≤3</li>
+                            <li><strong>Creative Directors (P2):</strong> 6-8 briefs in progress</li>
+                            <li><strong>Video Editors (Hero):</strong> 4-6 edits in progress</li>
+                            <li><strong>Media Buyers (P3):</strong> 8-10 P1 tests, 4-6 P2, 2-3 P3</li>
+                            <li><strong>Store Builders (Validation):</strong> 4-5 new builds, 4-6 tweaks</li>
+                        </ul>
+                        <p><strong>Your Role:</strong> Enforce these caps in ClickUp views. If a researcher has 7 R2 packets and tries to start an 8th, you block it or escalate to Integrator.</p>
+                    </div>
+                    
+                    <div class="callout callout-canon">
+                        <div class="callout-title">⚖️ Canon Rule: Kill Discipline (24-48hr Window)</div>
+                        <p><strong>From L2-05 (Testing Canon):</strong></p>
+                        <p>Products that fail P1 criteria must be killed within 24-48 hours. No "let's give it another day" unless there's a data anomaly.</p>
+                        <ul>
+                            <li><strong>P1 Kill Criteria:</strong> CTR <1.3% or CPC >$1.20, plus no meaningful depth events</li>
+                            <li><strong>P2 Kill Criteria:</strong> ROAS <1.2 or CAC >0.6× AOV after full P2 spend</li>
+                        </ul>
+                        <p><strong>Your Role:</strong> Monitor P1/P2 results daily. When a test fails, ensure it's marked "Killed" in ClickUp and the media buyer moves on immediately.</p>
+                    </div>
+                    
+                    <div class="callout callout-canon">
+                        <div class="callout-title">⚖️ Canon Rule: No New Tools Without Canon Update</div>
+                        <p><strong>From L2-01 (Standard Ops Binding) and Project Instructions:</strong></p>
+                        <p>Approved tool stack: ClickUp, Notion, Google Drive, Discord/Slack. <strong>Not approved:</strong> Airtable, Asana, Trello, Monday.com.</p>
+                        <p><strong>Your Role:</strong> If someone suggests using a new PM tool "just for their pod," you decline and explain the canon constraint. Escalate to Integrator if they insist.</p>
+                    </div>
+                    
+                    <div class="callout callout-warning">
+                        <div class="callout-title">⚠️ Common Failure Mode: "Stretch Targets" Becoming Canon</div>
+                        <p>Contractors sometimes have stretch goals in their contracts (e.g., "up to 20 P1 tests/week"). These are aspirational, not baseline.</p>
+                        <p><strong>Your job:</strong> Plan around baseline throughput from L2-03 (e.g., 8-12 P1 tests/week for a media buyer). If they hit 15-20, great—but don't plan capacity assuming 20.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Day-in-the-Life -->
+            <section id="day-in-life" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">🕐</span> Day-in-the-Life Timeline</h2>
+                </div>
+                <div class="section-intro">
+                    This is your typical daily rhythm. Actual timing varies based on pod schedules and time zones, but the sequence and priorities remain constant.
+                </div>
+                <div class="section-content">
+                    <div class="timeline">
+                        <div class="timeline-block">
+                            <div class="timeline-time">Morning Block (08:00-10:00)</div>
+                            <h4>System Health Check & Prioritization</h4>
+                            <p><strong>Input:</strong> Overnight Discord messages, ClickUp notifications, calendar for the day</p>
+                            <p><strong>Actions:</strong></p>
+                            <ul>
+                                <li>Review all "Blocked" tasks across P1/P2/P3 spaces in ClickUp</li>
+                                <li>Check #blockers channel in Discord for new issues</li>
+                                <li>Scan WIP dashboards: Is anyone over their cap?</li>
+                                <li>Review today's sprint commitments vs actual status</li>
+                                <li>Identify top 3 priorities for the day (usually: resolve 1-2 blockers, coordinate 1-2 handoffs, prepare for 1 planning session)</li>
+                            </ul>
+                            <p><strong>Output:</strong> Daily priority list (written in Notion or ClickUp task for yourself), initial messages sent to pod channels if issues detected</p>
+                            <p><strong>Duration:</strong> 60-90 minutes</p>
+                        </div>
+                        
+                        <div class="timeline-block">
+                            <div class="timeline-time">Mid-Morning (10:00-12:00)</div>
+                            <h4>Active Coordination & Blocker Resolution</h4>
+                            <p><strong>Input:</strong> Your priority list, incoming requests from pods</p>
+                            <p><strong>Actions:</strong></p>
+                            <ul>
+                                <li>Run 1-2 short sync calls (15-30 min each) with pod leads or specific roles</li>
+                                <li>Update ClickUp statuses, reassign tasks if needed</li>
+                                <li>Chase missing handoffs (e.g., R3 packet approved but not yet in Creative brief queue)</li>
+                                <li>Clear 1-2 blockers from your morning list</li>
+                                <li>Post updates to #p4-pm-coordination or relevant pod channels</li>
+                            </ul>
+                            <p><strong>Output:</strong> Blockers resolved or escalated, tasks moving forward, handoffs confirmed</p>
+                            <p><strong>Duration:</strong> 2 hours</p>
+                        </div>
+                        
+                        <div class="timeline-block">
+                            <div class="timeline-time">Early Afternoon (13:00-15:00)</div>
+                            <h4>Planning & Forecasting Work</h4>
+                            <p><strong>Input:</strong> Upcoming sprint backlog, pod capacity data, test performance data from P3</p>
+                            <p><strong>Actions:</strong></p>
+                            <ul>
+                                <li>Review next week's pipeline: How many products are in R3? How many P1 tests are scheduled? Is Creative capacity sufficient?</li>
+                                <li>Update sprint boards in ClickUp (move completed tasks to Done, archive old sprints)</li>
+                                <li>Draft next sprint plan or prepare for sprint planning meeting</li>
+                                <li>Check if any roles are approaching WIP caps and flag capacity issues to Integrator</li>
+                                <li>Update weekly throughput tracking (e.g., in Notion or a ClickUp dashboard)</li>
+                            </ul>
+                            <p><strong>Output:</strong> Draft sprint plan, capacity forecast, throughput tracking updated</p>
+                            <p><strong>Duration:</strong> 2 hours</p>
+                        </div>
+                        
+                        <div class="timeline-block">
+                            <div class="timeline-time">Late Afternoon (15:00-17:00)</div>
+                            <h4>Comms & Handoff Verification</h4>
+                            <p><strong>Input:</strong> Day's work completed by pods, your morning priorities</p>
+                            <p><strong>Actions:</strong></p>
+                            <ul>
+                                <li>Verify all handoffs completed today (R3→Brief, Brief→Creative assets, Creative→Media buyer campaigns)</li>
+                                <li>Post end-of-day standup summary to #daily-standups channel</li>
+                                <li>Send reminders to anyone who missed a deadline or needs to update a status</li>
+                                <li>Prep tomorrow's priorities based on what didn't get done today</li>
+                                <li>Update Integrator via Discord DM or Notion page on any critical issues</li>
+                            </ul>
+                            <p><strong>Output:</strong> Daily standup posted, handoffs verified, tomorrow's priorities set</p>
+                            <p><strong>Duration:</strong> 1-2 hours</p>
+                        </div>
+                        
+                        <div class="timeline-block">
+                            <div class="timeline-time">Weekly Rhythm (Not Daily)</div>
+                            <h4>Sprint Planning, Retrospectives, Deep Dives</h4>
+                            <p><strong>Frequency:</strong> 1x/week sprint planning (90-120 min), 1x/week retrospective (60 min), ad-hoc deep dives as needed</p>
+                            <p><strong>Actions:</strong></p>
+                            <ul>
+                                <li><strong>Sprint Planning:</strong> Review backlog with pod leads, commit to next sprint's work, assign tasks, set sprint goals</li>
+                                <li><strong>Retrospective:</strong> What went well? What didn't? What should we change? Document findings in Notion</li>
+                                <li><strong>Deep Dives:</strong> If a blocker is systemic (e.g., Creative always late), schedule a 60-min session with affected roles to diagnose root cause</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="kpi-strip">
+                        <div class="kpi-card">
+                            <div class="kpi-label">Daily Focus</div>
+                            <div class="kpi-value">3-5 Priorities</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Active Projects</div>
+                            <div class="kpi-value">6-8 WIP</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Planning Projects</div>
+                            <div class="kpi-value">3-4 Queue</div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-label">Weekly Throughput</div>
+                            <div class="kpi-value">4-6 Batches</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Core Workflows -->
+            <section id="workflows" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">⚙️</span> Core Workflows</h2>
+                </div>
+                <div class="section-intro">
+                    These are your repeatable processes. Each workflow has a clear trigger, defined steps, and specific outputs in ClickUp/Notion/Discord.
+                </div>
+                <div class="section-content">
+                    <!-- Workflow 1 -->
+                    <div class="workflow-card">
+                        <h4>WF1: Daily Blocker Review & Resolution</h4>
+                        <p><strong>Trigger:</strong> Every morning (08:00-09:00) or when "#blocker" is mentioned in Discord</p>
+                        <p><strong>Inputs:</strong></p>
+                        <ul>
+                            <li>Discord #blockers channel messages</li>
+                            <li>ClickUp tasks with Status = "Blocked"</li>
+                            <li>Direct messages from pod members</li>
+                        </ul>
+                        <p><strong>Steps:</strong></p>
+                        <ol class="workflow-steps">
+                            <li>Open ClickUp → Switch to "Everything" workspace → Open "Blocked Tasks" view (filter: Status = Blocked, all spaces)</li>
+                            <li>For each blocked task, read the task description and latest comment to understand the issue</li>
+                            <li>Categorize blocker:
+                                <ul>
+                                    <li><strong>Type A (Quick Fix):</strong> Missing info, simple question → ping the blocker in Discord or task comments, set 2hr deadline</li>
+                                    <li><strong>Type B (Coordination):</strong> Handoff stuck between pods → schedule 15min call with both parties today</li>
+                                    <li><strong>Type C (Resource/Capacity):</strong> Role at WIP cap or missing resource → escalate to Integrator immediately</li>
+                                    <li><strong>Type D (Canon/Process):</strong> Unclear process or canon conflict → check canon docs, clarify in Discord, update SOP if needed</li>
+                                </ul>
+                            </li>
+                            <li>Add a comment to the ClickUp task documenting your action and expected resolution time</li>
+                            <li>Update task status to "Active" only after blocker is resolved; otherwise leave as "Blocked" with clear next action</li>
+                            <li>Log blocker in your daily tracking sheet (Notion or ClickUp list): Date, Task ID, Blocker type, Resolution time, Outcome</li>
+                            <li>Post summary to #blockers channel: "Today's blockers: 3 resolved (avg 2hr), 1 escalated to Integrator, 0 pending"</li>
+                        </ol>
+                        <p><strong>Outputs:</strong></p>
+                        <ul>
+                            <li>ClickUp tasks unblocked or escalated</li>
+                            <li>Discord summary posted to #blockers</li>
+                            <li>Blocker log updated in Notion</li>
+                        </ul>
+                        <p><strong>Quality Check:</strong> No blocker should remain unaddressed for >4 hours during working hours. If you can't resolve, escalate.</p>
+                        <p><strong>Timing:</strong> 30-60 minutes/day (morning block)</p>
+                    </div>
+                    
+                    <!-- Workflow 2 -->
+                    <div class="workflow-card">
+                        <h4>WF2: Sprint Planning (Weekly Cadence)</h4>
+                        <p><strong>Trigger:</strong> Every Monday 10:00 AM (or agreed sprint start day)</p>
+                        <p><strong>Inputs:</strong></p>
+                        <ul>
+                            <li>Last sprint's completed/incomplete tasks</li>
+                            <li>Product pipeline forecast (how many R3 packets expected this week?)</li>
+                            <li>Pod capacity data (who's at WIP cap, who's available?)</li>
+                            <li>Integrator's strategic priorities for the week</li>
+                        </ul>
+                        <p><strong>Steps:</strong></p>
+                        <ol class="workflow-steps">
+                            <li><strong>Pre-Meeting Prep (1 day before):</strong>
+                                <ul>
+                                    <li>Review last sprint: What % of committed tasks were Done? What blocked? Document in Notion sprint retro page</li>
+                                    <li>Pull current R3 packet count from ClickUp P1 space → R3 Approved Packets list</li>
+                                    <li>Check P2 Creative capacity: How many hero edits are in progress vs capacity?</li>
+                                    <li>Check P3 Media buyer schedule: How many P1 slots available this week?</li>
+                                    <li>Draft proposed sprint goal (e.g., "Launch 12 P1 tests, complete 5 R3 packets, ship 3 brand store updates")</li>
+                                </ul>
+                            </li>
+                            <li><strong>Meeting (90-120 min):</strong>
+                                <ul>
+                                    <li>Invite: Integrator, P1 Lead (or senior researcher), P2 Creative Director, P3 Media Buyer Lead, P3 Store Lead (if needed)</li>
+                                    <li>Agenda:
+                                        <ol>
+                                            <li>Review last sprint (10 min)</li>
+                                            <li>Discuss blockers and lessons (15 min)</li>
+                                            <li>Present this week's pipeline forecast (10 min)</li>
+                                            <li>Propose sprint goal and commitments (20 min)</li>
+                                            <li>Assign specific tasks to roles/people (30 min)</li>
+                                            <li>Flag any WIP or capacity concerns (10 min)</li>
+                                            <li>Confirm handoff points and dependencies (10 min)</li>
+                                        </ol>
+                                    </li>
+                                    <li>Use ClickUp screen share to move tasks from Backlog → sprint board</li>
+                                    <li>Set due dates for all tasks assigned this sprint</li>
+                                </ul>
+                            </li>
+                            <li><strong>Post-Meeting:</strong>
+                                <ul>
+                                    <li>Post sprint summary to #p4-pm-coordination: "Sprint X goals: [goals], commitments: [commitments], watch items: [risks]"</li>
+                                    <li>Update Notion Sprint Log page with sprint goal, committed tasks, key dependencies</li>
+                                    <li>Send individual reminders to task owners via ClickUp mentions or Discord DMs</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p><strong>Outputs:</strong></p>
+                        <ul>
+                            <li>ClickUp sprint board populated with tasks, due dates, assignees</li>
+                            <li>Notion Sprint Log page updated</li>
+                            <li>Discord sprint summary posted</li>
+                        </ul>
+                        <p><strong>Quality Check:</strong> Every task on sprint board must have: assignee, due date, Product_ID (if applicable), clear acceptance criteria in description</p>
+                        <p><strong>Timing:</strong> 2 hours (1hr prep + 1-1.5hr meeting)</p>
+                    </div>
+                    
+                    <!-- Workflow 3 -->
+                    <div class="workflow-card">
+                        <h4>WF3: WIP Cap Enforcement (Continuous)</h4>
+                        <p><strong>Trigger:</strong> Continuous monitoring; formal check 2x/week (e.g., Tuesday and Friday)</p>
+                        <p><strong>Inputs:</strong></p>
+                        <ul>
+                            <li>ClickUp "By Assignee" views across all pods</li>
+                            <li>WIP caps from L2-03 Role Registry</li>
+                        </ul>
+                        <p><strong>Steps:</strong></p>
+                        <ol class="workflow-steps">
+                            <li>Open ClickUp → Go to each pod space (P1/P2/P3) → Open "By Assignee" board view</li>
+                            <li>For each active team member, count tasks in Active/Review status (ignore Done/Killed/Backlog)</li>
+                            <li>Compare count to their canon WIP cap (from L2-03):
+                                <ul>
+                                    <li>Researchers: R1≤10, R2≤6, R3≤3</li>
+                                    <li>Creative Directors: ≤8 briefs</li>
+                                    <li>Hero Editors: ≤6 edits</li>
+                                    <li>Media Buyers: ≤10 P1, ≤6 P2, ≤3 P3</li>
+                                </ul>
+                            </li>
+                            <li>If anyone is at or over cap:
+                                <ul>
+                                    <li>Send Discord DM: "@[name], you're at WIP cap ([X/Y]). Please don't start new tasks until you complete or hand off current ones."</li>
+                                    <li>If they're over cap by 2+, escalate to their pod lead or Integrator: "We need to redistribute [role]'s load or pause new assignments"</li>
+                                </ul>
+                            </li>
+                            <li>If a pod as a whole is consistently at 90%+ WIP capacity for 3+ days, flag to Integrator: "P2 Creative is bottlenecked, recommend adding 0.5 FTE editor or slowing R3 approvals"</li>
+                            <li>Log WIP status in weekly tracking sheet (Notion or ClickUp): Date, Pod, Role, WIP count, Cap, % utilized, Action taken</li>
+                        </ol>
+                        <p><strong>Outputs:</strong></p>
+                        <ul>
+                            <li>Discord DMs sent to over-cap team members</li>
+                            <li>Escalations to Integrator if systemic</li>
+                            <li>WIP tracking log updated</li>
+                        </ul>
+                        <p><strong>Quality Check:</strong> No role should remain over WIP cap for >48 hours without Integrator approval</p>
+                        <p><strong>Timing:</strong> 20-30 minutes per check, 2x/week</p>
+                    </div>
+                    
+                    <!-- Workflow 4 -->
+                    <div class="workflow-card">
+                        <h4>WF4: Cross-Pod Handoff Verification</h4>
+                        <p><strong>Trigger:</strong> Daily (end of day, 16:00-17:00) or when a major handoff is expected</p>
+                        <p><strong>Inputs:</strong></p>
+                        <ul>
+                            <li>ClickUp tasks marked with "Handoff" label or status transition (e.g., R3→Brief, Brief→Creative Assets Ready)</li>
+                            <li>Discord handoff messages (should be posted per Standard Ops Binding)</li>
+                        </ul>
+                        <p><strong>Steps:</strong></p>
+                        <ol class="workflow-steps">
+                            <li>Identify expected handoffs for today by reviewing sprint board and asking yourself: "What should have moved between pods today?"</li>
+                            <li>For each expected handoff, verify:
+                                <ul>
+                                    <li><strong>R3→Brief (P1→P2):</strong> Check if R3 packet task has status "Done" in P1 space AND a corresponding Brief task exists in P2 space with status "Backlog" or "Active"</li>
+                                    <li><strong>Brief→Assets (P2→P3):</strong> Check if Creative brief task is "Done" in P2 AND a "Creative Assets" folder exists in Drive AND Media Buyer has marked campaign setup task as "Active" in P3</li>
+                                    <li><strong>P1 Complete→P2 or Kill (P3→P4/P1):</strong> Check if test results are logged in Notion and ClickUp status updated to "Done" or "Killed"</li>
+                                </ul>
+                            </li>
+                            <li>If handoff is missing or incomplete:
+                                <ul>
+                                    <li>Check Discord handoff channels for notification (should be posted per L2-01 Standard Ops Binding)</li>
+                                    <li>If no notification, ping upstream role: "@[role], is [Product_ID] ready to hand off? It was expected today per sprint plan."</li>
+                                    <li>If they confirm delay, update sprint board and notify downstream role: "@[role], [Product_ID] handoff delayed by 1 day, adjust your schedule"</li>
+                                </ul>
+                            </li>
+                            <li>Log handoff verification in daily tracking: Date, Handoff type (R3→Brief, etc.), Product_ID, Expected time, Actual time, Delay (if any), Reason</li>
+                        </ol>
+                        <p><strong>Outputs:</strong></p>
+                        <ul>
+                            <li>Handoffs confirmed or delays flagged</li>
+                            <li>Discord messages to upstream/downstream roles</li>
+                            <li>Handoff tracking log updated</li>
+                        </ul>
+                        <p><strong>Quality Check:</strong> All scheduled handoffs should complete within 24hrs of expected time. If >48hr delay, escalate to Integrator</p>
+                        <p><strong>Timing:</strong> 20-30 minutes/day</p>
+                    </div>
+                    
+                    <!-- Workflow 5 -->
+                    <div class="workflow-card">
+                        <h4>WF5: Test Performance Review & Kill/Pass Coordination</h4>
+                        <p><strong>Trigger:</strong> Daily (morning), or when P1/P2 test reaches spend threshold</p>
+                        <p><strong>Inputs:</strong></p>
+                        <ul>
+                            <li>Notion Tests DB (performance data logged by media buyer)</li>
+                            <li>ClickUp P3 space → P1 Tests and P2 Tests lists</li>
+                            <li>Pass/kill criteria from L2-05 Testing Canon</li>
+                        </ul>
+                        <p><strong>Steps:</strong></p>
+                        <ol class="workflow-steps">
+                            <li>Open Notion Tests DB → Filter: Status = "P1_ACTIVE" or "P2_ACTIVE"</li>
+                            <li>For each active test, check spend vs budget:
+                                <ul>
+                                    <li><strong>P1:</strong> If spend ≥$50 (or agreed P1 threshold), check metrics: CTR, CPC, depth events</li>
+                                    <li><strong>P2:</strong> If spend ≥$100 (or agreed P2 threshold), check: ROAS, CAC/AOV ratio</li>
+                                </ul>
+                            </li>
+                            <li>Apply kill/pass criteria (from L2-05):
+                                <ul>
+                                    <li><strong>P1 Kill:</strong> CTR <1.3% OR CPC >$1.20 AND no meaningful depth events → Status = "P1_FAIL"</li>
+                                    <li><strong>P1 Pass:</strong> CTR ≥1.3% OR CPC ≤$1.20 with depth events → Status = "P1_PASS" → Move to P2</li>
+                                    <li><strong>P2 Kill:</strong> ROAS <1.2 OR CAC >0.6×AOV → Status = "P2_FAIL"</li>
+                                    <li><strong>P2 Pass:</strong> ROAS ≥1.5 AND CAC <0.5×AOV → Status = "P2_PASS" → Move to P3</li>
+                                </ul>
+                            </li>
+                            <li>Update ClickUp task status:
+                                <ul>
+                                    <li>If kill: Change status to "Killed", add comment with kill reason and metrics</li>
+                                    <li>If pass: Change status to "Done" (P1 list) or "P2_PASS" / "P3_TEST" (move to next list), add comment with pass metrics</li>
+                                </ul>
+                            </li>
+                            <li>Post to Discord #p3-media-updates: "P1 results for [Product_ID]: [PASS/FAIL], CTR=[X]%, CPC=$[Y], next: [P2/Kill]"</li>
+                            <li>If kill, ping media buyer to confirm ad campaigns paused within 24hrs (per canon kill discipline)</li>
+                            <li>Update weekly tracking: # P1 tests, # P1 passes, # P2 tests, # P2 passes, pass rate vs 4-6% target</li>
+                        </ol>
+                        <p><strong>Outputs:</strong></p>
+                        <ul>
+                            <li>Notion Tests DB updated with pass/fail status</li>
+                            <li>ClickUp tasks moved to appropriate lists/statuses</li>
+                            <li>Discord notifications posted</li>
+                            <li>Weekly tracking updated</li>
+                        </ul>
+                        <p><strong>Quality Check:</strong> No test should remain in "Active" status >48hrs after reaching spend threshold without status update. If media buyer hasn't logged data, chase them.</p>
+                        <p><strong>Timing:</strong> 30-45 minutes/day</p>
+                    </div>
+                    
+                    <!-- Diagram: Cross-Pod Flow -->
+                    <div class="diagram-container">
+                        <h3 style="margin-bottom: 1rem;">Diagram: Cross-Pod Product Flow (PM Orchestration)</h3>
+                        <div class="mermaid">
+                        graph TB
+                            Start([Product Idea]) --> R0[R0: Scouting]
+                            R0 --> R1[R1: Initial Research]
+                            R1 --> R2[R2: Deep Research]
+                            R2 --> R3[R3: Final Approval]
+                            R3 --> Brief[P2: Creative Brief]
+                            Brief --> Assets[P2: Creative Assets]
+                            Assets --> P1[P3: P1 Smoke Test]
+                            P1 --> P1Decision{P1 Pass/Kill?}
+                            P1Decision -->|Kill| Archive1[Archive]
+                            P1Decision -->|Pass| P2[P3: P2 Confirmation]
+                            P2 --> P2Decision{P2 Pass/Kill?}
+                            P2Decision -->|Kill| Archive2[Archive]
+                            P2Decision -->|Pass| P3[P3: Scaling]
+                            P3 --> Winner[Winner Portfolio]
+                            
+                            PM[PM Manager] -.->|Monitors WIP| R1
+                            PM -.->|Monitors WIP| R2
+                            PM -.->|Verifies Handoff| R3
+                            PM -.->|Verifies Handoff| Brief
+                            PM -.->|Verifies Handoff| Assets
+                            PM -.->|Enforces Kill Discipline| P1Decision
+                            PM -.->|Enforces Kill Discipline| P2Decision
+                            PM -.->|Tracks Throughput| P3
+                            
+                            style Start fill:#F4E8D0
+                            style PM fill:#00C8C8,stroke:#1A1A1A,stroke-width:3px
+                            style P1Decision fill:#F59E0B
+                            style P2Decision fill:#F59E0B
+                            style Winner fill:#10B981
+                            style Archive1 fill:#EF4444
+                            style Archive2 fill:#EF4444
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Handoffs & Interfaces -->
+            <section id="handoffs" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">🔄</span> Handoffs & Interface Specs</h2>
+                </div>
+                <div class="section-intro">
+                    These are the critical handoff points where work moves between pods. Each handoff has a defined format, required fields, and notification protocol.
+                </div>
+                <div class="section-content">
+                    <!-- Handoff 1 -->
+                    <div class="handoff-card">
+                        <h4>HO1: R3 Approved Packet → Creative Brief (P1→P2)</h4>
+                        <div class="handoff-meta">
+                            <div class="handoff-meta-item">
+                                <strong>FROM</strong>
+                                <div>P1-R3-LEAD-STRATEGIST (or senior researcher)</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>TO</strong>
+                                <div>P2-CR-DIRECTOR (Creative Director)</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>TRIGGER</strong>
+                                <div>R3 packet approved, ready for creative strategy</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>CHANNEL</strong>
+                                <div>ClickUp status change + Discord #p2-creative-briefs</div>
+                            </div>
+                        </div>
+                        <p><strong>Required Inputs (must be present before handoff):</strong></p>
+                        <ul>
+                            <li>Packet_ID (e.g., PKT-20251209-042)</li>
+                            <li>Product_ID linked</li>
+                            <li>Notion Product Packet page fully populated:
+                                <ul>
+                                    <li>Product description, AOV estimate, target audience</li>
+                                    <li>3-5 angles/hooks identified</li>
+                                    <li>Competitor creative references (links or Drive folder)</li>
+                                    <li>Supplier info and lead time</li>
+                                </ul>
+                            </li>
+                            <li>Google Drive folder created: /Product Research/R3_Approved/[Product_ID]/</li>
+                            <li>ClickUp R3 task status = "Done" in P1 space</li>
+                        </ul>
+                        <p><strong>Handoff Actions (performed by upstream role, verified by PM):</strong></p>
+                        <ol>
+                            <li>P1 researcher changes ClickUp R3 task status to "Done"</li>
+                            <li>P1 researcher creates new task in ClickUp P2 space → Briefs list:
+                                <ul>
+                                    <li>Task name: "Brief: [Product_Name]"</li>
+                                    <li>Custom fields: Product_ID, Packet_ID, Gate=R3, Status=Backlog</li>
+                                    <li>Description: Link to Notion packet + Drive folder</li>
+                                    <li>Assignee: Creative Director</li>
+                                </ul>
+                            </li>
+                            <li>P1 researcher posts to Discord #p2-creative-briefs:</li>
+                        </ol>
+                        <pre><code>📦 New R3 Packet Ready for Brief
+Product: [Product Name]
+Packet ID: PKT-20251209-042
+Product ID: PRD-20251209-042
+Angles: [Angle 1, Angle 2, Angle 3]
+Notion: [Link]
+Drive: [Link]
+ClickUp: [Task Link]
+Assigned: @Creative-Director</code></pre>
+                        <p><strong>PM Verification Steps:</strong></p>
+                        <ol>
+                            <li>Check that P2 Brief task exists in ClickUp within 4 hours of R3 "Done" status</li>
+                            <li>Verify Discord notification was posted</li>
+                            <li>If missing, ping P1 researcher and Creative Director</li>
+                            <li>Track handoff completion time in daily log</li>
+                        </ol>
+                        <p><strong>Minimum Quality Bar:</strong></p>
+                        <ul>
+                            <li>Notion packet must have at least 3 angles and 2+ competitor references</li>
+                            <li>Drive folder must have at least 5 reference images/videos</li>
+                            <li>AOV estimate must be present (even if rough)</li>
+                        </ul>
+                        <p><strong>Expected Timing:</strong> R3 approval to Brief task creation: <4 hours during working hours</p>
+                    </div>
+                    
+                    <!-- Handoff 2 -->
+                    <div class="handoff-card">
+                        <h4>HO2: Creative Assets Ready → Media Buyer Campaign Setup (P2→P3)</h4>
+                        <div class="handoff-meta">
+                            <div class="handoff-meta-item">
+                                <strong>FROM</strong>
+                                <div>P2 Video Editors / Static Designers</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>TO</strong>
+                                <div>P3-MB-BUYER-XX (Media Buyer)</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>TRIGGER</strong>
+                                <div>P1 or P2 creative pack complete</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>CHANNEL</strong>
+                                <div>Drive folder ready + Discord #p3-media-campaigns</div>
+                            </div>
+                        </div>
+                        <p><strong>Required Inputs:</strong></p>
+                        <ul>
+                            <li>Google Drive folder: /Creative Assets/[Product_ID]/P1/ or /P2/
+                                <ul>
+                                    <li><strong>P1 Pack:</strong> 4-6 hero videos (15-60s each), 3-5 static creatives, ad copy doc</li>
+                                    <li><strong>P2 Pack:</strong> 2-4 new angle variants, 2-3 statics</li>
+                                </ul>
+                            </li>
+                            <li>All files named per convention: [Product_ID]_[CreativeType]_[Version].mp4/jpg</li>
+                            <li>Notion Product Packet updated with "Creative_Pack_Ready: TRUE"</li>
+                            <li>ClickUp P2 Creative task status = "Done"</li>
+                        </ul>
+                        <p><strong>Handoff Actions:</strong></p>
+                        <ol>
+                            <li>P2 editor/designer changes ClickUp creative task to "Done"</li>
+                            <li>P2 editor/designer posts to Discord #p3-media-campaigns:</li>
+                        </ol>
+                        <pre><code>🎬 Creative Pack Ready for Launch
+Product: [Product Name]
+Product ID: PRD-20251209-042
+Gate: P1 (or P2)
+Assets: 5 hero videos, 4 statics
+Drive: [Folder Link]
+Copy Doc: [Google Doc Link]
+ClickUp: [Task Link]
+Assigned Media Buyer: @Media-Buyer-Name</code></pre>
+                        <p><strong>PM Verification Steps:</strong></p>
+                        <ol>
+                            <li>Check that P3 campaign setup task exists in ClickUp P3 space within 8 hours of creative "Done"</li>
+                            <li>Verify Drive folder has minimum required assets (4+ videos for P1, 2+ for P2)</li>
+                            <li>Check that media buyer acknowledged in Discord (reply to handoff message)</li>
+                            <li>If media buyer hasn't started within 24hrs, ping them and flag to Integrator if capacity issue</li>
+                        </ol>
+                        <p><strong>Minimum Quality Bar:</strong></p>
+                        <ul>
+                            <li>All videos must have correct aspect ratio (9:16 for TikTok, 4:5 or 1:1 for Meta)</li>
+                            <li>File sizes appropriate (<50MB per video, <5MB per static)</li>
+                            <li>Ad copy doc must include headlines, primary text, CTAs for each creative</li>
+                        </ul>
+                        <p><strong>Expected Timing:</strong> Creative "Done" to Campaign live: 24-48 hours</p>
+                    </div>
+                    
+                    <!-- Handoff 3 -->
+                    <div class="handoff-card">
+                        <h4>HO3: Test Results → Kill/Pass Decision → Next Phase (P3→P4/P1)</h4>
+                        <div class="handoff-meta">
+                            <div class="handoff-meta-item">
+                                <strong>FROM</strong>
+                                <div>P3-MB-BUYER-XX (Media Buyer)</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>TO</strong>
+                                <div>PM Manager (you) + Integrator</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>TRIGGER</strong>
+                                <div>P1 or P2 test reaches spend threshold</div>
+                            </div>
+                            <div class="handoff-meta-item">
+                                <strong>CHANNEL</strong>
+                                <div>Notion Tests DB update + Discord #test-results</div>
+                            </div>
+                        </div>
+                        <p><strong>Required Inputs:</strong></p>
+                        <ul>
+                            <li>Notion Tests DB entry fully populated:
+                                <ul>
+                                    <li>Test_ID, Product_ID, Gate (P1/P2), Spend_Total</li>
+                                    <li>Metrics: Impressions, Clicks, CTR, CPC, ATC, IC, Purchases, ROAS, CAC</li>
+                                    <li>Status: P1_ACTIVE → P1_PASS or P1_FAIL</li>
+                                </ul>
+                            </li>
+                            <li>ClickUp P3 test task updated with final spend and metrics in comments</li>
+                        </ul>
+                        <p><strong>Handoff Actions (Media Buyer):</strong></p>
+                        <ol>
+                            <li>Once test spend reaches threshold ($50 P1, $100 P2), media buyer logs final metrics in Notion</li>
+                            <li>Media buyer applies pass/kill criteria (from L2-05) and updates Status field</li>
+                            <li>Media buyer posts to Discord #test-results:</li>
+                        </ol>
+                        <pre><code>📊 P1 Test Complete: [Product Name]
+Test ID: TST-PRD-20251209-042-P001
+Spend: $55
+CTR: 1.8% | CPC: $0.95 | ATC: 12 | Purchases: 2
+Result: ✅ PASS (CTR >1.3%, depth events present)
+Next: Moving to P2
+Notion: [Link]</code></pre>
+                        <p><strong>PM Actions (within 24hrs of test completion):</strong></p>
+                        <ol>
+                            <li>Review Notion entry to confirm metrics are logged</li>
+                            <li>Verify pass/kill decision aligns with L2-05 criteria</li>
+                            <li>If PASS: Ensure P2 brief task created in ClickUp (if new creative needed) or P2 campaign task created</li>
+                            <li>If KILL: Verify media buyer has paused/archived ad campaigns within 24hrs</li>
+                            <li>Update weekly tracking: log pass/kill, calculate cumulative pass rate</li>
+                            <li>If kill, move ClickUp task to "Killed" status and archive</li>
+                        </ol>
+                        <p><strong>Escalation Triggers:</strong></p>
+                        <ul>
+                            <li>If test reaches spend threshold but no metrics logged after 48hrs → ping media buyer + Integrator</li>
+                            <li>If killed test's campaigns are still running after 48hrs → escalate to Integrator (budget burn risk)</li>
+                            <li>If pass rate is <2% or >10% for 2 consecutive weeks → flag to Integrator (pipeline or criteria issue)</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Diagram: Handoff Swimlanes -->
+                    <div class="diagram-container">
+                        <h3 style="margin-bottom: 1rem;">Diagram: Cross-Pod Handoff Swimlanes</h3>
+                        <div class="mermaid">
+                        graph TB
+                            subgraph P1[Pod 1 - Product Intelligence]
+                                R3[R3 Packet Approved]
+                            end
+                            
+                            subgraph P2[Pod 2 - Creative Factory]
+                                Brief[Creative Brief]
+                                Assets[Assets Production]
+                            end
+                            
+                            subgraph P3[Pod 3 - Media & Store]
+                                Campaign[Campaign Setup]
+                                Test[Run Test]
+                                Results[Log Results]
+                            end
+                            
+                            subgraph PM[PM Manager - You]
+                                Verify1[Verify HO1]
+                                Verify2[Verify HO2]
+                                Verify3[Verify HO3]
+                                Decision[Review Decision]
+                            end
+                            
+                            R3 -->|HO1: Packet handoff| Brief
+                            Brief --> Assets
+                            Assets -->|HO2: Creative handoff| Campaign
+                            Campaign --> Test
+                            Test --> Results
+                            Results -->|HO3: Results handoff| Decision
+                            
+                            R3 -.->|Check handoff| Verify1
+                            Assets -.->|Check handoff| Verify2
+                            Results -.->|Check handoff| Verify3
+                            Verify3 --> Decision
+                            
+                            style R3 fill:#F4E8D0
+                            style Brief fill:#F4E8D0
+                            style Assets fill:#F4E8D0
+                            style Campaign fill:#F4E8D0
+                            style Test fill:#F4E8D0
+                            style Results fill:#F4E8D0
+                            style PM fill:#00C8C8,stroke:#1A1A1A,stroke-width:2px
+                            style Verify1 fill:#00C8C8
+                            style Verify2 fill:#00C8C8
+                            style Verify3 fill:#00C8C8
+                            style Decision fill:#00C8C8
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- KPIs & Quality Bar -->
+            <section id="kpis" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">📊</span> KPIs & Quality Bar</h2>
+                </div>
+                <div class="section-intro">
+                    Your performance is measured by system health, not vanity metrics. These KPIs come from L2-07 Pod KPIs & TestBank v4.0.
+                </div>
+                <div class="section-content">
+                    <h3>Primary KPIs (Weekly/Monthly Tracking)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>KPI</th>
+                                <th>Target</th>
+                                <th>Measurement Method</th>
+                                <th>Source</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>On-Time Delivery Rate</strong></td>
+                                <td>≥85% of sprint commitments completed on time</td>
+                                <td>ClickUp: (# tasks Done by due date) / (# tasks committed in sprint) × 100</td>
+                                <td>Weekly sprint review</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Blocker Resolution Time</strong></td>
+                                <td>Avg <4 hours for Type A/B, <24hrs for Type C</td>
+                                <td>Your blocker tracking log: sum(resolution times) / count(blockers)</td>
+                                <td>Daily blocker log in Notion</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Weekly Throughput Consistency</strong></td>
+                                <td>4-6 product test batches/week, variance <20%</td>
+                                <td>Count # P1 tests launched per week, calculate std deviation</td>
+                                <td>Notion Tests DB + weekly tracking</td>
+                            </tr>
+                            <tr>
+                                <td><strong>WIP Compliance</strong></td>
+                                <td>≥95% of roles within WIP caps at any given time</td>
+                                <td>Weekly WIP check: (# roles at or under cap) / (# total roles) × 100</td>
+                                <td>ClickUp "By Assignee" views</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Handoff Completion Time</strong></td>
+                                <td>≥90% of handoffs complete within target window</td>
+                                <td>Handoff tracking log: (# on-time handoffs) / (# total handoffs) × 100</td>
+                                <td>Your handoff verification log</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Secondary/Diagnostic KPIs</h3>
+                    <ul>
+                        <li><strong>Sprint Commitment Accuracy:</strong> Are we estimating capacity correctly? Target: ±10% variance between committed and actual completed tasks</li>
+                        <li><strong>Cross-Pod Communication Lag:</strong> Time between blocker reported and PM response. Target: <2 hours during working hours</li>
+                        <li><strong>Escalation Rate:</strong> % of blockers requiring Integrator escalation. Target: <15% (most should be resolvable at PM level)</li>
+                    </ul>
+                    
+                    <h3>Qualitative Standards</h3>
+                    <div class="callout callout-tip">
+                        <div class="callout-title">💡 Good PM Work Looks Like</div>
+                        <ul>
+                            <li>Pods know what's happening 2-3 days ahead (no surprises)</li>
+                            <li>Blockers are surfaced and resolved before they cascade</li>
+                            <li>ClickUp reflects reality (statuses are accurate, not stale)</li>
+                            <li>Handoffs are documented and verifiable, not just "I think it happened"</li>
+                            <li>Sprint retrospectives identify systemic issues, not just blame individuals</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="callout callout-warning">
+                        <div class="callout-title">⚠️ Bad PM Work Looks Like</div>
+                        <ul>
+                            <li>Pods learn about urgent changes via random Discord DMs</li>
+                            <li>ClickUp is 3+ days out of sync with reality</li>
+                            <li>Same blockers repeat every week with no root cause fix</li>
+                            <li>WIP caps are routinely ignored "because we're behind"</li>
+                            <li>Handoffs happen via informal back-channels, no documentation</li>
+                        </ul>
+                    </div>
+                    
+                    <h3>How KPIs Are Reported</h3>
+                    <p><strong>Weekly:</strong> Post summary to #p4-pm-coordination and Notion PM Dashboard:</p>
+                    <pre><code>📊 PM Weekly Summary (Week of Dec 4-8)
+Sprint Completion: 22/25 tasks (88% ✅)
+Blockers Resolved: 9 total, avg 3.2hr resolution time ✅
+Throughput: 5 test batches launched (target: 4-6) ✅
+WIP Compliance: 97% roles within cap ✅
+Handoffs: 18/19 on-time (95% ✅)
+Escalations: 2 (one capacity, one canon question)
+Notable Issues: P2 Creative brief queue backed up Mon-Tue, resolved by adding temp editor
+Next Week Focus: Sprint planning for Q1 ramp-up</code></pre>
+                    
+                    <p><strong>Monthly:</strong> Comprehensive report to Integrator (Notion page or Google Doc):</p>
+                    <ul>
+                        <li>Trend analysis for all KPIs</li>
+                        <li>Top 3 systemic blockers identified</li>
+                        <li>Capacity forecast for next month</li>
+                        <li>Recommendations for process improvements</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- AI Usage & Prompts -->
+            <section id="ai-usage" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">🤖</span> AI Usage & Prompt Patterns</h2>
+                </div>
+                <div class="section-intro">
+                    AI (ChatGPT, Claude, etc.) can accelerate your PM work, but must never replace your judgment on canon compliance, capacity, or escalation decisions. Use AI for drafting, analysis, and pattern recognition—not for autonomous decision-making.
+                </div>
+                <div class="section-content">
+                    <h3>Where AI Helps</h3>
+                    <ul>
+                        <li><strong>Sprint Planning Prep:</strong> Analyze last sprint's data, draft proposed commitments</li>
+                        <li><strong>Blocker Analysis:</strong> Identify patterns in recurring blockers, suggest root causes</li>
+                        <li><strong>Communication Drafting:</strong> Write Discord announcements, sprint summaries, escalation messages</li>
+                        <li><strong>Retrospective Synthesis:</strong> Summarize meeting notes, extract action items</li>
+                        <li><strong>Capacity Forecasting:</strong> Analyze throughput trends, predict bottlenecks</li>
+                    </ul>
+                    
+                    <h3>Where AI Does NOT Replace You</h3>
+                    <ul>
+                        <li><strong>Canon Interpretation:</strong> AI doesn't have L0-L3 docs; you must verify all suggestions against canon</li>
+                        <li><strong>Escalation Decisions:</strong> AI can't judge when to escalate to Integrator; this requires human context</li>
+                        <li><strong>Conflict Resolution:</strong> Inter-pod conflicts need human mediation, not AI-generated "solutions"</li>
+                        <li><strong>WIP Judgment Calls:</strong> When to allow temporary WIP cap violation requires understanding team stress, not just rules</li>
+                    </ul>
+                    
+                    <h3>Ready-to-Use AI Prompts</h3>
+                    
+                    <div class="workflow-card">
+                        <h4>Prompt 1: Sprint Planning Analysis</h4>
+                        <p><strong>Use Case:</strong> Prep for Monday sprint planning meeting</p>
+                        <pre><code>You are a project management analyst for DriveOn Commerce, a lean-volume dropshipping operation running 45-60 product tests/month through a CaniCol v4.0 model.
+
+Context:
+- We just completed Sprint X
+- Our target: 4-6 product test batches/week across 4 pods (P1 Research, P2 Creative, P3 Media/Store, P4 Ops)
+- WIP caps per role are defined (e.g., researchers R2≤6, media buyers P1≤10)
+
+Last Sprint Data (paste from ClickUp):
+[Paste: # tasks committed, # tasks Done, # tasks carried over, avg completion time]
+
+Current Pipeline (paste from ClickUp):
+[Paste: # R3 packets ready, # Creative briefs in progress, # P1 tests queued]
+
+Analyze:
+1. What % of last sprint's commitments were completed on time?
+2. What were the top 3 blockers/delays?
+3. Based on current pipeline, what's a realistic commitment for next sprint?
+4. Are any pods at risk of WIP overload?
+
+Draft proposed sprint goal and commitments for next week.
+Do NOT suggest increasing WIP caps or adding new roles without flagging as "requires Integrator approval."</code></pre>
+                    </div>
+                    
+                    <div class="workflow-card">
+                        <h4>Prompt 2: Blocker Root Cause Analysis</h4>
+                        <p><strong>Use Case:</strong> Same blocker keeps recurring, need to identify systemic issue</p>
+                        <pre><code>You are analyzing recurring project blockers for DriveOn Commerce.
+
+Problem: The handoff from P1 (Research) R3 packets to P2 (Creative) briefs has been delayed 4 times in the past 2 weeks.
+
+Blocker Log (paste your tracking data):
+[Paste: Date, Product_ID, Delay (hrs), Reason given, Resolution]
+
+Context:
+- Canon requirement: R3→Brief handoff should happen <4hrs
+- Process: Researcher marks R3 task "Done" → creates Brief task in P2 space → posts Discord notification
+- WIP caps: R3≤3 packets per researcher, Briefs≤8 per Creative Director
+
+Questions:
+1. Is this a capacity issue (researcher or Creative Director at WIP cap)?
+2. Is this a process issue (handoff steps not clear or too manual)?
+3. Is this a communication issue (notifications not seen/acted on)?
+4. What pattern do you see in the "Reason" column?
+
+Recommend:
+- Short-term fix (immediate action I can take as PM)
+- Long-term fix (process change or escalation to Integrator)
+- Whether this requires a canon/SOP update
+
+Do NOT recommend solutions that violate canon (e.g., "skip R3 approval" or "let researchers exceed WIP cap").</code></pre>
+                    </div>
+                    
+                    <div class="workflow-card">
+                        <h4>Prompt 3: Discord Announcement Draft</h4>
+                        <p><strong>Use Case:</strong> Need to communicate sprint results or upcoming change to all pods</p>
+                        <pre><code>You are writing a Discord announcement for DriveOn Commerce team.
+
+Context: We just completed Sprint X with strong results and are kicking off Sprint Y.
+
+Key Points to Communicate:
+- Sprint X: 24/27 tasks completed (89%), 5 test batches launched (target was 4-6)
+- Notable: P2 Creative delivered hero edits 15% faster than last sprint
+- Sprint Y goal: Launch 6 test batches, complete 4 R3 packets, ship 2 brand store updates
+- Watch item: P3 Media buyer will be out Wed-Thu, backup is [Name]
+
+Write a concise, friendly Discord announcement for #daily-standups channel.
+Tone: Direct, positive, facts-first (no hype or "crushing it" language).
+Length: 200-300 words.
+Include relevant ClickUp links and tag specific roles if action needed.
+
+Follow DriveOn's communication style: systems-first, anti-hype, helpful but not deferential.</code></pre>
+                    </div>
+                    
+                    <div class="workflow-card">
+                        <h4>Prompt 4: Capacity Forecast</h4>
+                        <p><strong>Use Case:</strong> Monthly planning, need to forecast if current team can handle next month's volume</p>
+                        <pre><code>You are forecasting capacity for DriveOn Commerce for next month.
+
+Current Team Capacity (from L2-03 Role Registry):
+- Researchers: 2 FTE at R2 (each can handle R2≤6 packets), target 8-12 R3 packets/week
+- Creative Directors: 1 FTE (≤8 briefs in progress), target 8-12 briefs/week
+- Video Editors (Hero): 1 FTE (≤6 edits), target 6-10 hero edits/week
+- Media Buyers: 2 FTE (each P1≤10, P2≤6), target 8-12 P1 tests/week
+
+Next Month Target:
+- Maintain 45-60 products/month P1/P2 pipeline (~50 avg)
+- This translates to ~11-13 P1 tests/week
+- Assume ~20% P1→P2 pass rate → ~2-3 P2 tests/week
+
+Current Month Performance (paste data):
+[Paste: actual # R3 packets/week, # P1 tests/week, # P2 tests/week, any capacity issues noted]
+
+Questions:
+1. Can current team handle 50 products/month without WIP cap violations?
+2. Which role is most likely to bottleneck?
+3. If we need to scale to 60 products/month, what's the minimum FTE addition needed?
+
+Recommend:
+- Keep current capacity / Add X FTE in [role] / Reduce volume target
+- If recommending FTE addition, justify with specific math (WIP caps, throughput baselines)
+
+Do NOT assume we can just "work faster" or "optimize processes"—respect canon WIP caps.</code></pre>
+                    </div>
+                    
+                    <div class="workflow-card">
+                        <h4>Prompt 5: Retrospective Meeting Notes Synthesis</h4>
+                        <p><strong>Use Case:</strong> After weekly retro meeting, need to extract action items and themes</p>
+                        <pre><code>You are synthesizing meeting notes from a sprint retrospective for DriveOn Commerce.
+
+Meeting: Sprint X Retrospective (60 min)
+Attendees: PM Manager (me), Integrator, P1 Lead, P2 Creative Director, P3 Media Buyer Lead
+
+Raw Notes (paste from meeting):
+[Paste: bullet points from meeting, including "what went well," "what didn't," "action items"]
+
+Output Format:
+1. Top 3 Themes (what patterns emerged?)
+2. Action Items (who owns, by when, specific and measurable)
+3. Follow-Up for Next Retro (what to check on)
+
+Rules:
+- Action items must have clear owner and deadline
+- If an action requires Integrator approval or canon change, flag it
+- Don't editorialize or add suggestions not discussed in meeting
+- Keep synthesis to 300-400 words max
+
+Tone: Neutral, action-oriented, no blame language.</code></pre>
+                    </div>
+                    
+                    <h3>AI Checkpoints (When to Verify with Human)</h3>
+                    <ul>
+                        <li><strong>Before sending any AI-drafted message:</strong> Read it yourself, check for canon accuracy</li>
+                        <li><strong>Before acting on AI capacity recommendations:</strong> Verify against L2-03 WIP caps and throughput baselines</li>
+                        <li><strong>Before escalating based on AI analysis:</strong> Confirm the pattern is real, not artifact of incomplete data</li>
+                        <li><strong>Always cross-check AI's interpretation of canon:</strong> AI hallucinates, canon doesn't lie</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Tools & Systems -->
+            <section id="tools" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">🛠️</span> Tools & Systems Reference</h2>
+                </div>
+                <div class="section-intro">
+                    Your daily tool stack. All locations, views, and conventions are defined in L3-01 through L3-04 (Discord, ClickUp, Notion, Drive blueprints).
+                </div>
+                <div class="section-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>Primary Use Cases</th>
+                                <th>Key Views/Lists/DBs</th>
+                                <th>Access Level</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ClickUp</strong></td>
+                                <td>Task management, WIP tracking, sprint boards, time tracking</td>
+                                <td>
+                                    <ul style="margin: 0.5rem 0;">
+                                        <li><strong>Spaces:</strong> P1-Product Intelligence, P2-Creative, P3-Media & Store, P4-Ops & PM</li>
+                                        <li><strong>Views:</strong> "My Active Tasks," "By Product," "By Gate," "Blocked Tasks," "By Assignee"</li>
+                                        <li><strong>P4 Lists:</strong> Project Coordination, Canon Updates, Tool Integrations</li>
+                                    </ul>
+                                </td>
+                                <td>Manager (full access, cannot change billing)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Notion</strong></td>
+                                <td>Canon docs, Product OS, Tests DB, People & Roles registry, Sprint logs</td>
+                                <td>
+                                    <ul style="margin: 0.5rem 0;">
+                                        <li><strong>DBs:</strong> Product Packets, Tests, People & Roles, Canon Registry, Sprint Log</li>
+                                        <li><strong>Pages:</strong> PM Dashboard, Weekly Tracking, Blocker Log, Handoff Log</li>
+                                        <li><strong>Views:</strong> "Active Products," "Tests by Gate," "Team Roster"</li>
+                                    </ul>
+                                </td>
+                                <td>Manager (can edit all PM-related pages and DBs)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google Drive</strong></td>
+                                <td>File storage for creative assets, research references, SOPs (linked from Notion)</td>
+                                <td>
+                                    <ul style="margin: 0.5rem 0;">
+                                        <li><strong>Folders:</strong> /DriveOn Commerce/Product Research/, /Creative Assets/, /Ops & PM/</li>
+                                        <li><strong>Naming:</strong> All files follow [Product_ID]_[Type]_[Version] convention</li>
+                                    </ul>
+                                </td>
+                                <td>Editor (can upload, organize, but not change folder structure without Integrator approval)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Discord</strong></td>
+                                <td>Real-time comms, handoffs, blockers, standups</td>
+                                <td>
+                                    <ul style="margin: 0.5rem 0;">
+                                        <li><strong>Channels:</strong> #p4-pm-coordination, #blockers, #daily-standups, #p1-research-updates, #p2-creative-briefs, #p3-media-campaigns, #test-results</li>
+                                        <li><strong>DMs:</strong> Quick clarifications only, not for decisions</li>
+                                    </ul>
+                                </td>
+                                <td>Full access (can post to all channels, manage #p4-pm-coordination)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Slack</strong></td>
+                                <td>Recruiting, external partners (limited internal use per L2-01)</td>
+                                <td>
+                                    <ul style="margin: 0.5rem 0;">
+                                        <li><strong>Channels:</strong> #recruiting-pipeline (if active)</li>
+                                        <li><strong>Use:</strong> Candidate comms before Discord onboarding</li>
+                                    </ul>
+                                </td>
+                                <td>Member (use only for recruiting, not internal ops)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h3>Workspace Bindings (Detailed)</h3>
+                    
+                    <h4>ClickUp Structure You Manage</h4>
+                    <p><strong>P4 Space → PM & Integrations Folder:</strong></p>
+                    <ul>
+                        <li><strong>List: Project Coordination</strong>
+                            <ul>
+                                <li>One task per active "project" (e.g., "Sprint 42," "Q1 Capacity Planning," "Handoff Process Improvement")</li>
+                                <li>Custom fields: Project_Type (Sprint/Ops/Canon/Tool), Owner_Role, Due_Date</li>
+                                <li>Statuses: Backlog → Planning → Active → Review → Done</li>
+                            </ul>
+                        </li>
+                        <li><strong>List: Tool Integrations</strong>
+                            <ul>
+                                <li>Tasks for ClickUp↔Notion sync, Zapier automations, dashboard updates</li>
+                                <li>Custom fields: Integration_Type, Status, Last_Updated</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h4>Notion Pages You Own</h4>
+                    <ul>
+                        <li><strong>PM Dashboard</strong> (landing page for your role)
+                            <ul>
+                                <li>Embedded views: Active Blockers, This Week's Sprint Board, WIP Status, Throughput Tracking</li>
+                                <li>Links to: Sprint Log, Blocker Log, Handoff Log, Weekly Reports</li>
+                            </ul>
+                        </li>
+                        <li><strong>Sprint Log DB</strong>
+                            <ul>
+                                <li>Properties: Sprint_ID (e.g., "Sprint-2025-W01"), Sprint_Goal, Start_Date, End_Date, Committed_Tasks (relation to ClickUp), Completion_Rate, Retro_Notes (long text)</li>
+                                <li>Views: "Current Sprint," "Past Sprints," "Sprint Trends"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Blocker Log DB</strong>
+                            <ul>
+                                <li>Properties: Date, Task_Link (ClickUp URL), Blocker_Type (A/B/C/D), Reported_By, Resolution_Time_Hours, Outcome, Escalated (checkbox)</li>
+                                <li>Views: "Open Blockers," "This Week," "Escalations"</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h4>Discord Message Templates (Standard Formats)</h4>
+                    <p><strong>Daily Standup Post (#daily-standups):</strong></p>
+                    <pre><code>📅 PM Standup - [Day of Week]
+✅ Completed: [2-3 bullet points]
+🔄 In Progress: [2-3 bullet points]
+🚧 Blockers: [List or "None"]
+🎯 Today's Focus: [Top 3 priorities]</code></pre>
+                    
+                    <p><strong>Blocker Alert (#blockers):</strong></p>
+                    <pre><code>🚨 BLOCKER - [Brief description]
+Product: [Product_ID if applicable]
+Affects: @[Role/Pod]
+Issue: [Clear explanation]
+Needed: [Specific action/info needed]
+Deadline: [When it becomes critical]
+ClickUp: [Task link]</code></pre>
+                </div>
+            </section>
+            
+            <!-- Escalation & Decision Rights -->
+            <section id="escalation" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">⬆️</span> Escalation & Decision Rights</h2>
+                </div>
+                <div class="section-intro">
+                    Clear decision authority prevents both bottlenecks and overreach. Know what you can decide alone, what needs Integrator, and what needs Founder.
+                </div>
+                <div class="section-content">
+                    <h3>Decisions You Make Independently (No Approval Needed)</h3>
+                    <ul>
+                        <li><strong>Daily Coordination:</strong> Moving tasks between statuses, reassigning within same role type, setting sprint due dates</li>
+                        <li><strong>Minor Schedule Adjustments:</strong> Shifting a handoff by 1-2 days if both pods agree</li>
+                        <li><strong>Blocker Resolution (Type A/B):</strong> Resolving info gaps, coordination issues, communication failures</li>
+                        <li><strong>Documentation Updates:</strong> Updating Notion sprint logs, blocker logs, weekly tracking sheets</li>
+                        <li><strong>Standard Reminders:</strong> Pinging team members about due dates, missing statuses, handoff delays</li>
+                        <li><strong>ClickUp Hygiene:</strong> Archiving old completed tasks, cleaning up duplicate tasks, updating descriptions for clarity</li>
+                    </ul>
+                    
+                    <h3>Decisions Requiring Integrator Approval</h3>
+                    <ul>
+                        <li><strong>WIP Cap Exceptions:</strong> Allowing a role to exceed canon WIP cap, even temporarily</li>
+                        <li><strong>Capacity Changes:</strong> Recommending adding/removing FTE, hiring new roles, redistributing major responsibilities</li>
+                        <li><strong>Process Changes:</strong> Proposing changes to handoff protocols, status workflows, or sprint cadence</li>
+                        <li><strong>Systemic Blockers (Type C):</strong> Resource/capacity issues that can't be resolved by coordination alone</li>
+                        <li><strong>Schedule Conflicts:</strong> If two pods are deadlocked on priorities or timelines</li>
+                        <li><strong>Canon Clarifications:</strong> When there's ambiguity in L2-L3 docs and you need authoritative interpretation</li>
+                    </ul>
+                    
+                    <h3>Decisions Requiring Founder Approval</h3>
+                    <ul>
+                        <li><strong>Strategic Changes:</strong> Proposing changes to testing volume (moving from 45-60 to different range)</li>
+                        <li><strong>Economic Changes:</strong> Recommending changes to P1/P2 budgets beyond canon ranges</li>
+                        <li><strong>Major Tool Changes:</strong> Proposing to add a new core tool to the stack (would trigger Canon Change Request)</li>
+                        <li><strong>Canon Conflicts:</strong> If you find a contradiction between L1 and L2 docs that Integrator can't resolve</li>
+                    </ul>
+                    
+                    <h3>Escalation Protocol</h3>
+                    <div class="workflow-card">
+                        <h4>Standard Escalation Flow</h4>
+                        <ol class="workflow-steps">
+                            <li><strong>Document the Issue:</strong> Create ClickUp task or Notion page with:
+                                <ul>
+                                    <li>Clear problem statement</li>
+                                    <li>Impact (which pods, which products, how many people affected)</li>
+                                    <li>What you've tried (so far)</li>
+                                    <li>Proposed solutions (2-3 options with tradeoffs)</li>
+                                    <li>Urgency (how soon needs decision)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Send to Integrator:</strong> Discord DM + link to doc:
+                                <ul>
+                                    <li>"@Integrator, need escalation on [issue]. Doc: [link]. Urgency: [timeline]. Request: [specific decision needed]"</li>
+                                </ul>
+                            </li>
+                            <li><strong>If Urgent (needs decision <24hrs):</strong> Tag in relevant channel too:
+                                <ul>
+                                    <li>"@Integrator, urgent escalation in DM re: [issue], affects [pod/deadline]"</li>
+                                </ul>
+                            </li>
+                            <li><strong>Follow Up:</strong> If no response in expected timeframe (24hrs non-urgent, 4hrs urgent), send reminder:
+                                <ul>
+                                    <li>"Following up on [issue] escalation from [date]. Still need decision by [deadline]."</li>
+                                </ul>
+                            </li>
+                            <li><strong>Document Decision:</strong> Once Integrator decides, update original doc and post summary to relevant channels:
+                                <ul>
+                                    <li>"Update on [issue]: Decision made, [action]. Details: [link]"</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    
+                    <h3>Expected Response Times</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Escalation Type</th>
+                                <th>Expected Response</th>
+                                <th>If No Response</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Type C Blocker (capacity)</td>
+                                <td>4 hours during working hours</td>
+                                <td>Ping again + mark as "Urgent" in Discord</td>
+                            </tr>
+                            <tr>
+                                <td>WIP Exception Request</td>
+                                <td>24 hours</td>
+                                <td>Proceed with interim solution (e.g., pause new work)</td>
+                            </tr>
+                            <tr>
+                                <td>Process Change Proposal</td>
+                                <td>48 hours</td>
+                                <td>Follow up, but don't implement until approved</td>
+                            </tr>
+                            <tr>
+                                <td>Canon Clarification</td>
+                                <td>24 hours</td>
+                                <td>Document as "pending" in relevant SOPs</td>
+                            </tr>
+                            <tr>
+                                <td>Strategic/Founder-level</td>
+                                <td>1 week</td>
+                                <td>Integrator will manage follow-up timeline</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Onboarding Checklist -->
+            <section id="onboarding" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">✅</span> Onboarding Checklist</h2>
+                </div>
+                <div class="section-intro">
+                    Use this if you're new to the PM Manager role. Complete these milestones in sequence, working with your Integrator as mentor.
+                </div>
+                <div class="section-content">
+                    <h3>Phase 1: Canon & Context (Days 1-3)</h3>
+                    <ul class="checklist">
+                        <li>Read L1-01 CaniCol Model v4.0 (understand economics, hit rates, portfolio thinking)</li>
+                        <li>Read L1-02 Canon Precedence & Versioning (understand how conflicts are resolved)</li>
+                        <li>Read L2-02 Pod Overview (understand P1/P2/P3/P4 missions and handoffs)</li>
+                        <li>Read L2-03 Role Registry & WIP Limits (memorize WIP caps for key roles)</li>
+                        <li>Read L2-05 Testing Canon (understand P1/P2/P3 budgets and pass/kill criteria)</li>
+                        <li>Read this SOP completely (the one you're reading now)</li>
+                        <li>Access granted to: ClickUp (Manager), Notion (Editor), Discord (all PM channels), Drive (Editor)</li>
+                        <li>Shadow current PM Manager for 1 full day (watch daily blocker review, sprint coordination, handoff verification)</li>
+                    </ul>
+                    
+                    <h3>Phase 2: Tool Setup & Observation (Days 4-7)</h3>
+                    <ul class="checklist">
+                        <li>Set up ClickUp views:
+                            <ul>
+                                <li>"My Active Tasks" (filter: Assignee=Me, Status∈{Active,Review,Blocked})</li>
+                                <li>"Blocked Tasks - All Pods" (filter: Status=Blocked, all spaces)</li>
+                                <li>"By Product" (group by Product_ID)</li>
+                                <li>"By Gate" (group by Gate)</li>
+                            </ul>
+                        </li>
+                        <li>Set up Notion workspace:
+                            <ul>
+                                <li>Create your PM Dashboard page (or copy template from Integrator)</li>
+                                <li>Set up Blocker Log DB with your first entry</li>
+                                <li>Set up Handoff Log DB</li>
+                                <li>Create Weekly Tracking sheet</li>
+                            </ul>
+                        </li>
+                        <li>Join Discord channels: #p4-pm-coordination, #blockers, #daily-standups, #p1-research-updates, #p2-creative-briefs, #p3-media-campaigns, #test-results</li>
+                        <li>Observe (don't lead yet) 1 full sprint cycle:
+                            <ul>
+                                <li>Attend sprint planning meeting (shadow, take notes)</li>
+                                <li>Watch how current PM tracks daily progress</li>
+                                <li>Observe how blockers are resolved</li>
+                                <li>Attend sprint retrospective (shadow, take notes)</li>
+                            </ul>
+                        </li>
+                        <li>Complete "Day-in-the-Life Timeline" simulation: Pick one day, follow this SOP's timeline, document what you observe</li>
+                    </ul>
+                    
+                    <h3>Phase 3: Supervised Practice (Days 8-14)</h3>
+                    <ul class="checklist">
+                        <li>Run 3 daily blocker reviews with Integrator shadowing:
+                            <ul>
+                                <li>Identify blockers from ClickUp and Discord</li>
+                                <li>Categorize (Type A/B/C/D)</li>
+                                <li>Resolve or escalate</li>
+                                <li>Log in Notion</li>
+                                <li>Post summary to #blockers</li>
+                            </ul>
+                        </li>
+                        <li>Conduct 2 WIP cap checks with Integrator reviewing:
+                            <ul>
+                                <li>Review "By Assignee" views across all pods</li>
+                                <li>Compare to canon WIP caps</li>
+                                <li>Send DMs to over-cap roles</li>
+                                <li>Log WIP status</li>
+                            </ul>
+                        </li>
+                        <li>Verify 5 cross-pod handoffs with Integrator reviewing:
+                            <ul>
+                                <li>R3→Brief (P1→P2)</li>
+                                <li>Brief→Assets (P2→P3)</li>
+                                <li>Assets→Campaign (P3 media buyer)</li>
+                                <li>Test results→Kill/pass decision (P3→P4)</li>
+                            </ul>
+                        </li>
+                        <li>Draft 1 sprint plan with Integrator reviewing before sending to team</li>
+                        <li>Post 5 daily standup summaries to #daily-standups (Integrator reviews before posting)</li>
+                    </ul>
+                    
+                    <h3>Phase 4: Independent Execution (Days 15-21)</h3>
+                    <ul class="checklist">
+                        <li>Run daily blocker reviews independently for 5 consecutive days (Integrator spot-checks, no longer shadows)</li>
+                        <li>Conduct 1 full sprint planning meeting independently:
+                            <ul>
+                                <li>Prep 24hrs ahead (review last sprint, draft proposal)</li>
+                                <li>Lead 90-120min meeting with pod leads</li>
+                                <li>Assign tasks, set commitments</li>
+                                <li>Post sprint summary to Discord</li>
+                                <li>Update Notion Sprint Log</li>
+                            </ul>
+                        </li>
+                        <li>Conduct 1 sprint retrospective independently:
+                            <ul>
+                                <li>Review completion rate, blockers, lessons</li>
+                                <li>Extract action items</li>
+                                <li>Document in Notion</li>
+                                <li>Post summary</li>
+                            </ul>
+                        </li>
+                        <li>Make 1 independent decision (within your authority):
+                            <ul>
+                                <li>Document decision</li>
+                                <li>Implement</li>
+                                <li>Inform affected parties</li>
+                                <li>Report outcome to Integrator</li>
+                            </ul>
+                        </li>
+                        <li>Escalate 1 issue to Integrator using proper protocol:
+                            <ul>
+                                <li>Document issue in Notion or ClickUp</li>
+                                <li>Propose 2-3 solutions with tradeoffs</li>
+                                <li>Send escalation message</li>
+                                <li>Follow up appropriately</li>
+                                <li>Document decision</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h3>Phase 5: Full Autonomy (Day 22-30)</h3>
+                    <ul class="checklist">
+                        <li>Operate as PM Manager with full autonomy for 2 consecutive weeks:
+                            <ul>
+                                <li>Daily blocker reviews</li>
+                                <li>WIP enforcement</li>
+                                <li>Sprint planning</li>
+                                <li>Handoff verification</li>
+                                <li>Test performance tracking</li>
+                            </ul>
+                        </li>
+                        <li>Produce 1 weekly summary report to Integrator (KPIs, notable issues, next week focus)</li>
+                        <li>Identify 1 systemic blocker or process improvement opportunity:
+                            <ul>
+                                <li>Document root cause analysis</li>
+                                <li>Propose solution</li>
+                                <li>Escalate to Integrator with recommendation</li>
+                            </ul>
+                        </li>
+                        <li>Conduct 30-day review with Integrator:
+                            <ul>
+                                <li>Review KPIs: On-time delivery rate, blocker resolution time, WIP compliance, throughput consistency</li>
+                                <li>Discuss challenges and lessons</li>
+                                <li>Set goals for next 90 days</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h3>Success Criteria for Full PM Manager Status</h3>
+                    <p>You're ready to operate independently when:</p>
+                    <ul>
+                        <li>You can explain the CaniCol model and economics to a new team member without notes</li>
+                        <li>You can identify and resolve 80%+ of blockers without escalation</li>
+                        <li>You can run a sprint planning meeting without Integrator present</li>
+                        <li>Your weekly on-time delivery rate is ≥80% (acknowledging learning curve)</li>
+                        <li>You've escalated at least one issue correctly and documented the outcome</li>
+                        <li>Integrator confirms: "I trust you to manage the machine day-to-day"</li>
+                    </ul>
+                </div>
+            </section>
+            
+            <!-- Change Log -->
+            <section id="changelog" class="section">
+                <div class="section-header">
+                    <h2><span class="section-icon">📝</span> Change Log</h2>
+                </div>
+                <div class="section-content">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Author</th>
+                                <th>Change Summary</th>
+                                <th>Canon Update Trigger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1.0</td>
+                                <td>2025-12-09</td>
+                                <td>DriveOn SOP Factory v4.0</td>
+                                <td>Initial SOP creation for PM Manager role (P4-PM-MANAGER-XX). Based on L2-03 Role Registry v1, L2-02 Pod Overview v1, L2-05 Testing Canon v4.0, L3-01 through L3-04 infrastructure blueprints. Includes all 12 Global SOP Schema sections.</td>
+                                <td>None (initial release)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" style="text-align: center; font-style: italic; color: var(--text-secondary);">Future versions will be logged here when L0-L3 canon updates require changes to this SOP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="callout callout-tip">
+                        <div class="callout-title">💡 When This SOP Changes</div>
+                        <p>This SOP will be updated when:</p>
+                        <ul>
+                            <li>L2-03 Role Registry changes PM Manager WIP caps or throughput targets</li>
+                            <li>L2-05 Testing Canon changes pass/kill criteria (affecting your test tracking workflow)</li>
+                            <li>L2-07 Pod KPIs updates PM Manager KPI definitions</li>
+                            <li>L3-02 (ClickUp) or L3-03 (Notion) blueprints change workspace structures</li>
+                            <li>Integrator approves a process change that requires SOP update</li>
+                        </ul>
+                        <p><strong>Who Updates:</strong> Integrator or PM Manager (with Integrator approval) drafts update, submits to Canon Registry for version bump.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <script type="application/json" id="sop-structure">
+    {
+        "role_id": "P4-PM-MANAGER-XX",
+        "role_name": "PM Manager (Project Manager)",
+        "pod": "P4",
+        "pipeline_stages": ["Cross-pod: R0→R1→R2→R3→P1→P2→P3"],
+        "cross_pod": true,
+        "status": "CORE",
+        "fte": 1.0,
+        "wip_limits": {
+            "active_projects": "6-8",
+            "planning_projects": "3-4"
+        },
+        "weekly_throughput_target": "4-6 product test batches",
+        "primary_kpis": [
+            {
+                "name": "On-Time Delivery Rate",
+                "definition": "% of sprint commitments completed on time",
+                "target": "≥85%",
+                "source_doc_id": "L2-07"
+            },
+            {
+                "name": "Blocker Resolution Time",
+                "definition": "Average time to resolve blockers",
+                "target": "<4hrs Type A/B, <24hrs Type C",
+                "source_doc_id": "L2-07"
+            },
+            {
+                "name": "WIP Compliance",
+                "definition": "% of roles within canon WIP caps",
+                "target": "≥95%",
+                "source_doc_id": "L2-03"
+            },
+            {
+                "name": "Weekly Throughput Consistency",
+                "definition": "Product test batches launched per week",
+                "target": "4-6 batches, <20% variance",
+                "source_doc_id": "L1-01, L2-05"
+            }
+        ],
+        "day_in_life": [
+            {
+                "time_range": "08:00-10:00",
+                "focus": "System Health Check & Prioritization",
+                "primary_workflows": ["WF1: Daily Blocker Review"]
+            },
+            {
+                "time_range": "10:00-12:00",
+                "focus": "Active Coordination & Blocker Resolution",
+                "primary_workflows": ["WF1: Daily Blocker Review", "WF4: Cross-Pod Handoff Verification"]
+            },
+            {
+                "time_range": "13:00-15:00",
+                "focus": "Planning & Forecasting",
+                "primary_workflows": ["WF2: Sprint Planning", "WF3: WIP Cap Enforcement"]
+            },
+            {
+                "time_range": "15:00-17:00",
+                "focus": "Comms & Handoff Verification",
+                "primary_workflows": ["WF4: Cross-Pod Handoff Verification", "WF5: Test Performance Review"]
+            }
+        ],
+        "workflows": [
+            {
+                "id": "WF1",
+                "name": "Daily Blocker Review & Resolution",
+                "trigger": "Every morning (08:00-09:00) or #blocker mention in Discord",
+                "inputs": ["Discord #blockers channel", "ClickUp Blocked tasks", "Direct messages"],
+                "steps": [
+                    "Open ClickUp Blocked Tasks view",
+                    "Categorize each blocker as Type A/B/C/D",
+                    "Take appropriate action per blocker type",
+                    "Add comment to ClickUp task documenting action",
+                    "Update status or leave Blocked with next action",
+                    "Log blocker in Notion tracking sheet",
+                    "Post summary to #blockers channel"
+                ],
+                "outputs": ["Blockers resolved or escalated", "Discord summary", "Notion log updated"],
+                "tools": ["ClickUp", "Discord", "Notion"]
+            },
+            {
+                "id": "WF2",
+                "name": "Sprint Planning (Weekly)",
+                "trigger": "Every Monday 10:00 AM",
+                "inputs": ["Last sprint data", "Pipeline forecast", "Pod capacity", "Integrator priorities"],
+                "steps": [
+                    "Pre-meeting prep: Review last sprint, check R3 pipeline, check P2/P3 capacity",
+                    "Meeting: Review, discuss, propose goals, assign tasks, flag concerns",
+                    "Post-meeting: Post summary to Discord, update Notion Sprint Log, send reminders"
+                ],
+                "outputs": ["ClickUp sprint board populated", "Notion Sprint Log updated", "Discord announcement"],
+                "tools": ["ClickUp", "Notion", "Discord"]
+            },
+            {
+                "id": "WF3",
+                "name": "WIP Cap Enforcement",
+                "trigger": "Continuous monitoring, formal check 2x/week",
+                "inputs": ["ClickUp By Assignee views", "L2-03 WIP caps"],
+                "steps": [
+                    "Open By Assignee view for each pod",
+                    "Count Active/Review tasks per person",
+                    "Compare to canon WIP caps",
+                    "Send DM if at/over cap",
+                    "Escalate if over by 2+ or pod at 90%+ capacity",
+                    "Log WIP status"
+                ],
+                "outputs": ["Discord DMs sent", "Escalations to Integrator", "WIP log updated"],
+                "tools": ["ClickUp", "Discord", "Notion"]
+            },
+            {
+                "id": "WF4",
+                "name": "Cross-Pod Handoff Verification",
+                "trigger": "Daily (16:00-17:00) or when handoff expected",
+                "inputs": ["ClickUp tasks with Handoff label", "Discord handoff messages"],
+                "steps": [
+                    "Identify expected handoffs for today",
+                    "Verify each handoff: R3→Brief, Brief→Assets, Assets→Campaign, Test→Results",
+                    "If missing, check Discord for notification",
+                    "Ping upstream role if delay",
+                    "Update sprint board and notify downstream",
+                    "Log handoff verification"
+                ],
+                "outputs": ["Handoffs confirmed or delays flagged", "Discord messages", "Handoff log updated"],
+                "tools": ["ClickUp", "Discord", "Notion"]
+            },
+            {
+                "id": "WF5",
+                "name": "Test Performance Review & Kill/Pass Coordination",
+                "trigger": "Daily (morning) or when test reaches spend threshold",
+                "inputs": ["Notion Tests DB", "ClickUp P3 test tasks", "L2-05 pass/kill criteria"],
+                "steps": [
+                    "Open Notion Tests DB, filter Active tests",
+                    "Check spend vs budget threshold",
+                    "Apply kill/pass criteria from L2-05",
+                    "Update ClickUp task status",
+                    "Post to Discord #test-results",
+                    "Ping media buyer to confirm ad pause if kill",
+                    "Update weekly tracking"
+                ],
+                "outputs": ["Notion Tests DB updated", "ClickUp tasks moved", "Discord notifications", "Weekly tracking updated"],
+                "tools": ["Notion", "ClickUp", "Discord"]
+            }
+        ],
+        "handoffs": [
+            {
+                "id": "HO1",
+                "from_role": "P1-R3-LEAD-STRATEGIST",
+                "to_role": "P2-CR-DIRECTOR",
+                "trigger": "R3 packet approved",
+                "inputs": ["Packet_ID", "Product_ID", "Notion packet", "Drive folder", "ClickUp R3 Done"],
+                "channel": "ClickUp + Discord #p2-creative-briefs",
+                "expected_timing": "<4 hours"
+            },
+            {
+                "id": "HO2",
+                "from_role": "P2 Video Editors/Designers",
+                "to_role": "P3-MB-BUYER-XX",
+                "trigger": "Creative pack complete",
+                "inputs": ["Drive folder with assets", "Ad copy doc", "Notion updated", "ClickUp Creative Done"],
+                "channel": "Drive + Discord #p3-media-campaigns",
+                "expected_timing": "24-48 hours to campaign live"
+            },
+            {
+                "id": "HO3",
+                "from_role": "P3-MB-BUYER-XX",
+                "to_role": "PM Manager",
+                "trigger": "Test reaches spend threshold",
+                "inputs": ["Notion Tests DB entry", "Metrics logged", "Pass/kill decision"],
+                "channel": "Notion + Discord #test-results",
+                "expected_timing": "<24 hours after test complete"
+            }
+        ],
+        "tools": [
+            {
+                "tool": "ClickUp",
+                "use_cases": ["Task management", "WIP tracking", "Sprint boards"],
+                "key_views": ["My Active Tasks", "By Product", "By Gate", "Blocked Tasks", "By Assignee"],
+                "access_level": "Manager"
+            },
+            {
+                "tool": "Notion",
+                "use_cases": ["Canon docs", "Product OS", "Tests DB", "Sprint logs"],
+                "key_dbs": ["Product Packets", "Tests", "People & Roles", "Canon Registry", "Sprint Log"],
+                "access_level": "Manager"
+            },
+            {
+                "tool": "Discord",
+                "use_cases": ["Real-time comms", "Handoffs", "Blockers", "Standups"],
+                "key_channels": ["#p4-pm-coordination", "#blockers", "#daily-standups"],
+                "access_level": "Full"
+            }
+        ],
+        "version": "1.0",
+        "last_updated": "2025-12-09",
+        "canon_sources": ["L1-01", "L1-02", "L2-02", "L2-03", "L2-05", "L2-07", "L3-01", "L3-02", "L3-03", "L3-04"]
+    }
+    </script>
+    
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#00C8C8',
+                primaryTextColor: '#1A1A1A',
+                primaryBorderColor: '#1A1A1A',
+                lineColor: '#666666',
+                secondaryColor: '#F4E8D0',
+                tertiaryColor: '#F8F8F8'
+            }
+        });
+        
+        // Navigation functionality
+        function toggleNav() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+        
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const yOffset = -90; // Account for fixed header
+                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
+                
+                // Update active nav link
+                document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+                event.target.classList.add('active');
+                
+                // Close mobile nav
+                if (window.innerWidth <= 968) {
+                    document.getElementById('sidebar').classList.remove('open');
+                }
+            }
+        }
+        
+        // Collapsible sections
+        document.querySelectorAll('.section-header').forEach(header => {
+            const toggle = header.querySelector('.collapse-toggle');
+            if (toggle) {
+                header.addEventListener('click', (e) => {
+                    if (e.target === toggle || e.target.closest('.collapse-toggle')) return;
+                    const content = header.nextElementSibling;
+                    if (content && content.classList.contains('section-content')) {
+                        content.classList.toggle('collapsed');
+                        if (toggle) {
+                            toggle.textContent = content.classList.contains('collapsed') ? 'Expand' : 'Collapse';
+                        }
+                    }
+                });
+            }
+        });
+        
+        // Highlight active section on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Close mobile nav when clicking outside
+        document.addEventListener('click', (e) => {
+            const sidebar = document.getElementById('sidebar');
+            const navToggle = document.querySelector('.nav-toggle');
+            if (window.innerWidth <= 968 && sidebar.classList.contains('open')) {
+                if (!sidebar.contains(e.target) && !navToggle.contains(e.target)) {
+                    sidebar.classList.remove('open');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

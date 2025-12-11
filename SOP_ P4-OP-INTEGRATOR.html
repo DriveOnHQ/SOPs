@@ -1,0 +1,2546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P4-OP-INTEGRATOR | Operations Integrator SOP</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --drive-cyan: #00C8C8;
+            --carbon-black: #1A1A1A;
+            --text-secondary: #666666;
+            --surface-white: #FFFFFF;
+            --surface-light: #F8F8F8;
+            --border-color: #E0E0E0;
+            --champagne: #F4E8D0;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--carbon-black);
+            background: var(--surface-light);
+        }
+
+        /* Header */
+        header {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .role-id {
+            color: var(--drive-cyan);
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .status-chip {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            left: 0;
+            top: 80px;
+            width: 250px;
+            height: calc(100vh - 80px);
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-color);
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            z-index: 50;
+        }
+
+        nav h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            color: var(--carbon-black);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        nav a:hover {
+            background: var(--surface-light);
+            color: var(--drive-cyan);
+        }
+
+        nav a.active {
+            background: var(--drive-cyan);
+            color: var(--carbon-black);
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        main {
+            margin-left: 250px;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        /* Hero Summary */
+        .hero-summary {
+            background: linear-gradient(135deg, var(--drive-cyan) 0%, #00A0A0 100%);
+            color: var(--carbon-black);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 200, 200, 0.2);
+        }
+
+        .hero-summary h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .key-outcomes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .outcome-chip {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+        }
+
+        .you-own {
+            margin-top: 1.5rem;
+        }
+
+        .you-own h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .you-own ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .you-own li:before {
+            content: "✓";
+            color: var(--carbon-black);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Sections */
+        section {
+            background: var(--surface-white);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        section h2 {
+            color: var(--drive-cyan);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        section h3 {
+            color: var(--carbon-black);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-intro {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--surface-light);
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--drive-cyan);
+        }
+
+        .card h4 {
+            color: var(--carbon-black);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+
+        .callout-canon {
+            background: #FFF9E6;
+            border-color: var(--warning);
+        }
+
+        .callout-warning {
+            background: #FFEBEE;
+            border-color: var(--danger);
+        }
+
+        .callout-tip {
+            background: #E8F5E9;
+            border-color: var(--success);
+        }
+
+        .callout-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Checklists */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: var(--surface-white);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            font-size: 1.25rem;
+            color: var(--drive-cyan);
+            flex-shrink: 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline:before {
+            content: "";
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--drive-cyan);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+
+        .timeline-item:before {
+            content: "";
+            position: absolute;
+            left: -1.625rem;
+            top: 0.25rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--drive-cyan);
+        }
+
+        .timeline-time {
+            font-weight: 600;
+            color: var(--drive-cyan);
+            font-size: 0.875rem;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--surface-light);
+            font-weight: 600;
+            color: var(--carbon-black);
+        }
+
+        tr:hover {
+            background: var(--surface-light);
+        }
+
+        /* Code Blocks */
+        code {
+            background: var(--carbon-black);
+            color: var(--drive-cyan);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        pre {
+            background: var(--carbon-black);
+            color: var(--surface-white);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Collapsible */
+        details {
+            background: var(--surface-light);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+        }
+
+        summary {
+            font-weight: 600;
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary:before {
+            content: "▶";
+            transition: transform 0.2s;
+        }
+
+        details[open] summary:before {
+            transform: rotate(90deg);
+        }
+
+        details[open] summary {
+            margin-bottom: 1rem;
+        }
+
+        /* KPI Badges */
+        .kpi-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        .kpi-badge {
+            background: var(--surface-white);
+            border: 2px solid var(--drive-cyan);
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .kpi-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--drive-cyan);
+        }
+
+        .kpi-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Handoff Cards */
+        .handoff-card {
+            background: var(--surface-white);
+            border: 2px solid var(--drive-cyan);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .handoff-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .handoff-flow {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .handoff-arrow {
+            color: var(--drive-cyan);
+            font-size: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                position: static;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            main {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Mermaid Diagrams */
+        .mermaid {
+            background: var(--surface-white);
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div>
+                <div class="role-id">P4-OP-INTEGRATOR</div>
+                <h1 class="role-title">Operations Integrator / Operations Architect</h1>
+            </div>
+            <span class="status-chip">ACTIVE | POD 4</span>
+        </div>
+    </header>
+
+    <nav>
+        <h3>Contents</h3>
+        <ul>
+            <li><a href="#hero">Overview</a></li>
+            <li><a href="#meta">Meta & Role Snapshot</a></li>
+            <li><a href="#purpose">Role Purpose</a></li>
+            <li><a href="#canon">Canon Constraints</a></li>
+            <li><a href="#day">Day-in-the-Life</a></li>
+            <li><a href="#workflows">Core Workflows</a></li>
+            <li><a href="#handoffs">Handoffs & Interfaces</a></li>
+            <li><a href="#kpis">KPIs & Quality Bar</a></li>
+            <li><a href="#ai">AI Usage Patterns</a></li>
+            <li><a href="#tools">Tools & Systems</a></li>
+            <li><a href="#escalation">Escalation & Decisions</a></li>
+            <li><a href="#onboarding">Onboarding Checklist</a></li>
+            <li><a href="#changelog">Change Log</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Hero Summary -->
+        <div class="hero-summary" id="hero">
+            <h1>Operations Integrator</h1>
+            <p><strong>Role ID:</strong> P4-OP-INTEGRATOR | <strong>Pod:</strong> Pod 4 (Ops/PM/Integrator) | <strong>Reports To:</strong> Founder</p>
+            
+            <div class="key-outcomes">
+                <span class="outcome-chip">System Coherence</span>
+                <span class="outcome-chip">WIP Discipline</span>
+                <span class="outcome-chip">Canon Integrity</span>
+                <span class="outcome-chip">Bottleneck Resolution</span>
+                <span class="outcome-chip">Cross-Pod Orchestration</span>
+            </div>
+
+            <div class="you-own">
+                <h3>You Own:</h3>
+                <ul>
+                    <li>Operating system coherence across all pods</li>
+                    <li>Canon updates (L1-L4 documentation)</li>
+                    <li>Infrastructure change management</li>
+                    <li>SOP maintenance and regeneration</li>
+                    <li>Cross-pod bottleneck identification and resolution</li>
+                    <li>System-level decision documentation</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Meta Block -->
+        <section id="meta">
+            <h2>📋 Meta & Role Snapshot</h2>
+            <p class="section-intro">High-level metadata and system position for this role within DriveOn Commerce.</p>
+
+            <table>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td><strong>Role ID</strong></td>
+                    <td><code>P4-OP-INTEGRATOR</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Legacy ID</strong></td>
+                    <td><code>P4-01</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Role Name</strong></td>
+                    <td>Integrator / Operations Architect</td>
+                </tr>
+                <tr>
+                    <td><strong>Pod</strong></td>
+                    <td>Pod 4 (Ops/PM/Integrator)</td>
+                </tr>
+                <tr>
+                    <td><strong>Seniority</strong></td>
+                    <td>Lead</td>
+                </tr>
+                <tr>
+                    <td><strong>Status</strong></td>
+                    <td>ACTIVE | CORE</td>
+                </tr>
+                <tr>
+                    <td><strong>Cross-Pod</strong></td>
+                    <td>true</td>
+                </tr>
+                <tr>
+                    <td><strong>Default FTE</strong></td>
+                    <td>1.0</td>
+                </tr>
+                <tr>
+                    <td><strong>Upstream Roles</strong></td>
+                    <td>All Pods (P1, P2, P3, P4)</td>
+                </tr>
+                <tr>
+                    <td><strong>Downstream Roles</strong></td>
+                    <td>All Pods (P1, P2, P3, P4)</td>
+                </tr>
+            </table>
+
+            <div class="kpi-strip">
+                <div class="kpi-badge">
+                    <div class="kpi-value">8-10</div>
+                    <div class="kpi-label">Active Initiatives</div>
+                </div>
+                <div class="kpi-badge">
+                    <div class="kpi-value">3-5</div>
+                    <div class="kpi-label">Critical Decisions/Day</div>
+                </div>
+                <div class="kpi-badge">
+                    <div class="kpi-value">10-15</div>
+                    <div class="kpi-label">Cross-Pod Issues/Week</div>
+                </div>
+                <div class="kpi-badge">
+                    <div class="kpi-value">40-60</div>
+                    <div class="kpi-label">Issues Resolved/Month</div>
+                </div>
+            </div>
+
+            <h3>Primary Tools</h3>
+            <ul>
+                <li><strong>ClickUp:</strong> Task management, WIP tracking, ops initiatives</li>
+                <li><strong>Notion:</strong> Canon Registry, SOPs, Change Registry, configuration DBs</li>
+                <li><strong>Google Drive:</strong> Canon docs (L0-L3), decision logs, change documentation</li>
+                <li><strong>Discord/Slack:</strong> Cross-pod communication, escalation channels</li>
+                <li><strong>BI Tools:</strong> Portfolio dashboards, system health metrics</li>
+            </ul>
+
+            <h3>Primary Artifacts</h3>
+            <ul>
+                <li>SOPs (all layers: L0-L4)</li>
+                <li>Workflow documentation</li>
+                <li>Decision logs</li>
+                <li>Canon change proposals (CCR)</li>
+                <li>Infrastructure blueprints</li>
+                <li>System health reports</li>
+            </ul>
+        </section>
+
+        <!-- Role Purpose -->
+        <section id="purpose">
+            <h2>🎯 Role Purpose & Context</h2>
+            <p class="section-intro">Why this role exists and how it supports the CaniCol model.</p>
+
+            <h3>Mission Statement</h3>
+            <p>The Operations Integrator serves as the <strong>"mini-COO"</strong> of DriveOn Commerce, responsible for maintaining <strong>operating system coherence</strong> across all four pods. This role ensures that the CaniCol v4.0 model runs as designed, that canon remains the single source of truth, and that cross-pod friction is eliminated systematically rather than through ad-hoc heroics.</p>
+
+            <h3>Strategic Context</h3>
+            <p>DriveOn Commerce operates a lean-volume dropshipping engine testing <strong>45-60 products/month</strong> with strict economic constraints (<strong>$80-$100 average P1+P2 spend</strong>). At this volume, system coherence is non-negotiable:</p>
+            <ul>
+                <li><strong>Without WIP discipline:</strong> Pods overflow, quality drops, kill discipline fails</li>
+                <li><strong>Without canon integrity:</strong> Each pod invents its own rules, creating drift and inconsistency</li>
+                <li><strong>Without bottleneck resolution:</strong> The 45-60 test/month engine stalls</li>
+                <li><strong>Without cross-pod orchestration:</strong> Handoffs fail, products get stuck between gates</li>
+            </ul>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Canon Constraint</div>
+                <p>This role exists to <strong>implement canon, not modify it</strong>. Any proposed changes to L0-L2 economics, gate definitions, WIP caps, or pod structures must flow through formal Canon Change Requests (CCR) and founder approval. The Integrator protects the CaniCol model above all else.</p>
+            </div>
+
+            <h3>How This Role Supports CaniCol Economics</h3>
+            <ul>
+                <li><strong>Maintains test bank integrity:</strong> Ensures $4,000-$5,500/month P1+P2 spend stays within bounds</li>
+                <li><strong>Enforces kill discipline:</strong> Tracks that 70-80% of products are eliminated in P1 within 24-48 hours</li>
+                <li><strong>Protects winner rates:</strong> Validates that 4-6% hit rate expectations are realistic given current pod capacity</li>
+                <li><strong>Prevents capacity bottlenecks:</strong> Ensures research, creative, and media pods can sustain 45-60 test/month throughput</li>
+                <li><strong>Guards WIP caps:</strong> Stops pods from overloading (e.g., R1 ≤10, R2 ≤6, R3 ≤3 per FTE)</li>
+            </ul>
+        </section>
+
+        <!-- Canon Constraints -->
+        <section id="canon">
+            <h2>⚖️ Canon Constraints</h2>
+            <p class="section-intro">Non-negotiable rules and boundaries that govern this role's operations.</p>
+
+            <div class="callout callout-canon">
+                <div class="callout-title">⚖️ Precedence Hierarchy</div>
+                <p><strong>L0 > L1 > L2 > L3 > L4 > Legacy 3.2</strong></p>
+                <p>In any conflict, higher layers win. Legacy 3.2 documents never override v4.0 canon.</p>
+            </div>
+
+            <h3>Economic Constraints (L1-01 + L2-05)</h3>
+            <div class="card">
+                <h4>Non-Negotiable Testing Economics</h4>
+                <ul>
+                    <li><strong>Testing Volume:</strong> ~45-60 products/month reach P1/P2</li>
+                    <li><strong>P1 Budget:</strong> $40-$60 per product</li>
+                    <li><strong>P1+P2 Total:</strong> $70-$120 per product (standard: $80-$100)</li>
+                    <li><strong>Tier-S Exception:</strong> $150-$200 total (rare, must be justified)</li>
+                    <li><strong>Test Bank:</strong> ~$4,000-$5,500/month P1+P2 spend</li>
+                    <li><strong>Hit Rate:</strong> 4-6% true winners (~2-4 products/month)</li>
+                    <li><strong>Portfolio Distribution:</strong> 70-80% killed in P1, 10-16% reach P2, 4-10% reach P3</li>
+                </ul>
+                <p><strong>You may NOT alter these numbers</strong> without drafting a formal L1/L2 canon update and obtaining founder approval.</p>
+            </div>
+
+            <h3>WIP & Throughput Constraints (L2-03 + L2-07)</h3>
+            <div class="card">
+                <h4>Canonical WIP Caps (Per 1.0 FTE)</h4>
+                <table>
+                    <tr>
+                        <th>Gate/Role</th>
+                        <th>WIP Cap</th>
+                        <th>Throughput Target</th>
+                    </tr>
+                    <tr>
+                        <td>Research (R1)</td>
+                        <td>≤10 packets</td>
+                        <td>15-20/week</td>
+                    </tr>
+                    <tr>
+                        <td>Research (R2)</td>
+                        <td>≤6 packets</td>
+                        <td>8-12/week</td>
+                    </tr>
+                    <tr>
+                        <td>Research (R3)</td>
+                        <td>≤3 packets</td>
+                        <td>3-4/week</td>
+                    </tr>
+                    <tr>
+                        <td>Creative (P1/P2)</td>
+                        <td>4-6 products</td>
+                        <td>4-6 creative packs/week</td>
+                    </tr>
+                    <tr>
+                        <td>Media Buyer (P1)</td>
+                        <td>8-10 tests</td>
+                        <td>8-12 tests/week</td>
+                    </tr>
+                    <tr>
+                        <td>Media Buyer (P2)</td>
+                        <td>4-6 tests</td>
+                        <td>4-6 tests/week</td>
+                    </tr>
+                    <tr>
+                        <td>Integrator (Self)</td>
+                        <td>8-10 initiatives</td>
+                        <td>3-5 decisions/blocks cleared daily</td>
+                    </tr>
+                </table>
+                <p><strong>You may NOT modify WIP caps</strong> without L2-03 canon update.</p>
+            </div>
+
+            <h3>Tool Stack Constraints (L2 + L3)</h3>
+            <div class="card">
+                <h4>Approved Core Tools</h4>
+                <ul>
+                    <li><strong>ClickUp:</strong> All task management and pipeline tracking</li>
+                    <li><strong>Notion:</strong> All knowledge base, canon, and database work</li>
+                    <li><strong>Google Drive:</strong> All file storage with pod-based hierarchy</li>
+                    <li><strong>Discord/Slack:</strong> All team communication</li>
+                    <li><strong>Time & Payroll Systems:</strong> As specified in L3-05</li>
+                </ul>
+                <p><strong>NOT Approved:</strong> Airtable, Asana, Trello, Monday.com, or any PM/DB tools not in L2/L3</p>
+                <p>Any proposed tool additions require a Canon Change Request and must not duplicate existing approved tool functions.</p>
+            </div>
+
+            <h3>Change Authority</h3>
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Decision Rights</div>
+                <ul>
+                    <li><strong>You CAN decide alone:</strong> L3/L4 infrastructure tweaks (minor), SOP content updates, workflow optimizations that don't change economics</li>
+                    <li><strong>You NEED PM input:</strong> Medium infra changes, new automation proposals, cross-pod process changes</li>
+                    <li><strong>You NEED Founder approval:</strong> L0-L2 canon changes, major infra changes, new tool additions, role/pod structure changes, testing budget/WIP changes</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Day in the Life -->
+        <section id="day">
+            <h2>📅 Day-in-the-Life Timeline</h2>
+            <p class="section-intro">Typical daily workflow for the Operations Integrator role.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">08:00 - 09:00 | System Health Check</div>
+                    <p><strong>Focus:</strong> Portfolio & bottleneck scanning</p>
+                    <ul>
+                        <li>Review overnight alerts in Discord #sys-health channel</li>
+                        <li>Check ClickUp WIP dashboards across all pods (P1-P4)</li>
+                        <li>Scan Notion Canon Registry for any overnight changes</li>
+                        <li>Review BI dashboards for portfolio ROAS, test bank burn rate</li>
+                        <li>Identify any red flags (WIP violations, budget overruns, stalled handoffs)</li>
+                    </ul>
+                    <p><strong>Tools:</strong> ClickUp dashboards, Notion Canon Registry, BI tools, Discord</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">09:00 - 11:00 | Critical Decision Block</div>
+                    <p><strong>Focus:</strong> Clearing blockers and making system-level decisions</p>
+                    <ul>
+                        <li>Process escalations from pods (3-5 items typically)</li>
+                        <li>Review/approve Canon Change Requests in Notion Change_Registry</li>
+                        <li>Make go/no-go decisions on infrastructure changes</li>
+                        <li>Resolve cross-pod conflicts or handoff failures</li>
+                        <li>Document decisions in ClickUp ops tasks + Notion decision log</li>
+                    </ul>
+                    <p><strong>Primary Workflow:</strong> Escalation Resolution (see Workflows section)</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">11:00 - 12:30 | Canon & SOP Work</div>
+                    <p><strong>Focus:</strong> Documentation maintenance and updates</p>
+                    <ul>
+                        <li>Review any L1-L3 canon docs flagged for update</li>
+                        <li>Coordinate with LLM factory for SOP regeneration if canon changed</li>
+                        <li>Update Notion Canon Registry status and version numbers</li>
+                        <li>Review SOP feedback from pods and prioritize updates</li>
+                        <li>Draft new SOPs for newly defined roles (if applicable)</li>
+                    </ul>
+                    <p><strong>Primary Workflow:</strong> Canon Maintenance (see Workflows section)</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">12:30 - 13:30 | Lunch / Async Communication</div>
+                    <p><strong>Focus:</strong> Lightweight monitoring and responses</p>
+                    <ul>
+                        <li>Monitor Discord for urgent escalations</li>
+                        <li>Respond to quick clarification requests from pods</li>
+                        <li>Review ClickUp notifications</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">13:30 - 15:30 | Infrastructure & Process Improvement</div>
+                    <p><strong>Focus:</strong> Proactive system improvements</p>
+                    <ul>
+                        <li>Work on 1-2 active infrastructure initiatives from WIP</li>
+                        <li>Implement approved infrastructure changes (ClickUp/Notion/Discord structure)</li>
+                        <li>Test and deploy new automations (coordinated with PM)</li>
+                        <li>Audit tool configurations against L3 blueprints</li>
+                        <li>Identify and document recurring friction patterns</li>
+                    </ul>
+                    <p><strong>Primary Workflow:</strong> Infrastructure Change Management (see Workflows section)</p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">15:30 - 17:00 | Cross-Pod Coordination & Planning</div>
+                    <p><strong>Focus:</strong> Orchestration and forward planning</p>
+                    <ul>
+                        <li>Join pod standups or async check-ins as needed</li>
+                        <li>Review cross-pod handoff quality (R3→Creative, Creative→Media)</li>
+                        <li>Plan capacity adjustments if bottlenecks detected</li>
+                        <li>Coordinate with PM on upcoming sprint priorities</li>
+                        <li>Draft Canon Change Requests for founder review (if needed)</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-time">17:00 - 17:30 | End-of-Day Closeout</div>
+                    <p><strong>Focus:</strong> Documentation and handoff prep</p>
+                    <ul>
+                        <li>Update ClickUp ops initiative statuses</li>
+                        <li>Document any critical decisions in Notion decision log</li>
+                        <li>Flag any overnight risks or follow-ups in Discord</li>
+                        <li>Prepare briefing for Founder if major issues arose</li>
+                        <li>Set priorities for next day based on system health</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Timing Flexibility</div>
+                <p>This timeline is a <strong>typical pattern</strong>, not a rigid schedule. Some days will be dominated by emergency bottleneck resolution; others by deep canon work. The key discipline is: <strong>critical decisions and escalations always get morning slots</strong> before they block pod work.</p>
+            </div>
+        </section>
+
+        <!-- Core Workflows -->
+        <section id="workflows">
+            <h2>⚙️ Core Workflows</h2>
+            <p class="section-intro">Step-by-step processes for the Integrator's primary responsibilities.</p>
+
+            <!-- Workflow 1 -->
+            <details>
+                <summary><strong>Workflow 1: Escalation Resolution & Bottleneck Clearing</strong></summary>
+                <div class="card">
+                    <h4>Trigger</h4>
+                    <p>Pod lead or team member escalates an issue via Discord #p4-ops-escalations or ClickUp ops ticket.</p>
+
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li><strong>Escalation ticket</strong> in ClickUp (Space: "Pod 4 - Ops", List: "Escalations")</li>
+                        <li><strong>Context:</strong> Which pod(s), which product(s), what's blocked</li>
+                        <li><strong>Canon reference:</strong> Which L1-L3 doc is relevant (if known)</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Acknowledge within 2 hours:</strong> Post in Discord confirming receipt and expected resolution time</li>
+                        <li><strong>Classify the escalation:</strong>
+                            <ul>
+                                <li><strong>Type A - Process Clarification:</strong> Canon unclear, SOP ambiguous</li>
+                                <li><strong>Type B - Tool/Infra Issue:</strong> ClickUp/Notion/Discord not working as expected</li>
+                                <li><strong>Type C - Cross-Pod Conflict:</strong> Two pods disagree on handoff or responsibility</li>
+                                <li><strong>Type D - Capacity/WIP Violation:</strong> Pod is overloaded beyond canonical caps</li>
+                                <li><strong>Type E - Canon Contradiction:</strong> Reality doesn't match L1-L3 rules</li>
+                            </ul>
+                        </li>
+                        <li><strong>Check canon precedence:</strong>
+                            <ul>
+                                <li>Open Notion Canon Registry and locate relevant L0-L3 docs</li>
+                                <li>Verify current version and status (ACTIVE vs LEGACY)</li>
+                                <li>Apply precedence rule: L0 > L1 > L2 > L3 > L4</li>
+                            </ul>
+                        </li>
+                        <li><strong>Make decision based on type:</strong>
+                            <ul>
+                                <li><strong>Type A:</strong> Clarify canon, document in decision log, flag SOP for update</li>
+                                <li><strong>Type B:</strong> Log in Change_Registry, coordinate fix with PM/VA</li>
+                                <li><strong>Type C:</strong> Reference L2-02 Pod Overview for RACI, make binding call</li>
+                                <li><strong>Type D:</strong> Review WIP data, coordinate capacity adjustment with Founder</li>
+                                <li><strong>Type E:</strong> Draft Canon Change Request, escalate to Founder</li>
+                            </ul>
+                        </li>
+                        <li><strong>Document decision:</strong>
+                            <ul>
+                                <li>Update ClickUp ticket with resolution and rationale</li>
+                                <li>Add entry to Notion decision log with date, decision, canon refs</li>
+                                <li>If canon/SOP update needed, create follow-up task</li>
+                            </ul>
+                        </li>
+                        <li><strong>Communicate resolution:</strong>
+                            <ul>
+                                <li>Post resolution in Discord escalation thread</li>
+                                <li>Notify affected pod leads via @mention</li>
+                                <li>If system-wide impact, announce in #sys-all-hands</li>
+                            </ul>
+                        </li>
+                        <li><strong>Close or hand off:</strong>
+                            <ul>
+                                <li>If resolved: move ClickUp ticket to "Closed"</li>
+                                <li>If requires follow-up: assign to PM/VA and set due date</li>
+                                <li>If requires Founder approval: move to "Awaiting Approval" and notify</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Resolved escalation ticket in ClickUp</li>
+                        <li>Decision log entry in Notion</li>
+                        <li>Discord resolution announcement</li>
+                        <li>SOP update task (if needed)</li>
+                        <li>Canon Change Request draft (if Type E)</li>
+                    </ul>
+
+                    <h4>Quality Check</h4>
+                    <ul>
+                        <li>✓ Decision aligns with canon precedence</li>
+                        <li>✓ All affected pods notified</li>
+                        <li>✓ Documentation is searchable and linked</li>
+                        <li>✓ Follow-up actions assigned with clear owners</li>
+                    </ul>
+
+                    <h4>Time Budget</h4>
+                    <p>15-45 minutes per escalation depending on type complexity</p>
+                </div>
+            </details>
+
+            <!-- Workflow 2 -->
+            <details>
+                <summary><strong>Workflow 2: Canon Maintenance & Version Management</strong></summary>
+                <div class="card">
+                    <h4>Trigger</h4>
+                    <p>Quarterly review cycle, or immediate trigger if L1-L2 change approved by Founder.</p>
+
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li><strong>Approved Canon Change Request</strong> from Notion Change_Registry</li>
+                        <li><strong>Current canon docs</strong> from Google Drive + Notion</li>
+                        <li><strong>Impact assessment</strong> (which L3/L4 docs affected)</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Open Change_Registry entry:</strong>
+                            <ul>
+                                <li>Navigate to Notion → DriveOn · Canon & SOPs → 01 · Canon_Config (SSOT) → Change_Registry</li>
+                                <li>Filter for Status = "Approved" or "In Progress"</li>
+                                <li>Review the change scope, affected docs, and systems</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update L0-L3 canon docs:</strong>
+                            <ul>
+                                <li>Open the source doc in Google Drive (e.g., L1-01_CaniCol_Model_v4.0.docx)</li>
+                                <li>Make the approved changes following exact CCR specifications</li>
+                                <li>Bump version number per L1-02 rules (MAJOR.MINOR.PATCH)</li>
+                                <li>Update change log section with date, change description, author</li>
+                                <li>Save new version with updated filename (e.g., v4.1 becomes v4.2)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Canon Registry in Notion:</strong>
+                            <ul>
+                                <li>Open the affected doc's row in Canon Registry</li>
+                                <li>Update Version field (e.g., 4.0 → 4.1)</li>
+                                <li>Update Status (confirm ACTIVE if previously DRAFT)</li>
+                                <li>Update Last Reviewed date to today</li>
+                                <li>Add Change Summary text</li>
+                                <li>Set Replaces_Canon_Doc_ID to previous version</li>
+                            </ul>
+                        </li>
+                        <li><strong>Mark previous version as LEGACY:</strong>
+                            <ul>
+                                <li>Find the previous version row in Canon Registry</li>
+                                <li>Change Status from ACTIVE to LEGACY</li>
+                                <li>Add note: "Superseded by [new version]"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Assess downstream impact:</strong>
+                            <ul>
+                                <li>Check which L3 infra docs reference the changed L1-L2 doc</li>
+                                <li>Check which L4 SOPs embed the old values/rules</li>
+                                <li>Create a list of docs requiring regeneration</li>
+                            </ul>
+                        </li>
+                        <li><strong>Trigger L3/L4 updates:</strong>
+                            <ul>
+                                <li>For each affected L3 doc: draft updated sections, bump version</li>
+                                <li>For each affected L4 SOP: coordinate with LLM SOP factory to regenerate</li>
+                                <li>Update SOP Library in Notion with new versions</li>
+                                <li>Deprecate old SOP versions (status = LEGACY)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update tools to match canon:</strong>
+                            <ul>
+                                <li>If ClickUp structure changed: update spaces/folders/lists/statuses</li>
+                                <li>If Notion schema changed: update DB properties</li>
+                                <li>If Discord channels changed: rename or create channels</li>
+                                <li>Document all tool changes in Change_Registry</li>
+                            </ul>
+                        </li>
+                        <li><strong>Communicate the change:</strong>
+                            <ul>
+                                <li>Draft change announcement for Discord #sys-canon-updates</li>
+                                <li>Include: what changed, why, impact on operations, where to find new docs</li>
+                                <li>@mention all pod leads</li>
+                                <li>Post link to updated Canon Registry entry</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Change_Registry entry:</strong>
+                            <ul>
+                                <li>Move Status to "Implemented"</li>
+                                <li>Link all updated canon docs in Docs_Links relation</li>
+                                <li>Add implementation notes</li>
+                                <li>Set review date for follow-up check (usually +2 weeks)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Monitor adoption (2-week follow-up):</strong>
+                            <ul>
+                                <li>Check if pods are following new canon</li>
+                                <li>Address any confusion or friction</li>
+                                <li>Move Change_Registry status to "Reviewed" then "Closed"</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Updated L0-L3 canon docs with new version numbers</li>
+                        <li>Updated Canon Registry entries (new ACTIVE, old LEGACY)</li>
+                        <li>Regenerated L3/L4 docs reflecting new canon</li>
+                        <li>Updated tool configurations (ClickUp/Notion/Discord)</li>
+                        <li>Change announcement in Discord</li>
+                        <li>Closed Change_Registry entry</li>
+                    </ul>
+
+                    <h4>Quality Check</h4>
+                    <ul>
+                        <li>✓ All version numbers incremented correctly per L1-02 rules</li>
+                        <li>✓ Canon Registry shows clear ACTIVE vs LEGACY status</li>
+                        <li>✓ Downstream L3/L4 docs updated and cross-referenced</li>
+                        <li>✓ Tool configurations match new canon (no drift)</li>
+                        <li>✓ All pods notified and aware of changes</li>
+                    </ul>
+
+                    <h4>Time Budget</h4>
+                    <p>2-8 hours depending on scope (PATCH = 2h, MINOR = 4h, MAJOR = 8h+)</p>
+                </div>
+            </details>
+
+            <!-- Workflow 3 -->
+            <details>
+                <summary><strong>Workflow 3: Infrastructure Change Management</strong></summary>
+                <div class="card">
+                    <h4>Trigger</h4>
+                    <p>Proposed infra change from any pod, or proactive improvement identified by Integrator.</p>
+
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li><strong>Change proposal</strong> (can be informal request or formal CCR)</li>
+                        <li><strong>System affected:</strong> ClickUp, Notion, Discord, Drive, or Automation</li>
+                        <li><strong>Business justification:</strong> What problem does this solve?</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Create Change_Registry entry:</strong>
+                            <ul>
+                                <li>Open Notion Change_Registry DB</li>
+                                <li>Create new entry with Title: "[Infra] [System] - [Description]"</li>
+                                <li>Set Type = "Infra" or "Mixed"</li>
+                                <li>Set Risk = "Low" / "Medium" / "High" based on impact</li>
+                                <li>Document Requested_By, Systems_Affected</li>
+                                <li>Status = "Proposed"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Check canon alignment (Step 0 from L3-06):</strong>
+                            <ul>
+                                <li>Does this touch L1-01 CaniCol Model economics? (STOP if yes)</li>
+                                <li>Does this touch L2-02 Pod Overview responsibilities? (Needs L2 update)</li>
+                                <li>Does this touch L2-03 Role Registry or WIP caps? (Needs L2 update)</li>
+                                <li>Does this touch L3-01 to L3-05 blueprints? (Needs L3 update)</li>
+                                <li>If canon conflict detected: MUST update canon first before proceeding</li>
+                            </ul>
+                        </li>
+                        <li><strong>Classify change magnitude:</strong>
+                            <ul>
+                                <li><strong>Minor:</strong> Cosmetic, view changes, no ID/flow impact → Ops Lead can approve</li>
+                                <li><strong>Medium:</strong> New fields/statuses, new DBs/channels, no breaking changes → Ops Lead + Founder approve</li>
+                                <li><strong>Major:</strong> Breaking changes to IDs, pod logic, flows → Requires L2/L3 canon update + Founder approval</li>
+                            </ul>
+                        </li>
+                        <li><strong>If Medium/Major and touches canon:</strong>
+                            <ul>
+                                <li>Draft canon update (relevant L2/L3 doc)</li>
+                                <li>Bump version per L1-02 rules</li>
+                                <li>Update Canon Registry</li>
+                                <li>Get Founder approval on canon change BEFORE implementing in tools</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Workspace_Map in Notion:</strong>
+                            <ul>
+                                <li>For new entities: add rows with Token, System, Human_Name, URL (placeholder), Used_By_Roles</li>
+                                <li>For renamed entities: update existing row, mark old Token as Deprecated</li>
+                                <li>For deleted entities: set Status = Deprecated (don't delete row)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Implement in tools (Step 5 from L3-06):</strong>
+                            <ul>
+                                <li><strong>ClickUp:</strong> Create/rename spaces, folders, lists, statuses, custom fields per Workspace_Map</li>
+                                <li><strong>Notion:</strong> Create/update DBs, properties, views per schema</li>
+                                <li><strong>Discord:</strong> Create/rename channels, categories per structure</li>
+                                <li><strong>Drive:</strong> Create/rename folders per hierarchy</li>
+                                <li>Update Workspace_Map with actual URLs once created</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update or create automations if needed:</strong>
+                            <ul>
+                                <li>Add row to Automation_Registry if new automation</li>
+                                <li>Update existing row if automation modified</li>
+                                <li>Document: Trigger, Input, Output, Owner_Role, Touches_Workspace_Tokens</li>
+                                <li>Test automation in sandbox before enabling</li>
+                            </ul>
+                        </li>
+                        <li><strong>Communicate and train (Step 6 from L3-06):</strong>
+                            <ul>
+                                <li>Post announcement in Discord #sys-infra-changes</li>
+                                <li>Include: what changed, why, where updated docs live</li>
+                                <li>If workflow changes: record quick Loom walkthrough</li>
+                                <li>@mention affected pod leads</li>
+                            </ul>
+                        </li>
+                        <li><strong>Regenerate affected SOPs (Step 7 from L3-06):</strong>
+                            <ul>
+                                <li>Identify SOPs that reference old structure</li>
+                                <li>Coordinate with LLM SOP factory to regenerate with new infra references</li>
+                                <li>Update SOP Library in Notion</li>
+                                <li>Mark old versions as LEGACY</li>
+                            </ul>
+                        </li>
+                        <li><strong>Update Change_Registry to "Implemented":</strong>
+                            <ul>
+                                <li>Link updated canon docs if any</li>
+                                <li>Link updated Workspace_Map rows</li>
+                                <li>Link updated Automation_Registry rows</li>
+                                <li>Set review date (+1 week for monitoring)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Monitor adoption and close:</strong>
+                            <ul>
+                                <li>Check if pods are using new structure correctly</li>
+                                <li>Address any friction or confusion</li>
+                                <li>Move Change_Registry to "Reviewed" then "Closed"</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Updated infrastructure in live tools (ClickUp/Notion/Discord/Drive)</li>
+                        <li>Updated Workspace_Map in Notion</li>
+                        <li>Updated Automation_Registry if applicable</li>
+                        <li>Updated canon docs if Medium/Major change</li>
+                        <li>Regenerated SOPs reflecting new infra</li>
+                        <li>Change announcement and training material</li>
+                        <li>Closed Change_Registry entry</li>
+                    </ul>
+
+                    <h4>Quality Check</h4>
+                    <ul>
+                        <li>✓ Canon updated BEFORE tools (if needed)</li>
+                        <li>✓ Workspace_Map accurately reflects live tool state</li>
+                        <li>✓ No "shadow" entities exist outside Workspace_Map</li>
+                        <li>✓ All automations documented in Automation_Registry</li>
+                        <li>✓ SOPs regenerated and referencing correct structure</li>
+                        <li>✓ Pods trained and using new structure correctly</li>
+                    </ul>
+
+                    <h4>Time Budget</h4>
+                    <p>1-6 hours depending on change class (Minor = 1h, Medium = 3h, Major = 6h+)</p>
+                </div>
+            </details>
+
+            <!-- Workflow 4 -->
+            <details>
+                <summary><strong>Workflow 4: System Health Monitoring & Bottleneck Detection</strong></summary>
+                <div class="card">
+                    <h4>Trigger</h4>
+                    <p>Daily morning routine, or triggered by alert from BI dashboard or Discord notification.</p>
+
+                    <h4>Inputs</h4>
+                    <ul>
+                        <li><strong>ClickUp WIP dashboards</strong> for each pod</li>
+                        <li><strong>BI portfolio dashboard</strong> showing ROAS, test bank burn, winner rate</li>
+                        <li><strong>Discord alerts</strong> from #sys-health channel</li>
+                        <li><strong>Notion Product OS</strong> status distribution</li>
+                    </ul>
+
+                    <h4>Steps</h4>
+                    <ol>
+                        <li><strong>Check overnight Discord alerts:</strong>
+                            <ul>
+                                <li>Open Discord #sys-health channel</li>
+                                <li>Review any automated alerts or manual flags from pods</li>
+                                <li>Note: WIP violations, budget overruns, stalled products, critical escalations</li>
+                            </ul>
+                        </li>
+                        <li><strong>Scan ClickUp WIP dashboards by pod:</strong>
+                            <ul>
+                                <li><strong>Pod 1 (Research):</strong>
+                                    <ul>
+                                        <li>R1 WIP per researcher (should be ≤10)</li>
+                                        <li>R2 WIP per researcher (should be ≤6)</li>
+                                        <li>R3 WIP per researcher (should be ≤3)</li>
+                                        <li>R3 approval backlog (should be <5 days old)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Pod 2 (Creative):</strong>
+                                    <ul>
+                                        <li>Products in creative queue (should match R3 output)</li>
+                                        <li>WIP per creative role (4-6 products)</li>
+                                        <li>Time since R3 handoff for oldest item (should be <3 days)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Pod 3 (Media & Store):</strong>
+                                    <ul>
+                                        <li>P1 WIP per media buyer (should be 8-10)</li>
+                                        <li>P2 WIP per media buyer (should be 4-6)</li>
+                                        <li>Store setup backlog for new P1 tests</li>
+                                        <li>Kill discipline: products in P1_FAIL status >48h (should be 0)</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Pod 4 (Ops):</strong>
+                                    <ul>
+                                        <li>Open escalations >48h (should be 0)</li>
+                                        <li>Active infrastructure initiatives (should be 8-10)</li>
+                                        <li>Pending Canon Change Requests (should have response within 24h)</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><strong>Review BI portfolio dashboard:</strong>
+                            <ul>
+                                <li><strong>Test Bank Burn Rate:</strong> Current month P1+P2 spend vs. $4,000-$5,500 budget</li>
+                                <li><strong>Portfolio ROAS:</strong> Blended ROAS across all active products</li>
+                                <li><strong>Winner Rate:</strong> P2_PASS products as % of tested (should be 4-6%)</li>
+                                <li><strong>Kill Discipline:</strong> % of clear failures killed within 24-48h</li>
+                                <li><strong>Testing Velocity:</strong> Products entering P1 per week (should be 10-15)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Check Notion Product OS status distribution:</strong>
+                            <ul>
+                                <li>Filter by Status: count products in each stage</li>
+                                <li>Compare to canonical distribution: 70-80% kill in P1, 10-16% reach P2, 4-10% reach P3</li>
+                                <li>Flag any anomalies (e.g., P2 rate too high = soft kill discipline)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Identify bottlenecks using "5 Whys" pattern:</strong>
+                            <ul>
+                                <li>If R3 queue backing up: Why? → Check R3 lead capacity → Check R2 output quality → Check R1 sourcing volume</li>
+                                <li>If P1 tests delayed: Why? → Check creative handoff → Check store setup → Check media buyer capacity</li>
+                                <li>If test bank burning too fast: Why? → Check P1 budgets → Check kill discipline → Check tier mix</li>
+                            </ul>
+                        </li>
+                        <li><strong>Classify issues by urgency:</strong>
+                            <ul>
+                                <li><strong>RED - Critical:</strong> Blocks testing velocity (must resolve today)</li>
+                                <li><strong>YELLOW - Important:</strong> Friction building, will block soon (resolve this week)</li>
+                                <li><strong>GREEN - Monitor:</strong> Within tolerance, watch for trend (next review)</li>
+                            </ul>
+                        </li>
+                        <li><strong>Create action items for RED/YELLOW issues:</strong>
+                            <ul>
+                                <li>For RED: create ClickUp ops task with today's due date</li>
+                                <li>For YELLOW: create ClickUp ops task with this week's due date</li>
+                                <li>Assign to self or delegate to PM/pod lead as appropriate</li>
+                                <li>Post in Discord if cross-pod coordination needed</li>
+                            </ul>
+                        </li>
+                        <li><strong>Document findings in daily health log:</strong>
+                            <ul>
+                                <li>Open Notion → System Health Logs DB</li>
+                                <li>Create daily entry with date, pod statuses, issues flagged, actions taken</li>
+                                <li>Link to any created ClickUp tasks</li>
+                            </ul>
+                        </li>
+                        <li><strong>Brief Founder if critical issues:</strong>
+                            <ul>
+                                <li>Draft summary in Discord DM or #founder-brief channel</li>
+                                <li>Include: issue, impact, proposed solution, decision needed (if any)</li>
+                                <li>Don't wait for scheduled sync if RED issue exists</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <h4>Outputs</h4>
+                    <ul>
+                        <li>Prioritized list of issues (RED/YELLOW/GREEN)</li>
+                        <li>ClickUp ops tasks for RED and YELLOW items</li>
+                        <li>Daily health log entry in Notion</li>
+                        <li>Discord posts for cross-pod issues</li>
+                        <li>Founder briefing if critical issues</li>
+                    </ul>
+
+                    <h4>Quality Check</h4>
+                    <ul>
+                        <li>✓ All WIP violations identified</li>
+                        <li>✓ Test bank burn rate within bounds or flagged</li>
+                        <li>✓ Critical blockers have same-day action items</li>
+                        <li>✓ Health log is complete and searchable</li>
+                    </ul>
+
+                    <h4>Time Budget</h4>
+                    <p>30-60 minutes daily (more if critical issues require deep dive)</p>
+                </div>
+            </details>
+
+            <div class="mermaid">
+                graph TB
+                    A[Integrator Daily Cycle] --> B[System Health Check]
+                    B --> C{Issues Found?}
+                    C -->|Yes| D[Classify by Urgency]
+                    C -->|No| E[Continue Routine Work]
+                    D --> F{Critical RED?}
+                    F -->|Yes| G[Immediate Resolution]
+                    F -->|No| H{Important YELLOW?}
+                    H -->|Yes| I[Schedule This Week]
+                    H -->|No| J[Monitor GREEN]
+                    G --> K[Update Health Log]
+                    I --> K
+                    J --> K
+                    E --> L[Canon/SOP Work]
+                    L --> M[Infrastructure Improvements]
+                    M --> N[Cross-Pod Coordination]
+                    N --> K
+                    K --> O[End of Day Closeout]
+                    O --> A
+                    
+                    style A fill:#00C8C8,stroke:#1A1A1A,stroke-width:3px,color:#1A1A1A
+                    style G fill:#F44336,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+                    style I fill:#FF9800,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+                    style J fill:#4CAF50,stroke:#1A1A1A,stroke-width:2px,color:#FFF
+            </div>
+        </section>
+
+        <!-- Handoffs & Interfaces -->
+        <section id="handoffs">
+            <h2>🔄 Handoffs & Interface Specifications</h2>
+            <p class="section-intro">How this role interfaces with other pods and roles, including precise handoff protocols.</p>
+
+            <h3>Cross-Pod Interface Pattern</h3>
+            <p>The Integrator is <strong>bi-directional</strong> with all pods: receives escalations/requests from all pods, and pushes canon/SOP/infrastructure updates back to all pods.</p>
+
+            <div class="mermaid">
+                graph LR
+                    P1[Pod 1<br/>Research] <-->|Escalations<br/>Canon Updates| INT[P4-OP-INTEGRATOR]
+                    P2[Pod 2<br/>Creative] <-->|Escalations<br/>Canon Updates| INT
+                    P3[Pod 3<br/>Media & Store] <-->|Escalations<br/>Canon Updates| INT
+                    P4[Pod 4<br/>PM/Ops] <-->|Coordination<br/>Decisions| INT
+                    INT --> F[Founder]
+                    F --> INT
+                    
+                    style INT fill:#00C8C8,stroke:#1A1A1A,stroke-width:4px,color:#1A1A1A
+                    style F fill:#F4E8D0,stroke:#1A1A1A,stroke-width:2px
+            </div>
+
+            <!-- Handoff 1 -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-flow">
+                        <span>ALL PODS</span>
+                        <span class="handoff-arrow">→</span>
+                        <span>P4-OP-INTEGRATOR</span>
+                    </div>
+                    <span class="status-chip" style="background: var(--warning);">INBOUND</span>
+                </div>
+                <h4>Escalations & Blocker Notifications</h4>
+                <p><strong>Trigger:</strong> Pod encounters blocker, ambiguity, or conflict they can't resolve locally</p>
+                <p><strong>Channel:</strong> Discord #p4-ops-escalations + ClickUp ticket</p>
+                <p><strong>Required Inputs:</strong></p>
+                <ul>
+                    <li>Which pod(s) affected</li>
+                    <li>Which product(s) or initiative blocked (if applicable)</li>
+                    <li>Brief description of the issue</li>
+                    <li>Canon reference if known (L1/L2/L3 doc)</li>
+                    <li>Urgency level: URGENT (blocks today) / IMPORTANT (blocks this week) / MONITOR</li>
+                </ul>
+                <p><strong>Handoff Template (Discord):</strong></p>
+                <pre><code>🚨 ESCALATION: [Brief Title]
+Pod: [P1/P2/P3/P4]
+Urgency: [URGENT/IMPORTANT/MONITOR]
+Blocked: [Product ID or initiative]
+Issue: [1-3 sentence description]
+Canon Ref: [L1-XX or "Unknown"]
+ClickUp: [Link to ops ticket]
+@P4-OP-INTEGRATOR</code></pre>
+                <p><strong>SLA:</strong> Integrator acknowledges within 2 hours, provides resolution or next steps within 4-24 hours depending on urgency</p>
+            </div>
+
+            <!-- Handoff 2 -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-flow">
+                        <span>P4-OP-INTEGRATOR</span>
+                        <span class="handoff-arrow">→</span>
+                        <span>ALL PODS</span>
+                    </div>
+                    <span class="status-chip" style="background: var(--success);">OUTBOUND</span>
+                </div>
+                <h4>Canon Updates & System Changes</h4>
+                <p><strong>Trigger:</strong> Canon doc updated, infrastructure changed, or SOP regenerated</p>
+                <p><strong>Channel:</strong> Discord #sys-canon-updates or #sys-infra-changes + Notion Canon Registry</p>
+                <p><strong>Required Outputs:</strong></p>
+                <ul>
+                    <li>What changed (brief description)</li>
+                    <li>Why it changed (business justification)</li>
+                    <li>Which doc(s) updated (with version numbers)</li>
+                    <li>Impact on operations (what teams need to do differently)</li>
+                    <li>Links to updated docs (Canon Registry + Drive)</li>
+                    <li>Training material if workflow changed (Loom, updated SOP)</li>
+                </ul>
+                <p><strong>Handoff Template (Discord):</strong></p>
+                <pre><code>📢 CANON UPDATE: [Brief Title]
+Type: [L0/L1/L2/L3/L4] [Major/Minor/Patch]
+Affected Pods: [P1/P2/P3/P4/All]
+
+**What Changed:**
+[1-3 sentences]
+
+**Why:**
+[Business justification]
+
+**Impact:**
+[What pods need to do differently]
+
+**Updated Docs:**
+- [Doc Name] v[X.Y] → v[X.Z]
+- Canon Registry: [Link]
+- Drive: [Link]
+
+**Training:**
+[Loom link or "See updated SOP"]
+
+@pod-leads</code></pre>
+                <p><strong>SLA:</strong> All affected pod leads must acknowledge receipt within 24 hours</p>
+            </div>
+
+            <!-- Handoff 3 -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-flow">
+                        <span>P4-OP-INTEGRATOR</span>
+                        <span class="handoff-arrow">↔</span>
+                        <span>P4-PM-COORDINATOR</span>
+                    </div>
+                    <span class="status-chip" style="background: var(--drive-cyan);">COORDINATION</span>
+                </div>
+                <h4>Ops & PM Coordination</h4>
+                <p><strong>Trigger:</strong> Daily standups, infrastructure changes, or capacity planning</p>
+                <p><strong>Channel:</strong> Discord #p4-ops-pm-sync + ClickUp shared views</p>
+                <p><strong>Coordination Points:</strong></p>
+                <ul>
+                    <li><strong>Integrator to PM:</strong> "This infrastructure change affects these tasks" or "WIP violation detected in Pod X"</li>
+                    <li><strong>PM to Integrator:</strong> "Recurring bottleneck pattern observed" or "Capacity adjustment needed for Pod Y"</li>
+                </ul>
+                <p><strong>Meeting Cadence:</strong></p>
+                <ul>
+                    <li>Daily async check-in via Discord</li>
+                    <li>Weekly 30-min sync for capacity/priority alignment</li>
+                    <li>Ad-hoc as needed for critical issues</li>
+                </ul>
+            </div>
+
+            <!-- Handoff 4 -->
+            <div class="handoff-card">
+                <div class="handoff-header">
+                    <div class="handoff-flow">
+                        <span>P4-OP-INTEGRATOR</span>
+                        <span class="handoff-arrow">→</span>
+                        <span>FOUNDER</span>
+                    </div>
+                    <span class="status-chip" style="background: var(--champagne); color: var(--carbon-black);">ESCALATION</span>
+                </div>
+                <h4>Strategic Decisions & Approvals</h4>
+                <p><strong>Trigger:</strong> L0-L2 canon change needed, major infrastructure change, or unresolvable conflict</p>
+                <p><strong>Channel:</strong> Discord DM or #founder-brief + Notion Canon Change Request</p>
+                <p><strong>Required Inputs for Founder:</strong></p>
+                <ul>
+                    <li>Draft Canon Change Request with full impact assessment</li>
+                    <li>What's broken or suboptimal with current canon</li>
+                    <li>Proposed change with specific L0-L2 doc edits</li>
+                    <li>Impact on economics, WIP, or pod structure</li>
+                    <li>Risk assessment</li>
+                    <li>Integrator recommendation: APPROVE / REJECT / MODIFY</li>
+                </ul>
+                <p><strong>SLA:</strong> Founder reviews within 48 hours for Medium changes, 24 hours for urgent Major changes</p>
+            </div>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Handoff Quality Standard</div>
+                <p>All handoffs must be <strong>asynchronous-first</strong> and <strong>documentation-complete</strong>. The recipient should be able to understand context, make decisions, and take action without needing a synchronous call. Links to canon, ClickUp tasks, and decision logs are mandatory.</p>
+            </div>
+        </section>
+
+        <!-- KPIs -->
+        <section id="kpis">
+            <h2>📊 KPIs & Quality Bar</h2>
+            <p class="section-intro">How success is measured for the Operations Integrator role.</p>
+
+            <h3>Primary KPIs (from L2-07)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>KPI</th>
+                        <th>Target</th>
+                        <th>Measurement Method</th>
+                        <th>Source</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Portfolio ROAS</strong></td>
+                        <td>Positive blended ROAS across active products</td>
+                        <td>BI dashboard, monthly review</td>
+                        <td>Aggregate from all P2+ products</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Portfolio Net Profit (NP)</strong></td>
+                        <td>Positive NP at portfolio level</td>
+                        <td>Financial dashboard</td>
+                        <td>Revenue - COGS - Ad Spend - Fixed Costs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>On-Time Delivery</strong></td>
+                        <td>≥90% of initiatives complete on time</td>
+                        <td>ClickUp completion reports</td>
+                        <td>Closed ops tasks vs. due dates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bottleneck Resolution Time</strong></td>
+                        <td>Critical (RED) issues: <1 day<br>Important (YELLOW): <3 days</td>
+                        <td>ClickUp escalation ticket timestamps</td>
+                        <td>Ticket creation → closure time</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Canon Freshness</strong></td>
+                        <td>All ACTIVE canon docs reviewed quarterly</td>
+                        <td>Notion Canon Registry "Last Reviewed" dates</td>
+                        <td>Manual audit of Canon Registry</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SOP Accuracy Rate</strong></td>
+                        <td>≥95% of SOPs align with current canon</td>
+                        <td>Quarterly SOP audit</td>
+                        <td>Sample 10 SOPs, check vs. canon versions</td>
+                    </tr>
+                    <tr>
+                        <td><strong>WIP Discipline</strong></td>
+                        <td>Zero unresolved WIP violations >7 days</td>
+                        <td>Weekly ClickUp WIP dashboard review</td>
+                        <td>Count of roles exceeding canonical WIP caps</td>
+                    </tr>
+                    <tr>
+                        <td><strong>System Health Score</strong></td>
+                        <td>≥80/100 composite score</td>
+                        <td>Weekly health check (see below)</td>
+                        <td>Weighted average of sub-metrics</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>System Health Score Breakdown</h3>
+            <p>Composite score calculated weekly from multiple dimensions:</p>
+            <div class="card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dimension</th>
+                            <th>Weight</th>
+                            <th>Green (20pts)</th>
+                            <th>Yellow (10pts)</th>
+                            <th>Red (0pts)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Testing Velocity</td>
+                            <td>20%</td>
+                            <td>10-15 P1 starts/week</td>
+                            <td>7-9 or 16-18/week</td>
+                            <td><7 or >18/week</td>
+                        </tr>
+                        <tr>
+                            <td>Test Bank Discipline</td>
+                            <td>20%</td>
+                            <td>Within $4K-$5.5K/month</td>
+                            <td>$3.5K-$4K or $5.5K-$6K</td>
+                            <td><$3.5K or >$6K</td>
+                        </tr>
+                        <tr>
+                            <td>WIP Compliance</td>
+                            <td>20%</td>
+                            <td>0 violations</td>
+                            <td>1-2 minor violations</td>
+                            <td>3+ or any major violation</td>
+                        </tr>
+                        <tr>
+                            <td>Kill Discipline</td>
+                            <td>15%</td>
+                            <td>≥90% killed within 48h</td>
+                            <td>75-89% within 48h</td>
+                            <td><75% within 48h</td>
+                        </tr>
+                        <tr>
+                            <td>Escalation Response</td>
+                            <td>15%</td>
+                            <td>All resolved within SLA</td>
+                            <td>1-2 SLA misses</td>
+                            <td>3+ SLA misses</td>
+                        </tr>
+                        <tr>
+                            <td>Canon-Tool Alignment</td>
+                            <td>10%</td>
+                            <td>No drift detected</td>
+                            <td>Minor drift (cosmetic)</td>
+                            <td>Major drift (breaking)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><strong>Calculation:</strong> Sum of (Dimension Score × Weight) = Total Health Score out of 100</p>
+                <p><strong>Reporting:</strong> Weekly health score logged in Notion System Health Logs DB, shared with Founder monthly</p>
+            </div>
+
+            <h3>Qualitative Standards</h3>
+            <div class="card">
+                <h4>Good vs. Bad: Canon Maintenance</h4>
+                <table>
+                    <tr>
+                        <th style="color: var(--success);">✓ Good Example</th>
+                        <th style="color: var(--danger);">✗ Bad Example</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Canon change requires L1 update</li>
+                                <li>Integrator drafts L1 v4.0 → v4.1 change</li>
+                                <li>Gets Founder approval</li>
+                                <li>Updates Canon Registry (v4.0 = LEGACY, v4.1 = ACTIVE)</li>
+                                <li>Regenerates 3 affected L4 SOPs</li>
+                                <li>Announces change with links to new docs</li>
+                                <li>Result: System stays coherent, all docs aligned</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>Pod requests canon change</li>
+                                <li>Integrator verbally agrees but doesn't update docs</li>
+                                <li>Change implemented in ClickUp only</li>
+                                <li>Canon Registry not updated</li>
+                                <li>SOPs still reference old rules</li>
+                                <li>Result: Drift created, pods confused, new hires onboard to wrong canon</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="card">
+                <h4>Good vs. Bad: Bottleneck Resolution</h4>
+                <table>
+                    <tr>
+                        <th style="color: var(--success);">✓ Good Example</th>
+                        <th style="color: var(--danger);">✗ Bad Example</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul>
+                                <li>Morning WIP check reveals R3 queue backing up</li>
+                                <li>Integrator digs: R2 output quality is low, causing R3 rejections</li>
+                                <li>Root cause: R1 volume too high, researchers rushing</li>
+                                <li>Solution: Temporarily reduce R1 intake, add quality checkpoint</li>
+                                <li>Documents in decision log, updates affected researchers</li>
+                                <li>Monitors for 1 week, R3 queue normalizes</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul>
+                                <li>R3 queue backing up</li>
+                                <li>Integrator tells R3 lead to "work faster"</li>
+                                <li>No root cause analysis</li>
+                                <li>R3 lead burns out trying to clear backlog</li>
+                                <li>Quality drops further, more rejections</li>
+                                <li>Bottleneck gets worse, testing velocity drops</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 Leading vs. Lagging Indicators</div>
+                <p><strong>Leading indicators</strong> (act on these early): WIP trending upward, R3 approval time increasing, escalation volume rising</p>
+                <p><strong>Lagging indicators</strong> (outcome measures): Portfolio ROAS, testing velocity, winner rate</p>
+                <p>The Integrator's job is to spot and fix leading indicators before they degrade lagging indicators.</p>
+            </div>
+        </section>
+
+        <!-- AI Usage -->
+        <section id="ai">
+            <h2>🤖 AI Usage & Prompt Patterns</h2>
+            <p class="section-intro">How this role leverages AI tools while maintaining canon compliance.</p>
+
+            <h3>Where AI is Used</h3>
+            <ul>
+                <li><strong>SOP Regeneration:</strong> Using LLM SOP factory to regenerate L4 SOPs when canon changes</li>
+                <li><strong>Decision Documentation:</strong> Drafting structured decision logs from meeting notes</li>
+                <li><strong>Impact Analysis:</strong> Analyzing which L3/L4 docs affected by L1/L2 canon change</li>
+                <li><strong>Communication Drafting:</strong> Writing clear announcements for canon/infra changes</li>
+                <li><strong>Root Cause Analysis:</strong> Using AI to help identify patterns in recurring issues</li>
+            </ul>
+
+            <h3>Human Checkpoints (AI Cannot Decide Alone)</h3>
+            <div class="callout callout-warning">
+                <div class="callout-title">⚠️ Human-in-the-Loop Required</div>
+                <ul>
+                    <li>✓ <strong>Approving Canon Change Requests</strong> - Integrator + Founder decide, AI drafts only</li>
+                    <li>✓ <strong>Making WIP cap changes</strong> - Must be explicit L2-03 update, not AI suggestion</li>
+                    <li>✓ <strong>Changing testing economics</strong> - Must be explicit L1-01 or L2-05 update</li>
+                    <li>✓ <strong>Adding new core tools</strong> - Must be Founder-approved, not AI-recommended</li>
+                    <li>✓ <strong>Resolving cross-pod conflicts</strong> - Integrator judges based on canon, AI provides context only</li>
+                </ul>
+            </div>
+
+            <h3>Ready-to-Use AI Prompts</h3>
+
+            <details>
+                <summary><strong>Prompt 1: Regenerate SOP After Canon Change</strong></summary>
+                <pre><code>You are the DriveOn SOP Factory (v4). Canon has been updated.
+
+**Your task:** Regenerate the L4 SOP for role [ROLE_ID] to reflect the updated canon.
+
+**Inputs:**
+- Updated canon docs: [List L0-L3 doc IDs and versions]
+- Previous SOP version: [Link or paste previous SOP]
+- What changed: [Brief description of canon change]
+
+**Requirements:**
+1. Follow the DriveOn SOP Factory Project Instructions (v4)
+2. Obey L0 > L1 > L2 > L3 > L4 precedence
+3. Use exact new values from updated canon (don't invent)
+4. Update Meta Block with new version number
+5. Add change log entry documenting what changed
+6. Maintain 1:1 information parity between text and HTML layers
+
+**Output:** Two-layer SOP (text + HTML) with updated canon-compliant content.
+
+Do NOT modify canon constraints. Your job is to implement canon, not alter it.</code></pre>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 2: Draft Canon Change Request (CCR)</strong></summary>
+                <pre><code>You are an operations analyst helping draft a Canon Change Request for DriveOn Commerce.
+
+**Context:** CaniCol v4.0 model with strict economic constraints.
+
+**Situation:** [Describe what's broken or suboptimal with current canon]
+
+**Proposed change:** [What you want to change - be specific about which L0-L3 doc and which section]
+
+**Your task:** Help me draft a structured CCR following this template:
+
+═══════════════════════════════════════════════════════════════
+CANON CHANGE REQUEST
+═══════════════════════════════════════════════════════════════
+
+Requested By: [Your name]
+Date: [Today's date]
+Status: DRAFT – NOT APPROVED
+
+Target Docs:
+- [Doc_IDs that need changes]
+
+Current Canon:
+[Quote or summarize current rule]
+
+Proposed Change:
+[Concrete change with specific edits]
+
+Rationale:
+[Business/economic/operational reason - why is current canon failing?]
+
+Impact Analysis:
+- L1 Impact: [How does this affect CaniCol model economics?]
+- L2 Impact: [How does this affect pods, roles, WIP, or testing thresholds?]
+- L3 Impact: [How does this affect infrastructure?]
+- L4 Impact: [How many SOPs need regeneration?]
+
+Risk Assessment:
+[What could go wrong? Unknowns?]
+
+Recommendation:
+[APPROVE / REJECT / MODIFY + your reasoning]
+
+Next Steps:
+[If approved: what happens next?]
+═══════════════════════════════════════════════════════════════
+
+**Important:** Focus on whether the change preserves CaniCol v4.0 philosophy. If this breaks the portfolio-first, lean-volume model, flag it as high risk.</code></pre>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 3: Analyze Bottleneck Pattern</strong></summary>
+                <pre><code>You are a systems analyst helping identify bottlenecks in DriveOn Commerce's CaniCol engine.
+
+**Context:** Lean-volume dropshipping testing 45-60 products/month through R0→R3 research gates and P1→P2→P3 testing gates.
+
+**Observed symptom:** [Describe what you're seeing - e.g., "R3 queue backing up" or "P1 tests delayed"]
+
+**Data provided:**
+- WIP snapshots: [Paste relevant WIP numbers for affected pods]
+- Timeline: [When did this start?]
+- Recent changes: [Any canon, infra, or staffing changes in past 2 weeks?]
+
+**Your task:** Help me do a structured root cause analysis:
+
+1. **Immediate cause:** What's the direct blocker?
+2. **5 Whys drill-down:** Work backwards through the chain
+3. **Capacity vs. Demand:** Is this a volume problem or quality problem?
+4. **Canon misalignment:** Could current canon be creating this issue?
+5. **Proposed solutions:** Rank by: (a) Fastest to implement, (b) Most sustainable, (c) Requires canon change
+
+**Important constraints:**
+- Do NOT suggest changing WIP caps without L2-03 canon update
+- Do NOT suggest changing testing budgets without L1-01/L2-05 update
+- Do NOT suggest new tools not in approved stack
+- Focus on system-level fixes, not "work harder" suggestions
+
+**Output format:** Structured analysis with ranked solution options and implementation requirements for each.</code></pre>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 4: Draft System Change Announcement</strong></summary>
+                <pre><code>You are a communications specialist drafting a system change announcement for DriveOn Commerce's operations team.
+
+**Change type:** [Canon update / Infrastructure change / Process change]
+
+**What changed:** [Brief technical description]
+
+**Why it changed:** [Business justification]
+
+**Affected pods/roles:** [List specific pods or roles]
+
+**Your task:** Draft a clear, concise Discord announcement following this template:
+
+📢 [TYPE] UPDATE: [Brief Title]
+Type: [L0/L1/L2/L3/L4] [Major/Minor/Patch]
+Affected Pods: [P1/P2/P3/P4/All]
+
+**What Changed:**
+[1-3 sentences in plain language]
+
+**Why:**
+[Business justification - what problem does this solve?]
+
+**Impact:**
+[What teams need to do differently - be specific]
+
+**Updated Docs:**
+- [Doc Name] v[X.Y] → v[X.Z]
+- Canon Registry: [Provide link]
+- Drive: [Provide link]
+
+**Training:**
+[If workflow changed, mention training material]
+
+**Questions?** Reply in thread or escalate to @P4-OP-INTEGRATOR
+
+---
+
+**Tone guidelines:**
+- Clear and direct (no corporate fluff)
+- Assume the reader is busy and needs facts fast
+- Highlight action items in bold
+- Link to detailed docs, don't repeat them
+- Acknowledge if this creates extra work and why it's worth it</code></pre>
+            </details>
+
+            <details>
+                <summary><strong>Prompt 5: Generate Decision Log Entry</strong></summary>
+                <pre><code>You are documenting a decision for DriveOn Commerce's decision log.
+
+**Context:** You made a system-level decision as Operations Integrator.
+
+**Decision raw notes:** [Paste your meeting notes or rough decision description]
+
+**Your task:** Format this as a structured decision log entry following this schema:
+
+═══════════════════════════════════════════════════════════════
+DECISION LOG ENTRY
+═══════════════════════════════════════════════════════════════
+
+Decision ID: DEC-YYYYMMDD-XXX
+Date: [Date]
+Decision Maker: P4-OP-INTEGRATOR
+Decision Type: [Strategic / Tactical / Operational]
+
+**Situation:**
+[What was happening that required a decision? 2-3 sentences.]
+
+**Options Considered:**
+1. Option A: [Brief description]
+   - Pros: [List]
+   - Cons: [List]
+2. Option B: [Brief description]
+   - Pros: [List]
+   - Cons: [List]
+[Add more options if applicable]
+
+**Decision Made:**
+[Clear statement of what was decided]
+
+**Rationale:**
+[Why this option? Which canon docs or constraints drove this?]
+
+**Canon Alignment:**
+[Which L0-L3 docs were referenced? Any canon updates required?]
+
+**Implementation:**
+[Who needs to do what? Timeline?]
+
+**Follow-up:**
+[Review date or success criteria]
+
+**Related Links:**
+- ClickUp: [Link]
+- Canon Registry: [Link]
+- Change Registry: [Link if applicable]
+═══════════════════════════════════════════════════════════════
+
+**Store this in:** Notion → Decision Logs DB
+**Notify:** [List affected pod leads]</code></pre>
+            </details>
+
+            <div class="callout callout-tip">
+                <div class="callout-title">💡 AI Prompt Best Practice</div>
+                <p>Always include <strong>canon constraints</strong> in your prompts to AI. Example: "Remember: you cannot change WIP caps, testing budgets, or tool stack without canon update." This helps AI stay within bounds and flag when a request conflicts with canon.</p>
+            </div>
+        </sectionRContinue
+
+    <!-- Tools & Systems -->
+    <section id="tools">
+        <h2>🛠️ Tools & Systems Reference</h2>
+        <p class="section-intro">Tool stack, access requirements, and key views for the Integrator role.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tool</th>
+                    <th>Use Case</th>
+                    <th>Key Views / Lists / DBs</th>
+                    <th>Access Level</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>ClickUp</strong></td>
+                    <td>Task management, WIP tracking, escalation queue</td>
+                    <td>
+                        <strong>Spaces:</strong> P1-Product Intelligence, P2-Creative, P3-Media & Store, P4-Ops & PM<br>
+                        <strong>Lists:</strong> P4 → Escalations, P4 → Infrastructure Initiatives, P4 → Canon Changes<br>
+                        <strong>Dashboards:</strong> Pod WIP Summary (all pods), System Health Dashboard
+                    </td>
+                    <td>Admin (all spaces)</td>
+                </tr>
+                <tr>
+                    <td><strong>Notion</strong></td>
+                    <td>Canon registry, SOPs, decision logs, configuration DBs</td>
+                    <td>
+                        <strong>Workspaces:</strong> DriveOn · Canon & SOPs<br>
+                        <strong>DBs:</strong> Canon Registry, Change_Registry, Role_Registry_Config, Testing_Config, Workspace_Map, Automation_Registry, SOP Library, Decision Logs, System Health Logs<br>
+                        <strong>Pages:</strong> 01 · Canon_Config (SSOT), 02 · Canon Docs (L1-L3), 03 · SOPs & Checklists (L4)
+                    </td>
+                    <td>Admin (full edit)</td>
+                </tr>
+                <tr>
+                    <td><strong>Google Drive</strong></td>
+                    <td>Canon docs (L0-L3 source files), decision archives</td>
+                    <td>
+                        <strong>Folders:</strong><br>
+                        /DriveOn Commerce/Canon & SOPs/L0_Holdings_Architecture/<br>
+                        /DriveOn Commerce/Canon & SOPs/L1_Model/<br>
+                        /DriveOn Commerce/Canon & SOPs/L2_Schema_Governance/<br>
+                        /DriveOn Commerce/Canon & SOPs/L3_Infrastructure/<br>
+                        /DriveOn Commerce/Decision_Logs/
+                    </td>
+                    <td>Owner (all canon folders)</td>
+                </tr>
+                <tr>
+                    <td><strong>Discord</strong></td>
+                    <td>Cross-pod communication, escalations, announcements</td>
+                    <td>
+                        <strong>Categories:</strong> SYS · canon-infra, P4 · ops-admin<br>
+                        <strong>Channels:</strong> #sys-canon-updates, #sys-infra-changes, #sys-health, #sys-all-hands, #p4-ops-escalations, #p4-ops-pm-sync, #founder-brief
+                    </td>
+                    <td>Admin (all channels)</td>
+                </tr>
+                <tr>
+                    <td><strong>BI Tools</strong><br>(Triple Whale, Looker, or similar)</td>
+                    <td>Portfolio ROAS, test bank tracking, system health metrics</td>
+                    <td>
+                        <strong>Dashboards:</strong><br>
+                        - Portfolio Performance (ROAS, NP, revenue)<br>
+                        - Test Bank Monitor (monthly spend vs. budget)<br>
+                        - Testing Velocity (P1 starts per week)<br>
+                        - Winner Rate Tracker (P2_PASS % over time)<br>
+                        - Pod Capacity Utilization
+                    </td>
+                    <td>Admin / Full Access</td>
+                </tr>
+                <tr>
+                    <td><strong>LLM Tools</strong><br>(Claude, ChatGPT)</td>
+                    <td>SOP regeneration, decision drafting, analysis</td>
+                    <td>
+                        <strong>Contexts:</strong><br>
+                        - DriveOn SOP Factory Project (this project)<br>
+                        - Canon doc library as context<br>
+                        - Prompt templates (see AI Usage section)
+                    </td>
+                    <td>API access or premium subscription</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Critical System Bindings</h3>
+        <div class="card">
+            <h4>Canon Registry (Notion)</h4>
+            <p><strong>Location:</strong> DriveOn · Canon & SOPs → 01 · Canon_Config (SSOT) → Canon Registry</p>
+            <p><strong>Purpose:</strong> Single source of truth for which canon docs are ACTIVE vs LEGACY, version numbers, last reviewed dates</p>
+            <p><strong>Integrator responsibilities:</strong></p>
+            <ul>
+                <li>Update Version, Status, Last Reviewed after any canon change</li>
+                <li>Link new version to old version via Replaces_Canon_Doc_ID</li>
+                <li>Ensure ACTIVE status = one and only one version per doc family</li>
+                <li>Quarterly audit: verify all ACTIVE docs reviewed within 90 days</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4>Change_Registry (Notion)</h4>
+            <p><strong>Location:</strong> DriveOn · Canon & SOPs → 01 · Canon_Config (SSOT) → Change_Registry</p>
+            <p><strong>Purpose:</strong> Track all changes to canon, infra, or automations from proposal through closure</p>
+            <p><strong>Integrator responsibilities:</strong></p>
+            <ul>
+                <li>Create entry for every Medium/Major change (Minor changes are optional)</li>
+                <li>Move through statuses: Proposed → Approved → In Progress → Implemented → Reviewed → Closed</li>
+                <li>Link affected Config_Links and Docs_Links</li>
+                <li>Document implementation notes and review outcomes</li>
+                <li>Close only after adoption confirmed (usually +2 weeks after implementation)</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h4>Workspace_Map (Notion)</h4>
+            <p><strong>Location:</strong> DriveOn · Canon & SOPs → 01 · Canon_Config (SSOT) → Workspace_Map</p>
+            <p><strong>Purpose:</strong> Map canonical tokens (e.g., CU_P1_R1_QUEUE) to actual tool entities (ClickUp lists, Notion DBs, Discord channels)</p>
+            <p><strong>Integrator responsibilities:</strong></p>
+            <ul>
+                <li>Add row for every new structural entity BEFORE creating it in tools</li>
+                <li>Update URLs after entity created</li>
+                <li>Mark deprecated entities with Status = Deprecated (don't delete rows)</li>
+                <li>Ensure SOPs reference tokens, not hard-coded names/URLs</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Escalation -->
+    <section id="escalation">
+        <h2>🚨 Escalation & Decision Rights</h2>
+        <p class="section-intro">What this role can decide alone vs. when to escalate up or coordinate laterally.</p>
+
+        <h3>Decisions You Can Make Alone</h3>
+        <ul>
+            <li>✓ Minor L3/L4 infrastructure tweaks (e.g., renaming a ClickUp view, adding a Notion filter)</li>
+            <li>✓ SOP content updates that don't change canon constraints</li>
+            <li>✓ Workflow optimizations within existing pod structure</li>
+            <li>✓ Escalation prioritization (RED vs YELLOW vs GREEN)</li>
+            <li>✓ Tactical decisions on which pod handles a borderline task</li>
+            <li>✓ Scheduling canon review cycles</li>
+            <li>✓ Creating decision log entries</li>
+            <li>✓ Responding to process clarification questions from pods</li>
+        </ul>
+
+        <h3>Decisions Requiring PM Input/Coordination</h3>
+        <ul>
+            <li>⚠ Medium infrastructure changes that affect task routing or pod handoffs</li>
+            <li>⚠ New automation proposals</li>
+            <li>⚠ Cross-pod process changes that impact schedules</li>
+            <li>⚠ Capacity adjustments (adding/removing roles or FTE splits)</li>
+            <li>⚠ Sprint priority changes based on bottleneck analysis</li>
+        </ul>
+        <p><strong>Coordination method:</strong> Async discussion in Discord #p4-ops-pm-sync, followed by 30-min sync call if needed. Decision documented in Notion decision log with "Co-decision: Integrator + PM" tag.</p>
+
+        <h3>Decisions Requiring Founder Approval</h3>
+        <ul>
+            <li>🚫 L0-L2 canon changes (Holdings charter, CaniCol model, pod structures, role definitions, WIP caps, testing economics)</li>
+            <li>🚫 Major infrastructure changes that alter core workflows or break existing IDs</li>
+            <li>🚫 New tool additions to the approved stack</li>
+            <li>🚫 Role/pod structure changes (adding/removing pods, redefining pod boundaries)</li>
+            <li>🚫 Testing budget changes (P1/P2 budget bands, test bank size)</li>
+            <li>🚫 Tier-S or other high-risk/high-spend testing proposals</li>
+            <li>🚫 Conflicts between pods that can't be resolved via canon precedence</li>
+        </ul>
+        <p><strong>Escalation method:</strong> Draft Canon Change Request in Notion Change_Registry, brief Founder in Discord DM or #founder-brief with summary and recommendation. Founder reviews within 24-48 hours depending on urgency.</p>
+
+        <h3>Expected Response Times</h3>
+        <table>
+            <tr>
+                <th>Decision Type</th>
+                <th>Your Response SLA</th>
+            </tr>
+            <tr>
+                <td>Critical escalation (blocks testing today)</td>
+                <td>Acknowledge: 2 hours<br>Resolve or escalate: 4 hours</td>
+            </tr>
+            <tr>
+                <td>Important escalation (blocks testing this week)</td>
+                <td>Acknowledge: 4 hours<br>Resolve or escalate: 24 hours</td>
+            </tr>
+            <tr>
+                <td>Monitor-level issue</td>
+                <td>Acknowledge: 24 hours<br>Resolve or escalate: 3-5 days</td>
+            </tr>
+            <tr>
+                <td>Canon clarification question</td>
+                <td>Response: 2-4 hours during work hours</td>
+            </tr>
+            <tr>
+                <td>Infrastructure change proposal</td>
+                <td>Initial review: 24 hours<br>Approve/reject: 2-3 days</td>
+            </tr>
+        </table>
+
+        <div class="callout callout-warning">
+            <div class="callout-title">⚠️ When in Doubt, Check Canon First</div>
+            <p>If you're unsure whether you can decide something alone, the rule is simple: <strong>Check if it touches L0-L2 canon</strong>. If yes, escalate to Founder. If no, you can decide or coordinate with PM. Never guess on canon changes.</p>
+        </div>
+    </section>
+
+    <!-- Onboarding -->
+    <section id="onboarding">
+        <h2>📚 Onboarding Checklist</h2>
+        <p class="section-intro">30-day ramp plan for new Operations Integrators.</p>
+
+        <h3>Week 1: Access & Canon Foundations</h3>
+        <ul class="checklist">
+            <li>Set up all tool access (ClickUp Admin, Notion Admin, Drive Owner, Discord Admin, BI tools)</li>
+            <li>Read L0-01 DriveOn Holdings Charter (understand thesis and anti-noise positioning)</li>
+            <li>Read L0-02 Product and Brand Architecture (understand holdings structure)</li>
+            <li>Read L1-01 CaniCol Model v4.0 (memorize: 45-60 tests/month, $80-$100 avg spend, 4-6% hit rate)</li>
+            <li>Read L1-02 Canon Precedence and Versioning (understand L0 > L1 > L2 > L3 > L4 > Legacy 3.2)</li>
+            <li>Read L2-02 Pod Overview (understand P1/P2/P3/P4 missions and handoffs)</li>
+            <li>Read L2-03 Role Registry and WIP Limits (understand canonical WIP caps for all roles)</li>
+            <li>Read L2-05 Testing Canon (memorize P1/P2 pass/kill thresholds)</li>
+            <li>Shadow Founder on 2-3 escalation resolutions (observe decision-making process)</li>
+            <li>Set up Notion Canon Registry watchlist (get notified of any canon changes)</li>
+        </ul>
+
+        <h3>Week 2: Infrastructure & Workflows</h3>
+        <ul class="checklist">
+            <li>Read all L3 infrastructure blueprints (L3-01 through L3-07)</li>
+            <li>Audit ClickUp structure against L3-02 blueprint (document any drift)</li>
+            <li>Audit Notion structure against L3-03 blueprint (document any drift)</li>
+            <li>Audit Discord channels against L3-01 blueprint (document any drift)</li>
+            <li>Audit Google Drive folders against L3-04 blueprint (document any drift)</li>
+            <li>Review Notion Workspace_Map: understand all canonical tokens</li>
+            <li>Review Notion Automation_Registry: understand all active automations</li>
+            <li>Shadow PM on 2-3 WIP tracking cycles (learn how WIP violations are detected)</li>
+            <li>Complete first supervised System Health Check (morning routine with Founder observing)</li>
+            <li>Read 5-10 recent Decision Logs in Notion (understand decision documentation patterns)</li>
+        </ul>
+
+        <h3>Week 3: Supervised Execution</h3>
+        <ul class="checklist">
+            <li>Handle 3-5 escalations with Founder review (practice Workflow 1)</li>
+            <li>Execute 1 minor infrastructure change with PM supervision (practice Workflow 3)</li>
+            <li>Conduct daily System Health Checks independently, brief Founder on findings (practice Workflow 4)</li>
+            <li>Participate in 1 canon update cycle (observe, don't lead yet - practice Workflow 2)</li>
+            <li>Draft 1 system change announcement for Founder review (practice communication)</li>
+            <li>Update 2-3 SOPs for minor canon refinements (practice SOP maintenance)</li>
+            <li>Learn BI dashboard tools: run portfolio ROAS, test bank burn, winner rate reports</li>
+            <li>Shadow Founder on 1-2 Canon Change Request reviews (learn approval criteria)</li>
+            <li>Start building personal decision log habit (document daily key decisions)</li>
+        </ul>
+
+        <h3>Week 4: Independent Operation with Spot Checks</h3>
+        <ul class="checklist">
+            <li>Handle all escalations independently, brief Founder on outcomes (not decisions themselves)</li>
+            <li>Execute 1-2 medium infrastructure changes independently (Founder reviews post-implementation)</li>
+            <li>Conduct full weekly System Health analysis, present to Founder with recommendations</li>
+            <li>Lead 1 canon update cycle end-to-end (L2 or L3 level, with Founder approval on final)</li>
+            <li>Proactively identify and propose 1-2 system improvements (practice bottleneck detection)</li>
+            <li>Coordinate with PM on capacity planning for next month (practice cross-pod orchestration)</li>
+            <li>Draft and submit 1 Canon Change Request (doesn't need to be approved, just well-structured)</li>
+            <li>Establish weekly health score reporting cadence to Founder</li>
+        </ul>
+
+        <h3>30-Day Review Criteria (Must Demonstrate)</h3>
+        <div class="card">
+            <h4>Competencies to Demonstrate</h4>
+            <ul>
+                <li>✓ Can recite core CaniCol economics from memory (45-60 tests/month, $80-$100 spend, 4-6% hit rate, WIP caps)</li>
+                <li>✓ Can apply precedence hierarchy (L0 > L1 > L2 > L3 > L4) to resolve conflicts</li>
+                <li>✓ Can conduct complete System Health Check and produce action items within 60 minutes</li>
+                <li>✓ Can draft structurally correct Canon Change Request with impact analysis</li>
+                <li>✓ Can execute medium infrastructure change following L3-06 playbook without supervision</li>
+                <li>✓ Can identify bottleneck root causes using "5 Whys" methodology</li>
+                <li>✓ Demonstrates decision documentation discipline (all decisions logged in Notion)</li>
+                <li>✓ Escalates appropriately (knows when to decide alone vs. get Founder approval)</li>
+                <li>✓ Communicates changes clearly to pods (no confusion or push-back on announcements)</li>
+            </ul>
+            <p><strong>Assessment method:</strong> Founder reviews last 2 weeks of escalations, decision logs, and system health reports. If 8/9 competencies demonstrated, role is considered "onboarded." Any gaps become focus areas for month 2.</p>
+        </div>
+    </section>
+
+    <!-- Change Log -->
+    <section id="changelog">
+        <h2>📝 Change Log</h2>
+        <p class="section-intro">Version history for this SOP document.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Version</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Change Summary</th>
+                    <th>Canon Updates Reflected</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1.0</strong></td>
+                    <td>2025-12-10</td>
+                    <td>DriveOn SOP Factory (v4)</td>
+                    <td>Initial SOP creation for P4-OP-INTEGRATOR role based on Role Registry v2.0 and full L0-L3 canon stack</td>
+                    <td>
+                        L0-01 v1.0, L0-02 v1.0, L1-01 v4.0, L1-02 v1.0, L2-02 v1.0, L2-03 v1.0, L2-05 v4.0, L2-07 v4.0, L3-01 through L3-07 v1.0, L3-OS v1.0
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-tip">
+            <div class="callout-title">💡 SOP Maintenance Cadence</div>
+            <p>This SOP should be reviewed and updated:</p>
+            <ul>
+                <li><strong>Immediately:</strong> When any L0-L2 canon affecting this role is updated</li>
+                <li><strong>Quarterly:</strong> Routine review for accuracy and completeness</li>
+                <li><strong>As-needed:</strong> When process improvements or new workflows are added</li>
+            </ul>
+            <p>Version bumps: MAJOR = role scope change, MINOR = workflow addition/change, PATCH = clarifications/fixes</p>
+        </div>
+    </section>
+
+</main>
+
+<!-- Hidden JSON Structure -->
+<script type="application/json" id="sop-structure">
+{
+  "role_id": "P4-OP-INTEGRATOR",
+  "role_name": "Integrator / Operations Architect",
+  "pod": "P4",
+  "seniority": "Lead",
+  "wip_limits": {
+    "active_initiatives": "8-10"
+  },
+  "throughput": {
+    "daily": "3-5 critical decisions/blocks cleared",
+    "weekly": "10-15 cross-pod issues resolved",
+    "monthly": "40-60 issues resolved"
+  },
+  "workflows": [
+    {
+      "name": "Escalation Resolution & Bottleneck Clearing",
+      "trigger": "Pod escalates issue via Discord or ClickUp",
+      "inputs": ["Escalation ticket", "Context", "Canon reference"],
+      "steps": [
+        "Acknowledge within 2 hours",
+        "Classify escalation (A-E)",
+        "Check canon precedence",
+        "Make decision based on type",
+        "Document decision",
+        "Communicate resolution",
+        "Close or hand off"
+      ],
+      "outputs": ["Resolved ticket", "Decision log", "Discord announcement", "SOP update task", "CCR draft"],
+      "time_budget": "15-45 minutes"
+    },
+    {
+      "name": "Canon Maintenance & Version Management",
+      "trigger": "Quarterly review or approved CCR",
+      "inputs": ["Approved CCR", "Current canon docs", "Impact assessment"],
+      "steps": [
+        "Open Change_Registry entry",
+        "Update L0-L3 canon docs",
+        "Update Canon Registry",
+        "Mark previous version LEGACY",
+        "Assess downstream impact",
+        "Trigger L3/L4 updates",
+        "Update tools",
+        "Communicate change",
+        "Update Change_Registry",
+        "Monitor adoption"
+      ],
+      "outputs": ["Updated canon docs", "Updated registries", "Regenerated SOPs", "Tool configs", "Announcement"],
+      "time_budget": "2-8 hours"
+    },
+    {
+      "name": "Infrastructure Change Management",
+      "trigger": "Proposed change or proactive improvement",
+      "inputs": ["Change proposal", "System affected", "Business justification"],
+      "steps": [
+        "Create Change_Registry entry",
+        "Check canon alignment",
+        "Classify magnitude",
+        "Update canon if needed",
+        "Update Workspace_Map",
+        "Implement in tools",
+        "Update automations",
+        "Communicate and train",
+        "Regenerate SOPs",
+        "Update Change_Registry",
+        "Monitor adoption"
+      ],
+      "outputs": ["Updated infra", "Workspace_Map updates", "Automation_Registry updates", "Canon updates", "SOPs", "Announcement"],
+      "time_budget": "1-6 hours"
+    },
+    {
+      "name": "System Health Monitoring & Bottleneck Detection",
+      "trigger": "Daily morning routine or alert",
+      "inputs": ["ClickUp WIP dashboards", "BI dashboard", "Discord alerts", "Notion Product OS"],
+      "steps": [
+        "Check overnight alerts",
+        "Scan ClickUp WIP by pod",
+        "Review BI portfolio dashboard",
+        "Check Product OS distribution",
+        "Identify bottlenecks (5 Whys)",
+        "Classify by urgency (RED/YELLOW/GREEN)",
+        "Create action items",
+        "Document in health log",
+        "Brief Founder if critical"
+      ],
+      "outputs": ["Prioritized issues", "ClickUp tasks", "Health log", "Discord posts", "Founder brief"],
+      "time_budget": "30-60 minutes"
+    }
+  ],
+  "day_in_life": [
+    {
+      "time_range": "08:00-09:00",
+      "focus": "System Health Check",
+      "primary_workflows": ["System Health Monitoring"]
+    },
+    {
+      "time_range": "09:00-11:00",
+      "focus": "Critical Decision Block",
+      "primary_workflows": ["Escalation Resolution"]
+    },
+    {
+      "time_range": "11:00-12:30",
+      "focus": "Canon & SOP Work",
+      "primary_workflows": ["Canon Maintenance"]
+    },
+    {
+      "time_range": "13:30-15:30",
+      "focus": "Infrastructure & Process Improvement",
+      "primary_workflows": ["Infrastructure Change Management"]
+    },
+    {
+      "time_range": "15:30-17:00",
+      "focus": "Cross-Pod Coordination",
+      "primary_workflows": ["All workflows (coordination phase)"]
+    }
+  ],
+  "kpis": [
+    {
+      "name": "Portfolio ROAS",
+      "definition": "Positive blended ROAS across active products",
+      "source_doc_id": "L2-07",
+      "target": "Positive"
+    },
+    {
+      "name": "On-Time Delivery",
+      "definition": "% of initiatives complete on time",
+      "source_doc_id": "L2-07",
+      "target": "≥90%"
+    },
+    {
+      "name": "Bottleneck Resolution Time",
+      "definition": "Time to resolve RED (critical) and YELLOW (important) issues",
+      "source_doc_id": "01_Role_Pod_Registry_v2",
+      "target": "RED: <1 day, YELLOW: <3 days"
+    },
+    {
+      "name": "Canon Freshness",
+      "definition": "% of ACTIVE canon docs reviewed quarterly",
+      "source_doc_id": "This SOP",
+      "target": "100%"
+    },
+    {
+      "name": "WIP Discipline",
+      "definition": "Zero unresolved WIP violations >7 days",
+      "source_doc_id": "L2-03",
+      "target": "0"
+    },
+    {
+      "name": "System Health Score",
+      "definition": "Composite score from 6 dimensions (testing velocity, test bank, WIP, kill discipline, escalations, canon-tool alignment)",
+      "source_doc_id": "This SOP",
+      "target": "≥80/100"
+    }
+  ],
+  "canon_constraints": {
+    "testing_volume": "45-60 products/month",
+    "p1_budget": "$40-$60",
+    "p1_p2_total_budget": "$70-$120 (typical $80-$100)",
+    "test_bank": "$4,000-$5,500/month",
+    "hit_rate": "4-6% (2-4 products/month)",
+    "wip_research_r1": "≤10",
+    "wip_research_r2": "≤6",
+    "wip_research_r3": "≤3",
+    "wip_creative": "4-6 products",
+    "wip_media_p1": "8-10 tests",
+    "wip_media_p2": "4-6 tests"
+  },
+  "tools": [
+    {
+      "name": "ClickUp",
+      "use_case": "Task management, WIP tracking, escalation queue",
+      "access_level": "Admin (all spaces)"
+    },
+    {
+      "name": "Notion",
+      "use_case": "Canon registry, SOPs, decision logs, configuration DBs",
+      "access_level": "Admin (full edit)"
+    },
+    {
+      "name": "Google Drive",
+      "use_case": "Canon docs (L0-L3 source files), decision archives",
+      "access_level": "Owner (all canon folders)"
+    },
+    {
+      "name": "Discord",
+      "use_case": "Cross-pod communication, escalations, announcements",
+      "access_level": "Admin (all channels)"
+    },
+    {
+      "name": "BI Tools",
+      "use_case": "Portfolio ROAS, test bank tracking, system health metrics",
+      "access_level": "Admin / Full Access"
+    }
+  ]
+}
+</script>
+
+<script>
+    // Initialize Mermaid
+    mermaid.initialize({ 
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#00C8C8',
+            primaryTextColor: '#1A1A1A',
+            primaryBorderColor: '#1A1A1A',
+            lineColor: '#00C8C8',
+            secondaryColor: '#F4E8D0',
+            tertiaryColor: '#F8F8F8'
+        }
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            const headerOffset = 100;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Highlight active section in nav
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+        
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+</body>
+</html>
